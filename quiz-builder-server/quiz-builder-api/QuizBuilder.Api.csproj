@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>quiz_builder_api</RootNamespace>
+        <RootNamespace>QuizBuilder.Api</RootNamespace>
     </PropertyGroup>
 
 

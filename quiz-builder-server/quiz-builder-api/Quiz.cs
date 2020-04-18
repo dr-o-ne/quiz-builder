@@ -1,6 +1,4 @@
-using System;
-
-namespace quiz_builder_api
+namespace QuizBuilder.Api
 {
     public class Quiz
     {
