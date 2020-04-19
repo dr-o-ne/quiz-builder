@@ -1,4 +1,4 @@
-namespace QuizBuilder.Api
+namespace QuizBuilder.Common.Types
 {
     public class Quiz
     {

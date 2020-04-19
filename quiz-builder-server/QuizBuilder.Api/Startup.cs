@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuizBuilder.Common.Extensions;
 
 namespace QuizBuilder.Api
 {
@@ -18,6 +19,8 @@ namespace QuizBuilder.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDispatchers();
+            services.AddHandlers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
