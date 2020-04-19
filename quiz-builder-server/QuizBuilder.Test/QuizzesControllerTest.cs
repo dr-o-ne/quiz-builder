@@ -1,8 +1,10 @@
 using NUnit.Framework;
-using QuizBuilder.Api;
 using QuizBuilder.Api.Controllers;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using QuizBuilder.Common.Extensions;
+using QuizBuilder.Common.Handlers.Default;
 
 namespace QuizBuilder.Test
 {
@@ -12,15 +14,40 @@ namespace QuizBuilder.Test
 
 		[SetUp]
 		public void Setup() {
-			_quizzesController = new QuizzesController(null);
+			var services = new ServiceCollection();
+			services.AddDispatchers();
+			services.AddHandlers();
+			services.AddSingleton<QuizzesController>();
+			var provider = services.BuildServiceProvider();
+			_quizzesController = provider.GetRequiredService<QuizzesController>();
 		}
 
 		[Test]
-		public void TestQuizzesController() {
-			IEnumerable<Quiz> result = _quizzesController.Get();
+		public async Task TestQuizzesController_GetAll() {
+			var actionResult = await _quizzesController.GetAll(new GetAllQuizzesQuery());
+			var okResult = actionResult as OkObjectResult;
+
+			Assert.IsNotNull(okResult);
+
+			var result = okResult.Value as AllQuizzesDto;
 
 			Assert.IsNotNull(result);
-			Assert.IsTrue(result.Any());
+			Assert.IsNotNull(result.Quizzes);
+			Assert.IsNotEmpty(result.Quizzes);
+		}
+
+		[Test]
+		public async Task TestQuizzesController_Post()
+		{
+			var actionResult = await _quizzesController.Post(new CreateQuizCommand());
+			var okResult = actionResult as CreatedResult;
+
+			Assert.IsNotNull(okResult);
+
+			var result = okResult.Value as CreateQuizCommandResult;
+
+			Assert.IsNotNull(result);
+			Assert.IsTrue(result.Success);
 		}
 	}
 }

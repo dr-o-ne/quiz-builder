@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using QuizBuilder.Common.Dispatchers;
+using QuizBuilder.Common.Handlers.Default;
 
 namespace QuizBuilder.Api.Controllers
 {
@@ -8,34 +9,25 @@ namespace QuizBuilder.Api.Controllers
     [Route("[controller]")]
     public class QuizzesController : ControllerBase
     {
-        private readonly ILogger<QuizzesController> _logger;
+        private readonly IDispatcher _dispatcher;
 
-        public QuizzesController(ILogger<QuizzesController> logger)
+        public QuizzesController(IDispatcher dispatcher)
         {
-            _logger = logger;
+            _dispatcher = dispatcher;
         }
 
         [HttpGet]
-        public IEnumerable<Quiz> Get()
+        public async Task<ActionResult> GetAll([FromQuery] GetAllQuizzesQuery query)
         {
-            return new Quiz[]
-            {
-                new Quiz()
-                {
-                    Id = 1,
-                    Name = "First Quiz"
-                },
-                new Quiz()
-                {
-                    Id = 2,
-                    Name = "Second Quiz"
-                },
-                new Quiz()
-                {
-                    Id = 3,
-                    Name = "Third Quiz"
-                },
-            };
+            var result = await _dispatcher.QueryAsync(query);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] CreateQuizCommand command)
+        {
+            var result = await _dispatcher.SendAsync(command);
+            return Created(nameof(GetAll), result);
         }
     }
 }

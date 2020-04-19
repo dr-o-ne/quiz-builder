@@ -5,5 +5,9 @@
         <RootNamespace>QuizBuilder.Api</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\QuizBuilder.Common\QuizBuilder.Common.csproj" />
+    </ItemGroup>
+
 
 </Project>
