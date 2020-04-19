@@ -24,6 +24,7 @@ namespace QuizBuilder.Test
             _quizRepositoryMock.Setup(x => x.GetAll()).Returns(
                 new Collection<Quiz>() {new Quiz(), new Quiz(), new Quiz()});
             _quizRepositoryMock.Setup(x => x.Add(It.IsAny<Quiz>())).Returns(new Quiz() {Id = 1});
+            _quizRepositoryMock.Setup(x => x.GetById(It.IsAny<long>())).Returns(new Quiz() {Id = 1});
 
             var services = new ServiceCollection();
             services.AddDispatchers();
@@ -47,6 +48,20 @@ namespace QuizBuilder.Test
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Quizzes);
             Assert.IsNotEmpty(result.Quizzes);
+        }
+
+        [Test]
+        public async Task TestQuizzesController_GetById()
+        {
+            var actionResult = await _quizzesController.GetById(new GetQuizByIdQuery());
+            var okResult = actionResult as OkObjectResult;
+
+            Assert.IsNotNull(okResult);
+
+            var result = okResult.Value as GetQuizByIdDto;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Id, 1);
         }
 
         [Test]
