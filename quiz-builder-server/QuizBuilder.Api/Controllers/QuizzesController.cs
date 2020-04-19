@@ -16,6 +16,16 @@ namespace QuizBuilder.Api.Controllers
             _dispatcher = dispatcher;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById([FromRoute] GetQuizByIdQuery query)
+        {
+            var result = await _dispatcher.QueryAsync(query);
+
+            return result is null
+                ? (ActionResult) NoContent()
+                : Ok(result);
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetAll([FromQuery] GetAllQuizzesQuery query)
         {

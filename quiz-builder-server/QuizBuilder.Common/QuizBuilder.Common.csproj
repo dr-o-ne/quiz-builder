@@ -10,4 +10,9 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuizBuilder.Model\QuizBuilder.Model.csproj" />
+    <ProjectReference Include="..\QuizBuilder.Repository\QuizBuilder.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

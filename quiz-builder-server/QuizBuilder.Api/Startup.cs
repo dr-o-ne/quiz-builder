@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common.Extensions;
+using QuizBuilder.Model.Extensions;
+using QuizBuilder.Repository.Extensions;
 
 namespace QuizBuilder.Api
 {
@@ -21,6 +23,8 @@ namespace QuizBuilder.Api
             services.AddControllers();
             services.AddDispatchers();
             services.AddHandlers();
+            services.AddQuizBuilderDataContext();
+            services.AddRepositories();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
