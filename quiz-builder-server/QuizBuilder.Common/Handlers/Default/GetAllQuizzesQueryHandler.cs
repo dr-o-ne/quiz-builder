@@ -1,28 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading.Tasks;
 using QuizBuilder.Common.Types;
+using QuizBuilder.Model.Model.Default;
+using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Common.Handlers.Default
 {
     public class AllQuizzesDto
     {
-        public Quiz[] Quizzes => new[]
+        public ImmutableList<Quiz> Quizzes { get; }
+
+        public AllQuizzesDto(IEnumerable<Quiz> quizzes)
         {
-            new Quiz()
-            {
-                Id = 1,
-                Name = "First Quiz"
-            },
-            new Quiz()
-            {
-                Id = 2,
-                Name = "Second Quiz"
-            },
-            new Quiz()
-            {
-                Id = 3,
-                Name = "Third Quiz"
-            },
-        };
+            Quizzes = quizzes.ToImmutableList();
+        }
     }
 
     public class GetAllQuizzesQuery : IQuery<AllQuizzesDto>
@@ -32,7 +25,19 @@ namespace QuizBuilder.Common.Handlers.Default
 
     public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, AllQuizzesDto>
     {
-        public Task<AllQuizzesDto> HandleAsync(GetAllQuizzesQuery query)
-            => Task.Run(() => new AllQuizzesDto());
+        private readonly IQuizRepository _quizRepository;
+
+        public GetAllQuizzesQueryHandler(IQuizRepository quizRepository)
+        {
+            _quizRepository = quizRepository;
+        }
+
+        public async Task<AllQuizzesDto> HandleAsync(GetAllQuizzesQuery query)
+        {
+            var entities = await Task.Run(() => _quizRepository.GetAll());
+            var result = new AllQuizzesDto(entities);
+
+            return result;
+        }
     }
 }

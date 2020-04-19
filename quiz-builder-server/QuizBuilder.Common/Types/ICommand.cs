@@ -4,11 +4,11 @@ namespace QuizBuilder.Common.Types
 {
     public interface ICommand
     {
-        Guid Id { get; }
+        Guid CommandId { get; }
     }
 
     public interface ICommand<out TResult> where TResult : ICommandResult
     {
-        Guid Id { get; }
+        Guid CommandId { get; }
     }
 }
