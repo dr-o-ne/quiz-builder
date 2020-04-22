@@ -14,6 +14,7 @@ namespace QuizBuilder.Model.Model.Default.Structure {
 		public List<QuizEntity> Items { get; set; }
 
 		public abstract bool IsValid();
+
 	}
 
 }

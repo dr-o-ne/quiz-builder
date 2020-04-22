@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using QuizBuilder.Model.Extensions;
 using QuizBuilder.Model.Model.Default.Choices;
 
 namespace QuizBuilder.Model.Model.Default.Questions {
@@ -8,6 +9,15 @@ namespace QuizBuilder.Model.Model.Default.Questions {
 
 		private readonly List<BinaryChoice> _choices = new List<BinaryChoice>();
 
+		public List<BinaryChoice> Choices {
+			get {
+				var temp = new List<BinaryChoice>( _choices );
+				if( Randomize )
+					temp.Shuffle();
+				return temp;
+			}
+		}
+
 		public bool Randomize { get; set; }
 
 		public void AddChoice( BinaryChoice choice ) {
@@ -15,12 +25,9 @@ namespace QuizBuilder.Model.Model.Default.Questions {
 			_choices.Add( choice );
 		}
 
-		public override bool IsValid() {
-
-			return base.IsValid() && _choices.Count( x => x.IsCorrect ) == 1;
-
-		}
-
+		public override bool IsValid() => base.IsValid() &&
+		                                  _choices.Count( x => x.IsCorrect ) == 1 &&
+		                                  _choices.Count( x => !x.IsValid() ) == 0;
 	}
 
 }

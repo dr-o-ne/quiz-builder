@@ -12,11 +12,11 @@ using Xunit;
 
 namespace QuizBuilder.Test {
 
-	public sealed class QuizzesControllerTest {
+	public sealed class QuizzesControllerTests {
 
 		private readonly QuizzesController _quizzesController;
 
-		public QuizzesControllerTest() {
+		public QuizzesControllerTests() {
 			Mock<IQuizRepository> quizRepositoryMock = new Mock<IQuizRepository>();
 			quizRepositoryMock.Setup( x => x.GetAll() ).Returns(
 				new Collection<Quiz>() {new Quiz(), new Quiz(), new Quiz()} );

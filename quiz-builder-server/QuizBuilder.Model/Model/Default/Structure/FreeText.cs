@@ -2,9 +2,7 @@
 
 	public sealed class FreeText : QuizEntity {
 
-		public override bool IsValid() {
-			return !string.IsNullOrWhiteSpace( Text );
-		}
+		public override bool IsValid() => !string.IsNullOrWhiteSpace( Text );
 
 	}
 
