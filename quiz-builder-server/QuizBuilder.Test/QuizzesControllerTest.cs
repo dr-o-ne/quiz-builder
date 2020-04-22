@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using NUnit.Framework;
 using QuizBuilder.Api.Controllers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,73 +8,59 @@ using QuizBuilder.Common.Extensions;
 using QuizBuilder.Common.Handlers.Default;
 using QuizBuilder.Model.Model.Default;
 using QuizBuilder.Repository.Repository;
+using Xunit;
 
-namespace QuizBuilder.Test
-{
-    public class QuizzesControllerTest
-    {
-        private QuizzesController _quizzesController;
-        private Mock<IQuizRepository> _quizRepositoryMock;
+namespace QuizBuilder.Test {
 
-        [SetUp]
-        public void Setup()
-        {
-            _quizRepositoryMock = new Mock<IQuizRepository>();
-            _quizRepositoryMock.Setup(x => x.GetAll()).Returns(
-                new Collection<Quiz>() {new Quiz(), new Quiz(), new Quiz()});
-            _quizRepositoryMock.Setup(x => x.Add(It.IsAny<Quiz>())).Returns(new Quiz() {Id = 1});
-            _quizRepositoryMock.Setup(x => x.GetById(It.IsAny<long>())).Returns(new Quiz() {Id = 1});
+	public sealed class QuizzesControllerTest {
 
-            var services = new ServiceCollection();
-            services.AddDispatchers();
-            services.AddHandlers();
-            services.AddSingleton(typeof(IQuizRepository), _quizRepositoryMock.Object);
-            services.AddSingleton<QuizzesController>();
-            var provider = services.BuildServiceProvider();
-            _quizzesController = provider.GetRequiredService<QuizzesController>();
-        }
+		private readonly QuizzesController _quizzesController;
 
-        [Test]
-        public async Task TestQuizzesController_GetAll()
-        {
-            var actionResult = await _quizzesController.GetAll(new GetAllQuizzesQuery());
-            var okResult = actionResult as OkObjectResult;
+		public QuizzesControllerTest() {
+			Mock<IQuizRepository> quizRepositoryMock = new Mock<IQuizRepository>();
+			quizRepositoryMock.Setup( x => x.GetAll() ).Returns(
+				new Collection<Quiz>() {new Quiz(), new Quiz(), new Quiz()} );
+			quizRepositoryMock.Setup( x => x.Add( It.IsAny<Quiz>() ) ).Returns( new Quiz {Id = 1} );
+			quizRepositoryMock.Setup( x => x.GetById( It.IsAny<long>() ) ).Returns( new Quiz {Id = 1} );
 
-            Assert.IsNotNull(okResult);
+			var services = new ServiceCollection();
+			services.AddDispatchers();
+			services.AddHandlers();
+			services.AddSingleton( typeof(IQuizRepository), quizRepositoryMock.Object );
+			services.AddSingleton<QuizzesController>();
+			var provider = services.BuildServiceProvider();
+			_quizzesController = provider.GetRequiredService<QuizzesController>();
+		}
 
-            var result = okResult.Value as AllQuizzesDto;
+		[Fact]
+		public async Task TestQuizzesController_GetAll() {
+			var actionResult = await _quizzesController.GetAll( new GetAllQuizzesQuery() );
+			var okResult = actionResult as OkObjectResult;
 
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Quizzes);
-            Assert.IsNotEmpty(result.Quizzes);
-        }
+			var result = (AllQuizzesDto)okResult.Value;
 
-        [Test]
-        public async Task TestQuizzesController_GetById()
-        {
-            var actionResult = await _quizzesController.GetById(new GetQuizByIdQuery());
-            var okResult = actionResult as OkObjectResult;
+			Assert.NotNull( result.Quizzes );
+			Assert.NotEmpty( result.Quizzes );
+		}
 
-            Assert.IsNotNull(okResult);
+		[Fact]
+		public async Task TestQuizzesController_GetById() {
+			var actionResult = await _quizzesController.GetById( new GetQuizByIdQuery() );
+			var okResult = actionResult as OkObjectResult;
 
-            var result = okResult.Value as GetQuizByIdDto;
+			var result = (GetQuizByIdDto)okResult.Value;
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, 1);
-        }
+			Assert.Equal( 1, result.Id );
+		}
 
-        [Test]
-        public async Task TestQuizzesController_Post()
-        {
-            var actionResult = await _quizzesController.Post(new CreateQuizCommand());
-            var okResult = actionResult as CreatedResult;
+		[Fact]
+		public async Task TestQuizzesController_Post() {
+			var actionResult = await _quizzesController.Post( new CreateQuizCommand() );
+			var okResult = actionResult as CreatedResult;
 
-            Assert.IsNotNull(okResult);
+			var result = (CreateQuizCommandResult)okResult.Value;
 
-            var result = okResult.Value as CreateQuizCommandResult;
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Success);
-        }
-    }
+			Assert.True( result.Success );
+		}
+	}
 }
