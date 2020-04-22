@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using QuizBuilder.Model.Model;
+using QuizBuilder.Model.Model.Default.Base;
 
 namespace QuizBuilder.Repository.Repository
 {

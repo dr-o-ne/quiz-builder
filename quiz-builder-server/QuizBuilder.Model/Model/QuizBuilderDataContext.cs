@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using QuizBuilder.Model.Model.Default;
+using QuizBuilder.Model.Model.Default.Base;
 
 namespace QuizBuilder.Model.Model
 {

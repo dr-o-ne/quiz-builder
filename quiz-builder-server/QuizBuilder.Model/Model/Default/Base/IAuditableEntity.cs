@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuizBuilder.Model.Model
+namespace QuizBuilder.Model.Model.Default.Base
 {
     public interface IAuditableEntity
     {

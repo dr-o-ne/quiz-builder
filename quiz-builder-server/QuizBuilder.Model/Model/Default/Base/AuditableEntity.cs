@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuizBuilder.Model.Model
+namespace QuizBuilder.Model.Model.Default.Base
 {
     public abstract class AuditableEntity<T> : Entity<T>, IAuditableEntity
     {
