@@ -4,12 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common.Extensions;
-using QuizBuilder.Model.Extensions;
-using QuizBuilder.Repository.Extensions;
+using QuizBuilder.Repository.Repository;
+using QuizBuilder.Repository.Repository.Default;
 
-namespace QuizBuilder.Api
-{
-    public class Startup
+namespace QuizBuilder.Api {
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -20,11 +19,11 @@ namespace QuizBuilder.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+			string connectionString = Configuration.GetConnectionString( "quizBuilderSchema" );
+			services.AddTransient<IQuizRepository, QuizRepository>( provider => new QuizRepository( connectionString ) );
+			services.AddControllers();
             services.AddDispatchers();
             services.AddHandlers();
-            services.AddQuizBuilderDataContext();
-            services.AddRepositories();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

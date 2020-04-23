@@ -44,9 +44,7 @@ namespace QuizBuilder.Common.Handlers.Default
             var quiz = new Quiz() { Name = command.Name };
             var entity = await Task.Run(() =>
             {
-                var record = _quizRepository.Add(quiz);
-                _quizRepository.Save();
-                return record;
+                return _quizRepository.Add( quiz );
             });
             var result = new CreateQuizCommandResult(
                 success: entity?.Id > 0,
