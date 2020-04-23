@@ -1,0 +1,72 @@
+<div class="container">
+
+  <div class="main-color">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{answer.name || "New Answer" }}</h1>
+      </div>
+    </div>
+  
+    <div class="row">
+
+      <div *ngIf="!answer.id" class="col-md-2">
+        <button class="full-width" mat-raised-button 
+        color="accent"
+        type="submit"
+        (click)="saveAnswer()"
+        [disabled]="!answerForm.valid">Save</button>
+      </div>
+
+      <div *ngIf="answer.id" class="col-md-2">
+        <button class="full-width" mat-raised-button 
+        color="primary"
+        type="submit"
+        (click)="updateAnswer()"
+        [disabled]="!answerForm.valid">Update</button>
+      </div>
+
+      <div class="col-md-2">
+        <button class="full-width" mat-raised-button [routerLink]="['/editquiz/', quiz.id, 'editquestion', question.id]">
+          <mat-icon>reply</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="main-color">
+
+    <mat-form-field class="full-width">
+        <mat-label>Name Quiz</mat-label>
+        <input matInput disabled [ngModel]="quiz.name">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Name Question</mat-label>
+      <input matInput disabled [ngModel]="question.name">
+    </mat-form-field>
+
+    <form [formGroup]="answerForm">
+
+      <mat-grid-list cols="2" rowHeight="100px" gutterSize="30px">
+
+        <mat-grid-tile >
+            <mat-form-field class="full-width">
+                <mat-label>Name Answer</mat-label>
+                <input matInput type="text" [(ngModel)]="answer.name" required formControlName="name">
+                <button mat-button *ngIf="answer.name" matSuffix mat-icon-button aria-label="Clear" (click)="answer.name =''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-grid-tile>
+        
+        <mat-grid-tile >
+          <mat-checkbox class="margin-right" [(ngModel)]="answer.isCorrect" formControlName="isCorrect">Correct Answer</mat-checkbox>
+        </mat-grid-tile>
+      
+      </mat-grid-list>
+  
+    </form>
+  </div>
+
+</div>

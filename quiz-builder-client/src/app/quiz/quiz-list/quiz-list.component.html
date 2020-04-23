@@ -1,0 +1,72 @@
+<div class="container">
+
+  <div class="main-color">
+    <mat-grid-list cols="4" rowHeight="100px" gutterSize="30px" >
+
+      <mat-grid-tile colspan="3">
+        <mat-form-field class="full-width">
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterData">
+          <button mat-button *ngIf="filterData" matSuffix mat-icon-button aria-label="Clear" (click)="cleanFilter()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile>
+        <button class="full-width" mat-raised-button 
+        color="primary"
+        [routerLink]="['/createquiz']"
+        >Create Quiz</button>
+      </mat-grid-tile>
+  
+    </mat-grid-list>
+  </div>
+  
+  <div class="main-color">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="preview">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element"> 
+          <button mat-icon-button color="primary">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+  
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/editquiz/', element.id]">
+              <mat-icon>apps</mat-icon>
+              <span>Edit</span>
+            </button>
+          </mat-menu>
+  
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+      
+    <mat-paginator [pageSizeOptions]="[15, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  
+</div>
