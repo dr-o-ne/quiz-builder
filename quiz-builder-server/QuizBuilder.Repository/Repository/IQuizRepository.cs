@@ -1,9 +1,18 @@
-﻿using QuizBuilder.Model.Model.Default;
+﻿using System.Collections.Generic;
+using QuizBuilder.Model.Model.Default;
 
 namespace QuizBuilder.Repository.Repository
 {
-    public interface IQuizRepository : IGenericRepository<Quiz>
+    public interface IQuizRepository
     {
-        Quiz GetById(long id);
-    }
+		IEnumerable<Quiz> GetAll();
+
+		Quiz GetById(long id);
+
+		Quiz Add( Quiz entity );
+
+		void Delete( long id );
+
+		void Edit( Quiz entity );
+	}
 }

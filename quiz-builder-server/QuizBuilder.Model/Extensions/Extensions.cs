@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using QuizBuilder.Model.Model;
 
 namespace QuizBuilder.Model.Extensions {
 
@@ -19,14 +16,6 @@ namespace QuizBuilder.Model.Extensions {
 				list[k] = list[n];
 				list[n] = value;
 			}
-		}
-
-		public static void AddQuizBuilderDataContext( this IServiceCollection services ) {
-			services.AddDbContext<QuizBuilderDataContext>( options =>
-				options.UseSqlite(
-					@"Data Source=..\QuizBuilder.db",
-					b => b.MigrationsAssembly( "QuizBuilder.Model" ) )
-			);
 		}
 	}
 }

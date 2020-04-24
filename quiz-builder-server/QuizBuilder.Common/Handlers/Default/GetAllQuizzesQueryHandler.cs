@@ -24,16 +24,16 @@ namespace QuizBuilder.Common.Handlers.Default
 
     public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, AllQuizzesDto>
     {
-        private readonly IQuizRepository _quizRepository;
+        private readonly IGenericRepository<Quiz> _quizRepository;
 
-        public GetAllQuizzesQueryHandler(IQuizRepository quizRepository)
+        public GetAllQuizzesQueryHandler( IGenericRepository<Quiz> quizRepository )
         {
             _quizRepository = quizRepository;
         }
 
         public async Task<AllQuizzesDto> HandleAsync(GetAllQuizzesQuery query)
         {
-            var entities = await Task.Run(() => _quizRepository.GetAll());
+            var entities = await _quizRepository.GetAllAsync();
             var result = new AllQuizzesDto(entities);
 
             return result;

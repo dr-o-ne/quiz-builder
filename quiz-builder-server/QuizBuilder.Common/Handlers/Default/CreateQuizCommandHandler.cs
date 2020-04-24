@@ -32,9 +32,9 @@ namespace QuizBuilder.Common.Handlers.Default
 
     public class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CreateQuizCommandResult>
     {
-        private readonly IQuizRepository _quizRepository;
+        private readonly IGenericRepository<Quiz> _quizRepository;
 
-        public CreateQuizCommandHandler(IQuizRepository quizRepository)
+        public CreateQuizCommandHandler( IGenericRepository<Quiz> quizRepository )
         {
             _quizRepository = quizRepository;
         }
@@ -42,15 +42,11 @@ namespace QuizBuilder.Common.Handlers.Default
         public async Task<CreateQuizCommandResult> HandleAsync(CreateQuizCommand command)
         {
             var quiz = new Quiz() { Name = command.Name };
-            var entity = await Task.Run(() =>
-            {
-                var record = _quizRepository.Add(quiz);
-                _quizRepository.Save();
-                return record;
-            });
-            var result = new CreateQuizCommandResult(
-                success: entity?.Id > 0,
-                message: entity?.Id > 0 ? "Success" : "Failed",
+			long id = await _quizRepository.AddAsync( quiz );
+
+			var result = new CreateQuizCommandResult(
+                success: id > 0,
+                message: id > 0 ? "Success" : "Failed",
                 commandId: command.CommandId);
 
             return result;

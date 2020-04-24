@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using QuizBuilder.Model.Model;
-using QuizBuilder.Model.Model.Default.Base;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace QuizBuilder.Repository.Repository
-{
-    public interface IGenericRepository<T> where T : BaseEntity
-    {
-        IEnumerable<T> GetAll();
-        IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
-        T Add(T entity);
-        T Delete(T entity);
-        void Edit(T entity);
-        void Save();
-    }
+namespace QuizBuilder.Repository.Repository {
+	public interface IGenericRepository<T> {
+
+		Task<T> GetByIdAsync( long id );
+
+		Task<IEnumerable<T>> GetAllAsync();
+
+		Task<long> AddAsync( T entity );
+
+		void DeleteAsync( long id );
+
+		void EditAsync( T entity );
+	}
 }
