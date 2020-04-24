@@ -24,9 +24,9 @@ namespace QuizBuilder.Common.Handlers.Default
 
     public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, AllQuizzesDto>
     {
-        private readonly IQuizRepository _quizRepository;
+        private readonly IGenericRepository<Quiz> _quizRepository;
 
-        public GetAllQuizzesQueryHandler(IQuizRepository quizRepository)
+        public GetAllQuizzesQueryHandler( IGenericRepository<Quiz> quizRepository )
         {
             _quizRepository = quizRepository;
         }

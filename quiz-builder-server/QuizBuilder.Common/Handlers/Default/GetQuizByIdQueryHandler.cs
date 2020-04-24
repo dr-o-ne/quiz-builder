@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using QuizBuilder.Common.Types;
+using QuizBuilder.Model.Model.Default;
 using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Common.Handlers.Default
@@ -28,9 +29,9 @@ namespace QuizBuilder.Common.Handlers.Default
 
     public class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, GetQuizByIdDto>
     {
-        private readonly IQuizRepository _quizRepository;
+        private readonly IGenericRepository<Quiz> _quizRepository;
 
-        public GetQuizByIdQueryHandler(IQuizRepository quizRepository)
+        public GetQuizByIdQueryHandler( IGenericRepository<Quiz> quizRepository )
         {
             _quizRepository = quizRepository;
         }

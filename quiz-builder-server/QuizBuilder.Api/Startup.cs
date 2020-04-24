@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common.Extensions;
+using QuizBuilder.Model.Model.Default;
 using QuizBuilder.Repository.Repository;
 using QuizBuilder.Repository.Repository.Default;
 
@@ -20,7 +21,7 @@ namespace QuizBuilder.Api {
         public void ConfigureServices(IServiceCollection services)
         {
 			string connectionString = Configuration.GetConnectionString( "quizBuilderSchema" );
-			services.AddTransient<IQuizRepository, QuizRepository>( provider => new QuizRepository( connectionString ) );
+			services.AddTransient<IGenericRepository<Quiz>, QuizRepository>( provider => new QuizRepository( connectionString ) );
 			services.AddControllers();
             services.AddDispatchers();
             services.AddHandlers();
