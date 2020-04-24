@@ -17,16 +17,16 @@ namespace QuizBuilder.Test {
 		private readonly QuizzesController _quizzesController;
 
 		public QuizzesControllerTests() {
-			Mock<IQuizRepository> quizRepositoryMock = new Mock<IQuizRepository>();
+			Mock<IGenericRepository<Quiz>> quizRepositoryMock = new Mock<IGenericRepository<Quiz>>();
 			quizRepositoryMock.Setup( x => x.GetAll() ).Returns(
 				new Collection<Quiz>() {new Quiz(), new Quiz(), new Quiz()} );
-			quizRepositoryMock.Setup( x => x.Add( It.IsAny<Quiz>() ) ).Returns( new Quiz {Id = 1} );
+			quizRepositoryMock.Setup( x => x.Add( It.IsAny<Quiz>() ) ).Returns( 1 );
 			quizRepositoryMock.Setup( x => x.GetById( It.IsAny<long>() ) ).Returns( new Quiz {Id = 1} );
 
 			var services = new ServiceCollection();
 			services.AddDispatchers();
 			services.AddHandlers();
-			services.AddSingleton( typeof(IQuizRepository), quizRepositoryMock.Object );
+			services.AddSingleton( typeof( IGenericRepository<Quiz> ), quizRepositoryMock.Object );
 			services.AddSingleton<QuizzesController>();
 			var provider = services.BuildServiceProvider();
 			_quizzesController = provider.GetRequiredService<QuizzesController>();
