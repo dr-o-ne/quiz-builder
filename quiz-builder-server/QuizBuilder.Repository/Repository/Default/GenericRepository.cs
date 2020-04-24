@@ -1,70 +1,61 @@
 ﻿using System.Data;
-using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using System.Reflection;
-using Dapper;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace QuizBuilder.Repository.Repository.Default {
-	public abstract class GenericRepository<T> : IGenericRepository<T> where T : class {
 
-		private readonly string _tableName;
+	public class GenericRepository<T> : IGenericRepository<T> where T : class {
+
 		private readonly string _connectionString;
+		private readonly string _tableName;
 
-		protected GenericRepository( string tableName, string connectionString ) {
-			_tableName = tableName;
+		public GenericRepository( string connectionString, string tableName ) {
 			_connectionString = connectionString;
+			_tableName = tableName;
 		}
-		
-		private SqlConnection SqlConnection() {
-			return new SqlConnection( _connectionString );
-		}
-
 		
 		private IDbConnection CreateConnection() {
-			SqlConnection conn = SqlConnection();
+			SqlConnection conn = new SqlConnection( _connectionString );
 			conn.Open();
 			return conn;
 		}
 
-		private IEnumerable<PropertyInfo> GetProperties => typeof(T).GetProperties(BindingFlags.Public);
-
-		public async Task<long> AddAsync( T entity ) {
-			using( IDbConnection connection = CreateConnection() ) {
-				string insertQuery = GenerateInsertQuery();
-				return await connection.QuerySingleOrDefaultAsync<long>( insertQuery, entity );
-			}
-		}
-
-		public async void DeleteAsync( long id ) {
-			using( IDbConnection db = CreateConnection() ) {
-				await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
-			}
-		}
-
-		public async void EditAsync( T entity ) {
-			using( IDbConnection connection = CreateConnection() ) {
-				string updateQuery = GenerateUpdateQuery();
-				await connection.ExecuteAsync( updateQuery, entity );
-			}
-		}
+		private static IEnumerable<PropertyInfo> GetProperties => typeof(T).GetProperties(BindingFlags.Public);
 
 		public async Task<IEnumerable<T>> GetAllAsync() {
-			using( IDbConnection connection = CreateConnection() ) {
-				return await connection.QueryAsync<T>( $"SELECT * FROM {_tableName}" );
-			}
+			using IDbConnection connection = CreateConnection();
+			return await connection.QueryAsync<T>( $"SELECT * FROM {_tableName}" );
 		}
 
 		public async Task<T> GetByIdAsync( long id ) {
-			using( IDbConnection connection = CreateConnection() ) {
-				T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
-				if( result == null )
-					throw new KeyNotFoundException( $"{_tableName} with id [{id}] could not be found." );
-				return result;
-			}
+			using IDbConnection connection = CreateConnection();
+			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
+			if( result == null )
+				throw new KeyNotFoundException( $"{_tableName} with id [{id}] could not be found." );
+			return result;
+		}
+
+		public async Task<long> AddAsync( T entity ) {
+			using IDbConnection connection = CreateConnection();
+			string insertQuery = GenerateInsertQuery();
+			return await connection.QuerySingleOrDefaultAsync<long>( insertQuery, entity );
+		}
+
+		public async Task UpdateAsync( T entity ) {
+			using IDbConnection connection = CreateConnection();
+			string updateQuery = GenerateUpdateQuery();
+			await connection.ExecuteAsync( updateQuery, entity );
+		}
+
+		public async Task DeleteAsync( long id ) {
+			using IDbConnection db = CreateConnection();
+			await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
 		}
 
 		private static List<string> GenerateListOfProperties( IEnumerable<PropertyInfo> listOfProperties ) {
