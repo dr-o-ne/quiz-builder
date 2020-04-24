@@ -33,7 +33,7 @@ namespace QuizBuilder.Common.Handlers.Default
 
         public async Task<AllQuizzesDto> HandleAsync(GetAllQuizzesQuery query)
         {
-            var entities = await Task.Run(() => _quizRepository.GetAll());
+            var entities = await _quizRepository.GetAllAsync();
             var result = new AllQuizzesDto(entities);
 
             return result;

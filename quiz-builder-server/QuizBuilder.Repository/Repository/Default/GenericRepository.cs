@@ -6,14 +6,16 @@ using Dapper;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace QuizBuilder.Repository.Repository.Default {
 	public abstract class GenericRepository<T> : IGenericRepository<T> where T : class {
 
-		private readonly string _tableName = typeof(T).Name;
+		private readonly string _tableName;
 		private readonly string _connectionString;
 
-		protected GenericRepository( string connectionString ) {
+		protected GenericRepository( string tableName, string connectionString ) {
+			_tableName = tableName;
 			_connectionString = connectionString;
 		}
 		
@@ -28,37 +30,37 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return conn;
 		}
 
-		private IEnumerable<PropertyInfo> GetProperties => typeof( T ).GetProperties();
+		private IEnumerable<PropertyInfo> GetProperties => typeof(T).GetProperties(BindingFlags.Public);
 
-		public long Add( T entity ) {
+		public async Task<long> AddAsync( T entity ) {
 			using( IDbConnection connection = CreateConnection() ) {
 				string insertQuery = GenerateInsertQuery();
-				return connection.Query<long>( insertQuery, entity ).FirstOrDefault();
+				return await connection.QuerySingleOrDefaultAsync<long>( insertQuery, entity );
 			}
 		}
 
-		public void Delete( long id ) {
+		public async void DeleteAsync( long id ) {
 			using( IDbConnection db = CreateConnection() ) {
-				db.Execute( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
+				await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
 			}
 		}
 
-		public void Edit( T entity ) {
+		public async void EditAsync( T entity ) {
 			using( IDbConnection connection = CreateConnection() ) {
 				string updateQuery = GenerateUpdateQuery();
-				connection.Execute( updateQuery, entity );
+				await connection.ExecuteAsync( updateQuery, entity );
 			}
 		}
 
-		public IEnumerable<T> GetAll() {
+		public async Task<IEnumerable<T>> GetAllAsync() {
 			using( IDbConnection connection = CreateConnection() ) {
-				return connection.Query<T>( $"SELECT * FROM {_tableName}" );
+				return await connection.QueryAsync<T>( $"SELECT * FROM {_tableName}" );
 			}
 		}
 
-		public T GetById( long id ) {
+		public async Task<T> GetByIdAsync( long id ) {
 			using( IDbConnection connection = CreateConnection() ) {
-				T result = connection.QuerySingleOrDefault<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
+				T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
 				if( result == null )
 					throw new KeyNotFoundException( $"{_tableName} with id [{id}] could not be found." );
 				return result;
@@ -70,7 +72,7 @@ namespace QuizBuilder.Repository.Repository.Default {
 					 where attributes.Length <= 0 || ( attributes[0] as DescriptionAttribute )?.Description != "ignore" select prop.Name ).ToList();
 		}
 
-		private string GenerateInsertQuery() {
+		protected virtual string GenerateInsertQuery() {
 			var insertQuery = new StringBuilder( $"INSERT INTO {_tableName} " );
 
 			insertQuery.Append( "(" );
@@ -91,7 +93,7 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return insertQuery.ToString();
 		}
 
-		private string GenerateUpdateQuery() {
+		protected virtual string GenerateUpdateQuery() {
 			var updateQuery = new StringBuilder( $"UPDATE {_tableName} SET " );
 			var properties = GenerateListOfProperties( GetProperties );
 

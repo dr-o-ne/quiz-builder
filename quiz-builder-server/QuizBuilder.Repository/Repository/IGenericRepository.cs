@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace QuizBuilder.Repository.Repository {
 	public interface IGenericRepository<T> {
 
-		T GetById( long id );
+		Task<T> GetByIdAsync( long id );
 
-		IEnumerable<T> GetAll();
+		Task<IEnumerable<T>> GetAllAsync();
 
-		long Add( T entity );
+		Task<long> AddAsync( T entity );
 
-		void Delete( long id );
+		void DeleteAsync( long id );
 
-		void Edit( T entity );
+		void EditAsync( T entity );
 	}
 }

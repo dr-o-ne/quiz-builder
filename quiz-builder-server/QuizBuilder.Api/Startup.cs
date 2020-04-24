@@ -20,8 +20,8 @@ namespace QuizBuilder.Api {
 
         public void ConfigureServices(IServiceCollection services)
         {
-			string connectionString = Configuration.GetConnectionString( "quizBuilderSchema" );
-			services.AddTransient<IGenericRepository<Quiz>, QuizRepository>( provider => new QuizRepository( connectionString ) );
+			string connectionString = Configuration.GetConnectionString( "defaultConnectionString" );
+			services.AddTransient<IGenericRepository<Quiz>, QuizRepository>( provider => new QuizRepository( "Quiz", connectionString ) );
 			services.AddControllers();
             services.AddDispatchers();
             services.AddHandlers();

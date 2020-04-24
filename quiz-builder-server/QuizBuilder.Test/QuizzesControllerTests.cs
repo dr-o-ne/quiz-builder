@@ -18,10 +18,9 @@ namespace QuizBuilder.Test {
 
 		public QuizzesControllerTests() {
 			Mock<IGenericRepository<Quiz>> quizRepositoryMock = new Mock<IGenericRepository<Quiz>>();
-			quizRepositoryMock.Setup( x => x.GetAll() ).Returns(
-				new Collection<Quiz>() {new Quiz(), new Quiz(), new Quiz()} );
-			quizRepositoryMock.Setup( x => x.Add( It.IsAny<Quiz>() ) ).Returns( 1 );
-			quizRepositoryMock.Setup( x => x.GetById( It.IsAny<long>() ) ).Returns( new Quiz {Id = 1} );
+			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync(  new Collection<Quiz>() { new Quiz(), new Quiz(), new Quiz() } );
+			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<Quiz>() ) ).ReturnsAsync( 1 );
+			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new Quiz {Id = 1} );
 
 			var services = new ServiceCollection();
 			services.AddDispatchers();

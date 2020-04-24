@@ -42,11 +42,9 @@ namespace QuizBuilder.Common.Handlers.Default
         public async Task<CreateQuizCommandResult> HandleAsync(CreateQuizCommand command)
         {
             var quiz = new Quiz() { Name = command.Name };
-			long id = await Task.Run(() =>
-            {
-                return _quizRepository.Add( quiz );
-            });
-            var result = new CreateQuizCommandResult(
+			long id = await _quizRepository.AddAsync( quiz );
+
+			var result = new CreateQuizCommandResult(
                 success: id > 0,
                 message: id > 0 ? "Success" : "Failed",
                 commandId: command.CommandId);

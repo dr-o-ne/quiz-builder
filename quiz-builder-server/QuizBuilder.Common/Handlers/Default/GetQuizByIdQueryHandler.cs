@@ -38,7 +38,7 @@ namespace QuizBuilder.Common.Handlers.Default
 
         public async Task<GetQuizByIdDto> HandleAsync(GetQuizByIdQuery query)
         {
-            var entity = await Task.Run(() => _quizRepository.GetById(query.Id));
+            var entity = await _quizRepository.GetByIdAsync( query.Id );
 
             return entity is null
                 ? default
