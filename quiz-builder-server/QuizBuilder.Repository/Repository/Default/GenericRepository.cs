@@ -12,6 +12,11 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 	public class GenericRepository<T> : IGenericRepository<T> where T : class {
 
+		private static readonly List<string> NonUpdateableColumns = new List<string> {
+			"Id",
+			"CreatedOn"
+		};
+
 		private readonly string _connectionString;
 		private readonly string _tableName;
 
@@ -77,27 +82,27 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 			properties.ForEach( prop => { insertQuery.Append( $"@{prop}," ); } );
 
-			insertQuery
+			return insertQuery
 				.Remove( insertQuery.Length - 1, 1 )
-				.Append( ")" );
-
-			return insertQuery.ToString();
+				.Append( ")" )
+				.ToString();
 		}
 
 		protected virtual string GenerateUpdateQuery() {
 			var updateQuery = new StringBuilder( $"UPDATE {_tableName} SET " );
 			var properties = GenerateListOfProperties( GetProperties );
 
-			properties.ForEach( property => {
-				if( !property.Equals( "Id" ) ) {
-					updateQuery.Append( $"{property}=@{property}," );
-				}
-			} );
+			foreach (string property in properties) {
+				if( NonUpdateableColumns.Contains( property ) ) 
+					continue;
 
-			updateQuery.Remove( updateQuery.Length - 1, 1 );
-			updateQuery.Append( " WHERE Id=@Id" );
+				updateQuery.Append( $"{property}=@{property}," );
+			}
 
-			return updateQuery.ToString();
+			return updateQuery
+				.Remove( updateQuery.Length - 1, 1 )
+				.Append( " WHERE Id=@Id" )
+				.ToString();
 		}
 	}
 }

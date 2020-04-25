@@ -5,6 +5,8 @@ namespace QuizBuilder.Model.Model.Default.Structure {
 
 	public abstract class QuizEntity : AuditableEntity<long>, IValidatable {
 
+		public string Name { get; set; }
+
 		public string Text { get; set; }
 
 		protected QuizEntity() {

@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Common.Handlers.Default;
-using QuizBuilder.Model.Model.Default;
+using QuizBuilder.Model.Mapper;
+using QuizBuilder.Model.Mapper.Default;
+using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 using Xunit;
 
@@ -17,15 +19,16 @@ namespace QuizBuilder.Test {
 		private readonly QuizzesController _quizzesController;
 
 		public QuizzesControllerTests() {
-			Mock<IGenericRepository<Quiz>> quizRepositoryMock = new Mock<IGenericRepository<Quiz>>();
-			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync(  new Collection<Quiz>() { new Quiz(), new Quiz(), new Quiz() } );
-			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<Quiz>() ) ).ReturnsAsync( 1 );
-			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new Quiz {Id = 1} );
+			var quizRepositoryMock = new Mock<IGenericRepository<QuizDto>>();
+			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync( new Collection<QuizDto> {new QuizDto(), new QuizDto(), new QuizDto()} );
+			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<QuizDto>() ) ).ReturnsAsync( 1 );
+			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new QuizDto {Id = 1} );
 
 			var services = new ServiceCollection();
 			services.AddDispatchers();
 			services.AddHandlers();
-			services.AddSingleton( typeof( IGenericRepository<Quiz> ), quizRepositoryMock.Object );
+			services.AddSingleton( typeof(IQuizMapper), new QuizMapper() );
+			services.AddSingleton( typeof(IGenericRepository<QuizDto>), quizRepositoryMock.Object );
 			services.AddSingleton<QuizzesController>();
 			var provider = services.BuildServiceProvider();
 			_quizzesController = provider.GetRequiredService<QuizzesController>();
