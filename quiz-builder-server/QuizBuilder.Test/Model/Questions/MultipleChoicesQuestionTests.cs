@@ -61,9 +61,11 @@ namespace QuizBuilder.Test.Model.Questions {
 				sut.AddChoice( new BinaryChoice { Text = i.ToString(), IsCorrect = false } );
 
 			Assert.True( sut.IsValid() );
-			Assert.True( sut.Choices[0].IsCorrect );
+
+			var choices = sut.GetChoicesRandomized();
+			Assert.True( choices[0].IsCorrect );
 			for( int i = 1; i < 100; i++ ) 
-				Assert.False( sut.Choices[i].IsCorrect );
+				Assert.False( choices[i].IsCorrect );
 		}
 
 		[Fact]
@@ -73,7 +75,7 @@ namespace QuizBuilder.Test.Model.Questions {
 			for( int i = 1; i < 10000; i++ )
 				sut.AddChoice( new BinaryChoice { Text = i.ToString(), IsCorrect = false } );
 
-			Assert.False( sut.Choices[0].IsCorrect );
+			Assert.False( sut.GetChoicesRandomized()[0].IsCorrect );
 		}
 
 	}
