@@ -42,6 +42,8 @@ namespace QuizBuilder.Common.Handlers.Default {
 			QuizDto dto = await _quizRepository.GetByIdAsync( query.Id );
 
 			Quiz entity = _quizMapper.Map( dto );
+			if( entity == null )
+				return null;
 
 			return new GetQuizByIdDto( entity.Id, entity.Name, DateTime.MinValue, DateTime.MinValue );
 		}

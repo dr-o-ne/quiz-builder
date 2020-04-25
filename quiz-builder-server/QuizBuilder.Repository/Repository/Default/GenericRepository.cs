@@ -41,8 +41,6 @@ namespace QuizBuilder.Repository.Repository.Default {
 		public async Task<T> GetByIdAsync( long id ) {
 			using IDbConnection connection = CreateConnection();
 			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
-			if( result == null )
-				throw new KeyNotFoundException( $"{_tableName} with id [{id}] could not be found." );
 			return result;
 		}
 
