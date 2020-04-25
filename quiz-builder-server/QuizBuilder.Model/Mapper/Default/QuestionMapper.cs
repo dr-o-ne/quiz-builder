@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text.Json;
 using QuizBuilder.Model.Model;
 using QuizBuilder.Model.Model.Default.Questions;
 using QuizBuilder.Repository.Dto;
+using static QuizBuilder.Model.Model.Enums.QuestionType;
 
 namespace QuizBuilder.Model.Mapper.Default {
 
@@ -12,7 +14,29 @@ namespace QuizBuilder.Model.Mapper.Default {
 			if( entity == null )
 				return null;
 
-			return new QuestionDto {Id = entity.Id, Name = entity.Name};
+			string settings;
+			Enums.QuestionType questionType;
+
+			switch( entity ) {
+				case TrueFalseQuestion question:
+					questionType = TrueFalse;
+					settings = JsonSerializer.Serialize( question );
+					break;
+				case MultipleChoiceQuestion question:
+					settings = JsonSerializer.Serialize( question );
+					questionType = MultiChoice;
+					break;
+				default:
+					throw new ArgumentException( "Unknown question type" );
+			}
+
+			return new QuestionDto {
+				Id = entity.Id,
+				QuestionTypeId = (int)questionType,
+				Name = entity.Name,
+				QuestionText = entity.Text,
+				Settings = settings
+			};
 		}
 
 		public Question Map( QuestionDto dto ) {
@@ -23,13 +47,14 @@ namespace QuizBuilder.Model.Mapper.Default {
 			var questionType = (Enums.QuestionType)dto.QuestionTypeId;
 
 			Question entity = questionType switch {
-				Enums.QuestionType.TrueFalse => new TrueFalseQuestion(),
-				Enums.QuestionType.MultiChoice => new MultipleChoiceQuestion(),
+				TrueFalse => JsonSerializer.Deserialize<TrueFalseQuestion>( dto.Settings ),
+				MultiChoice => JsonSerializer.Deserialize<MultipleChoiceQuestion>( dto.Settings ),
 				_ => throw new ArgumentException( "Unknown question type" )
 			};
 
 			entity.Id = dto.Id;
 			entity.Name = dto.Name;
+			entity.Text = dto.QuestionText;
 
 			return entity;
 		}

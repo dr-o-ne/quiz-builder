@@ -1,18 +1,21 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
-namespace QuizBuilder.Model.Model.Default.Base
-{
-    public abstract class AuditableEntity<T> : Entity<T>, IAuditableEntity
-    {
-        public DateTime CreatedDate { get; set; }
+namespace QuizBuilder.Model.Model.Default.Base {
 
-        [MaxLength(256)]
-        public string CreatedBy { get; set; }
+	public abstract class AuditableEntity<T> : Entity<T>, IAuditableEntity {
 
-        public DateTime UpdatedDate { get; set; }
+		[JsonIgnore]
+		public DateTime CreatedDate { get; set; }
 
-        [MaxLength(256)]
-        public string UpdatedBy { get; set; }
-    }
+		[JsonIgnore]
+		public string CreatedBy { get; set; }
+
+		[JsonIgnore]
+		public DateTime UpdatedDate { get; set; }
+
+		[JsonIgnore]
+		public string UpdatedBy { get; set; }
+
+	}
 }
