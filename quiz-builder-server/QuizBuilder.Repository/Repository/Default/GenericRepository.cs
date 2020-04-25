@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Repository.Repository.Default {
 
 	public class GenericRepository<T> : IGenericRepository<T> where T : class {
 
+		private static readonly List<string> NonUpdateableColumns = new List<string> {
+			"Id",
+			"CreatedOn"
+		};
+
 		private readonly string _connectionString;
 		private readonly string _tableName;
 
-		public GenericRepository( string connectionString, string tableName ) {
-			_connectionString = connectionString;
-			_tableName = tableName;
+		public GenericRepository( IConfiguration config ) {
+			_connectionString = config.GetConnectionString( "defaultConnectionString" );
+			_tableName = GetTableName;
 		}
 		
 		private IDbConnection CreateConnection() {
@@ -28,6 +36,8 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 		private static IEnumerable<PropertyInfo> GetProperties => typeof(T).GetProperties(BindingFlags.Public);
 
+		private static string GetTableName => typeof( T ).GetAttributeValue( ( TableAttribute attribute ) => attribute.Name );
+
 		public async Task<IEnumerable<T>> GetAllAsync() {
 			using IDbConnection connection = CreateConnection();
 			return await connection.QueryAsync<T>( $"SELECT * FROM {_tableName}" );
@@ -36,8 +46,6 @@ namespace QuizBuilder.Repository.Repository.Default {
 		public async Task<T> GetByIdAsync( long id ) {
 			using IDbConnection connection = CreateConnection();
 			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
-			if( result == null )
-				throw new KeyNotFoundException( $"{_tableName} with id [{id}] could not be found." );
 			return result;
 		}
 
@@ -77,27 +85,27 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 			properties.ForEach( prop => { insertQuery.Append( $"@{prop}," ); } );
 
-			insertQuery
+			return insertQuery
 				.Remove( insertQuery.Length - 1, 1 )
-				.Append( ")" );
-
-			return insertQuery.ToString();
+				.Append( ")" )
+				.ToString();
 		}
 
 		protected virtual string GenerateUpdateQuery() {
 			var updateQuery = new StringBuilder( $"UPDATE {_tableName} SET " );
 			var properties = GenerateListOfProperties( GetProperties );
 
-			properties.ForEach( property => {
-				if( !property.Equals( "Id" ) ) {
-					updateQuery.Append( $"{property}=@{property}," );
-				}
-			} );
+			foreach (string property in properties) {
+				if( NonUpdateableColumns.Contains( property ) ) 
+					continue;
 
-			updateQuery.Remove( updateQuery.Length - 1, 1 );
-			updateQuery.Append( " WHERE Id=@Id" );
+				updateQuery.Append( $"{property}=@{property}," );
+			}
 
-			return updateQuery.ToString();
+			return updateQuery
+				.Remove( updateQuery.Length - 1, 1 )
+				.Append( " WHERE Id=@Id" )
+				.ToString();
 		}
 	}
 }

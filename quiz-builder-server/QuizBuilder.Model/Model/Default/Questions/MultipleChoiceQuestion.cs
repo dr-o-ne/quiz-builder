@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using QuizBuilder.Model.Extensions;
 using QuizBuilder.Model.Model.Default.Choices;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Model.Model.Default.Questions {
 
