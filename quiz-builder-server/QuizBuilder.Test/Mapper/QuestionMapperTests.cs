@@ -13,7 +13,7 @@ namespace QuizBuilder.Test.Mapper {
 		[Fact]
 		public void TrueFalse_Serialize_Deserialize_Test() {
 
-			var entity = new TrueFalseQuestion {
+			var expected = new TrueFalseQuestion {
 				Text = "TrueFalse",
 				Name = "Question Text",
 				FalseChoice = {
@@ -26,12 +26,12 @@ namespace QuizBuilder.Test.Mapper {
 				}
 			};
 
-			var dto = _sut.Map( entity );
+			var dto = _sut.Map( expected );
 			var actual = (TrueFalseQuestion)_sut.Map( dto );
 
 			actual.Should().BeEquivalentTo(
-				entity,
-				opt => opt
+				expected,
+				config => config
 					.WithStrictOrdering()
 					.IncludingAllRuntimeProperties()
 			);
