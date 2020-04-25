@@ -13,7 +13,7 @@ namespace QuizBuilder.Repository.Dto {
 
 		public string QuestionText { get; set; }
 
-		public string AnswerSettings { get; set; }
+		public string Settings { get; set; }
 
 	}
 }
