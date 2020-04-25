@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\QuizBuilder.Repository\QuizBuilder.Repository.csproj" />
+      <ProjectReference Include="..\QuizBuilder.Utils\QuizBuilder.Utils.csproj" />
     </ItemGroup>
 
 </Project>

@@ -6,11 +6,11 @@ using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Model.Mapper;
 using QuizBuilder.Model.Mapper.Default;
-using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 using QuizBuilder.Repository.Repository.Default;
 
 namespace QuizBuilder.Api {
+
 	public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -27,7 +27,7 @@ namespace QuizBuilder.Api {
 			services.AddSingleton<IQuizMapper, QuizMapper>();
 			services.AddSingleton<IQuestionMapper, QuestionMapper>();
 
-			services.AddSingleton<IGenericRepository<QuizDto>, GenericRepository<QuizDto>>( provider => new GenericRepository<QuizDto>( connectionString, "Quiz" ) );
+			services.AddSingleton( typeof( IGenericRepository<> ), typeof( GenericRepository<> ) );
 
 			services.AddControllers();
             services.AddDispatchers();

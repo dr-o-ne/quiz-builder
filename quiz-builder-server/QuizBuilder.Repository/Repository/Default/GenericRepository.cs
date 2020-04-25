@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Repository.Repository.Default {
 
@@ -20,9 +23,9 @@ namespace QuizBuilder.Repository.Repository.Default {
 		private readonly string _connectionString;
 		private readonly string _tableName;
 
-		public GenericRepository( string connectionString, string tableName ) {
-			_connectionString = connectionString;
-			_tableName = tableName;
+		public GenericRepository( IConfiguration config ) {
+			_connectionString = config.GetConnectionString( "defaultConnectionString" );
+			_tableName = GetTableName;
 		}
 		
 		private IDbConnection CreateConnection() {
@@ -32,6 +35,8 @@ namespace QuizBuilder.Repository.Repository.Default {
 		}
 
 		private static IEnumerable<PropertyInfo> GetProperties => typeof(T).GetProperties(BindingFlags.Public);
+
+		private static string GetTableName => typeof( T ).GetAttributeValue( ( TableAttribute attribute ) => attribute.Name );
 
 		public async Task<IEnumerable<T>> GetAllAsync() {
 			using IDbConnection connection = CreateConnection();
