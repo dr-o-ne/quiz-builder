@@ -20,7 +20,7 @@ import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { AnswerResolver } from './_resolvers/answer.resolver';
 import { AnswerService } from './_service/answer.service';
-import { AnswerPageComponent } from './answer/answer-page.component';
+import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { AnswerPageComponent } from './answer/answer-page.component';
       QuizListComponent,
       QuizPageComponent,
       QuestionPageComponent,
-      AnswerPageComponent
+      PreviewQuizComponent
    ],
    imports: [
       BrowserModule,
@@ -40,17 +40,17 @@ import { AnswerPageComponent } from './answer/answer-page.component';
       BrowserAnimationsModule,
       HttpClientModule,
       MatirealModule,
-      RouterModule.forRoot(appRoutes),
+      RouterModule.forRoot(appRoutes)
    ],
    entryComponents: [],
    providers: [
-    AuthGuard,
-    QuizService,
-    QuestionService,
-    QuizResolver,
-    QuestionResolver,
-    AnswerResolver,
-    AnswerService
+      AuthGuard,
+      QuizService,
+      QuestionService,
+      QuizResolver,
+      QuestionResolver,
+      AnswerResolver,
+      AnswerService
    ],
    bootstrap: [
       AppComponent

@@ -11,7 +11,8 @@ export class QuestionResolver implements Resolve<Question> {
     constructor(private questionService: QuestionService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Question> {
-        return this.questionService.getQuestion(route.params.id);
+        const id = route.url[3].path;
+        return this.questionService.getQuestion(id);
     //     .pipe(
     //         catchError(error => {
     //             console.log('Problem retrieving data');

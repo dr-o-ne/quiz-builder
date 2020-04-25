@@ -48,7 +48,6 @@ export class QuizListComponent implements OnInit {
       this.dataQuiz = JSON.parse(storage);
       if (tempQuizSave) {
         const newQuiz: Quiz = JSON.parse(tempQuizSave);
-        newQuiz.id = this.generateId();
         this.dataQuiz.push(newQuiz);
         localStorage.setItem('quizlist', JSON.stringify(this.dataQuiz));
         this.initDataSource();
