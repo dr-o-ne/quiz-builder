@@ -6,8 +6,7 @@ import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { AnswerPageComponent } from './answer/answer-page.component';
-import { AnswerResolver } from './_resolvers/answer.resolver';
+import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -24,10 +23,8 @@ export const appRoutes: Routes = [
                     resolve: {quiz: QuizResolver}},
             {path: 'editquiz/:id/editquestion/:id', component: QuestionPageComponent,
                      resolve: {quiz: QuizResolver, question: QuestionResolver }},
-            {path: 'editquiz/:id/editquestion/:id/addnewanswer', component: AnswerPageComponent,
-                     resolve: {quiz: QuizResolver, question: QuestionResolver }},
-            {path: 'editquiz/:id/editquestion/:id/editanswer/:id', component: AnswerPageComponent,
-                     resolve: {quiz: QuizResolver, question: QuestionResolver, answer: AnswerResolver }}
+            {path: 'preview/:id', component: PreviewQuizComponent,
+                     resolve: {quiz: QuizResolver}}
         ]
     },
     {path: '**', redirectTo: 'home', pathMatch: 'full'}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Question } from 'src/app/_models/question';
@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionService } from 'src/app/_service/question.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.css']
@@ -49,7 +50,7 @@ export class QuizPageComponent implements OnInit {
       this.questionService.getQuestionData().subscribe((question: any) => {
         this.dataQuestion = question.questionlist.filter((obj: { quizId: number; }) => obj.quizId === id);
         this.initDataSource();
-        localStorage.setItem('questionlist', JSON.stringify(this.dataQuestion));
+        localStorage.setItem('questionlist', JSON.stringify(question.questionlist));
       }, error => {
         console.log(error);
       });
@@ -58,14 +59,15 @@ export class QuizPageComponent implements OnInit {
       const tempUpdate = localStorage.getItem('question-update');
       this.dataQuestion = JSON.parse(storage);
       if (!tempSave && !tempUpdate) {
+        this.dataQuestion = this.dataQuestion.filter((obj: { quizId: number; }) => obj.quizId === id);
         this.initDataSource();
         return;
       }
       if (tempSave) {
         const newQuestion: Question = JSON.parse(tempSave);
-        newQuestion.id = this.generateId();
         this.dataQuestion.push(newQuestion);
         localStorage.setItem('questionlist', JSON.stringify(this.dataQuestion));
+        this.dataQuestion = this.dataQuestion.filter((obj: { quizId: number; }) => obj.quizId === id);
         this.initDataSource();
         localStorage.removeItem('question-save');
         return;
@@ -74,6 +76,7 @@ export class QuizPageComponent implements OnInit {
       const objIndex = this.dataQuestion.findIndex((obj => obj.id === editQuestion.id));
       this.dataQuestion[objIndex] = editQuestion;
       localStorage.setItem('questionlist', JSON.stringify(this.dataQuestion));
+      this.dataQuestion = this.dataQuestion.filter((obj: { quizId: number; }) => obj.quizId === id);
       localStorage.removeItem('question-update');
       this.initDataSource();
     }
@@ -96,16 +99,6 @@ export class QuizPageComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  cleanFilter() {
-    this.filterData = '';
-    this.initDataSource();
-  }
-
-  applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   saveQuiz() {
     this.saveOrUpdate('save');
   }
@@ -116,6 +109,9 @@ export class QuizPageComponent implements OnInit {
 
   saveOrUpdate(operation: string) {
     if (this.quizForm.valid) {
+      if (!this.newQuiz.hasOwnProperty('id')) {
+        this.newQuiz.id = this.generateId();
+      }
       this.newQuiz = Object.assign(this.newQuiz, this.quizForm.value);
       localStorage.setItem('quiz-' + operation, JSON.stringify(this.newQuiz));
       this.router.navigate(['/quizlist']);

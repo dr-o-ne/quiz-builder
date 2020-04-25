@@ -10,7 +10,8 @@ export class QuizResolver implements Resolve<Quiz> {
     constructor(private quizService: QuizService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Quiz> {
-        return this.quizService.getQuiz(route.params.id);
+        const id = route.url[1].path;
+        return this.quizService.getQuiz(id);
     //     .pipe(
     //         catchError(error => {
     //             console.log('Problem retrieving data');

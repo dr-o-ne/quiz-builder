@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="main-color">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{quiz.name}}</h1>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="main-color" *ngFor="let question of questionList; let i = index">
+
+    <div class="col-md-12">
+      <h4>{{i+1}}. {{question.name}}</h4>
+    </div>
+
+    <div class="row mt-3" *ngIf="question.type === 'Multiple Choice'">
+
+      <div class="col-md-12 margin-left-control">
+        <div class="row" *ngFor="let answer of question.answers">
+          <div class="col-md-6">
+            <mat-checkbox [(ngModel)]="answer.isCorrect">{{answer.name}}</mat-checkbox>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row mt-3" *ngIf="question.type === 'True/False'">
+
+      <div class="col-md-12 margin-left-control">
+        <mat-radio-group (change)="changeRadioButton($event)">
+          <div class="row" *ngFor="let answer of question.answers; let i = index">
+            <div class="col-md-6">
+              <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">{{answer.name}}</mat-radio-button>
+            </div>
+          </div>  
+        </mat-radio-group>
+      </div>
+      
+    </div>
+
+    <div class="row mt-3" *ngIf="question.type === 'Single Choice (Radio Button)'">
+
+      <div class="col-md-12 margin-left-control">
+        <mat-radio-group (change)="changeRadioButton($event)">
+
+          <div class="row" *ngFor="let answer of question.answers; let i = index">
+            <div class="col-md-6">
+              <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">{{answer.name}}</mat-radio-button>
+            </div>
+          </div>
+          
+        </mat-radio-group>
+      </div>
+      
+    </div>
+
+    <div class="row mt-3" *ngIf="question.type === 'Single Choice (Dropdown)'">
+      <div class="col-md-6 margin-left-control">
+
+        <mat-form-field class="full-width">
+          <mat-label>Select your answer</mat-label>
+          <mat-select [(ngModel)]="selectedAnswer">
+            <mat-option *ngFor="let answer of question.answers; let i = index" [value]="answer.id">
+              {{answer.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

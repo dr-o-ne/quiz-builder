@@ -15,3 +15,11 @@ th.mat-sort-header-sorted {
     float: right;
     margin: 8px;
 }
+
+.radio-align-vertical {
+    margin-top: 2%;
+}
+
+.btn-align-vertical {
+    margin-top: 1%;
+}

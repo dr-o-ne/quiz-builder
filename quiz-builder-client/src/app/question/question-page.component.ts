@@ -1,35 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { QuestionService } from '../_service/question.service';
 import { Quiz } from '../_models/quiz';
 import { Question } from '../_models/question';
 import { Answer } from '../_models/answer';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { AnswerService } from '../_service/answer.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-question-page',
   templateUrl: './question-page.component.html',
   styleUrls: ['./question-page.component.css']
 })
 export class QuestionPageComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'isCorrect', 'menu'];
-
   quiz: Quiz;
   question: Question;
   questionForm: FormGroup;
-  resources: string[] = ['Single Choice (Radio Button)', 'Single Choice (Dropdown)', 'Multiple Choice'];
+  resources: string[] = ['Single Choice (Radio Button)', 'Single Choice (Dropdown)', 'Multiple Choice', 'True/False'];
 
-  answerData: Answer[];
-  dataSource: MatTableDataSource<Answer>;
-
-  filterData: string;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  answerData: Answer[] = [];
 
   constructor(private fb: FormBuilder, private router: Router, private activeRout: ActivatedRoute,
               private answerService: AnswerService) {}
@@ -57,8 +46,7 @@ export class QuestionPageComponent implements OnInit {
     if (!storage) {
       this.answerService.getAnswerData().subscribe((answer: any) => {
         this.answerData = answer.answerlist.filter((obj) => obj.questionId === id);
-        this.initDataSource();
-        localStorage.setItem('answerlist', JSON.stringify(this.answerData));
+        localStorage.setItem('answerlist', JSON.stringify(answer.answerlist));
       }, error => {
         console.log(error);
       });
@@ -67,7 +55,7 @@ export class QuestionPageComponent implements OnInit {
       const tempUpdate = localStorage.getItem('answer-update');
       this.answerData = JSON.parse(storage);
       if (!tempSave && !tempUpdate) {
-        this.initDataSource();
+        this.answerData = this.answerData.filter((obj) => obj.questionId === id);
         return;
       }
       if (tempSave) {
@@ -75,7 +63,7 @@ export class QuestionPageComponent implements OnInit {
         newAnswer.id = this.generateId();
         this.answerData.push(newAnswer);
         localStorage.setItem('answerlist', JSON.stringify(this.answerData));
-        this.initDataSource();
+        this.answerData = this.answerData.filter((obj) => obj.questionId === id);
         localStorage.removeItem('answer-save');
         return;
       }
@@ -83,8 +71,8 @@ export class QuestionPageComponent implements OnInit {
       const objIndex = this.answerData.findIndex((obj => obj.id === editAnswer.id));
       this.answerData[objIndex] = editAnswer;
       localStorage.setItem('answerlist', JSON.stringify(this.answerData));
+      this.answerData = this.answerData.filter((obj) => obj.questionId === id);
       localStorage.removeItem('answer-update');
-      this.initDataSource();
     }
   }
 
@@ -99,24 +87,11 @@ export class QuestionPageComponent implements OnInit {
     });
   }
 
-  initDataSource() {
-    this.dataSource = new MatTableDataSource<Answer>(this.answerData);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  cleanFilter() {
-    this.filterData = '';
-    this.initDataSource();
-  }
-
-  applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   saveOrUpdate(operation: string) {
     if (this.questionForm.valid) {
+      if (!this.question.hasOwnProperty('id')) {
+        this.question.id = this.generateId();
+      }
       this.question = Object.assign(this.question, this.questionForm.value);
       this.question.quizId = this.quiz.id;
       localStorage.setItem('question-' + operation, JSON.stringify(this.question));
@@ -130,6 +105,65 @@ export class QuestionPageComponent implements OnInit {
 
   updateQuestion() {
     this.saveOrUpdate('update');
+  }
+
+  changeRadioButton(event) {
+    this.answerData.forEach(item => {
+      if (item.id === event.value) {
+        item.isCorrect = true;
+        return;
+      }
+      item.isCorrect = false;
+    });
+  }
+
+  addNewAnswer() {
+    switch (this.question.type) {
+      case 'True/False':
+        if (this.answerData.length < 2) {
+          this.addAnswer('True');
+          this.addAnswer('False');
+          return;
+        }
+        break;
+      default:
+        this.addAnswer();
+        break;
+    }
+  }
+
+  addAnswer(name?: string) {
+    const newAnswer = new Answer();
+    if (name) {
+      newAnswer.name = name;
+    }
+    newAnswer.id = this.generateId();
+    newAnswer.isCorrect = false;
+    newAnswer.questionId = this.question.id;
+    this.answerData.push(newAnswer);
+  }
+
+  deleteAnswer(answer: Answer) {
+    this.answerData.splice(this.answerData.findIndex(ans => ans.id === answer.id), 1);
+    const storageAnswer = localStorage.getItem('answerlist');
+    const currenAnswerList: Answer[] = JSON.parse(storageAnswer);
+    currenAnswerList.splice(currenAnswerList.findIndex(ans => ans.id === answer.id), 1);
+    localStorage.setItem('answerlist', JSON.stringify(currenAnswerList));
+  }
+
+  saveAnswer() {
+    const storageAnswer = localStorage.getItem('answerlist');
+    const currenAnswerList: Answer[] = JSON.parse(storageAnswer);
+    this.answerData.forEach(item => {
+      const index = currenAnswerList.findIndex((obj) => obj.id === item.id);
+      if (index === -1) {
+        currenAnswerList.push(item);
+        return;
+      }
+      currenAnswerList[index] = item;
+    });
+    localStorage.setItem('answerlist', JSON.stringify(currenAnswerList));
+    alert('Save Succes');
   }
 
 }

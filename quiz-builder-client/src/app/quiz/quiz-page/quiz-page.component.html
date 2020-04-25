@@ -14,7 +14,8 @@
         color="accent"
         type="submit"
         (click)="saveQuiz()"
-        [disabled]="!quizForm.valid">Save</button>
+        [disabled]="!quizForm.valid"
+        >Save</button>
       </div>
 
       <div *ngIf="newQuiz.id" class="col-md-2">
@@ -22,7 +23,8 @@
         color="primary"
         type="submit"
         (click)="updateQuiz()"
-        [disabled]="!quizForm.valid">Update</button>
+        [disabled]="quizForm.touched"
+        >Update</button>
       </div>
 
       <div class="col-md-2">
@@ -36,36 +38,54 @@
   </div>
   
   <div class="main-color">
-    <form [formGroup]="quizForm">
 
-      <mat-grid-list cols="2" rowHeight="100px" gutterSize="30px">
-  
-        <mat-grid-tile >
-            <mat-form-field class="full-width">
-                <mat-label>Name</mat-label>
-                <input matInput type="text" [(ngModel)]="newQuiz.name" required formControlName="name">
-                <button mat-button *ngIf="newQuiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="newQuiz.name =''">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
-        </mat-grid-tile>
-        
-        <mat-grid-tile>
-            <mat-form-field class="full-width">
-                <mat-label>Status</mat-label>
-                <mat-select formControlName="status" required [(ngModel)]="newQuiz.status">
-                <mat-option>--</mat-option>
-                  <mat-option *ngFor="let resource of resources" [value]="resource">
-                    {{resource}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="quizForm.get('status').hasError('required')">Choice status</mat-error>
-            </mat-form-field>
-        </mat-grid-tile>
+    <mat-tab-group>
+
+      <mat-tab label="Quiz">
+        <ng-template matTabContent>
+
+          <form [formGroup]="quizForm" class="mt-3">
+
+            <div class="row">
       
-      </mat-grid-list>
-  
-    </form>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" [(ngModel)]="newQuiz.name" required formControlName="name">
+                  <button mat-button *ngIf="newQuiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="newQuiz.name =''">
+                      <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+      
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Status</mat-label>
+                  <mat-select [disabled]="newQuiz.id" formControlName="status" required [(ngModel)]="newQuiz.status">
+                  <mat-option>--</mat-option>
+                    <mat-option *ngFor="let resource of resources" [value]="resource">
+                      {{resource}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="quizForm.get('status').hasError('required')">Choice status</mat-error>
+                </mat-form-field>
+              </div>
+      
+            </div>
+            
+          </form>
+
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Settings">
+        <ng-template matTabContent>
+              Settings
+        </ng-template>
+      </mat-tab>
+
+    </mat-tab-group>
+
   </div>
 
   <div *ngIf="newQuiz.id" class="main-color">
@@ -74,16 +94,6 @@
           <ng-template matTabContent>
             
             <mat-grid-list cols="4" rowHeight="100px" gutterSize="30px" >
-
-              <mat-grid-tile colspan="3">
-                <mat-form-field class="full-width">
-                  <mat-label>Search</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterData">
-                  <button mat-button *ngIf="filterData" matSuffix mat-icon-button aria-label="Clear" (click)="cleanFilter()">
-                    <mat-icon>close</mat-icon>
-                  </button>
-                </mat-form-field>
-              </mat-grid-tile>
           
               <mat-grid-tile>
                 <button class="full-width" mat-raised-button 
@@ -127,15 +137,11 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
               
-            <mat-paginator [pageSizeOptions]="[15, 20]" showFirstLastButtons></mat-paginator>
+            <mat-paginator *ngIf="dataQuestion.length >= 20"  [pageSizeOptions]="[20, 40]" showFirstLastButtons></mat-paginator>
 
           </ng-template>
       </mat-tab>
-      <mat-tab label="Settings">
-          <ng-template matTabContent>
-              Settings
-          </ng-template>
-      </mat-tab>
+
     </mat-tab-group>
   </div>
   
