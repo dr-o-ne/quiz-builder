@@ -7,27 +7,25 @@ namespace QuizBuilder.Model.Model.Default.Questions {
 
 	public sealed class MultipleChoiceQuestion : Question {
 
-		private readonly List<BinaryChoice> _choices = new List<BinaryChoice>();
+		public List<BinaryChoice> Choices { get; set; } = new List<BinaryChoice>();
 
-		public List<BinaryChoice> Choices {
-			get {
-				var temp = new List<BinaryChoice>( _choices );
-				if( Randomize )
-					temp.Shuffle();
-				return temp;
-			}
+		public List<BinaryChoice> GetChoicesRandomized() {
+			var temp = new List<BinaryChoice>( Choices );
+			if( Randomize )
+				temp.Shuffle();
+			return temp;
 		}
 
 		public bool Randomize { get; set; }
 
 		public void AddChoice( BinaryChoice choice ) {
 
-			_choices.Add( choice );
+			Choices.Add( choice );
 		}
 
 		public override bool IsValid() => base.IsValid() &&
-		                                  _choices.Count( x => x.IsCorrect ) == 1 &&
-		                                  _choices.Count( x => !x.IsValid() ) == 0;
+		                                  Choices.Count( x => x.IsCorrect ) == 1 &&
+		                                  Choices.Count( x => !x.IsValid() ) == 0;
 	}
 
 }
