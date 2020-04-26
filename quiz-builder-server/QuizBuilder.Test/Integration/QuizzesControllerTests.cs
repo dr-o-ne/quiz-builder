@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
-using QuizBuilder.Api.Controllers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using QuizBuilder.Api.Controllers;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Common.Handlers.Default;
 using QuizBuilder.Model.Mapper;
@@ -12,7 +12,7 @@ using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 using Xunit;
 
-namespace QuizBuilder.Test {
+namespace QuizBuilder.Test.Integration {
 
 	public sealed class QuizzesControllerTests {
 

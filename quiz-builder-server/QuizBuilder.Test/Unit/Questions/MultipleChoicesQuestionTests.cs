@@ -1,10 +1,40 @@
-﻿using QuizBuilder.Model.Model.Default.Choices;
+﻿using FluentAssertions;
+using QuizBuilder.Model.Mapper;
+using QuizBuilder.Model.Mapper.Default;
+using QuizBuilder.Model.Model.Default.Choices;
 using QuizBuilder.Model.Model.Default.Questions;
 using Xunit;
 
-namespace QuizBuilder.Test.Model.Questions {
+namespace QuizBuilder.Test.Unit.Questions {
 
 	public sealed class MultipleChoicesQuestionTests {
+
+		private readonly IQuestionMapper _mapper = new QuestionMapper();
+
+		[Fact]
+		public void Serialize_Deserialize_Test() {
+
+			var expected = new MultipleChoiceQuestion {
+				Text = "MultipleChoice",
+				Name = "Question Text",
+				Randomize = true
+			};
+
+			expected.AddChoice( new BinaryChoice { IsCorrect = true, Text = "Choice1" } );
+			expected.AddChoice( new BinaryChoice { IsCorrect = false, Text = "Choice2" } );
+			expected.AddChoice( new BinaryChoice { IsCorrect = false, Text = "Choice3" } );
+
+			var dto = _mapper.Map( expected );
+			var actual = (MultipleChoiceQuestion)_mapper.Map( dto );
+
+			actual.Should().BeEquivalentTo(
+				expected,
+				config => config
+					.WithStrictOrdering()
+					.IncludingAllRuntimeProperties()
+			);
+
+		}
 
 		[Fact]
 		public void Text_Validation_Test() {
@@ -77,6 +107,8 @@ namespace QuizBuilder.Test.Model.Questions {
 
 			Assert.False( sut.GetChoicesRandomized()[0].IsCorrect );
 		}
+
+
 
 	}
 
