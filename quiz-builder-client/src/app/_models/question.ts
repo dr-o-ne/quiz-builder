@@ -5,5 +5,6 @@ export class Question {
     name?: string;
     type?: string;
     quizId: number;
+    groupId: number;
     answers?: Answer[];
 }

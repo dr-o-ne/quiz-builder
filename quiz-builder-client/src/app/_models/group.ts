@@ -1,10 +1,8 @@
 import { Question } from './question';
-import { Group } from './group';
 
-export class Quiz {
+export class Group {
     id: number;
     name?: string;
-    status?: string;
-    groups?: Group[];
+    quizId: number;
     question?: Question[];
 }

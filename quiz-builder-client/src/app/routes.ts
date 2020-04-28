@@ -7,6 +7,7 @@ import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
+import { GroupResolver } from './_resolvers/group.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -19,10 +20,10 @@ export const appRoutes: Routes = [
             {path: 'createquiz', component: QuizPageComponent},
             {path: 'editquiz/:id', component: QuizPageComponent,
                     resolve: {quiz: QuizResolver}},
-            {path: 'editquiz/:id/addnewquestion', component: QuestionPageComponent,
-                    resolve: {quiz: QuizResolver}},
-            {path: 'editquiz/:id/editquestion/:id', component: QuestionPageComponent,
-                     resolve: {quiz: QuizResolver, question: QuestionResolver }},
+            {path: 'editquiz/:id/group/:id/addnewquestion', component: QuestionPageComponent,
+                    resolve: {quiz: QuizResolver, group: GroupResolver}},
+            {path: 'editquiz/:id/group/:id/editquestion/:id', component: QuestionPageComponent,
+                     resolve: {quiz: QuizResolver, group: GroupResolver, question: QuestionResolver }},
             {path: 'preview/:id', component: PreviewQuizComponent,
                      resolve: {quiz: QuizResolver}}
         ]

@@ -21,6 +21,8 @@ import { QuestionResolver } from './_resolvers/question.resolver';
 import { AnswerResolver } from './_resolvers/answer.resolver';
 import { AnswerService } from './_service/answer.service';
 import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
+import { QuestionListComponent } from './question/question-list/question-list.component';
+import { GroupResolver } from './_resolvers/group.resolver';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
       QuizListComponent,
       QuizPageComponent,
       QuestionPageComponent,
-      PreviewQuizComponent
+      PreviewQuizComponent,
+      QuestionListComponent
    ],
    imports: [
       BrowserModule,
@@ -50,7 +53,8 @@ import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
       QuizResolver,
       QuestionResolver,
       AnswerResolver,
-      AnswerService
+      AnswerService,
+      GroupResolver
    ],
    bootstrap: [
       AppComponent

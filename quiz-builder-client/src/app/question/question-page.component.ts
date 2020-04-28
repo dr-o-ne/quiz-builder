@@ -5,6 +5,7 @@ import { Quiz } from '../_models/quiz';
 import { Question } from '../_models/question';
 import { Answer } from '../_models/answer';
 import { AnswerService } from '../_service/answer.service';
+import { Group } from '../_models/group';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,31 +15,42 @@ import { AnswerService } from '../_service/answer.service';
 })
 export class QuestionPageComponent implements OnInit {
   quiz: Quiz;
+  group: Group;
   question: Question;
   questionForm: FormGroup;
   resources: string[] = ['Single Choice (Radio Button)', 'Single Choice (Dropdown)', 'Multiple Choice', 'True/False'];
 
   answerData: Answer[] = [];
+  groupResurce: Group[] = [];
 
   constructor(private fb: FormBuilder, private router: Router, private activeRout: ActivatedRoute,
               private answerService: AnswerService) {}
 
   ngOnInit() {
     this.initValidate();
+    this.initGroup();
 
     this.activeRout.data.subscribe(data => {
-      if (data.hasOwnProperty('quiz')) {
+      if (data.hasOwnProperty('quiz') && data.hasOwnProperty('group')) {
         this.quiz = data.quiz;
+        this.group = data.group;
         if (data.hasOwnProperty('question')) {
           this.question = data.question;
           this.initAnswer(this.question.id);
           return;
         }
         this.question = new Question();
+        this.question.quizId = this.quiz.id;
+        this.question.groupId = this.group.id;
       } else {
         console.log('Not found correct quiz');
       }
     });
+  }
+
+  initGroup() {
+    const storage = localStorage.getItem('grouplist');
+    this.groupResurce = JSON.parse(storage);
   }
 
   initAnswer(id: number) {
@@ -83,7 +95,8 @@ export class QuestionPageComponent implements OnInit {
   initValidate() {
     this.questionForm = this.fb.group({
       name: ['', Validators.required],
-      type: ['', Validators.required]
+      type: ['', Validators.required],
+      groupId: [Number, Validators.required]
     });
   }
 
@@ -92,8 +105,9 @@ export class QuestionPageComponent implements OnInit {
       if (!this.question.hasOwnProperty('id')) {
         this.question.id = this.generateId();
       }
-      this.question = Object.assign(this.question, this.questionForm.value);
-      this.question.quizId = this.quiz.id;
+      this.question.groupId = this.group.id;
+      this.question.name = this.questionForm.value.name;
+      this.question.type = this.questionForm.value.type;
       localStorage.setItem('question-' + operation, JSON.stringify(this.question));
       this.router.navigate(['/editquiz/', this.quiz.id]);
     }
