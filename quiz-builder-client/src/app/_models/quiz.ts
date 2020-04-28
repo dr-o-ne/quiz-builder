@@ -3,8 +3,7 @@ import { Group } from './group';
 
 export class Quiz {
     id: number;
-    name?: string;
+    name: string;
     status?: string;
     groups?: Group[];
-    question?: Question[];
 }

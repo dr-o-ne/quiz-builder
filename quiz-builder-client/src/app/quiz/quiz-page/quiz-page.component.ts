@@ -19,6 +19,8 @@ import { QuizService } from 'src/app/_service/quiz.service';
 export class QuizPageComponent implements OnInit {
   newQuiz: Quiz;
   newGroup: Group;
+  oldGroup: Group;
+  selectedIndex = 0;
   quizForm: FormGroup;
   resources: string[] = ['In Design'];
 
@@ -35,14 +37,19 @@ export class QuizPageComponent implements OnInit {
               private groupService: QuizService) {}
 
   ngOnInit() {
+    this.initValidate();
     this.activeRout.data.subscribe(data => {
       if (data.hasOwnProperty('quiz')) {
         this.newQuiz = data.quiz;
+        if (data.hasOwnProperty('group')) {
+          this.oldGroup = data.group;
+          this.initGroup(this.newQuiz.id);
+          return;
+        }
         this.initGroup(this.newQuiz.id);
       } else {
         this.newQuiz = new Quiz();
       }
-      this.initValidate();
     });
   }
 
@@ -61,6 +68,7 @@ export class QuizPageComponent implements OnInit {
       this.dataGroup = JSON.parse(storage);
       if (!tempSave && !tempUpdate) {
         this.dataGroup = this.dataGroup.filter((obj) => obj.quizId === id);
+        this.setActiveGroup();
         return;
       }
       if (tempSave) {
@@ -69,6 +77,7 @@ export class QuizPageComponent implements OnInit {
         localStorage.setItem('grouplist', JSON.stringify(this.dataGroup));
         this.dataGroup = this.dataGroup.filter((obj) => obj.quizId === id);
         localStorage.removeItem('group-save');
+        this.setActiveGroup();
         return;
       }
       const editGroup: Group = JSON.parse(tempUpdate);
@@ -77,6 +86,13 @@ export class QuizPageComponent implements OnInit {
       localStorage.setItem('grouplist', JSON.stringify(this.dataGroup));
       this.dataGroup = this.dataGroup.filter((obj) => obj.quizId === id);
       localStorage.removeItem('group-update');
+      this.setActiveGroup();
+    }
+  }
+
+  setActiveGroup() {
+    if (this.oldGroup) {
+      this.selectedIndex = this.dataGroup.findIndex((obj => obj.id === this.oldGroup.id));
     }
   }
 

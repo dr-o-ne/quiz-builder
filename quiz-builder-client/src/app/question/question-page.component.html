@@ -22,11 +22,11 @@
         color="primary"
         type="submit"
         (click)="updateQuestion()"
-        [disabled]="!questionForm.valid">Save</button>
+        [disabled]="!questionForm.valid">Update</button>
       </div>
 
       <div class="col-md-2">
-        <button class="full-width" mat-raised-button [routerLink]="['/editquiz/', quiz.id]">
+        <button class="full-width" mat-raised-button [routerLink]="['/editquiz/', quiz.id, 'group', group.id]">
           <mat-icon>reply</mat-icon>
         </button>
       </div>
@@ -51,21 +51,6 @@
             </div>
           
             <form [formGroup]="questionForm">
-
-              <div class="row">
-                <div class="col-md-12">
-                  <mat-form-field class="full-width">
-                    <mat-label>Group</mat-label>
-                    <mat-select formControlName="groupId" disabled required [(ngModel)]="group.name" >
-                    <mat-option>--</mat-option>
-                      <mat-option *ngFor="let resource of groupResurce" [value]="resource.name">
-                        {{resource.name}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
         
               <div class="row">
                 <div class="col-md-6">
@@ -88,7 +73,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
-                  </mat-form-field>
+                </mat-form-field>
                 </div>
               </div>
         
@@ -125,77 +110,33 @@
             <div class="row mt-3" *ngIf="question.type === 'True/False'">
 
               <div class="col-md-12">
-                <mat-radio-group (change)="changeRadioButton($event)">
-                  <div class="row" *ngFor="let answer of answerData">
-                    <div class="col-md-6">
-                      <mat-form-field class="full-width">
-                        <mat-label>Name Answer</mat-label>
-                        <input matInput type="text" [(ngModel)]="answer.name" disabled>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-1 radio-align-vertical">
-                      <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">Correct</mat-radio-button>
-                    </div>
-                  </div>  
-                </mat-radio-group>
+                <app-true-false-answer [answerData]="answerData"></app-true-false-answer>
               </div>
 
             </div>
 
             <div class="row mt-3" *ngIf="question.type === 'Multiple Choice'">
+
               <div class="col-md-12">
-
-                <div class="row" *ngFor="let answer of answerData">
-
-                  <div class="col-md-6">
-                    <mat-form-field class="full-width">
-                      <mat-label>Name Answer</mat-label>
-                      <input matInput type="text" [(ngModel)]="answer.name">
-                      <button mat-button *ngIf="answer.name" matSuffix mat-icon-button aria-label="Clear" (click)="answer.name =''">
-                        <mat-icon>close</mat-icon>
-                      </button>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-1 radio-align-vertical">
-                    <mat-checkbox [(ngModel)]="answer.isCorrect">Correct</mat-checkbox>
-                  </div>
-                  <div class="col-md-1 btn-align-vertical">
-                    <button mat-icon-button color="accent" (click)="deleteAnswer(answer)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-
-                </div>
+                <app-multiple-choice-answer [answerData]="answerData"></app-multiple-choice-answer>
               </div>
+
             </div>
 
-            <div class="row mt-3" *ngIf="question.type === 'Single Choice (Radio Button)' || question.type === 'Single Choice (Dropdown)'" >
+            <div class="row mt-3" *ngIf="question.type === 'Single Choice (Radio Button)'" >
 
               <div class="col-md-12">
-                <mat-radio-group (change)="changeRadioButton($event)">
-                  <div class="row" *ngFor="let answer of answerData">
-                    <div class="col-md-6">
-                      <mat-form-field class="full-width">
-                        <mat-label>Name Answer</mat-label>
-                        <input matInput type="text" [(ngModel)]="answer.name">
-                        <button mat-button *ngIf="answer.name" matSuffix mat-icon-button aria-label="Clear" (click)="answer.name =''">
-                          <mat-icon>close</mat-icon>
-                        </button>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-1 radio-align-vertical">
-                      <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">Correct</mat-radio-button>
-                    </div>
-                    <div class="col-md-1 btn-align-vertical">
-                      <button mat-icon-button color="accent" (click)="deleteAnswer(answer)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-                  
-                </mat-radio-group>
+                <app-single-choice-radio-answer [answerData]="answerData"></app-single-choice-radio-answer>
               </div>
               
+            </div>
+
+            <div class="row mt-3" *ngIf="question.type === 'Single Choice (Dropdown)'">
+
+              <div class="col-md-12">
+                <app-single-choice-dropdown-answer [answerData]="answerData"></app-single-choice-dropdown-answer>
+              </div>
+
             </div>
     
           </ng-template>

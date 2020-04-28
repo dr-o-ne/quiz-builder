@@ -1,12 +1,14 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
 import { Question } from 'src/app/_models/question';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Group } from 'src/app/_models/group';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { QuestionService } from 'src/app/_service/question.service';
+import clonedeep from 'lodash.clonedeep';
+import { CdkDropList, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-question-list',
@@ -17,7 +19,10 @@ export class QuestionListComponent implements OnInit {
   @Input() group: Group;
   @Input() quiz: Quiz;
 
-  displayedColumns: string[] = ['name', 'type', 'menu'];
+  @ViewChild('table1') table1: MatTable<Question>;
+  @ViewChild('list1') list1: CdkDropList;
+
+  displayedColumns: string[] = ['name', 'type', 'edit', 'move to group', 'delete'];
 
   dataQuestion: Question[] = [];
   dataSource: MatTableDataSource<Question>;
@@ -80,6 +85,19 @@ export class QuestionListComponent implements OnInit {
 
   generateId() {
     return Math.floor(Math.random() * 10000) + 1;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+
+    this.dataSource.data = clonedeep(this.dataSource.data);
   }
 
 }

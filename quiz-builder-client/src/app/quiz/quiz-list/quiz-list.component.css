@@ -19,3 +19,7 @@ th.mat-sort-header-sorted {
     float: right;
     margin: 8px;
 }
+
+.btn-align-vertical {
+    margin-top: 1%;
+}
