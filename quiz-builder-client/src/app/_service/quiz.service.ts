@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import { Quiz } from '../_models/quiz';
 import { Observable } from 'rxjs';
 import { Group } from '../_models/group';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class QuizService{
     group: Observable<Group>;
-    apiUrl = 'https://localhost:5001/';
+    apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient){}
 

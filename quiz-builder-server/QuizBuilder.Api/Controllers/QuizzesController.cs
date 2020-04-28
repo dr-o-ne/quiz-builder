@@ -37,7 +37,6 @@ namespace QuizBuilder.Api.Controllers {
 			return result.Success
 				? (ActionResult)Created( nameof(GetAllQuizzes), result )
 				: UnprocessableEntity( result );
-			return Created( nameof(GetAllQuizzes), result );
 		}
 
 		[HttpPut]
