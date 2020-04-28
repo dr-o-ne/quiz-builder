@@ -19,13 +19,13 @@ export const appRoutes: Routes = [
             {path: 'quizlist', component: QuizListComponent},
             {path: 'createquiz', component: QuizPageComponent},
             {path: 'editquiz/:id', component: QuizPageComponent,
-                    resolve: {quiz: QuizResolver}},
+                    resolve: {quizResolver: QuizResolver}},
             {path: 'editquiz/:id/group/:id/addnewquestion', component: QuestionPageComponent,
-                    resolve: {quiz: QuizResolver, group: GroupResolver}},
+                    resolve: {quizResolver: QuizResolver, group: GroupResolver}},
             {path: 'editquiz/:id/group/:id/editquestion/:id', component: QuestionPageComponent,
-                     resolve: {quiz: QuizResolver, group: GroupResolver, question: QuestionResolver }},
+                     resolve: {quizResolver: QuizResolver, group: GroupResolver, question: QuestionResolver }},
             {path: 'preview/:id', component: PreviewQuizComponent,
-                     resolve: {quiz: QuizResolver}}
+                     resolve: {quizResolver: QuizResolver}}
         ]
     },
     {path: '**', redirectTo: 'home', pathMatch: 'full'}

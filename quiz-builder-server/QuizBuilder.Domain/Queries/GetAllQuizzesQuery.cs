@@ -3,7 +3,7 @@ using QuizBuilder.Domain.Dtos;
 
 namespace QuizBuilder.Domain.Queries
 {
-	public class GetAllQuizzesQuery : IQuery<AllQuizzesDto>
+	public class GetAllQuizzesQuery : IQuery<GetAllQuizzesDto>
 	{
 	}
 }

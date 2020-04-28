@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Domain.Dtos;
@@ -8,28 +7,21 @@ using QuizBuilder.Domain.Queries;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
-namespace QuizBuilder.Domain.Handlers
-{
+namespace QuizBuilder.Domain.Handlers {
 	public class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, GetQuizByIdDto> {
-
 		private readonly IQuizMapper _quizMapper;
-		private readonly IGenericRepository<QuizDto> _quizRepository;
+		private readonly IGenericRepository<Quiz> _quizRepository;
 
-		public GetQuizByIdQueryHandler( IQuizMapper quizMapper, IGenericRepository<QuizDto> quizRepository ) {
+		public GetQuizByIdQueryHandler( IQuizMapper quizMapper, IGenericRepository<Quiz> quizRepository ) {
 			_quizMapper = quizMapper;
 			_quizRepository = quizRepository;
 		}
 
 		public async Task<GetQuizByIdDto> HandleAsync( GetQuizByIdQuery query ) {
+			Quiz entity = await _quizRepository.GetByIdAsync( query.Id );
+			QuizDto dto = _quizMapper.Map( entity );
 
-			QuizDto dto = await _quizRepository.GetByIdAsync( query.Id );
-
-			Quiz entity = _quizMapper.Map( dto );
-			if( entity == null )
-				return null;
-
-			return new GetQuizByIdDto( entity.Id, entity.Name, DateTime.MinValue, DateTime.MinValue );
+			return entity is null ? null : new GetQuizByIdDto( dto );
 		}
-
 	}
 }

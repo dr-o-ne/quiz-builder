@@ -9,11 +9,11 @@ namespace QuizBuilder.Repository.Repository {
 
 		Task<T> GetByIdAsync( long id );
 
-		Task<long> AddAsync( T entity );
+		Task<int> AddAsync( T entity );
 
-		Task UpdateAsync( T entity );
+		Task<int> UpdateAsync( T entity );
 
-		Task DeleteAsync( long id );
+		Task<int> DeleteAsync( long id );
 
 	}
 

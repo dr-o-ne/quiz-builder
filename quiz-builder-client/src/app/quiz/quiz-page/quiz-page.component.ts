@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import { Quiz } from 'src/app/_models/quiz';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Question } from 'src/app/_models/question';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute } from '@angular/router';
-import { QuestionService } from 'src/app/_service/question.service';
-import { Group } from 'src/app/_models/group';
-import { QuizService } from 'src/app/_service/quiz.service';
+import {Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
+import {Quiz} from 'src/app/_models/quiz';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {Question} from 'src/app/_models/question';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {Router, ActivatedRoute} from '@angular/router';
+import {QuestionService} from 'src/app/_service/question.service';
+import {Group} from 'src/app/_models/group';
+import {QuizService} from 'src/app/_service/quiz.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,10 +17,10 @@ import { QuizService } from 'src/app/_service/quiz.service';
   styleUrls: ['./quiz-page.component.css']
 })
 export class QuizPageComponent implements OnInit {
-  newQuiz: Quiz;
+  quiz: Quiz;
   newGroup: Group;
   quizForm: FormGroup;
-  resources: string[] = ['In Design'];
+  resources: string[] = ['In design'];
 
   groupFormControl: FormControl;
 
@@ -32,15 +32,16 @@ export class QuizPageComponent implements OnInit {
   newNameGroup: string;
 
   constructor(private fb: FormBuilder, private router: Router, private activeRout: ActivatedRoute,
-              private groupService: QuizService) {}
+              private quizService: QuizService) {
+  }
 
   ngOnInit() {
-    this.activeRout.data.subscribe(data => {
-      if (data.hasOwnProperty('quiz')) {
-        this.newQuiz = data.quiz;
-        this.initGroup(this.newQuiz.id);
+    this.activeRout.data.subscribe(response => {
+      if (response.hasOwnProperty('quizResolver')) {
+        this.quiz = response.quizResolver.quiz;
+        this.initGroup(this.quiz.id);
       } else {
-        this.newQuiz = new Quiz();
+        this.quiz = new Quiz();
       }
       this.initValidate();
     });
@@ -49,7 +50,7 @@ export class QuizPageComponent implements OnInit {
   initGroup(id: number) {
     const storage = localStorage.getItem('grouplist');
     if (!storage) {
-      this.groupService.getGroupData().subscribe((group: any) => {
+      this.quizService.getGroupData().subscribe((group: any) => {
         this.dataGroup = group.grouplist.filter((obj) => obj.quizId === id);
         localStorage.setItem('grouplist', JSON.stringify(group.grouplist));
       }, error => {
@@ -108,9 +109,9 @@ export class QuizPageComponent implements OnInit {
       this.newGroup = new Group();
       this.newGroup.id = this.generateId();
       this.newGroup.name = this.newNameGroup;
-      this.newGroup.quizId = this.newQuiz.id;
+      this.newGroup.quizId = this.quiz.id;
       localStorage.setItem('group-save', JSON.stringify(this.newGroup));
-      this.initGroup(this.newQuiz.id);
+      this.initGroup(this.quiz.id);
     }
   }
 
@@ -138,7 +139,7 @@ export class QuizPageComponent implements OnInit {
       currentGroup.name = this.newNameGroup;
       localStorage.setItem('group-update', JSON.stringify(currentGroup));
       this.hideBtnNewGroup = false;
-      this.initGroup(this.newQuiz.id);
+      this.initGroup(this.quiz.id);
     }
   }
 
@@ -149,22 +150,15 @@ export class QuizPageComponent implements OnInit {
     });
   }
 
-  saveQuiz() {
-    this.saveOrUpdate('quiz-save');
+  createQuiz() {
+    this.quizService.createQuiz(this.quiz).subscribe(response => {
+      this.router.navigate(['/quizlist']);
+    }, error => console.log(error));
   }
 
   updateQuiz() {
-    this.saveOrUpdate('quiz-update');
-  }
-
-  saveOrUpdate(operation: string) {
-    if (this.quizForm.valid) {
-      if (!this.newQuiz.hasOwnProperty('id')) {
-        this.newQuiz.id = this.generateId();
-      }
-      this.newQuiz = Object.assign(this.newQuiz, this.quizForm.value);
-      localStorage.setItem(operation, JSON.stringify(this.newQuiz));
+    this.quizService.updateQuiz(this.quiz).subscribe(response => {
       this.router.navigate(['/quizlist']);
-    }
+    }, error => console.log(error));
   }
 }

@@ -7,18 +7,18 @@ using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Domain.Handlers {
-	public class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
+	public class UpdateQuizCommandHandler : ICommandHandler<UpdateQuizCommand, CommandResult> {
 		private readonly IQuizMapper _quizMapper;
 		private readonly IGenericRepository<Quiz> _quizRepository;
 
-		public CreateQuizCommandHandler( IQuizMapper quizMapper, IGenericRepository<Quiz> quizRepository ) {
+		public UpdateQuizCommandHandler( IQuizMapper quizMapper, IGenericRepository<Quiz> quizRepository ) {
 			_quizMapper = quizMapper;
 			_quizRepository = quizRepository;
 		}
 
-		public async Task<CommandResult> HandleAsync( CreateQuizCommand command ) {
+		public async Task<CommandResult> HandleAsync( UpdateQuizCommand command ) {
 			Quiz quiz = _quizMapper.Map( command );
-			int rowsAffected = await _quizRepository.AddAsync( quiz );
+			int rowsAffected = await _quizRepository.UpdateAsync( quiz );
 
 			return new CommandResult( success: rowsAffected > 0, message: string.Empty );
 		}

@@ -22,9 +22,9 @@ export class PreviewQuizComponent implements OnInit {
               private questionService: QuestionService, private answerService: AnswerService) {}
 
   ngOnInit() {
-    this.activeRout.data.subscribe(data => {
-      if (data.hasOwnProperty('quiz')) {
-        this.quiz = data.quiz;
+    this.activeRout.data.subscribe(response => {
+      if (response.hasOwnProperty('quizResolver')) {
+        this.quiz = response.quizResolver.quiz;
         this.initPreview();
       } else {
         console.log('Not found correct quiz');

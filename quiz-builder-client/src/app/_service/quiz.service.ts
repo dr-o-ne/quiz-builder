@@ -8,22 +8,25 @@ import { Group } from '../_models/group';
     providedIn: 'root'
 })
 export class QuizService{
-    quiz: Observable<Quiz>;
     group: Observable<Group>;
+    apiUrl = 'https://localhost:5001/';
 
     constructor(private http: HttpClient){}
 
-    getQuizData(){
-        return this.http.get('assets/quiz.json');
+    getAllQuizzes(): Observable<object> {
+        return this.http.get(this.apiUrl + 'quizzes');
     }
 
-    getQuiz(id): Observable<Quiz> {
-        const tempListQuiz = localStorage.getItem('quizlist');
-        const quizList = JSON.parse(tempListQuiz);
-        // tslint:disable-next-line: radix
-        const index = quizList.findIndex((obj => obj.id === Number.parseInt(id)));
-        this.quiz = quizList[index];
-        return this.quiz;
+    getQuiz(id: number): Observable<object> {
+      return this.http.get(this.apiUrl + 'quizzes/' + id);
+    }
+
+    createQuiz(quiz: Quiz): Observable<object> {
+      return this.http.post(this.apiUrl + 'quizzes', quiz);
+    }
+
+    updateQuiz(quiz: Quiz): Observable<object> {
+      return this.http.put(this.apiUrl + 'quizzes', quiz);
     }
 
     getGroupData() {
