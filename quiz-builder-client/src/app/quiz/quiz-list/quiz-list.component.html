@@ -1,6 +1,17 @@
 <div class="container">
 
+    <div class="row">
+
+      <div class="col-md-4 btn-align-vertical">
+        <button class="full-width" mat-raised-button 
+        color="primary"
+        [routerLink]="['/createquiz']">New Quiz</button>
+      </div>
+
+    </div>
+  
   <div class="main-color">
+
     <div class="row">
 
       <div class="col-md-8">
@@ -14,22 +25,11 @@
         </mat-form-field>
       </div>
 
-      <div class="col-md-4 btn-align-vertical">
-        <button class="full-width" mat-raised-button 
-        color="primary"
-        [routerLink]="['/createquiz']">New Quiz</button>
-      </div>
-
-    </div>
-  </div>
-  
-  <div class="main-color">
-
-    <div class="row">
+    
       <div class="col-md-2">
         <button class="full-width" mat-raised-button [color]="colorBtnBulk" (click)="clickBulkEdit()">
           <mat-icon>edit</mat-icon>
-          Bulk Edit
+          Bulk Actions
         </button>
       </div>
     </div>
@@ -66,8 +66,17 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let element"> 
-          <button mat-icon-button color="primary" [routerLink]="['/editquiz/', element.id]">
+          <button mat-icon-button color="primary" matTooltip="Edit" [routerLink]="['/editquiz/', element.id]">
             <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="preview">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element"> 
+          <button mat-icon-button color="primary" matTooltip="Preview" [routerLink]="['/preview/', element.id]">
+            <mat-icon>visibility</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -84,17 +93,8 @@
       <ng-container matColumnDef="analize">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let element"> 
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" matTooltip="Statistics">
             <mat-icon>equalizer</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="preview">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-        <td mat-cell *matCellDef="let element"> 
-          <button mat-icon-button color="primary" [routerLink]="['/preview/', element.id]">
-            <mat-icon>visibility</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -120,7 +120,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
       
-    <mat-paginator [pageSizeOptions]="[15, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator *ngIf="dataSource.data.length>15" [pageSizeOptions]="[15, 20]" showFirstLastButtons></mat-paginator>
   </div>
   
 </div>
