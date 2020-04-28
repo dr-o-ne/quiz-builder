@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using QuizBuilder.Model.Mapper;
-using QuizBuilder.Model.Mapper.Default;
-using QuizBuilder.Model.Model.Default.Questions;
+using QuizBuilder.Domain.Mapper;
+using QuizBuilder.Domain.Mapper.Default;
+using QuizBuilder.Domain.Model.Default.Questions;
 using Xunit;
 
 namespace QuizBuilder.Test.Unit.Questions {

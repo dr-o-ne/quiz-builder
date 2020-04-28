@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Repository", "Q
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Test", "QuizBuilder.Test\QuizBuilder.Test.csproj", "{9CF372C6-5AD7-4C1C-99CC-C874A04C789D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Model", "QuizBuilder.Model\QuizBuilder.Model.csproj", "{E33B36DA-3F14-46F5-9EA5-CEFBEE661F2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Domain", "QuizBuilder.Domain\QuizBuilder.Domain.csproj", "{E33B36DA-3F14-46F5-9EA5-CEFBEE661F2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizBuilder.Utils", "QuizBuilder.Utils\QuizBuilder.Utils.csproj", "{6890FF7F-E364-4789-A18C-F5EE88A73204}"
 EndProject
