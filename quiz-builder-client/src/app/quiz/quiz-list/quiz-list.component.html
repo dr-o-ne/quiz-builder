@@ -4,9 +4,10 @@
     <div class="row">
 
       <div class="col-md-8">
-        <mat-form-field class="full-width">
-          <mat-label>Search</mat-label>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Search For...</mat-label>
           <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterData">
+          <mat-icon matSuffix *ngIf="!filterData">search</mat-icon>
           <button mat-button *ngIf="filterData" matSuffix mat-icon-button aria-label="Clear" (click)="cleanFilter()">
             <mat-icon>close</mat-icon>
           </button>
@@ -16,7 +17,7 @@
       <div class="col-md-4 btn-align-vertical">
         <button class="full-width" mat-raised-button 
         color="primary"
-        [routerLink]="['/createquiz']">Create Quiz</button>
+        [routerLink]="['/createquiz']">New Quiz</button>
       </div>
 
     </div>
