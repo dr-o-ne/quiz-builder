@@ -1,0 +1,13 @@
+<mat-radio-group (change)="changeRadioButton($event)">
+  <div class="row" *ngFor="let answer of answerData">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <mat-label>Name Answer</mat-label>
+        <input matInput type="text" [(ngModel)]="answer.name" disabled>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1 radio-align-vertical">
+      <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">Correct</mat-radio-button>
+    </div>
+  </div>  
+</mat-radio-group>

@@ -23,6 +23,12 @@ import { AnswerService } from './_service/answer.service';
 import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
 import { GroupResolver } from './_resolvers/group.resolver';
+import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
+import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
+import { SingleChoiceRadioAnswerComponent } from './question/answer/single-choice-radio-answer/single-choice-radio-answer.component';
+import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -34,7 +40,11 @@ import { GroupResolver } from './_resolvers/group.resolver';
       QuizPageComponent,
       QuestionPageComponent,
       PreviewQuizComponent,
-      QuestionListComponent
+      QuestionListComponent,
+      TrueFalseAnswerComponent,
+      MultipleChoiceAnswerComponent,
+      SingleChoiceRadioAnswerComponent,
+      SingleChoiceDropdownAnswerComponent
    ],
    imports: [
       BrowserModule,
@@ -43,9 +53,11 @@ import { GroupResolver } from './_resolvers/group.resolver';
       BrowserAnimationsModule,
       HttpClientModule,
       MatirealModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      MatNativeDateModule,
+      MatTooltipModule
    ],
-   entryComponents: [],
+   entryComponents: [QuestionListComponent],
    providers: [
       AuthGuard,
       QuizService,

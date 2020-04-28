@@ -2,7 +2,7 @@ import { Question } from './question';
 
 export class Group {
     id: number;
-    name?: string;
+    name: string;
     quizId: number;
     question?: Question[];
 }
