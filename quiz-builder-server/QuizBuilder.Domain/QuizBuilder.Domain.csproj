@@ -1,15 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>QuizBuilder.Api</RootNamespace>
+        <RootNamespace>QuizBuilder.Domain</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\QuizBuilder.Common\QuizBuilder.Common.csproj" />
-      <ProjectReference Include="..\QuizBuilder.Domain\QuizBuilder.Domain.csproj" />
       <ProjectReference Include="..\QuizBuilder.Repository\QuizBuilder.Repository.csproj" />
+      <ProjectReference Include="..\QuizBuilder.Utils\QuizBuilder.Utils.csproj" />
     </ItemGroup>
-
 
 </Project>

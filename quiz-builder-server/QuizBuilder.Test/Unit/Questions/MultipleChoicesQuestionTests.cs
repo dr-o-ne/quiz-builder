@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using QuizBuilder.Model.Mapper;
-using QuizBuilder.Model.Mapper.Default;
-using QuizBuilder.Model.Model.Default.Choices;
-using QuizBuilder.Model.Model.Default.Questions;
+using QuizBuilder.Domain.Mapper;
+using QuizBuilder.Domain.Mapper.Default;
+using QuizBuilder.Domain.Model.Default.Choices;
+using QuizBuilder.Domain.Model.Default.Questions;
 using Xunit;
 
 namespace QuizBuilder.Test.Unit.Questions {
@@ -87,14 +87,14 @@ namespace QuizBuilder.Test.Unit.Questions {
 		public void Randomize_False_Test() {
 			var sut = new MultipleChoiceQuestion { Text = "Test Question" };
 			sut.AddChoice( new BinaryChoice { Text = 0.ToString(), IsCorrect = true } );
-			for( int i = 1; i < 100; i++ ) 
+			for( int i = 1; i < 100; i++ )
 				sut.AddChoice( new BinaryChoice { Text = i.ToString(), IsCorrect = false } );
 
 			Assert.True( sut.IsValid() );
 
 			var choices = sut.GetChoicesRandomized();
 			Assert.True( choices[0].IsCorrect );
-			for( int i = 1; i < 100; i++ ) 
+			for( int i = 1; i < 100; i++ )
 				Assert.False( choices[i].IsCorrect );
 		}
 
