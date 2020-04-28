@@ -6,7 +6,7 @@ import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { PreviewQuizComponent } from './preview-quiz/preview-quiz.component';
+import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
 import { GroupResolver } from './_resolvers/group.resolver';
 
 export const appRoutes: Routes = [
