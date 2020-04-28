@@ -19,7 +19,7 @@ namespace QuizBuilder.Domain.Extensions {
 		}
 
 		private static void AddCommandQueryHandlers( this IServiceCollection services, Type handlerInterface ) {
-			var handlers = typeof(Common.Extensions.Extensions).Assembly.GetTypes()
+			var handlers = typeof(Extensions).Assembly.GetTypes()
 				.Where( t => t.GetInterfaces().Any( i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface )
 				);
 
