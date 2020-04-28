@@ -1,27 +1,27 @@
 using System.Threading.Tasks;
 using QuizBuilder.Common.Types;
 
-namespace QuizBuilder.Common.Dispatchers.Default
-{
-    public class Dispatcher : IDispatcher
-    {
-        private readonly ICommandDispatcher _commandDispatcher;
-        private readonly IQueryDispatcher _queryDispatcher;
+namespace QuizBuilder.Common.Dispatchers.Default {
 
-        public Dispatcher(ICommandDispatcher commandDispatcher,
-            IQueryDispatcher queryDispatcher)
-        {
-            _commandDispatcher = commandDispatcher;
-            _queryDispatcher = queryDispatcher;
-        }
+	public sealed class Dispatcher : IDispatcher {
 
-        public async Task SendAsync<TCommand>(TCommand command) where TCommand : ICommand
-            => await _commandDispatcher.SendAsync(command);
+		private readonly ICommandDispatcher _commandDispatcher;
+		private readonly IQueryDispatcher _queryDispatcher;
 
-        public async Task<TResult> SendAsync<TResult>(ICommand<TResult> command) where TResult : ICommandResult
-            => await _commandDispatcher.SendAsync(command);
+		public Dispatcher( ICommandDispatcher commandDispatcher,
+			IQueryDispatcher queryDispatcher ) {
+			_commandDispatcher = commandDispatcher;
+			_queryDispatcher = queryDispatcher;
+		}
 
-        public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
-            => await _queryDispatcher.QueryAsync(query);
-    }
+		public Task SendAsync<TCommand>( TCommand command ) where TCommand : ICommand
+			=> _commandDispatcher.SendAsync( command );
+
+		public Task<TResult> SendAsync<TResult>( ICommand<TResult> command ) where TResult : ICommandResult
+			=> _commandDispatcher.SendAsync( command );
+
+		public Task<TResult> QueryAsync<TResult>( IQuery<TResult> query )
+			=> _queryDispatcher.QueryAsync( query );
+
+	}
 }
