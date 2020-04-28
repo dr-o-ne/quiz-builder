@@ -1,18 +1,17 @@
 import {Injectable} from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Quiz } from '../_models/quiz';
+import { QuizService } from '../_service/quiz.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Question } from '../_models/question';
-import { QuestionService } from '../_service/question.service';
+import { Group } from '../_models/group';
 
 @Injectable()
-export class QuestionResolver implements Resolve<Question> {
-    constructor(private questionService: QuestionService, private router: Router) {}
+export class GroupResolver implements Resolve<Group> {
+    constructor(private quizService: QuizService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Question> {
-        const id = route.url[5].path;
-        return this.questionService.getQuestion(id);
+    resolve(route: ActivatedRouteSnapshot): Observable<Group> {
+        const id = route.url[3].path;
+        return this.quizService.getGroup(id);
     //     .pipe(
     //         catchError(error => {
     //             console.log('Problem retrieving data');

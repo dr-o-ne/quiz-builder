@@ -1,0 +1,19 @@
+{
+    "grouplist":[
+        {
+            "id": 1,
+            "name": "Main group",
+            "quizId": 1
+        },
+        {
+            "id": 2,
+            "name": "Main group",
+            "quizId": 2
+        },
+        {
+            "id": 3,
+            "name": "Main group",
+            "quizId": 3
+        }
+    ]
+}
