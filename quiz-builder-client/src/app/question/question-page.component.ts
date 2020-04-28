@@ -109,7 +109,7 @@ export class QuestionPageComponent implements OnInit {
       this.question.name = this.questionForm.value.name;
       this.question.type = this.questionForm.value.type;
       localStorage.setItem('question-' + operation, JSON.stringify(this.question));
-      this.router.navigate(['/editquiz/', this.quiz.id]);
+      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
     }
   }
 

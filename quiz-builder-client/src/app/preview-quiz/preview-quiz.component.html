@@ -10,7 +10,17 @@
 
   </div>
 
-  <div class="main-color" *ngFor="let question of questionList; let i = index">
+  <div class="main-color">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Group: {{currentGroup?.name}}</h4>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="main-color" *ngFor="let question of currentGroup?.question; let i = index">
 
     <div class="col-md-12">
       <h4>{{i+1}}. {{question.name}}</h4>
@@ -73,6 +83,19 @@
       </div>
     </div>
 
+  </div>
+
+  <div *ngIf="groupList?.length !== 1" class="main-color">
+    <div class="row">
+      <div *ngIf="currentIndex !== 0" class="col-md-6">
+        <button class="full-width" mat-raised-button 
+          color="primary" (click)="prevPage()">Prev</button>
+      </div>
+      <div *ngIf="groupList?.length !== currentIndex + 1" class="col-md-6">
+        <button class="full-width" mat-raised-button 
+          color="primary" (click)="nextPage()">Next</button>
+      </div>
+    </div>
   </div>
 
 </div>
