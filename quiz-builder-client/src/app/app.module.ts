@@ -28,6 +28,7 @@ import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice
 import { SingleChoiceRadioAnswerComponent } from './question/answer/single-choice-radio-answer/single-choice-radio-answer.component';
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { MatNativeDateModule } from '@angular/material/core';
       HttpClientModule,
       MatirealModule,
       RouterModule.forRoot(appRoutes),
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatTooltipModule
    ],
    entryComponents: [QuestionListComponent],
    providers: [

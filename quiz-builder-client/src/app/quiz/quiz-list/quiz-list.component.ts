@@ -12,7 +12,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./quiz-list.component.css']
 })
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'status', 'edit', 'publish', 'analize', 'preview', 'menu'];
+  displayedColumns: string[] = ['name', 'status', 'edit', 'preview', 'publish', 'analize', 'menu'];
 
   dataQuiz: Quiz[] = [];
   dataSource: MatTableDataSource<Quiz>;
