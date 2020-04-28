@@ -47,5 +47,15 @@ namespace QuizBuilder.Api.Controllers {
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
+
+		[HttpDelete("{id}")]
+		public async Task<ActionResult> DeleteQuiz([FromRoute] DeleteQuizCommand command)
+		{
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.Success
+				? (ActionResult)NoContent()
+				: UnprocessableEntity( result );
+		}
 	}
 }

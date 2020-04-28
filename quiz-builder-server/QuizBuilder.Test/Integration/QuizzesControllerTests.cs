@@ -29,6 +29,7 @@ namespace QuizBuilder.Test.Integration {
 			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync( new Collection<Quiz> {new Quiz(), new Quiz(), new Quiz()} );
 			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<Quiz>() ) ).ReturnsAsync( 1 );
 			quizRepositoryMock.Setup( x => x.UpdateAsync( It.IsAny<Quiz>() ) ).ReturnsAsync( 1 );
+			quizRepositoryMock.Setup( x => x.DeleteAsync( It.IsAny<long>() ) ).ReturnsAsync( 1 );
 			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new Quiz {Id = 1} );
 
 			var services = new ServiceCollection();
@@ -75,6 +76,14 @@ namespace QuizBuilder.Test.Integration {
 		[Fact]
 		public async Task TestQuizzesController_UpdateQuiz() {
 			var actionResult = await _quizzesController.UpdateQuiz( new UpdateQuizCommand() );
+			var okResult = actionResult as NoContentResult;
+
+			Assert.NotNull( okResult );
+		}
+
+		[Fact]
+		public async Task TestQuizzesController_DeleteQuiz() {
+			var actionResult = await _quizzesController.DeleteQuiz( new DeleteQuizCommand() );
 			var okResult = actionResult as NoContentResult;
 
 			Assert.NotNull( okResult );

@@ -62,7 +62,10 @@ export class QuizListComponent implements OnInit {
       this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  deleteQuiz(element: Quiz) {
+  deleteQuiz(quiz: Quiz) {
+    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
+      this.initDataQuiz();
+    }, error => console.log(error));
   }
 
   clickBulkEdit() {

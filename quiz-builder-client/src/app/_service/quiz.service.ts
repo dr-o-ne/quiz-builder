@@ -30,6 +30,10 @@ export class QuizService{
       return this.http.put(this.apiUrl + 'quizzes', quiz);
     }
 
+    deleteQuiz(id: number): Observable<object> {
+      return this.http.delete(this.apiUrl + 'quizzes/' + id);
+    }
+
     getGroupData() {
         return this.http.get('assets/group.json');
     }
