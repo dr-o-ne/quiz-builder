@@ -14,7 +14,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class QuizListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'status', 'edit', 'preview', 'publish', 'analize', 'menu'];
 
-  dataQuiz: Quiz[] = [];
+  quizzes: Quiz[] = [];
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
 
@@ -33,47 +33,20 @@ export class QuizListComponent implements OnInit {
   }
 
   initDataQuiz() {
-    const storage = localStorage.getItem('quizlist');
-    if (!storage) {
-      this.quizService.getQuizData().subscribe((quiz: any) => {
-        this.dataQuiz = quiz.quizlist;
-        this.initDataSource();
-        localStorage.setItem('quizlist', JSON.stringify(this.dataQuiz));
-      }, error => {
-        console.log(error);
-      });
-    } else {
-      const tempQuizSave = localStorage.getItem('quiz-save');
-      const tempQuizUpdate = localStorage.getItem('quiz-update');
-      if (!tempQuizSave && !tempQuizUpdate) {
-        this.dataQuiz = JSON.parse(storage);
-        this.initDataSource();
-        return;
-      }
-      this.dataQuiz = JSON.parse(storage);
-      if (tempQuizSave) {
-        const newQuiz: Quiz = JSON.parse(tempQuizSave);
-        this.dataQuiz.push(newQuiz);
-        localStorage.setItem('quizlist', JSON.stringify(this.dataQuiz));
-        this.initDataSource();
-        localStorage.removeItem('quiz-save');
-        return;
-      }
-      const editQuiz: Quiz = JSON.parse(tempQuizUpdate);
-      const objIndex = this.dataQuiz.findIndex((obj => obj.id === editQuiz.id));
-      this.dataQuiz[objIndex] = editQuiz;
-      localStorage.setItem('quizlist', JSON.stringify(this.dataQuiz));
-      localStorage.removeItem('quiz-update');
+    this.quizService.getAllQuizzes().subscribe((response: any) => {
+      this.quizzes = response.quizzes;
       this.initDataSource();
-    }
+    }, error => {
+      console.log(error);
+    });
   }
 
-  generateId() {
+  generateId(): number {
     return Math.floor(Math.random() * 10000) + 1;
   }
 
   initDataSource() {
-    this.dataSource = new MatTableDataSource<Quiz>(this.dataQuiz);
+    this.dataSource = new MatTableDataSource<Quiz>(this.quizzes);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.selection = new SelectionModel<Quiz>(true, []);
@@ -89,7 +62,10 @@ export class QuizListComponent implements OnInit {
       this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  deleteQuiz(element: Quiz) {
+  deleteQuiz(quiz: Quiz) {
+    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
+      this.initDataQuiz();
+    }, error => console.log(error));
   }
 
   clickBulkEdit() {

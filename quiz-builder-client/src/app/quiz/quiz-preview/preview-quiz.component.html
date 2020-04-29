@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
 
     <div class="row mt-3" *ngIf="question.type === 'True/False'">
@@ -46,10 +46,10 @@
             <div class="col-md-6">
               <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">{{answer.name}}</mat-radio-button>
             </div>
-          </div>  
+          </div>
         </mat-radio-group>
       </div>
-      
+
     </div>
 
     <div class="row mt-3" *ngIf="question.type === 'Single Choice (Radio Button)'">
@@ -62,10 +62,10 @@
               <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">{{answer.name}}</mat-radio-button>
             </div>
           </div>
-          
+
         </mat-radio-group>
       </div>
-      
+
     </div>
 
     <div class="row mt-3" *ngIf="question.type === 'Single Choice (Dropdown)'">
@@ -88,14 +88,20 @@
   <div *ngIf="groupList?.length !== 1" class="main-color">
     <div class="row">
       <div *ngIf="currentIndex !== 0" class="col-md-6">
-        <button class="full-width" mat-raised-button 
+        <button class="full-width" mat-raised-button
           color="primary" (click)="prevPage()">Prev</button>
       </div>
       <div *ngIf="groupList?.length !== currentIndex + 1" class="col-md-6">
-        <button class="full-width" mat-raised-button 
+        <button class="full-width" mat-raised-button
           color="primary" (click)="nextPage()">Next</button>
       </div>
     </div>
+  </div>
+
+  <div class="col-md-2">
+    <button mat-raised-button [routerLink]="['/quizlist']">
+      <mat-icon>reply</mat-icon>
+    </button>
   </div>
 
 </div>

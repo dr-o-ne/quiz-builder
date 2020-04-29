@@ -9,6 +9,6 @@ namespace QuizBuilder.Common.Types
 
     public interface ICommand<out TResult> where TResult : ICommandResult
     {
-        Guid CommandId { get; }
+        // Guid CommandId { get; }
     }
 }

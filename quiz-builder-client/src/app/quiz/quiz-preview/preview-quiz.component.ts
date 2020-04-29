@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Quiz } from '../_models/quiz';
-import { QuestionService } from '../_service/question.service';
-import { AnswerService } from '../_service/answer.service';
-import { Question } from '../_models/question';
-import { Answer } from '../_models/answer';
-import { Group } from '../_models/group';
-import { QuizService } from '../_service/quiz.service';
+import { Quiz } from 'src/app/_models/quiz';
+import { QuestionService } from 'src/app/_service/question.service';
+import { AnswerService } from 'src/app/_service/answer.service';
+import { Question } from 'src/app/_models/question';
+import { Answer } from 'src/app/_models/answer';
+import { Group } from 'src/app/_models/group';
+import { QuizService } from 'src/app/_service/quiz.service';
 
 @Component({
   selector: 'app-preview-quiz',
@@ -29,9 +29,9 @@ export class PreviewQuizComponent implements OnInit {
               private quizService: QuizService) {}
 
   ngOnInit() {
-    this.activeRout.data.subscribe(data => {
-      if (data.hasOwnProperty('quiz')) {
-        this.quiz = data.quiz;
+    this.activeRout.data.subscribe(response => {
+      if (response.hasOwnProperty('quizResolver')) {
+        this.quiz = response.quizResolver.quiz;
         this.initPreview();
       } else {
         console.log('Not found correct quiz');

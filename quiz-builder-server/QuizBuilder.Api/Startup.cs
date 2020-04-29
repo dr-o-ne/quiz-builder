@@ -32,6 +32,7 @@ namespace QuizBuilder.Api {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors( x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod() );
             }
 
             app.UseHttpsRedirection();

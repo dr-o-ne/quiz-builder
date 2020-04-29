@@ -7,8 +7,7 @@ namespace QuizBuilder.Api
     {
         public static void Main(string[] args)
         {
-			IHost host = CreateHostBuilder(args).Build();
-            host.Run();
+			CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

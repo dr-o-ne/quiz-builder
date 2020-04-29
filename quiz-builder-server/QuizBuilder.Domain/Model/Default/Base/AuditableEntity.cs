@@ -1,21 +1,20 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace QuizBuilder.Domain.Model.Default.Base {
 
 	public abstract class AuditableEntity<T> : Entity<T>, IAuditableEntity {
-
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public DateTime CreatedDate { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public string CreatedBy { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public DateTime UpdatedDate { get; set; }
 
-		[JsonIgnore]
+		[IgnoreDataMember]
 		public string UpdatedBy { get; set; }
-
 	}
 }

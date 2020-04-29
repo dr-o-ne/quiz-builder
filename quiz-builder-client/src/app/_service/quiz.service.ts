@@ -3,27 +3,35 @@ import {HttpClient} from '@angular/common/http';
 import { Quiz } from '../_models/quiz';
 import { Observable } from 'rxjs';
 import { Group } from '../_models/group';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class QuizService{
-    quiz: Observable<Quiz>;
     group: Observable<Group>;
+    apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient){}
 
-    getQuizData(){
-        return this.http.get('assets/quiz.json');
+    getAllQuizzes(): Observable<object> {
+        return this.http.get(this.apiUrl + 'quizzes');
     }
 
-    getQuiz(id): Observable<Quiz> {
-        const tempListQuiz = localStorage.getItem('quizlist');
-        const quizList = JSON.parse(tempListQuiz);
-        // tslint:disable-next-line: radix
-        const index = quizList.findIndex((obj => obj.id === Number.parseInt(id)));
-        this.quiz = quizList[index];
-        return this.quiz;
+    getQuiz(id: number): Observable<object> {
+      return this.http.get(this.apiUrl + 'quizzes/' + id);
+    }
+
+    createQuiz(quiz: Quiz): Observable<object> {
+      return this.http.post(this.apiUrl + 'quizzes', quiz);
+    }
+
+    updateQuiz(quiz: Quiz): Observable<object> {
+      return this.http.put(this.apiUrl + 'quizzes', quiz);
+    }
+
+    deleteQuiz(id: number): Observable<object> {
+      return this.http.delete(this.apiUrl + 'quizzes/' + id);
     }
 
     getGroupData() {
