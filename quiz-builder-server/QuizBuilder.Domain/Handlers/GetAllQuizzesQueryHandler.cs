@@ -10,7 +10,9 @@ using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Domain.Handlers {
+
 	public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, GetAllQuizzesDto> {
+
 		private readonly IQuizMapper _quizMapper;
 		private readonly IGenericRepository<Quiz> _quizRepository;
 
