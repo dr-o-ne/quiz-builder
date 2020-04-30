@@ -7,24 +7,24 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Repository.Repository.Default {
+
 	public class GenericRepository<T> : IGenericRepository<T> where T : class {
+
 		private static readonly List<string> NonUpdateableColumns = new List<string> {"Id", "CreatedOn"};
 
-		private readonly string _connectionString;
 		private readonly string _tableName;
+		private readonly IDatabaseConnectionFactory _dbConnectionFactory;
 
-		public GenericRepository( IConfiguration config ) {
-			_connectionString = config.GetConnectionString( "defaultConnectionString" );
+		public GenericRepository( IDatabaseConnectionFactory dbConnectionFactory ) {
+			_dbConnectionFactory = dbConnectionFactory;
 			_tableName = GetTableName;
 		}
 
 		private IDbConnection CreateConnection() {
-			SqlConnection conn = new SqlConnection( _connectionString );
+			IDbConnection conn = _dbConnectionFactory.GetConnection();
 			conn.Open();
 			return conn;
 		}
