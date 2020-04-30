@@ -7,11 +7,11 @@ namespace QuizBuilder.Api.Controllers {
 
 	[ApiController]
 	[Route( "[controller]" )]
-	public sealed class QuestionController : ControllerBase {
+	public sealed class QuestionsController : ControllerBase {
 
 		private readonly IDispatcher _dispatcher;
 
-		public QuestionController( IDispatcher dispatcher ) {
+		public QuestionsController( IDispatcher dispatcher ) {
 			_dispatcher = dispatcher;
 		}
 
