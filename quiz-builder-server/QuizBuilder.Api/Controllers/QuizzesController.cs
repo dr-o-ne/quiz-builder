@@ -2,14 +2,15 @@
 using System.Threading.Tasks;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Commands;
-using QuizBuilder.Domain.Queries;
 using QuizBuilder.Domain.Commands.QuizCommands;
 using QuizBuilder.Domain.Queries.QuizQueries;
 
 namespace QuizBuilder.Api.Controllers {
+
 	[ApiController]
 	[Route( "[controller]" )]
-	public class QuizzesController : ControllerBase {
+	public sealed class QuizzesController : ControllerBase {
+
 		private readonly IDispatcher _dispatcher;
 
 		public QuizzesController( IDispatcher dispatcher ) {
@@ -50,9 +51,8 @@ namespace QuizBuilder.Api.Controllers {
 				: UnprocessableEntity( result );
 		}
 
-		[HttpDelete("{id}")]
-		public async Task<ActionResult> DeleteQuiz([FromRoute] DeleteQuizCommand command)
-		{
+		[HttpDelete( "{id}" )]
+		public async Task<ActionResult> DeleteQuiz( [FromRoute] DeleteQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
