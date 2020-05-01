@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using QuizBuilder.Domain.Commands.QuestionCommands;
 using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Repository.Dto;
@@ -59,6 +60,13 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			return entity;
 		}
 
+		public QuestionDto Map( CreateQuestionCommand command ) {
+			throw new NotImplementedException();
+		}
+
+		public QuestionDto Map( UpdateQuestionCommand command ) {
+			throw new NotImplementedException();
+		}
 	}
 
 }

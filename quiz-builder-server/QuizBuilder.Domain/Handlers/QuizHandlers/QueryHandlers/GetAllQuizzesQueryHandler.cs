@@ -5,11 +5,11 @@ using QuizBuilder.Common.Handlers;
 using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Domain.Queries;
+using QuizBuilder.Domain.Queries.QuizQueries;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
-namespace QuizBuilder.Domain.Handlers {
+namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 	public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, GetAllQuizzesDto> {
 		private readonly IQuizMapper _quizMapper;
 		private readonly IGenericRepository<Quiz> _quizRepository;

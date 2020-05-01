@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Commands;
 using QuizBuilder.Domain.Queries;
+using QuizBuilder.Domain.Commands.QuizCommands;
+using QuizBuilder.Domain.Queries.QuizQueries;
 
 namespace QuizBuilder.Api.Controllers {
 	[ApiController]

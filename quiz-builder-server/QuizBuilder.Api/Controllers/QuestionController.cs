@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Domain.Queries;
+using QuizBuilder.Domain.Queries.QuestionQueries;
 
 namespace QuizBuilder.Api.Controllers {
 
@@ -22,6 +22,13 @@ namespace QuizBuilder.Api.Controllers {
 			return result is null
 				? (ActionResult)NoContent()
 				: Ok( result );
+		}
+
+		[HttpGet]
+		public async Task<ActionResult> GetAllQuestions( [FromQuery] GetAllQuestionQuery query ) {
+			var result = await _dispatcher.QueryAsync( query );
+
+			return Ok( result );
 		}
 	}
 
