@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Domain.Commands;
+using QuizBuilder.Domain.Commands.QuizCommands;
 using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Repository.Repository;
 
-namespace QuizBuilder.Domain.Handlers {
+namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 	public class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
 		private readonly IQuizMapper _quizMapper;
 		private readonly IGenericRepository<Quiz> _quizRepository;

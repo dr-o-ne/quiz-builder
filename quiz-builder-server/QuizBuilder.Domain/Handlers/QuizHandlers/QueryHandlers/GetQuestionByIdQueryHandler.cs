@@ -3,12 +3,11 @@ using QuizBuilder.Common.Handlers;
 using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Domain.Queries;
+using QuizBuilder.Domain.Queries.QuestionQueries;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
-namespace QuizBuilder.Domain.Handlers
-{
+namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 	public sealed class GetQuestionByIdQueryHandler : IQueryHandler<GetQuestionByIdQuery, GetQuestionByIdDto> {
 
 		private readonly IQuestionMapper _questionMapper;
@@ -29,6 +28,5 @@ namespace QuizBuilder.Domain.Handlers
 
 			return new GetQuestionByIdDto( entity.Id, entity.Name );
 		}
-
 	}
 }

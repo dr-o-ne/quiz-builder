@@ -6,7 +6,7 @@ using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Repository.Repository;
 
-namespace QuizBuilder.Domain.Handlers {
+namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 	public class UpdateQuizCommandHandler : ICommandHandler<UpdateQuizCommand, CommandResult> {
 		private readonly IQuizMapper _quizMapper;
 		private readonly IGenericRepository<Quiz> _quizRepository;
