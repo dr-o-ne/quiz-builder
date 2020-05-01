@@ -1,29 +1,30 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Domain.Dtos;
-using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default.Questions;
+using QuizBuilder.Domain.Model.View;
 using QuizBuilder.Domain.Queries.QuestionQueries;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Domain.Handlers.QuestionHandlers.QueryHandlers {
-	public class GetAllQuestionQueryHandler : IQueryHandler<GetAllQuestionQuery, GetAllQuestionDto> {
-		private readonly IQuestionMapper _questionMapper;
+	public class GetAllQuestionQueryHandler : IQueryHandler<GetAllQuestionQuery, GetAllQuestionsDto> {
+		private readonly IMapper _mapper;
 		private readonly IGenericRepository<QuestionDto> _questionRepository;
 
-		public GetAllQuestionQueryHandler( IQuestionMapper questionMapper, IGenericRepository<QuestionDto> questionRepository ) {
-			_questionMapper = questionMapper;
+		public GetAllQuestionQueryHandler( IMapper mapper, IGenericRepository<QuestionDto> questionRepository ) {
+			_mapper = mapper;
 			_questionRepository = questionRepository;
 		}
 
-		public async Task<GetAllQuestionDto> HandleAsync( GetAllQuestionQuery query ) {
-			IEnumerable<QuestionDto> entities = await _questionRepository.GetAllAsync();
-			IEnumerable<Question> dtos = entities.Select( _questionMapper.Map );
+		public async Task<GetAllQuestionsDto> HandleAsync( GetAllQuestionQuery query ) {
+			IEnumerable<QuestionDto> questionDtos = await _questionRepository.GetAllAsync();
+			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );
+			IEnumerable<QuestionViewModel> questionViewModels = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>( questions );
 
-			return new GetAllQuestionDto( dtos );
+			return new GetAllQuestionsDto( questionViewModels );
 		}
 	}
 }

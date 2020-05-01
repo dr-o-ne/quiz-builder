@@ -16,8 +16,8 @@ namespace QuizBuilder.Domain.Mapper {
 		}
 
 		private void AddQuizMapping() {
-			CreateMap<Quiz, QuizDto>().ConvertUsing<QuizToQuizDtoConverter>();
 			CreateMap<Quiz, Quiz>().ConvertUsing<QuizToQuizConverter>();
+			CreateMap<Quiz, QuizDto>().ConvertUsing<QuizToQuizDtoConverter>();
 			CreateMap<QuizDto, Quiz>().ConvertUsing<QuizDtoToQuizConverter>();
 			CreateMap<Quiz, QuizViewModel>().ConvertUsing<QuizToQuizViewModelConverter>();
 			CreateMap<CreateQuizCommand, Quiz>().ConvertUsing<CreateQuizCommandToQuizConverter>();
@@ -25,8 +25,10 @@ namespace QuizBuilder.Domain.Mapper {
 		}
 
 		private void AddQuestionMapping() {
+			CreateMap<Question, Question>().ConvertUsing<QuestionToQuestionConverter>();
 			CreateMap<Question, QuestionDto>().ConvertUsing<QuestionToQuestionDtoConverter>();
 			CreateMap<QuestionDto, Question>().ConvertUsing<QuestionDtoToQuestionConverter>();
+			CreateMap<Question, QuestionViewModel>().ConvertUsing<QuestionToQuestionViewModelConverter>();
 			CreateMap<CreateQuestionCommand, Question>().ConvertUsing<CreateQuestionCommandToQuestionConverter>();
 			CreateMap<UpdateQuestionCommand, Question>().ConvertUsing<UpdateQuestionCommandToQuestionConverter>();
 		}

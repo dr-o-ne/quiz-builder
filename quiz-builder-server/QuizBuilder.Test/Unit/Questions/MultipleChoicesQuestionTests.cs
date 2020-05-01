@@ -1,15 +1,17 @@
-﻿using FluentAssertions;
+﻿using AutoMapper;
+using FluentAssertions;
 using QuizBuilder.Domain.Mapper;
-using QuizBuilder.Domain.Mapper.Default;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
+using QuizBuilder.Repository.Dto;
 using Xunit;
 
 namespace QuizBuilder.Test.Unit.Questions {
 
 	public sealed class MultipleChoicesQuestionTests {
 
-		private readonly IQuestionMapper _mapper = new QuestionMapper();
+		private readonly IMapper _mapper = new Mapper(
+			new MapperConfiguration( cfg => cfg.AddProfile<QuizBuilderProfile>() ) );
 
 		[Fact]
 		public void Serialize_Deserialize_Test() {
@@ -24,8 +26,8 @@ namespace QuizBuilder.Test.Unit.Questions {
 			expected.AddChoice( new BinaryChoice { IsCorrect = false, Text = "Choice2" } );
 			expected.AddChoice( new BinaryChoice { IsCorrect = false, Text = "Choice3" } );
 
-			var dto = _mapper.Map( expected );
-			var actual = (MultipleChoiceQuestion)_mapper.Map( dto );
+			var dto = _mapper.Map<Question, QuestionDto>( expected );
+			var actual = (MultipleChoiceQuestion)_mapper.Map<QuestionDto, Question>( dto );
 
 			actual.Should().BeEquivalentTo(
 				expected,

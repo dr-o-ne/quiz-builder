@@ -3,5 +3,6 @@ using QuizBuilder.Common.Types.Default;
 
 namespace QuizBuilder.Domain.Commands.QuestionCommands {
 	public class UpdateQuestionCommand : ICommand<CommandResult> {
+		public long Id { get; set; }
 	}
 }

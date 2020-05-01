@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using QuizBuilder.Domain.Model.Default.Base;
 
 namespace QuizBuilder.Domain.Model.Default {

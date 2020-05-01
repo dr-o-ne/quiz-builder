@@ -3,13 +3,10 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using QuizBuilder.Common.Handlers;
-using QuizBuilder.Domain.Mapper;
-using QuizBuilder.Domain.Mapper.Default;
 
 namespace QuizBuilder.Domain.Extensions {
 	public static class Extensions {
 		public static void AddMappers( this IServiceCollection services ) {
-			services.AddSingleton<IQuestionMapper, QuestionMapper>();
 			services.AddAutoMapper( typeof(Extensions).Assembly );
 		}
 
