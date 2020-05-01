@@ -45,12 +45,18 @@ namespace QuizBuilder.Repository.Repository.Default {
 		}
 
 		public async Task<int> AddAsync( T entity ) {
+			if( entity is null ) {
+				return 0;
+			}
 			using IDbConnection connection = CreateConnection();
 			string insertQuery = GenerateInsertQuery();
 			return await connection.ExecuteAsync( insertQuery, entity );
 		}
 
 		public async Task<int> UpdateAsync( T entity ) {
+			if( entity is null ) {
+				return 0;
+			}
 			using IDbConnection connection = CreateConnection();
 			string updateQuery = GenerateUpdateQuery();
 			return await connection.ExecuteAsync( updateQuery, entity );

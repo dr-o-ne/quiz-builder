@@ -5,7 +5,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 {
 	public class QuizToQuizConverter : ITypeConverter<Quiz, Quiz> {
 		public Quiz Convert( Quiz source, Quiz destination, ResolutionContext context ) {
-			if( source is null )
+			if( source is null || destination is null )
 				return null;
 
 			if( source == destination ) { // ToDo: override Equals
