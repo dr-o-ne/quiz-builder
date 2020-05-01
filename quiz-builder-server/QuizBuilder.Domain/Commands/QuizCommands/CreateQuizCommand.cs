@@ -8,5 +8,6 @@ namespace QuizBuilder.Domain.Commands.QuizCommands {
 		[MaxLength( 100 )]
 		public string Name { get; set; }
 		public string Status { get; set; }
+		public bool IsVisible { get; set; }
 	}
 }
