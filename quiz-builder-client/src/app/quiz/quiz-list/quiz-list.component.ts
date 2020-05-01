@@ -20,8 +20,8 @@ export class QuizListComponent implements OnInit {
 
   filterData: string;
 
-  isBulkEdit = false;
   colorBtnBulk = 'primary';
+  isBulkEdit = true;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -68,10 +68,10 @@ export class QuizListComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  clickBulkEdit() {
+  clickMultiSelection() {
     this.colorBtnBulk = this.colorBtnBulk === 'primary' ? 'accent' : 'primary';
     this.isBulkEdit = !this.isBulkEdit;
-    if (this.isBulkEdit) {
+    if (!this.isBulkEdit) {
       this.displayedColumns.unshift('select');
     } else {
       this.displayedColumns.shift();
@@ -97,5 +97,9 @@ export class QuizListComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
   }
+
+  bulkPublish() {}
+
+  bulkDelete() {}
 
 }

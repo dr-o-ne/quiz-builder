@@ -21,7 +21,7 @@ export const appRoutes: Routes = [
             {path: 'editquiz/:id', component: QuizPageComponent,
                     resolve: {quizResolver: QuizResolver}},
             {path: 'editquiz/:id/group/:id', component: QuizPageComponent,
-                    resolve: {quiz: QuizResolver, group: GroupResolver}},
+                    resolve: {quizResolver: QuizResolver, group: GroupResolver}},
             {path: 'editquiz/:id/group/:id/addnewquestion', component: QuestionPageComponent,
                     resolve: {quizResolver: QuizResolver, group: GroupResolver}},
             {path: 'editquiz/:id/group/:id/editquestion/:id', component: QuestionPageComponent,
