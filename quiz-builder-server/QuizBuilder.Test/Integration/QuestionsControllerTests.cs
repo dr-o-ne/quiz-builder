@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Repository.Dto;
@@ -9,6 +11,23 @@ using Xunit;
 namespace QuizBuilder.Test.Integration {
 
 	public sealed class QuestionsControllerTests : IClassFixture<TestApplicationFactory<Startup>> {
+
+		private static readonly ImmutableArray<QuestionDto> QuizData = new List<QuestionDto> {
+			new QuestionDto {
+				Id = 1,
+				Name = "True/False",
+				QuestionTypeId = 1,
+				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""}}",
+				QuestionText = "TrueChoice Question Text"
+			},
+			new QuestionDto {
+				Id = 2,
+				Name = "MultipleChoice",
+				QuestionTypeId = 2,
+				Settings = @"{""Choices"":[{""IsCorrect"":true,""Text"":""Choice1""},{""IsCorrect"":false,""Text"":""Choice2""},{""IsCorrect"":false,""Text"":""Choice3""}],""Randomize"":true}",
+				QuestionText = "MultiChoice Question Text"
+			}
+		}.ToImmutableArray();
 
 		private readonly HttpClient _httpClient;
 
@@ -28,27 +47,13 @@ namespace QuizBuilder.Test.Integration {
 
 		private static void SetupData( IDbConnectionFactory connectionFactory ) {
 
-			const string tableName = "Question";
-
 			using var connection = connectionFactory.CreateDbConnection();
 			connection.Open();
-			connection.DropAndCreateTable<QuestionDto>( tableName );
+			connection.DropAndCreateTable<QuestionDto>( "Question" );
 
-			connection.Insert( tableName, new QuestionDto {
-				Id = 1,
-				Name = "True/False",
-				QuestionTypeId = 1,
-				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""}}",
-				QuestionText = "TrueChoice Question Text"
-			} );
-
-			connection.Insert( tableName, new QuestionDto() {
-				Id = 2,
-				Name = "MultipleChoice",
-				QuestionTypeId = 2,
-				Settings = @"{""Choices"":[{""IsCorrect"":true,""Text"":""Choice1""},{""IsCorrect"":false,""Text"":""Choice2""},{""IsCorrect"":false,""Text"":""Choice3""}],""Randomize"":true}",
-				QuestionText = "MultiChoice Question Text"
-			} );
+			foreach( var item in QuizData ) {
+				connection.Insert( "Question", item );
+			}
 		}
 
 	}
