@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Net;
 using System.Net.Http;
@@ -29,6 +30,16 @@ namespace QuizBuilder.Test.Integration {
 			new QuizDto {
 				Id = 1000,
 				Name = "Quiz To Be Deleted",
+				IsVisible = false
+			},
+			new QuizDto {
+				Id = 1001,
+				Name = "Quiz To Be BulkDeleted",
+				IsVisible = true
+			},
+			new QuizDto {
+				Id = 1002,
+				Name = "Quiz To Be BulkDeleted",
 				IsVisible = false
 			}
 
@@ -103,8 +114,23 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Quiz_DeleteById_Fail_Test() {
-			var response = await _httpClient.DeleteAsync( "/quizzes/2000" );
+			using var response = await _httpClient.DeleteAsync( "/quizzes/2000" );
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Quiz_DeleteBulk_Success_Test() {
+			var content = JsonConvert.SerializeObject( new {Ids = new List<long> {1001, 1002}} );
+
+			using var request = new HttpRequestMessage {
+				Method = HttpMethod.Delete,
+				RequestUri = new Uri( _httpClient.BaseAddress + "quizzes/" ),
+				Content = new StringContent( content, Encoding.UTF8, "application/json" )
+			};
+
+			using var response = await _httpClient.SendAsync( request );
+
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
 		private static void SetupData( IDbConnectionFactory connectionFactory ) {
