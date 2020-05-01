@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Quiz } from '../_models/quiz';
 import { Question } from '../_models/question';
@@ -18,39 +18,48 @@ export class QuestionPageComponent implements OnInit {
   group: Group;
   question: Question;
   questionForm: FormGroup;
-  resources: string[] = ['Single Choice (Radio Button)', 'Single Choice (Dropdown)', 'Multiple Choice', 'True/False'];
+  resources: string[] = ['Multiple Choice', 'True/False'];
 
   answerData: Answer[] = [];
   groupResurce: Group[] = [];
+
+  defaultCountAnswer = 4;
+  isNewState = false;
 
   constructor(private fb: FormBuilder, private router: Router, private activeRout: ActivatedRoute,
               private answerService: AnswerService) {}
 
   ngOnInit() {
     this.initValidate();
-    this.initGroup();
 
     this.activeRout.data.subscribe(data => {
-      if (data.hasOwnProperty('quiz') && data.hasOwnProperty('group')) {
-        this.quiz = data.quiz;
+      if (data.hasOwnProperty('quizResolver') && data.hasOwnProperty('group')) {
+        this.quiz = data.quizResolver.quiz;
         this.group = data.group;
+        this.initGroup();
         if (data.hasOwnProperty('question')) {
           this.question = data.question;
           this.initAnswer(this.question.id);
           return;
         }
-        this.question = new Question();
-        this.question.quizId = this.quiz.id;
-        this.question.groupId = this.group.id;
+        this.createNewQuestion();
       } else {
         console.log('Not found correct quiz');
       }
     });
   }
 
+  createNewQuestion() {
+    this.isNewState = true;
+    this.question = new Question();
+    this.question.quizId = this.quiz.id;
+    this.question.groupId = this.group.id;
+    this.question.id = this.generateId();
+  }
+
   initGroup() {
-    const storage = localStorage.getItem('grouplist');
-    this.groupResurce = JSON.parse(storage);
+    const storage = JSON.parse(localStorage.getItem('grouplist'));
+    this.groupResurce = storage.filter(obj => obj.quizId === this.quiz.id);
   }
 
   initAnswer(id: number) {
@@ -96,21 +105,35 @@ export class QuestionPageComponent implements OnInit {
     this.questionForm = this.fb.group({
       name: ['', Validators.required],
       type: ['', Validators.required],
-      groupId: [Number, Validators.required]
+      groupId: [Number, Validators.required],
+      text: ['', Validators.required]
     });
   }
 
   saveOrUpdate(operation: string) {
     if (this.questionForm.valid) {
-      if (!this.question.hasOwnProperty('id')) {
-        this.question.id = this.generateId();
-      }
       this.question.groupId = this.group.id;
       this.question.name = this.questionForm.value.name;
       this.question.type = this.questionForm.value.type;
+      this.question.text = this.questionForm.value.text;
       localStorage.setItem('question-' + operation, JSON.stringify(this.question));
       this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+      this.saveAnswer();
     }
+  }
+
+  isDisabledBtn(): boolean {
+    const validArray = [this.questionForm.valid, this.isValidAnswer()];
+    return validArray.some(arr => arr === false);
+  }
+
+  isValidAnswer(): boolean {
+    if (this.answerData.length === 0) {
+      return false;
+    }
+    const index = this.answerData.findIndex(ans => ans.name === '');
+    const isChecked = this.answerData.some(ans => ans.isCorrect === true);
+    return index === -1 && isChecked;
   }
 
   saveQuestion() {
@@ -121,63 +144,70 @@ export class QuestionPageComponent implements OnInit {
     this.saveOrUpdate('update');
   }
 
-  changeRadioButton(event) {
-    this.answerData.forEach(item => {
-      if (item.id === event.value) {
-        item.isCorrect = true;
-        return;
-      }
-      item.isCorrect = false;
-    });
-  }
-
   addNewAnswer() {
     switch (this.question.type) {
-      case 'True/False':
-        if (this.answerData.length < 2) {
-          this.addAnswer('True');
-          this.addAnswer('False');
-          return;
-        }
-        break;
       default:
         this.addAnswer();
         break;
     }
   }
 
-  addAnswer(name?: string) {
+  addAnswer(name?: string, isCorrect?: boolean) {
     const newAnswer = new Answer();
-    if (name) {
-      newAnswer.name = name;
-    }
+    newAnswer.name = name || '';
     newAnswer.id = this.generateId();
-    newAnswer.isCorrect = false;
+    newAnswer.isCorrect = isCorrect || false;
     newAnswer.questionId = this.question.id;
     this.answerData.push(newAnswer);
   }
 
-  deleteAnswer(answer: Answer) {
-    this.answerData.splice(this.answerData.findIndex(ans => ans.id === answer.id), 1);
-    const storageAnswer = localStorage.getItem('answerlist');
-    const currenAnswerList: Answer[] = JSON.parse(storageAnswer);
-    currenAnswerList.splice(currenAnswerList.findIndex(ans => ans.id === answer.id), 1);
-    localStorage.setItem('answerlist', JSON.stringify(currenAnswerList));
+  saveListAnswers(answers: Answer[]) {
+    this.answerData.forEach(item => {
+      const index = answers.findIndex((obj) => obj.id === item.id);
+      if (index === -1) {
+        answers.push(item);
+        return;
+      }
+      answers[index] = item;
+    });
+    localStorage.setItem('answerlist', JSON.stringify(answers));
   }
 
   saveAnswer() {
     const storageAnswer = localStorage.getItem('answerlist');
-    const currenAnswerList: Answer[] = JSON.parse(storageAnswer);
-    this.answerData.forEach(item => {
-      const index = currenAnswerList.findIndex((obj) => obj.id === item.id);
-      if (index === -1) {
-        currenAnswerList.push(item);
-        return;
-      }
-      currenAnswerList[index] = item;
-    });
-    localStorage.setItem('answerlist', JSON.stringify(currenAnswerList));
-    alert('Save Succes');
+    let currenAnswerList: Answer[] = [];
+    if (!storageAnswer) {
+      this.answerService.getAnswerData().subscribe((answers: any) => {
+        currenAnswerList = answers.answerlist;
+        this.saveListAnswers(currenAnswerList);
+      }, error => console.log(error));
+      return;
+    }
+    currenAnswerList = JSON.parse(storageAnswer);
+    this.saveListAnswers(currenAnswerList);
+  }
+
+  makeCustomListAnswer(count: number) {
+    for (let i = 0; i < count; i++) {
+      this.addAnswer();
+    }
+  }
+
+  selectChangeType() {
+    this.answerData = [];
+    switch (this.question.type) {
+      case 'True/False':
+        this.addAnswer('True', true);
+        this.addAnswer('False');
+        break;
+      default:
+        this.makeCustomListAnswer(this.defaultCountAnswer);
+        break;
+    }
+  }
+
+  selectGroup(select) {
+    this.group = this.groupResurce.filter(group => group.id === select.selected.value)[0];
   }
 
 }

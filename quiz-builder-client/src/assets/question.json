@@ -3,20 +3,23 @@
         {
             "id": 1,
             "name": "Test question 1",
-            "type": "Single Choice (Radio Button)",
+            "text": "Test question 1",
+            "type": "Multiple Choice",
             "quizId": 1,
             "groupId": 1
         },
         {
             "id": 2,
             "name": "Test question 2",
-            "type": "Single Choice (Dropdown)",
+            "text": "Test question 1",
+            "type": "Multiple Choice",
             "quizId": 1,
             "groupId": 1
         },
         {
             "id": 3,
             "name": "Test question 3",
+            "text": "Test question 1",
             "type": "Multiple Choice",
             "quizId": 1,
             "groupId": 1
@@ -24,20 +27,23 @@
         {
             "id": 4,
             "name": "Test question 4",
-            "type": "Single Choice (Radio Button)",
+            "text": "Test question 1",
+            "type": "Multiple Choice",
             "quizId": 2,
             "groupId": 2
         },
         {
             "id": 5,
             "name": "Test question 5",
-            "type": "Single Choice (Dropdown)",
+            "text": "Test question 1",
+            "type": "Multiple Choice",
             "quizId": 2,
             "groupId": 2
         },
         {
             "id": 6,
             "name": "Test question 6",
+            "text": "Test question 1",
             "type": "Multiple Choice",
             "quizId": 2,
             "groupId": 2
@@ -45,20 +51,23 @@
         {
             "id": 7,
             "name": "Test question 7",
-            "type": "Single Choice (Radio Button)",
+            "text": "Test question 1",
+            "type": "Multiple Choice",
             "quizId": 3,
             "groupId": 3
         },
         {
             "id": 8,
             "name": "Test question 8",
-            "type": "Single Choice (Dropdown)",
+            "text": "Test question 1",
+            "type": "Multiple Choice",
             "quizId": 3,
             "groupId": 3
         },
         {
             "id": 9,
             "name": "Test question 9",
+            "text": "Test question 1",
             "type": "Multiple Choice",
             "quizId": 3,
             "groupId": 3

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Answer } from 'src/app/_models/answer';
+import { Question } from 'src/app/_models/question';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-true-false-answer',
@@ -8,6 +10,7 @@ import { Answer } from 'src/app/_models/answer';
 })
 export class TrueFalseAnswerComponent implements OnInit {
   @Input() answerData: Answer[];
+  @Input() question: Question;
 
   constructor() { }
 
