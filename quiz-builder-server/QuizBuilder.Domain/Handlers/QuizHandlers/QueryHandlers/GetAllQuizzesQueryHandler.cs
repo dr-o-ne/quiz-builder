@@ -11,6 +11,7 @@ using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 	public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, GetAllQuizzesDto> {
+
 		private readonly IQuizMapper _quizMapper;
 		private readonly IGenericRepository<Quiz> _quizRepository;
 
