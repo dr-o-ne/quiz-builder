@@ -20,7 +20,7 @@ namespace QuizBuilder.Test.Integration {
 		[Fact]
 		public async Task Questions_Get_Success_Test() {
 			string value = await _httpClient.GetStringAsync( "/questions/1" );
-			Assert.True( value.Contains( "True/False" ) );
+			Assert.Contains( "True/False", value );
 		}
 
 		private void SetupData( IDbConnectionFactory connectionFactory ) {
