@@ -14,16 +14,6 @@ export class SingleChoiceRadioAnswerComponent implements OnInit {
   ngOnInit() {
   }
 
-   changeRadioButton(event) {
-    this.answerData.forEach(item => {
-      if (item.id === event.value) {
-        item.isCorrect = true;
-        return;
-      }
-      item.isCorrect = false;
-    });
-  }
-
    deleteAnswer(answer: Answer) {
     this.answerData.splice(this.answerData.findIndex(ans => ans.id === answer.id), 1);
     const storageAnswer = localStorage.getItem('answerlist');

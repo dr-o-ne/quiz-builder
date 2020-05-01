@@ -92,7 +92,19 @@
     <div class="row">
 
       <div *ngIf="!hideBtnAddGroup" class="col-md-3">
-        <button class="full-width" mat-raised-button (click)="addTab()">Add new Group</button>
+        <button mat-mini-fab matTooltip="New" color="primary" [matMenuTriggerFor]="menu">
+          <mat-icon class="btn-center">add</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="addTab()">
+            <mat-icon>group_work</mat-icon>
+            <span>Group</span>
+          </button>
+          <button mat-menu-item (click)="addNewQuestion(tabGroup)">
+            <mat-icon>help_outline</mat-icon>
+            <span>Question</span>
+          </button>
+        </mat-menu>
       </div>
 
       <div *ngIf="hideBtnAddGroup" class="col-md-6">
@@ -130,7 +142,7 @@
       </div>
     </div>
 
-    <mat-tab-group [selectedIndex]="selectedIndex">
+    <mat-tab-group #tabGroup [selectedIndex]="selectedIndex">
       <mat-tab *ngFor="let tab of dataGroup; let index = index">
 
         <ng-template mat-tab-label>{{ tab.name }}

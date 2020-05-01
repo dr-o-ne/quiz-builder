@@ -25,21 +25,14 @@
         </mat-form-field>
       </div>
 
-    
-      <div class="col-md-2">
-        <button class="full-width" mat-raised-button [color]="colorBtnBulk" (click)="clickBulkEdit()">
-          <mat-icon>edit</mat-icon>
-          Bulk Actions
-        </button>
-      </div>
     </div>
 
     <table mat-table [dataSource]="dataSource" matSort>
 
-      <ng-container *ngIf="isBulkEdit" matColumnDef="select">
+      <ng-container *ngIf="!isBulkEdit" matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="$event ? masterToggle() : null"
-                        [checked]="selection.hasValue() && isAllSelected()"
+                        [checked]="selection?.hasValue() && isAllSelected()"
                         [indeterminate]="selection.hasValue() && !isAllSelected()"
                         [aria-label]="checkboxLabel()">
           </mat-checkbox>
@@ -100,7 +93,29 @@
       </ng-container>
   
       <ng-container matColumnDef="menu">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button [matMenuTriggerFor]="bulkMenu" matTooltip="Bulk Edit">
+              <mat-icon>apps</mat-icon>
+            </button>
+            <mat-menu #bulkMenu="matMenu">
+              <button *ngIf="isBulkEdit" mat-menu-item (click)="clickMultiSelection()">
+                <mat-icon>dehaze</mat-icon>
+                <span>Multiple Selection</span>
+              </button>
+              <button *ngIf="!isBulkEdit" mat-menu-item (click)="clickMultiSelection()">
+                <mat-icon>close</mat-icon>
+                <span>Close Selection</span>
+              </button>
+              <button mat-menu-item (click)="bulkPublish()" [disabled]="isBulkEdit">
+                <mat-icon>cloud_upload</mat-icon>
+                <span>Bulk Publish</span>
+              </button>
+              <button mat-menu-item (click)="bulkDelete()" [disabled]="isBulkEdit">
+                <mat-icon>delete</mat-icon>
+                <span>Bulk Delete</span>
+              </button>
+            </mat-menu>
+        </th>
         <td mat-cell *matCellDef="let element">
   
           <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -120,7 +135,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
       
-    <mat-paginator *ngIf="dataSource.data.length>15" [pageSizeOptions]="[15, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator *ngIf="dataSource?.data?.length>15" [pageSizeOptions]="[15, 20]" showFirstLastButtons></mat-paginator>
   </div>
   
 </div>

@@ -60,6 +60,9 @@ export class QuizPageComponent implements OnInit {
       this.quizService.getGroupData().subscribe((group: any) => {
         this.dataGroup = group.grouplist.filter((obj) => obj.quizId === id);
         localStorage.setItem('grouplist', JSON.stringify(group.grouplist));
+        if (!this.dataGroup.length) {
+          this.addNewTab(true, 'Default group');
+        }
       }, error => {
         console.log(error);
       });
@@ -69,6 +72,9 @@ export class QuizPageComponent implements OnInit {
       this.dataGroup = JSON.parse(storage);
       if (!tempSave && !tempUpdate) {
         this.dataGroup = this.dataGroup.filter((obj) => obj.quizId === id);
+        if (!this.dataGroup.length) {
+          this.addNewTab(true, 'Default group');
+        }
         this.setActiveGroup();
         return;
       }
@@ -119,12 +125,16 @@ export class QuizPageComponent implements OnInit {
     return Math.floor(Math.random() * 10000) + 1;
   }
 
-  addNewTab(operation?: string) {
-    if (!this.groupFormControl.invalid) {
+  addNewTab(isValid?: boolean, defaultName?: string) {
+    if (isValid || !this.groupFormControl.invalid) {
       this.hideBtnAddGroup = false;
       this.newGroup = new Group();
       this.newGroup.id = this.generateId();
-      this.newGroup.name = this.newNameGroup;
+      if (defaultName) {
+        this.newGroup.name = defaultName;
+      } else {
+        this.newGroup.name = this.newNameGroup;
+      }
       this.newGroup.quizId = this.quiz.id;
       localStorage.setItem('group-save', JSON.stringify(this.newGroup));
       this.initGroup(this.quiz.id);
@@ -176,5 +186,10 @@ export class QuizPageComponent implements OnInit {
     this.quizService.updateQuiz(this.quiz).subscribe(response => {
       this.router.navigate(['/quizlist']);
     }, error => console.log(error));
+  }
+
+  addNewQuestion(tabGroup) {
+    const groupId = this.dataGroup[tabGroup._selectedIndex].id;
+    this.router.navigate(['/editquiz/', this.quiz.id, 'group', groupId, 'addnewquestion']);
   }
 }
