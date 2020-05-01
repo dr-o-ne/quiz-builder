@@ -5,6 +5,7 @@ using QuizBuilder.Common.Handlers;
 using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Domain.Model.View;
 using QuizBuilder.Domain.Queries.QuizQueries;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
@@ -24,7 +25,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 			IEnumerable<QuizDto> entities = await _quizRepository.GetAllAsync();
 			IEnumerable<Quiz> quizzes = entities.Select( _quizMapper.Map );
 
-			return new GetAllQuizzesDto( null );
+			return new GetAllQuizzesDto( new QuizViewModel[] { new QuizViewModel() } );
 		}
 	}
 }
