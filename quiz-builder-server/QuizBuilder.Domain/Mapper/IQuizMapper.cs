@@ -11,9 +11,9 @@ namespace QuizBuilder.Domain.Mapper {
 
 		Quiz Map( QuizDto dto );
 
-		Quiz Map( CreateQuizCommand command );
+		QuizDto Map( CreateQuizCommand command );
 
-		Quiz Map( UpdateQuizCommand command );
+		QuizDto Map( UpdateQuizCommand command );
 	}
 
 }

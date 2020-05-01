@@ -5,16 +5,16 @@ using System.Text.Json.Serialization;
 namespace QuizBuilder.Domain.Model.Default.Base {
 
 	public abstract class AuditableEntity<T> : Entity<T>, IAuditableEntity {
-		[IgnoreDataMember]
+		[JsonIgnore]
 		public DateTime CreatedDate { get; set; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		public string CreatedBy { get; set; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		public DateTime UpdatedDate { get; set; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		public string UpdatedBy { get; set; }
 	}
 }

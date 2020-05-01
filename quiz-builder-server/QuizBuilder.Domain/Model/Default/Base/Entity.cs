@@ -7,7 +7,7 @@ namespace QuizBuilder.Domain.Model.Default.Base {
 	}
 
 	public abstract class Entity<T> : BaseEntity, IEntity<T> {
-		[IgnoreDataMember]
+		[JsonIgnore]
 		public virtual T Id { get; set; }
 	}
 

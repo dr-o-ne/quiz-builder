@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using QuizBuilder.Domain.Model.View;
 using QuizBuilder.Repository.Dto;
 
 namespace QuizBuilder.Domain.Dtos {
 	public class GetAllQuizzesDto {
-		public ImmutableList<QuizDto> Quizzes { get; }
+		public ImmutableList<QuizViewModel> Quizzes { get; }
 
-		public GetAllQuizzesDto( IEnumerable<QuizDto> quizzes ) {
+		public GetAllQuizzesDto( IEnumerable<QuizViewModel> quizzes ) {
 			Quizzes = quizzes.ToImmutableList();
 		}
 	}

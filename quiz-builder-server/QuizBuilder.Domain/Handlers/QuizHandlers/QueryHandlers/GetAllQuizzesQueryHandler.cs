@@ -13,18 +13,18 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 	public class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, GetAllQuizzesDto> {
 
 		private readonly IQuizMapper _quizMapper;
-		private readonly IGenericRepository<Quiz> _quizRepository;
+		private readonly IGenericRepository<QuizDto> _quizRepository;
 
-		public GetAllQuizzesQueryHandler( IQuizMapper quizMapper, IGenericRepository<Quiz> quizRepository ) {
+		public GetAllQuizzesQueryHandler( IQuizMapper quizMapper, IGenericRepository<QuizDto> quizRepository ) {
 			_quizMapper = quizMapper;
 			_quizRepository = quizRepository;
 		}
 
 		public async Task<GetAllQuizzesDto> HandleAsync( GetAllQuizzesQuery query ) {
-			IEnumerable<Quiz> entities = await _quizRepository.GetAllAsync();
-			IEnumerable<QuizDto> dtos = entities.Select( _quizMapper.Map );
+			IEnumerable<QuizDto> entities = await _quizRepository.GetAllAsync();
+			IEnumerable<Quiz> quizzes = entities.Select( _quizMapper.Map );
 
-			return new GetAllQuizzesDto( dtos );
+			return new GetAllQuizzesDto( null );
 		}
 	}
 }
