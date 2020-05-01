@@ -58,7 +58,12 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 		public async Task<int> DeleteAsync( long id ) {
 			using IDbConnection db = CreateConnection();
-			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new {Id = id} );
+			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
+		}
+
+		public async Task<int> DeleteBulkAsync( List<long> ids ) {
+			using IDbConnection db = CreateConnection();
+			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id IN @Ids", new { Ids = ids } );
 		}
 
 		private static List<string> GenerateListOfProperties( IEnumerable<PropertyInfo> listOfProperties ) =>
