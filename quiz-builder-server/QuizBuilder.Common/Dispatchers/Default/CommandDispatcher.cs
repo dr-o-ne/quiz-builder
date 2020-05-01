@@ -20,8 +20,7 @@ namespace QuizBuilder.Common.Dispatchers.Default
 
         public async Task<TResult> SendAsync<TResult>(ICommand<TResult> command) where TResult : ICommandResult
         {
-            var handlerType = typeof(ICommandHandler<,>)
-                .MakeGenericType(command.GetType(), typeof(TResult));
+            var handlerType = typeof(ICommandHandler<,>).MakeGenericType(command.GetType(), typeof(TResult));
 
             dynamic handler = _serviceProvider.GetService(handlerType);
 

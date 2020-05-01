@@ -15,6 +15,8 @@ namespace QuizBuilder.Repository.Repository {
 
 		Task<int> DeleteAsync( long id );
 
+		Task<int> DeleteBulkAsync( List<long> ids );
+
 	}
 
 }
