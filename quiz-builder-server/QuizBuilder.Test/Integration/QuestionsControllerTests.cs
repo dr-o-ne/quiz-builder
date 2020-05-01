@@ -18,22 +18,36 @@ namespace QuizBuilder.Test.Integration {
 		}
 
 		[Fact]
-		public async Task Questions_Get_Success_Test() {
-			string value = await _httpClient.GetStringAsync( "/questions/1" );
-			Assert.Contains( "True/False", value );
+		public async Task Questions_GetById_Success_Test() {
+			string result1 = await _httpClient.GetStringAsync( "/questions/1" );
+			Assert.Contains( "True/False", result1 );
+
+			string result2 = await _httpClient.GetStringAsync( "/questions/2" );
+			Assert.Contains( "MultipleChoice", result2 );
 		}
 
-		private void SetupData( IDbConnectionFactory connectionFactory ) {
+		private static void SetupData( IDbConnectionFactory connectionFactory ) {
+
+			const string tableName = "Question";
+
 			using var connection = connectionFactory.CreateDbConnection();
 			connection.Open();
-			connection.DropAndCreateTable<QuestionDto>( "Question" );
+			connection.DropAndCreateTable<QuestionDto>( tableName );
 
-			connection.Insert( "Question", new QuestionDto {
+			connection.Insert( tableName, new QuestionDto {
 				Id = 1,
 				Name = "True/False",
 				QuestionTypeId = 1,
-				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""},""CreatedDate"":""0001-01-01T00:00:00"",""CreatedBy"":null,""UpdatedDate"":""0001-01-01T00:00:00"",""UpdatedBy"":null,""Id"":0}",
-				QuestionText = ""
+				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""}}",
+				QuestionText = "TrueChoice Question Text"
+			} );
+
+			connection.Insert( tableName, new QuestionDto() {
+				Id = 2,
+				Name = "MultipleChoice",
+				QuestionTypeId = 2,
+				Settings = @"{""Choices"":[{""IsCorrect"":true,""Text"":""Choice1""},{""IsCorrect"":false,""Text"":""Choice2""},{""IsCorrect"":false,""Text"":""Choice3""}],""Randomize"":true}",
+				QuestionText = "MultiChoice Question Text"
 			} );
 		}
 
