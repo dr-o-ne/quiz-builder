@@ -1,94 +1,123 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using QuizBuilder.Api.Controllers;
-using QuizBuilder.Common.Extensions;
-using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Domain.Commands;
-using QuizBuilder.Domain.Commands.QuizCommands;
-using QuizBuilder.Domain.Dtos;
-using QuizBuilder.Domain.Extensions;
-using QuizBuilder.Domain.Mapper;
-using QuizBuilder.Domain.Mapper.Default;
-using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Domain.Queries;
-using QuizBuilder.Domain.Queries.QuizQueries;
+using Newtonsoft.Json;
+using QuizBuilder.Api;
 using QuizBuilder.Repository.Dto;
-using QuizBuilder.Repository.Extensions;
-using QuizBuilder.Repository.Repository;
+using QuizBuilder.Test.Integration.TestHelpers;
+using ServiceStack.Data;
 using Xunit;
 
 namespace QuizBuilder.Test.Integration {
 
-	public sealed class QuizzesControllerTests {
+	public sealed class QuizzesControllerTests : IClassFixture<TestApplicationFactory<Startup>> {
 
-		private readonly QuizzesController _quizzesController;
+		private static readonly ImmutableArray<QuizDto> QuizData = new List<QuizDto> {
+			new QuizDto {
+				Id = 1,
+				Name = "Quiz 1",
+				IsVisible = true
+			},
+			new QuizDto {
+				Id = 2,
+				Name = "Quiz 2",
+				IsVisible = false
+			},
+			new QuizDto {
+				Id = 1000,
+				Name = "Quiz To Be Deleted",
+				IsVisible = false
+			}
 
-		public QuizzesControllerTests() {
-			var quizRepositoryMock = new Mock<IGenericRepository<QuizDto>>();
-			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync( new Collection<QuizDto> {new QuizDto(), new QuizDto(), new QuizDto()} );
-			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<QuizDto>() ) ).ReturnsAsync( 1 );
-			quizRepositoryMock.Setup( x => x.UpdateAsync( It.IsAny<QuizDto>() ) ).ReturnsAsync( 1 );
-			quizRepositoryMock.Setup( x => x.DeleteAsync( It.IsAny<long>() ) ).ReturnsAsync( 1 );
-			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new QuizDto() {Id = 1} );
+		}.ToImmutableArray();
 
-			var services = new ServiceCollection();
-			services.AddDispatchers();
-			services.AddHandlers();
-			services.AddMappers();
-			services.AddSingleton( typeof(IGenericRepository<QuizDto>), quizRepositoryMock.Object );
-			services.AddSingleton<QuizzesController>();
-			var provider = services.BuildServiceProvider();
-			_quizzesController = provider.GetRequiredService<QuizzesController>();
+		private readonly HttpClient _httpClient;
+
+		public QuizzesControllerTests( TestApplicationFactory<Startup> factory ) {
+			_httpClient = factory.CreateClient();
+			SetupData( factory.DB.ConnectionFactory );
 		}
 
 		[Fact]
-		public async Task TestQuizzesController_GetAllQuizzes() {
-			var actionResult = await _quizzesController.GetAllQuizzes( new GetAllQuizzesQuery() );
-			var okResult = actionResult as OkObjectResult;
+		public async Task Quiz_GetAll_Success_Test() {
+			using var response = await _httpClient.GetAsync( "/quizzes/" );
 
-			var result = (GetAllQuizzesDto)okResult.Value;
-
-			Assert.NotNull( result.Quizzes );
-			Assert.NotEmpty( result.Quizzes );
+			Assert.Equal( HttpStatusCode.OK, response.StatusCode );
 		}
 
 		[Fact]
-		public async Task TestQuizzesController_GetQuizById() {
-			var actionResult = await _quizzesController.GetQuizById( new GetQuizByIdQuery() );
-			var okResult = actionResult as OkObjectResult;
+		public async Task Quiz_GetById_Success_Test() {
+			using var response = await _httpClient.GetAsync( "/quizzes/1" );
 
-			var result = (GetQuizByIdDto)okResult.Value;
-
-			Assert.Equal( 1, result.Quiz.Id );
+			Assert.Equal( HttpStatusCode.OK, response.StatusCode );
 		}
 
 		[Fact]
-		public async Task TestQuizzesController_CreateQuiz() {
-			var actionResult = await _quizzesController.CreateQuiz( new CreateQuizCommand() );
-			var okResult = actionResult as CreatedResult;
+		public async Task Quiz_Create_Success_Test() {
+			var content = JsonConvert.SerializeObject( new { Name = "New Quiz" } );
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
-			var result = (CommandResult)okResult.Value;
+			using var response = await _httpClient.PostAsync( "/quizzes/", stringContent );
 
-			Assert.True( result.Success );
+			Assert.Equal( HttpStatusCode.Created, response.StatusCode );
 		}
 
 		[Fact]
-		public async Task TestQuizzesController_UpdateQuiz() {
-			var actionResult = await _quizzesController.UpdateQuiz( new UpdateQuizCommand() );
-			var okResult = actionResult as NoContentResult;
+		public async Task Quiz_Create_BadRequest_Test() {
+			var content = JsonConvert.SerializeObject( new { Unknown = "" } );
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
-			Assert.NotNull( okResult );
+			using var response = await _httpClient.PostAsync( "/quizzes/", stringContent );
+
+			Assert.Equal( HttpStatusCode.BadRequest, response.StatusCode );
 		}
 
 		[Fact]
-		public async Task TestQuizzesController_DeleteQuiz() {
-			var actionResult = await _quizzesController.DeleteQuiz( new DeleteQuizCommand() );
-			var okResult = actionResult as NoContentResult;
+		public async Task Quiz_Update_Success_Test() {
+			var content = JsonConvert.SerializeObject( new { Id = 1 , Name = "New Quiz Name" } );
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
-			Assert.NotNull( okResult );
+			using var response = await _httpClient.PutAsync( "/quizzes/", stringContent );
+
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Quiz_Update_Fail_Test() {
+			var content = JsonConvert.SerializeObject( new { Id = 100, Name = "New Quiz Name" } );
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+
+			using var response = await _httpClient.PutAsync( "/quizzes/", stringContent );
+
+			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Quiz_DeleteById_Success_Test() {
+			var response = await _httpClient.DeleteAsync( "/quizzes/1000" );
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Quiz_DeleteById_Fail_Test() {
+			var response = await _httpClient.DeleteAsync( "/quizzes/2000" );
+			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+		}
+
+		private static void SetupData( IDbConnectionFactory connectionFactory ) {
+
+			using var connection = connectionFactory.CreateDbConnection();
+			connection.Open();
+			connection.DropAndCreateTable<QuizDto>( "Quiz" );
+
+			foreach( var item in QuizData ) {
+				connection.Insert( "Quiz", item );
+			}
+
 		}
 	}
+
 }
