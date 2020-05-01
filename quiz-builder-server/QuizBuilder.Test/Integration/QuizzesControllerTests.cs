@@ -27,18 +27,18 @@ namespace QuizBuilder.Test.Integration {
 		private readonly QuizzesController _quizzesController;
 
 		public QuizzesControllerTests() {
-			var quizRepositoryMock = new Mock<IGenericRepository<Quiz>>();
-			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync( new Collection<Quiz> {new Quiz(), new Quiz(), new Quiz()} );
-			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<Quiz>() ) ).ReturnsAsync( 1 );
-			quizRepositoryMock.Setup( x => x.UpdateAsync( It.IsAny<Quiz>() ) ).ReturnsAsync( 1 );
+			var quizRepositoryMock = new Mock<IGenericRepository<QuizDto>>();
+			quizRepositoryMock.Setup( x => x.GetAllAsync() ).ReturnsAsync( new Collection<QuizDto> {new QuizDto(), new QuizDto(), new QuizDto()} );
+			quizRepositoryMock.Setup( x => x.AddAsync( It.IsAny<QuizDto>() ) ).ReturnsAsync( 1 );
+			quizRepositoryMock.Setup( x => x.UpdateAsync( It.IsAny<QuizDto>() ) ).ReturnsAsync( 1 );
 			quizRepositoryMock.Setup( x => x.DeleteAsync( It.IsAny<long>() ) ).ReturnsAsync( 1 );
-			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new Quiz {Id = 1} );
+			quizRepositoryMock.Setup( x => x.GetByIdAsync( It.IsAny<long>() ) ).ReturnsAsync( new QuizDto() {Id = 1} );
 
 			var services = new ServiceCollection();
 			services.AddDispatchers();
 			services.AddHandlers();
 			services.AddMappers();
-			services.AddSingleton( typeof(IGenericRepository<Quiz>), quizRepositoryMock.Object );
+			services.AddSingleton( typeof(IGenericRepository<QuizDto>), quizRepositoryMock.Object );
 			services.AddSingleton<QuizzesController>();
 			var provider = services.BuildServiceProvider();
 			_quizzesController = provider.GetRequiredService<QuizzesController>();
