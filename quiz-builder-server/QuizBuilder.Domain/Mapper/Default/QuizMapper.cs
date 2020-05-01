@@ -32,22 +32,22 @@ namespace QuizBuilder.Domain.Mapper.Default {
 
 		}
 
-		public Quiz Map( CreateQuizCommand command ) {
+		public QuizDto Map( CreateQuizCommand command ) {
 
 			if( command is null )
 				return null;
 
-			return new Quiz {
+			return new QuizDto {
 				Name = command.Name
 			};
 		}
 
-		public Quiz Map( UpdateQuizCommand command ) {
+		public QuizDto Map( UpdateQuizCommand command ) {
 
 			if( command is null )
 				return null;
 
-			return new Quiz {
+			return new QuizDto {
 				Id = command.Id,
 				Name = command.Name
 			};

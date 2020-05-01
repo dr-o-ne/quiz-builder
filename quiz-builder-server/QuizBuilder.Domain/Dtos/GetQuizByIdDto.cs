@@ -1,10 +1,11 @@
+using QuizBuilder.Domain.Model.View;
 using QuizBuilder.Repository.Dto;
 
 namespace QuizBuilder.Domain.Dtos {
 	public class GetQuizByIdDto {
-		public QuizDto Quiz { get; }
+		public QuizViewModel Quiz { get; }
 
-		public GetQuizByIdDto( QuizDto quiz ) {
+		public GetQuizByIdDto( QuizViewModel quiz ) {
 			Quiz = quiz;
 		}
 	}

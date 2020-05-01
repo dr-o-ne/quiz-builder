@@ -22,7 +22,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 			Quiz entity = await _quizRepository.GetByIdAsync( query.Id );
 			QuizDto dto = _quizMapper.Map( entity );
 
-			return entity is null ? null : new GetQuizByIdDto( dto );
+			return entity is null ? null : new GetQuizByIdDto( null );
 		}
 	}
 }
