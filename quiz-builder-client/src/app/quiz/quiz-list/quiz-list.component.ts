@@ -100,6 +100,11 @@ export class QuizListComponent implements OnInit {
 
   bulkPublish() {}
 
-  bulkDelete() {}
+  bulkDelete() {
+    let ids = this.selection.selected.map(x => x.id);
+    this.quizService.deleteQuizzes(ids).subscribe(
+      response => { this.initDataQuiz(); },
+      error => console.log(error));    
+  }
 
 }
