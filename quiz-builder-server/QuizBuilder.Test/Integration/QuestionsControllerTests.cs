@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
@@ -12,7 +15,7 @@ namespace QuizBuilder.Test.Integration {
 
 	public sealed class QuestionsControllerTests : IClassFixture<TestApplicationFactory<Startup>> {
 
-		private static readonly ImmutableArray<QuestionDto> QuizData = new List<QuestionDto> {
+		private static readonly ImmutableArray<QuestionDto> QuestionData = new List<QuestionDto> {
 			new QuestionDto {
 				Id = 1,
 				Name = "True/False",
@@ -45,13 +48,39 @@ namespace QuizBuilder.Test.Integration {
 			Assert.Contains( "MultipleChoice", result2 );
 		}
 
+		[Fact]
+		public async Task Question_Create_Success_Test() {
+			var content = JsonConvert.SerializeObject( new {
+				Name = "Question Name",
+				QuestionText = "Question Text",
+				QuestionType = 1,
+				Settings = "{\"TrueChoice\":{\"IsCorrect\":false,\"Text\":\"TrueIncorrect\"},\"FalseChoice\":{\"IsCorrect\":true,\"Text\":\"FalseCorrect\"}}"
+			} );
+
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+
+			using var response = await _httpClient.PostAsync( "/questions/", stringContent );
+
+			Assert.Equal( HttpStatusCode.Created, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Question_Create_BadRequest_Test() {
+			var content = JsonConvert.SerializeObject( new { Unknown = "" } );
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+
+			using var response = await _httpClient.PostAsync( "/questions/", stringContent );
+
+			Assert.Equal( HttpStatusCode.InternalServerError, response.StatusCode );
+		}
+
 		private static void SetupData( IDbConnectionFactory connectionFactory ) {
 
 			using var connection = connectionFactory.CreateDbConnection();
 			connection.Open();
 			connection.DropAndCreateTable<QuestionDto>( "Question" );
 
-			foreach( var item in QuizData ) {
+			foreach( var item in QuestionData ) {
 				connection.Insert( "Question", item );
 			}
 		}
