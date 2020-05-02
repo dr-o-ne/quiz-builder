@@ -1,27 +1,29 @@
 using System.Threading.Tasks;
+using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Commands.QuizCommands;
-using QuizBuilder.Domain.Mapper;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 	public class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
-		private readonly IQuizMapper _quizMapper;
+		private readonly IMapper _mapper;
 		private readonly IGenericRepository<QuizDto> _quizRepository;
 
-		public CreateQuizCommandHandler( IQuizMapper quizMapper, IGenericRepository<QuizDto> quizRepository ) {
-			_quizMapper = quizMapper;
+		public CreateQuizCommandHandler( IMapper mapper, IGenericRepository<QuizDto> quizRepository ) {
+			_mapper = mapper;
 			_quizRepository = quizRepository;
 		}
 
 		public async Task<CommandResult> HandleAsync( CreateQuizCommand command ) {
-			QuizDto quiz = _quizMapper.Map( command );
-			int rowsAffected = await _quizRepository.AddAsync( quiz );
+			Quiz quiz = _mapper.Map<CreateQuizCommand, Quiz>( command );
+			QuizDto quizDto = _mapper.Map<Quiz, QuizDto>( quiz );
+			int rowsAffected = await _quizRepository.AddAsync( quizDto );
 
-			return new CommandResult( success: rowsAffected > 0, message: string.Empty );
+			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );
 		}
 	}
 }

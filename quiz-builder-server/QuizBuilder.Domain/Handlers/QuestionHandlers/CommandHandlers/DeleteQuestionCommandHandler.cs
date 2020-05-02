@@ -4,6 +4,7 @@ using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Commands.QuestionCommands;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 	public class DeleteQuestionCommandHandler : ICommandHandler<DeleteQuestionCommand, CommandResult> {
@@ -16,7 +17,8 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 
 		public async Task<CommandResult> HandleAsync( DeleteQuestionCommand command ) {
 			int rowsAffected = await _questionRepository.DeleteAsync( command.Id );
-			return new CommandResult( success: rowsAffected > 0, message: string.Empty );
+
+			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );
 		}
 	}
 }

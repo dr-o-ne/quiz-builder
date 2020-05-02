@@ -1,13 +1,11 @@
+using QuizBuilder.Domain.Model.View;
+
 namespace QuizBuilder.Domain.Dtos {
-
 	public sealed class GetQuestionByIdDto {
+		public QuestionViewModel Question { get; }
 
-		public long Id { get; }
-		public string Name { get; }
-
-		public GetQuestionByIdDto( long id, string name ) {
-			Id = id;
-			Name = name;
+		public GetQuestionByIdDto( QuestionViewModel question ) {
+			Question = question;
 		}
 	}
 }
