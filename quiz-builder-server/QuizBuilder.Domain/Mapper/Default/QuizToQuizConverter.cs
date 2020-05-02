@@ -1,5 +1,6 @@
 using AutoMapper;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Mapper.Default
 {
@@ -12,10 +13,12 @@ namespace QuizBuilder.Domain.Mapper.Default
 				return destination;
 			}
 
-			destination.Name = source.Name;
-			destination.IsVisible = source.IsVisible;
+			Quiz merged = destination.Clone();
 
-			return destination;
+			merged.Name = source.Name;
+			merged.IsVisible = source.IsVisible;
+
+			return merged;
 		}
 	}
 }

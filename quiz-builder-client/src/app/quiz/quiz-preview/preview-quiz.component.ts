@@ -40,48 +40,48 @@ export class PreviewQuizComponent implements OnInit {
   }
 
   initPreview() {
-    const storageQuestion = localStorage.getItem('questionlist');
-    const storageAnswer = localStorage.getItem('answerlist');
-    const storageGroup = localStorage.getItem('grouplist');
-    if (!storageQuestion && !storageAnswer && !storageGroup) {
-      this.quizService.getGroupData().subscribe((group: any) => {
-        this.groupList = group.grouplist;
-        this.questionService.getQuestionData().subscribe((question: any) => {
-          this.questionList = question.questionlist;
-          this.answerService.getAnswerData().subscribe((ans: any) => {
-            this.answerList = ans.answerlist;
-            this.buildStructQuiz();
-          }, error => console.log(error));
-        }, error => console.log(error));
-      }, error => console.log(error));
-      return;
-    }
-    if (storageGroup && !storageQuestion && !storageAnswer) {
-      this.groupList = JSON.parse(storageGroup);
-      this.questionService.getQuestionData().subscribe((question: any) => {
-        this.questionList = question.questionlist;
-        this.answerService.getAnswerData().subscribe((ans: any) => {
-          this.answerList = ans.answerlist;
-          this.buildStructQuiz();
-        }, error => console.log(error));
-      }, error => console.log(error));
-      return;
-    }
-    if (storageGroup && storageQuestion && !storageAnswer) {
-      this.groupList = JSON.parse(storageGroup);
-      this.questionList = JSON.parse(storageQuestion);
-      this.answerService.getAnswerData().subscribe((ans: any) => {
-        this.answerList = ans.answerlist;
-        this.buildStructQuiz();
-      }, error => console.log(error));
-    }
-    if (storageQuestion && storageGroup && storageAnswer) {
-      this.questionList = JSON.parse(storageQuestion);
-      this.groupList = JSON.parse(storageGroup);
-      this.answerList = JSON.parse(storageAnswer);
-      this.buildStructQuiz();
-      return;
-    }
+    // const storageQuestion = localStorage.getItem('questionlist');
+    // const storageAnswer = localStorage.getItem('answerlist');
+    // const storageGroup = localStorage.getItem('grouplist');
+    // if (!storageQuestion && !storageAnswer && !storageGroup) {
+    //   this.quizService.getGroupData().subscribe((group: any) => {
+    //     this.groupList = group.grouplist;
+    //     this.questionService.getQuestionsByGroupId(group.id).subscribe((question: any) => {
+    //       this.questionList = question.questions;
+    //       this.answerService.getAnswerData().subscribe((ans: any) => {
+    //         this.answerList = ans.answerlist;
+    //         this.buildStructQuiz();
+    //       }, error => console.log(error));
+    //     }, error => console.log(error));
+    //   }, error => console.log(error));
+    //   return;
+    // }
+    // if (storageGroup && !storageQuestion && !storageAnswer) {
+    //   this.groupList = JSON.parse(storageGroup);
+    //   this.questionService.getQuestionsByGroupId().subscribe((question: any) => {
+    //     this.questionList = question.questionlist;
+    //     this.answerService.getAnswerData().subscribe((ans: any) => {
+    //       this.answerList = ans.answerlist;
+    //       this.buildStructQuiz();
+    //     }, error => console.log(error));
+    //   }, error => console.log(error));
+    //   return;
+    // }
+    // if (storageGroup && storageQuestion && !storageAnswer) {
+    //   this.groupList = JSON.parse(storageGroup);
+    //   this.questionList = JSON.parse(storageQuestion);
+    //   this.answerService.getAnswerData().subscribe((ans: any) => {
+    //     this.answerList = ans.answerlist;
+    //     this.buildStructQuiz();
+    //   }, error => console.log(error));
+    // }
+    // if (storageQuestion && storageGroup && storageAnswer) {
+    //   this.questionList = JSON.parse(storageQuestion);
+    //   this.groupList = JSON.parse(storageGroup);
+    //   this.answerList = JSON.parse(storageAnswer);
+    //   this.buildStructQuiz();
+    //   return;
+    // }
   }
 
   buildStructQuiz() {
@@ -114,5 +114,4 @@ export class PreviewQuizComponent implements OnInit {
   prevPage() {
     this.currentGroup = this.groupList[--this.currentIndex];
   }
-
 }

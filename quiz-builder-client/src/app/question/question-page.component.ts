@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Quiz } from '../_models/quiz';
-import { Question } from '../_models/question';
-import { Answer } from '../_models/answer';
-import { AnswerService } from '../_service/answer.service';
-import { Group } from '../_models/group';
+import {ChangeDetectionStrategy, Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Quiz} from '../_models/quiz';
+import {Question, QuestionType} from '../_models/question';
+import {Answer} from '../_models/answer';
+import {AnswerService} from '../_service/answer.service';
+import {Group} from '../_models/group';
+import {QuestionService} from '../_service/question.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +19,8 @@ export class QuestionPageComponent implements OnInit {
   group: Group;
   question: Question;
   questionForm: FormGroup;
-  resources: string[] = ['Multiple Choice', 'True/False'];
+  questionTypes = QuestionType;
+  questionTypeKeys: number[];
 
   answerData: Answer[] = [];
   groupResurce: Group[] = [];
@@ -26,19 +28,24 @@ export class QuestionPageComponent implements OnInit {
   defaultCountAnswer = 4;
   isNewState = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private activeRout: ActivatedRoute,
-              private answerService: AnswerService) {}
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private activeRout: ActivatedRoute,
+              private answerService: AnswerService,
+              private questionService: QuestionService)
+  {
+    this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
+  }
 
   ngOnInit() {
     this.initValidate();
-
     this.activeRout.data.subscribe(data => {
       if (data.hasOwnProperty('quizResolver') && data.hasOwnProperty('group')) {
         this.quiz = data.quizResolver.quiz;
         this.group = data.group;
         this.initGroup();
-        if (data.hasOwnProperty('question')) {
-          this.question = data.question;
+        if (data.hasOwnProperty('questionResolver')) {
+          this.question = data.questionResolver.question;
           this.initAnswer(this.question.id);
           return;
         }
@@ -110,16 +117,32 @@ export class QuestionPageComponent implements OnInit {
     });
   }
 
-  saveOrUpdate(operation: string) {
-    if (this.questionForm.valid) {
-      this.question.groupId = this.group.id;
-      this.question.name = this.questionForm.value.name;
-      this.question.type = this.questionForm.value.type;
-      this.question.text = this.questionForm.value.text;
-      localStorage.setItem('question-' + operation, JSON.stringify(this.question));
-      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
-      this.saveAnswer();
+  updateQuestionModel() {
+    this.question.groupId = this.group.id;
+    this.question.name = this.questionForm.value.name;
+    this.question.type = this.questionForm.value.type;
+    this.question.text = this.questionForm.value.text;
+  }
+
+  updateQuestion() {
+    if (!this.questionForm.valid) {
+      return;
     }
+    this.updateQuestionModel();
+    this.questionService.updateQuestion(this.question).subscribe(response => {
+      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+    }, error => console.log(error));
+  }
+
+  createQuestion() {
+    if (!this.questionForm.valid) {
+      return;
+    }
+    this.updateQuestionModel();
+    this.questionService.createQuestion(this.question).subscribe(response => {
+      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+    }, error => console.log(error));
+    // this.saveAnswer(); ???
   }
 
   isDisabledBtn(): boolean {
@@ -134,14 +157,6 @@ export class QuestionPageComponent implements OnInit {
     const index = this.answerData.findIndex(ans => ans.name === '');
     const isChecked = this.answerData.some(ans => ans.isCorrect === true);
     return index === -1 && isChecked;
-  }
-
-  saveQuestion() {
-    this.saveOrUpdate('save');
-  }
-
-  updateQuestion() {
-    this.saveOrUpdate('update');
   }
 
   addNewAnswer() {
@@ -196,7 +211,7 @@ export class QuestionPageComponent implements OnInit {
   selectChangeType() {
     this.answerData = [];
     switch (this.question.type) {
-      case 'True/False':
+      case QuestionType.TrueFalse:
         this.addAnswer('True', true);
         this.addAnswer('False');
         break;

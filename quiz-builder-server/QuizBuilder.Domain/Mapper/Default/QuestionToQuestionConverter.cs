@@ -1,5 +1,6 @@
 using AutoMapper;
 using QuizBuilder.Domain.Model.Default.Questions;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Mapper.Default
 {
@@ -12,9 +13,12 @@ namespace QuizBuilder.Domain.Mapper.Default
 				return destination;
 			}
 
-			destination.Name = source.Name;
+			Question merged = destination.Clone();
 
-			return destination;
+			merged.Name = source.Name;
+			merged.Text = source.Text;
+
+			return merged;
 		}
 	}
 }

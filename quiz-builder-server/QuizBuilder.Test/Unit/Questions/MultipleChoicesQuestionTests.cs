@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using QuizBuilder.Domain.Mapper;
+using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Repository.Dto;
@@ -19,7 +20,8 @@ namespace QuizBuilder.Test.Unit.Questions {
 			var expected = new MultipleChoiceQuestion {
 				Text = "MultipleChoice",
 				Name = "Question Text",
-				Randomize = true
+				Randomize = true,
+				Type = Enums.QuestionType.MultiChoice
 			};
 
 			expected.AddChoice( new BinaryChoice { IsCorrect = true, Text = "Choice1" } );

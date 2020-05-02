@@ -11,15 +11,15 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			if( source is null )
 				return null;
 
-			Question entity = source.QuestionType switch
+			Question entity = source.Type switch
 			{
-				TrueFalse => JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings ),
-				MultiChoice => JsonSerializer.Deserialize<MultipleChoiceQuestion>( source.Settings ),
+				TrueFalse => new TrueFalseQuestion(),
+				MultiChoice => new MultipleChoiceQuestion(),
 				_ => throw new ArgumentException( "Unknown question type" )
 			};
 
 			entity.Name = source.Name;
-			entity.Text = source.QuestionText;
+			entity.Text = source.Text;
 
 			return entity;
 		}
