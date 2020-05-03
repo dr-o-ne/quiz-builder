@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Answer } from 'src/app/_models/answer';
-import { Question } from 'src/app/_models/question';
-import { FormControl, Validators, FormArray } from '@angular/forms';
+import {Question, QuestionType} from 'src/app/_models/question';
 
 @Component({
   selector: 'app-multiple-choice-answer',
@@ -11,7 +10,7 @@ import { FormControl, Validators, FormArray } from '@angular/forms';
 export class MultipleChoiceAnswerComponent implements OnInit {
   @Input() answerData: Answer[];
   @Input() question: Question;
-
+  questionType = QuestionType;
   constructor() { }
 
   ngOnInit() {

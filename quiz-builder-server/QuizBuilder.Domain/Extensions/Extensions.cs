@@ -34,8 +34,8 @@ namespace QuizBuilder.Domain.Extensions {
 			return objects.Skip( 1 ).Aggregate( result, ( res, obj ) => mapper.Map( obj, res ) );
 		}
 
-		public static TCurrent Merge<TUpdated, TCurrent>( this IMapper mapper, TUpdated updated, TCurrent current ) where TUpdated : TCurrent {
-			return mapper.Map<TUpdated, TCurrent>( updated, current );
+		public static TOriginal Merge<TModified, TOriginal>( this IMapper mapper, TModified modified, TOriginal original ) where TModified : TOriginal {
+			return mapper.Map( modified, original );
 		}
 	}
 }

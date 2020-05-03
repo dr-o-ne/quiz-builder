@@ -6,20 +6,20 @@
         <h1>{{question?.name || "New Question" }}</h1>
       </div>
     </div>
-  
+
     <div class="row">
 
       <div *ngIf="isNewState" class="col-md-2">
-        <button class="full-width" mat-raised-button 
+        <button class="full-width" mat-raised-button
         color="accent"
         type="submit"
-        (click)="saveQuestion()"
+        (click)="createQuestion()"
         [disabled]="isDisabledBtn()"
         >Save</button>
       </div>
 
       <div *ngIf="!isNewState" class="col-md-2">
-        <button class="full-width" mat-raised-button 
+        <button class="full-width" mat-raised-button
         color="primary"
         type="submit"
         (click)="updateQuestion()"
@@ -45,7 +45,7 @@
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="full-width">
-                  <mat-label>Name Quiz</mat-label>
+                  <mat-label>Quiz</mat-label>
                   <input matInput disabled [ngModel]="quiz.name">
                 </mat-form-field>
               </div>
@@ -60,27 +60,27 @@
                 </mat-form-field>
               </div>>
             </div>
-          
+
             <form [formGroup]="questionForm">
-        
+
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="full-width">
-                    <mat-label>Name Question</mat-label>
+                    <mat-label>Name</mat-label>
                     <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
                     <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear" (click)="question.name =''">
                         <mat-icon>close</mat-icon>
                     </button>
                   </mat-form-field>
                 </div>
-        
+
                 <div class="col-md-6">
                   <mat-form-field class="full-width">
-                    <mat-label>Type Question</mat-label>
+                    <mat-label>Type</mat-label>
                     <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="!isNewState" (selectionChange)="selectChangeType()">
                     <mat-option>--</mat-option>
-                      <mat-option *ngFor="let resource of resources" [value]="resource">
-                        {{resource}}
+                      <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
+                        {{questionTypes[key]}}
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
@@ -91,7 +91,7 @@
               <div class="row">
                 <div class="col-md-12 mt-3">
                   <mat-form-field class="full-width">
-                    <mat-label>Question</mat-label>
+                    <mat-label>Text</mat-label>
                     <textarea matInput formControlName="text" [(ngModel)]="question.text" required></textarea>
                   </mat-form-field>
                 </div>
@@ -111,15 +111,15 @@
 
   </div>
 
-  <div *ngIf="question?.type === 'True/False'" class="main-color">
-    <app-true-false-answer 
-      [answerData]="answerData" 
-      [question]="question"></app-true-false-answer> 
+  <div *ngIf="question?.type === questionTypes.TrueFalse" class="main-color">
+    <app-true-false-answer
+      [answerData]="answerData"
+      [question]="question"></app-true-false-answer>
   </div>
 
-  <div *ngIf="question?.type === 'Multiple Choice'" class="main-color">
+  <div *ngIf="question?.type === questionTypes.MultipleChoice" class="main-color">
     <app-multiple-choice-answer
-      [answerData]="answerData" 
+      [answerData]="answerData"
       [question]="question"></app-multiple-choice-answer>
   </div>
 

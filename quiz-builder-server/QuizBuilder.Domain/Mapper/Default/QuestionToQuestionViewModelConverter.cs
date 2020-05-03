@@ -1,4 +1,5 @@
 using AutoMapper;
+using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.View;
 
@@ -11,7 +12,9 @@ namespace QuizBuilder.Domain.Mapper.Default
 
 			return new QuestionViewModel {
 				Id = source.Id,
-				Name = source.Name
+				Type = source.Type,
+				Name = source.Name,
+				Text = source.Text
 			};
 		}
 	}

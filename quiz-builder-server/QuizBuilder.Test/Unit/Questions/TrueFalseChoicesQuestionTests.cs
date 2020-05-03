@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using QuizBuilder.Domain.Mapper;
+using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Repository.Dto;
 using Xunit;
@@ -25,7 +26,8 @@ namespace QuizBuilder.Test.Unit.Questions {
 				TrueChoice = {
 					Text = "TrueIncorrect",
 					IsCorrect = false
-				}
+				},
+				Type = Enums.QuestionType.TrueFalse
 			};
 
 			var dto = _mapper.Map<Question, QuestionDto>( expected );

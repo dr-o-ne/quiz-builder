@@ -52,8 +52,8 @@ namespace QuizBuilder.Test.Integration {
 		public async Task Question_Create_Success_Test() {
 			var content = JsonConvert.SerializeObject( new {
 				Name = "Question Name",
-				QuestionText = "Question Text",
-				QuestionType = 1,
+				Text = "Question Text",
+				Type = 1,
 				Settings = "{\"TrueChoice\":{\"IsCorrect\":false,\"Text\":\"TrueIncorrect\"},\"FalseChoice\":{\"IsCorrect\":true,\"Text\":\"FalseCorrect\"}}"
 			} );
 
@@ -72,6 +72,21 @@ namespace QuizBuilder.Test.Integration {
 			using var response = await _httpClient.PostAsync( "/questions/", stringContent );
 
 			Assert.Equal( HttpStatusCode.InternalServerError, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Question_Update_Success_Test() {
+			var content = JsonConvert.SerializeObject( new {
+				Id = 1,
+				Name = "Question Name",
+				Text = "Question Text",
+				Type = 1,
+			} );
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+
+			using var response = await _httpClient.PutAsync( "/questions/", stringContent );
+
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
 		private static void SetupData( IDbConnectionFactory connectionFactory ) {
