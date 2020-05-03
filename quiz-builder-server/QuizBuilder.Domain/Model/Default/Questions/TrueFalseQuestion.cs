@@ -8,10 +8,16 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public BinaryChoice FalseChoice { get; set; } = new BinaryChoice();
 
+		public Enums.ChoicesDisplayType ChoicesDisplayType { get; set; }
+
+		public Enums.ChoicesEnumerationType ChoicesEnumerationType { get; set; }
+
 		public override Enums.QuestionType Type { get => Enums.QuestionType.TrueFalse; }
 
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
+			ChoicesEnumerationType != Enums.ChoicesEnumerationType.None &&
+			ChoicesDisplayType != Enums.ChoicesDisplayType.None &&
 			TrueChoice.IsCorrect != FalseChoice.IsCorrect;
 	}
 }
