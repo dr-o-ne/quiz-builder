@@ -6,7 +6,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 	public abstract class Question : AuditableEntity<long> {
 
 		[JsonIgnore]
-		public Enums.QuestionType Type { get; set; } //TODO: to abstract readonly?
+		public abstract Enums.QuestionType Type { get; }
 
 		[JsonIgnore]
 		public string Name { get; set; }

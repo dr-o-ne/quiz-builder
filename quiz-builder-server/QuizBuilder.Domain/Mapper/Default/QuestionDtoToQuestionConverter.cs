@@ -22,7 +22,6 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			};
 
 			entity.Id = source.Id;
-			entity.Type = (Enums.QuestionType)source.QuestionTypeId;
 			entity.Name = source.Name;
 			entity.Text = source.QuestionText;
 

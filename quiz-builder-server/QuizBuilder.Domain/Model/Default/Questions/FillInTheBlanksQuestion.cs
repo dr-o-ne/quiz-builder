@@ -14,6 +14,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class FillInTheBlanksQuestion : Question {
 
+		public override Enums.QuestionType Type { get => Enums.QuestionType.FillInTheBlanks; }
+
 		public override string Text {
 			get { return string.Empty; }
 			set { }

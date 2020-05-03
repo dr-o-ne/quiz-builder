@@ -18,8 +18,7 @@ namespace QuizBuilder.Test.Unit.Questions {
 		public void Serialize_Deserialize_Test() {
 
 			var expected = new FillInTheBlanksQuestion {
-				Name = "Fill In The Blanks Question Sample",
-				Type = Enums.QuestionType.FillInTheBlanks
+				Name = "Fill In The Blanks Question Sample"
 			};
 
 			expected.Texts.Add( new FillInTheBlanksText {Order = 0, Text = "<p>The oceanic crust is made of "} );

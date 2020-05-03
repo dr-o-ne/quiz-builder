@@ -21,7 +21,6 @@ namespace QuizBuilder.Test.Unit.Questions {
 				Text = "MultipleChoice",
 				Name = "Question Text",
 				Randomize = true,
-				Type = Enums.QuestionType.MultiChoice
 			};
 
 			expected.AddChoice( new BinaryChoice { IsCorrect = true, Text = "Choice1" } );
