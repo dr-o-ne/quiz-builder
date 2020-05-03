@@ -6,8 +6,7 @@ using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Repository.Dto;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
-namespace QuizBuilder.Domain.Mapper.Default
-{
+namespace QuizBuilder.Domain.Mapper.Default {
 	internal class QuestionToQuestionDtoConverter : ITypeConverter<Question, QuestionDto> {
 		public QuestionDto Convert( Question source, QuestionDto destination, ResolutionContext context ) {
 			if( source == null )
@@ -24,6 +23,10 @@ namespace QuizBuilder.Domain.Mapper.Default
 				case MultipleChoiceQuestion question:
 					settings = JsonSerializer.Serialize( question );
 					questionType = MultiChoice;
+					break;
+				case FillInTheBlanksQuestion question:
+					settings = JsonSerializer.Serialize( question );
+					questionType = FillInTheBlanks;
 					break;
 				default:
 					throw new ArgumentException( "Unknown question type" );

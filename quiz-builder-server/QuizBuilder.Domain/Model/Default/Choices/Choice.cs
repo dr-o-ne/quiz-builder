@@ -6,7 +6,9 @@ namespace QuizBuilder.Domain.Model.Default.Choices {
 
 		public string Text { get; set; }
 
-		public bool IsValid() => !string.IsNullOrWhiteSpace( Text );
+		public string Feedback { get; set; }
+
+		public virtual bool IsValid() => !string.IsNullOrWhiteSpace( Text );
 	}
 
 }

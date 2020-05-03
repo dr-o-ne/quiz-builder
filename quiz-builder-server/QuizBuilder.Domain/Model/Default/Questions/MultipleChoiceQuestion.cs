@@ -23,12 +23,12 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			Choices.Add( choice );
 		}
 
-		public override bool IsValid() => base.IsValid() &&
-		                                  Choices.Count( x => x.IsCorrect ) == 1 &&
-		                                  Choices.Count( x => !x.IsValid() ) == 0;
+		public override Enums.QuestionType Type { get => Enums.QuestionType.MultiChoice; }
 
-		public override Enums.QuestionType Type => Enums.QuestionType.MultiChoice;
-
+		public override bool IsValid() =>
+			!string.IsNullOrWhiteSpace( Text ) &&
+		    Choices.Count( x => x.IsCorrect ) == 1 &&
+		    Choices.Count( x => !x.IsValid() ) == 0;
 	}
 
 }
