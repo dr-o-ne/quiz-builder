@@ -18,7 +18,11 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public bool Randomize { get; set; }
 
-		public Enums.QuestionGradingType GradingType { get; set; }
+		public Enums.QuestionGradingType GradingType { get; set; } = Enums.QuestionGradingType.AllOrNothing;
+
+		public Enums.ChoicesDisplayType ChoicesDisplayType { get; set; } = Enums.ChoicesDisplayType.Vertical;
+
+		public Enums.ChoicesEnumerationType ChoicesEnumerationType { get; set; } = Enums.ChoicesEnumerationType.NoEnumeration;
 
 		public void AddChoice( BinaryChoice choice ) {
 			choice.Order = Choices.Count;
@@ -29,7 +33,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
-			GradingType != Enums.QuestionGradingType.None &&
 			Choices.Count( x => x.IsCorrect ) > 0 &&
 			Choices.Count( x => !x.IsValid() ) == 0;
 	}

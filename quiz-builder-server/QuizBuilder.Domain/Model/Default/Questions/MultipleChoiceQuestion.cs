@@ -18,6 +18,10 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public bool Randomize { get; set; }
 
+		public Enums.ChoicesDisplayType ChoicesDisplayType { get; set; } = Enums.ChoicesDisplayType.Vertical;
+
+		public Enums.ChoicesEnumerationType ChoicesEnumerationType { get; set; } = Enums.ChoicesEnumerationType.NoEnumeration;
+
 		public void AddChoice( BinaryChoice choice ) {
 			choice.Order = Choices.Count;
 			Choices.Add( choice );
