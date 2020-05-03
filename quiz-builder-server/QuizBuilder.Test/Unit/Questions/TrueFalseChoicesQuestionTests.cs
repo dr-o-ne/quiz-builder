@@ -27,7 +27,6 @@ namespace QuizBuilder.Test.Unit.Questions {
 					Text = "TrueIncorrect",
 					IsCorrect = false
 				},
-				Type = Enums.QuestionType.TrueFalse
 			};
 
 			var dto = _mapper.Map<Question, QuestionDto>( expected );
