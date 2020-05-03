@@ -8,10 +8,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public BinaryChoice FalseChoice { get; set; } = new BinaryChoice();
 
-		public override bool IsValid() {
-
-			return base.IsValid() && TrueChoice.IsCorrect != FalseChoice.IsCorrect;
-
-		}
+		public override bool IsValid() =>
+			!string.IsNullOrWhiteSpace( Text ) &&
+			TrueChoice.IsCorrect != FalseChoice.IsCorrect;
 	}
 }
