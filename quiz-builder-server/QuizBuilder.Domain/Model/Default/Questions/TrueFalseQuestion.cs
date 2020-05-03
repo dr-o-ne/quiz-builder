@@ -13,5 +13,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			return base.IsValid() && TrueChoice.IsCorrect != FalseChoice.IsCorrect;
 
 		}
+
+		public override Enums.QuestionType Type => Enums.QuestionType.TrueFalse;
 	}
 }
