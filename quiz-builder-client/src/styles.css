@@ -18,6 +18,11 @@ mat-sidenav-content {
   width: 100%;
 }
 
+.header-stick {
+  position: sticky;
+  top: 0;
+}
+
 
 button:focus {
     outline: 0px dotted;
