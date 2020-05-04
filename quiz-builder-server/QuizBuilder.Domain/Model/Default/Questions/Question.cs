@@ -14,6 +14,12 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 		[JsonIgnore]
 		public virtual string Text { get; set; }
 
+		public string Feedback { get; set; }
+
+		public string CorrectFeedback { get; set; }
+
+		public string IncorrectFeedback { get; set; }
+
 		public abstract bool IsValid();
 
 		public virtual Question Clone() {

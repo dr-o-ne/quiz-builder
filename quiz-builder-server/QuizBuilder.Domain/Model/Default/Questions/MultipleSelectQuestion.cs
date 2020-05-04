@@ -5,7 +5,7 @@ using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
-	public sealed class MultipleChoiceQuestion : Question {
+	public sealed class MultipleSelectQuestion : Question {
 
 		public List<BinaryChoice> Choices { get; set; } = new List<BinaryChoice>();
 
@@ -18,6 +18,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public bool Randomize { get; set; }
 
+		public Enums.QuestionGradingType GradingType { get; set; } = Enums.QuestionGradingType.AllOrNothing;
+
 		public Enums.ChoicesDisplayType ChoicesDisplayType { get; set; } = Enums.ChoicesDisplayType.Vertical;
 
 		public Enums.ChoicesEnumerationType ChoicesEnumerationType { get; set; } = Enums.ChoicesEnumerationType.NoEnumeration;
@@ -27,12 +29,11 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			Choices.Add( choice );
 		}
 
-		public override Enums.QuestionType Type { get => Enums.QuestionType.MultiChoice; }
+		public override Enums.QuestionType Type { get => Enums.QuestionType.MultiSelect; }
 
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
-		    Choices.Count( x => x.IsCorrect ) == 1 &&
-		    Choices.Count( x => !x.IsValid() ) == 0;
+			Choices.Count( x => x.IsCorrect ) > 0 &&
+			Choices.Count( x => !x.IsValid() ) == 0;
 	}
-
 }

@@ -8,6 +8,10 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public BinaryChoice FalseChoice { get; set; } = new BinaryChoice();
 
+		public Enums.ChoicesDisplayType ChoicesDisplayType { get; set; } = Enums.ChoicesDisplayType.Vertical;
+
+		public Enums.ChoicesEnumerationType ChoicesEnumerationType { get; set; } = Enums.ChoicesEnumerationType.NoEnumeration;
+
 		public override Enums.QuestionType Type { get => Enums.QuestionType.TrueFalse; }
 
 		public override bool IsValid() =>
