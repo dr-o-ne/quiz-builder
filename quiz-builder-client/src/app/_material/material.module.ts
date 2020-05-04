@@ -19,6 +19,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   exports: [
@@ -42,7 +44,9 @@ import {MatRadioModule} from '@angular/material/radio';
         MatNativeDateModule,
         MatRippleModule,
         DragDropModule,
-        MatRadioModule
+        MatRadioModule,
+        MatSliderModule,
+        MatSlideToggleModule
     ]
 })
 export class MatirealModule { }

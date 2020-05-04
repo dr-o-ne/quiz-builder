@@ -192,4 +192,8 @@ export class QuizPageComponent implements OnInit {
     const groupId = this.dataGroup[tabGroup._selectedIndex].id;
     this.router.navigate(['/editquiz/', this.quiz.id, 'group', groupId, 'addnewquestion']);
   }
+
+  clickToogle(toogle) {
+    this.quiz.isVisible = toogle._checked;
+  }
 }

@@ -12,7 +12,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./quiz-list.component.css']
 })
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'status', 'edit', 'preview', 'publish', 'analize', 'menu'];
+  displayedColumns: string[] = ['name', 'isVisible', 'edit', 'preview', 'analize', 'menu'];
 
   quizzes: Quiz[] = [];
   dataSource: MatTableDataSource<Quiz>;
@@ -101,10 +101,14 @@ export class QuizListComponent implements OnInit {
   bulkPublish() {}
 
   bulkDelete() {
-    let ids = this.selection.selected.map(x => x.id);
+    const ids = this.selection.selected.map(x => x.id);
     this.quizService.deleteQuizzes(ids).subscribe(
       response => { this.initDataQuiz(); },
-      error => console.log(error));    
+      error => console.log(error));
+  }
+
+  clickToogle(toogle, quiz) {
+    quiz.isVisible = toogle._checked;
   }
 
 }

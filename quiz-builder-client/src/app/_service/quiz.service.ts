@@ -35,7 +35,7 @@ export class QuizService{
     }
 
     deleteQuizzes(ids: number[]): Observable<object> {
-      let body = JSON.stringify({ids: ids});
+      const body = JSON.stringify({ids});
       const options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

@@ -11,6 +11,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 
 			return new Quiz {
 				Id = source.Id,
+				IsVisible = source.IsVisible,
 				Name = source.Name
 			};
 		}
