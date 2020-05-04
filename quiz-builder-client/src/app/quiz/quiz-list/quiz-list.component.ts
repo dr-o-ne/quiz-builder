@@ -109,6 +109,7 @@ export class QuizListComponent implements OnInit {
 
   clickToogle(toogle, quiz) {
     quiz.isVisible = toogle._checked;
+    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
   }
 
 }
