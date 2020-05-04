@@ -61,7 +61,6 @@ export class QuestionPageComponent implements OnInit {
     this.question = new Question();
     this.question.quizId = this.quiz.id;
     this.question.groupId = this.group.id;
-    this.question.id = this.generateId();
   }
 
   initGroup() {
@@ -119,9 +118,7 @@ export class QuestionPageComponent implements OnInit {
 
   updateQuestionModel() {
     this.question.groupId = this.group.id;
-    this.question.name = this.questionForm.value.name;
-    this.question.type = this.questionForm.value.type;
-    this.question.text = this.questionForm.value.text;
+    this.question = Object.assign(this.question, this.questionForm.value);
   }
 
   updateQuestion() {
@@ -130,6 +127,9 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.updateQuestion(this.question).subscribe(response => {
+      // это пока мы не определимся со структурой ответа и как мы их храним
+      this.saveAnswer();
+
       this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
     }, error => console.log(error));
   }
@@ -140,9 +140,11 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.createQuestion(this.question).subscribe(response => {
-      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+       // это пока мы не определимся со структурой ответа и как мы их храним
+       this.saveAnswer();
+
+       this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
     }, error => console.log(error));
-    // this.saveAnswer(); ???
   }
 
   isDisabledBtn(): boolean {

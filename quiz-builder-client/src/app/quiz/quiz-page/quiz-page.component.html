@@ -79,18 +79,18 @@
 
     <div class="row">
 
-      <div *ngIf="!hideBtnAddGroup" class="col-md-3">
-        <button mat-mini-fab matTooltip="New" color="primary" [matMenuTriggerFor]="menu">
-          <mat-icon class="btn-center">add</mat-icon>
+      <div *ngIf="!hideBtnAddGroup" class="col-md-2">
+        <button mat-raised-button class="full-width" color="primary" [matMenuTriggerFor]="menu">
+          Add New
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="addTab()">
             <mat-icon>group_work</mat-icon>
-            <span>Group</span>
+            <span>New Group</span>
           </button>
           <button mat-menu-item (click)="addNewQuestion(tabGroup)">
             <mat-icon>help_outline</mat-icon>
-            <span>Question</span>
+            <span>New Question</span>
           </button>
         </mat-menu>
       </div>

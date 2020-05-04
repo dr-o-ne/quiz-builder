@@ -21,6 +21,7 @@ mat-sidenav-content {
 .header-stick {
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 

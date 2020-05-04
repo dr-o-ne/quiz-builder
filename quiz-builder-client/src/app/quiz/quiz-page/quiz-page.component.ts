@@ -171,8 +171,7 @@ export class QuizPageComponent implements OnInit {
 
   initValidate() {
     this.quizForm = this.fb.group({
-      name: ['', Validators.required],
-      status: ['', Validators.required]
+      name: ['', Validators.required]
     });
   }
 
