@@ -1,12 +1,6 @@
 <div class="container">
 
-  <div class="main-color">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>{{quiz.name || "New Quiz" }}</h1>
-      </div>
-    </div>
-
+  <div class="main-color header-stick">
     <div class="row">
 
       <div *ngIf="!quiz.id" class="col-md-2">
@@ -58,16 +52,10 @@
               </div>
 
               <div class="col-md-6">
-                <mat-form-field class="full-width">
-                  <mat-label>Status</mat-label>
-                  <mat-select [disabled]="quiz.id" formControlName="status" required [(ngModel)]="quiz.status">
-                  <mat-option>--</mat-option>
-                    <mat-option *ngFor="let resource of resources" [value]="resource">
-                      {{resource}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="quizForm.get('status').hasError('required')">Choice status</mat-error>
-                </mat-form-field>
+                <div class="row mrgn-container-toogle">
+                  <mat-label class="">IsVisible</mat-label>
+                  <mat-slide-toggle #toogle class="mrgn-lft-toogle" color="primary" [checked]="quiz.isVisible" (change)="clickToogle(toogle)"></mat-slide-toggle>
+                </div>
               </div>
 
             </div>
@@ -91,18 +79,18 @@
 
     <div class="row">
 
-      <div *ngIf="!hideBtnAddGroup" class="col-md-3">
-        <button mat-mini-fab matTooltip="New" color="primary" [matMenuTriggerFor]="menu">
-          <mat-icon class="btn-center">add</mat-icon>
+      <div *ngIf="!hideBtnAddGroup" class="col-md-2">
+        <button mat-raised-button class="full-width" color="primary" [matMenuTriggerFor]="menu">
+          Add New
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="addTab()">
             <mat-icon>group_work</mat-icon>
-            <span>Group</span>
+            <span>New Group</span>
           </button>
           <button mat-menu-item (click)="addNewQuestion(tabGroup)">
             <mat-icon>help_outline</mat-icon>
-            <span>Question</span>
+            <span>New Question</span>
           </button>
         </mat-menu>
       </div>

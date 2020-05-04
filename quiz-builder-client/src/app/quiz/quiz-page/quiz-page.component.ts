@@ -171,8 +171,7 @@ export class QuizPageComponent implements OnInit {
 
   initValidate() {
     this.quizForm = this.fb.group({
-      name: ['', Validators.required],
-      status: ['', Validators.required]
+      name: ['', Validators.required]
     });
   }
 
@@ -191,5 +190,9 @@ export class QuizPageComponent implements OnInit {
   addNewQuestion(tabGroup) {
     const groupId = this.dataGroup[tabGroup._selectedIndex].id;
     this.router.navigate(['/editquiz/', this.quiz.id, 'group', groupId, 'addnewquestion']);
+  }
+
+  clickToogle(toogle) {
+    this.quiz.isVisible = toogle._checked;
   }
 }
