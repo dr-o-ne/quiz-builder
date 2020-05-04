@@ -52,7 +52,7 @@
       </ng-container>
     
       <ng-container matColumnDef="isVisible">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> IsVisible </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Visible </th>
         <td mat-cell *matCellDef="let element">
           <mat-slide-toggle #toogle color="primary" [checked]="element.isVisible" (change)="clickToogle(toogle, element)"></mat-slide-toggle>
         </td>
