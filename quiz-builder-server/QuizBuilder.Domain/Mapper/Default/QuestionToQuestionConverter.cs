@@ -17,6 +17,9 @@ namespace QuizBuilder.Domain.Mapper.Default
 
 			merged.Name = source.Name;
 			merged.Text = source.Text;
+			merged.Feedback = source.Feedback;
+			merged.CorrectFeedback = source.CorrectFeedback;
+			merged.IncorrectFeedback = source.IncorrectFeedback;
 
 			return merged;
 		}
