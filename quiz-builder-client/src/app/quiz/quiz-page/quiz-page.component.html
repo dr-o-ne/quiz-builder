@@ -53,7 +53,7 @@
 
               <div class="col-md-6">
                 <div class="row mrgn-container-toogle">
-                  <mat-label class="">IsVisible</mat-label>
+                  <mat-label class="">Visible</mat-label>
                   <mat-slide-toggle #toogle class="mrgn-lft-toogle" color="primary" [checked]="quiz.isVisible" (change)="clickToogle(toogle)"></mat-slide-toggle>
                 </div>
               </div>
@@ -84,13 +84,13 @@
           Add New
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="addTab()">
-            <mat-icon>group_work</mat-icon>
-            <span>New Group</span>
-          </button>
           <button mat-menu-item (click)="addNewQuestion(tabGroup)">
             <mat-icon>help_outline</mat-icon>
-            <span>New Question</span>
+            <span>Question</span>
+          </button>
+          <button mat-menu-item (click)="addTab()">
+            <mat-icon>group_work</mat-icon>
+            <span>Group</span>
           </button>
         </mat-menu>
       </div>

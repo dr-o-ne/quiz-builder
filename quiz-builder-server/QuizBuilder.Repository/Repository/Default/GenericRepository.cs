@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,7 +39,7 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return await connection.QueryAsync<T>( $"SELECT * FROM {_tableName}" );
 		}
 
-		public async Task<T> GetByIdAsync( long id ) {
+		public async Task<T> GetByIdAsync( Guid id ) {
 			using IDbConnection connection = CreateConnection();
 			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new {Id = id} );
 			return result;
@@ -62,12 +63,12 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return await connection.ExecuteAsync( updateQuery, entity );
 		}
 
-		public async Task<int> DeleteAsync( long id ) {
+		public async Task<int> DeleteAsync( Guid id ) {
 			using IDbConnection db = CreateConnection();
 			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
 		}
 
-		public async Task<int> DeleteBulkAsync( List<long> ids ) {
+		public async Task<int> DeleteBulkAsync( List<Guid> ids ) {
 			using IDbConnection db = CreateConnection();
 			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id IN @Ids", new { Ids = ids } );
 		}

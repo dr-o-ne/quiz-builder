@@ -10,7 +10,7 @@ export class QuizResolver implements Resolve<Quiz> {
     constructor(private quizService: QuizService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot) {
-        const id = Number(route.url[1].path);
+        const id = route.url[1].path;
         return this.quizService.getQuiz(id)
         .pipe(
             catchError(error => {
