@@ -3,6 +3,7 @@
 namespace QuizBuilder.Domain.Model.Default.Choices {
 
 	public abstract class Choice : IValidatable, IOrdered {
+		public long Id { get; set; }
 
 		public string Text { get; set; }
 

@@ -1,6 +1,7 @@
 export class Answer {
     id: number;
-    name: string;
+    text: string;
+    feedback?: string;
+    order?: number;
     isCorrect: boolean;
-    questionId: number;
 }

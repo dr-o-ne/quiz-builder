@@ -1,7 +1,12 @@
+using System;
 using AutoMapper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.View;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuizBuilder.Domain.Mapper.Default
 {
@@ -10,11 +15,58 @@ namespace QuizBuilder.Domain.Mapper.Default
 			if( source is null )
 				return null;
 
+			string settings;
+			string choices;
+			switch( source ) {
+				case MultipleChoiceQuestion question:
+					var settingsMultiChoice = new {
+						ChoicesDisplayType = question.ChoicesDisplayType,
+						ChoicesEnumerationType = question.ChoicesEnumerationType,
+						Randomize = question.Randomize
+					};
+					settings = JsonConvert.SerializeObject( settingsMultiChoice, SetJsonOptions() );
+					choices = JsonConvert.SerializeObject( question.Choices, SetJsonOptions() );
+					break;
+				case MultipleSelectQuestion question:
+					var settingsMultipleSelect = new {
+						ChoicesDisplayType = question.ChoicesDisplayType,
+						ChoicesEnumerationType = question.ChoicesEnumerationType,
+						GradingType = question.GradingType,
+						Randomize = question.Randomize
+					};
+					settings = JsonConvert.SerializeObject( settingsMultipleSelect, SetJsonOptions() );
+					choices = JsonConvert.SerializeObject( question.Choices, SetJsonOptions() );
+					break;
+				case TrueFalseQuestion question:
+					var settingsTrueFalse = new {
+						ChoicesDisplayType = question.ChoicesDisplayType,
+						ChoicesEnumerationType = question.ChoicesEnumerationType
+					};
+					settings = JsonConvert.SerializeObject( settingsTrueFalse, SetJsonOptions() );
+					var binaryChoices = new BinaryChoice[] { question.TrueChoice, question.FalseChoice };
+					choices = JsonConvert.SerializeObject( binaryChoices, SetJsonOptions() );
+					break;
+				default:
+					throw new ArgumentException( "Unknown question type" );
+			}
+
 			return new QuestionViewModel {
 				Id = source.Id,
 				Type = source.Type,
 				Name = source.Name,
-				Text = source.Text
+				Text = source.Text,
+				Settings = settings,
+				Choices = choices
+			};
+		}
+
+		private JsonSerializerSettings SetJsonOptions() {
+			DefaultContractResolver contractResolver = new DefaultContractResolver {
+				NamingStrategy = new CamelCaseNamingStrategy()
+			};
+			return new JsonSerializerSettings {
+				ContractResolver = contractResolver,
+				Formatting = Formatting.Indented
 			};
 		}
 	}

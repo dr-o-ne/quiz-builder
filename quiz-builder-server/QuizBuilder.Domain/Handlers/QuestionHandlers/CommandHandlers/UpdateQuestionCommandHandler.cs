@@ -21,11 +21,8 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuestionCommand command ) {
-			QuestionDto questionDto = await _questionRepository.GetByIdAsync( command.Id );
-			Question originalQuestion = _mapper.Map<QuestionDto, Question>( questionDto );
 			Question modifiedQuestion = _mapper.Map<UpdateQuestionCommand, Question>( command );
-			Question mergedQuestion = _mapper.Merge( modifiedQuestion, originalQuestion );
-			QuestionDto mergedQuestionDto = _mapper.Map<Question, QuestionDto>( mergedQuestion );
+			QuestionDto mergedQuestionDto = _mapper.Map<Question, QuestionDto>( modifiedQuestion );
 			int rowsAffected = await _questionRepository.UpdateAsync( mergedQuestionDto );
 
 			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );

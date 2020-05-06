@@ -15,6 +15,9 @@ export class SingleChoiceDropdownAnswerComponent implements OnInit {
   }
 
    changeRadioButton(event) {
+    if (!event.value) {
+      return;
+    }
     this.answerData.forEach(item => {
       if (item.id === event.value) {
         item.isCorrect = true;
@@ -26,10 +29,6 @@ export class SingleChoiceDropdownAnswerComponent implements OnInit {
 
    deleteAnswer(answer: Answer) {
     this.answerData.splice(this.answerData.findIndex(ans => ans.id === answer.id), 1);
-    const storageAnswer = localStorage.getItem('answerlist');
-    const currenAnswerList: Answer[] = JSON.parse(storageAnswer);
-    currenAnswerList.splice(currenAnswerList.findIndex(ans => ans.id === answer.id), 1);
-    localStorage.setItem('answerlist', JSON.stringify(currenAnswerList));
   }
 
 }

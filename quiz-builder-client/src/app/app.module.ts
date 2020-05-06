@@ -18,8 +18,6 @@ import { QuestionService } from './_service/question.service';
 import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { AnswerResolver } from './_resolvers/answer.resolver';
-import { AnswerService } from './_service/answer.service';
 import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
 import { GroupResolver } from './_resolvers/group.resolver';
@@ -64,8 +62,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       QuestionService,
       QuizResolver,
       QuestionResolver,
-      AnswerResolver,
-      AnswerService,
       GroupResolver
    ],
    bootstrap: [
