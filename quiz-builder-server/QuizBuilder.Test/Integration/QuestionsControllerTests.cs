@@ -82,7 +82,10 @@ namespace QuizBuilder.Test.Integration {
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,
+				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
+				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			} );
+
 			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
 			using var response = await _httpClient.PutAsync( "/questions/", stringContent );
