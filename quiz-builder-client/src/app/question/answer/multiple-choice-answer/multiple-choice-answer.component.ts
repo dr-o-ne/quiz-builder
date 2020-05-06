@@ -17,6 +17,9 @@ export class MultipleChoiceAnswerComponent implements OnInit {
   }
 
   changeRadioButton(event) {
+    if (!event.value) {
+      return;
+    }
     this.answerData.forEach(item => {
       if (item.id === event.value) {
         item.isCorrect = true;
@@ -28,10 +31,6 @@ export class MultipleChoiceAnswerComponent implements OnInit {
 
    deleteAnswer(answer: Answer) {
     this.answerData.splice(this.answerData.findIndex(ans => ans.id === answer.id), 1);
-    const storageAnswer = localStorage.getItem('answerlist');
-    const currenAnswerList: Answer[] = JSON.parse(storageAnswer);
-    currenAnswerList.splice(currenAnswerList.findIndex(ans => ans.id === answer.id), 1);
-    localStorage.setItem('answerlist', JSON.stringify(currenAnswerList));
   }
 
   addNewAnswer() {
@@ -44,10 +43,9 @@ export class MultipleChoiceAnswerComponent implements OnInit {
 
   addAnswer(name?: string, isCorrect?: boolean) {
     const newAnswer = new Answer();
-    newAnswer.name = name || '';
+    newAnswer.text = name || '';
     newAnswer.id = this.generateId();
     newAnswer.isCorrect = isCorrect || false;
-    newAnswer.questionId = this.question.id;
     this.answerData.push(newAnswer);
   }
 

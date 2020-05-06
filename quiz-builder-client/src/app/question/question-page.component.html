@@ -107,13 +107,13 @@
 
   <div *ngIf="question?.type === questionTypes.TrueFalse" class="main-color">
     <app-true-false-answer
-      [answerData]="answerData"
+      [answerData]="answers"
       [question]="question"></app-true-false-answer>
   </div>
 
   <div *ngIf="question?.type === questionTypes.MultipleChoice" class="main-color">
     <app-multiple-choice-answer
-      [answerData]="answerData"
+      [answerData]="answers"
       [question]="question"></app-multiple-choice-answer>
   </div>
 

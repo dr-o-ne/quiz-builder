@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Quiz } from 'src/app/_models/quiz';
 import { QuestionService } from 'src/app/_service/question.service';
-import { AnswerService } from 'src/app/_service/answer.service';
 import { Question } from 'src/app/_models/question';
 import { Answer } from 'src/app/_models/answer';
 import { Group } from 'src/app/_models/group';
@@ -25,7 +24,7 @@ export class PreviewQuizComponent implements OnInit {
   selectedAnswer: string;
 
   constructor(private router: Router, private activeRout: ActivatedRoute,
-              private questionService: QuestionService, private answerService: AnswerService,
+              private questionService: QuestionService,
               private quizService: QuizService) {}
 
   ngOnInit() {
@@ -85,20 +84,20 @@ export class PreviewQuizComponent implements OnInit {
   }
 
   buildStructQuiz() {
-    this.groupList = this.groupList.filter(item => item.quizId === this.quiz.id);
-    this.groupList.forEach(group => {
-      group.question = this.questionList.filter(question => question.groupId === group.id);
-      group.question.forEach(question => {
-        question.answers = this.answerList.filter(answer => answer.questionId === question.id).map(changeAns => {
-          return {
-            id: changeAns.id,
-            isCorrect: false,
-            name: changeAns.name,
-            questionId: changeAns.questionId
-          };
-        });
-      });
-    });
+    // this.groupList = this.groupList.filter(item => item.quizId === this.quiz.id);
+    // this.groupList.forEach(group => {
+    //   group.question = this.questionList.filter(question => question.groupId === group.id);
+    //   group.question.forEach(question => {
+    //     question.choices = this.answerList.filter(answer => answer.questionId === question.id).map(changeAns => {
+    //       return {
+    //         id: changeAns.id,
+    //         isCorrect: false,
+    //         name: changeAns.name,
+    //         questionId: changeAns.questionId
+    //       };
+    //     });
+    //   });
+    // });
     this.currentGroup = this.groupList[this.currentIndex];
   }
 

@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../_models/quiz';
 import {Question, QuestionType} from '../_models/question';
 import {Answer} from '../_models/answer';
-import {AnswerService} from '../_service/answer.service';
 import {Group} from '../_models/group';
 import {QuestionService} from '../_service/question.service';
 
@@ -22,8 +21,9 @@ export class QuestionPageComponent implements OnInit {
   questionTypes = QuestionType;
   questionTypeKeys: number[];
 
-  answerData: Answer[] = [];
   groupResurce: Group[] = [];
+  answers: Answer[] = [];
+  settings: any;
 
   defaultCountAnswer = 4;
   isNewState = false;
@@ -31,7 +31,6 @@ export class QuestionPageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private activeRout: ActivatedRoute,
-              private answerService: AnswerService,
               private questionService: QuestionService)
   {
     this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
@@ -46,7 +45,7 @@ export class QuestionPageComponent implements OnInit {
         this.initGroup();
         if (data.hasOwnProperty('questionResolver')) {
           this.question = data.questionResolver.question;
-          this.initAnswer(this.question.id);
+          this.initAnswersAndSettings();
           return;
         }
         this.createNewQuestion();
@@ -68,43 +67,9 @@ export class QuestionPageComponent implements OnInit {
     this.groupResurce = storage.filter(obj => obj.quizId === this.quiz.id);
   }
 
-  initAnswer(id: number) {
-    const storage = localStorage.getItem('answerlist');
-    if (!storage) {
-      this.answerService.getAnswerData().subscribe((answer: any) => {
-        this.answerData = answer.answerlist.filter((obj) => obj.questionId === id);
-        localStorage.setItem('answerlist', JSON.stringify(answer.answerlist));
-      }, error => {
-        console.log(error);
-      });
-    } else {
-      const tempSave = localStorage.getItem('answer-save');
-      const tempUpdate = localStorage.getItem('answer-update');
-      this.answerData = JSON.parse(storage);
-      if (!tempSave && !tempUpdate) {
-        this.answerData = this.answerData.filter((obj) => obj.questionId === id);
-        return;
-      }
-      if (tempSave) {
-        const newAnswer: Answer = JSON.parse(tempSave);
-        newAnswer.id = this.generateId();
-        this.answerData.push(newAnswer);
-        localStorage.setItem('answerlist', JSON.stringify(this.answerData));
-        this.answerData = this.answerData.filter((obj) => obj.questionId === id);
-        localStorage.removeItem('answer-save');
-        return;
-      }
-      const editAnswer: Answer = JSON.parse(tempUpdate);
-      const objIndex = this.answerData.findIndex((obj => obj.id === editAnswer.id));
-      this.answerData[objIndex] = editAnswer;
-      localStorage.setItem('answerlist', JSON.stringify(this.answerData));
-      this.answerData = this.answerData.filter((obj) => obj.questionId === id);
-      localStorage.removeItem('answer-update');
-    }
-  }
-
-  generateId() {
-    return Math.floor(Math.random() * 10000) + 1;
+  initAnswersAndSettings() {
+    this.answers = JSON.parse(this.question.choices);
+    this.settings = JSON.parse(this.question.settings);
   }
 
   initValidate() {
@@ -119,6 +84,8 @@ export class QuestionPageComponent implements OnInit {
   updateQuestionModel() {
     this.question.groupId = this.group.id;
     this.question = Object.assign(this.question, this.questionForm.value);
+    this.question.choices = JSON.stringify(this.answers);
+    this.question.settings = JSON.stringify(this.settings);
   }
 
   updateQuestion() {
@@ -127,9 +94,6 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.updateQuestion(this.question).subscribe(response => {
-      // это пока мы не определимся со структурой ответа и как мы их храним
-      this.saveAnswer();
-
       this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
     }, error => console.log(error));
   }
@@ -138,11 +102,11 @@ export class QuestionPageComponent implements OnInit {
     if (!this.questionForm.valid) {
       return;
     }
+
+    this.settings = {choicesDisplayType: 1, choicesEnumerationType: 1};
+
     this.updateQuestionModel();
     this.questionService.createQuestion(this.question).subscribe(response => {
-       // это пока мы не определимся со структурой ответа и как мы их храним
-       this.saveAnswer();
-
        this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
     }, error => console.log(error));
   }
@@ -153,11 +117,11 @@ export class QuestionPageComponent implements OnInit {
   }
 
   isValidAnswer(): boolean {
-    if (this.answerData.length === 0) {
+    if (this.answers.length === 0) {
       return false;
     }
-    const index = this.answerData.findIndex(ans => ans.name === '');
-    const isChecked = this.answerData.some(ans => ans.isCorrect === true);
+    const index = this.answers.findIndex(ans => ans.text === '');
+    const isChecked = this.answers.some(ans => ans.isCorrect === true);
     return index === -1 && isChecked;
   }
 
@@ -171,37 +135,14 @@ export class QuestionPageComponent implements OnInit {
 
   addAnswer(name?: string, isCorrect?: boolean) {
     const newAnswer = new Answer();
-    newAnswer.name = name || '';
     newAnswer.id = this.generateId();
+    newAnswer.text = name || '';
     newAnswer.isCorrect = isCorrect || false;
-    newAnswer.questionId = this.question.id;
-    this.answerData.push(newAnswer);
+    this.answers.push(newAnswer);
   }
 
-  saveListAnswers(answers: Answer[]) {
-    this.answerData.forEach(item => {
-      const index = answers.findIndex((obj) => obj.id === item.id);
-      if (index === -1) {
-        answers.push(item);
-        return;
-      }
-      answers[index] = item;
-    });
-    localStorage.setItem('answerlist', JSON.stringify(answers));
-  }
-
-  saveAnswer() {
-    const storageAnswer = localStorage.getItem('answerlist');
-    let currenAnswerList: Answer[] = [];
-    if (!storageAnswer) {
-      this.answerService.getAnswerData().subscribe((answers: any) => {
-        currenAnswerList = answers.answerlist;
-        this.saveListAnswers(currenAnswerList);
-      }, error => console.log(error));
-      return;
-    }
-    currenAnswerList = JSON.parse(storageAnswer);
-    this.saveListAnswers(currenAnswerList);
+  generateId() {
+    return Math.floor(Math.random() * 10000) + 1;
   }
 
   makeCustomListAnswer(count: number) {
@@ -211,7 +152,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   selectChangeType() {
-    this.answerData = [];
+    this.answers = [];
     switch (this.question.type) {
       case QuestionType.TrueFalse:
         this.addAnswer('True', true);
