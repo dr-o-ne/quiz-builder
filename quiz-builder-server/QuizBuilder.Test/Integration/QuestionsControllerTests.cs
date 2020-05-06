@@ -54,7 +54,8 @@ namespace QuizBuilder.Test.Integration {
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,
-				Settings = "{\"TrueChoice\":{\"IsCorrect\":false,\"Text\":\"TrueIncorrect\"},\"FalseChoice\":{\"IsCorrect\":true,\"Text\":\"FalseCorrect\"}}"
+				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
+				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			} );
 
 			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
