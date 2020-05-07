@@ -1,7 +1,7 @@
 import { Group } from './group';
 
 export class Quiz {
-    id: number;
+    id: string;
     name: string;
     isVisible: boolean;
     status?: string;

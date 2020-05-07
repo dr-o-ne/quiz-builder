@@ -10,7 +10,7 @@ export class QuestionResolver implements Resolve<Question> {
     constructor(private questionService: QuestionService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Question> {
-        const id = Number(route.url[5].path);
+        const id = route.url[5].path;
         return this.questionService.getQuestion(id)
         .pipe(
             catchError(error => {

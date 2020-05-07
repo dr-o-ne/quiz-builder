@@ -1,7 +1,7 @@
 import {Answer} from './answer';
 
 export class Question {
-  id: number;
+  id: string;
   name: string;
   text: string;
   feedback: string;
@@ -9,8 +9,8 @@ export class Question {
   incorrectFeedback: string;
   type: QuestionType;
   settings?: any;
-  quizId: number;
-  groupId: number;
+  quizId: string;
+  groupId: string;
   choices?: any;
 }
 

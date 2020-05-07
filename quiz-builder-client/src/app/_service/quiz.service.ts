@@ -18,7 +18,7 @@ export class QuizService{
         return this.http.get(this.apiUrl + 'quizzes/');
     }
 
-    getQuiz(id: number): Observable<object> {
+    getQuiz(id: string): Observable<object> {
       return this.http.get(this.apiUrl + 'quizzes/' + id);
     }
 
@@ -30,11 +30,11 @@ export class QuizService{
       return this.http.put(this.apiUrl + 'quizzes/', quiz);
     }
 
-    deleteQuiz(id: number): Observable<object> {
+    deleteQuiz(id: string): Observable<object> {
       return this.http.delete(this.apiUrl + 'quizzes/' + id);
     }
 
-    deleteQuizzes(ids: number[]): Observable<object> {
+    deleteQuizzes(ids: string[]): Observable<object> {
       const body = JSON.stringify({ids});
       const options = {
         headers: new HttpHeaders({
@@ -49,11 +49,11 @@ export class QuizService{
         return this.http.get('assets/group.json');
     }
 
-    getGroup(id): Observable<Group> {
+    getGroup(id: string): Observable<Group> {
         const tempListGroup = localStorage.getItem('grouplist');
         const groupList = JSON.parse(tempListGroup);
         // tslint:disable-next-line: radix
-        const index = groupList.findIndex((obj => obj.id === Number.parseInt(id)));
+        const index = groupList.findIndex((obj => obj.id == id));
         this.group = groupList[index];
         return this.group;
     }

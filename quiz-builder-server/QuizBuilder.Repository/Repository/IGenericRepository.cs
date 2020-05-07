@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace QuizBuilder.Repository.Repository {
@@ -7,15 +8,15 @@ namespace QuizBuilder.Repository.Repository {
 
 		Task<IEnumerable<T>> GetAllAsync();
 
-		Task<T> GetByIdAsync( long id );
+		Task<T> GetByIdAsync( Guid id );
 
 		Task<int> AddAsync( T entity );
 
 		Task<int> UpdateAsync( T entity );
 
-		Task<int> DeleteAsync( long id );
+		Task<int> DeleteAsync( Guid id );
 
-		Task<int> DeleteBulkAsync( List<long> ids );
+		Task<int> DeleteBulkAsync( List<Guid> ids );
 
 	}
 
