@@ -26,23 +26,6 @@ CREATE TABLE dbo.QuizItemType(
 ) ON [PRIMARY]
 GO
 
-
-CREATE TABLE dbo.QuestionType(
-	[Id] BIGINT IDENTITY(1,1) NOT NULL,
-	[Name] NVARCHAR(255) NOT NULL,
-	[CreatedOn] DATETIME2(7) NOT NULL,
-	[ModifiedOn] DATETIME2(7) NOT NULL,
-
-	CONSTRAINT [PK_QUESTIONTYPE] PRIMARY KEY CLUSTERED ( [Id] ASC ) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[QuestionType] ADD  CONSTRAINT [DF_QuestionT_CreatedOn]  DEFAULT (getutcdate()) FOR [CreatedOn]
-GO
-
-ALTER TABLE [dbo].[QuestionType] ADD  CONSTRAINT [DF_QuestionT_ModifiedOn]  DEFAULT (getutcdate()) FOR [ModifiedOn]
-GO
-
 CREATE TABLE dbo.Question(
 	[Id] UNIQUEIDENTIFIER ROWGUIDCOL NOT NULL PRIMARY KEY CLUSTERED DEFAULT NEWSEQUENTIALID(),
 	[QuestionTypeId] BIGINT NOT NULL,
@@ -58,13 +41,6 @@ ALTER TABLE [dbo].[Question] ADD CONSTRAINT [DF_Question_CreatedOn]  DEFAULT (ge
 GO
 
 ALTER TABLE [dbo].[Question] ADD CONSTRAINT [DF_Question_ModifiedOn]  DEFAULT (getutcdate()) FOR [ModifiedOn]
-GO
-
-ALTER TABLE dbo.Question WITH CHECK ADD CONSTRAINT [Question_QuestionType] FOREIGN KEY([QuestionTypeId])
-REFERENCES [dbo].[QuestionType] ([Id])
-GO
-
-ALTER TABLE [dbo].[Question] CHECK CONSTRAINT [Question_QuestionType]
 GO
 
 CREATE TABLE dbo.QuizItem(
