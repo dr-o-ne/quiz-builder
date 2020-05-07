@@ -67,8 +67,8 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id IN @Ids", new { Ids = ids } );
 		}
 
-		protected virtual string GenerateInsertQuery() => _queryBuilder.GenerateInsertQuery();
+		protected virtual string GenerateInsertQuery() => _queryBuilder.GetInsertQuery();
 
-		protected virtual string GenerateUpdateQuery() => _queryBuilder.GenerateUpdateQuery();
+		protected virtual string GenerateUpdateQuery() => _queryBuilder.GetUpdateQuery();
 	}
 }

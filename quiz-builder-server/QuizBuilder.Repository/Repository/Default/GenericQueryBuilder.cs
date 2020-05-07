@@ -14,34 +14,39 @@ namespace QuizBuilder.Repository.Repository.Default {
 		private readonly string _tableName;
 		private readonly ImmutableArray<string> _columnNames;
 
+		private readonly string InsertQuery;
+		private readonly string UpdateQuery;
+
 		public GenericQueryBuilder() {
 			_tableName = GetTableName;
 			_columnNames = GetProperties
 				.Where( p => p.GetCustomAttributes( typeof( IgnoreDataMemberAttribute ), false ).Length == 0 )
 				.Select( x => x.Name )
 				.ToImmutableArray();
+
+			InsertQuery = GenerateInsertQuery();
+			UpdateQuery = GenerateUpdateQuery();
+
 		}
 
-		public string GenerateInsertQuery() {
+		public string GetInsertQuery() => InsertQuery;
+
+		public string GetUpdateQuery() => UpdateQuery;
+
+		private string GenerateInsertQuery() {
 			var sb = new StringBuilder( $"INSERT INTO {_tableName} " );
-
-			sb.Append( "(" );
-			foreach( var column in _columnNames ) {
-				sb.Append( $"[{column}]," );
-			}
-			sb.Remove( sb.Length - 1, 1 ).Append( ") VALUES (" );
-
+			sb.Append( $"({string.Join( ',', _columnNames )})" );
+			sb.Append( " VALUES (" );
 			foreach( var column in _columnNames ) {
 				sb.Append( $"@{column}," );
 			}
-
 			return sb
 				.Remove( sb.Length - 1, 1 )
 				.Append( ")" )
 				.ToString();
 		}
 
-		public string GenerateUpdateQuery() {
+		private string GenerateUpdateQuery() {
 			var updateQuery = new StringBuilder( $"UPDATE {_tableName} SET " );
 
 			foreach( string columnName in _columnNames ) {

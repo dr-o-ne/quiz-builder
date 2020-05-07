@@ -2,9 +2,9 @@
 
 	public interface IGenericQueryBuilder<T> {
 
-		string GenerateInsertQuery();
+		string GetInsertQuery();
 
-		string GenerateUpdateQuery();
+		string GetUpdateQuery();
 
 	}
 
