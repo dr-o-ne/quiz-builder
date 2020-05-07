@@ -10,7 +10,7 @@ namespace QuizBuilder.Repository.Repository {
 
 		Task<T> GetByIdAsync( Guid id );
 
-		Task<int> AddAsync( T entity );
+		Task<Guid> AddAsync( T entity );
 
 		Task<int> UpdateAsync( T entity );
 

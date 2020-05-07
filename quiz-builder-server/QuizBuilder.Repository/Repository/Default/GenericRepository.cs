@@ -39,13 +39,13 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return result;
 		}
 
-		public async Task<int> AddAsync( T entity ) {
+		public async Task<Guid> AddAsync( T entity ) {
 			if( entity is null ) {
-				return 0;
+				return Guid.Empty;
 			}
 			using IDbConnection connection = CreateConnection();
 			string insertQuery = GenerateInsertQuery();
-			return await connection.ExecuteAsync( insertQuery, entity );
+			return await connection.ExecuteScalarAsync<Guid>( insertQuery, entity );
 		}
 
 		public async Task<int> UpdateAsync( T entity ) {

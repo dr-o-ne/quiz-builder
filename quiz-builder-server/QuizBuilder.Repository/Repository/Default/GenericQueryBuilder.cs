@@ -36,6 +36,7 @@ namespace QuizBuilder.Repository.Repository.Default {
 		private string GenerateInsertQuery() {
 			var sb = new StringBuilder( $"INSERT INTO {_tableName} " );
 			sb.Append( $"({string.Join( ',', _columnNames )})" );
+			sb.Append( " OUTPUT INSERTED.Id " );
 			sb.Append( " VALUES (" );
 			foreach( var column in _columnNames ) {
 				sb.Append( $"@{column}," );
