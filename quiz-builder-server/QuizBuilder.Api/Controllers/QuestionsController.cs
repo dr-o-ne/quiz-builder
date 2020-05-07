@@ -5,14 +5,31 @@ using QuizBuilder.Domain.Commands.QuestionCommands;
 using QuizBuilder.Domain.Queries.QuestionQueries;
 
 namespace QuizBuilder.Api.Controllers {
+
+	[ApiController]
+	[Route( "quizzes/{quizId:int}/questions" )]
+	public sealed class QuizzesQuestionsController : ControllerBase {
+
+		private readonly IDispatcher _dispatcher;
+
+		public QuizzesQuestionsController( IDispatcher dispatcher ) => _dispatcher = dispatcher;
+
+		[HttpGet]
+		public async Task<ActionResult> GetAllQuestionsByQuiz( [FromRoute] GetQuestionsByQuizIdQuery query ) {
+			var result = await _dispatcher.QueryAsync( query );
+
+			return Ok( result );
+		}
+
+	}
+
 	[ApiController]
 	[Route( "[controller]" )]
 	public sealed class QuestionsController : ControllerBase {
+
 		private readonly IDispatcher _dispatcher;
 
-		public QuestionsController( IDispatcher dispatcher ) {
-			_dispatcher = dispatcher;
-		}
+		public QuestionsController( IDispatcher dispatcher ) => _dispatcher = dispatcher;
 
 		[HttpGet( "{id}" )]
 		public async Task<ActionResult> GetQuestionById( [FromRoute] GetQuestionByIdQuery query ) {

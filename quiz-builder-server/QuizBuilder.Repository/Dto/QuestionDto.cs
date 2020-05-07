@@ -9,6 +9,8 @@ namespace QuizBuilder.Repository.Dto {
 		[IgnoreDataMember]
 		public long Id { get; set; }
 
+		public long? QuizId { get; set; }
+
 		public string Name { get; set; }
 
 		public int QuestionTypeId { get; set; }
