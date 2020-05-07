@@ -26,6 +26,14 @@ CREATE TABLE dbo.QuizItemType(
 ) ON [PRIMARY]
 GO
 
+INSERT INTO dbo.QuizItemType ([Name])
+VALUES
+    ('Question'),
+    ('Section'),
+    ('FreeText'),
+    ('QuestionPool')
+GO
+
 CREATE TABLE dbo.Question(
 	[Id] UNIQUEIDENTIFIER ROWGUIDCOL NOT NULL PRIMARY KEY CLUSTERED DEFAULT NEWSEQUENTIALID(),
 	[QuestionTypeId] BIGINT NOT NULL,
