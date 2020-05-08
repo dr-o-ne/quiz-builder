@@ -6,6 +6,7 @@ import {Question, QuestionType} from '../_models/question';
 import {Answer} from '../_models/answer';
 import {Group} from '../_models/group';
 import {QuestionService} from '../_service/question.service';
+import { BaseChoiceSettings } from '../_models/settings/answer.settings';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +24,7 @@ export class QuestionPageComponent implements OnInit {
 
   groupResurce: Group[] = [];
   answers: Answer[] = [];
-  settings: any;
+  settings: BaseChoiceSettings = new BaseChoiceSettings();
 
   defaultCountAnswer = 4;
   isNewState = false;
@@ -31,6 +32,8 @@ export class QuestionPageComponent implements OnInit {
   isFeedback = false;
   isCorrectFeedback = false;
   isIncorrectFeedback = false;
+
+  isSelectType = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -113,9 +116,6 @@ export class QuestionPageComponent implements OnInit {
     if (!this.questionForm.valid) {
       return;
     }
-
-    this.settings = {choicesDisplayType: 1, choicesEnumerationType: 1};
-
     this.updateQuestionModel();
     this.questionService.createQuestion(this.question).subscribe(response => {
        this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
@@ -134,14 +134,6 @@ export class QuestionPageComponent implements OnInit {
     const index = this.answers.findIndex(ans => ans.text === '');
     const isChecked = this.answers.some(ans => ans.isCorrect === true);
     return index === -1 && isChecked;
-  }
-
-  addNewAnswer() {
-    switch (this.question.type) {
-      default:
-        this.addAnswer();
-        break;
-    }
   }
 
   addAnswer(name?: string, isCorrect?: boolean) {
@@ -163,6 +155,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   selectChangeType() {
+    // this.isSelectType = true;
     this.answers = [];
     switch (this.question.type) {
       case QuestionType.TrueFalse:

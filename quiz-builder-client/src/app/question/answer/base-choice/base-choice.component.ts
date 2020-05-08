@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Answer } from 'src/app/_models/answer';
 import { Question } from 'src/app/_models/question';
+import { SettingsTrueFalse, ChoicesDisplayType, ChoicesEnumerationType } from 'src/app/_models/settings/answer.settings';
 
 @Component({
   template: ''
@@ -8,12 +9,24 @@ import { Question } from 'src/app/_models/question';
 export class BaseChoiceComponent implements OnInit {
   @Input() answerData: Answer[];
 
+  choicesDisplayTypes = ChoicesDisplayType;
+  choicesDisplayTypesKeys: number[] = [];
+
+  choicesEnumerationTypes = ChoicesEnumerationType;
+  choicesEnumerationTypesKeys: number[] = [];
+
   isFeedback = false;
 
   constructor() { }
 
   ngOnInit() {
     this.initFeedback();
+    this.initEnums('choicesDisplayTypes', 'choicesDisplayTypesKeys');
+    this.initEnums('choicesEnumerationTypes', 'choicesEnumerationTypesKeys');
+  }
+
+  initEnums(enums, keys) {
+    this[keys] = Object.keys(this[enums]).filter(Number).map(v => Number(v));
   }
 
   initFeedback() {
@@ -34,6 +47,12 @@ export class BaseChoiceComponent implements OnInit {
     newAnswer.id = this.generateId();
     newAnswer.isCorrect = isCorrect || false;
     this.answerData.push(newAnswer);
+  }
+
+  selectDisplayType(settings) {
+    if (settings.choicesDisplayType === this.choicesDisplayTypes.Dropdown) {
+      settings.choicesEnumerationType = 0;
+    }
   }
 
 }
