@@ -28,6 +28,10 @@ export class QuestionPageComponent implements OnInit {
   defaultCountAnswer = 4;
   isNewState = false;
 
+  isFeedback = false;
+  isCorrectFeedback = false;
+  isIncorrectFeedback = false;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private activeRout: ActivatedRoute,
@@ -46,6 +50,7 @@ export class QuestionPageComponent implements OnInit {
         if (data.hasOwnProperty('questionResolver')) {
           this.question = data.questionResolver.question;
           this.initAnswersAndSettings();
+          this.initFeedback();
           return;
         }
         this.createNewQuestion();
@@ -60,6 +65,12 @@ export class QuestionPageComponent implements OnInit {
     this.question = new Question();
     this.question.quizId = this.quiz.id;
     this.question.groupId = this.group.id;
+  }
+
+  initFeedback() {
+    this.isFeedback = this.question.feedback ? true : false;
+    this.isCorrectFeedback = this.question.correctFeedback ? true : false;
+    this.isIncorrectFeedback = this.question.incorrectFeedback ? true : false;
   }
 
   initGroup() {

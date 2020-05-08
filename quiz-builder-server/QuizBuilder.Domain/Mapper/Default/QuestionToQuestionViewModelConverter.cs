@@ -55,6 +55,9 @@ namespace QuizBuilder.Domain.Mapper.Default
 				Type = source.Type,
 				Name = source.Name,
 				Text = source.Text,
+				Feedback = source.Feedback,
+				IncorrectFeedback = source.IncorrectFeedback,
+				CorrectFeedback = source.CorrectFeedback,
 				Settings = settings,
 				Choices = choices
 			};

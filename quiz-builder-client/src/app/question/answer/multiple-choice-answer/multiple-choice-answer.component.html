@@ -1,11 +1,21 @@
+<div class="row container-option-btn">
+  <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="isFeedback = !isFeedback;">
+      <mat-icon *ngIf="isFeedback">done</mat-icon>
+      <span>Feedback</span>
+    </button>
+  </mat-menu>
+</div>
+
 <mat-tab-group>
   <mat-tab label="Aswer">
       <ng-template matTabContent>
 
         <div class="row mt-3">
           <div class="col-md-3">
-            <button class="full-width" mat-raised-button color="primary" (click)="addNewAnswer()"
-            [disabled]="question.type == questionType.TrueFalse && answerData.length >= 2">Add new answer</button>
+            <button class="full-width" mat-raised-button color="primary" (click)="addAnswer()">Add new answer</button>
           </div>
         </div>
 
@@ -15,26 +25,41 @@
 
             <mat-radio-group (change)="changeRadioButton($event)">
 
-              <div class="row" *ngFor="let answer of answerData">
-                <div class="col-md-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Name Answer</mat-label>
-                    <input matInput type="text" [(ngModel)]="answer.text" required>
-                    <button mat-button *ngIf="answer.text" matSuffix mat-icon-button aria-label="Clear" (click)="answer.text =''">
-                      <mat-icon>close</mat-icon>
+              <div class="container-answ" *ngFor="let answer of answerData">
+                <div class="row" >
+                  <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                      <mat-label>Name Answer</mat-label>
+                      <input matInput type="text" [(ngModel)]="answer.text" required>
+                      <button mat-button *ngIf="answer.text" matSuffix mat-icon-button aria-label="Clear" (click)="answer.text =''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-1 radio-align-vertical">
+                    <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">Correct</mat-radio-button>
+                  </div>
+                  <div class="col-md-1 btn-align-vertical">
+                    <button mat-icon-button color="accent" (click)="deleteAnswer(answer)">
+                      <mat-icon>delete</mat-icon>
                     </button>
-                  </mat-form-field>
+                  </div>
                 </div>
-                <div class="col-md-1 radio-align-vertical">
-                  <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">Correct</mat-radio-button>
-                </div>
-                <div class="col-md-1 btn-align-vertical">
-                  <button mat-icon-button color="accent" (click)="deleteAnswer(answer)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
-              </div>
 
+                <div *ngIf="isFeedback" class="row feedback-mrgn-top">
+                  <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                      <mat-label>Feedback</mat-label>
+                      <input matInput type="text" [(ngModel)]="answer.feedback">
+                      <button mat-button *ngIf="answer.feedback" matSuffix mat-icon-button aria-label="Clear" (click)="answer.feedback =''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+              </div>
+              
             </mat-radio-group>
 
           </div>

@@ -23,7 +23,7 @@ import { QuestionListComponent } from './question/question-list/question-list.co
 import { GroupResolver } from './_resolvers/group.resolver';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
-import { SingleChoiceRadioAnswerComponent } from './question/answer/single-choice-radio-answer/single-choice-radio-answer.component';
+import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -41,7 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       QuestionListComponent,
       TrueFalseAnswerComponent,
       MultipleChoiceAnswerComponent,
-      SingleChoiceRadioAnswerComponent,
+      MultiSelectChoiceComponent,
       SingleChoiceDropdownAnswerComponent
    ],
    imports: [

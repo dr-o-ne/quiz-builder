@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SingleChoiceRadioAnswerComponent } from './single-choice-radio-answer.component';
+import { MultiSelectChoiceComponent } from './multi-select-choice.component';
 
 describe('SingleChoiceRadioAnswerComponent', () => {
-  let component: SingleChoiceRadioAnswerComponent;
-  let fixture: ComponentFixture<SingleChoiceRadioAnswerComponent>;
+  let component: MultiSelectChoiceComponent;
+  let fixture: ComponentFixture<MultiSelectChoiceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleChoiceRadioAnswerComponent ]
+      declarations: [ MultiSelectChoiceComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleChoiceRadioAnswerComponent);
+    fixture = TestBed.createComponent(MultiSelectChoiceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

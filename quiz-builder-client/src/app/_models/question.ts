@@ -16,5 +16,6 @@ export class Question {
 
 export enum QuestionType {
   TrueFalse = 1,
-  MultipleChoice = 2
+  MultipleChoice = 2,
+  MultiSelect = 4
 }
