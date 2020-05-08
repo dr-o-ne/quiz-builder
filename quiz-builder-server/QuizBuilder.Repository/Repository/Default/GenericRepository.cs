@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
-using System.Reflection;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using QuizBuilder.Utils.Extensions;
@@ -14,12 +10,12 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 	public class GenericRepository<T> : IGenericRepository<T> where T : class {
 
-		private static readonly List<string> NonUpdateableColumns = new List<string> {"Id", "CreatedOn"};
-
 		private readonly string _tableName;
 		private readonly IDatabaseConnectionFactory _dbConnectionFactory;
+		private readonly IGenericQueryBuilder<T> _queryBuilder;
 
-		public GenericRepository( IDatabaseConnectionFactory dbConnectionFactory ) {
+		public GenericRepository( IGenericQueryBuilder<T> queryBuilder, IDatabaseConnectionFactory dbConnectionFactory ) {
+			_queryBuilder = queryBuilder;
 			_dbConnectionFactory = dbConnectionFactory;
 			_tableName = GetTableName;
 		}
@@ -30,9 +26,7 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return conn;
 		}
 
-		private static IEnumerable<PropertyInfo> GetProperties => typeof(T).GetProperties( BindingFlags.Instance | BindingFlags.Public );
-
-		private static string GetTableName => typeof(T).GetAttributeValue( ( TableAttribute attribute ) => attribute.Name );
+		private static string GetTableName => typeof( T ).GetAttributeValue( ( TableAttribute attribute ) => attribute.Name );
 
 		public async Task<IEnumerable<T>> GetAllAsync() {
 			using IDbConnection connection = CreateConnection();
@@ -41,7 +35,7 @@ namespace QuizBuilder.Repository.Repository.Default {
 
 		public async Task<T> GetByIdAsync( Guid id ) {
 			using IDbConnection connection = CreateConnection();
-			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new {Id = id} );
+			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
 			return result;
 		}
 
@@ -73,46 +67,8 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id IN @Ids", new { Ids = ids } );
 		}
 
-		private static List<string> GenerateListOfProperties( IEnumerable<PropertyInfo> listOfProperties ) =>
-			listOfProperties
-				.Where( p => p.GetCustomAttributes( typeof(IgnoreDataMemberAttribute), false ).Length == 0 )
-				.Select( x => x.Name )
-				.ToList();
+		protected virtual string GenerateInsertQuery() => _queryBuilder.GetInsertQuery();
 
-		protected virtual string GenerateInsertQuery() {
-			var insertQuery = new StringBuilder( $"INSERT INTO {_tableName} " );
-
-			insertQuery.Append( "(" );
-			List<string> properties = GenerateListOfProperties( GetProperties );
-			properties.ForEach( prop => { insertQuery.Append( $"[{prop}]," ); } );
-
-			insertQuery
-				.Remove( insertQuery.Length - 1, 1 )
-				.Append( ") VALUES (" );
-
-			properties.ForEach( prop => { insertQuery.Append( $"@{prop}," ); } );
-
-			return insertQuery
-				.Remove( insertQuery.Length - 1, 1 )
-				.Append( ")" )
-				.ToString();
-		}
-
-		protected virtual string GenerateUpdateQuery() {
-			var updateQuery = new StringBuilder( $"UPDATE {_tableName} SET " );
-			var properties = GenerateListOfProperties( GetProperties );
-
-			foreach( string property in properties ) {
-				if( NonUpdateableColumns.Contains( property ) )
-					continue;
-
-				updateQuery.Append( $"{property}=@{property}," );
-			}
-
-			return updateQuery
-				.Remove( updateQuery.Length - 1, 1 )
-				.Append( " WHERE Id=@Id" )
-				.ToString();
-		}
+		protected virtual string GenerateUpdateQuery() => _queryBuilder.GetUpdateQuery();
 	}
 }

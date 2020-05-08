@@ -8,6 +8,7 @@ namespace QuizBuilder.Repository.Extensions {
 
 		public static void AddRepositories( this IServiceCollection services ) {
 			services.AddSingleton<IDatabaseConnectionFactory, DatabaseConnectionFactory>();
+			services.AddSingleton( typeof( IGenericQueryBuilder<> ), typeof( GenericQueryBuilder<> ) );
 			services.AddSingleton( typeof(IGenericRepository<>), typeof(GenericRepository<>) );
 		}
 
