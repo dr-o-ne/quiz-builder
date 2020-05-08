@@ -39,6 +39,12 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return result;
 		}
 
+		public async Task<T> GetByIdAsync( long id ) {
+			using IDbConnection connection = CreateConnection();
+			T result = await connection.QuerySingleOrDefaultAsync<T>( $"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id } );
+			return result;
+		}
+
 		public async Task<int> AddAsync( T entity ) {
 			if( entity is null ) {
 				return 0;
@@ -62,7 +68,12 @@ namespace QuizBuilder.Repository.Repository.Default {
 			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
 		}
 
-		public async Task<int> DeleteBulkAsync( List<Guid> ids ) {
+		public async Task<int> DeleteAsync( long id ) {
+			using IDbConnection db = CreateConnection();
+			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = id } );
+		}
+
+		public async Task<int> DeleteBulkAsync( List<long> ids ) {
 			using IDbConnection db = CreateConnection();
 			return await db.ExecuteAsync( $"DELETE FROM {_tableName} WHERE Id IN @Ids", new { Ids = ids } );
 		}

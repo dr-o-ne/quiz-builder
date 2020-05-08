@@ -3,7 +3,7 @@ using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 
 namespace QuizBuilder.Domain.Commands.QuizCommands {
-	public class CreateQuizCommand : ICommand<CommandResult> {
+	public sealed class CreateQuizCommand : ICommand<CommandResult> {
 		[Required]
 		[MaxLength( 100 )]
 		public string Name { get; set; }
