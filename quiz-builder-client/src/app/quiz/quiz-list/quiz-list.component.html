@@ -91,21 +91,18 @@
               <mat-icon>apps</mat-icon>
             </button>
             <mat-menu #bulkMenu="matMenu">
-              <button *ngIf="isBulkEdit" mat-menu-item (click)="clickMultiSelection()">
-                <mat-icon>dehaze</mat-icon>
-                <span>Multiple Selection</span>
-              </button>
-              <button *ngIf="!isBulkEdit" mat-menu-item (click)="clickMultiSelection()">
-                <mat-icon>close</mat-icon>
-                <span>Close Selection</span>
+              <button mat-menu-item (click)="clickMultiSelection()">
+                <mat-icon *ngIf="isBulkEdit">done_all</mat-icon>
+                <mat-icon *ngIf="!isBulkEdit">close</mat-icon>
+                <span>Multiselect</span>
               </button>
               <button mat-menu-item (click)="bulkPublish()" [disabled]="isBulkEdit">
                 <mat-icon>cloud_upload</mat-icon>
-                <span>Bulk Publish</span>
+                <span>Bulk publish</span>
               </button>
               <button mat-menu-item (click)="bulkDelete()" [disabled]="isBulkEdit">
                 <mat-icon>delete</mat-icon>
-                <span>Bulk Delete</span>
+                <span>Bulk delete</span>
               </button>
             </mat-menu>
         </th>

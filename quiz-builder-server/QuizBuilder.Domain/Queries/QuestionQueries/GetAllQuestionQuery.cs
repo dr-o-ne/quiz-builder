@@ -1,4 +1,5 @@
-﻿using QuizBuilder.Common.Types;
+﻿using System;
+using QuizBuilder.Common.Types;
 using QuizBuilder.Domain.Dtos;
 
 namespace QuizBuilder.Domain.Queries.QuestionQueries {
@@ -6,6 +7,6 @@ namespace QuizBuilder.Domain.Queries.QuestionQueries {
 	}
 
 	public class GetQuestionsByGroupIdQuery : IQuery<GetQuestionsByGroupIdDto> {
-		public long GroupId { get; set; }
+		public Guid GroupId { get; set; }
 	}
 }

@@ -13,11 +13,11 @@ export class QuestionService{
 
     constructor(private http: HttpClient){}
 
-    getQuestionsByGroupId(groupId: number): Observable<object>{
+    getQuestionsByGroupId(groupId: string): Observable<object>{
       return this.http.get(this.apiUrl + 'questions/group/' + groupId);
     }
 
-    getQuestion(id: number): Observable<object> {
+    getQuestion(id: string): Observable<object> {
       return this.http.get(this.apiUrl + 'questions/' + id);
     }
 

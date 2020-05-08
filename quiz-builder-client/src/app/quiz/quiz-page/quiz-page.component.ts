@@ -54,7 +54,7 @@ export class QuizPageComponent implements OnInit {
     });
   }
 
-  initGroup(id: number) {
+  initGroup(id: string) {
     const storage = localStorage.getItem('grouplist');
     if (!storage) {
       this.quizService.getGroupData().subscribe((group: any) => {
@@ -121,8 +121,12 @@ export class QuizPageComponent implements OnInit {
     localStorage.setItem('grouplist', JSON.stringify(listGroup));
   }
 
-  generateId() {
-    return Math.floor(Math.random() * 10000) + 1;
+  generateId(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0,
+        v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 
   addNewTab(isValid?: boolean, defaultName?: string) {

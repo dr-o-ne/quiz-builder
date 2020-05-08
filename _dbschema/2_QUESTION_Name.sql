@@ -1,2 +1,0 @@
-ALTER TABLE dbo.Question ADD Name NVARCHAR(255) NOT NULL
-GO

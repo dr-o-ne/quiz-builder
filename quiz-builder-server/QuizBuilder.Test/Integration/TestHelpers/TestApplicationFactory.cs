@@ -8,7 +8,6 @@ using QuizBuilder.Repository.Repository;
 namespace QuizBuilder.Test.Integration.TestHelpers {
 
 	public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class {
-
 		public readonly TestDatabase DB = new TestDatabase();
 
 		protected override void ConfigureWebHost( IWebHostBuilder builder ) {
@@ -27,6 +26,5 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 			var databaseMock = Mock.Of<IDatabaseConnectionFactory>( x => x.GetConnection() == DB.ConnectionFactory.CreateDbConnection() );
 			services.AddSingleton( databaseMock );
 		}
-
 	}
 }

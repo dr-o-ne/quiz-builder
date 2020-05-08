@@ -1,8 +1,8 @@
 import { Question } from './question';
 
 export class Group {
-    id: number;
+    id: string;
     name: string;
-    quizId: number;
+    quizId: string;
     question?: Question[];
 }
