@@ -1,16 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Answer } from 'src/app/_models/answer';
-import { BaseChoiceComponent } from '../base-choice/base-choice.component';
-import { SettingsMultipleSelectQuestion, QuestionGradingType, BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
+import {Component, OnInit} from '@angular/core';
+import {BaseChoiceComponent} from '../base-choice/base-choice.component';
+import {SettingsMultipleSelectQuestion, QuestionGradingType, BaseChoiceSettings} from 'src/app/_models/settings/answer.settings';
 
 @Component({
   selector: 'app-multi-select-choice',
   templateUrl: './multi-select-choice.component.html',
   styleUrls: ['./multi-select-choice.component.css']
 })
-export class MultiSelectChoiceComponent extends BaseChoiceComponent {
-  @Input() settings: SettingsMultipleSelectQuestion;
 
+export class MultiSelectChoiceComponent extends BaseChoiceComponent implements OnInit {
+  settings: SettingsMultipleSelectQuestion;
   questionGradingTypes = QuestionGradingType;
   questionGradingTypesKeys: number[] = [];
 
@@ -19,16 +18,14 @@ export class MultiSelectChoiceComponent extends BaseChoiceComponent {
     this.initEnums('questionGradingTypes', 'questionGradingTypesKeys');
   }
 
-  // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
     super.ngOnInit();
     this.initSettings();
   }
 
   initSettings() {
-    if (!this.settings.hasOwnProperty('gradingType')) {
-      this.settings = Object.assign( this.settings, new SettingsMultipleSelectQuestion());
+    if (this.settings instanceof BaseChoiceSettings) {
+      this.settings = Object.assign(this.settings, new SettingsMultipleSelectQuestion());
     }
   }
-
 }

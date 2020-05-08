@@ -151,23 +151,12 @@
 
   </div>
 
-  <div *ngIf="question?.type === questionTypes.TrueFalse" class="main-color">
-    <app-true-false-answer
+  <div class="main-color">
+    <app-dynamic-choice
+      [questionType]="question.type"
       [answerData]="answers"
-      [isSelectType]="isSelectType"
-      [settings]="settings"></app-true-false-answer>
-  </div>
-
-  <div *ngIf="question?.type === questionTypes.MultipleChoice" class="main-color">
-    <app-multiple-choice-answer
-      [answerData]="answers"
-      [settings]="settings"></app-multiple-choice-answer>
-  </div>
-
-  <div *ngIf="question?.type === questionTypes.MultiSelect" class="main-color">
-    <app-multi-select-choice 
-      [answerData]="answers"
-      [settings]="settings"></app-multi-select-choice>
+      [settings]="settings">
+    </app-dynamic-choice>
   </div>
 
 </div>

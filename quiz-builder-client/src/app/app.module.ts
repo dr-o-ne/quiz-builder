@@ -27,6 +27,8 @@ import { MultiSelectChoiceComponent } from './question/answer/multi-select-choic
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {ChoiceDirective} from './_directive/choice.directive';
+import {DynamicChoiceComponent} from './question/answer/base-choice/dynamic-choice.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       TrueFalseAnswerComponent,
       MultipleChoiceAnswerComponent,
       MultiSelectChoiceComponent,
-      SingleChoiceDropdownAnswerComponent
+      SingleChoiceDropdownAnswerComponent,
+      ChoiceDirective,
+      DynamicChoiceComponent
    ],
    imports: [
       BrowserModule,

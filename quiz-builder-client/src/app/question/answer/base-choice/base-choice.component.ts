@@ -1,23 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { OnInit} from '@angular/core';
 import { Answer } from 'src/app/_models/answer';
-import { Question } from 'src/app/_models/question';
-import { SettingsTrueFalse, ChoicesDisplayType, ChoicesEnumerationType } from 'src/app/_models/settings/answer.settings';
+import {
+  ChoicesDisplayType,
+  ChoicesEnumerationType,
+  BaseChoiceSettings
+} from 'src/app/_models/settings/answer.settings';
 
-@Component({
-  template: ''
-})
 export class BaseChoiceComponent implements OnInit {
-  @Input() answerData: Answer[];
-
+  answerData: Answer[];
+  settings: BaseChoiceSettings;
   choicesDisplayTypes = ChoicesDisplayType;
   choicesDisplayTypesKeys: number[] = [];
-
   choicesEnumerationTypes = ChoicesEnumerationType;
   choicesEnumerationTypesKeys: number[] = [];
-
   isFeedback = false;
-
-  constructor() { }
 
   ngOnInit() {
     this.initFeedback();
@@ -54,5 +50,4 @@ export class BaseChoiceComponent implements OnInit {
       settings.choicesEnumerationType = 0;
     }
   }
-
 }
