@@ -84,13 +84,13 @@
           Add New
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="addTab()">
-            <mat-icon>group_work</mat-icon>
-            <span>New Group</span>
-          </button>
           <button mat-menu-item (click)="addNewQuestion(tabGroup)">
             <mat-icon>help_outline</mat-icon>
             <span>New Question</span>
+          </button>
+          <button mat-menu-item (click)="addTab()">
+            <mat-icon>group_work</mat-icon>
+            <span>New Group</span>
           </button>
         </mat-menu>
       </div>

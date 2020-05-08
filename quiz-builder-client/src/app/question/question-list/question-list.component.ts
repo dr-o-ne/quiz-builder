@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
-import { Question } from 'src/app/_models/question';
+import { Question, QuestionType } from 'src/app/_models/question';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -28,6 +28,7 @@ export class QuestionListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  questionTypes = QuestionType;
 
   constructor(private questionService: QuestionService) { }
 
