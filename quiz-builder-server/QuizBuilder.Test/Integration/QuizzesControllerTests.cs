@@ -19,26 +19,31 @@ namespace QuizBuilder.Test.Integration {
 		private static readonly ImmutableArray<QuizDto> QuizData = new List<QuizDto> {
 			new QuizDto {
 				Id = 1,
+				UId = "0000000001",
 				Name = "Quiz 1",
 				IsVisible = true
 			},
 			new QuizDto {
 				Id = 2,
+				UId = "0000000002",
 				Name = "Quiz 2",
 				IsVisible = false
 			},
 			new QuizDto {
 				Id = 1000,
+				UId = "0000001000",
 				Name = "Quiz To Be Deleted",
 				IsVisible = false
 			},
 			new QuizDto {
 				Id = 1001,
+				UId = "0000001001",
 				Name = "Quiz To Be BulkDeleted",
 				IsVisible = true
 			},
 			new QuizDto {
 				Id = 1002,
+				UId = "0000001002",
 				Name = "Quiz To Be BulkDeleted",
 				IsVisible = false
 			}
@@ -61,7 +66,7 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Quiz_GetById_Success_Test() {
-			using var response = await _httpClient.GetAsync( "/quizzes/1" );
+			using var response = await _httpClient.GetAsync( "/quizzes/0000000001" );
 
 			Assert.Equal( HttpStatusCode.OK, response.StatusCode );
 		}
@@ -88,7 +93,7 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Quiz_Update_Success_Test() {
-			var content = JsonConvert.SerializeObject( new { Id = 1, Name = "New Quiz Name" } );
+			var content = JsonConvert.SerializeObject( new { Id = "0000000001", Name = "New Quiz Name" } );
 			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
 			using var response = await _httpClient.PutAsync( "/quizzes/", stringContent );
@@ -98,7 +103,7 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Quiz_Update_Fail_Test() {
-			var content = JsonConvert.SerializeObject( new { Id = 100, Name = "New Quiz Name" } );
+			var content = JsonConvert.SerializeObject( new { Id = "0000000100", Name = "New Quiz Name" } );
 			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
 			using var response = await _httpClient.PutAsync( "/quizzes/", stringContent );
@@ -108,19 +113,19 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Quiz_DeleteById_Success_Test() {
-			var response = await _httpClient.DeleteAsync( "/quizzes/1000" );
+			var response = await _httpClient.DeleteAsync( "/quizzes/0000001000" );
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
 		[Fact]
 		public async Task Quiz_DeleteById_Fail_Test() {
-			using var response = await _httpClient.DeleteAsync( "/quizzes/2000" );
+			using var response = await _httpClient.DeleteAsync( "/quizzes/0000002000" );
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
 		}
 
 		[Fact]
 		public async Task Quiz_DeleteBulk_Success_Test() {
-			var content = JsonConvert.SerializeObject( new { Ids = new List<long> { 1001, 1002 } } );
+			var content = JsonConvert.SerializeObject( new { Ids = new List<string> { "0000001001", "0000001002" } } );
 
 			using var request = new HttpRequestMessage {
 				Method = HttpMethod.Delete,
