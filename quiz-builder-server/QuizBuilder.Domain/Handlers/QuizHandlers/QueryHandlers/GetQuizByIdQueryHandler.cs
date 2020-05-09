@@ -9,7 +9,9 @@ using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
-	public class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, GetQuizByIdDto> {
+
+	public sealed class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, GetQuizByIdDto> {
+
 		private readonly IMapper _mapper;
 		private readonly IGenericRepository<QuizDto> _quizRepository;
 
@@ -19,7 +21,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 		}
 
 		public async Task<GetQuizByIdDto> HandleAsync( GetQuizByIdQuery query ) {
-			QuizDto quizDto = await _quizRepository.GetByIdAsync( query.Id );
+			QuizDto quizDto = await _quizRepository.GetByUIdAsync( query.Id );
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			QuizViewModel quizViewModel = _mapper.Map<Quiz, QuizViewModel>( quiz );
 

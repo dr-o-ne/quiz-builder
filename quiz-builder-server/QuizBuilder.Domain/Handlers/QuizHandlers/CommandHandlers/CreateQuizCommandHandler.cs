@@ -11,7 +11,7 @@ using QuizBuilder.Utils.Services;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 
-	public class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
+	public sealed class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
 
 		private readonly IMapper _mapper;
 		private readonly IGenericRepository<QuizDto> _quizRepository;
