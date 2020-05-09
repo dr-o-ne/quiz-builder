@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {Quiz} from 'src/app/_models/quiz';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -13,20 +13,15 @@ import {SelectionModel} from '@angular/cdk/collections';
 })
 export class QuizListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'isVisible', 'edit', 'preview', 'statistic', 'menu'];
-
-  quizzes: Quiz[] = [];
+  filterData: string;
+  isMultiSelect = true;
+  tablePageSizeOptions = [15, 20];
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
 
-  filterData: string;
-
-  colorBtnBulk = 'primary';
-  isBulkEdit = true;
-
-  tablePageSizeOptions = [15, 20];
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
   constructor(private quizService: QuizService) {
   }
@@ -37,18 +32,21 @@ export class QuizListComponent implements OnInit {
 
   initDataQuiz(): void {
     this.quizService.getAllQuizzes().subscribe((response: any) => {
-      this.quizzes = response.quizzes;
-      this.initDataSource();
+      this.initDataSource(response.quizzes);
     }, error => {
       console.log(error);
     });
   }
 
-  initDataSource(): void {
-    this.dataSource = new MatTableDataSource<Quiz>(this.quizzes);
+  initDataSource(quizzes: Quiz[]): void {
+    this.dataSource = new MatTableDataSource<Quiz>(quizzes);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.selection = new SelectionModel<Quiz>(true, []);
+  }
+
+  isEmptyFilter(): boolean {
+    return !this.filterData || this.filterData.trim() === '';
   }
 
   cleanFilter(): void {
@@ -60,50 +58,51 @@ export class QuizListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  deleteQuiz(quiz: Quiz): void {
-    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
-      this.initDataQuiz();
-    }, error => console.log(error));
-  }
-
   clickMultiSelection(): void {
-    this.colorBtnBulk = this.colorBtnBulk === 'primary' ? 'accent' : 'primary';
-    this.isBulkEdit = !this.isBulkEdit;
-    if (!this.isBulkEdit) {
-      this.displayedColumns.unshift('select');
-    } else {
-      this.displayedColumns.shift();
-    }
-    this.initDataSource();
+    this.isMultiSelect = !this.isMultiSelect;
+
+    this.isMultiSelect
+      ? this.displayedColumns.shift()
+      : this.displayedColumns.unshift('select');
+
+    this.table.renderRows();
   }
 
   isAllSelected(): boolean {
-    return this.selection.selected.length === this.dataSource.data.length;
+    return this.selection?.selected.length === this.dataSource?.data.length;
   }
 
-  isAnyItemSelected(): boolean {
-    return this.selection?.selected.length > 0;
+  isAnySelected(): boolean {
+    return this.selection?.hasValue();
+  }
+
+  isItemSelected(item: Quiz): boolean {
+    return this.selection.isSelected(item);
   }
 
   isPaginatorEnabled(): boolean {
     return this.dataSource?.data?.length > 15;
   }
 
-  masterToggle(): void {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+  checkItemToggle(item: Quiz): void {
+    this.selection.toggle(item);
   }
 
-  checkboxLabel(row?: Quiz): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
+  checkAllToggle(checked: boolean): void {
+    checked
+      ? this.selection.select(...this.dataSource.data)
+      : this.selection.clear();
   }
 
-  bulkPublish(): void {
-    this.selection.selected.forEach(x => this.clickToggle(true, x));
+  clickVisibleToggle(checked: boolean, quiz: Quiz): void {
+    quiz.isVisible = checked;
+    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+  }
+
+  deleteQuiz(quiz: Quiz): void {
+    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
+      this.initDataQuiz();
+    }, error => console.log(error));
   }
 
   bulkDelete(): void {
@@ -115,8 +114,7 @@ export class QuizListComponent implements OnInit {
       error => console.log(error));
   }
 
-  clickToggle(checked: boolean, quiz: Quiz): void {
-    quiz.isVisible = checked;
-    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+  bulkPublish(): void {
+    this.selection.selected.forEach(x => this.clickVisibleToggle(true, x));
   }
 }

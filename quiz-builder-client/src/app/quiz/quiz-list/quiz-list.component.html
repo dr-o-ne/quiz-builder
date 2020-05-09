@@ -19,8 +19,8 @@
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Search For...</mat-label>
           <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterData">
-          <mat-icon matSuffix *ngIf="!filterData">search</mat-icon>
-          <button mat-button *ngIf="filterData" matSuffix mat-icon-button aria-label="Clear" (click)="cleanFilter()">
+          <mat-icon matSuffix *ngIf="isEmptyFilter()">search</mat-icon>
+          <button mat-button *ngIf="!isEmptyFilter()" matSuffix mat-icon-button aria-label="Clear" (click)="cleanFilter()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
@@ -30,19 +30,18 @@
 
     <table mat-table [dataSource]="dataSource" matSort>
 
-      <ng-container *ngIf="!isBulkEdit" matColumnDef="select">
+      <ng-container *ngIf="!isMultiSelect" matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? masterToggle() : null"
-                        [checked]="selection?.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()"
-                        [aria-label]="checkboxLabel()">
+          <mat-checkbox (change)="checkAllToggle($event.checked)"
+                        [indeterminate]="isAnySelected() && !isAllSelected()"
+                        [checked]="isAllSelected()"
+          >
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
           <mat-checkbox (click)="$event.stopPropagation()"
-                        (change)="$event ? selection.toggle(row) : null"
-                        [checked]="selection.isSelected(row)"
-                        [aria-label]="checkboxLabel(row)"
+                        (change)="checkItemToggle(row)"
+                        [checked]="isItemSelected(row)"
           >
           </mat-checkbox>
         </td>
@@ -57,7 +56,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Visible</th>
         <td mat-cell *matCellDef="let element">
           <mat-slide-toggle color="primary" [checked]="element.isVisible"
-                            (change)="clickToggle($event.checked, element)">
+                            (change)="clickVisibleToggle($event.checked, element)">
           </mat-slide-toggle>
         </td>
       </ng-container>
@@ -91,7 +90,7 @@
 
       <ng-container matColumnDef="menu">
         <th mat-header-cell *matHeaderCellDef>
-          <button mat-icon-button [matMenuTriggerFor]="bulkMenu" matTooltip="Bulk Edit">
+          <button mat-icon-button [matMenuTriggerFor]="bulkMenu" matTooltip="Bulk edit">
             <mat-icon>apps</mat-icon>
           </button>
           <mat-menu #bulkMenu="matMenu">
@@ -99,11 +98,11 @@
               <mat-icon>done_all</mat-icon>
               <span>Multiselect</span>
             </button>
-            <button mat-menu-item (click)="bulkPublish()" [disabled]="!isAnyItemSelected()">
+            <button mat-menu-item (click)="bulkPublish()" [disabled]="!isAnySelected()">
               <mat-icon>cloud_upload</mat-icon>
               <span>Bulk publish</span>
             </button>
-            <button mat-menu-item (click)="bulkDelete()" [disabled]="!isAnyItemSelected()">
+            <button mat-menu-item (click)="bulkDelete()" [disabled]="!isAnySelected()">
               <mat-icon>delete</mat-icon>
               <span>Bulk delete</span>
             </button>
