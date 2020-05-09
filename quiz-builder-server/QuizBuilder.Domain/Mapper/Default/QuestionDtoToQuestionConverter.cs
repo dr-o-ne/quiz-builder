@@ -7,7 +7,8 @@ using QuizBuilder.Repository.Dto;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Mapper.Default {
-	internal class QuestionDtoToQuestionConverter : ITypeConverter<QuestionDto, Question> {
+
+	internal sealed class QuestionDtoToQuestionConverter : ITypeConverter<QuestionDto, Question> {
 		public Question Convert( QuestionDto source, Question destination, ResolutionContext context ) {
 			if( source == null )
 				return null;
@@ -23,6 +24,7 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			};
 
 			entity.Id = source.Id;
+			entity.UId = source.UId;
 			entity.Name = source.Name;
 			entity.Text = source.QuestionText;
 
