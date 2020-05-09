@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Domain.Extensions;
 using QuizBuilder.Repository.Extensions;
+using QuizBuilder.Utils;
 
 namespace QuizBuilder.Api {
 
@@ -32,6 +33,7 @@ namespace QuizBuilder.Api {
             services.AddHandlers();
             services.AddMappers();
             services.AddRepositories();
+			services.AddUtils();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
