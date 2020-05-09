@@ -4,7 +4,7 @@ namespace QuizBuilder.Domain.Model.Default {
 
 	public sealed class Quiz : AuditableEntity<long> {
 
-		public string ClientId { get; set; }
+		public string UId { get; set; }
 
 		public string Name { get; set; }
 

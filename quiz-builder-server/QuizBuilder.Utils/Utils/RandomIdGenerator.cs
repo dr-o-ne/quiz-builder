@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace QuizBuilder.Utils {
+namespace QuizBuilder.Utils.Utils {
 
 	public static class RandomIdGenerator {
 

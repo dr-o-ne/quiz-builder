@@ -11,7 +11,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 
 			return new QuizDto {
 				Id = source.Id,
-				ClientId = source.ClientId,
+				UId = source.UId,
 				Name = source.Name,
 				IsVisible = source.IsVisible
 			};
