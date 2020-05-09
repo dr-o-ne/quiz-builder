@@ -8,15 +8,11 @@ namespace QuizBuilder.Repository.Repository {
 
 		Task<IEnumerable<T>> GetAllAsync();
 
-		Task<T> GetByIdAsync( Guid id );
-
 		Task<T> GetByIdAsync( long id );
 
 		Task<int> AddAsync( T entity );
 
 		Task<int> UpdateAsync( T entity );
-
-		Task<int> DeleteAsync( Guid id );
 
 		Task<int> DeleteAsync( long id );
 
