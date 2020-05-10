@@ -96,6 +96,18 @@ namespace QuizBuilder.Test.Integration {
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
+		[Fact]
+		public async Task Question_DeleteById_Success_Test() {
+			var response = await _httpClient.DeleteAsync( "/questions/000000001" );
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
+		}
+
+		[Fact]
+		public async Task Question_DeleteById_Fail_Test() {
+			using var response = await _httpClient.DeleteAsync( "/questions/000000011" );
+			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+		}
+
 		private static void SetupData( IDbConnectionFactory connectionFactory ) {
 
 			using var connection = connectionFactory.CreateDbConnection();

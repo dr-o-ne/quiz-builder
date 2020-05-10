@@ -154,9 +154,8 @@
   <div *ngIf="question.type" class="main-color">
     <app-dynamic-choice
       [questionType]="question.type"
-      [answerData]="answers"
-      [settings]="settings"
-      [isNewState]="isNewState">
+      [choices]="choices"
+      [settings]="settings">
     </app-dynamic-choice>
   </div>
 
