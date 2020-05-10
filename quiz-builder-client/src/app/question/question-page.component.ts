@@ -6,6 +6,7 @@ import {Question, QuestionType} from '../_models/question';
 import {Answer} from '../_models/answer';
 import {Group} from '../_models/group';
 import {QuestionService} from '../_service/question.service';
+import { BaseChoiceSettings } from '../_models/settings/answer.settings';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,9 +24,8 @@ export class QuestionPageComponent implements OnInit {
 
   groupResurce: Group[] = [];
   answers: Answer[] = [];
-  settings: any;
+  settings: BaseChoiceSettings = new BaseChoiceSettings();
 
-  defaultCountAnswer = 4;
   isNewState = false;
 
   isFeedback = false;
@@ -113,9 +113,6 @@ export class QuestionPageComponent implements OnInit {
     if (!this.questionForm.valid) {
       return;
     }
-
-    this.settings = {choicesDisplayType: 1, choicesEnumerationType: 1};
-
     this.updateQuestionModel();
     this.questionService.createQuestion(this.question).subscribe(response => {
        this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
@@ -136,43 +133,8 @@ export class QuestionPageComponent implements OnInit {
     return index === -1 && isChecked;
   }
 
-  addNewAnswer() {
-    switch (this.question.type) {
-      default:
-        this.addAnswer();
-        break;
-    }
-  }
-
-  addAnswer(name?: string, isCorrect?: boolean) {
-    const newAnswer = new Answer();
-    newAnswer.id = this.generateId();
-    newAnswer.text = name || '';
-    newAnswer.isCorrect = isCorrect || false;
-    this.answers.push(newAnswer);
-  }
-
-  generateId() {
-    return Math.floor(Math.random() * 10000) + 1;
-  }
-
-  makeCustomListAnswer(count: number) {
-    for (let i = 0; i < count; i++) {
-      this.addAnswer();
-    }
-  }
-
   selectChangeType() {
     this.answers = [];
-    switch (this.question.type) {
-      case QuestionType.TrueFalse:
-        this.addAnswer('True', true);
-        this.addAnswer('False');
-        break;
-      default:
-        this.makeCustomListAnswer(this.defaultCountAnswer);
-        break;
-    }
   }
 
   selectGroup(select) {

@@ -1,34 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { Answer } from 'src/app/_models/answer';
+import {TrueFalseAnswerComponent} from '../true-false-answer/true-false-answer.component';
 
 @Component({
   selector: 'app-single-choice-dropdown-answer',
   templateUrl: './single-choice-dropdown-answer.component.html',
   styleUrls: ['./single-choice-dropdown-answer.component.css']
 })
-export class SingleChoiceDropdownAnswerComponent implements OnInit {
-  @Input() answerData: Answer[];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-   changeRadioButton(event) {
-    if (!event.value) {
-      return;
-    }
-    this.answerData.forEach(item => {
-      if (item.id === event.value) {
-        item.isCorrect = true;
-        return;
-      }
-      item.isCorrect = false;
-    });
-  }
+export class SingleChoiceDropdownAnswerComponent extends TrueFalseAnswerComponent {
 
    deleteAnswer(answer: Answer) {
     this.answerData.splice(this.answerData.findIndex(ans => ans.id === answer.id), 1);
   }
-
 }

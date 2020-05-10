@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Quiz } from 'src/app/_models/quiz';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { QuizService } from 'src/app/_service/quiz.service';
-import { SelectionModel } from '@angular/cdk/collections';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {Quiz} from 'src/app/_models/quiz';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {QuizService} from 'src/app/_service/quiz.service';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-quiz-list',
@@ -12,104 +12,109 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./quiz-list.component.css']
 })
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'isVisible', 'edit', 'preview', 'analize', 'menu'];
-
-  quizzes: Quiz[] = [];
+  displayedColumns: string[] = ['name', 'isVisible', 'edit', 'preview', 'statistic', 'menu'];
+  filterData: string;
+  isMultiSelect = true;
+  tablePageSizeOptions = [15, 20];
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
 
-  filterData: string;
-
-  colorBtnBulk = 'primary';
-  isBulkEdit = true;
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService) {
+  }
 
   ngOnInit() {
     this.initDataQuiz();
   }
 
-  initDataQuiz() {
+  initDataQuiz(): void {
     this.quizService.getAllQuizzes().subscribe((response: any) => {
-      this.quizzes = response.quizzes;
-      this.initDataSource();
+      this.initDataSource(response.quizzes);
     }, error => {
       console.log(error);
     });
   }
 
-  generateId(): number {
-    return Math.floor(Math.random() * 10000) + 1;
-  }
-
-  initDataSource() {
-    this.dataSource = new MatTableDataSource<Quiz>(this.quizzes);
+  initDataSource(quizzes: Quiz[]): void {
+    this.dataSource = new MatTableDataSource<Quiz>(quizzes);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.selection = new SelectionModel<Quiz>(true, []);
   }
 
-  cleanFilter() {
+  isEmptyFilter(): boolean {
+    return !this.filterData || this.filterData.trim() === '';
+  }
+
+  cleanFilter(): void {
+    this.dataSource.filter = '';
     this.filterData = '';
-    this.initDataSource();
   }
 
-  applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue: string): void {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  deleteQuiz(quiz: Quiz) {
+  clickMultiSelection(): void {
+    this.isMultiSelect = !this.isMultiSelect;
+
+    this.isMultiSelect
+      ? this.displayedColumns.shift()
+      : this.displayedColumns.unshift('select');
+
+    this.table.renderRows();
+  }
+
+  isAllSelected(): boolean {
+    return this.selection?.selected.length === this.dataSource?.data.length;
+  }
+
+  isAnySelected(): boolean {
+    return this.selection?.hasValue();
+  }
+
+  isItemSelected(item: Quiz): boolean {
+    return this.selection.isSelected(item);
+  }
+
+  isPaginatorEnabled(): boolean {
+    return this.dataSource?.data?.length > 15;
+  }
+
+  checkItemToggle(item: Quiz): void {
+    this.selection.toggle(item);
+  }
+
+  checkAllToggle(checked: boolean): void {
+    checked
+      ? this.selection.select(...this.dataSource.data)
+      : this.selection.clear();
+  }
+
+  clickVisibleToggle(checked: boolean, quiz: Quiz): void {
+    quiz.isVisible = checked;
+    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+  }
+
+  deleteQuiz(quiz: Quiz): void {
     this.quizService.deleteQuiz(quiz.id).subscribe(response => {
       this.initDataQuiz();
     }, error => console.log(error));
   }
 
-  clickMultiSelection() {
-    this.colorBtnBulk = this.colorBtnBulk === 'primary' ? 'accent' : 'primary';
-    this.isBulkEdit = !this.isBulkEdit;
-    if (!this.isBulkEdit) {
-      this.displayedColumns.unshift('select');
-    } else {
-      this.displayedColumns.shift();
-    }
-    this.initDataSource();
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  checkboxLabel(row?: Quiz): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
-  }
-
-  bulkPublish() {}
-
-  bulkDelete() {
+  bulkDelete(): void {
     const ids = this.selection.selected.map(x => x.id);
     this.quizService.deleteQuizzes(ids).subscribe(
-      response => { this.initDataQuiz(); },
+      response => {
+        this.initDataQuiz();
+      },
       error => console.log(error));
   }
 
-  clickToogle(toogle, quiz) {
-    quiz.isVisible = toogle._checked;
-    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+  bulkPublish(): void {
+    this.selection.selected.forEach(x => this.clickVisibleToggle(true, x));
   }
-
 }

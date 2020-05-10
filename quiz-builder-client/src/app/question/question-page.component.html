@@ -96,7 +96,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
-                </mat-form-field>
+                 </mat-form-field>
                 </div>
               </div>
 
@@ -151,19 +151,13 @@
 
   </div>
 
-  <div *ngIf="question?.type === questionTypes.TrueFalse" class="main-color">
-    <app-true-false-answer
-      [answerData]="answers"></app-true-false-answer>
-  </div>
-
-  <div *ngIf="question?.type === questionTypes.MultipleChoice" class="main-color">
-    <app-multiple-choice-answer
-      [answerData]="answers"></app-multiple-choice-answer>
-  </div>
-
-  <div *ngIf="question?.type === questionTypes.MultiSelect" class="main-color">
-    <app-multi-select-choice 
-      [answerData]="answers"></app-multi-select-choice>
+  <div *ngIf="question.type" class="main-color">
+    <app-dynamic-choice
+      [questionType]="question.type"
+      [answerData]="answers"
+      [settings]="settings"
+      [isNewState]="isNewState">
+    </app-dynamic-choice>
   </div>
 
 </div>

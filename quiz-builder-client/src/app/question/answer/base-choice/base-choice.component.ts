@@ -1,19 +1,54 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { OnInit} from '@angular/core';
 import { Answer } from 'src/app/_models/answer';
-import { Question } from 'src/app/_models/question';
+import {
+  ChoicesDisplayType,
+  ChoicesEnumerationType,
+  BaseChoiceSettings
+} from 'src/app/_models/settings/answer.settings';
+import { QuestionType } from 'src/app/_models/question';
 
-@Component({
-  template: ''
-})
 export class BaseChoiceComponent implements OnInit {
-  @Input() answerData: Answer[];
-
+  answerData: Answer[];
+  settings: BaseChoiceSettings;
+  choicesDisplayTypes = ChoicesDisplayType;
+  choicesDisplayTypesKeys: number[] = [];
+  choicesEnumerationTypes = ChoicesEnumerationType;
+  choicesEnumerationTypesKeys: number[] = [];
   isFeedback = false;
-
-  constructor() { }
+  defaultCountAnswer = 4;
+  questionType: QuestionType;
+  isNewState = false;
 
   ngOnInit() {
     this.initFeedback();
+    this.initEnums('choicesDisplayTypes', 'choicesDisplayTypesKeys');
+    this.initEnums('choicesEnumerationTypes', 'choicesEnumerationTypesKeys');
+    this.initDefaultChoice();
+  }
+
+  initDefaultChoice() {
+    if (!this.isNewState) {
+      return;
+    }
+    switch (this.questionType) {
+      case QuestionType.TrueFalse:
+        this.addAnswer('True', true);
+        this.addAnswer('False');
+        break;
+      default:
+        this.makeCustomListAnswer(this.defaultCountAnswer);
+        break;
+    }
+  }
+
+  makeCustomListAnswer(count: number) {
+    for (let i = 0; i < count; i++) {
+      this.addAnswer();
+    }
+  }
+
+  initEnums(enums, keys) {
+    this[keys] = Object.keys(this[enums]).filter(Number).map(v => Number(v));
   }
 
   initFeedback() {
@@ -36,4 +71,9 @@ export class BaseChoiceComponent implements OnInit {
     this.answerData.push(newAnswer);
   }
 
+  selectDisplayType(settings) {
+    if (settings.choicesDisplayType === this.choicesDisplayTypes.Dropdown) {
+      settings.choicesEnumerationType = 1;
+    }
+  }
 }
