@@ -19,6 +19,7 @@ namespace QuizBuilder.Test.Integration {
 		private static readonly ImmutableArray<QuestionDto> QuestionData = new List<QuestionDto> {
 			new QuestionDto {
 				Id = 1,
+				UId = "000000001",
 				Name = "True/False",
 				QuestionTypeId = 1,
 				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""}}",
@@ -26,6 +27,7 @@ namespace QuizBuilder.Test.Integration {
 			},
 			new QuestionDto {
 				Id = 2,
+				UId = "000000002",
 				Name = "MultipleChoice",
 				QuestionTypeId = 2,
 				Settings = @"{""Choices"":[{""IsCorrect"":true,""Text"":""Choice1""},{""IsCorrect"":false,""Text"":""Choice2""},{""IsCorrect"":false,""Text"":""Choice3""}],""Randomize"":true}",
@@ -42,10 +44,10 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Questions_GetById_Success_Test() {
-			string result1 = await _httpClient.GetStringAsync( $"/questions/{QuestionData.First().Id}" );
+			string result1 = await _httpClient.GetStringAsync( $"/questions/{QuestionData.First().UId}" );
 			Assert.Contains( "True/False", result1 );
 
-			string result2 = await _httpClient.GetStringAsync( $"/questions/{QuestionData.Last().Id}" );
+			string result2 = await _httpClient.GetStringAsync( $"/questions/{QuestionData.Last().UId}" );
 			Assert.Contains( "MultipleChoice", result2 );
 		}
 
@@ -79,7 +81,7 @@ namespace QuizBuilder.Test.Integration {
 		[Fact]
 		public async Task Question_Update_Success_Test() {
 			var content = JsonConvert.SerializeObject( new {
-				Id = QuestionData.First().Id,
+				Id = QuestionData.First().UId,
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,

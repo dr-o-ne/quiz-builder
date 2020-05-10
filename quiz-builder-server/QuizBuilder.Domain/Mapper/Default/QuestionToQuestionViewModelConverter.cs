@@ -2,7 +2,6 @@ using System;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.View;
@@ -51,7 +50,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 			}
 
 			return new QuestionViewModel {
-				Id = source.Id,
+				Id = source.UId,
 				Type = source.Type,
 				Name = source.Name,
 				Text = source.Text,
