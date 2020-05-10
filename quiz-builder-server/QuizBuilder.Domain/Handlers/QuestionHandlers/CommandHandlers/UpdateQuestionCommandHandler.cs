@@ -22,7 +22,7 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 
 		public async Task<CommandResult> HandleAsync( UpdateQuestionCommand command ) {
 
-			QuestionDto currentQuestionDto = await _questionRepository.GetByUIdAsync( command.Id );
+			QuestionDto currentQuestionDto = await _questionRepository.GetByUIdAsync( command.UId );
 
 			Question question = _mapper.Map<UpdateQuestionCommand, Question>( command );
 

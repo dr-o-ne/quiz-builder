@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Domain.Commands;
 using QuizBuilder.Domain.Commands.QuizCommands;
 using QuizBuilder.Domain.Queries.QuizQueries;
 
@@ -17,7 +16,7 @@ namespace QuizBuilder.Api.Controllers {
 			_dispatcher = dispatcher;
 		}
 
-		[HttpGet( "{id}" )]
+		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> GetQuizById( [FromRoute] GetQuizByIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
@@ -51,7 +50,7 @@ namespace QuizBuilder.Api.Controllers {
 				: UnprocessableEntity( result );
 		}
 
-		[HttpDelete( "{id}" )]
+		[HttpDelete( "{uid}" )]
 		public async Task<ActionResult> DeleteQuiz( [FromRoute] DeleteQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 

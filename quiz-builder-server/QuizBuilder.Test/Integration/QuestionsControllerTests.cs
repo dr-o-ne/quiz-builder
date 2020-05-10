@@ -75,7 +75,7 @@ namespace QuizBuilder.Test.Integration {
 
 			using var response = await _httpClient.PostAsync( "/questions/", stringContent );
 
-			Assert.Equal( HttpStatusCode.InternalServerError, response.StatusCode );
+			Assert.Equal( HttpStatusCode.BadRequest, response.StatusCode );
 		}
 
 		[Fact]

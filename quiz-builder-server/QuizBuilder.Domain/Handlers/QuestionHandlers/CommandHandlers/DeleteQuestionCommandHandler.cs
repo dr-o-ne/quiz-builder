@@ -16,7 +16,7 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( DeleteQuestionCommand command ) {
-			int rowsAffected = await _questionRepository.DeleteAsync( command.Id );
+			int rowsAffected = await _questionRepository.DeleteAsync( command.UId );
 
 			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );
 		}

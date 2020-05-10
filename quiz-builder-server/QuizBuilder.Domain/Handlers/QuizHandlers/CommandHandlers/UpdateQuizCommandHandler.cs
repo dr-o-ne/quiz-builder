@@ -20,7 +20,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuizCommand command ) {
-			QuizDto quizDto = await _quizRepository.GetByUIdAsync( command.Id );
+			QuizDto quizDto = await _quizRepository.GetByUIdAsync( command.UId );
 			Quiz currentQuiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			Quiz updatedQuiz = _mapper.Map<UpdateQuizCommand, Quiz>( command );
 			Quiz mergedQuiz = _mapper.Merge( updatedQuiz, currentQuiz );

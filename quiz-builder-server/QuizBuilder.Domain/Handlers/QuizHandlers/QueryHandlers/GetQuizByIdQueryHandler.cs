@@ -21,7 +21,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 		}
 
 		public async Task<GetQuizByIdDto> HandleAsync( GetQuizByIdQuery query ) {
-			QuizDto quizDto = await _quizRepository.GetByUIdAsync( query.Id );
+			QuizDto quizDto = await _quizRepository.GetByUIdAsync( query.UId );
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			QuizViewModel quizViewModel = _mapper.Map<Quiz, QuizViewModel>( quiz );
 
