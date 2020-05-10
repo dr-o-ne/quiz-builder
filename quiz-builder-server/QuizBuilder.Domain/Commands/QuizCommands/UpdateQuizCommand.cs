@@ -1,12 +1,11 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 
-namespace QuizBuilder.Domain.Commands {
-	public class UpdateQuizCommand : ICommand<CommandResult> {
+namespace QuizBuilder.Domain.Commands.QuizCommands {
+	public sealed class UpdateQuizCommand : ICommand<CommandResult> {
 		[Required]
-		public Guid Id { get; set; }
+		public string Id { get; set; }
 		public bool IsVisible { get; set; }
 		[Required]
 		[MaxLength( 100 )]

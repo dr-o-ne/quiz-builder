@@ -1,5 +1,6 @@
 using AutoMapper;
 using QuizBuilder.Domain.Commands;
+using QuizBuilder.Domain.Commands.QuizCommands;
 using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.Mapper.Default
@@ -10,7 +11,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 				return null;
 
 			return new Quiz {
-				Id = source.Id,
+				UId = source.Id,
 				IsVisible = source.IsVisible,
 				Name = source.Name
 			};

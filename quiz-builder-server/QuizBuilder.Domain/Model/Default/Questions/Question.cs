@@ -1,10 +1,12 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using QuizBuilder.Domain.Model.Default.Base;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
-	public abstract class Question : AuditableEntity<Guid> {
+	public abstract class Question : AuditableEntity<long> {
+
+		[JsonIgnore]
+		public string UId { get; set; }
 
 		[JsonIgnore]
 		public abstract Enums.QuestionType Type { get; }

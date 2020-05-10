@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Net;
@@ -19,14 +18,14 @@ namespace QuizBuilder.Test.Integration {
 
 		private static readonly ImmutableArray<QuestionDto> QuestionData = new List<QuestionDto> {
 			new QuestionDto {
-				Id = new Guid( "00000000-0000-0000-0000-000000000001" ),
+				Id = 1,
 				Name = "True/False",
 				QuestionTypeId = 1,
 				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""}}",
 				QuestionText = "TrueChoice Question Text"
 			},
 			new QuestionDto {
-				Id = new Guid( "00000000-0000-0000-0000-000000000002" ),
+				Id = 2,
 				Name = "MultipleChoice",
 				QuestionTypeId = 2,
 				Settings = @"{""Choices"":[{""IsCorrect"":true,""Text"":""Choice1""},{""IsCorrect"":false,""Text"":""Choice2""},{""IsCorrect"":false,""Text"":""Choice3""}],""Randomize"":true}",

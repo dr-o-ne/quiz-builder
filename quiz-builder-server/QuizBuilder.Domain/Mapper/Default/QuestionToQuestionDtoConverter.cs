@@ -38,6 +38,7 @@ namespace QuizBuilder.Domain.Mapper.Default {
 
 			return new QuestionDto {
 				Id = source.Id,
+				UId = source.UId,
 				QuestionTypeId = (int)questionType,
 				Name = source.Name,
 				QuestionText = source.Text,

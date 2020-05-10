@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace QuizBuilder.Repository.Dto {
@@ -8,7 +7,9 @@ namespace QuizBuilder.Repository.Dto {
 	public sealed class QuestionDto {
 
 		[IgnoreDataMember]
-		public Guid Id { get; set; }
+		public long Id { get; set; }
+
+		public string UId { get; set; }
 
 		public string Name { get; set; }
 

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Domain.Commands;
+using QuizBuilder.Domain.Commands.QuizCommands;
 using QuizBuilder.Domain.Extensions;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Repository.Dto;
@@ -20,7 +20,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuizCommand command ) {
-			QuizDto quizDto = await _quizRepository.GetByIdAsync( command.Id );
+			QuizDto quizDto = await _quizRepository.GetByUIdAsync( command.Id );
 			Quiz currentQuiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			Quiz updatedQuiz = _mapper.Map<UpdateQuizCommand, Quiz>( command );
 			Quiz mergedQuiz = _mapper.Merge( updatedQuiz, currentQuiz );

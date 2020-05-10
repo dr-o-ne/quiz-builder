@@ -2,7 +2,7 @@ using System;
 
 namespace QuizBuilder.Domain.Model.View {
 	public class QuestionViewModel {
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public Enums.QuestionType Type { get; set; }
 		public long GroupId { get; set; } = 1;
 		public string Name { get; set; }
