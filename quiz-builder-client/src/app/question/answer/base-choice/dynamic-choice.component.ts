@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, Input, OnChanges, SimpleChanges, Type, ViewChild} from '@angular/core';
-import {Answer} from 'src/app/_models/answer';
+import {Choice} from 'src/app/_models/choice';
 import {BaseChoiceSettings} from 'src/app/_models/settings/answer.settings';
 import {ChoiceDirective} from '../../../_directive/choice.directive';
 import {QuestionType} from '../../../_models/question';
@@ -15,9 +15,8 @@ import {MultipleChoiceAnswerComponent} from '../multiple-choice-answer/multiple-
 
 export class DynamicChoiceComponent implements OnChanges {
   @Input() settings: BaseChoiceSettings;
-  @Input() answerData: Answer[];
+  @Input() choices: Choice[];
   @Input() questionType: QuestionType;
-  @Input() isNewState: boolean;
 
   @ViewChild(ChoiceDirective, {static: true}) choiceHost: ChoiceDirective;
 
@@ -27,8 +26,8 @@ export class DynamicChoiceComponent implements OnChanges {
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent
   };
 
-  constructor(private resolver: ComponentFactoryResolver)
-  {  }
+  constructor(private resolver: ComponentFactoryResolver) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('questionType') && changes.questionType.currentValue) {
@@ -41,8 +40,7 @@ export class DynamicChoiceComponent implements OnChanges {
     this.choiceHost.viewContainerRef.clear();
     const componentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
     componentRef.instance.settings = this.settings;
-    componentRef.instance.answerData = this.answerData;
+    componentRef.instance.choices = this.choices;
     componentRef.instance.questionType = this.questionType;
-    componentRef.instance.isNewState = this.isNewState;
   }
 }
