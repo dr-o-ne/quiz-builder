@@ -10,7 +10,8 @@ using QuizBuilder.Repository.Repository;
 using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
-	public class UpdateQuestionCommandHandler : ICommandHandler<UpdateQuestionCommand, CommandResult> {
+
+	public sealed class UpdateQuestionCommandHandler : ICommandHandler<UpdateQuestionCommand, CommandResult> {
 
 		private readonly IMapper _mapper;
 		private readonly IGenericRepository<QuestionDto> _questionRepository;
@@ -21,9 +22,14 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuestionCommand command ) {
-			Question question = _mapper.Map<UpdateQuestionCommand, Question>( command );
-			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
-			int rowsAffected = await _questionRepository.UpdateAsync( questionDto );
+
+			QuestionDto questionDto = await _questionRepository.GetByUIdAsync( command.Id );
+
+			Question currentQuestion = _mapper.Map<QuestionDto, Question>( questionDto );
+			Question updatedQuestion = _mapper.Map<UpdateQuestionCommand, Question>( command );
+			Question mergedQuestion = _mapper.Merge( updatedQuestion, currentQuestion );
+			QuestionDto mergedQuestionDto = _mapper.Map<Question, QuestionDto>( mergedQuestion );
+			int rowsAffected = await _questionRepository.UpdateAsync( mergedQuestionDto );
 
 			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );
 		}

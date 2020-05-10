@@ -3,8 +3,9 @@ using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Model;
 
 namespace QuizBuilder.Domain.Commands.QuestionCommands {
-	public class UpdateQuestionCommand : ICommand<CommandResult> {
-		public long Id { get; set; }
+
+	public sealed class UpdateQuestionCommand : ICommand<CommandResult> {
+		public string Id { get; set; }
 		public string Name { get; set; }
 		public long GroupId { get; set; }
 		public Enums.QuestionType Type { get; set; }
@@ -15,4 +16,5 @@ namespace QuizBuilder.Domain.Commands.QuestionCommands {
 		public string Settings { get; set; }
 		public string Choices { get; set; }
 	}
+
 }

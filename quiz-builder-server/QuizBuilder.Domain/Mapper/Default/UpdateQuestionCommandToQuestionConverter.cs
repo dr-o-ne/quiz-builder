@@ -8,9 +8,10 @@ using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
-namespace QuizBuilder.Domain.Mapper.Default
-{
-	internal class UpdateQuestionCommandToQuestionConverter : ITypeConverter<UpdateQuestionCommand, Question> {
+namespace QuizBuilder.Domain.Mapper.Default {
+
+	internal sealed class UpdateQuestionCommandToQuestionConverter : ITypeConverter<UpdateQuestionCommand, Question> {
+
 		public Question Convert( UpdateQuestionCommand source, Question destination, ResolutionContext context ) {
 			if( source is null )
 				return null;
@@ -43,7 +44,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 					throw new ArgumentException( "Unknown question type" );
 			}
 
-			question.Id = source.Id;
+			question.UId = source.Id;
 			question.Name = source.Name;
 			question.Text = source.Text;
 			question.Feedback = source.Feedback;
