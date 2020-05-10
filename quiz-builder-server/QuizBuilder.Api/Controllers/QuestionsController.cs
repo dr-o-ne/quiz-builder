@@ -5,16 +5,18 @@ using QuizBuilder.Domain.Commands.QuestionCommands;
 using QuizBuilder.Domain.Queries.QuestionQueries;
 
 namespace QuizBuilder.Api.Controllers {
+
 	[ApiController]
 	[Route( "[controller]" )]
 	public sealed class QuestionsController : ControllerBase {
+
 		private readonly IDispatcher _dispatcher;
 
 		public QuestionsController( IDispatcher dispatcher ) {
 			_dispatcher = dispatcher;
 		}
 
-		[HttpGet( "{id}" )]
+		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> GetQuestionById( [FromRoute] GetQuestionByIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
@@ -57,7 +59,7 @@ namespace QuizBuilder.Api.Controllers {
 				: UnprocessableEntity( result );
 		}
 
-		[HttpDelete( "{id}" )]
+		[HttpDelete( "{uid}" )]
 		public async Task<ActionResult> DeleteQuestion( [FromRoute] DeleteQuestionCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 

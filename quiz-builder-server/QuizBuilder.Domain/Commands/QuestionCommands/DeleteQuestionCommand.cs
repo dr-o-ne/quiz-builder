@@ -4,7 +4,9 @@ using QuizBuilder.Common.Types.Default;
 namespace QuizBuilder.Domain.Commands.QuestionCommands {
 
 	public sealed class DeleteQuestionCommand : ICommand<CommandResult> {
-		public string Id { get; set; }
+
+		public string UId { get; set; }
+
 	}
 
 }

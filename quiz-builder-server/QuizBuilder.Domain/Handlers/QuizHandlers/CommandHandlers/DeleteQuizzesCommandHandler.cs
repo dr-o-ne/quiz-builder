@@ -17,8 +17,8 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( DeleteQuizzesCommand command ) {
-			int rowsAffected = await _quizRepository.DeleteBulkAsync( command.Ids.ToList() );
-			return new CommandResult( success: rowsAffected == command.Ids.Length, message: string.Empty );
+			int rowsAffected = await _quizRepository.DeleteBulkAsync( command.UIds.ToList() );
+			return new CommandResult( success: rowsAffected == command.UIds.Length, message: string.Empty );
 		}
 
 	}

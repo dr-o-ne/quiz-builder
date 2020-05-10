@@ -1,15 +1,19 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 
 namespace QuizBuilder.Domain.Commands.QuizCommands {
 	public sealed class UpdateQuizCommand : ICommand<CommandResult> {
+
 		[Required]
-		public string Id { get; set; }
-		public bool IsVisible { get; set; }
+		[JsonPropertyName("Id")]
+		public string UId { get; set; }
+
 		[Required]
-		[MaxLength( 100 )]
 		public string Name { get; set; }
-		public string Status { get; set; }
+
+		public bool IsVisible { get; set; }
+
 	}
 }

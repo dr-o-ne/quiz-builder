@@ -44,7 +44,7 @@ namespace QuizBuilder.Domain.Mapper.Default {
 					throw new ArgumentException( "Unknown question type" );
 			}
 
-			question.UId = source.Id;
+			question.UId = source.UId;
 			question.Name = source.Name;
 			question.Text = source.Text;
 			question.Feedback = source.Feedback;

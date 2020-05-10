@@ -10,7 +10,7 @@ namespace QuizBuilder.Domain.Mapper.Default
 				return null;
 
 			return new Quiz {
-				UId = source.Id,
+				UId = source.UId,
 				IsVisible = source.IsVisible,
 				Name = source.Name
 			};
