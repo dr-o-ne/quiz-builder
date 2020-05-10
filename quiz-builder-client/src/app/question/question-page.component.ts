@@ -3,10 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../_models/quiz';
 import {Question, QuestionType} from '../_models/question';
-import {Answer} from '../_models/answer';
+import {Choice} from '../_models/choice';
 import {Group} from '../_models/group';
 import {QuestionService} from '../_service/question.service';
-import { BaseChoiceSettings } from '../_models/settings/answer.settings';
+import {BaseChoiceSettings} from '../_models/settings/answer.settings';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +23,7 @@ export class QuestionPageComponent implements OnInit {
   questionTypeKeys: number[];
 
   groupResurce: Group[] = [];
-  answers: Answer[] = [];
+  choices: Choice[] = [];
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
   isNewState = false;
@@ -35,8 +35,7 @@ export class QuestionPageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private activeRout: ActivatedRoute,
-              private questionService: QuestionService)
-  {
+              private questionService: QuestionService) {
     this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
   }
 
@@ -79,7 +78,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   initAnswersAndSettings() {
-    this.answers = JSON.parse(this.question.choices);
+    this.choices = JSON.parse(this.question.choices);
     this.settings = JSON.parse(this.question.settings);
   }
 
@@ -95,7 +94,7 @@ export class QuestionPageComponent implements OnInit {
   updateQuestionModel() {
     this.question.groupId = this.group.id;
     this.question = Object.assign(this.question, this.questionForm.value);
-    this.question.choices = JSON.stringify(this.answers);
+    this.question.choices = JSON.stringify(this.choices);
     this.question.settings = JSON.stringify(this.settings);
   }
 
@@ -115,26 +114,25 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.createQuestion(this.question).subscribe(response => {
-       this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
     }, error => console.log(error));
   }
 
   isDisabledBtn(): boolean {
-    const validArray = [this.questionForm.valid, this.isValidAnswer()];
-    return validArray.some(arr => arr === false);
+    return !this.questionForm.valid || !this.isChoicesValid();
   }
 
-  isValidAnswer(): boolean {
-    if (this.answers.length === 0) {
+  isChoicesValid(): boolean {
+    if (this.choices.length === 0) {
       return false;
     }
-    const index = this.answers.findIndex(ans => ans.text === '');
-    const isChecked = this.answers.some(ans => ans.isCorrect === true);
-    return index === -1 && isChecked;
+    const isAnyEmpty = this.choices.some(c => c.text === '');
+    const isAnyCorrect = this.choices.some(c => c.isCorrect === true);
+    return !isAnyEmpty && isAnyCorrect;
   }
 
   selectChangeType() {
-    this.answers = [];
+    this.choices = [];
   }
 
   selectGroup(select) {

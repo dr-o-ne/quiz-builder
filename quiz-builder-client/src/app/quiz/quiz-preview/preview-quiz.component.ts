@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Quiz } from 'src/app/_models/quiz';
 import { QuestionService } from 'src/app/_service/question.service';
 import { Question } from 'src/app/_models/question';
-import { Answer } from 'src/app/_models/answer';
+import { Choice } from 'src/app/_models/choice';
 import { Group } from 'src/app/_models/group';
 import { QuizService } from 'src/app/_service/quiz.service';
 
@@ -15,7 +15,7 @@ import { QuizService } from 'src/app/_service/quiz.service';
 export class PreviewQuizComponent implements OnInit {
   quiz: Quiz;
   questionList: Question[];
-  answerList: Answer[];
+  answerList: Choice[];
   groupList: Group[];
 
   currentGroup: Group;

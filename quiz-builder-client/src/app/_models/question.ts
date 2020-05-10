@@ -1,4 +1,4 @@
-import {Answer} from './answer';
+import {Choice} from './choice';
 
 export class Question {
   id: string;

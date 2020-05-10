@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { BaseChoiceComponent } from '../base-choice/base-choice.component';
+import {Component} from '@angular/core';
+import {BaseChoiceComponent} from '../base-choice/base-choice.component';
 
 @Component({
   selector: 'app-true-false-answer',
@@ -8,17 +8,8 @@ import { BaseChoiceComponent } from '../base-choice/base-choice.component';
 })
 
 export class TrueFalseAnswerComponent extends BaseChoiceComponent {
-
-  changeRadioButton(event) {
-    if (!event.value) {
-      return;
-    }
-    this.answerData.forEach(item => {
-      if (item.id === event.value) {
-        item.isCorrect = true;
-        return;
-      }
-      item.isCorrect = false;
-    });
+  initDefaultChoices(): void {
+    this.addChoice('No', true);
+    this.addChoice('Yes', false);
   }
 }
