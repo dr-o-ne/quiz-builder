@@ -26,14 +26,11 @@ export class QuestionPageComponent implements OnInit {
   answers: Answer[] = [];
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
-  defaultCountAnswer = 4;
   isNewState = false;
 
   isFeedback = false;
   isCorrectFeedback = false;
   isIncorrectFeedback = false;
-
-  isSelectType = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -136,36 +133,8 @@ export class QuestionPageComponent implements OnInit {
     return index === -1 && isChecked;
   }
 
-  addAnswer(name?: string, isCorrect?: boolean) {
-    const newAnswer = new Answer();
-    newAnswer.id = this.generateId();
-    newAnswer.text = name || '';
-    newAnswer.isCorrect = isCorrect || false;
-    this.answers.push(newAnswer);
-  }
-
-  generateId() {
-    return Math.floor(Math.random() * 10000) + 1;
-  }
-
-  makeCustomListAnswer(count: number) {
-    for (let i = 0; i < count; i++) {
-      this.addAnswer();
-    }
-  }
-
   selectChangeType() {
-    // this.isSelectType = true;
     this.answers = [];
-    switch (this.question.type) {
-      case QuestionType.TrueFalse:
-        this.addAnswer('True', true);
-        this.addAnswer('False');
-        break;
-      default:
-        this.makeCustomListAnswer(this.defaultCountAnswer);
-        break;
-    }
   }
 
   selectGroup(select) {

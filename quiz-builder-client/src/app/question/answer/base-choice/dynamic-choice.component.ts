@@ -17,6 +17,7 @@ export class DynamicChoiceComponent implements OnChanges {
   @Input() settings: BaseChoiceSettings;
   @Input() answerData: Answer[];
   @Input() questionType: QuestionType;
+  @Input() isNewState: boolean;
 
   @ViewChild(ChoiceDirective, {static: true}) choiceHost: ChoiceDirective;
 
@@ -41,5 +42,7 @@ export class DynamicChoiceComponent implements OnChanges {
     const componentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
     componentRef.instance.settings = this.settings;
     componentRef.instance.answerData = this.answerData;
+    componentRef.instance.questionType = this.questionType;
+    componentRef.instance.isNewState = this.isNewState;
   }
 }

@@ -5,6 +5,7 @@ import {
   ChoicesEnumerationType,
   BaseChoiceSettings
 } from 'src/app/_models/settings/answer.settings';
+import { QuestionType } from 'src/app/_models/question';
 
 export class BaseChoiceComponent implements OnInit {
   answerData: Answer[];
@@ -14,11 +15,36 @@ export class BaseChoiceComponent implements OnInit {
   choicesEnumerationTypes = ChoicesEnumerationType;
   choicesEnumerationTypesKeys: number[] = [];
   isFeedback = false;
+  defaultCountAnswer = 4;
+  questionType: QuestionType;
+  isNewState = false;
 
   ngOnInit() {
     this.initFeedback();
     this.initEnums('choicesDisplayTypes', 'choicesDisplayTypesKeys');
     this.initEnums('choicesEnumerationTypes', 'choicesEnumerationTypesKeys');
+    this.initDefaultChoice();
+  }
+
+  initDefaultChoice() {
+    if (!this.isNewState) {
+      return;
+    }
+    switch (this.questionType) {
+      case QuestionType.TrueFalse:
+        this.addAnswer('True', true);
+        this.addAnswer('False');
+        break;
+      default:
+        this.makeCustomListAnswer(this.defaultCountAnswer);
+        break;
+    }
+  }
+
+  makeCustomListAnswer(count: number) {
+    for (let i = 0; i < count; i++) {
+      this.addAnswer();
+    }
   }
 
   initEnums(enums, keys) {
@@ -47,7 +73,7 @@ export class BaseChoiceComponent implements OnInit {
 
   selectDisplayType(settings) {
     if (settings.choicesDisplayType === this.choicesDisplayTypes.Dropdown) {
-      settings.choicesEnumerationType = 0;
+      settings.choicesEnumerationType = 1;
     }
   }
 }

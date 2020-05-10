@@ -151,11 +151,12 @@
 
   </div>
 
-  <div class="main-color">
+  <div *ngIf="question.type" class="main-color">
     <app-dynamic-choice
       [questionType]="question.type"
       [answerData]="answers"
-      [settings]="settings">
+      [settings]="settings"
+      [isNewState]="isNewState">
     </app-dynamic-choice>
   </div>
 
