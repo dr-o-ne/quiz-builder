@@ -16,6 +16,15 @@ namespace QuizBuilder.Test.Integration {
 
 	public sealed class QuestionsControllerTests : IClassFixture<TestApplicationFactory<Startup>> {
 
+		private static readonly ImmutableArray<QuizDto> QuizData = new List<QuizDto> {
+			new QuizDto {
+				Id = 1,
+				UId = "1000000001",
+				Name = "Quiz 1",
+				IsVisible = true
+			}
+		}.ToImmutableArray();
+
 		private static readonly ImmutableArray<QuestionDto> QuestionData = new List<QuestionDto> {
 			new QuestionDto {
 				Id = 1,
@@ -54,6 +63,7 @@ namespace QuizBuilder.Test.Integration {
 		[Fact]
 		public async Task Question_Create_Success_Test() {
 			var content = JsonConvert.SerializeObject( new {
+				QuizId = "1000000001",
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,
@@ -112,11 +122,15 @@ namespace QuizBuilder.Test.Integration {
 
 			using var connection = connectionFactory.CreateDbConnection();
 			connection.Open();
+			connection.DropAndCreateTable<QuizDto>( "Quiz" );
 			connection.DropAndCreateTable<QuestionDto>( "Question" );
 
-			foreach( var item in QuestionData ) {
+			foreach( var item in QuizData )
+				connection.Insert( "Quiz", item );
+
+			foreach( var item in QuestionData ) 
 				connection.Insert( "Question", item );
-			}
+
 		}
 
 	}

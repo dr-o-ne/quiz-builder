@@ -14,11 +14,20 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 	public sealed class CreateQuestionCommandHandler : ICommandHandler<CreateQuestionCommand, CommandResult> {
 
 		private readonly IMapper _mapper;
+		private readonly IGenericRepository<QuizDto> _quizRepository;
+		private readonly IGenericRepository<QuizItemDto> _quizItemRepository;
 		private readonly IGenericRepository<QuestionDto> _questionRepository;
 		private readonly IUIdService _uIdService;
 
-		public CreateQuestionCommandHandler( IMapper mapper, IGenericRepository<QuestionDto> questionRepository, IUIdService uIdService ) {
+		public CreateQuestionCommandHandler(
+			IMapper mapper,
+			IGenericRepository<QuizDto> quizRepository,
+			IGenericRepository<QuizItemDto> quizItemRepository,
+			IGenericRepository<QuestionDto> questionRepository,
+			IUIdService uIdService ) {
 			_mapper = mapper;
+			_quizRepository = quizRepository;
+			_quizItemRepository = quizItemRepository;
 			_questionRepository = questionRepository;
 			_uIdService = uIdService;
 		}
@@ -26,7 +35,7 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 		public async Task<CommandResult> HandleAsync( CreateQuestionCommand command ) {
 			Question question = _mapper.Map<CreateQuestionCommand, Question>( command );
 			question.UId = _uIdService.GetUId();
-			
+
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
 			int rowsAffected = await _questionRepository.AddAsync( questionDto );
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Model;
@@ -10,7 +11,12 @@ namespace QuizBuilder.Domain.Commands.QuestionCommands {
 		[Required]
 		public string Name { get; set; }
 
-		public long GroupId { get; set; }
+		[Required]
+		[JsonPropertyName("QuizId")]
+		public string QuizUId { get; set; }
+
+		[JsonPropertyName( "QuizUId" )]
+		public string GroupUId { get; set; }
 
 		public Enums.QuestionType Type { get; set; }
 
