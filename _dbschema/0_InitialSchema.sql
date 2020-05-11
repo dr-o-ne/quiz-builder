@@ -66,6 +66,7 @@ GO
 
 CREATE TABLE dbo.QuizItem(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
+	[UId] NVARCHAR(10) NOT NULL,
 	[QuizItemTypeId] BIGINT NOT NULL,
 	[ParentQuizItemId] BIGINT NULL,
 	[QuestionId] BIGINT NULL,
@@ -96,6 +97,8 @@ GO
 ALTER TABLE [dbo].[QuizItem] CHECK CONSTRAINT [FK_QuizItem_Question]
 GO
 
+CREATE UNIQUE NONCLUSTERED INDEX [UI_QuizItem_UId] ON dbo.QuizItem ( [UId] ASC ) ON [PRIMARY]
+GO
 
 CREATE TABLE dbo.QuizQuizItem(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
