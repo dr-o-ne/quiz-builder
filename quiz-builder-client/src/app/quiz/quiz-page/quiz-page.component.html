@@ -84,7 +84,7 @@
           Add New
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="addNewQuestion(tabGroup)">
+          <button mat-menu-item [matMenuTriggerFor]="typeQuestion">
             <mat-icon>help_outline</mat-icon>
             <span>Question</span>
           </button>
@@ -92,6 +92,10 @@
             <mat-icon>group_work</mat-icon>
             <span>Group</span>
           </button>
+        </mat-menu>
+        <mat-menu #typeQuestion="matMenu">
+          <button mat-menu-item *ngFor="let key of questionTypeKeys"
+            (click)="addNewQuestion(tabGroup, key)">{{questionTypes[key]}}</button>
         </mat-menu>
       </div>
 
