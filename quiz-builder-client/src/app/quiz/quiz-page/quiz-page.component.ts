@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
 import {Quiz} from 'src/app/_models/quiz';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {Question} from 'src/app/_models/question';
+import {Question, QuestionType} from 'src/app/_models/question';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -33,8 +33,12 @@ export class QuizPageComponent implements OnInit {
   currentIndexTab: number;
   newNameGroup: string;
 
+  questionTypes = QuestionType;
+  questionTypeKeys: number[];
+
   constructor(private fb: FormBuilder, private router: Router, private activeRout: ActivatedRoute,
               private quizService: QuizService) {
+    this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
   }
 
   ngOnInit() {
@@ -122,9 +126,9 @@ export class QuizPageComponent implements OnInit {
   }
 
   generateId(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
   }
@@ -191,8 +195,9 @@ export class QuizPageComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  addNewQuestion(tabGroup) {
+  addNewQuestion(tabGroup, typeQuestion) {
     const groupId = this.dataGroup[tabGroup._selectedIndex].id;
+    localStorage.setItem('typeQuestion' + this.quiz.id, typeQuestion);
     this.router.navigate(['/editquiz/', this.quiz.id, 'group', groupId, 'addnewquestion']);
   }
 

@@ -64,6 +64,16 @@ export class QuestionPageComponent implements OnInit {
     this.question = new Question();
     this.question.quizId = this.quiz.id;
     this.question.groupId = this.group.id;
+    this.initTypeQuestion();
+  }
+
+  initTypeQuestion() {
+    const key = 'typeQuestion' + this.quiz.id;
+    const typeQuestion = Number(localStorage.getItem(key));
+    if (typeQuestion) {
+      this.question.type = typeQuestion;
+      localStorage.removeItem(key);
+    }
   }
 
   initFeedback() {
