@@ -123,6 +123,8 @@ namespace QuizBuilder.Test.Integration {
 			using var connection = connectionFactory.CreateDbConnection();
 			connection.Open();
 			connection.DropAndCreateTable<QuizDto>( "Quiz" );
+			connection.DropAndCreateTable<QuizQuizItemDto>( "QuizQuizItem" );
+			connection.DropAndCreateTable<QuizItemDto>( "QuizItem" );
 			connection.DropAndCreateTable<QuestionDto>( "Question" );
 
 			foreach( var item in QuizData )

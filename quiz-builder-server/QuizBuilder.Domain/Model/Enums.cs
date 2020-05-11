@@ -11,6 +11,14 @@
 			MultiSelect = 4,
 		}
 
+		public enum QuizItemType {
+			None = 0,
+			Question = 1,
+			Section = 2,
+			FreeText = 3,
+			QuestionPool = 4
+		}
+
 		public enum TextEvaluationType {
 			None = 0,
 			CaseSensitive,
