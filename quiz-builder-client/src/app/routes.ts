@@ -7,7 +7,6 @@ import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
-import { GroupResolver } from './_resolvers/group.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,12 +19,10 @@ export const appRoutes: Routes = [
             {path: 'createquiz', component: QuizPageComponent},
             {path: 'editquiz/:id', component: QuizPageComponent,
                     resolve: {quizResolver: QuizResolver}},
-            {path: 'editquiz/:id/group/:id', component: QuizPageComponent,
-                    resolve: {quizResolver: QuizResolver, group: GroupResolver}},
-            {path: 'editquiz/:id/group/:id/addnewquestion', component: QuestionPageComponent,
-                    resolve: {quizResolver: QuizResolver, group: GroupResolver}},
-            {path: 'editquiz/:id/group/:id/editquestion/:id', component: QuestionPageComponent,
-                     resolve: {quizResolver: QuizResolver, group: GroupResolver, questionResolver: QuestionResolver }},
+            {path: 'editquiz/:id/addnewquestion', component: QuestionPageComponent,
+                    resolve: {quizResolver: QuizResolver}},
+            {path: 'editquiz/:id/editquestion/:id', component: QuestionPageComponent,
+                     resolve: {quizResolver: QuizResolver, questionResolver: QuestionResolver }},
             {path: 'preview/:id', component: PreviewQuizComponent,
                      resolve: {quizResolver: QuizResolver}}
         ]

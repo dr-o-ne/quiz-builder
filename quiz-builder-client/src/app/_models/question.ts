@@ -10,7 +10,7 @@ export class Question {
   type: QuestionType;
   settings?: any;
   quizId: string;
-  groupId: string;
+  groupId?: string;
   choices?: any;
 }
 

@@ -20,7 +20,6 @@ import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
-import { GroupResolver } from './_resolvers/group.resolver';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
@@ -65,8 +64,7 @@ import {DynamicChoiceComponent} from './question/answer/base-choice/dynamic-choi
       QuizService,
       QuestionService,
       QuizResolver,
-      QuestionResolver,
-      GroupResolver
+      QuestionResolver
    ],
    bootstrap: [
       AppComponent
