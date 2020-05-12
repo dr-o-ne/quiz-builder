@@ -15,7 +15,7 @@ namespace QuizBuilder.Domain.Commands.QuestionCommands {
 		[JsonPropertyName("QuizId")]
 		public string QuizUId { get; set; }
 
-		[JsonPropertyName( "QuizUId" )]
+		[JsonPropertyName( "GroupId" )]
 		public string GroupUId { get; set; }
 
 		public Enums.QuestionType Type { get; set; }

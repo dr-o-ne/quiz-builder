@@ -196,9 +196,8 @@ export class QuizPageComponent implements OnInit {
   }
 
   addNewQuestion(tabGroup, typeQuestion) {
-    const groupId = this.dataGroup[tabGroup._selectedIndex].id;
     localStorage.setItem('typeQuestion' + this.quiz.id, typeQuestion);
-    this.router.navigate(['/editquiz/', this.quiz.id, 'group', groupId, 'addnewquestion']);
+    this.router.navigate(['/editquiz/', this.quiz.id, 'addnewquestion']);
   }
 
   clickToogle(toogle) {

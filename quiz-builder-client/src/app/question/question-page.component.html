@@ -21,7 +21,7 @@
       </div>
 
       <div class="col-md-2">
-        <button class="full-width" mat-raised-button [routerLink]="['/editquiz/', quiz.id, 'group', group.id]">
+        <button class="full-width" mat-raised-button [routerLink]="['/editquiz/', quiz.id]">
           <mat-icon>reply</mat-icon>
         </button>
       </div>
@@ -64,7 +64,7 @@
               <div class="col-md-6">
                 <mat-form-field class="full-width">
                   <mat-label>Group</mat-label>
-                  <mat-select #select [value]="group.id" (selectionChange)="selectGroup(select)">
+                  <mat-select #select [value]="question.groupId" (selectionChange)="selectGroup(select)">
                     <mat-option *ngFor="let groupRes of groupResurce" [value]="groupRes.id">
                       {{groupRes.name}}
                     </mat-option>

@@ -16,7 +16,6 @@ import {BaseChoiceSettings} from '../_models/settings/answer.settings';
 })
 export class QuestionPageComponent implements OnInit {
   quiz: Quiz;
-  group: Group;
   question: Question;
   questionForm: FormGroup;
   questionTypes = QuestionType;
@@ -42,16 +41,16 @@ export class QuestionPageComponent implements OnInit {
   ngOnInit() {
     this.initValidate();
     this.activeRout.data.subscribe(data => {
-      if (data.hasOwnProperty('quizResolver') && data.hasOwnProperty('group')) {
+      if (data.hasOwnProperty('quizResolver')) {
         this.quiz = data.quizResolver.quiz;
-        this.group = data.group;
-        this.initGroup();
         if (data.hasOwnProperty('questionResolver')) {
           this.question = data.questionResolver.question;
+          this.initGroup();
           this.initAnswersAndSettings();
           this.initFeedback();
           return;
         }
+        this.initGroup();
         this.createNewQuestion();
       } else {
         console.log('Not found correct quiz');
@@ -63,7 +62,6 @@ export class QuestionPageComponent implements OnInit {
     this.isNewState = true;
     this.question = new Question();
     this.question.quizId = this.quiz.id;
-    this.question.groupId = this.group.id;
     this.initTypeQuestion();
   }
 
@@ -85,6 +83,9 @@ export class QuestionPageComponent implements OnInit {
   initGroup() {
     const storage = JSON.parse(localStorage.getItem('grouplist'));
     this.groupResurce = storage.filter(obj => obj.quizId === this.quiz.id);
+    if (!this.question.groupId) {
+      this.question.groupId = this.groupResurce[0]?.id || '';
+    }
   }
 
   initAnswersAndSettings() {
@@ -96,13 +97,11 @@ export class QuestionPageComponent implements OnInit {
     this.questionForm = this.fb.group({
       name: ['', Validators.required],
       type: ['', Validators.required],
-      groupId: [Number, Validators.required],
       text: ['', Validators.required]
     });
   }
 
   updateQuestionModel() {
-    this.question.groupId = this.group.id;
     this.question = Object.assign(this.question, this.questionForm.value);
     this.question.choices = JSON.stringify(this.choices);
     this.question.settings = JSON.stringify(this.settings);
@@ -114,7 +113,7 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.updateQuestion(this.question).subscribe(response => {
-      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+      this.router.navigate(['/editquiz/', this.quiz.id]);
     }, error => console.log(error));
   }
 
@@ -124,7 +123,7 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.createQuestion(this.question).subscribe(response => {
-      this.router.navigate(['/editquiz/', this.quiz.id, 'group', this.group.id]);
+      this.router.navigate(['/editquiz/', this.quiz.id]);
     }, error => console.log(error));
   }
 
@@ -146,7 +145,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   selectGroup(select) {
-    this.group = this.groupResurce.filter(group => group.id === select.selected.value)[0];
+    this.question.groupId = this.groupResurce.filter(group => group.id === select.selected.value)[0].id;
   }
 
 }
