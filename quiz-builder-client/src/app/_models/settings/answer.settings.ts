@@ -14,6 +14,14 @@ export class SettingsMultipleSelectQuestion extends BaseChoiceSettings {
 export class SettingsMultipleChoiceQuestion extends BaseChoiceSettings {
 }
 
+export class DefaultEnumChoice {
+  one_two_three = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  i_ii_iii = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'];
+  I_II_III = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+  a_b_c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+  A_B_C = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+}
+
 export enum ChoicesDisplayType {
   None = 0,
   Horizontal = 1,
