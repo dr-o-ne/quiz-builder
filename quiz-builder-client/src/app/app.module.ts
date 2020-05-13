@@ -26,8 +26,13 @@ import { MultiSelectChoiceComponent } from './question/answer/multi-select-choic
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {ChoiceDirective} from './_directive/choice.directive';
-import {DynamicChoiceComponent} from './question/answer/base-choice/dynamic-choice.component';
+import { ChoiceDirective } from './_directive/choice.directive';
+import { DynamicChoiceComponent } from './question/answer/base-choice/dynamic-choice.component';
+import { ModalWindowPreviewQuestionComponent } from './question/modal-window/modal-window-preview-question.component';
+import { QuestionPreviewDirective } from './_directive/question.preview.directive';
+import { DynamicQuestionPreviewComponent } from './question/question-preview/base-question-preview/dynamic-question-preview.component';
+import { TrueFalsePreviewComponent } from './question/question-preview/true-false-preview/true-false-preview.component';
+import { MultiSelectPreviewComponent } from './question/question-preview/multi-select-preview/multi-select-preview.component';
 
 
 @NgModule({
@@ -45,7 +50,12 @@ import {DynamicChoiceComponent} from './question/answer/base-choice/dynamic-choi
       MultiSelectChoiceComponent,
       SingleChoiceDropdownAnswerComponent,
       ChoiceDirective,
-      DynamicChoiceComponent
+      QuestionPreviewDirective,
+      DynamicChoiceComponent,
+      DynamicQuestionPreviewComponent,
+      ModalWindowPreviewQuestionComponent,
+      TrueFalsePreviewComponent,
+      MultiSelectPreviewComponent
    ],
    imports: [
       BrowserModule,
@@ -58,7 +68,7 @@ import {DynamicChoiceComponent} from './question/answer/base-choice/dynamic-choi
       MatNativeDateModule,
       MatTooltipModule
    ],
-   entryComponents: [QuestionListComponent],
+   entryComponents: [QuestionListComponent, QuestionPageComponent, ModalWindowPreviewQuestionComponent],
    providers: [
       AuthGuard,
       QuizService,

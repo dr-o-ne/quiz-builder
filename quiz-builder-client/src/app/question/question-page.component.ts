@@ -7,6 +7,8 @@ import {Choice} from '../_models/choice';
 import {Group} from '../_models/group';
 import {QuestionService} from '../_service/question.service';
 import {BaseChoiceSettings} from '../_models/settings/answer.settings';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalWindowPreviewQuestionComponent } from './modal-window/modal-window-preview-question.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,7 +36,8 @@ export class QuestionPageComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private activeRout: ActivatedRoute,
-              private questionService: QuestionService) {
+              private questionService: QuestionService,
+              public dialog: MatDialog) {
     this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
   }
 
@@ -50,8 +53,8 @@ export class QuestionPageComponent implements OnInit {
           this.initFeedback();
           return;
         }
-        this.initGroup();
         this.createNewQuestion();
+        this.initGroup();
       } else {
         console.log('Not found correct quiz');
       }
@@ -146,6 +149,18 @@ export class QuestionPageComponent implements OnInit {
 
   selectGroup(select) {
     this.question.groupId = this.groupResurce.filter(group => group.id === select.selected.value)[0].id;
+  }
+
+  openPreview() {
+    this.updateQuestionModel();
+    const dialogRef = this.dialog.open(ModalWindowPreviewQuestionComponent, {
+      width: '500px',
+      data: {question: this.question}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
