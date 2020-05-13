@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
-using ServiceStack.Data;
+using ServiceStack.OrmLite;
 using Xunit;
 
 namespace QuizBuilder.Test.Integration {
 
-	public sealed class QuizzesControllerTests : IClassFixture<TestApplicationFactory<Startup>> {
+	[Trait( "Category", "Integration" )]
+	[Collection( "DB" )]
+	public sealed class QuizzesControllerTests : IClassFixture<TestApplicationFactory<Startup>>, IDisposable {
 
 		private static readonly ImmutableArray<QuizDto> QuizData = new List<QuizDto> {
 			new QuizDto {
@@ -51,10 +56,13 @@ namespace QuizBuilder.Test.Integration {
 		}.ToImmutableArray();
 
 		private readonly HttpClient _httpClient;
+		private readonly TestDatabaseWrapper _db;
 
 		public QuizzesControllerTests( TestApplicationFactory<Startup> factory ) {
 			_httpClient = factory.CreateClient();
-			SetupData( factory.DB.ConnectionFactory );
+			IConfiguration config = factory.Services.GetRequiredService<IConfiguration>();
+			_db = new TestDatabaseWrapper( config );
+			SetupData();
 		}
 
 		[Fact]
@@ -138,17 +146,20 @@ namespace QuizBuilder.Test.Integration {
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
-		private static void SetupData( IDbConnectionFactory connectionFactory ) {
+		private void SetupData() {
+			_db.Cleanup();
 
-			using var connection = connectionFactory.CreateDbConnection();
-			connection.Open();
-			connection.DropAndCreateTable<QuizDto>( "Quiz" );
+			using IDbConnection conn = _db.CreateDbConnection();
+			conn.Open();
 
+			conn.ExecuteSql( "SET IDENTITY_INSERT dbo.Quiz ON" );
 			foreach( var item in QuizData ) {
-				connection.Insert( "Quiz", item );
+				conn.Insert( "Quiz", item );
 			}
-
+			conn.ExecuteSql( "SET IDENTITY_INSERT dbo.Quiz OFF" );
 		}
+
+		public void Dispose() => _db.Cleanup();
 	}
 
 }

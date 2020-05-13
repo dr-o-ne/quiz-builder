@@ -1,20 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
-using ServiceStack.Data;
+using ServiceStack.OrmLite;
 using Xunit;
 
 namespace QuizBuilder.Test.Integration {
 
-	public sealed class QuestionsControllerTests : IClassFixture<TestApplicationFactory<Startup>> {
+	[Trait( "Category", "Integration" )]
+	[Collection( "DB" )]
+	public sealed class QuestionsControllerTests : IClassFixture<TestApplicationFactory<Startup>>, IDisposable {
 
 		private static readonly ImmutableArray<QuizDto> QuizData = new List<QuizDto> {
 			new QuizDto {
@@ -45,10 +51,13 @@ namespace QuizBuilder.Test.Integration {
 		}.ToImmutableArray();
 
 		private readonly HttpClient _httpClient;
+		private readonly TestDatabaseWrapper _db;
 
 		public QuestionsControllerTests( TestApplicationFactory<Startup> factory ) {
 			_httpClient = factory.CreateClient();
-			SetupData( factory.DB.ConnectionFactory );
+			IConfiguration config = factory.Services.GetRequiredService<IConfiguration>();
+			_db = new TestDatabaseWrapper( config );
+			SetupData();
 		}
 
 		[Fact]
@@ -118,22 +127,24 @@ namespace QuizBuilder.Test.Integration {
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
 		}
 
-		private static void SetupData( IDbConnectionFactory connectionFactory ) {
+		private void SetupData() {
+			_db.Cleanup();
 
-			using var connection = connectionFactory.CreateDbConnection();
-			connection.Open();
-			connection.DropAndCreateTable<QuizDto>( "Quiz" );
-			connection.DropAndCreateTable<QuizQuizItemDto>( "QuizQuizItem" );
-			connection.DropAndCreateTable<QuizItemDto>( "QuizItem" );
-			connection.DropAndCreateTable<QuestionDto>( "Question" );
+			using IDbConnection conn = _db.CreateDbConnection();
+			conn.Open();
 
-			foreach( var item in QuizData )
-				connection.Insert( "Quiz", item );
+			conn.ExecuteSql( $"SET IDENTITY_INSERT dbo.Quiz ON" );
+			foreach( var item in QuizData ) {
+				conn.Insert( "Quiz", item );
+			}
+			conn.ExecuteSql( $"SET IDENTITY_INSERT dbo.Quiz OFF" );
 
+			conn.ExecuteSql( $"SET IDENTITY_INSERT dbo.Question ON" );
 			foreach( var item in QuestionData ) 
-				connection.Insert( "Question", item );
-
+				conn.Insert( "Question", item );
+			conn.ExecuteSql( $"SET IDENTITY_INSERT dbo.Question OFF" );
 		}
 
+		public void Dispose() => _db.Cleanup();
 	}
 }
