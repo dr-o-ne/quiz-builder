@@ -1,6 +1,5 @@
 using AutoMapper;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Mapper.Default
 {

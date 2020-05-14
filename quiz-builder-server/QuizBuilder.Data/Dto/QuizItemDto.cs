@@ -10,7 +10,7 @@
 
 		public long? QuestionId { get; set; }
 
-		public int QuizItemTypeId { get; set; }
+		public int TypeId { get; set; }
 
 	}
 

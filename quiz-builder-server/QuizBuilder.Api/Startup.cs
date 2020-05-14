@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Data;
 using QuizBuilder.Domain.Extensions;
-using QuizBuilder.Repository.Extensions;
 using QuizBuilder.Utils;
 
 namespace QuizBuilder.Api {
@@ -33,7 +32,6 @@ namespace QuizBuilder.Api {
             services.AddDispatchers();
             services.AddHandlers();
             services.AddMappers();
-            services.AddRepositories();
 			services.AddUtils();
 			services.AddData();
 		}

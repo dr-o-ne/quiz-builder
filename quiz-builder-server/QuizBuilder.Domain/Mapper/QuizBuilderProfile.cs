@@ -5,7 +5,6 @@ using QuizBuilder.Domain.Mapper.Default;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.View;
-using QuestionDto = QuizBuilder.Repository.Dto.QuestionDto;
 
 namespace QuizBuilder.Domain.Mapper {
 	public sealed class QuizBuilderProfile : Profile {

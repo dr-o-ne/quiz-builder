@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
 using AutoMapper;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Repository.Dto;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Mapper.Default {
@@ -43,9 +43,9 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			return new QuestionDto {
 				Id = source.Id,
 				UId = source.UId,
-				QuestionTypeId = (int)questionType,
+				TypeId = (int)questionType,
 				Name = source.Name,
-				QuestionText = source.Text,
+				Text = source.Text,
 				Settings = settings
 			};
 		}

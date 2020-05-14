@@ -44,9 +44,9 @@ GO
 CREATE TABLE dbo.Question(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[UId] NVARCHAR(10) NOT NULL,
-	[QuestionTypeId] BIGINT NOT NULL,
+	[TypeId] BIGINT NOT NULL,
 	[Name] NVARCHAR(255) NOT NULL,
-	[QuestionText] NVARCHAR(MAX) NOT NULL,
+	[Text] NVARCHAR(MAX) NOT NULL,
 	[Settings] NVARCHAR(MAX) NOT NULL,
 	[CreatedOn] DATETIME2(7) NOT NULL,
 	[ModifiedOn] DATETIME2(7) NOT NULL,
@@ -67,8 +67,8 @@ GO
 CREATE TABLE dbo.QuizItem(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[UId] NVARCHAR(10) NOT NULL,
-	[QuizItemTypeId] BIGINT NOT NULL,
-	[ParentQuizItemId] BIGINT NULL,
+	[TypeId] BIGINT NOT NULL,
+	[ParentId] BIGINT NULL,
 	[QuestionId] BIGINT NULL,
 	[CreatedOn] DATETIME2(7) NOT NULL,
 	[ModifiedOn] DATETIME2(7) NOT NULL,
@@ -83,7 +83,7 @@ GO
 ALTER TABLE dbo.QuizItem ADD  CONSTRAINT [DF_QuizItem_ModifiedOn] DEFAULT (getutcdate()) FOR [ModifiedOn]
 GO
 
-ALTER TABLE dbo.QuizItem WITH CHECK ADD CONSTRAINT [FK_QuizItem_QuizItemType] FOREIGN KEY([QuizItemTypeId])
+ALTER TABLE dbo.QuizItem WITH CHECK ADD CONSTRAINT [FK_QuizItem_QuizItemType] FOREIGN KEY([TypeId])
 REFERENCES dbo.QuizItemType ([Id])
 GO
 

@@ -2,35 +2,34 @@
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Data.DataProviders;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Actions;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Repository.Dto;
-using QuizBuilder.Repository.Repository;
-using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 
 	public sealed class UpdateQuestionCommandHandler : ICommandHandler<UpdateQuestionCommand, CommandResult> {
 
 		private readonly IMapper _mapper;
-		private readonly IGenericRepository<QuestionDto> _questionRepository;
+		private readonly IQuestionDataProvider _questionDataProvider;
 
-		public UpdateQuestionCommandHandler( IMapper mapper, IGenericRepository<QuestionDto> questionRepository ) {
+		public UpdateQuestionCommandHandler( IMapper mapper, IQuestionDataProvider questionDataProvider ) {
 			_mapper = mapper;
-			_questionRepository = questionRepository;
+			_questionDataProvider = questionDataProvider;
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuestionCommand command ) {
 
-			QuestionDto currentQuestionDto = await _questionRepository.GetByUIdAsync( command.UId );
+			QuestionDto currentQuestionDto = await _questionDataProvider.Get( command.UId );
 
 			Question question = _mapper.Map<UpdateQuestionCommand, Question>( command );
 
 			question.Id = currentQuestionDto.Id;
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
-			int rowsAffected = await _questionRepository.UpdateAsync( questionDto );
+			await _questionDataProvider.Update( questionDto );
 
-			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );
+			return new CommandResult( success: true, message: string.Empty );
 
 		}
 	}
