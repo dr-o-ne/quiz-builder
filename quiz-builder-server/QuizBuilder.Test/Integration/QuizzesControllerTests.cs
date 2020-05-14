@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
-using QuizBuilder.Repository.Dto;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
@@ -128,7 +128,7 @@ namespace QuizBuilder.Test.Integration {
 		[Fact]
 		public async Task Quiz_DeleteById_Fail_Test() {
 			using var response = await _httpClient.DeleteAsync( "/quizzes/0000002000" );
-			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
 		[Fact]

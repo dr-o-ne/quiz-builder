@@ -2,11 +2,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Data.DataProviders;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Actions;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Repository.Dto;
-using QuizBuilder.Repository.Repository;
-using QuizBuilder.Utils.Extensions;
 using QuizBuilder.Utils.Services;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
@@ -14,12 +13,12 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 	public sealed class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
 
 		private readonly IMapper _mapper;
-		private readonly IGenericRepository<QuizDto> _quizRepository;
+		private readonly IQuizDataProvider _quizDataProvider;
 		private readonly IUIdService _uIdService;
 
-		public CreateQuizCommandHandler( IMapper mapper, IGenericRepository<QuizDto> quizRepository, IUIdService uIdService ) {
+		public CreateQuizCommandHandler( IMapper mapper, IQuizDataProvider quizDataProvider, IUIdService uIdService ) {
 			_mapper = mapper;
-			_quizRepository = quizRepository;
+			_quizDataProvider = quizDataProvider;
 			_uIdService = uIdService;
 		}
 
@@ -28,9 +27,9 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 			quiz.UId = _uIdService.GetUId();
 
 			QuizDto quizDto = _mapper.Map<Quiz, QuizDto>( quiz );
-			int rowsAffected = await _quizRepository.AddAsync( quizDto );
+			await _quizDataProvider.Add( quizDto );
 
-			return new CommandResult( success: rowsAffected.GreaterThanZero(), message: string.Empty );
+			return new CommandResult( success: true, message: string.Empty );
 		}
 	}
 }

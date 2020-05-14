@@ -11,10 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
-using QuizBuilder.Repository.Dto;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
+using QuestionDto = QuizBuilder.Repository.Dto.QuestionDto;
 
 namespace QuizBuilder.Test.Integration {
 

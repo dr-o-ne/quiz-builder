@@ -2,23 +2,22 @@
 using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Domain.Actions;
-using QuizBuilder.Repository.Dto;
-using QuizBuilder.Repository.Repository;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 
 	public sealed class DeleteQuizzesCommandHandler : ICommandHandler<DeleteQuizzesCommand, CommandResult> {
 
-		private readonly IGenericRepository<QuizDto> _quizRepository;
+		private readonly IQuizDataProvider _quizDataProvider;
 
-		public DeleteQuizzesCommandHandler( IGenericRepository<QuizDto> quizRepository ) {
-			_quizRepository = quizRepository;
+		public DeleteQuizzesCommandHandler( IQuizDataProvider quizDataProvider ) {
+			_quizDataProvider = quizDataProvider;
 		}
 
 		public async Task<CommandResult> HandleAsync( DeleteQuizzesCommand command ) {
-			int rowsAffected = await _quizRepository.DeleteBulkAsync( command.UIds.ToList() );
-			return new CommandResult( success: rowsAffected == command.UIds.Length, message: string.Empty );
+			await _quizDataProvider.Delete( command.UIds.ToList() );
+			return new CommandResult( success: true, message: string.Empty );
 		}
 
 	}
