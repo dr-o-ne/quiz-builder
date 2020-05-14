@@ -40,6 +40,10 @@ namespace QuizBuilder.Domain.Mapper.Default {
 						question = entity;
 						break;
 					}
+				case LongAnswer: {
+						question = JsonSerializer.Deserialize<LongAnswerQuestion>( source.Settings, serializerOptions );
+						break;
+					}
 				default:
 					throw new ArgumentException( "Unknown question type" );
 			}

@@ -62,6 +62,10 @@ export class QuestionPageComponent implements OnInit {
     });
   }
 
+  showChoice() {
+    return this.question.type && this.question.type !== this.questionTypes.LongAnswer;
+  }
+
   createNewQuestion() {
     this.isNewState = true;
     this.question = new Question();
@@ -93,7 +97,9 @@ export class QuestionPageComponent implements OnInit {
   }
 
   initAnswersAndSettings() {
-    this.choices = JSON.parse(this.question.choices);
+    if (this.question.choices) {
+      this.choices = JSON.parse(this.question.choices);
+    }
     this.settings = JSON.parse(this.question.settings);
   }
 
@@ -136,6 +142,9 @@ export class QuestionPageComponent implements OnInit {
   }
 
   isChoicesValid(): boolean {
+    if (this.question.type === this.questionTypes.LongAnswer) {
+      return true;
+    }
     if (this.choices.length === 0) {
       return false;
     }

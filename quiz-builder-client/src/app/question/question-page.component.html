@@ -157,7 +157,7 @@
 
   </div>
 
-  <div *ngIf="question.type" class="main-color">
+  <div *ngIf="showChoice()" class="main-color">
     <app-dynamic-choice
       [questionType]="question.type"
       [choices]="choices"

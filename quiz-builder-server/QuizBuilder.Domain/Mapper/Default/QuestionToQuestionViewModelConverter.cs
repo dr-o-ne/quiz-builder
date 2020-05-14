@@ -45,6 +45,13 @@ namespace QuizBuilder.Domain.Mapper.Default
 					var binaryChoices = new BinaryChoice[] { question.TrueChoice, question.FalseChoice };
 					choices = JsonConvert.SerializeObject( binaryChoices, SetJsonOptions() );
 					break;
+				case LongAnswerQuestion question:
+					var settingsLongAnswer = new {
+						AnswerText = question.AnswerText
+					};
+					settings = JsonConvert.SerializeObject( settingsLongAnswer, SetJsonOptions() );
+					choices = string.Empty;
+					break;
 				default:
 					throw new ArgumentException( "Unknown question type" );
 			}

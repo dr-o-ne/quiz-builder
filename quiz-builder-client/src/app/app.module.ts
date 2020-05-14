@@ -33,6 +33,8 @@ import { QuestionPreviewDirective } from './_directive/question.preview.directiv
 import { DynamicQuestionPreviewComponent } from './question/question-preview/base-question-preview/dynamic-question-preview.component';
 import { TrueFalsePreviewComponent } from './question/question-preview/true-false-preview/true-false-preview.component';
 import { MultiSelectPreviewComponent } from './question/question-preview/multi-select-preview/multi-select-preview.component';
+import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
+import { LongAnswerPreviewComponent } from './question/question-preview/long-answer-preview/long-answer-preview.component';
 
 
 @NgModule({
@@ -55,7 +57,9 @@ import { MultiSelectPreviewComponent } from './question/question-preview/multi-s
       DynamicQuestionPreviewComponent,
       ModalWindowPreviewQuestionComponent,
       TrueFalsePreviewComponent,
-      MultiSelectPreviewComponent
+      MultiSelectPreviewComponent,
+      LongAnswerComponent,
+      LongAnswerPreviewComponent
    ],
    imports: [
       BrowserModule,

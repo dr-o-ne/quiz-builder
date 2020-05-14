@@ -7,6 +7,7 @@ import {TrueFalseAnswerComponent} from '../true-false-answer/true-false-answer.c
 import {MultiSelectChoiceComponent} from '../multi-select-choice/multi-select-choice.component';
 import {BaseChoiceComponent} from './base-choice.component';
 import {MultipleChoiceAnswerComponent} from '../multiple-choice-answer/multiple-choice-answer.component';
+import { LongAnswerComponent } from '../long-answer/long-answer.component';
 
 @Component({
   selector: 'app-dynamic-choice',
@@ -23,7 +24,8 @@ export class DynamicChoiceComponent implements OnChanges {
   private components: { [id in QuestionType]: Type<BaseChoiceComponent> } = {
     [QuestionType.TrueFalse]: TrueFalseAnswerComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
-    [QuestionType.MultiSelect]: MultiSelectChoiceComponent
+    [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
+    [QuestionType.LongAnswer]: LongAnswerComponent
   };
 
   constructor(private resolver: ComponentFactoryResolver) {
