@@ -1,4 +1,4 @@
-import {OnInit} from '@angular/core';
+import {OnInit, ViewChild} from '@angular/core';
 import {Choice} from 'src/app/_models/choice';
 import {
   ChoicesDisplayType,
@@ -6,23 +6,28 @@ import {
   BaseChoiceSettings
 } from 'src/app/_models/settings/answer.settings';
 import {QuestionType} from 'src/app/_models/question';
+import {MatMenuTrigger} from '@angular/material/menu';
+import {Option} from '../../../_models/option';
 
 export class BaseChoiceComponent implements OnInit {
+  @ViewChild(MatMenuTrigger) optionsMenu: MatMenuTrigger;
   choices: Choice[];
   settings: BaseChoiceSettings;
   choicesDisplayTypes = ChoicesDisplayType;
   choicesDisplayTypesKeys: number[] = [];
   choicesEnumerationTypes = ChoicesEnumerationType;
   choicesEnumerationTypesKeys: number[] = [];
-  isFeedback = false;
   questionType: QuestionType;
+
+  options: Option[] = [
+    new Option('feedback', 'Feedback', 'text')
+  ];
 
   ngOnInit() {
     this.initDefaults();
   }
 
   initDefaults(): void {
-    this.initFeedback();
     this.initEnums('choicesDisplayTypes', 'choicesDisplayTypesKeys');
     this.initEnums('choicesEnumerationTypes', 'choicesEnumerationTypesKeys');
     if (!this.choices?.length) {
@@ -35,10 +40,6 @@ export class BaseChoiceComponent implements OnInit {
 
   initEnums(enums, keys): void {
     this[keys] = Object.keys(this[enums]).filter(Number).map(v => Number(v));
-  }
-
-  initFeedback(): void {
-    this.isFeedback = this.choices.some(ans => ans.feedback);
   }
 
   generateId(): number {
@@ -58,8 +59,11 @@ export class BaseChoiceComponent implements OnInit {
     this.choices.push(choice);
   }
 
-  clickOption(event: any, prop: string): void {
-    this[prop] = !this[prop];
+  clickOption(event: MouseEvent, option: Option): void {
+    option.enabled = !option.enabled;
     event.stopPropagation();
+    if (this.options.every(i => !i.enabled)) {
+      this.optionsMenu.closeMenu();
+    }
   }
 }

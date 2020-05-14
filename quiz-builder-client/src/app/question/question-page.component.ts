@@ -7,9 +7,9 @@ import {Choice} from '../_models/choice';
 import {Group} from '../_models/group';
 import {QuestionService} from '../_service/question.service';
 import {BaseChoiceSettings} from '../_models/settings/answer.settings';
-import { MatDialog } from '@angular/material/dialog';
-import { ModalWindowPreviewQuestionComponent } from './modal-window/modal-window-preview-question.component';
-import { MatMenuTrigger } from '@angular/material/menu';
+import {MatDialog} from '@angular/material/dialog';
+import {ModalWindowPreviewQuestionComponent} from './modal-window/modal-window-preview-question.component';
+import {Option} from '../_models/option';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,9 +30,11 @@ export class QuestionPageComponent implements OnInit {
 
   isNewState = false;
 
-  isFeedback = false;
-  isCorrectFeedback = false;
-  isIncorrectFeedback = false;
+  options: Option[] = [
+    new Option('feedback', 'Feedback', 'text'),
+    new Option('correctFeedback', 'Correct feedback', 'text'),
+    new Option('incorrectFeedback', 'Incorrect feedback', 'text'),
+  ];
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -51,7 +53,6 @@ export class QuestionPageComponent implements OnInit {
           this.question = data.questionResolver.question;
           this.initGroup();
           this.initAnswersAndSettings();
-          this.initFeedback();
           return;
         }
         this.createNewQuestion();
@@ -62,18 +63,14 @@ export class QuestionPageComponent implements OnInit {
     });
   }
 
-  showChoice() {
-    return this.question.type && this.question.type !== this.questionTypes.LongAnswer;
-  }
-
-  createNewQuestion() {
+  createNewQuestion(): void {
     this.isNewState = true;
     this.question = new Question();
     this.question.quizId = this.quiz.id;
     this.initTypeQuestion();
   }
 
-  initTypeQuestion() {
+  initTypeQuestion(): void {
     const key = 'typeQuestion' + this.quiz.id;
     const typeQuestion = Number(localStorage.getItem(key));
     if (typeQuestion) {
@@ -82,13 +79,7 @@ export class QuestionPageComponent implements OnInit {
     }
   }
 
-  initFeedback() {
-    this.isFeedback = this.question.feedback ? true : false;
-    this.isCorrectFeedback = this.question.correctFeedback ? true : false;
-    this.isIncorrectFeedback = this.question.incorrectFeedback ? true : false;
-  }
-
-  initGroup() {
+  initGroup(): void {
     const storage = JSON.parse(localStorage.getItem('grouplist'));
     this.groupResurce = storage.filter(obj => obj.quizId === this.quiz.id);
     if (!this.question.groupId) {
@@ -96,14 +87,14 @@ export class QuestionPageComponent implements OnInit {
     }
   }
 
-  initAnswersAndSettings() {
+  initAnswersAndSettings(): void {
     if (this.question.choices) {
       this.choices = JSON.parse(this.question.choices);
     }
     this.settings = JSON.parse(this.question.settings);
   }
 
-  initValidate() {
+  initValidate(): void {
     this.questionForm = this.fb.group({
       name: ['', Validators.required],
       type: ['', Validators.required],
@@ -111,13 +102,13 @@ export class QuestionPageComponent implements OnInit {
     });
   }
 
-  updateQuestionModel() {
+  updateQuestionModel(): void {
     this.question = Object.assign(this.question, this.questionForm.value);
     this.question.choices = JSON.stringify(this.choices);
     this.question.settings = JSON.stringify(this.settings);
   }
 
-  updateQuestion() {
+  updateQuestion(): void {
     if (!this.questionForm.valid) {
       return;
     }
@@ -127,7 +118,7 @@ export class QuestionPageComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  createQuestion() {
+  createQuestion(): void {
     if (!this.questionForm.valid) {
       return;
     }
@@ -153,15 +144,15 @@ export class QuestionPageComponent implements OnInit {
     return !isAnyEmpty && isAnyCorrect;
   }
 
-  selectChangeType() {
+  selectChangeType(): void {
     this.choices = [];
   }
 
-  selectGroup(select) {
+  selectGroup(select): void {
     this.question.groupId = this.groupResurce.filter(group => group.id === select.selected.value)[0].id;
   }
 
-  openPreview() {
+  openPreview(): void {
     this.updateQuestionModel();
     const dialogRef = this.dialog.open(ModalWindowPreviewQuestionComponent, {
       width: '500px',
@@ -173,9 +164,8 @@ export class QuestionPageComponent implements OnInit {
     });
   }
 
-  clickOption(event, prop) {
-    this[prop] = !this[prop];
+  clickOption(event: MouseEvent, option: Option): void {
+    option.enabled = !option.enabled;
     event.stopPropagation();
   }
-
 }
