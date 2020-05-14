@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
+using QuizBuilder.Domain.Actions;
 using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.View;
-using QuizBuilder.Domain.Queries.QuestionQueries;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 
