@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Domain.Commands.QuestionCommands;
+using QuizBuilder.Domain.Actions;
 using QuizBuilder.Repository.Dto;
 using QuizBuilder.Repository.Repository;
 using QuizBuilder.Utils.Extensions;

@@ -2,7 +2,7 @@
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Domain.Commands.QuestionCommands;
+using QuizBuilder.Domain.Actions;
 using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Repository.Dto;
