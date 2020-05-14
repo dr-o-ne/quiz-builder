@@ -5,19 +5,21 @@
 
       <div *ngIf="isNewState" class="col-md-2">
         <button class="full-width" mat-raised-button
-        color="accent"
-        type="submit"
-        (click)="createQuestion()"
-        [disabled]="isDisabledBtn()"
-        >Save</button>
+                color="accent"
+                type="submit"
+                (click)="createQuestion()"
+                [disabled]="isDisabledBtn()"
+        >Save
+        </button>
       </div>
 
       <div *ngIf="!isNewState" class="col-md-2">
         <button class="full-width" mat-raised-button
-        color="primary"
-        type="submit"
-        (click)="updateQuestion()"
-        [disabled]="isDisabledBtn()">Save</button>
+                color="primary"
+                type="submit"
+                (click)="updateQuestion()"
+                [disabled]="isDisabledBtn()">Save
+        </button>
       </div>
 
       <div class="col-md-2">
@@ -41,17 +43,9 @@
       <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="clickOption($event, 'isFeedback')">
-          <mat-icon *ngIf="isFeedback">done</mat-icon>
-          <span>Feedback</span>
-        </button>
-        <button mat-menu-item (click)="clickOption($event, 'isCorrectFeedback')">
-          <mat-icon *ngIf="isCorrectFeedback">done</mat-icon>
-          <span>CorrectFeedback</span>
-        </button>
-        <button mat-menu-item (click)="clickOption($event, 'isIncorrectFeedback')">
-          <mat-icon *ngIf="isIncorrectFeedback">done</mat-icon>
-          <span>IncorrectFeedback</span>
+        <button mat-menu-item *ngFor="let option of options" (click)="clickOption($event, option)">
+          <mat-icon *ngIf="option.enabled">done</mat-icon>
+          <span>{{option.displayName}}</span>
         </button>
       </mat-menu>
     </div>
@@ -76,7 +70,8 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>>
+              </div>
+              >
             </div>
 
             <form [formGroup]="questionForm">
@@ -86,8 +81,9 @@
                   <mat-form-field class="full-width">
                     <mat-label>Name</mat-label>
                     <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
-                    <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear" (click)="question.name =''">
-                        <mat-icon>close</mat-icon>
+                    <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="question.name =''">
+                      <mat-icon>close</mat-icon>
                     </button>
                   </mat-form-field>
                 </div>
@@ -95,14 +91,15 @@
                 <div class="col-md-6">
                   <mat-form-field class="full-width">
                     <mat-label>Type</mat-label>
-                    <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="!isNewState" (selectionChange)="selectChangeType()">
-                    <mat-option>--</mat-option>
+                    <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="!isNewState"
+                                (selectionChange)="selectChangeType()">
+                      <mat-option>--</mat-option>
                       <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
                         {{questionTypes[key]}}
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
-                 </mat-form-field>
+                  </mat-form-field>
                 </div>
               </div>
 
@@ -110,39 +107,26 @@
                 <div class="col-md-12">
                   <mat-form-field class="full-width">
                     <mat-label>Text</mat-label>
-                    <textarea matInput formControlName="text" [(ngModel)]="question.text" required></textarea>
+                    <label>
+                      <textarea matInput formControlName="text" [(ngModel)]="question.text" required></textarea>
+                    </label>
                   </mat-form-field>
                 </div>
               </div>
 
             </form>
 
-            <div class="row" *ngIf="isFeedback">
-              <div class="col-md-12">
-                <mat-form-field class="full-width">
-                  <mat-label>Feedback</mat-label>
-                  <textarea matInput [(ngModel)]="question.feedback"></textarea>
-                </mat-form-field>
+            <div *ngFor="let option of options">
+              <div class="row" *ngIf="option.enabled">
+                <div class="col-md-12">
+                  <mat-form-field class="full-width">
+                    <mat-label>{{option.displayName}}</mat-label>
+                    <textarea matInput [(ngModel)]="question[option.name]"></textarea>
+                  </mat-form-field>
+                </div>
               </div>
             </div>
 
-            <div class="row" *ngIf="isCorrectFeedback">
-              <div class="col-md-12">
-                <mat-form-field class="full-width">
-                  <mat-label>CorrectFeedback</mat-label>
-                  <textarea matInput [(ngModel)]="question.correctFeedback"></textarea>
-                </mat-form-field>
-              </div>
-            </div>
-
-            <div class="row" *ngIf="isIncorrectFeedback">
-              <div class="col-md-12">
-                <mat-form-field class="full-width">
-                  <mat-label>IncorrectFeedback</mat-label>
-                  <textarea matInput [(ngModel)]="question.incorrectFeedback"></textarea>
-                </mat-form-field>
-              </div>
-            </div>
           </div>
 
         </ng-template>
@@ -150,19 +134,17 @@
 
       <mat-tab label="Settings">
         <ng-template matTabContent>
-            Settings
+          Settings
         </ng-template>
       </mat-tab>
     </mat-tab-group>
 
   </div>
 
-  <div *ngIf="showChoice()" class="main-color">
-    <app-dynamic-choice
-      [questionType]="question.type"
-      [choices]="choices"
-      [settings]="settings">
-    </app-dynamic-choice>
-  </div>
+  <app-dynamic-choice
+    [questionType]="question.type"
+    [choices]="choices"
+    [settings]="settings">
+  </app-dynamic-choice>
 
 </div>
