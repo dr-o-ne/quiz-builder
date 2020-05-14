@@ -20,6 +20,7 @@ namespace QuizBuilder.Domain.Mapper.Default {
 				MultiChoice => JsonSerializer.Deserialize<MultipleChoiceQuestion>( source.Settings ),
 				FillInTheBlanks => JsonSerializer.Deserialize<FillInTheBlanksQuestion>( source.Settings ),
 				MultiSelect => JsonSerializer.Deserialize<MultipleSelectQuestion>( source.Settings ),
+				LongAnswer => JsonSerializer.Deserialize<LongAnswerQuestion>( source.Settings ),
 				_ => throw new ArgumentException( "Unknown question type" )
 			};
 

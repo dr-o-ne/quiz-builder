@@ -9,6 +9,7 @@
 			MultiChoice = 2,
 			FillInTheBlanks = 3,
 			MultiSelect = 4,
+			LongAnswer = 5
 		}
 
 		public enum QuizItemType {

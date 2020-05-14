@@ -41,15 +41,15 @@
       <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="isFeedback = !isFeedback;">
+        <button mat-menu-item (click)="clickOption($event, 'isFeedback')">
           <mat-icon *ngIf="isFeedback">done</mat-icon>
           <span>Feedback</span>
         </button>
-        <button mat-menu-item (click)="isCorrectFeedback = !isCorrectFeedback;">
+        <button mat-menu-item (click)="clickOption($event, 'isCorrectFeedback')">
           <mat-icon *ngIf="isCorrectFeedback">done</mat-icon>
           <span>CorrectFeedback</span>
         </button>
-        <button mat-menu-item (click)="isIncorrectFeedback = !isIncorrectFeedback;">
+        <button mat-menu-item (click)="clickOption($event, 'isIncorrectFeedback')">
           <mat-icon *ngIf="isIncorrectFeedback">done</mat-icon>
           <span>IncorrectFeedback</span>
         </button>
@@ -157,7 +157,7 @@
 
   </div>
 
-  <div *ngIf="question.type" class="main-color">
+  <div *ngIf="showChoice()" class="main-color">
     <app-dynamic-choice
       [questionType]="question.type"
       [choices]="choices"

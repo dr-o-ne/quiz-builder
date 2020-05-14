@@ -1,7 +1,7 @@
 <div class="row container-option-btn">
   <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu">Options</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="isFeedback = !isFeedback;">
+    <button mat-menu-item (click)="clickOption($event, 'isFeedback')">
       <mat-icon *ngIf="isFeedback">done</mat-icon>
       <span>Feedback</span>
     </button>
