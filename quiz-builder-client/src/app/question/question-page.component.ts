@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, Pipe, PipeTransform, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../_models/quiz';
@@ -9,6 +9,7 @@ import {QuestionService} from '../_service/question.service';
 import {BaseChoiceSettings} from '../_models/settings/answer.settings';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalWindowPreviewQuestionComponent } from './modal-window/modal-window-preview-question.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -161,6 +162,11 @@ export class QuestionPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  clickOption(event, prop) {
+    this[prop] = !this[prop];
+    event.stopPropagation();
   }
 
 }

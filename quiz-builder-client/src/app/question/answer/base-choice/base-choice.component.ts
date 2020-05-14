@@ -57,4 +57,9 @@ export class BaseChoiceComponent implements OnInit {
     const choice = new Choice(this.generateId(), text, isCorrect);
     this.choices.push(choice);
   }
+
+  clickOption(event: any, prop: string): void {
+    this[prop] = !this[prop];
+    event.stopPropagation();
+  }
 }
