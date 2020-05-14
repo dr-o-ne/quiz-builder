@@ -1,6 +1,6 @@
 using AutoMapper;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Repository.Dto;
 
 namespace QuizBuilder.Domain.Mapper.Default
 {
