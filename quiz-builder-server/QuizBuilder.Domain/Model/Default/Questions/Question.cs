@@ -1,18 +1,12 @@
 ﻿using Newtonsoft.Json;
-using QuizBuilder.Domain.Model.Default.Base;
+using QuizBuilder.Domain.Model.Default.Structure;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
-	public abstract class Question : AuditableEntity<long> {
-
-		[JsonIgnore]
-		public string UId { get; set; }
+	public abstract class Question : QuizEntity {
 
 		[JsonIgnore]
 		public abstract Enums.QuestionType Type { get; }
-
-		[JsonIgnore]
-		public string Name { get; set; }
 
 		[JsonIgnore]
 		public virtual string Text { get; set; }
@@ -22,8 +16,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 		public string CorrectFeedback { get; set; }
 
 		public string IncorrectFeedback { get; set; }
-
-		public abstract bool IsValid();
 
 		public virtual Question Clone() {
 			return (Question)this.MemberwiseClone(); // ToDo: deep cloning needed?

@@ -5,11 +5,9 @@ using Newtonsoft.Json.Serialization;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.View;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace QuizBuilder.Domain.Mapper.Default
-{
-	public class QuestionToQuestionViewModelConverter: ITypeConverter<Question, QuestionViewModel> {
+namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
+	internal sealed class QuestionToQuestionViewModelConverter: ITypeConverter<Question, QuestionViewModel> {
 		public QuestionViewModel Convert( Question source, QuestionViewModel destination, ResolutionContext context ) {
 			if( source is null )
 				return null;

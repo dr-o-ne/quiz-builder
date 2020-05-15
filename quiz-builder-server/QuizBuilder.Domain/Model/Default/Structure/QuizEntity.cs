@@ -6,10 +6,10 @@ namespace QuizBuilder.Domain.Model.Default.Structure {
 	public abstract class QuizEntity : AuditableEntity<long>, IValidatable {
 
 		[JsonIgnore]
-		public string Name { get; set; }
+		public string UId { get; set; }
 
 		[JsonIgnore]
-		public string Text { get; set; }
+		public string Name { get; set; }
 
 		public abstract bool IsValid();
 

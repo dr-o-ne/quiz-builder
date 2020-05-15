@@ -1,15 +1,14 @@
 using AutoMapper;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Utils.Extensions;
 
-namespace QuizBuilder.Domain.Mapper.Default
-{
-	public class QuizToQuizConverter : ITypeConverter<Quiz, Quiz> {
+namespace QuizBuilder.Domain.Mapper.Default.ModelToModel {
+	internal sealed class QuizToQuizConverter : ITypeConverter<Quiz, Quiz> {
 		public Quiz Convert( Quiz source, Quiz destination, ResolutionContext context ) {
 			if( source is null || destination is null )
 				return null;
 
-			if( source == destination ) { // ToDo: override Equals
+			if( source == destination ) {
+				// ToDo: override Equals
 				return destination;
 			}
 

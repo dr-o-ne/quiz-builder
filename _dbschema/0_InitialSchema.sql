@@ -36,9 +36,9 @@ GO
 INSERT INTO dbo.QuizItemType ([Name])
 VALUES
     ('Question'),
-    ('Section'),
+    ('Group'),
     ('FreeText'),
-    ('QuestionPool')
+    ('Pool')
 GO
 
 CREATE TABLE dbo.Question(

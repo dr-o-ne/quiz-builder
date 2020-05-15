@@ -9,8 +9,8 @@ using QuizBuilder.Domain.Model.Default.Questions;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace QuizBuilder.Domain.Mapper.Default {
-	internal class CreateQuestionCommandToQuestionConverter : ITypeConverter<CreateQuestionCommand, Question> {
+namespace QuizBuilder.Domain.Mapper.Default.ActionToModel {
+	internal sealed class CreateQuestionCommandToQuestionConverter : ITypeConverter<CreateQuestionCommand, Question> {
 		public Question Convert( CreateQuestionCommand source, Question destination, ResolutionContext context ) {
 			if( source is null )
 				return null;
