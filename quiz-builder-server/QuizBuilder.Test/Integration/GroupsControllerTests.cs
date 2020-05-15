@@ -50,6 +50,19 @@ namespace QuizBuilder.Test.Integration {
 			Assert.Equal( HttpStatusCode.Created, response.StatusCode );
 		}
 
+		[Fact]
+		public async Task Group_Create_NoParent_Quiz_Test() {
+			var content = JsonConvert.SerializeObject( new {
+				QuizId = "quiz-empty",
+				Name = "Group Name"
+			} );
+
+			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+			using var response = await _httpClient.PostAsync( "/groups/", stringContent );
+
+			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+		}
+
 		private void SetupData() {
 			_db.Cleanup();
 
