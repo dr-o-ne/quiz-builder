@@ -6,7 +6,7 @@ using QuizBuilder.Domain.Actions;
 namespace QuizBuilder.Api.Controllers {
 
 	[ApiController]
-	[Route( "quizzes/{id:alpha}/groups" )]
+	[Route( "[controller]" )]
 	public sealed class QuizzesGroupsController : ControllerBase {
 
 		private readonly IDispatcher _dispatcher;
@@ -15,28 +15,15 @@ namespace QuizBuilder.Api.Controllers {
 			_dispatcher = dispatcher;
 		}
 
-		[HttpGet]
-		public async Task<ActionResult> Get( [FromRoute] string id ) {
-			var query = new GetAllGroupsByQuizQuery {QuizUId = id};
-			var result = await _dispatcher.QueryAsync( query );
-			throw null;
-			//
-			//SELECT * FROM dto.Quiz
-			//return Ok( result );
+		[HttpPost]
+		public async Task<ActionResult> Create( [FromBody] CreateCategoryCommand command ) {
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.Success
+				? (ActionResult)Created( nameof( Create ), result )
+				: UnprocessableEntity( result );
 		}
 	}
 
 }
 
-/*
-	quiz
-		group
-			question
-			question
-		group
-			question
-			question
-
-
-
- */
