@@ -32,7 +32,7 @@ namespace QuizBuilder.Api.Controllers {
 			return Ok( result );
 		}
 
-		[Obsolete]
+		/*[Obsolete]
 		[HttpGet( "group/{groupId}" )]
 		public async Task<ActionResult> GetByGroupId( [FromRoute] GetQuestionsByGroupIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
@@ -40,7 +40,7 @@ namespace QuizBuilder.Api.Controllers {
 			return result is null
 				? (ActionResult)NoContent()
 				: Ok( result );
-		}
+		}*/
 
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] CreateQuestionCommand command ) {

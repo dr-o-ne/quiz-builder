@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using QuizBuilder.Api;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {
 
@@ -19,4 +21,14 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 		}
 
 	}
+
+	internal static class TestApplicationFactoryExtensions {
+
+		public static TestDatabaseWrapper GetTestDatabaseWrapper( this TestApplicationFactory<Startup> factory ) {
+			IConfiguration config = factory.Services.GetRequiredService<IConfiguration>();
+			return new TestDatabaseWrapper( config );
+		}
+
+	}
+
 }

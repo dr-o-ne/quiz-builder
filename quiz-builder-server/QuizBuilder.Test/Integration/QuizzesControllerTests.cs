@@ -6,8 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
@@ -60,8 +58,7 @@ namespace QuizBuilder.Test.Integration {
 
 		public QuizzesControllerTests( TestApplicationFactory<Startup> factory ) {
 			_httpClient = factory.CreateClient();
-			IConfiguration config = factory.Services.GetRequiredService<IConfiguration>();
-			_db = new TestDatabaseWrapper( config );
+			_db = factory.GetTestDatabaseWrapper();
 			SetupData();
 		}
 

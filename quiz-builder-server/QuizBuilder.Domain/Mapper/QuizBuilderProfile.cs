@@ -8,12 +8,14 @@ using QuizBuilder.Domain.Mapper.Default.ModelToModel;
 using QuizBuilder.Domain.Mapper.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
+using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Domain.Model.View;
 
 namespace QuizBuilder.Domain.Mapper {
 	public sealed class QuizBuilderProfile : Profile {
 		public QuizBuilderProfile() {
 			AddQuizMapping();
+			AddGroupMapping();
 			AddQuestionMapping();
 		}
 
@@ -33,6 +35,11 @@ namespace QuizBuilder.Domain.Mapper {
 			CreateMap<Question, QuestionViewModel>().ConvertUsing<QuestionToQuestionViewModelConverter>();
 			CreateMap<CreateQuestionCommand, Question>().ConvertUsing<CreateQuestionCommandToQuestionConverter>();
 			CreateMap<UpdateQuestionCommand, Question>().ConvertUsing<UpdateQuestionCommandToQuestionConverter>();
+		}
+
+		private void AddGroupMapping() {
+			CreateMap<CreateGroupCommand, Group>().ConvertUsing<CreateGroupCommandToGroupConverter>();
+			CreateMap<Group, GroupDto>().ConvertUsing<GroupToGroupDtoConverter>();
 		}
 	}
 }
