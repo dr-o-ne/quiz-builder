@@ -6,7 +6,7 @@ namespace QuizBuilder.Data.DataProviders {
 
 		Task AddQuizQuestionRelationship( long quizId, long quizItemId );
 
-		Task AddQuizGroupRelationship( long quizid, long groupId );
+		Task AddQuizGroupRelationship( long quizId, long groupId );
 
 		Task AddGroupQuestionRelationship( long groupId, long questionId );
 
