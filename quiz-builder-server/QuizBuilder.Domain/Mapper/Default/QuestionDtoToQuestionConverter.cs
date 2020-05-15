@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
 using AutoMapper;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Repository.Dto;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Mapper.Default {
@@ -13,7 +13,7 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			if( source == null )
 				return null;
 
-			var questionType = (Enums.QuestionType)source.QuestionTypeId;
+			var questionType = (Enums.QuestionType)source.TypeId;
 
 			Question entity = questionType switch {
 				TrueFalse => JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings ),
@@ -27,7 +27,7 @@ namespace QuizBuilder.Domain.Mapper.Default {
 			entity.Id = source.Id;
 			entity.UId = source.UId;
 			entity.Name = source.Name;
-			entity.Text = source.QuestionText;
+			entity.Text = source.Text;
 
 			return entity;
 		}

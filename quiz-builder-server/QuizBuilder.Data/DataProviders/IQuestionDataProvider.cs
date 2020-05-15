@@ -6,15 +6,15 @@ namespace QuizBuilder.Data.DataProviders {
 
 	public interface IQuestionDataProvider {
 
-		public Task Add( QuizDto dto );
+		public Task<IEnumerable<QuestionDto>> GetByQuiz( string uid );
 
-		public Task<List<QuizDto>> GetAll();
+		public Task<QuestionDto> Get( string uid );
 
-		public Task Update( QuizDto dto );
+		public Task<(long, long)> Add( QuestionDto dto );
+
+		public Task Update( QuestionDto dto );
 
 		public Task Delete( string uid );
-
-		public Task Delete( List<string> uids );
 
 	}
 

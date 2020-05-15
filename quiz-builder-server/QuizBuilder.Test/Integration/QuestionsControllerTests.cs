@@ -15,7 +15,6 @@ using QuizBuilder.Data.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
-using QuestionDto = QuizBuilder.Repository.Dto.QuestionDto;
 
 namespace QuizBuilder.Test.Integration {
 
@@ -37,17 +36,17 @@ namespace QuizBuilder.Test.Integration {
 				Id = 1,
 				UId = "000000001",
 				Name = "True/False",
-				QuestionTypeId = 1,
+				TypeId = 1,
 				Settings = @"{""TrueChoice"":{""IsCorrect"":false,""Text"":""TrueIncorrect""},""FalseChoice"":{""IsCorrect"":true,""Text"":""FalseCorrect""}}",
-				QuestionText = "TrueChoice Question Text"
+				Text = "TrueChoice Question Text"
 			},
 			new QuestionDto {
 				Id = 2,
 				UId = "000000002",
 				Name = "MultipleChoice",
-				QuestionTypeId = 2,
+				TypeId = 2,
 				Settings = @"{""Choices"":[{""IsCorrect"":true,""Text"":""Choice1""},{""IsCorrect"":false,""Text"":""Choice2""},{""IsCorrect"":false,""Text"":""Choice3""}],""Randomize"":true}",
-				QuestionText = "MultiChoice Question Text"
+				Text = "MultiChoice Question Text"
 			}
 		}.ToImmutableArray();
 
@@ -123,9 +122,9 @@ namespace QuizBuilder.Test.Integration {
 		}
 
 		[Fact]
-		public async Task Question_DeleteById_Fail_Test() {
+		public async Task Question_DeleteById_NoItem_Test() {
 			using var response = await _httpClient.DeleteAsync( "/questions/000000011" );
-			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
 		private void SetupData() {

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Mapper;
-using QuizBuilder.Domain.Model;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Repository.Dto;
 using Xunit;
 
 namespace QuizBuilder.Test.Unit.Questions {

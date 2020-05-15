@@ -51,7 +51,7 @@ SELECT
 	UId,
 	Name,
 	IsVisible
-FROM dbo.Quiz( NOLOCK )
+FROM dbo.Quiz ( NOLOCK )
 WHERE UId = @UId";
 
 			using IDbConnection conn = GetConnection();
@@ -59,6 +59,7 @@ WHERE UId = @UId";
 		}
 
 		public async Task<long> Add( QuizDto dto ) {
+
 			const string sql = @"
 INSERT INTO dbo.Quiz(
 	UId, 

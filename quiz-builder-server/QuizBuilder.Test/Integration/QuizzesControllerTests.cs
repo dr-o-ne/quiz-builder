@@ -126,7 +126,7 @@ namespace QuizBuilder.Test.Integration {
 		}
 
 		[Fact]
-		public async Task Quiz_DeleteById_Fail_Test() {
+		public async Task Quiz_DeleteById_NoItem_Test() {
 			using var response = await _httpClient.DeleteAsync( "/quizzes/0000002000" );
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}

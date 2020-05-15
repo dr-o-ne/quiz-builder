@@ -8,9 +8,9 @@
 
 		public string Name { get; set; }
 
-		public int QuestionTypeId { get; set; }
+		public int TypeId { get; set; }
 
-		public string QuestionText { get; set; }
+		public string Text { get; set; }
 
 		public string Settings { get; set; }
 	}
