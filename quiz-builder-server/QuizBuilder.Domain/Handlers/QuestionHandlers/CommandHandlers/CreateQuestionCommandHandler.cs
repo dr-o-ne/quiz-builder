@@ -45,7 +45,7 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 			//IGNORE GROUP FOR NOW
 			//if( string.IsNullOrWhiteSpace( command.GroupUId ) ) {
 
-				await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
+			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
 
 			/*} else {
 				throw new NotImplementedException();
@@ -55,3 +55,5 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 		}
 	}
 }
+
+

@@ -95,6 +95,7 @@ WHERE UId = @UId";
 		    TypeId,
 		    ParentId,
 		    QuestionId,
+			Name,
 		    CreatedOn,
 		    ModifiedOn
 		)
@@ -104,6 +105,7 @@ WHERE UId = @UId";
 		    1,
 		    NULL,
 		    (SELECT TOP 1 ID FROM @ID),
+			'',
 		    @CreatedOn,
 		    @ModifiedOn
 		)

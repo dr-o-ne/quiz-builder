@@ -70,6 +70,7 @@ CREATE TABLE dbo.QuizItem(
 	[TypeId] BIGINT NOT NULL,
 	[ParentId] BIGINT NULL,
 	[QuestionId] BIGINT NULL,
+	[Name] NVARCHAR(255) NOT NULL,
 	[CreatedOn] DATETIME2(7) NOT NULL,
 	[ModifiedOn] DATETIME2(7) NOT NULL,
 
