@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Actions;
@@ -16,7 +17,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpGet( "{uid}" )]
-		public async Task<ActionResult> GetQuestionById( [FromRoute] GetQuestionByIdQuery query ) {
+		public async Task<ActionResult> Get( [FromRoute] GetQuestionByIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
 			return result is null
@@ -25,12 +26,13 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpGet]
-		public async Task<ActionResult> GetAllQuestions( [FromQuery] GetAllQuestionQuery query ) {
+		public async Task<ActionResult> Get( [FromQuery] GetQuestionsByParentQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
 			return Ok( result );
 		}
 
+		[Obsolete]
 		[HttpGet( "group/{groupId}" )]
 		public async Task<ActionResult> GetByGroupId( [FromRoute] GetQuestionsByGroupIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
@@ -41,16 +43,16 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> CreateQuestion( [FromBody] CreateQuestionCommand command ) {
+		public async Task<ActionResult> Create( [FromBody] CreateQuestionCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
-				? (ActionResult)Created( nameof(GetAllQuestions), result )
+				? (ActionResult)Created( nameof( Create ), result )
 				: UnprocessableEntity( result );
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateQuestion( [FromBody] UpdateQuestionCommand command ) {
+		public async Task<ActionResult> Update( [FromBody] UpdateQuestionCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
@@ -59,7 +61,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpDelete( "{uid}" )]
-		public async Task<ActionResult> DeleteQuestion( [FromRoute] DeleteQuestionCommand command ) {
+		public async Task<ActionResult> Delete( [FromRoute] DeleteQuestionCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success

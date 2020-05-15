@@ -16,7 +16,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpGet( "{uid}" )]
-		public async Task<ActionResult> GetQuizById( [FromRoute] GetQuizByIdQuery query ) {
+		public async Task<ActionResult> Get( [FromRoute] GetQuizByIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
 			return result is null
@@ -32,16 +32,16 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> CreateQuiz( [FromBody] CreateQuizCommand command ) {
+		public async Task<ActionResult> Create( [FromBody] CreateQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
-				? (ActionResult)Created( nameof(GetAllQuizzes), result )
+				? (ActionResult)Created( nameof( Create ), result )
 				: UnprocessableEntity( result );
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateQuiz( [FromBody] UpdateQuizCommand command ) {
+		public async Task<ActionResult> Update( [FromBody] UpdateQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
@@ -50,7 +50,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpDelete( "{uid}" )]
-		public async Task<ActionResult> DeleteQuiz( [FromRoute] DeleteQuizCommand command ) {
+		public async Task<ActionResult> Delete( [FromRoute] DeleteQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
@@ -59,7 +59,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpDelete]
-		public async Task<ActionResult> DeleteQuizzes( [FromBody] DeleteQuizzesCommand command ) {
+		public async Task<ActionResult> Delete( [FromBody] DeleteQuizzesCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success

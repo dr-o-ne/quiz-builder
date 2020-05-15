@@ -8,7 +8,7 @@ using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
-namespace QuizBuilder.Domain.Mapper.Default {
+namespace QuizBuilder.Domain.Mapper.Default.ActionToModel {
 
 	internal sealed class UpdateQuestionCommandToQuestionConverter : ITypeConverter<UpdateQuestionCommand, Question> {
 
