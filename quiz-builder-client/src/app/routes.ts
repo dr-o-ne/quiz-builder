@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
@@ -6,26 +6,39 @@ import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
 
 export const appRoutes: Routes = [
-    {path: '', component: HomeComponent},
-    {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
-        children: [
-            {path: 'quizlist', component: QuizListComponent},
-            {path: 'createquiz', component: QuizPageComponent},
-            {path: 'editquiz/:id', component: QuizPageComponent,
-                    resolve: {quizResolver: QuizResolver}},
-            {path: 'editquiz/:id/addnewquestion', component: QuestionPageComponent,
-                    resolve: {quizResolver: QuizResolver}},
-            {path: 'editquiz/:id/editquestion/:id', component: QuestionPageComponent,
-                     resolve: {quizResolver: QuizResolver, questionResolver: QuestionResolver }},
-            {path: 'preview/:id', component: PreviewQuizComponent,
-                     resolve: {quizResolver: QuizResolver}}
-        ]
-    },
-    {path: '**', redirectTo: 'home', pathMatch: 'full'}
+  { path: '', component: HomeComponent },
+  {
+    path: 'quizzes',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children:
+      [
+        { path: '', component: QuizListComponent },
+        { path: 'new', component: QuizPageComponent }
+      ]
+  },
+  {
+    path: 'quizzes/:id',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children:
+      [
+        { path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },
+        {
+          path: 'questions', children:
+            [
+              { path: '', redirectTo: 'new', pathMatch: 'full' },
+              { path: 'new', component: QuestionPageComponent, resolve: { questionResolver: QuestionResolver } }
+            ]
+        },
+        {
+          path: 'questions/:id',
+          component: QuestionPageComponent,
+          resolve: { questionResolver: QuestionResolver }
+        }
+      ]
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
