@@ -1,9 +1,13 @@
 namespace QuizBuilder.Common.Types.Default {
 
-	public sealed class CommandResult : ICommandResult {
+	public class CommandResult : ICommandResult {
 
-		public bool Success { get; }
-		public string Message { get; }
+		public bool Success { get; set; }
+		public string Message { get; set; }
+
+		public CommandResult()
+		{
+		}
 
 		public CommandResult( bool success, string message ) {
 			Success = success;
