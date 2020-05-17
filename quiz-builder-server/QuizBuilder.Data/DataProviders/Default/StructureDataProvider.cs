@@ -23,7 +23,7 @@ INSERT INTO dbo.QuizQuizItem (
     CreatedOn,
     ModifiedOn
 )
-VALUES (	
+VALUES (
 	@QuizId,
     @QuizItemId,
     @CreatedOn,
@@ -46,7 +46,7 @@ INSERT INTO dbo.QuizQuizItem (
     CreatedOn,
     ModifiedOn
 )
-VALUES (	
+VALUES (
 	@QuizId,
     @QuizItemId,
     @CreatedOn,
@@ -61,8 +61,17 @@ VALUES (
 			} );
 		}
 
-		public Task AddGroupQuestionRelationship( long groupId, long questionId ) {
-			throw new System.NotImplementedException();
+		public async Task AddGroupQuestionRelationship( long groupId, long questionId ) {
+			const string sql = @"
+		UPDATE
+			dbo.QuizItem
+		SET
+			ParentId = @GroupId
+		WHERE
+			Id = @Id";
+
+			using IDbConnection conn = GetConnection();
+			await conn.ExecuteAsync( sql, new { GroupId = groupId, Id = questionId } );
 		}
 
 		private IDbConnection GetConnection() {

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using QuizBuilder.Data.Dto;
 
 namespace QuizBuilder.Data.DataProviders {
@@ -9,6 +10,7 @@ namespace QuizBuilder.Data.DataProviders {
 		public Task Update( GroupDto dto );
 
 		public Task Delete( string uid );
-
+		public Task<GroupDto> Get( string uid );
+		public Task<IEnumerable<GroupDto>> GetByQuiz( string uid );
 	}
 }

@@ -21,10 +21,10 @@ namespace QuizBuilder.Data.DataProviders.Default {
 
 			//	tODO: Add WHERE quiz.UId = @UId
 			const string sql = @"
-WITH 
+WITH
 cte_root_ids AS (
 	SELECT qi.Id FROM dbo.Quiz AS quiz (NOLOCK)
-	INNER JOIN dbo.QuizQuizItem AS qqi (NOLOCK) ON quiz.Id = qqi.QuizId 
+	INNER JOIN dbo.QuizQuizItem AS qqi (NOLOCK) ON quiz.Id = qqi.QuizId
 	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = qqi.QuizItemId
 
 ),
@@ -35,11 +35,11 @@ cte_all_ids AS ( --TODO: add recursion + optimize by types
 	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON ids.Id = qi.ParentId
 )
 SELECT
-	q.Id, 
-	q.UId, 
-	q.TypeId, 
-	q.Name, 
-	q.Text, 
+	q.Id,
+	q.UId,
+	q.TypeId,
+	q.Name,
+	q.Text,
 	q.Settings
 FROM cte_all_ids AS ids
 INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = ids.Id
@@ -49,14 +49,42 @@ INNER JOIN dbo.Question AS q  (NOLOCK) ON qi.QuestionId = q.Id";
 			return await conn.QueryAsync<QuestionDto>( sql, new { UId = uid } );
 		}
 
+		public async Task<IEnumerable<QuestionDto>> GetByParent( string quizUid, string groupUid ) {
+			string groupFilter = string.IsNullOrWhiteSpace( groupUid )
+				? " IS NULL"
+				: " = (SELECT TOP 1 Id FROM dbo.QuizItem WHERE UId = @GroupUId)"; // ToDo: update to normal state
+
+			string sql = @"
+		SELECT
+			q.Id,
+			q.UId,
+			q.TypeId,
+			q.Name,
+			q.Text,
+			q.Settings
+		FROM
+			dbo.Question q WITH(NOLOCK)
+		INNER JOIN
+			dbo.QuizItem qi WITH(NOLOCK) ON qi.QuestionId = q.Id
+		INNER JOIN
+			dbo.QuizQuizItem qqi WITH(NOLOCK) ON qqi.QuizItemId = qi.Id
+		INNER JOIN
+			dbo.Quiz qz WITH(NOLOCK) ON qqi.QuizId = qz.Id
+		WHERE
+			qz.UId = @QuizUid AND qi.ParentId" + groupFilter;
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUid = quizUid, GroupUId = groupUid } );
+		}
+
 		public async Task<QuestionDto> Get( string uid ) {
 			const string sql = @"
-SELECT 
-	Id, 
-	UId, 
-	TypeId, 
-	Name, 
-	Text, 
+SELECT
+	Id,
+	UId,
+	TypeId,
+	Name,
+	Text,
 	Settings
 FROM dbo.Question ( NOLOCK )
 WHERE UId = @UId";
@@ -100,7 +128,7 @@ WHERE UId = @UId";
 		    ModifiedOn
 		)
 		OUTPUT INSERTED.Id INTO @ID
-		VALUES(	
+		VALUES(
 			@UId,
 		    1,
 		    NULL,

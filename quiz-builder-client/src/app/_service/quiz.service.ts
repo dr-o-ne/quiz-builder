@@ -5,56 +5,48 @@ import { Observable } from 'rxjs';
 import { Group } from '../_models/group';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class QuizService{
-    group: Observable<Group>;
-    apiUrl = environment.apiUrl;
+@Injectable( {
+  providedIn: 'root'
+} )
+export class QuizService {
+  group: Observable<Group>;
+  apiUrl = environment.apiUrl;
 
-    constructor(private http: HttpClient){}
+  constructor( private http: HttpClient ) {
+  }
 
-    getAllQuizzes(): Observable<object> {
-        return this.http.get(this.apiUrl + 'quizzes/');
-    }
+  getAllQuizzes(): Observable<object> {
+    return this.http.get( this.apiUrl + 'quizzes' );
+  }
 
-    getQuiz(id: string): Observable<object> {
-      return this.http.get(this.apiUrl + 'quizzes/' + id);
-    }
+  getQuiz( id: string ): Observable<object> {
+    return this.http.get( this.apiUrl + 'quizzes/' + id );
+  }
 
-    createQuiz(quiz: Quiz): Observable<object> {
-      return this.http.post(this.apiUrl + 'quizzes/', quiz);
-    }
+  createQuiz( quiz: Quiz ): Observable<object> {
+    return this.http.post( this.apiUrl + 'quizzes/', quiz );
+  }
 
-    updateQuiz(quiz: Quiz): Observable<object> {
-      return this.http.put(this.apiUrl + 'quizzes/', quiz);
-    }
+  updateQuiz( quiz: Quiz ): Observable<object> {
+    return this.http.put( this.apiUrl + 'quizzes/', quiz );
+  }
 
-    deleteQuiz(id: string): Observable<object> {
-      return this.http.delete(this.apiUrl + 'quizzes/' + id);
-    }
+  deleteQuiz( id: string ): Observable<object> {
+    return this.http.delete( this.apiUrl + 'quizzes/' + id );
+  }
 
-    deleteQuizzes(ids: string[]): Observable<object> {
-      const body = JSON.stringify({ids});
-      const options = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-        body
-      };
-      return this.http.delete(this.apiUrl + 'quizzes/', options);
-    }
+  deleteQuizzes( ids: string[] ): Observable<object> {
+    const body = JSON.stringify( { ids } );
+    const options = {
+      headers: new HttpHeaders( {
+        'Content-Type': 'application/json',
+      } ),
+      body
+    };
+    return this.http.delete( this.apiUrl + 'quizzes', options );
+  }
 
-    getGroupData() {
-        return this.http.get('assets/group.json');
-    }
-
-    getGroup(id: string): Observable<Group> {
-        const tempListGroup = localStorage.getItem('grouplist');
-        const groupList = JSON.parse(tempListGroup);
-        // tslint:disable-next-line: radix
-        const index = groupList.findIndex((obj => obj.id == id));
-        this.group = groupList[index];
-        return this.group;
-    }
+  createGroup( group: Group ): Observable<object> {
+    return this.http.post( this.apiUrl + 'groups', group );
+  }
 }

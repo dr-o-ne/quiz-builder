@@ -54,7 +54,7 @@
               <div class="col-md-6">
                 <div class="row mrgn-container-toogle">
                   <mat-label class="">Visible</mat-label>
-                  <mat-slide-toggle #toogle class="mrgn-lft-toogle" color="primary" [checked]="quiz.isVisible" (change)="clickToogle(toogle)"></mat-slide-toggle>
+                  <mat-slide-toggle #toggle class="mrgn-lft-toogle" color="primary" [checked]="quiz.isVisible" (change)="clickToggle($event.checked)"></mat-slide-toggle>
                 </div>
               </div>
 
@@ -115,7 +115,7 @@
             </mat-form-field>
           </div>
           <div class="col-md-1 btn-vertical" *ngIf="!hideBtnNewGroup">
-            <button mat-icon-button color="accent" (click)="addNewTab()">
+            <button mat-icon-button color="accent" (click)="addGroup()">
               <mat-icon>add</mat-icon>
             </button>
           </div>
@@ -143,7 +143,7 @@
         </ng-template>
         <ng-template matTabContent>
 
-          <app-question-list [quiz]="quiz" [group]="groups[index]"></app-question-list>
+          <app-question-list [quizId]="quiz.id" [groupId]="groups[index].id"></app-question-list>
 
         </ng-template>
 

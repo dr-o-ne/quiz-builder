@@ -17,13 +17,15 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 		private readonly IQuizDataProvider _quizDataProvider;
 		private readonly IQuestionDataProvider _questionDataProvider;
 		private readonly IStructureDataProvider _structureDataProvider;
+		private readonly IGroupDataProvider _groupDataProvider;
 
-		public CreateQuestionCommandHandler( IMapper mapper, IUIdService uIdService, IQuizDataProvider quizDataProvider, IQuestionDataProvider questionDataProvider, IStructureDataProvider structureDataProvider ) {
+		public CreateQuestionCommandHandler( IMapper mapper, IUIdService uIdService, IQuizDataProvider quizDataProvider, IQuestionDataProvider questionDataProvider, IStructureDataProvider structureDataProvider, IGroupDataProvider groupDataProvider ) {
 			_mapper = mapper;
 			_uIdService = uIdService;
 			_quizDataProvider = quizDataProvider;
 			_questionDataProvider = questionDataProvider;
 			_structureDataProvider = structureDataProvider;
+			_groupDataProvider = groupDataProvider;
 		}
 
 		public async Task<CommandResult> HandleAsync( CreateQuestionCommand command ) {
@@ -41,8 +43,12 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.CommandHandlers {
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
 			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( questionDto );
 
-			//IGNORE GROUP FOR NOW
-			//if( string.IsNullOrWhiteSpace( command.GroupUId ) ) {
+			if( !string.IsNullOrWhiteSpace( command.GroupUId ) ) {
+				GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
+				if( groupDto != null ) {
+					await _structureDataProvider.AddGroupQuestionRelationship(groupDto.Id, ids.quizItemId);
+				}
+			}
 
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionType } from '../_models/question';
@@ -37,16 +37,21 @@ export class QuestionPageComponent implements OnInit {
 
   constructor( private fb: FormBuilder,
                private router: Router,
-               private activeRout: ActivatedRoute,
+               private activeRoute: ActivatedRoute,
                private questionService: QuestionService,
                public dialog: MatDialog ) {
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
   }
 
   ngOnInit() {
-    this.activeRout.parent.params.subscribe( p => this.quizId = p.id );
+    if ( !history.state.quizId ) {
+      this.router.navigate(['../'], { relativeTo: this.activeRoute.parent });
+      return;
+    }
+    this.quizId = history.state.quizId;
+    this.groupResurce = history.state.groups;
     this.initValidate();
-    this.activeRout.data.subscribe( data => {
+    this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {
         this.question = data.questionResolver.question;
         this.initAnswersAndSettings();
@@ -61,21 +66,10 @@ export class QuestionPageComponent implements OnInit {
     this.isNewState = true;
     this.question = new Question();
     this.question.quizId = this.quizId;
-    this.initTypeQuestion();
-  }
-
-  initTypeQuestion(): void {
-    const key = 'typeQuestion' + this.quizId;
-    const typeQuestion = Number( localStorage.getItem( key ) );
-    if ( typeQuestion ) {
-      this.question.type = typeQuestion;
-      localStorage.removeItem( key );
-    }
+    this.question.type = history.state.questionType;
   }
 
   initGroup(): void {
-    const storage = JSON.parse( localStorage.getItem( 'grouplist' ) );
-    this.groupResurce = storage.filter( obj => obj.quizId === this.quizId );
     if ( !this.question.groupId ) {
       this.question.groupId = this.groupResurce[0]?.id || '';
     }

@@ -22,7 +22,7 @@ namespace QuizBuilder.Domain.Handlers.QuestionHandlers.QueryHandlers {
 		}
 
 		public async Task<ImmutableList<QuestionViewModel>> HandleAsync( GetQuestionsByParentQuery query ) {
-			var questionDtos = await _questionDataProvider.GetByQuiz("");
+			var questionDtos = await _questionDataProvider.GetByParent( query.QuizUId, query.GroupUId );
 			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );
 			IEnumerable<QuestionViewModel> questionViewModels = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>( questions );
 
