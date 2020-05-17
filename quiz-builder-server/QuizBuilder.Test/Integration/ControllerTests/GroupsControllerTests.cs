@@ -13,7 +13,7 @@ using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
 
-namespace QuizBuilder.Test.Integration {
+namespace QuizBuilder.Test.Integration.ControllerTests {
 
 	[Trait( "Category", "Integration" )]
 	[Collection( "DB" )]
