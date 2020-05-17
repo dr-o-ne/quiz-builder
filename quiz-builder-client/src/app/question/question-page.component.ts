@@ -56,17 +56,17 @@ export class QuestionPageComponent implements OnInit {
         this.question = data.questionResolver.question;
         this.initAnswersAndSettings();
       } else {
-        this.createNewQuestion();
+        this.createNewQuestion(history.state.questionType);
       }
       this.initGroup();
     } );
   }
 
-  createNewQuestion(): void {
+  createNewQuestion(questionType: QuestionType): void {
     this.isNewState = true;
     this.question = new Question();
     this.question.quizId = this.quizId;
-    this.question.type = history.state.questionType;
+    this.question.type = questionType;
   }
 
   initGroup(): void {
@@ -117,7 +117,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   isDisabledBtn(): boolean {
-    return !this.questionForm.valid || !this.isChoicesValid();
+    return !this.questionForm?.valid || !this.isChoicesValid();
   }
 
   isChoicesValid(): boolean {

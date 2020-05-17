@@ -138,12 +138,12 @@
       <mat-tab *ngFor="let tab of groups; let index = index">
 
         <ng-template mat-tab-label>{{ tab.name }}
-          <i *ngIf="groups.length !== 1" class="material-icons" (click)="removeTab(index)">close</i>
+          <i *ngIf="groups?.length !== 1" class="material-icons" (click)="removeTab(index)">close</i>
           <i class="material-icons" (click)="editTab(index)">edit</i>
         </ng-template>
         <ng-template matTabContent>
 
-          <app-question-list [quizId]="quiz.id" [groupId]="groups[index].id"></app-question-list>
+          <app-question-list [quizId]="quiz.id" [group]="groups[index]"></app-question-list>
 
         </ng-template>
 

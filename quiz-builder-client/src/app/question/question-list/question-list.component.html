@@ -17,7 +17,7 @@
   <ng-container matColumnDef="edit">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="['/quizzes/', quizId, 'questions', element.id]">
+      <button mat-icon-button color="primary" (click)="onEditClick(element)">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-cell>

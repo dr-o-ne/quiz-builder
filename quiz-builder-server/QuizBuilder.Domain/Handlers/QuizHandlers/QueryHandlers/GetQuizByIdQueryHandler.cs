@@ -28,16 +28,16 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			IEnumerable<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( quiz.UId );
 			IEnumerable<Group> groups = _mapper.Map<IEnumerable<GroupDto>, IEnumerable<Group>>( groupDtos );
-			IEnumerable<GroupViewModel> quizItemViewModels = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>( groups );
+			IEnumerable<GroupViewModel> groupViewModels = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>( groups );
 			QuizViewModel quizViewModel = _mapper.Map<QuizViewModel>( quiz );
 
 			if( quizViewModel is null ) {
 				return null;
 			}
 
-			return quizViewModel is null
-				? null
-				: new GetQuizByIdDto{ Quiz = quizViewModel };
+			quizViewModel.Groups = groupViewModels;
+
+			return new GetQuizByIdDto { Quiz = quizViewModel };
 		}
 	}
 }

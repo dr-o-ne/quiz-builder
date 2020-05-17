@@ -5,6 +5,7 @@ import { QuestionType } from 'src/app/_models/question';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/_models/group';
 import { QuizService } from 'src/app/_service/quiz.service';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component( {
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,13 +15,11 @@ import { QuizService } from 'src/app/_service/quiz.service';
 } )
 export class QuizPageComponent implements OnInit {
   quiz: Quiz;
-  newGroup: Group;
-  oldGroup: Group;
   selectedIndex = 0;
   quizForm: FormGroup;
   groupFormControl: FormControl;
 
-  groups: Group[];
+  groups: Group[] = [];
 
   hideBtnAddGroup = false;
   hideBtnNewGroup = false;
@@ -52,13 +51,13 @@ export class QuizPageComponent implements OnInit {
   }
 
   initGroups( quiz: Quiz ): void {
-    this.groups = quiz.groups.length ? quiz.groups : [ new Group( '', this.quiz.id ) ];
+    const defaultGroup = new Group( '', this.quiz.id );
+    this.groups.push( defaultGroup );
+    this.groups.push( ...quiz.groups );
   }
 
-  setActiveGroup(): void {
-    if ( this.oldGroup ) {
-      this.selectedIndex = this.groups.findIndex( ( obj => obj.id === this.oldGroup.id ) );
-    }
+  setActiveGroup( groupId: string ): void {
+    this.selectedIndex = this.groups.findIndex( ( group => group.id === groupId ) );
   }
 
   addTab(): void {
@@ -75,11 +74,16 @@ export class QuizPageComponent implements OnInit {
   addGroup(): void {
     if ( this.groupFormControl.valid ) {
       const group = new Group( '', this.quiz.id, this.groupFormControl.value );
-      this.quizService.createGroup( group ).subscribe( response => {
-          // group.id = response.id;
+      this.quizService.createGroup( group ).subscribe( ( response: { groupId: string } ) => {
+          group.id = response.groupId;
           this.groups.push( group );
+          this.setActiveGroup( group.id );
         },
-        error => console.log( error ) );
+        error => console.log( error ),
+        () => {
+          this.cancelData();
+          this.groupFormControl.reset();
+        } );
     }
   }
 
@@ -101,7 +105,7 @@ export class QuizPageComponent implements OnInit {
   }
 
   saveEditTab(): void {
-    if ( !this.groupFormControl.invalid ) {
+    if ( this.groupFormControl.valid ) {
       this.hideBtnAddGroup = false;
       this.hideBtnNewGroup = false;
     }
@@ -125,13 +129,12 @@ export class QuizPageComponent implements OnInit {
     }, error => console.log( error ) );
   }
 
-  addNewQuestion( tabGroup, typeQuestion ): void {
-    // localStorage.setItem( 'typeQuestion' + this.quiz.id, typeQuestion );
+  addNewQuestion( tabGroup: MatTabGroup, typeQuestion: QuestionType ): void {
     this.router.navigate(
       [ 'questions' ],
       {
         relativeTo: this.activeRout,
-        state: { quizId: this.quiz.id, questionType: typeQuestion, groups: this.groups }
+        state: { quizId: this.quiz.id, questionType: typeQuestion, groups: [ this.groups[tabGroup.selectedIndex] ] }
       }
     );
   }

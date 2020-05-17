@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
-using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Actions;
@@ -10,7 +9,7 @@ using QuizBuilder.Utils.Services;
 
 namespace QuizBuilder.Domain.Handlers.GroupHandlers.CommandHandlers {
 
-	public sealed class CreateGroupCommandHandler : ICommandHandler<CreateGroupCommand, CommandResult> {
+	public sealed class CreateGroupCommandHandler : ICommandHandler<CreateGroupCommand, CreateGroupCommandResult> {
 
 		private readonly IMapper _mapper;
 		private readonly IUIdService _uIdService;
@@ -31,23 +30,23 @@ namespace QuizBuilder.Domain.Handlers.GroupHandlers.CommandHandlers {
 			_structureDataProvider = structureDataProvider;
 		}
 
-		public async Task<CommandResult> HandleAsync( CreateGroupCommand command ) {
+		public async Task<CreateGroupCommandResult> HandleAsync( CreateGroupCommand command ) {
 			Group model = _mapper.Map<CreateGroupCommand, Group>( command );
 			model.UId = _uIdService.GetUId();
 
 			if( !model.IsValid() )
-				return new CommandResult( success: false, message: string.Empty );
+				return new CreateGroupCommandResult( success: false, message: string.Empty );
 
 			QuizDto quizDto = await _quizDataProvider.Get( command.QuizUId );
 			if( quizDto == null )
-				return new CommandResult( success: false, message: string.Empty );
+				return new CreateGroupCommandResult( success: false, message: string.Empty );
 
 			GroupDto dto = _mapper.Map<Group, GroupDto>( model );
 
 			long id = await _groupDataProvider.Add( dto );
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, id );
 
-			return new CommandResult( success: true, message: string.Empty );
+			return new CreateGroupCommandResult( success: true, message: string.Empty, groupUId: model.UId );
 		}
 
 	}
