@@ -1,11 +1,17 @@
+using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Model.View;
 
 namespace QuizBuilder.Domain.Dtos {
-	public class GetQuizByIdDto {
-		public QuizViewModel Quiz { get; }
 
-		public GetQuizByIdDto( QuizViewModel quiz ) {
-			Quiz = quiz;
-		}
+	public sealed class GetQuizByIdDtoCommandResult : CommandResult {
+
+		public GetQuizByIdDto Data { get; set; }
+
+	}
+
+	public sealed class GetQuizByIdDto {
+
+		public QuizViewModel Quiz { get; set; }
+
 	}
 }

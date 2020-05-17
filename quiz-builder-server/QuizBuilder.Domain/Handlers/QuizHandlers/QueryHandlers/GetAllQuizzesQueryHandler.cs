@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
@@ -26,7 +27,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 			IEnumerable<Quiz> quizzes = _mapper.Map<IEnumerable<QuizDto>, IEnumerable<Quiz>>( quizDtos );
 			IEnumerable<QuizViewModel> quizViewModels = _mapper.Map<IEnumerable<Quiz>, IEnumerable<QuizViewModel>>( quizzes );
 
-			return new GetAllQuizzesDto( quizViewModels );
+			return new GetAllQuizzesDto{ Quizzes = quizViewModels.ToImmutableList() };
 		}
 	}
 }

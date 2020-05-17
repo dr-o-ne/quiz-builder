@@ -35,8 +35,9 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 				return null;
 			}
 
-			quizViewModel.Groups = quizItemViewModels;
-			return new GetQuizByIdDto( quizViewModel );
+			return quizViewModel is null
+				? null
+				: new GetQuizByIdDto{ Quiz = quizViewModel };
 		}
 	}
 }

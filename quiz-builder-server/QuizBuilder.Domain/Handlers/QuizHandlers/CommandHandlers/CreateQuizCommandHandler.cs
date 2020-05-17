@@ -1,16 +1,17 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
-using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Actions;
+using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Domain.Model.View;
 using QuizBuilder.Utils.Services;
 
 namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 
-	public sealed class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult> {
+	public sealed class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, GetQuizByIdDtoCommandResult> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -22,14 +23,21 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.CommandHandlers {
 			_uIdService = uIdService;
 		}
 
-		public async Task<CommandResult> HandleAsync( CreateQuizCommand command ) {
+		public async Task<GetQuizByIdDtoCommandResult> HandleAsync( CreateQuizCommand command ) {
 			Quiz quiz = _mapper.Map<CreateQuizCommand, Quiz>( command );
 			quiz.UId = _uIdService.GetUId();
 
 			QuizDto quizDto = _mapper.Map<Quiz, QuizDto>( quiz );
 			await _quizDataProvider.Add( quizDto );
 
-			return new CommandResult( success: true, message: string.Empty );
+			var addedQuiz = _mapper.Map<QuizDto, Quiz>( quizDto );
+			var quizViewModel = _mapper.Map<Quiz, QuizViewModel>( addedQuiz );
+
+			return new GetQuizByIdDtoCommandResult {
+				Success = true,
+				Message = string.Empty,
+				Data = new GetQuizByIdDto {Quiz = quizViewModel}
+			};
 		}
 	}
 }
