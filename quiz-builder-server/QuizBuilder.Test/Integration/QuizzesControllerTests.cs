@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
+using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
@@ -63,21 +64,39 @@ namespace QuizBuilder.Test.Integration {
 		}
 
 		[Fact]
-		public async Task Quiz_GetAll_Success_Test() {
-			using var response = await _httpClient.GetAsync( "/quizzes/" );
+		public async Task Quiz_GetById_OK_Test() {
+			(HttpStatusCode statusCode, GetQuizByIdDto data) result = await _httpClient.GetValueAsync<GetQuizByIdDto>( "/quizzes/0000000001" );
 
-			Assert.Equal( HttpStatusCode.OK, response.StatusCode );
+			Assert.Equal( HttpStatusCode.OK, result.statusCode );
+			Assert.Equal( "0000000001", result.data.Quiz.Id );
+			Assert.Equal( "Quiz 1", result.data.Quiz.Name );
+			Assert.True( result.data.Quiz.IsVisible );
 		}
 
 		[Fact]
-		public async Task Quiz_GetById_Success_Test() {
-			using var response = await _httpClient.GetAsync( "/quizzes/0000000001" );
+		public async Task Quiz_GetById_NoContent_Test() {
+			(HttpStatusCode statusCode, GetQuizByIdDto data) result = await _httpClient.GetValueAsync<GetQuizByIdDto>( "/quizzes/00" );
 
-			Assert.Equal( HttpStatusCode.OK, response.StatusCode );
+			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
+		}
+
+		[Fact]
+		public async Task Quiz_GetAll_OK_Test() {
+			(HttpStatusCode statusCode, GetAllQuizzesDto data) result = await _httpClient.GetValueAsync<GetAllQuizzesDto>( "/quizzes" );
+
+			Assert.Equal( HttpStatusCode.OK, result.statusCode );
+			Assert.Equal( 5, result.data.Quizzes.Count );
+			Assert.Equal( "0000000001", result.data.Quizzes[0].Id );
+			Assert.Equal( "0000000002", result.data.Quizzes[1].Id );
+			Assert.Equal( "0000001000", result.data.Quizzes[2].Id );
+			Assert.Equal( "0000001001", result.data.Quizzes[3].Id );
+			Assert.Equal( "0000001002", result.data.Quizzes[4].Id );
 		}
 
 		[Fact]
 		public async Task Quiz_Create_Success_Test() {
+
+
 			var content = JsonConvert.SerializeObject( new { Name = "New Quiz" } );
 			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 

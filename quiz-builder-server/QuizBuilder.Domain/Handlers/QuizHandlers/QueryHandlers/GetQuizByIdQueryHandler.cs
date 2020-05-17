@@ -27,7 +27,7 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 
 			return quizViewModel is null
 				? null
-				: new GetQuizByIdDto( quizViewModel );
+				: new GetQuizByIdDto{ Quiz = quizViewModel };
 		}
 	}
 }

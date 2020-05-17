@@ -25,7 +25,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpGet]
-		public async Task<ActionResult> GetAllQuizzes( [FromQuery] GetAllQuizzesQuery query ) {
+		public async Task<ActionResult> GetAll( [FromQuery] GetAllQuizzesQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
 			return Ok( result );

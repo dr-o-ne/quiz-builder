@@ -1,9 +1,9 @@
 namespace QuizBuilder.Domain.Model.View {
 	public sealed class QuestionViewModel {
 		public string Id { get; set; }
+		public string Name { get; set; }
 		public Enums.QuestionType Type { get; set; }
 		public long GroupId { get; set; } = 1;
-		public string Name { get; set; }
 		public string Text { get; set; }
 		public string Feedback { get; set; }
 		public string CorrectFeedback { get; set; }
