@@ -23,7 +23,7 @@
       </div>
 
       <div class="col-md-2">
-        <button class="full-width" mat-raised-button [routerLink]="['/editquiz/', quiz.id]">
+        <button class="full-width" mat-raised-button [routerLink]="['/quizzes/', quizId]">
           <mat-icon>reply</mat-icon>
         </button>
       </div>
@@ -57,12 +57,6 @@
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="full-width">
-                  <mat-label>Quiz</mat-label>
-                  <input matInput disabled [ngModel]="quiz.name">
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field class="full-width">
                   <mat-label>Group</mat-label>
                   <mat-select #select [value]="question.groupId" (selectionChange)="selectGroup(select)">
                     <mat-option *ngFor="let groupRes of groupResurce" [value]="groupRes.id">
@@ -71,7 +65,6 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              >
             </div>
 
             <form [formGroup]="questionForm">

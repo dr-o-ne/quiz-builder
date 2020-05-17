@@ -21,7 +21,7 @@
       </div>
 
       <div class="col-md-2">
-        <button class="full-width" mat-raised-button [routerLink]="['/quizlist']">
+        <button class="full-width" mat-raised-button [routerLink]="['/quizzes']">
           <mat-icon>reply</mat-icon>
         </button>
       </div>
@@ -135,15 +135,15 @@
     </div>
 
     <mat-tab-group #tabGroup [selectedIndex]="selectedIndex">
-      <mat-tab *ngFor="let tab of dataGroup; let index = index">
+      <mat-tab *ngFor="let tab of groups; let index = index">
 
         <ng-template mat-tab-label>{{ tab.name }}
-          <i *ngIf="dataGroup.length !== 1" class="material-icons" (click)="removeTab(index)">close</i>
+          <i *ngIf="groups.length !== 1" class="material-icons" (click)="removeTab(index)">close</i>
           <i class="material-icons" (click)="editTab(index)">edit</i>
         </ng-template>
         <ng-template matTabContent>
 
-          <app-question-list [quiz]="quiz" [group]="dataGroup[index]"></app-question-list>
+          <app-question-list [quiz]="quiz" [group]="groups[index]"></app-question-list>
 
         </ng-template>
 
