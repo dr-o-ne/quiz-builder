@@ -6,7 +6,6 @@ using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Actions;
 using QuizBuilder.Domain.Dtos;
-using QuizBuilder.Domain.Extensions;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Domain.Model.View;
@@ -25,6 +24,9 @@ namespace QuizBuilder.Domain.Handlers.QuizHandlers.QueryHandlers {
 
 		public async Task<GetQuizByIdDto> HandleAsync( GetQuizByIdQuery query ) {
 			QuizDto quizDto = await _quizDataProvider.Get( query.UId );
+			if( quizDto == null )
+				return null;
+
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			IEnumerable<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( quiz.UId );
 			IEnumerable<Group> groups = _mapper.Map<IEnumerable<GroupDto>, IEnumerable<Group>>( groupDtos );

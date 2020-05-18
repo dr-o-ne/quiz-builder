@@ -22,6 +22,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public Workflow1( TestApplicationFactory<Startup> factory ) {
 			_httpClient = factory.CreateClient();
 			_db = factory.GetTestDatabaseWrapper();
+			_db.Cleanup();
 		}
 
 		[Fact]
