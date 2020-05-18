@@ -9,7 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Dtos;
+using QuizBuilder.Domain.ActionResult.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;

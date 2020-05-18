@@ -1,6 +1,6 @@
 using AutoMapper;
+using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Domain.Model.View;
 
 namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 	internal sealed class QuizToQuizViewModelConverter : ITypeConverter<Quiz, QuizViewModel> {

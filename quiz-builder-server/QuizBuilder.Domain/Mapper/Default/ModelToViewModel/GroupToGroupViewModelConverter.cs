@@ -1,6 +1,6 @@
 using AutoMapper;
+using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default.Structure;
-using QuizBuilder.Domain.Model.View;
 
 namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 	public class GroupToGroupViewModelConverter : ITypeConverter<Group, GroupViewModel> {

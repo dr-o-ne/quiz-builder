@@ -2,9 +2,9 @@ using System;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Domain.Model.View;
 
 namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 	internal sealed class QuestionToQuestionViewModelConverter: ITypeConverter<Question, QuestionViewModel> {

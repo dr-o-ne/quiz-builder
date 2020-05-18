@@ -1,5 +1,5 @@
 using AutoMapper;
-using QuizBuilder.Domain.Actions;
+using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.Mapper.Default.ActionToModel {
