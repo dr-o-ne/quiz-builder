@@ -6,13 +6,13 @@ using QuizBuilder.Common.Handlers;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action;
-using QuizBuilder.Domain.ActionResult.Dto;
+using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.QueryHandlers {
 
-	public sealed class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, GetAllQuizzesDto> {
+	public sealed class GetAllQuizzesQueryHandler : IQueryHandler<GetAllQuizzesQuery, QuizzesQueryResult> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -22,12 +22,12 @@ namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.QueryHandlers {
 			_quizDataProvider = quizDataProvider;
 		}
 
-		public async Task<GetAllQuizzesDto> HandleAsync( GetAllQuizzesQuery query ) {
+		public async Task<QuizzesQueryResult> HandleAsync( GetAllQuizzesQuery query ) {
 			IEnumerable<QuizDto> quizDtos = await _quizDataProvider.GetAll();
 			IEnumerable<Quiz> quizzes = _mapper.Map<IEnumerable<QuizDto>, IEnumerable<Quiz>>( quizDtos );
 			IEnumerable<QuizViewModel> quizViewModels = _mapper.Map<IEnumerable<Quiz>, IEnumerable<QuizViewModel>>( quizzes );
 
-			return new GetAllQuizzesDto{ Quizzes = quizViewModels.ToImmutableList() };
+			return new QuizzesQueryResult{ Quizzes = quizViewModels.ToImmutableList() };
 		}
 	}
 }

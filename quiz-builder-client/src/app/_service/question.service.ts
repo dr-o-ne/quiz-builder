@@ -15,7 +15,7 @@ export class QuestionService {
   }
 
   getQuestionsByParent( quizId: string, groupId: string ): Observable<object> {
-    const options = { params: { quizUId: quizId, groupUId: groupId } };
+    const options = { params: { quizId, groupId } };
     return this.http.get( this.apiUrl + 'questions', options );
   }
 

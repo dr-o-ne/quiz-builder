@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.ActionResult.Dto;
+using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
@@ -61,7 +61,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Questions_GetById_OK_Test() {
 
-			(HttpStatusCode statusCode, GetQuestionByIdDto data) result = await _httpClient.GetValueAsync<GetQuestionByIdDto>( "/questions/000000001" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.GetValueAsync<QuestionQueryResult>( "/questions/000000001" );
 
 			Assert.Equal( HttpStatusCode.OK, result.statusCode );
 			Assert.Equal( "000000001", result.data.Question.Id );
@@ -71,7 +71,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Questions_GetById_NoContent_Test() {
 
-			(HttpStatusCode statusCode, GetQuestionByIdDto data) result = await _httpClient.GetValueAsync<GetQuestionByIdDto>( "/questions/001230001" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.GetValueAsync<QuestionQueryResult>( "/questions/001230001" );
 
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
