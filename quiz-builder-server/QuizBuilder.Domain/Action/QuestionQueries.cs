@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Immutable;
-using Newtonsoft.Json;
+﻿using System.Collections.Immutable;
 using QuizBuilder.Common.Types;
-using QuizBuilder.Domain.ActionResult.Dto;
+using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Domain.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.Action {
@@ -11,11 +9,11 @@ namespace QuizBuilder.Domain.Action {
 		public string GroupUId { get; set; }
 	}
 
-	public sealed class GetQuestionsByQuizIdQuery : IQuery<GetQuestionsByQuizIdDto> {
+	public sealed class GetQuestionsByQuizIdQuery : IQuery<QuestionsQueryResult> {
 		public string QuizUId { get; set; }
 	}
 
-	public sealed class GetQuestionByIdQuery : IQuery<GetQuestionByIdDto> {
+	public sealed class GetQuestionByIdQuery : IQuery<QuestionQueryResult> {
 		public string UId { get; set; }
 	}
 }
