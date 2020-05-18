@@ -2,11 +2,11 @@
 using System.Text.Json.Serialization;
 using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Domain.ActionResult.Dto;
+using QuizBuilder.Domain.ActionResult;
 
 namespace QuizBuilder.Domain.Action {
 
-	public sealed class CreateQuizCommand : ICommand<GetQuizByIdDtoCommandResult> {
+	public sealed class CreateQuizCommand : ICommand<QuizCommandResult> {
 
 		[Required]
 		public string Name { get; set; }

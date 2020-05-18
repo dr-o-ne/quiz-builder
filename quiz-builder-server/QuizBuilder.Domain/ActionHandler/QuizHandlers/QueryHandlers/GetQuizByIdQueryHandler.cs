@@ -5,13 +5,13 @@ using QuizBuilder.Common.Handlers;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action;
-using QuizBuilder.Domain.ActionResult.Dto;
+using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Structure;
 
 namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.QueryHandlers {
-	public sealed class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, GetQuizByIdDto> {
+	public sealed class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, QuizQueryResult> {
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
 		private readonly IGroupDataProvider _groupDataProvider;
@@ -22,7 +22,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.QueryHandlers {
 			_groupDataProvider = groupDataProvider;
 		}
 
-		public async Task<GetQuizByIdDto> HandleAsync( GetQuizByIdQuery query ) {
+		public async Task<QuizQueryResult> HandleAsync( GetQuizByIdQuery query ) {
 			QuizDto quizDto = await _quizDataProvider.Get( query.UId );
 			if( quizDto == null )
 				return null;
@@ -39,7 +39,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.QueryHandlers {
 
 			quizViewModel.Groups = groupViewModels;
 
-			return new GetQuizByIdDto { Quiz = quizViewModel };
+			return new QuizQueryResult { Quiz = quizViewModel };
 		}
 	}
 }
