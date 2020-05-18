@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -10,7 +9,6 @@ using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
-using ServiceStack.OrmLite;
 using Xunit;
 
 namespace QuizBuilder.Test.Integration.ControllerTests {
@@ -65,15 +63,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 
 		private void SetupData() {
 			_db.Cleanup();
-
-			using IDbConnection conn = _db.CreateDbConnection();
-			conn.Open();
-
-			conn.ExecuteSql( "SET IDENTITY_INSERT dbo.Quiz ON" );
-			foreach( var item in QuizData ) {
-				conn.Insert( "Quiz", item );
-			}
-			conn.ExecuteSql( "SET IDENTITY_INSERT dbo.Quiz OFF" );
+			_db.Insert( "Quiz", QuizData );
 		}
 
 		public void Dispose() => _db.Cleanup();
