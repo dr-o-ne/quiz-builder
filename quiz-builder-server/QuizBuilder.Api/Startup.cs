@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using QuizBuilder.Common.Extensions;
+using QuizBuilder.Common;
 using QuizBuilder.Data;
-using QuizBuilder.Domain.Extensions;
+using QuizBuilder.Domain;
 using QuizBuilder.Utils;
 
 namespace QuizBuilder.Api {
