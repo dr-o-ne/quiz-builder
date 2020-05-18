@@ -5,8 +5,8 @@ using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Dtos;
@@ -14,7 +14,7 @@ using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
 
-namespace QuizBuilder.Test.Integration {
+namespace QuizBuilder.Test.Integration.ControllerTests {
 
 	[Trait( "Category", "Integration" )]
 	[Collection( "DB" )]
@@ -149,7 +149,7 @@ namespace QuizBuilder.Test.Integration {
 
 		[Fact]
 		public async Task Quiz_DeleteBulk_Success_Test() {
-			var content = JsonConvert.SerializeObject( new { Ids = new List<string> { "0000001001", "0000001002" } } );
+			var content = JsonSerializer.Serialize( new { Ids = new List<string> { "0000001001", "0000001002" } } );
 
 			using var request = new HttpRequestMessage {
 				Method = HttpMethod.Delete,
