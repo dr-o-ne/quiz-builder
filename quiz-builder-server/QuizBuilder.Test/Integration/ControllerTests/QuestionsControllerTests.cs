@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
+using QuizBuilder.Domain.Dtos;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;
@@ -58,12 +59,21 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Questions_GetById_Success_Test() {
-			string result1 = await _httpClient.GetStringAsync( $"/questions/{QuestionData.First().UId}" );
-			Assert.Contains( "True/False", result1 );
+		public async Task Questions_GetById_OK_Test() {
 
-			string result2 = await _httpClient.GetStringAsync( $"/questions/{QuestionData.Last().UId}" );
-			Assert.Contains( "MultipleChoice", result2 );
+			(HttpStatusCode statusCode, GetQuestionByIdDto data) result = await _httpClient.GetValueAsync<GetQuestionByIdDto>( "/questions/000000001" );
+
+			Assert.Equal( HttpStatusCode.OK, result.statusCode );
+			Assert.Equal( "000000001", result.data.Question.Id );
+			Assert.Equal( "True/False", result.data.Question.Name );
+		}
+
+		[Fact]
+		public async Task Questions_GetById_NoContent_Test() {
+
+			(HttpStatusCode statusCode, GetQuestionByIdDto data) result = await _httpClient.GetValueAsync<GetQuestionByIdDto>( "/questions/001230001" );
+
+			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
 
 		[Fact]
