@@ -34,6 +34,16 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 				conn.ExecuteSql( "DELETE FROM " + dataTable );
 		}
 
+		public void Insert<T>( string table, IEnumerable<T> items ) {
+			using IDbConnection conn = CreateDbConnection();
+			conn.Open();
+
+			conn.ExecuteSql( $"SET IDENTITY_INSERT {table} ON" );
+			foreach( var item in items ) 
+				conn.Insert( table, item );
+			conn.ExecuteSql( $"SET IDENTITY_INSERT {table} OFF" );
+		}
+
 	}
 
 	internal static class GenericTableExtensions {
