@@ -36,7 +36,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.CommandHandlers {
 			return new QuizCommandResult {
 				Success = true,
 				Message = string.Empty,
-				Data = new QuizQueryResult {Quiz = quizViewModel}
+				Quiz = quizViewModel
 			};
 		}
 	}

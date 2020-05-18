@@ -4,9 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.ActionResult;
@@ -76,59 +74,62 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 
 		[Fact]
 		public async Task Question_Create_Success_Test() {
-			var content = JsonConvert.SerializeObject( new {
+
+			var content = new {
 				QuizId = "1000000001",
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
-			} );
+			};
 
-			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.PostValueAsync<QuestionQueryResult>( "/questions/", content );
 
-			using var response = await _httpClient.PostAsync( "/questions/", stringContent );
-
-			Assert.Equal( HttpStatusCode.Created, response.StatusCode );
+			Assert.Equal( HttpStatusCode.Created, result.statusCode );
+			Assert.False( string.IsNullOrWhiteSpace( result.data.Question.Id ) );
+			Assert.Equal( "Question Name", result.data.Question.Name );
+			Assert.Equal( "Question Text", result.data.Question.Text );
 		}
 
 		[Fact]
 		public async Task Question_Create_BadRequest_Test() {
-			var content = JsonConvert.SerializeObject( new { Unknown = "" } );
-			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
 
-			using var response = await _httpClient.PostAsync( "/questions/", stringContent );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.PostValueAsync<QuestionQueryResult>( "/questions/", new { Unknown = "" } );
 
-			Assert.Equal( HttpStatusCode.BadRequest, response.StatusCode );
+			Assert.Equal( HttpStatusCode.BadRequest, result.statusCode );
 		}
 
 		[Fact]
 		public async Task Question_Update_Success_Test() {
-			var content = JsonConvert.SerializeObject( new {
+
+			var content = new {
 				Id = QuestionData.First().UId,
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
-			} );
+			};
 
-			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.PutValueAsync<QuestionQueryResult>( "/questions/", content );
 
-			using var response = await _httpClient.PutAsync( "/questions/", stringContent );
-
-			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
+			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
 
 		[Fact]
 		public async Task Question_DeleteById_Success_Test() {
+
 			var response = await _httpClient.DeleteAsync( "/questions/000000001" );
+
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 
 		[Fact]
 		public async Task Question_DeleteById_NoItem_Test() {
+
 			using var response = await _httpClient.DeleteAsync( "/questions/000000011" );
+
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
 

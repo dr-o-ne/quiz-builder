@@ -6,7 +6,7 @@ namespace QuizBuilder.Domain.ActionResult {
 
 	public sealed class QuizCommandResult : CommandResult {
 
-		public QuizQueryResult Data { get; set; }
+		public QuizViewModel Quiz { get; set; }
 
 	}
 

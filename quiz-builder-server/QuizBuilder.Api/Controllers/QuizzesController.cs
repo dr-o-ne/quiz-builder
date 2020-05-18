@@ -31,6 +31,7 @@ namespace QuizBuilder.Api.Controllers {
 			return Ok( result );
 		}
 
+		//TODO: test
 		[HttpGet("{QuizUId}/questions")]
 		public async Task<ActionResult> GetAll( [FromRoute] GetQuestionsByQuizIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
@@ -43,7 +44,7 @@ namespace QuizBuilder.Api.Controllers {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
-				? (ActionResult)Created( nameof( Create ), result.Data )
+				? (ActionResult)Created( nameof( Create ), result )
 				: UnprocessableEntity( result );
 		}
 
