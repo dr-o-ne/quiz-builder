@@ -31,6 +31,13 @@ namespace QuizBuilder.Api.Controllers {
 			return Ok( result );
 		}
 
+		[HttpGet("{QuizUId}/questions")]
+		public async Task<ActionResult> GetAll( [FromRoute] GetQuestionsByQuizIdQuery query ) {
+			var result = await _dispatcher.QueryAsync( query );
+
+			return Ok( result );
+		}
+
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] CreateQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );

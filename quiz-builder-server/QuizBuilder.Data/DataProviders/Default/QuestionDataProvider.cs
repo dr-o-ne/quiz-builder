@@ -19,40 +19,57 @@ namespace QuizBuilder.Data.DataProviders.Default {
 
 		public async Task<IEnumerable<QuestionDto>> GetByQuiz( string uid ) {
 
-			//	tODO: Add WHERE quiz.UId = @UId
+// 			//	tODO: Add WHERE quiz.UId = @UId
+// 			const string sql = @"
+// WITH
+// cte_root_ids AS (
+// 	SELECT qi.Id FROM dbo.Quiz AS quiz (NOLOCK)
+// 	INNER JOIN dbo.QuizQuizItem AS qqi (NOLOCK) ON quiz.Id = qqi.QuizId
+// 	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = qqi.QuizItemId
+//
+// ),
+// cte_all_ids AS ( --TODO: add recursion + optimize by types
+// 	SELECT id FROM cte_root_ids
+// 	UNION
+// 	SELECT qi.Id FROM cte_root_ids AS ids (NOLOCK)
+// 	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON ids.Id = qi.ParentId
+// )
+// SELECT
+// 	q.Id,
+// 	q.UId,
+// 	q.TypeId,
+// 	q.Name,
+// 	q.Text,
+// 	q.Settings
+// FROM cte_all_ids AS ids
+// INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = ids.Id
+// INNER JOIN dbo.Question AS q  (NOLOCK) ON qi.QuestionId = q.Id";
 			const string sql = @"
-WITH
-cte_root_ids AS (
-	SELECT qi.Id FROM dbo.Quiz AS quiz (NOLOCK)
-	INNER JOIN dbo.QuizQuizItem AS qqi (NOLOCK) ON quiz.Id = qqi.QuizId
-	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = qqi.QuizItemId
-
-),
-cte_all_ids AS ( --TODO: add recursion + optimize by types
-	SELECT id FROM cte_root_ids
-	UNION
-	SELECT qi.Id FROM cte_root_ids AS ids (NOLOCK)
-	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON ids.Id = qi.ParentId
-)
-SELECT
-	q.Id,
-	q.UId,
-	q.TypeId,
-	q.Name,
-	q.Text,
-	q.Settings
-FROM cte_all_ids AS ids
-INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = ids.Id
-INNER JOIN dbo.Question AS q  (NOLOCK) ON qi.QuestionId = q.Id";
+			SELECT
+				q.Id,
+				q.UId,
+				q.TypeId,
+				q.Name,
+				q.Text,
+				q.Settings
+			FROM
+				dbo.Question q WITH(NOLOCK)
+			INNER JOIN
+				dbo.QuizItem qi WITH(NOLOCK) ON q.Id = qi.QuestionId
+			INNER JOIN
+				dbo.QuizQuizItem qqi WITH(NOLOCK) ON qi.Id = qqi.QuizItemId
+			INNER JOIN
+				dbo.Quiz qz WITH(NOLOCK) ON qz.Id = qqi.QuizId
+			WHERE qz.UId = @QuizUId";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QueryAsync<QuestionDto>( sql, new { UId = uid } );
+			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
 		}
 
 		public async Task<IEnumerable<QuestionDto>> GetByParent( string quizUid, string groupUid ) {
 			string groupFilter = string.IsNullOrWhiteSpace( groupUid )
 				? " IS NULL"
-				: " = (SELECT TOP 1 Id FROM dbo.QuizItem WHERE UId = @GroupUId)"; // ToDo: update to normal state
+				: " = (SELECT TOP 1 Id FROM dbo.QuizItem WITH(NOLOCK) WHERE UId = @GroupUId)"; // ToDo: update to normal state
 
 			string sql = @"
 		SELECT

@@ -1,29 +1,33 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {Quiz} from 'src/app/_models/quiz';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {QuizService} from 'src/app/_service/quiz.service';
-import {SelectionModel} from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Quiz } from 'src/app/_models/quiz';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { QuizService } from 'src/app/_service/quiz.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { ActivatedRoute, Router } from '@angular/router';
 
-@Component({
+@Component( {
   selector: 'app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.css']
-})
+  styleUrls: [ './quiz-list.component.css' ]
+} )
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'isVisible', 'edit', 'preview', 'statistic', 'menu'];
+  displayedColumns: string[] = [ 'name', 'isVisible', 'edit', 'preview', 'statistic', 'menu' ];
   filterData: string;
   isMultiSelect = true;
-  tablePageSizeOptions = [15, 20];
+  tablePageSizeOptions = [ 15, 20 ];
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+  @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
+  @ViewChild( MatSort, { static: true } ) sort: MatSort;
+  @ViewChild( MatTable, { static: true } ) table: MatTable<any>;
 
-  constructor(private quizService: QuizService) {
+  constructor( private quizService: QuizService,
+               private router: Router,
+               private activeRoute: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
@@ -31,18 +35,18 @@ export class QuizListComponent implements OnInit {
   }
 
   initDataQuiz(): void {
-    this.quizService.getAllQuizzes().subscribe((response: any) => {
-      this.initDataSource(response.quizzes);
+    this.quizService.getAllQuizzes().subscribe( ( response: any ) => {
+      this.initDataSource( response.quizzes );
     }, error => {
-      console.log(error);
-    });
+      console.log( error );
+    } );
   }
 
-  initDataSource(quizzes: Quiz[]): void {
-    this.dataSource = new MatTableDataSource<Quiz>(quizzes);
+  initDataSource( quizzes: Quiz[] ): void {
+    this.dataSource = new MatTableDataSource<Quiz>( quizzes );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.selection = new SelectionModel<Quiz>(true, []);
+    this.selection = new SelectionModel<Quiz>( true, [] );
   }
 
   isEmptyFilter(): boolean {
@@ -54,7 +58,7 @@ export class QuizListComponent implements OnInit {
     this.filterData = '';
   }
 
-  applyFilter(filterValue: string): void {
+  applyFilter( filterValue: string ): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -63,7 +67,7 @@ export class QuizListComponent implements OnInit {
 
     this.isMultiSelect
       ? this.displayedColumns.shift()
-      : this.displayedColumns.unshift('select');
+      : this.displayedColumns.unshift( 'select' );
 
     this.table.renderRows();
   }
@@ -76,45 +80,55 @@ export class QuizListComponent implements OnInit {
     return this.selection?.hasValue();
   }
 
-  isItemSelected(item: Quiz): boolean {
-    return this.selection.isSelected(item);
+  isItemSelected( item: Quiz ): boolean {
+    return this.selection.isSelected( item );
   }
 
   isPaginatorEnabled(): boolean {
     return this.dataSource?.data?.length > 15;
   }
 
-  checkItemToggle(item: Quiz): void {
-    this.selection.toggle(item);
+  checkItemToggle( item: Quiz ): void {
+    this.selection.toggle( item );
   }
 
-  checkAllToggle(checked: boolean): void {
+  checkAllToggle( checked: boolean ): void {
     checked
-      ? this.selection.select(...this.dataSource.data)
+      ? this.selection.select( ...this.dataSource.data )
       : this.selection.clear();
   }
 
-  clickVisibleToggle(checked: boolean, quiz: Quiz): void {
+  clickVisibleToggle( checked: boolean, quiz: Quiz ): void {
     quiz.isVisible = checked;
-    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+    this.quizService.updateQuiz( quiz ).subscribe( error => console.log( error ) );
   }
 
-  deleteQuiz(quiz: Quiz): void {
-    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
+  deleteQuiz( quiz: Quiz ): void {
+    this.quizService.deleteQuiz( quiz.id ).subscribe( response => {
       this.initDataQuiz();
-    }, error => console.log(error));
+    }, error => console.log( error ) );
   }
 
   bulkDelete(): void {
-    const ids = this.selection.selected.map(x => x.id);
-    this.quizService.deleteQuizzes(ids).subscribe(
+    const ids = this.selection.selected.map( x => x.id );
+    this.quizService.deleteQuizzes( ids ).subscribe(
       response => {
         this.initDataQuiz();
       },
-      error => console.log(error));
+      error => console.log( error ) );
   }
 
   bulkPublish(): void {
-    this.selection.selected.forEach(x => this.clickVisibleToggle(true, x));
+    this.selection.selected.forEach( x => this.clickVisibleToggle( true, x ) );
+  }
+
+  onPreviewClick( item: Quiz ) {
+    this.router.navigate(
+      [ item.id, 'preview' ],
+      {
+        relativeTo: this.activeRoute,
+        state: { quiz: item }
+      }
+    );
   }
 }

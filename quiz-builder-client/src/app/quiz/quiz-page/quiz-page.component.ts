@@ -32,7 +32,7 @@ export class QuizPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private activeRout: ActivatedRoute,
+    private activeRoute: ActivatedRoute,
     private quizService: QuizService
   ) {
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
@@ -40,8 +40,8 @@ export class QuizPageComponent implements OnInit {
 
   ngOnInit() {
     this.initValidate();
-    this.activeRout.data.subscribe( response => {
-      if ( response.hasOwnProperty( 'quizResolver' ) ) {
+    this.activeRoute.data.subscribe( response => {
+      if ( response && response.quizResolver ) {
         this.quiz = response.quizResolver.quiz;
         this.initGroups( this.quiz );
       } else {
@@ -51,7 +51,7 @@ export class QuizPageComponent implements OnInit {
   }
 
   initGroups( quiz: Quiz ): void {
-    const defaultGroup = new Group( '', this.quiz.id );
+    const defaultGroup = new Group( '', quiz.id );
     this.groups.push( defaultGroup );
     this.groups.push( ...quiz.groups );
   }
@@ -119,13 +119,13 @@ export class QuizPageComponent implements OnInit {
 
   createQuiz(): void {
     this.quizService.createQuiz( this.quiz ).subscribe( response => {
-      this.router.navigate( [ '/quizzes' ] );
+      this.router.navigate( [ 'quizzes' ] );
     }, error => console.log( error ) );
   }
 
   updateQuiz(): void {
     this.quizService.updateQuiz( this.quiz ).subscribe( response => {
-      this.router.navigate( [ '/quizzes' ] );
+      this.router.navigate( [ 'quizzes' ] );
     }, error => console.log( error ) );
   }
 
@@ -133,7 +133,7 @@ export class QuizPageComponent implements OnInit {
     this.router.navigate(
       [ 'questions' ],
       {
-        relativeTo: this.activeRout,
+        relativeTo: this.activeRoute,
         state: { quizId: this.quiz.id, questionType: typeQuestion, groups: [ this.groups[tabGroup.selectedIndex] ] }
       }
     );
