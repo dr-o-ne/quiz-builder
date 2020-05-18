@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Domain.Actions;
+using QuizBuilder.Domain.Action;
 
 namespace QuizBuilder.Api.Controllers {
 

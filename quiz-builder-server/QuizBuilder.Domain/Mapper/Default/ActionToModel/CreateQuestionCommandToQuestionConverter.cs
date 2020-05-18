@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using QuizBuilder.Domain.Actions;
+using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Utils;

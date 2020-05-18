@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Dtos;
+using QuizBuilder.Domain.ActionResult.Dto;
 using QuizBuilder.Test.Integration.TestHelpers;
 using ServiceStack.OrmLite;
 using Xunit;

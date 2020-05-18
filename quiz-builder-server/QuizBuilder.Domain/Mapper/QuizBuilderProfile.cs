@@ -1,6 +1,7 @@
 using AutoMapper;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Actions;
+using QuizBuilder.Domain.Action;
+using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Mapper.Default.ActionToModel;
 using QuizBuilder.Domain.Mapper.Default.DtoToModel;
 using QuizBuilder.Domain.Mapper.Default.ModelToDto;
@@ -9,7 +10,6 @@ using QuizBuilder.Domain.Mapper.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
-using QuizBuilder.Domain.Model.View;
 
 namespace QuizBuilder.Domain.Mapper {
 	public sealed class QuizBuilderProfile : Profile {
