@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using QuizBuilder.Domain.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.ActionResult.Dto {
-	public class GetQuestionsByGroupIdDto {
+	public class GetQuestionsByQuizIdDto {
 		public IEnumerable<QuestionViewModel> Questions { get; }
 
-		public GetQuestionsByGroupIdDto( IEnumerable<QuestionViewModel> questions ) {
+		public GetQuestionsByQuizIdDto( IEnumerable<QuestionViewModel> questions ) {
 			Questions = questions;
 		}
 	}

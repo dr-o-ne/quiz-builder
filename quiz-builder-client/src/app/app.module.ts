@@ -35,53 +35,56 @@ import { TrueFalsePreviewComponent } from './question/question-preview/true-fals
 import { MultiSelectPreviewComponent } from './question/question-preview/multi-select-preview/multi-select-preview.component';
 import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
 import { LongAnswerPreviewComponent } from './question/question-preview/long-answer-preview/long-answer-preview.component';
+import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
 
 
-@NgModule({
-   declarations: [
-      AppComponent,
-      NavComponent,
-      HomeComponent,
-      QuizListComponent,
-      QuizPageComponent,
-      QuestionPageComponent,
-      PreviewQuizComponent,
-      QuestionListComponent,
-      TrueFalseAnswerComponent,
-      MultipleChoiceAnswerComponent,
-      MultiSelectChoiceComponent,
-      SingleChoiceDropdownAnswerComponent,
-      ChoiceDirective,
-      QuestionPreviewDirective,
-      DynamicChoiceComponent,
-      DynamicQuestionPreviewComponent,
-      ModalWindowPreviewQuestionComponent,
-      TrueFalsePreviewComponent,
-      MultiSelectPreviewComponent,
-      LongAnswerComponent,
-      LongAnswerPreviewComponent
-   ],
-   imports: [
-      BrowserModule,
-      FormsModule,
-      ReactiveFormsModule,
-      BrowserAnimationsModule,
-      HttpClientModule,
-      MaterialModule,
-      RouterModule.forRoot(appRoutes),
-      MatNativeDateModule,
-      MatTooltipModule
-   ],
-   entryComponents: [QuestionListComponent, QuestionPageComponent, ModalWindowPreviewQuestionComponent],
-   providers: [
-      AuthGuard,
-      QuizService,
-      QuestionService,
-      QuizResolver,
-      QuestionResolver
-   ],
-   bootstrap: [
-      AppComponent
-   ]
-})
-export class AppModule { }
+@NgModule( {
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    QuizListComponent,
+    QuizPageComponent,
+    QuestionPageComponent,
+    PreviewQuizComponent,
+    QuestionListComponent,
+    TrueFalseAnswerComponent,
+    MultipleChoiceAnswerComponent,
+    MultiSelectChoiceComponent,
+    SingleChoiceDropdownAnswerComponent,
+    ChoiceDirective,
+    QuestionPreviewDirective,
+    DynamicChoiceComponent,
+    DynamicQuestionPreviewComponent,
+    ModalWindowPreviewQuestionComponent,
+    TrueFalsePreviewComponent,
+    MultiSelectPreviewComponent,
+    LongAnswerComponent,
+    LongAnswerPreviewComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MaterialModule,
+    RouterModule.forRoot( appRoutes ),
+    MatNativeDateModule,
+    MatTooltipModule
+  ],
+  entryComponents: [ QuestionListComponent, QuestionPageComponent, ModalWindowPreviewQuestionComponent ],
+  providers: [
+    AuthGuard,
+    QuizService,
+    QuestionService,
+    QuizResolver,
+    QuestionResolver,
+    QuizPreviewResolver
+  ],
+  bootstrap: [
+    AppComponent
+  ]
+} )
+export class AppModule {
+}

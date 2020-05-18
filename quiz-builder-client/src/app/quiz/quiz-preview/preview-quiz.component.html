@@ -1,107 +1,31 @@
-<!--<div class="container">-->
+<div class="container;main-color">
 
-<!--  <div class="main-color">-->
+  <div class="main-color">
 
-<!--    <div class="row">-->
-<!--      <div class="col-md-12">-->
-<!--        <h1>{{quiz.name}}</h1>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{quiz.name}}</h1>
+      </div>
+    </div>
 
-<!--  </div>-->
+  </div>
 
-<!--  <div class="main-color">-->
+  <div class="main-color" *ngFor="let question of questions; let i = index">
 
-<!--    <div class="row">-->
-<!--      <div class="col-md-12">-->
-<!--        <h4>Group: {{currentGroup?.name}}</h4>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="col-md-12">
+      <h4>{{i + 1}}. {{question.text}}</h4>
+      <app-dynamic-question-preview
+        [question]="question"
+        [choices]="question.choices">
+      </app-dynamic-question-preview>
+    </div>
 
-<!--  </div>-->
+  </div>
 
-<!--  <div class="main-color" *ngFor="let question of currentGroup?.question; let i = index">-->
+  <div class="col-md-2">
+    <button mat-raised-button [routerLink]="['/quizzes']">
+      <mat-icon>reply</mat-icon>
+    </button>
+  </div>
 
-<!--    <div class="col-md-12">-->
-<!--      <h4>{{i+1}}. {{question.name}}</h4>-->
-<!--    </div>-->
-
-<!--    <div class="row mt-3" *ngIf="question.type === 'Multiple Choice'">-->
-
-<!--      <div class="col-md-12 margin-left-control">-->
-<!--        <div class="row" *ngFor="let answer of question.answers">-->
-<!--          <div class="col-md-6">-->
-<!--            <mat-checkbox [(ngModel)]="answer.isCorrect">{{answer.name}}</mat-checkbox>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--    </div>-->
-
-<!--    <div class="row mt-3" *ngIf="question.type === 'True/False'">-->
-
-<!--      <div class="col-md-12 margin-left-control">-->
-<!--        <mat-radio-group (change)="changeRadioButton($event)">-->
-<!--          <div class="row" *ngFor="let answer of question.answers; let i = index">-->
-<!--            <div class="col-md-6">-->
-<!--              <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">{{answer.name}}</mat-radio-button>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </mat-radio-group>-->
-<!--      </div>-->
-
-<!--    </div>-->
-
-<!--    <div class="row mt-3" *ngIf="question.type === 'Single Choice (Radio Button)'">-->
-
-<!--      <div class="col-md-12 margin-left-control">-->
-<!--        <mat-radio-group (change)="changeRadioButton($event)">-->
-
-<!--          <div class="row" *ngFor="let answer of question.answers; let i = index">-->
-<!--            <div class="col-md-6">-->
-<!--              <mat-radio-button [value]="answer.id" [checked]="answer.isCorrect">{{answer.name}}</mat-radio-button>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </mat-radio-group>-->
-<!--      </div>-->
-
-<!--    </div>-->
-
-<!--    <div class="row mt-3" *ngIf="question.type === 'Single Choice (Dropdown)'">-->
-<!--      <div class="col-md-6 margin-left-control">-->
-
-<!--        <mat-form-field class="full-width">-->
-<!--          <mat-label>Select your answer</mat-label>-->
-<!--          <mat-select [(ngModel)]="selectedAnswer">-->
-<!--            <mat-option *ngFor="let answer of question.answers; let i = index" [value]="answer.id">-->
-<!--              {{answer.name}}-->
-<!--            </mat-option>-->
-<!--          </mat-select>-->
-<!--        </mat-form-field>-->
-
-<!--      </div>-->
-<!--    </div>-->
-
-<!--  </div>-->
-
-<!--  <div *ngIf="groupList?.length !== 1" class="main-color">-->
-<!--    <div class="row">-->
-<!--      <div *ngIf="currentIndex !== 0" class="col-md-6">-->
-<!--        <button class="full-width" mat-raised-button-->
-<!--          color="primary" (click)="prevPage()">Prev</button>-->
-<!--      </div>-->
-<!--      <div *ngIf="groupList?.length !== currentIndex + 1" class="col-md-6">-->
-<!--        <button class="full-width" mat-raised-button-->
-<!--          color="primary" (click)="nextPage()">Next</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="col-md-2">-->
-<!--    <button mat-raised-button [routerLink]="['/quizzes']">-->
-<!--      <mat-icon>reply</mat-icon>-->
-<!--    </button>-->
-<!--  </div>-->
-
-<!--</div>-->
+</div>

@@ -19,6 +19,10 @@ export class QuizService {
     return this.http.get( this.apiUrl + 'quizzes' );
   }
 
+  getAllQuestions( id: string ): Observable<object> {
+    return this.http.get( this.apiUrl + 'quizzes/' + id + '/questions' );
+  }
+
   getQuiz( id: string ): Observable<object> {
     return this.http.get( this.apiUrl + 'quizzes/' + id );
   }

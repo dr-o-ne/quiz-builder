@@ -16,7 +16,7 @@ export class QuestionResolver implements Resolve<Question> {
       .pipe(
         catchError( error => {
           console.log( 'Problem retrieving data' );
-          this.router.navigate( [ '/quizzes' ] );
+          this.router.navigate( [ 'quizzes' ] );
           return of( null );
         } )
       );
