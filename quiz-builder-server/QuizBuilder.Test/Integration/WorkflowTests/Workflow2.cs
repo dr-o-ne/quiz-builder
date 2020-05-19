@@ -77,13 +77,16 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.Equal( "Question Name 2 New", result6.data.Question.Name );
 
 			// Delete Question 1 //TODO: FIX DELETE
-			var result7 = await _httpClient.DeleteAsync( $"/questions/{questionUId1}" );
+			var result7 = await _httpClient.DeleteAsync( $"/quizzes/{uid1}/questions/{questionUId1}" );
 			Assert.Equal( HttpStatusCode.NoContent, result7.StatusCode );
 
 			// Get Question 1
-			(HttpStatusCode statusCode, QuestionQueryResult data) result8 = await _httpClient.GetValueAsync<QuestionQueryResult>( $"/questions/{questionUId2}" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result8 = await _httpClient.GetValueAsync<QuestionQueryResult>( $"/questions/{questionUId1}" );
 			Assert.Equal( HttpStatusCode.NoContent, result8.statusCode );
 
+			// Get Question 2
+			(HttpStatusCode statusCode, QuestionQueryResult data) result9 = await _httpClient.GetValueAsync<QuestionQueryResult>( $"/questions/{questionUId2}" );
+			Assert.Equal( "Question Name 2 New", result9.data.Question.Name );
 		}
 
 		public void Dispose() => _db.Cleanup();

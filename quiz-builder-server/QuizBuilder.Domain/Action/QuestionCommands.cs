@@ -63,6 +63,10 @@ namespace QuizBuilder.Domain.Action {
 
 	public sealed class DeleteQuestionCommand : ICommand<CommandResult> {
 
+		[Required]
+		public string QuizUId { get; set; }
+
+		[Required]
 		public string UId { get; set; }
 
 	}

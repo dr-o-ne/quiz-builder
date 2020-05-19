@@ -17,6 +17,8 @@ namespace QuizBuilder.Domain.ActionHandler.QuestionHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( DeleteQuestionCommand command ) {
+
+			await _structureDataProvider.DeleteQuizQuestionRelationship( command.QuizUId, command.UId );
 			await _questionDataProvider.Delete( command.UId );
 
 			return new CommandResult( success: true, message: string.Empty );

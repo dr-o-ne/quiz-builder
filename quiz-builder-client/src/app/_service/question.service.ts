@@ -31,7 +31,4 @@ export class QuestionService {
     return this.http.post( this.apiUrl + 'questions', question );
   }
 
-  deleteQuestion( id: string ): Observable<object> {
-    return this.http.delete( this.apiUrl + 'questions/' + id );
-  }
 }

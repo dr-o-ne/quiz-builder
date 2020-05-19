@@ -39,6 +39,15 @@ namespace QuizBuilder.Api.Controllers {
 			return Ok( result );
 		}
 
+		[HttpDelete( "{quizUId}/questions/{uid}" )]
+		public async Task<ActionResult> Delete( [FromRoute] DeleteQuestionCommand command ) {
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.Success
+				? (ActionResult)NoContent()
+				: UnprocessableEntity( result );
+		}
+
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] CreateQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );

@@ -117,22 +117,6 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
 
-		[Fact]
-		public async Task Question_DeleteById_Success_Test() {
-
-			var response = await _httpClient.DeleteAsync( "/questions/000000001" );
-
-			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
-		}
-
-		[Fact]
-		public async Task Question_DeleteById_NoItem_Test() {
-
-			using var response = await _httpClient.DeleteAsync( "/questions/000000011" );
-
-			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
-		}
-
 		private void SetupData() {
 			_db.Cleanup();
 			_db.Insert( "Quiz", QuizData );
