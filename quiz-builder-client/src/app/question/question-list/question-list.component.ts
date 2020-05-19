@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuestionService } from 'src/app/_service/question.service';
+import { QuizService } from 'src/app/_service/quiz.service';
 import { clonedeep } from 'lodash.clonedeep';
 import { CdkDropList, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Group } from '../../_models/group';
@@ -32,6 +33,7 @@ export class QuestionListComponent implements OnInit {
 
   constructor(
     private questionService: QuestionService,
+    private quizService: QuizService,
     private router: Router,
     private activeRout: ActivatedRoute ) {
   }
@@ -70,7 +72,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   deleteQuestion( question: Question ): void {
-    this.questionService.deleteQuestion( question.id ).subscribe( response => {
+    this.quizService.deleteQuestion( this.quizId, question.id ).subscribe( response => {
       this.initQuestions( this.quizId, this.group.id );
     }, error => console.log( error ) );
   }

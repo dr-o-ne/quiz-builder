@@ -74,6 +74,20 @@ VALUES (
 			await conn.ExecuteAsync( sql, new { GroupId = groupId, Id = questionId } );
 		}
 
+		public async Task DeleteQuizQuestionRelationship( string quizUId, string quizItemUId ) {
+			const string sql = @"
+DELETE qqi 
+FROM dbo.QuizQuizItem qqi
+INNER JOIN dbo.Quiz q ON q.Id = qqi.QuizId
+INNER JOIN dbo.QuizItem qi ON qi.Id = qqi.QuizItemId
+WHERE 
+	q.UId = @QuizUId AND
+	qi.UId = @QuizItemId";
+
+			using IDbConnection conn = GetConnection();
+			await conn.ExecuteAsync( sql, new { QuizUId = quizUId, QuizItemId = quizItemUId } );
+		}
+
 		private IDbConnection GetConnection() {
 			IDbConnection conn = _dbConnectionFactory.GetConnection();
 			conn.Open();
