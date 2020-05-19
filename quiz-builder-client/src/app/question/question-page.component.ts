@@ -27,8 +27,6 @@ export class QuestionPageComponent implements OnInit {
   choices: Choice[] = [];
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
-  isNewState = false;
-
   options: Option[] = [
     new Option( 'feedback', 'Feedback', 'text' ),
     new Option( 'correctFeedback', 'Correct feedback', 'text' ),
@@ -63,7 +61,6 @@ export class QuestionPageComponent implements OnInit {
   }
 
   createNewQuestion(questionType: QuestionType): void {
-    this.isNewState = true;
     this.question = new Question();
     this.question.quizId = this.quizId;
     this.question.type = questionType;
@@ -94,6 +91,14 @@ export class QuestionPageComponent implements OnInit {
     this.question = Object.assign( this.question, this.questionForm.value );
     this.question.choices = JSON.stringify( this.choices );
     this.question.settings = JSON.stringify( this.settings );
+  }
+
+  saveChange(): void {
+    if ( !this.question.id ) {
+      this.createQuestion();
+      return;
+    }
+    this.updateQuestion();
   }
 
   updateQuestion(): void {

@@ -3,21 +3,12 @@
   <div class="main-color header-stick">
     <div class="row">
 
-      <div *ngIf="!quiz.id" class="col-md-2">
+      <div class="col-md-2">
         <button class="full-width" mat-raised-button
         color="accent"
         type="submit"
-        (click)="createQuiz()"
-        [disabled]="!quizForm.valid"
-        >Save</button>
-      </div>
-
-      <div *ngIf="quiz.id" class="col-md-2">
-        <button class="full-width" mat-raised-button
-        color="primary"
-        type="submit"
-        (click)="updateQuiz()"
-        >Save</button>
+        (click)="saveChange()"
+        [disabled]="!quizForm.valid">Save</button>
       </div>
 
       <div class="col-md-2">
@@ -79,7 +70,7 @@
 
     <div class="row">
 
-      <div *ngIf="!hideBtnAddGroup" class="col-md-2">
+      <div *ngIf="!groupForm.isHide; else hide" class="col-md-2">
         <button mat-raised-button class="full-width" color="primary" [matMenuTriggerFor]="menu">
           Add New
         </button>
@@ -99,39 +90,38 @@
         </mat-menu>
       </div>
 
-      <div *ngIf="hideBtnAddGroup" class="col-md-6">
+      <ng-template #hide>
 
-        <div class="row">
-          <div class="col-md-10">
-            <mat-form-field class="full-width">
-              <mat-label>Name</mat-label>
-              <input matInput type="text" [(ngModel)]="newNameGroup" required [formControl]="groupFormControl">
-              <button mat-button *ngIf="newNameGroup" matSuffix mat-icon-button aria-label="Clear" (click)="newNameGroup =''">
-                  <mat-icon>close</mat-icon>
-              </button>
-              <mat-error *ngIf="groupFormControl.hasError('required')">
-                Name group <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
+        <div class="col-md-6">
+
+          <div class="row">
+            <div class="col-md-8">
+              <mat-form-field class="full-width">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" [(ngModel)]="groupForm.name" required [formControl]="groupFormControl">
+                <button mat-button *ngIf="groupForm.name" matSuffix mat-icon-button aria-label="Clear" (click)="groupForm.name =''">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="groupFormControl.hasError('required')">
+                  Name group <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div *ngFor="let btn of btnGroupControls">
+              <div class="btn-vertical"  *ngIf="!btn.isHide">
+                <button mat-icon-button color="accent" (click)="btn.action()">
+                  <mat-icon>{{btn.name}}</mat-icon>
+                </button>
+              </div>
+            </div>
+
           </div>
-          <div class="col-md-1 btn-vertical" *ngIf="!hideBtnNewGroup">
-            <button mat-icon-button color="accent" (click)="addGroup()">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-          <div class="col-md-1 btn-vertical" *ngIf="hideBtnNewGroup">
-            <button mat-icon-button color="accent" (click)="saveEditTab()">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </div>
-          <div class="col-md-1 btn-vertical">
-            <button mat-icon-button color="accent" (click)="cancelData()">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </div>
+  
         </div>
 
-      </div>
+      </ng-template>
+
     </div>
 
     <mat-tab-group #tabGroup [selectedIndex]="selectedIndex">
