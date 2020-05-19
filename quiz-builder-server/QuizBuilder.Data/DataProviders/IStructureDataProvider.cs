@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace QuizBuilder.Data.DataProviders {
 
@@ -11,6 +12,8 @@ namespace QuizBuilder.Data.DataProviders {
 		Task AddGroupQuestionRelationship( long groupId, long questionId );
 
 		Task DeleteQuizQuestionRelationship( string quizUId, string quizItemUId );
+
+		Task<IEnumerable<(string, int)>> DeleteQuizRelationships( string quizUId );
 
 	}
 }

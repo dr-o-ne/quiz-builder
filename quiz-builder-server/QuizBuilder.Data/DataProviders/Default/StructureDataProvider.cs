@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
@@ -86,6 +87,26 @@ WHERE
 
 			using IDbConnection conn = GetConnection();
 			await conn.ExecuteAsync( sql, new { QuizUId = quizUId, QuizItemId = quizItemUId } );
+		}
+
+		public async Task<IEnumerable<(string, int)>> DeleteQuizRelationships( string quizUId ) {
+			const string sql = @"
+DECLARE @QuizQuizItemIds TABLE
+( Id BIGINT )
+
+DELETE qqi
+OUTPUT DELETED.Id INTO @QuizQuizItemIds
+FROM dbo.QuizQuizItem qqi
+INNER JOIN dbo.Quiz q ON q.Id = qqi.QuizId
+WHERE q.UId = @QuizUId
+
+SELECT UId, q.TypeId
+FROM dbo.QuizItem q
+INNER JOIN @QuizQuizItemIds AS temp ON temp.Id = q.Id
+";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QueryAsync<(string, int)>( sql, new { QuizUId = quizUId } );
 		}
 
 		private IDbConnection GetConnection() {
