@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { QuestionType } from 'src/app/_models/question';
@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/_models/group';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { MatTabGroup } from '@angular/material/tabs';
+import { GroupForm, BtnGroupControl } from 'src/app/_models/option';
 
 @Component( {
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,14 +21,17 @@ export class QuizPageComponent implements OnInit {
   groupFormControl: FormControl;
 
   groups: Group[] = [];
-
-  hideBtnAddGroup = false;
-  hideBtnNewGroup = false;
   currentIndexTab: number;
-  newNameGroup: string;
 
   questionTypes = QuestionType;
   questionTypeKeys: number[];
+
+  groupForm = new GroupForm();
+  btnGroupControls: BtnGroupControl[] = [
+    new BtnGroupControl('add', this.addGroup.bind(this), false),
+    new BtnGroupControl('edit', this.saveEditTab.bind(this), true),
+    new BtnGroupControl('cancel', this.resetGroupForm.bind(this), false)
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -61,7 +65,7 @@ export class QuizPageComponent implements OnInit {
   }
 
   addTab(): void {
-    this.hideBtnAddGroup = true;
+    this.groupForm.isHide = true;
     this.groupFormControl = new FormControl( '', [
       Validators.required
     ] );
@@ -71,9 +75,9 @@ export class QuizPageComponent implements OnInit {
     this.groups.splice( index, 1 );
   }
 
-  addGroup(): void {
+  addGroup() {
     if ( this.groupFormControl.valid ) {
-      const group = new Group( '', this.quiz.id, this.groupFormControl.value );
+      const group = new Group( '', this.quiz.id, this.groupForm.name );
       this.quizService.createGroup( group ).subscribe( ( response: { groupId: string } ) => {
           group.id = response.groupId;
           this.groups.push( group );
@@ -81,16 +85,21 @@ export class QuizPageComponent implements OnInit {
         },
         error => console.log( error ),
         () => {
-          this.cancelData();
-          this.groupFormControl.reset();
+          this.resetGroupForm();
         } );
     }
   }
 
-  cancelData(): void {
-    this.hideBtnAddGroup = false;
-    this.hideBtnNewGroup = false;
-    this.newNameGroup = '';
+  resetGroupForm(): void {
+    this.groupForm.isHide = false;
+    this.setupBtnGroup('edit');
+    this.groupFormControl.reset();
+  }
+
+  setupBtnGroup( action: string ) {
+    this.btnGroupControls.forEach( btn => {
+      btn.isHide = btn.name === action;
+    });
   }
 
   editTab( index: number ): void {
@@ -98,16 +107,16 @@ export class QuizPageComponent implements OnInit {
     this.groupFormControl = new FormControl( '', [
       Validators.required
     ] );
-    this.hideBtnAddGroup = true;
-    const currentGroup = this.groups[index];
-    this.newNameGroup = currentGroup.name;
-    this.hideBtnNewGroup = true;
+    this.groupForm.name = this.groups[index].name;
+    this.groupForm.isHide = true;
+    this.setupBtnGroup('add');
   }
 
   saveEditTab(): void {
     if ( this.groupFormControl.valid ) {
-      this.hideBtnAddGroup = false;
-      this.hideBtnNewGroup = false;
+      this.groupForm.isHide = false;
+      this.setupBtnGroup('edit');
+      this.groups[this.currentIndexTab].name = this.groupForm.name;
     }
   }
 
@@ -115,6 +124,14 @@ export class QuizPageComponent implements OnInit {
     this.quizForm = this.fb.group( {
       name: [ '', Validators.required ]
     } );
+  }
+
+  saveChange(): void {
+    if ( !this.quiz.id ) {
+      this.createQuiz();
+      return;
+    }
+    this.updateQuiz();
   }
 
   createQuiz(): void {

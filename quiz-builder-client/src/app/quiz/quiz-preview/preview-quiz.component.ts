@@ -52,27 +52,6 @@ export class PreviewQuizComponent implements OnInit {
     this.questions.every(q => q.choices = JSON.parse( q.choices ));
   }
 
-  buildStructQuiz() {
-    // this.groupList = this.groupList.filter(item => item.quizId === this.quiz.id);
-    // this.groupList.forEach(group => {
-    //   group.question = this.questionList.filter(question => question.groupId === group.id);
-    //   group.question.forEach(question => {
-    //     question.choices = this.answerList.filter(answer => answer.questionId === question.id).map(changeAns => {
-    //       return {
-    //         id: changeAns.id,
-    //         isCorrect: false,
-    //         name: changeAns.name,
-    //         questionId: changeAns.questionId
-    //       };
-    //     });
-    //   });
-    // });
-    this.currentGroup = this.groupList[this.currentIndex];
-  }
-
-  changeRadioButton( event ) {
-  }
-
   nextPage() {
     if ( this.groupList.length > this.currentIndex ) {
       this.currentGroup = this.groupList[++this.currentIndex];
