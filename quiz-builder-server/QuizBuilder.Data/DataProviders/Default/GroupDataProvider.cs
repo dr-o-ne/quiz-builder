@@ -53,8 +53,12 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			throw new System.NotImplementedException();
 		}
 
-		public Task Delete( string uid ) {
-			throw new System.NotImplementedException();
+		public async Task Delete( string uid ) {
+			const string sql =
+				@"DELETE FROM dbo.QuizItem WHERE UId=@UId";
+
+			using IDbConnection conn = GetConnection();
+			await conn.ExecuteAsync( sql, new { UId = uid } );
 		}
 
 		public async Task<GroupDto> Get( string uid ) {
