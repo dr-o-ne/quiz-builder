@@ -16,6 +16,8 @@ namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.CommandHandlers {
 		}
 
 		public async Task<CommandResult> HandleAsync( DeleteQuizzesCommand command ) {
+			//TODO: delete questions
+			//TODO: delete groups
 			await _quizDataProvider.Delete( command.UIds.ToList() );
 			return new CommandResult( success: true, message: string.Empty );
 		}

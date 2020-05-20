@@ -15,7 +15,7 @@
 		public enum QuizItemType {
 			None = 0,
 			Question = 1,
-			Section = 2,
+			Group = 2,
 			FreeText = 3,
 			QuestionPool = 4
 		}
