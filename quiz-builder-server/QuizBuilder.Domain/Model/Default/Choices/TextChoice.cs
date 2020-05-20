@@ -1,4 +1,5 @@
 ﻿using static QuizBuilder.Domain.Model.Enums;
+using static QuizBuilder.Domain.Model.Enums.TextEvaluationType;
 
 namespace QuizBuilder.Domain.Model.Default.Choices {
 
@@ -7,7 +8,7 @@ namespace QuizBuilder.Domain.Model.Default.Choices {
 		public TextEvaluationType TextEvaluationType { get; set; }
 
 		public override bool IsValid() =>
-			base.IsValid() && TextEvaluationType != TextEvaluationType.None;
+			base.IsValid() && TextEvaluationType != None;
 	}
 
 }

@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using QuizBuilder.Domain.Model.Default.Structure;
+using static QuizBuilder.Domain.Model.Enums;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public abstract class Question : QuizEntity {
 
 		[JsonIgnore]
-		public abstract Enums.QuestionType Type { get; }
+		public abstract QuestionType Type { get; }
 
 		[JsonIgnore]
 		public virtual string Text { get; set; }

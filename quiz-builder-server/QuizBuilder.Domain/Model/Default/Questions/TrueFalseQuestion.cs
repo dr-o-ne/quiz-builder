@@ -1,5 +1,8 @@
 ﻿using QuizBuilder.Domain.Model.Default.Choices;
 using static QuizBuilder.Domain.Model.Enums;
+using static QuizBuilder.Domain.Model.Enums.ChoicesDisplayType;
+using static QuizBuilder.Domain.Model.Enums.ChoicesEnumerationType;
+using static QuizBuilder.Domain.Model.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
@@ -9,11 +12,11 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public BinaryChoice FalseChoice { get; set; } = new BinaryChoice();
 
-		public ChoicesDisplayType ChoicesDisplayType { get; set; } = ChoicesDisplayType.Vertical;
+		public ChoicesDisplayType ChoicesDisplayType { get; set; } = Vertical;
 
-		public ChoicesEnumerationType ChoicesEnumerationType { get; set; } = ChoicesEnumerationType.NoEnumeration;
+		public ChoicesEnumerationType ChoicesEnumerationType { get; set; } = NoEnumeration;
 
-		public override QuestionType Type { get => QuestionType.TrueFalse; }
+		public override QuestionType Type { get => TrueFalse; }
 
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
