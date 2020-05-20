@@ -76,7 +76,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			(HttpStatusCode statusCode, QuestionQueryResult data) result6 = await _httpClient.GetValueAsync<QuestionQueryResult>( $"/questions/{questionUId2}" );
 			Assert.Equal( "Question Name 2 New", result6.data.Question.Name );
 
-			// Delete Question 1 //TODO: FIX DELETE
+			// Delete Question 1
 			var result7 = await _httpClient.DeleteAsync( $"/quizzes/{uid1}/questions/{questionUId1}" );
 			Assert.Equal( HttpStatusCode.NoContent, result7.StatusCode );
 

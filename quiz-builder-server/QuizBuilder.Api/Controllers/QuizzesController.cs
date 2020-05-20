@@ -32,7 +32,7 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		//TODO: test
-		[HttpGet("{QuizUId}/questions")]
+		[HttpGet("{quizUId}/questions")]
 		public async Task<ActionResult> GetAll( [FromRoute] GetQuestionsByQuizIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
