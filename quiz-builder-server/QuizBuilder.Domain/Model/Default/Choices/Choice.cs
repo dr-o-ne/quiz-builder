@@ -3,6 +3,7 @@
 namespace QuizBuilder.Domain.Model.Default.Choices {
 
 	public abstract class Choice : IValidatable, IOrdered {
+
 		public long Id { get; set; }
 
 		public string Text { get; set; }
@@ -12,6 +13,7 @@ namespace QuizBuilder.Domain.Model.Default.Choices {
 		public string Feedback { get; set; }
 
 		public virtual bool IsValid() => !string.IsNullOrWhiteSpace( Text );
+
 	}
 
 }

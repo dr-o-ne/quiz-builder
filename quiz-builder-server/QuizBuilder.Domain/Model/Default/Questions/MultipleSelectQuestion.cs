@@ -2,6 +2,7 @@
 using System.Linq;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Utils.Extensions;
+using static QuizBuilder.Domain.Model.Enums;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
@@ -18,18 +19,18 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public bool Randomize { get; set; }
 
-		public Enums.QuestionGradingType GradingType { get; set; } = Enums.QuestionGradingType.AllOrNothing;
+		public QuestionGradingType GradingType { get; set; } = QuestionGradingType.AllOrNothing;
 
-		public Enums.ChoicesDisplayType ChoicesDisplayType { get; set; } = Enums.ChoicesDisplayType.Vertical;
+		public ChoicesDisplayType ChoicesDisplayType { get; set; } = ChoicesDisplayType.Vertical;
 
-		public Enums.ChoicesEnumerationType ChoicesEnumerationType { get; set; } = Enums.ChoicesEnumerationType.NoEnumeration;
+		public ChoicesEnumerationType ChoicesEnumerationType { get; set; } = ChoicesEnumerationType.NoEnumeration;
 
 		public void AddChoice( BinaryChoice choice ) {
 			choice.Order = Choices.Count;
 			Choices.Add( choice );
 		}
 
-		public override Enums.QuestionType Type { get => Enums.QuestionType.MultiSelect; }
+		public override QuestionType Type { get => QuestionType.MultiSelect; }
 
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&

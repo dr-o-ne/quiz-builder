@@ -1,11 +1,13 @@
-﻿namespace QuizBuilder.Domain.Model.Default.Choices {
+﻿using static QuizBuilder.Domain.Model.Enums;
+
+namespace QuizBuilder.Domain.Model.Default.Choices {
 
 	public sealed class TextChoice : Choice {
 
-		public Enums.TextEvaluationType TextEvaluationType { get; set; }
+		public TextEvaluationType TextEvaluationType { get; set; }
 
 		public override bool IsValid() =>
-			base.IsValid() && TextEvaluationType != Enums.TextEvaluationType.None;
+			base.IsValid() && TextEvaluationType != TextEvaluationType.None;
 	}
 
 }
