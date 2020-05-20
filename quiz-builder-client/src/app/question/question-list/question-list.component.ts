@@ -46,11 +46,6 @@ export class QuestionListComponent implements OnInit {
     this.questionService.getQuestionsByParent( quizId, groupId ).subscribe( ( response: any ) => {
       this.questions = response;
       this.initDataSource( this.questions );
-      console.log( 'RELOAD QUESTIONS' );
-      if( this.questions.length === 0){
-        console.log( '0 questions' );
-      }
-      console.log( this.dataSource.data.length );
     }, error => {
       console.log( error );
     } );
