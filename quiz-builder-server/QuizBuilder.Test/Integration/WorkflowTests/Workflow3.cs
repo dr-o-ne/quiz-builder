@@ -26,7 +26,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizQueryResult data) result1 = await _httpClient.PostValueAsync<QuizQueryResult>( "/quizzes/", new { Name = "Quiz 1" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Name = "Quiz 1" } );
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Question 1

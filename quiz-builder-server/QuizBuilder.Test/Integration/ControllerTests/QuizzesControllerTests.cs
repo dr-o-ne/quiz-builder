@@ -97,7 +97,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Create_Success_Test() {
 
-			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.PostValueAsync<QuizQueryResult>( "/quizzes/", new {Name = "New Quiz"} );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new {Name = "New Quiz"} );
 
 			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 			Assert.False( string.IsNullOrWhiteSpace( result.data.Quiz.Id ) );
@@ -108,7 +108,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Create_BadRequest_Test() {
 
-			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.PostValueAsync<QuizQueryResult>( "/quizzes/", new { Unknown = "" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Unknown = "" } );
 
 			Assert.Equal( HttpStatusCode.BadRequest, result.statusCode );
 		}
@@ -116,7 +116,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Update_Success_Test() {
 
-			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.PutValueAsync<QuizQueryResult>( "/quizzes/", new { Id = "0000000001", Name = "New Quiz Name" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PutValueAsync<QuizCommandResult>( "/quizzes/", new { Id = "0000000001", Name = "New Quiz Name" } );
 
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
@@ -124,7 +124,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Update_Fail_Test() {
 
-			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.PutValueAsync<QuizQueryResult>( "/quizzes/", new { Id = "0000000100", Name = "New Quiz Name" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PutValueAsync<QuizCommandResult>( "/quizzes/", new { Id = "0000000100", Name = "New Quiz Name" } );
 
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, result.statusCode );
 		}

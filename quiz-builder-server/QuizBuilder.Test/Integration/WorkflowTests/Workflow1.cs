@@ -29,15 +29,15 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizQueryResult data) result1 = await _httpClient.PostValueAsync<QuizQueryResult>( "/quizzes/", new {Name = "Quiz 1"} );
+			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new {Name = "Quiz 1"} );
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Quiz 2
-			(HttpStatusCode statusCode, QuizQueryResult data) result2 = await _httpClient.PostValueAsync<QuizQueryResult>( "/quizzes/", new {Name = "Quiz 2"} );
+			(HttpStatusCode statusCode, QuizCommandResult data) result2 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new {Name = "Quiz 2"} );
 			string uid2 = result2.data.Quiz.Id;
 
 			// Create Quiz 3
-			(HttpStatusCode statusCode, QuizQueryResult data) result3 = await _httpClient.PostValueAsync<QuizQueryResult>( "/quizzes/", new { Name = "Quiz 3" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result3 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Name = "Quiz 3" } );
 			string uid3 = result3.data.Quiz.Id;
 
 			// Get All Quizzes
@@ -54,10 +54,10 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.False( result4.data.Quizzes[2].IsVisible );
 
 			// Update Quiz 1
-			(HttpStatusCode statusCode, QuizQueryResult data) result5 = await _httpClient.PutValueAsync<QuizQueryResult>( "/quizzes/", new { Id = uid1, Name = "Quiz 1 New Name" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result5 = await _httpClient.PutValueAsync<QuizCommandResult>( "/quizzes/", new { Id = uid1, Name = "Quiz 1 New Name" } );
 
 			// Update Quiz 3
-			(HttpStatusCode statusCode, QuizQueryResult data) result6 = await _httpClient.PutValueAsync<QuizQueryResult>( "/quizzes/", new { Id = uid3, Name = "Quiz 3", IsVisible = true } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result6 = await _httpClient.PutValueAsync<QuizCommandResult>( "/quizzes/", new { Id = uid3, Name = "Quiz 3", IsVisible = true } );
 
 			// Get All Quizzes
 			(HttpStatusCode statusCode, QuizzesQueryResult data) result7 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "/quizzes" );
@@ -67,6 +67,8 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 
 			// Delete Quiz 1
 			var response8 = await _httpClient.DeleteAsync( "/quizzes/" + uid1 );
+
+			// Get All Quizzes
 			(HttpStatusCode statusCode, QuizzesQueryResult data) result9 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "/quizzes" );
 			Assert.Equal( 2, result9.data.Quizzes.Count );
 

@@ -17,7 +17,7 @@ namespace QuizBuilder.Api.Controllers {
 
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] CreateGroupCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+			CreateGroupCommandResult result = await _dispatcher.SendAsync( command );
 
 			return result.Success
 				? (ActionResult)Created( nameof( Create ), result )
