@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Action;
+using QuizBuilder.Domain.ActionResult;
 
 namespace QuizBuilder.Api.Controllers {
 

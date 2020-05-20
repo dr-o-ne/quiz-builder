@@ -56,7 +56,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuestionHandlers.CommandHandlers {
 			var addedQuestion = _mapper.Map<QuestionDto, Question>( questionDto );
 			var questionViewModel = _mapper.Map<Question, QuestionViewModel>( addedQuestion );
 
-			return new QuestionCommandResult() { Success = true, Question = questionViewModel };
+			return new QuestionCommandResult { Success = true, Question = questionViewModel };
 		}
 	}
 }
