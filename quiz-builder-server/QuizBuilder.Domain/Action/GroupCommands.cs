@@ -6,7 +6,7 @@ using QuizBuilder.Domain.ActionResult;
 
 namespace QuizBuilder.Domain.Action {
 
-	public sealed class CreateGroupCommand : ICommand<CreateGroupCommandResult> {
+	public sealed class CreateGroupCommand : ICommand<GroupCommandResult> {
 
 		[Required]
 		[JsonPropertyName( "QuizId" )]

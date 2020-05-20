@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
+using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -36,29 +35,23 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Group_Create_Success_Test() {
-			var content = JsonConvert.SerializeObject( new {
-				QuizId = "quiz-1",
-				Name = "Group Name"
-			} );
+		public async Task Group_Create_Created_Test() {
 
-			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
-			using var response = await _httpClient.PostAsync( "/groups/", stringContent );
+			var content = new { QuizId = "quiz-1", Name = "Group Name" };
 
-			Assert.Equal( HttpStatusCode.Created, response.StatusCode );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "/groups/", content );
+
+			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 		}
 
 		[Fact]
-		public async Task Group_Create_NoParent_Quiz_Test() {
-			var content = JsonConvert.SerializeObject( new {
-				QuizId = "quiz-empty",
-				Name = "Group Name"
-			} );
+		public async Task Group_Create_NoParent_UnprocessableEntity_Test() {
 
-			using var stringContent = new StringContent( content, Encoding.UTF8, "application/json" );
-			using var response = await _httpClient.PostAsync( "/groups/", stringContent );
+			var content = new { QuizId = "quiz-empty", Name = "Group Name" };
 
-			Assert.Equal( HttpStatusCode.UnprocessableEntity, response.StatusCode );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "/groups/", content );
+
+			Assert.Equal( HttpStatusCode.UnprocessableEntity, result.statusCode );
 		}
 
 		private void SetupData() {

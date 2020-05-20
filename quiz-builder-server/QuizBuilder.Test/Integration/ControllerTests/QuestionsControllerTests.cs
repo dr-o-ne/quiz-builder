@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -73,7 +72,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Question_Create_Success_Test() {
+		public async Task Question_Create_Created_Test() {
 
 			var content = new {
 				QuizId = "1000000001",
@@ -101,10 +100,10 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Question_Update_Success_Test() {
+		public async Task Question_Update_NoContent_Test() {
 
 			var content = new {
-				Id = QuestionData.First().UId,
+				Id = "000000001",
 				Name = "Question Name",
 				Text = "Question Text",
 				Type = 1,
