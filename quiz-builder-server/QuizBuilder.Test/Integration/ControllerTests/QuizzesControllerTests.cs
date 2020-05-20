@@ -95,7 +95,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Quiz_Create_Success_Test() {
+		public async Task Quiz_Create_Created_Test() {
 
 			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new {Name = "New Quiz"} );
 
@@ -130,7 +130,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Quiz_DeleteById_Success_Test() {
+		public async Task Quiz_DeleteById_NoContent_Test() {
 
 			var response = await _httpClient.DeleteAsync( "/quizzes/0000001000" );
 
@@ -138,7 +138,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Quiz_DeleteById_NoItem_Test() {
+		public async Task Quiz_DeleteById_NoItem_NoContent_Test() {
 
 			using var response = await _httpClient.DeleteAsync( "/quizzes/0000002000" );
 
@@ -146,7 +146,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		}
 
 		[Fact]
-		public async Task Quiz_DeleteBulk_Success_Test() {
+		public async Task Quiz_DeleteBulk_NoContent_Test() {
 			var content = JsonSerializer.Serialize( new { Ids = new List<string> { "0000001001", "0000001002" } } );
 
 			using var request = new HttpRequestMessage {

@@ -1,22 +1,12 @@
-﻿using System.Text.Json.Serialization;
-using QuizBuilder.Common.Types;
+﻿using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Domain.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.ActionResult {
 
-	public sealed class CreateGroupCommandResult : ICommandResult {
+	public sealed class GroupCommandResult : CommandResult {
 
-		public bool Success { get; }
+		public GroupViewModel Group { get; set; }
 
-		public string Message { get; }
-
-		[JsonPropertyName( "groupId" )]
-		public string GroupUId { get; }
-
-		public CreateGroupCommandResult( bool success, string message, string groupUId = "" ) {
-			Message = message;
-			GroupUId = groupUId;
-			Success = success;
-		}
 	}
 
 }

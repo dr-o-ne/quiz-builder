@@ -78,8 +78,8 @@ export class QuizPageComponent implements OnInit {
   addGroup() {
     if ( this.groupFormControl.valid ) {
       const group = new Group( '', this.quiz.id, this.groupForm.name );
-      this.quizService.createGroup( group ).subscribe( ( response: { groupId: string } ) => {
-          group.id = response.groupId;
+      this.quizService.createGroup( group ).subscribe( ( response: any ) => {
+          group.id = response.group.groupId;
           this.groups.push( group );
           this.setActiveGroup( group.id );
         },
