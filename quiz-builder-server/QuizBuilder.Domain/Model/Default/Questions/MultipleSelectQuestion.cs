@@ -36,8 +36,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => MultiSelect; }
 
-		public MultipleSelectQuestion WithoutCorrectChoices() {
-			foreach( var item in Choices ) 
+		public override Question ToQuestionWithoutCorrectChoices() {
+			foreach( var item in Choices )
 				item.IsCorrect = null;
 			return this;
 		}

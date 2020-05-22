@@ -23,6 +23,10 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			set { }
 		}
 
+		public override Question ToQuestionWithoutCorrectChoices() {
+			return this;
+		}
+
 		public List<FillInTheBlanksText> Texts { get; set; } = new List<FillInTheBlanksText>();
 
 		public List<TextChoiceGroup> ChoiceGroups { get; set; } = new List<TextChoiceGroup>();
