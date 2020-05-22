@@ -41,24 +41,25 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			return this;
 		}
 
-		public long Grade( Attempt attempt ) {
+		public long Match( QuestionAttempt attempt ) {
 
 			if( !IsValid() )
-				throw new Exception();
+				return 0;
 
 			if( !attempt.IsValid() )
-				throw new Exception();
+				return 0;
 
 			if( attempt.BinaryAnswers == null )
-				throw new Exception();
+				return 0;
 
-			if( attempt.BinaryAnswers.Count != 1 )
-				throw new Exception();
+			if( attempt.BinaryAnswers.Any() )
+				return 0;
 
-			var correctId = Choices.Single( x => x.IsCorrect.HasValue && x.IsCorrect.Value ).Id;
-			var answerId = attempt.BinaryAnswers.Single().Item1;
+			if( attempt.BinaryAnswers.Count != Choices.Count )
+				return 0;
 
-			return answerId == correctId ? 42 : 0;
+
+			return 0;
 
 		}
 

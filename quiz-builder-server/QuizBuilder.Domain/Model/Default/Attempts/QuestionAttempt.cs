@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using QuizBuilder.Domain.Model.Default.Base;
+using QuizBuilder.Domain.Model.Default.ChoiceSelections;
 
 namespace QuizBuilder.Domain.Model.Default.Attempts {
 
-	public sealed class Attempt : IValidatable {
+	public sealed class QuestionAttempt : IValidatable {
 
 		public string QuestionUId { get; set; }
 
-		public List<(long, bool)> BinaryAnswers { get; set; }
+		public List<BinaryChoiceSelection> BinaryAnswers { get; set; }
 
 		public string TextAnswer { get; set; }
 

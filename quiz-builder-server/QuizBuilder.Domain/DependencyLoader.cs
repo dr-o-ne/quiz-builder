@@ -3,6 +3,10 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using QuizBuilder.Common.Handlers;
+using QuizBuilder.Domain.Model.Default.Answers;
+using QuizBuilder.Domain.Model.Default.Base;
+using QuizBuilder.Domain.Model.Default.Graders;
+using QuizBuilder.Domain.Model.Default.Questions;
 
 namespace QuizBuilder.Domain {
 
@@ -29,6 +33,12 @@ namespace QuizBuilder.Domain {
 					handler.GetInterfaces()
 						.First( i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface ), handler );
 			}
+		}
+
+		public static void AddModels( this IServiceCollection services ) {
+			services.AddSingleton<IQuestionGrader<MultipleChoiceQuestion, MultipleChoiceAnswer>, MultipleChoiceGrader>();
+			services.AddSingleton<IQuestionGrader<MultipleSelectQuestion, MultipleSelectAnswer>, MultipleSelectGrader>();
+			services.AddSingleton<IQuestionGrader<TrueFalseQuestion, TrueFalseAnswer>, TrueFalseGrader>();
 		}
 
 	}

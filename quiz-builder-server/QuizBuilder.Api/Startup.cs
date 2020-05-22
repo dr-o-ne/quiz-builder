@@ -32,6 +32,7 @@ namespace QuizBuilder.Api {
             services.AddDispatchers();
             services.AddHandlers();
             services.AddMappers();
+            services.AddModels();
 			services.AddUtils();
 			services.AddData();
 		}
