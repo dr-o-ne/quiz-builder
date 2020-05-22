@@ -2,7 +2,7 @@
 
 	public sealed class BinaryChoice : Choice {
 
-		public bool IsCorrect { get; set; }
+		public bool? IsCorrect { get; set; }
 
 	}
 

@@ -36,9 +36,16 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => MultiSelect; }
 
+		public MultipleSelectQuestion WithoutCorrectChoices() {
+			foreach( var item in Choices ) 
+				item.IsCorrect = null;
+			return this;
+		}
+
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
-			Choices.Count( x => x.IsCorrect ) > 0 &&
+			Choices.All( x => x.IsCorrect != null ) &&
+			Choices.Count( x => x.IsCorrect != null && x.IsCorrect.Value ) == 1 &&
 			Choices.Count( x => !x.IsValid() ) == 0;
 	}
 }

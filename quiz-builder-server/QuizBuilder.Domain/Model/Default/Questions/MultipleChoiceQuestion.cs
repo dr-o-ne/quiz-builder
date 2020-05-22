@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Enums;
@@ -33,9 +35,37 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => MultiChoice; }
 
+		public MultipleChoiceQuestion WithoutCorrectChoices() {
+			foreach( var item in Choices )
+				item.IsCorrect = null;
+			return this;
+		}
+
+		public long Grade( Attempt attempt ) {
+
+			if( !IsValid() )
+				throw new Exception();
+
+			if( !attempt.IsValid() )
+				throw new Exception();
+
+			if( attempt.BinaryAnswers == null )
+				throw new Exception();
+
+			if( attempt.BinaryAnswers.Count != 1 )
+				throw new Exception();
+
+			var correctId = Choices.Single( x => x.IsCorrect.HasValue && x.IsCorrect.Value ).Id;
+			var answerId = attempt.BinaryAnswers.Single().Item1;
+
+			return answerId == correctId ? 42 : 0;
+
+		}
+
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
-		    Choices.Count( x => x.IsCorrect ) == 1 &&
+			Choices.All(  x => x.IsCorrect != null ) &&
+		    Choices.Count( x => x.IsCorrect != null && x.IsCorrect.Value ) == 1 &&
 		    Choices.Count( x => !x.IsValid() ) == 0;
 	}
 

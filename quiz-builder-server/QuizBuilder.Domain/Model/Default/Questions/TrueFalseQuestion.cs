@@ -18,8 +18,16 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => TrueFalse; }
 
+		public TrueFalseQuestion WithoutCorrectChoices() {
+			TrueChoice.IsCorrect = null;
+			FalseChoice.IsCorrect = null;
+			return this;
+		}
+
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
+			TrueChoice.IsCorrect != null &&
+			FalseChoice.IsCorrect != null &&
 			TrueChoice.IsCorrect != FalseChoice.IsCorrect;
 	}
 }
