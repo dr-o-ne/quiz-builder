@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Choices;
@@ -35,32 +34,10 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => MultiChoice; }
 
-		public MultipleChoiceQuestion WithoutCorrectChoices() {
+		public override Question ToQuestionWithoutCorrectChoices() {
 			foreach( var item in Choices )
 				item.IsCorrect = null;
 			return this;
-		}
-
-		public long Match( QuestionAttempt attempt ) {
-
-			if( !IsValid() )
-				return 0;
-
-			if( !attempt.IsValid() )
-				return 0;
-
-			if( attempt.BinaryAnswers == null )
-				return 0;
-
-			if( attempt.BinaryAnswers.Any() )
-				return 0;
-
-			if( attempt.BinaryAnswers.Count != Choices.Count )
-				return 0;
-
-
-			return 0;
-
 		}
 
 		public override bool IsValid() =>
