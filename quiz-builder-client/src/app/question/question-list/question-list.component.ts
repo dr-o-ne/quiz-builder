@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,9 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class QuestionListComponent implements OnInit {
   @Input() group: Group;
   @Input() quizId: string;
-
-  @ViewChild( 'table1' ) table1: MatTable<Question>;
-  @ViewChild( 'list1' ) list1: CdkDropList;
+  @Input() groups: Group[];
 
   displayedColumns: string[] = [ 'name', 'type', 'edit', 'move to group', 'delete' ];
 
@@ -35,7 +33,8 @@ export class QuestionListComponent implements OnInit {
     private questionService: QuestionService,
     private quizService: QuizService,
     private router: Router,
-    private activeRout: ActivatedRoute ) {
+    private activeRout: ActivatedRoute,
+    private changeDetectorRefs: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -67,13 +66,14 @@ export class QuestionListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex );
     }
-
-    this.dataSource.data = clonedeep( this.dataSource.data );
+    this.dataSource.data = event.container.data;
   }
 
-  deleteQuestion( question: Question ): void {
+  deleteQuestion( question: Question, index: number ): void {
     this.quizService.deleteQuestion( this.quizId, question.id ).subscribe( response => {
-      this.initQuestions( this.quizId, this.group.id );
+      this.questions.splice(index, 1);
+      this.initDataSource( this.questions );
+      this.changeDetectorRefs.detectChanges();
     }, error => console.log( error ) );
   }
 
@@ -82,7 +82,11 @@ export class QuestionListComponent implements OnInit {
       [ 'questions', question.id ],
       {
         relativeTo: this.activeRout,
-        state: { quizId: this.quizId, groups: [ this.group ] }
+        state: {
+          quizId: this.quizId,
+          groupId: this.group.id,
+          groups: this.groups
+        }
       } );
   }
 }

@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-md-2">
-        <button class="full-width" mat-raised-button [routerLink]="['/quizzes/', quizId]">
+        <button class="full-width" mat-raised-button (click)="replyClick()">
           <mat-icon>reply</mat-icon>
         </button>
       </div>

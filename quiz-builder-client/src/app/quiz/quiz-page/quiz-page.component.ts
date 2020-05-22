@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import {Location} from '@angular/common';
 import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { QuestionType } from 'src/app/_models/question';
@@ -37,7 +38,8 @@ export class QuizPageComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private location: Location
   ) {
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
   }
@@ -48,6 +50,7 @@ export class QuizPageComponent implements OnInit {
       if ( response && response.quizResolver ) {
         this.quiz = response.quizResolver.quiz;
         this.initGroups( this.quiz );
+        this.initActiveGroup();
       } else {
         this.quiz = new Quiz();
       }
@@ -58,6 +61,13 @@ export class QuizPageComponent implements OnInit {
     const defaultGroup = new Group( '', quiz.id );
     this.groups.push( defaultGroup );
     this.groups.push( ...quiz.groups );
+  }
+
+  initActiveGroup() {
+    const groupId = history.state.groupId;
+    if ( groupId ) {
+      this.selectedIndex = this.groups.findIndex(gr => gr.id === groupId);
+    }
   }
 
   setActiveGroup( groupId: string ): void {
@@ -136,13 +146,13 @@ export class QuizPageComponent implements OnInit {
 
   createQuiz(): void {
     this.quizService.createQuiz( this.quiz ).subscribe( response => {
-      this.router.navigate( [ 'quizzes' ] );
+      this.navigateToParent();
     }, error => console.log( error ) );
   }
 
   updateQuiz(): void {
     this.quizService.updateQuiz( this.quiz ).subscribe( response => {
-      this.router.navigate( [ 'quizzes' ] );
+      this.navigateToParent();
     }, error => console.log( error ) );
   }
 
@@ -151,12 +161,25 @@ export class QuizPageComponent implements OnInit {
       [ 'questions' ],
       {
         relativeTo: this.activeRoute,
-        state: { quizId: this.quiz.id, questionType: typeQuestion, groups: [ this.groups[tabGroup.selectedIndex] ] }
+        state: {
+          quizId: this.quiz.id,
+          questionType: typeQuestion,
+          groupId: this.groups[tabGroup.selectedIndex].id,
+          groups: this.groups
+        }
       }
     );
   }
 
   clickToggle( checked: boolean ): void {
     this.quiz.isVisible = checked;
+  }
+
+  replyClick(): void {
+    this.navigateToParent();
+  }
+
+  navigateToParent(): void {
+    this.router.navigate(['quizzes']);
   }
 }

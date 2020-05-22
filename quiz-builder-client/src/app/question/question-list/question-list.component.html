@@ -1,8 +1,5 @@
-<table
-  *ngIf="questions?.length" mat-table [dataSource]="dataSource" matSort
-  cdkDropList #table1 #list1="cdkDropList"
-  [cdkDropListData]="dataSource.data" [cdkDropListConnectedTo]="[list1]"
-  (cdkDropListDropped)="drop($event)" id="table1">
+<table *ngIf="questions?.length" mat-table [dataSource]="dataSource" matSort
+  cdkDropList [cdkDropListData]="dataSource.data" (cdkDropListDropped)="drop($event)">
 
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -34,8 +31,8 @@
 
   <ng-container matColumnDef="delete">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="deleteQuestion(element)">
+    <mat-cell *matCellDef="let element; let i = index">
+      <button mat-icon-button color="primary" (click)="deleteQuestion(element, i)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

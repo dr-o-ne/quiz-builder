@@ -122,6 +122,26 @@ export class QuizListComponent implements OnInit {
     this.selection.selected.forEach( x => this.clickVisibleToggle( true, x ) );
   }
 
+  onAttemptClick(item: Quiz ) {
+    this.router.navigate(
+      [ item.id],
+      {
+        relativeTo: this.activeRoute,
+        state: { quiz: item }
+      }
+    );
+  }
+
+  onEditClock(item: Quiz ) {
+    this.router.navigate(
+      [ item.id, 'edit'],
+      {
+        relativeTo: this.activeRoute,
+        state: { quiz: item }
+      }
+    );
+  }
+
   onPreviewClick( item: Quiz ) {
     this.router.navigate(
       [ item.id, 'preview' ],

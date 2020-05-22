@@ -1,5 +1,5 @@
 export class BaseChoiceSettings {
-  choicesDisplayType = ChoicesDisplayType.Dropdown;
+  choicesDisplayType = ChoicesDisplayType.Vertical;
   choicesEnumerationType = ChoicesEnumerationType.one_two_three;
   randomize = false;
   answerText = '';
@@ -24,14 +24,12 @@ export class DefaultEnumChoice {
 }
 
 export enum ChoicesDisplayType {
-  None = 0,
   Horizontal = 1,
   Vertical = 2,
   Dropdown = 3
 }
 
 export enum ChoicesEnumerationType {
-  None = 0,
   one_two_three = 1,
   i_ii_iii = 2,
   I_II_III = 3,
@@ -41,7 +39,6 @@ export enum ChoicesEnumerationType {
 }
 
 export enum QuestionGradingType {
-  None = 0,
   AllOrNothing = 1,
   RightMinusWrong = 2,
   CorrectAnswers = 3

@@ -56,7 +56,7 @@ export class QuestionPageComponent implements OnInit {
       } else {
         this.createNewQuestion(history.state.questionType);
       }
-      this.initGroup();
+      this.initGroup(history.state.groupId);
     } );
   }
 
@@ -64,11 +64,13 @@ export class QuestionPageComponent implements OnInit {
     this.question = new Question();
     this.question.quizId = this.quizId;
     this.question.type = questionType;
+    this.question.name = 'Question ' + Math.floor(Math.random() * 100);
+    this.question.text = 'default';
   }
 
-  initGroup(): void {
+  initGroup(groupId: string): void {
     if ( !this.question.groupId ) {
-      this.question.groupId = this.groupResurce[0]?.id || '';
+      this.question.groupId = groupId || '';
     }
   }
 
@@ -107,8 +109,24 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.updateQuestion( this.question ).subscribe( response => {
-      this.router.navigate( [ '/quizzes/', this.quizId ] );
+      this.navigateToParent();
     }, error => console.log( error ) );
+  }
+
+  navigateToParent(): void {
+    this.router.navigate(
+      ['../../'],
+      {
+        relativeTo: this.activeRoute,
+        state: {
+          groupId: this.question.groupId
+        }
+      }
+    );
+  }
+
+  replyClick(): void {
+    this.navigateToParent();
   }
 
   createQuestion(): void {
@@ -117,7 +135,7 @@ export class QuestionPageComponent implements OnInit {
     }
     this.updateQuestionModel();
     this.questionService.createQuestion( this.question ).subscribe( response => {
-      this.router.navigate( [ '/quizzes/', this.quizId ] );
+      this.navigateToParent();
     }, error => console.log( error ) );
   }
 

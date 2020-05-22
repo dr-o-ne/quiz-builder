@@ -62,7 +62,7 @@ VALUES (
 			} );
 		}
 
-		public async Task AddGroupQuestionRelationship( long groupId, long questionId ) {
+		public async Task AddGroupQuestionRelationship( long? groupId, long questionId ) {
 			const string sql = @"
 		UPDATE
 			dbo.QuizItem
@@ -113,6 +113,22 @@ INNER JOIN @QuizQuizItemIds AS temp ON temp.Id = q.Id
 			IDbConnection conn = _dbConnectionFactory.GetConnection();
 			conn.Open();
 			return conn;
+		}
+
+		public async Task<long> GetQuizItemIdByQuestionUid( string uid ) {
+			const string sql = @"
+			SELECT TOP 1
+				qi.Id
+			FROM 
+				dbo.QuizItem qi WITH(NOLOCK)
+			INNER JOIN
+				dbo.Question q WITH(NOLOCK)
+					ON qi.QuestionId = q.Id
+			WHERE
+				q.UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QueryFirstOrDefaultAsync<long>( sql, new { UId = uid } );
 		}
 	}
 
