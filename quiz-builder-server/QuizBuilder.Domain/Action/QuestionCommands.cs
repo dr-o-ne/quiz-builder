@@ -43,7 +43,8 @@ namespace QuizBuilder.Domain.Action {
 
 		public string Name { get; set; }
 
-		public long GroupId { get; set; }
+		[JsonPropertyName( "GroupId" )]
+		public string GroupUId { get; set; }
 
 		public Enums.QuestionType Type { get; set; }
 

@@ -27,24 +27,29 @@ export const appRoutes: Routes = [
     canActivate: [ AuthGuard ],
     children:
       [
-        { path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },
+        { path: '', component: PreviewQuizComponent, resolve: { quizResolver: QuizPreviewResolver } },
+        { path: 'edit', children:
+          [
+            {path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },
+            {
+              path: 'questions', children:
+                [
+                  { path: '', redirectTo: 'new', pathMatch: 'full' },
+                  { path: 'new', component: QuestionPageComponent }
+                ]
+            },
+            {
+              path: 'questions/:id',
+              component: QuestionPageComponent,
+              resolve: { questionResolver: QuestionResolver }
+            }
+          ]
+        },
         {
           path: 'preview', children:
             [
               { path: '', component: PreviewQuizComponent, resolve: { quizResolver: QuizPreviewResolver } }
             ]
-        },
-        {
-          path: 'questions', children:
-            [
-              { path: '', redirectTo: 'new', pathMatch: 'full' },
-              { path: 'new', component: QuestionPageComponent }
-            ]
-        },
-        {
-          path: 'questions/:id',
-          component: QuestionPageComponent,
-          resolve: { questionResolver: QuestionResolver }
         }
       ]
   },
