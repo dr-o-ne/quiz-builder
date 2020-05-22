@@ -132,7 +132,7 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  onEditClock(item: Quiz ) {
+  onEditClick(item: Quiz ) {
     this.router.navigate(
       [ item.id, 'edit'],
       {
