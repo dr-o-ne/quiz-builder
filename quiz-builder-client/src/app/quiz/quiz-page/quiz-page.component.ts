@@ -180,6 +180,11 @@ export class QuizPageComponent implements OnInit {
   }
 
   navigateToParent(): void {
-    this.router.navigate(['quizzes']);
+    this.router.navigate(
+      ['../../'],
+      {
+        relativeTo: this.activeRoute.parent
+      }
+    );
   }
 }
