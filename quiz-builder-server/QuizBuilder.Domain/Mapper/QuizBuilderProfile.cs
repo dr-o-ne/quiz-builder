@@ -8,6 +8,7 @@ using QuizBuilder.Domain.Mapper.Default.ModelToDto;
 using QuizBuilder.Domain.Mapper.Default.ModelToModel;
 using QuizBuilder.Domain.Mapper.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
 
@@ -17,6 +18,7 @@ namespace QuizBuilder.Domain.Mapper {
 			AddQuizMapping();
 			AddGroupMapping();
 			AddQuestionMapping();
+			AddAttemptMapping();
 		}
 
 		private void AddQuizMapping() {
@@ -42,6 +44,10 @@ namespace QuizBuilder.Domain.Mapper {
 			CreateMap<Group, GroupDto>().ConvertUsing<GroupToGroupDtoConverter>();
 			CreateMap<GroupDto, Group>().ConvertUsing<GroupDtoToGroupConverter>();
 			CreateMap<Group, GroupViewModel>().ConvertUsing<GroupToGroupViewModelConverter>();
+		}
+
+		private void AddAttemptMapping() {
+			CreateMap<QuizAttempt, AttemptDto>().ConvertUsing<QuizAttemptToAttemptDtoConverter>();
 		}
 	}
 }

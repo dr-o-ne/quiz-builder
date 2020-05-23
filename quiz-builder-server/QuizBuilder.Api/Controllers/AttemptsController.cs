@@ -16,13 +16,15 @@ namespace QuizBuilder.Api.Controllers {
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create( [FromBody] CreateQuizAttemptCommand command ) {
+		public async Task<ActionResult> Create( [FromBody] StartQuizAttemptCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
 				? (ActionResult)Created( nameof( Create ), result )
 				: UnprocessableEntity( result );
 		}
+
+
 
 	}
 
