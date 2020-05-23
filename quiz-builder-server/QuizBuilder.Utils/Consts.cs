@@ -6,7 +6,8 @@ namespace QuizBuilder.Utils {
 
 		public static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions {
 			PropertyNameCaseInsensitive = true,
-			IgnoreNullValues = true
+			IgnoreNullValues = true,
+			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
 
 
