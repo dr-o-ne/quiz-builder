@@ -5,12 +5,13 @@ using QuizBuilder.Domain.ActionResult;
 
 namespace QuizBuilder.Domain.Action {
 
-	public sealed class CreateQuizAttemptCommand : ICommand<QuizAttemptCommandResult> {
+	public sealed class StartQuizAttemptCommand : ICommand<QuizAttemptCommandResult> {
 	
 		[Required]
 		[JsonPropertyName( "QuizId" )]
 		public string QuizUId { get; set; }
 	
 	}
+
 
 }

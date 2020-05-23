@@ -57,8 +57,10 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			var content = new { QuizId = uid1 };
 			(HttpStatusCode statusCode, QuizAttemptCommandResult data) result4 = await _httpClient.PostValueAsync<QuizAttemptCommandResult>( "/attempts/", content );
 			Assert.Equal( HttpStatusCode.Created, result4.statusCode );
-			Assert.Equal( 2, result4.data.Questions.Count );
 
+			Assert.False( string.IsNullOrWhiteSpace( result4.data.QuizAttempt.Id ) );
+			Assert.Equal( uid1, result4.data.QuizAttempt.QuizId );
+			Assert.Equal( 2, result4.data.Questions.Count );
 			Assert.Contains( "\"isCorrect\": null", result4.data.Questions[0].Choices );
 			Assert.DoesNotContain( "\"isCorrect\": true", result4.data.Questions[0].Choices );
 			Assert.DoesNotContain( "\"isCorrect\": false", result4.data.Questions[0].Choices );
