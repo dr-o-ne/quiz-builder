@@ -18,9 +18,11 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => TrueFalse; }
 
-		public override Question ToQuestionWithoutCorrectChoices() {
+		public override Question NullifyChoices() {
 			TrueChoice.IsCorrect = null;
 			FalseChoice.IsCorrect = null;
+			TrueChoice.Feedback = null;
+			FalseChoice.Feedback = null;
 			return this;
 		}
 

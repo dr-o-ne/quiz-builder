@@ -28,13 +28,21 @@ namespace QuizBuilder.Api {
 		        options.AppendTrailingSlash = true;
 	        } );
 
-			services.AddControllers();
-            services.AddDispatchers();
-            services.AddHandlers();
-            services.AddMappers();
-            services.AddModels();
-			services.AddUtils();
-			services.AddData();
+	        services.AddControllers().AddJsonOptions( options => {
+		        options.JsonSerializerOptions.IgnoreNullValues = true;
+		        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+	        } );
+
+			ConfigureApplication( services );
+		}
+
+        private static void ConfigureApplication( IServiceCollection services ) {
+	        services.AddDispatchers();
+	        services.AddHandlers();
+	        services.AddMappers();
+	        services.AddModels();
+	        services.AddUtils();
+	        services.AddData();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

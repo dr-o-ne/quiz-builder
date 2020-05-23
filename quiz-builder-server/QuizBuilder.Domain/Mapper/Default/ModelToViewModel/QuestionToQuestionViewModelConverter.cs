@@ -1,10 +1,10 @@
 using System;
 using AutoMapper;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using QuizBuilder.Domain.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
+using QuizBuilder.Utils;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 	internal sealed class QuestionToQuestionViewModelConverter: ITypeConverter<Question, QuestionViewModel> {
@@ -21,8 +21,8 @@ namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 						ChoicesEnumerationType = question.ChoicesEnumerationType,
 						Randomize = question.Randomize
 					};
-					settings = JsonConvert.SerializeObject( settingsMultiChoice, SetJsonOptions() );
-					choices = JsonConvert.SerializeObject( question.Choices, SetJsonOptions() );
+					settings = JsonSerializer.Serialize( settingsMultiChoice, Consts.JsonSerializerOptions );
+					choices = JsonSerializer.Serialize( question.Choices, Consts.JsonSerializerOptions );
 					break;
 				case MultipleSelectQuestion question:
 					var settingsMultipleSelect = new {
@@ -31,23 +31,23 @@ namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 						GradingType = question.GradingType,
 						Randomize = question.Randomize
 					};
-					settings = JsonConvert.SerializeObject( settingsMultipleSelect, SetJsonOptions() );
-					choices = JsonConvert.SerializeObject( question.Choices, SetJsonOptions() );
+					settings = JsonSerializer.Serialize( settingsMultipleSelect, Consts.JsonSerializerOptions );
+					choices = JsonSerializer.Serialize( question.Choices, Consts.JsonSerializerOptions );
 					break;
 				case TrueFalseQuestion question:
 					var settingsTrueFalse = new {
 						ChoicesDisplayType = question.ChoicesDisplayType,
 						ChoicesEnumerationType = question.ChoicesEnumerationType
 					};
-					settings = JsonConvert.SerializeObject( settingsTrueFalse, SetJsonOptions() );
+					settings = JsonSerializer.Serialize( settingsTrueFalse, Consts.JsonSerializerOptions );
 					var binaryChoices = new BinaryChoice[] { question.TrueChoice, question.FalseChoice };
-					choices = JsonConvert.SerializeObject( binaryChoices, SetJsonOptions() );
+					choices = JsonSerializer.Serialize( binaryChoices, Consts.JsonSerializerOptions );
 					break;
 				case LongAnswerQuestion question:
 					var settingsLongAnswer = new {
 						AnswerText = question.AnswerText
 					};
-					settings = JsonConvert.SerializeObject( settingsLongAnswer, SetJsonOptions() );
+					settings = JsonSerializer.Serialize( settingsLongAnswer, Consts.JsonSerializerOptions );
 					choices = string.Empty;
 					break;
 				default:
@@ -67,14 +67,5 @@ namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 			};
 		}
 
-		private JsonSerializerSettings SetJsonOptions() {
-			DefaultContractResolver contractResolver = new DefaultContractResolver {
-				NamingStrategy = new CamelCaseNamingStrategy()
-			};
-			return new JsonSerializerSettings {
-				ContractResolver = contractResolver,
-				Formatting = Formatting.Indented
-			};
-		}
 	}
 }

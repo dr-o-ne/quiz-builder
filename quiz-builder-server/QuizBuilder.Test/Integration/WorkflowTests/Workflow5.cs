@@ -47,6 +47,9 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				Name = "Question Name 2",
 				Text = "Question Text 2",
 				Type = 1,
+				Feedback = "Feedback",
+				CorrectFeedback = "Correct Feedback",
+				IncorrectFeedback = "Incorrect Feedback",
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
@@ -61,9 +64,11 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.False( string.IsNullOrWhiteSpace( result4.data.QuizAttempt.Id ) );
 			Assert.Equal( uid1, result4.data.QuizAttempt.QuizId );
 			Assert.Equal( 2, result4.data.Questions.Count );
-			Assert.Contains( "\"isCorrect\": null", result4.data.Questions[0].Choices );
 			Assert.DoesNotContain( "\"isCorrect\": true", result4.data.Questions[0].Choices );
 			Assert.DoesNotContain( "\"isCorrect\": false", result4.data.Questions[0].Choices );
+			Assert.Null( result4.data.Questions[1].Feedback );
+			Assert.Null( result4.data.Questions[1].CorrectFeedback );
+			Assert.Null( result4.data.Questions[1].IncorrectFeedback );
 		}
 
 		public void Dispose() => _db.Cleanup();

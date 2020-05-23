@@ -39,7 +39,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuizAttemptHandlers.CommandHandlers {
 			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
 
 			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );
-			questions = questions.Select( x => x.ToQuestionWithoutCorrectChoices() );
+			questions = questions.Select( x => x.NullifyChoices().NullifyFeedback() );
 
 			IEnumerable<QuestionViewModel> questionViewModels = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>( questions );
 
