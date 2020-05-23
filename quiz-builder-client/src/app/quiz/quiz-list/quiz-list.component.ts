@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class QuizListComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'isVisible', 'edit', 'preview', 'statistic', 'menu' ];
   filterData: string;
-  isMultiSelect = true;
+  isMultiSelectMode = false;
   tablePageSizeOptions = [ 15, 20 ];
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
@@ -63,12 +63,11 @@ export class QuizListComponent implements OnInit {
   }
 
   clickMultiSelection(): void {
-    this.isMultiSelect = !this.isMultiSelect;
-
-    this.isMultiSelect
+    this.isMultiSelectMode
       ? this.displayedColumns.shift()
       : this.displayedColumns.unshift( 'select' );
 
+    this.isMultiSelectMode = !this.isMultiSelectMode;
     this.table.renderRows();
   }
 

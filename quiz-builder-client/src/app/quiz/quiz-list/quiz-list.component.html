@@ -30,7 +30,7 @@
 
     <table mat-table [dataSource]="dataSource" matSort>
 
-      <ng-container *ngIf="!isMultiSelect" matColumnDef="select">
+      <ng-container *ngIf="isMultiSelectMode" matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="checkAllToggle($event.checked)"
                         [indeterminate]="isAnySelected() && !isAllSelected()"
