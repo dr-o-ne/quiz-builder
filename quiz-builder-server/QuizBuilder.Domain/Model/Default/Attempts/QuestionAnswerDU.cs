@@ -9,7 +9,7 @@ namespace QuizBuilder.Domain.Model.Default.Attempts {
 
 		public string QuestionUId { get; set; }
 
-		public List<BinaryChoiceSelection> BinaryAnswers { get; set; }
+		public List<BinaryChoiceSelection> BinaryChoiceSelection { get; set; }
 
 		public string TextAnswer { get; set; }
 
@@ -17,7 +17,7 @@ namespace QuizBuilder.Domain.Model.Default.Attempts {
 
 		public bool IsValid() {
 			int count = 0;
-			if( BinaryAnswers.Any() )
+			if( BinaryChoiceSelection.Any() )
 				count++;
 			if( !string.IsNullOrWhiteSpace( TextAnswer ) )
 				count++;

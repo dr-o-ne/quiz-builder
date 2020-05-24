@@ -15,6 +15,22 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			_dbConnectionFactory = dbConnectionFactory;
 		}
 
+		public async Task<AttemptDto> Get( string uid ) {
+			const string sql = @"
+SELECT Id,
+       UId,
+       QuizId,
+       StartDate,
+       EndDate,
+       [Data],
+       Result
+FROM dbo.Attempt (NOLOCK)
+WHERE UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QuerySingleOrDefaultAsync<AttemptDto>( sql, new { UId = uid } );
+		}
+
 		public async Task<long> Add( AttemptDto dto ) {
 			const string sql = @"
 INSERT INTO dbo.Attempt (
