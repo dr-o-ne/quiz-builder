@@ -5,7 +5,7 @@ using QuizBuilder.Domain.Model.Default.ChoiceSelections;
 
 namespace QuizBuilder.Domain.Model.Default.Attempts {
 
-	public sealed class QuestionAttempt : IValidatable {
+	public sealed class QuestionAnswerDU : IValidatable {
 
 		public string QuestionUId { get; set; }
 

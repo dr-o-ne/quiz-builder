@@ -24,6 +24,10 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 
 		public static async Task<(HttpStatusCode, T)> PutValueAsync<T>( this HttpClient client, string url, object value ) {
 			string json = JsonSerializer.Serialize( value );
+			return await PutValueAsync<T>( client, url, json );
+		}
+
+		public static async Task<(HttpStatusCode, T)> PutValueAsync<T>( this HttpClient client, string url, string json ) {
 			using var stringContent = new StringContent( json, Encoding.UTF8, "application/json" );
 			using var response = await client.PutAsync( url, stringContent );
 

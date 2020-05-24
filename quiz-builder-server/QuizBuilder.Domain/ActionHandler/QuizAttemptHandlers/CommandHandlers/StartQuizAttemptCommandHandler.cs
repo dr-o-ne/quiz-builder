@@ -16,7 +16,7 @@ using QuizBuilder.Utils.Services;
 
 namespace QuizBuilder.Domain.ActionHandler.QuizAttemptHandlers.CommandHandlers {
 
-	public sealed class StartQuizAttemptCommandHandler : ICommandHandler<StartQuizAttemptCommand, QuizAttemptCommandResult> {
+	public sealed class StartQuizAttemptCommandHandler : ICommandHandler<StartQuizAttemptCommand, StartQuizAttemptCommandResult> {
 
 		private readonly IMapper _mapper;
 		private readonly IUIdService _uIdService;
@@ -34,7 +34,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuizAttemptHandlers.CommandHandlers {
 			_attemptDataProvider = attemptDataProvider;
 		}
 
-		public async Task<QuizAttemptCommandResult> HandleAsync( StartQuizAttemptCommand command ) {
+		public async Task<StartQuizAttemptCommandResult> HandleAsync( StartQuizAttemptCommand command ) {
 
 			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
 
@@ -55,7 +55,7 @@ namespace QuizBuilder.Domain.ActionHandler.QuizAttemptHandlers.CommandHandlers {
 
 			//TODO: problem: how to match attempts with modified quiz? Serialize and save questions?
 
-			return new QuizAttemptCommandResult {
+			return new StartQuizAttemptCommandResult {
 				Success = true,
 				QuizAttempt = new QuizAttemptViewModel {
 					Id = quizAttempt.UId,

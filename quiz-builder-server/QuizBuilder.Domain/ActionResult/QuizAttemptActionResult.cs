@@ -4,11 +4,15 @@ using QuizBuilder.Domain.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.ActionResult {
 
-	public sealed class QuizAttemptCommandResult : CommandResult {
+	public sealed class StartQuizAttemptCommandResult : CommandResult {
 
 		public QuizAttemptViewModel QuizAttempt { get; set; }
 
 		public ImmutableList<QuestionViewModel> Questions { get; set; }
+
+	}
+
+	public sealed class EndQuizAttemptCommandResult : CommandResult {
 
 	}
 
