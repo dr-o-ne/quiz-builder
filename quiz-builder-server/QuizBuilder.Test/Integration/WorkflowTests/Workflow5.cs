@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
+using QuizBuilder.Domain.Action;
+using QuizBuilder.Domain.Action.ViewModel;
 using QuizBuilder.Domain.ActionResult;
+using QuizBuilder.Domain.Model.Default.ChoiceSelections;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -56,9 +60,9 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			(HttpStatusCode statusCode, QuestionCommandResult data) result3 = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", content2 );
 			string questionUId2 = result3.data.Question.Id;
 
-			// Create Attempt 1
-			var content = new { QuizId = uid1 };
-			(HttpStatusCode statusCode, QuizAttemptCommandResult data) result4 = await _httpClient.PostValueAsync<QuizAttemptCommandResult>( "/attempts/", content );
+			// Start Attempt 1
+			var content3 = new { QuizId = uid1 };
+			(HttpStatusCode statusCode, StartQuizAttemptCommandResult data) result4 = await _httpClient.PostValueAsync<StartQuizAttemptCommandResult>( "/attempts/", content3 );
 			Assert.Equal( HttpStatusCode.Created, result4.statusCode );
 
 			Assert.False( string.IsNullOrWhiteSpace( result4.data.QuizAttempt.Id ) );
@@ -69,6 +73,39 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.Null( result4.data.Questions[1].Feedback );
 			Assert.Null( result4.data.Questions[1].CorrectFeedback );
 			Assert.Null( result4.data.Questions[1].IncorrectFeedback );
+
+
+			var contentObj = new EndQuizAttemptCommand {
+				UId = "123", QuestionAnswers = new List<QuestionAttemptViewModel> {
+					new QuestionAttemptViewModel()
+				}
+			};
+			contentObj.QuestionAnswers[0].QuestionUId = "3234234";
+			contentObj.QuestionAnswers[0].BinaryChoiceSelections = new List<BinaryChoiceSelection> {};
+			contentObj.QuestionAnswers[0].BinaryChoiceSelections.Add( new BinaryChoiceSelection() {Id = 1, IsSelected = true } );
+			contentObj.QuestionAnswers[0].BinaryChoiceSelections.Add( new BinaryChoiceSelection() { Id = 2, IsSelected = false } );
+
+			// EndAttempt 1
+			var content4 = @"{
+   ""Id"":""123"",
+   ""QuestionAnswers"":[
+      {
+         ""QuestionId"":""3234234"",
+         ""BinaryChoiceSelections"":[
+            {
+               ""Id"":1,
+               ""IsSelected"":true
+            },
+            {
+               ""Id"":2,
+               ""IsSelected"":false
+            }
+         ]
+      }
+   ]
+}";
+			var result5 = await _httpClient.PutValueAsync<EndQuizAttemptCommandResult>( "/attempts/", content4 );
+
 		}
 
 		public void Dispose() => _db.Cleanup();

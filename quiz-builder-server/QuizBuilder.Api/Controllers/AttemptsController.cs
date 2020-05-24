@@ -24,7 +24,14 @@ namespace QuizBuilder.Api.Controllers {
 				: UnprocessableEntity( result );
 		}
 
+		[HttpPut]
+		public async Task<ActionResult> Update( [FromBody] EndQuizAttemptCommand command ) {
+			var result = await _dispatcher.SendAsync( command );
 
+			return result.Success
+				? (ActionResult)Created( nameof( Create ), result )
+				: UnprocessableEntity( result );
+		}
 
 	}
 
