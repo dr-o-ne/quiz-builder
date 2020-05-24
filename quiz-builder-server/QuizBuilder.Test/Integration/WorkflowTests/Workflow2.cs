@@ -47,6 +47,9 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				Name = "Question Name 2",
 				Text = "Question Text 2",
 				Type = 1,
+				Feedback = "Feedback",
+				CorrectFeedback = "Correct Feedback",
+				IncorrectFeedback = "Incorrect Feedback",
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
@@ -60,6 +63,9 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.Equal( questionUId2, result4.data.Questions[1].Id );
 			Assert.Equal( "Question Name 1", result4.data.Questions[0].Name );
 			Assert.Equal( "Question Name 2", result4.data.Questions[1].Name );
+			Assert.Equal( "Feedback", result4.data.Questions[1].Feedback );
+			Assert.Equal( "Correct Feedback", result4.data.Questions[1].CorrectFeedback );
+			Assert.Equal( "Incorrect Feedback", result4.data.Questions[1].IncorrectFeedback );
 
 			// Update Question 2
 			var content3 = new {

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using QuizBuilder.Domain.Model.Default.Structure;
 using static QuizBuilder.Domain.Model.Enums;
 
@@ -18,7 +18,15 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public string IncorrectFeedback { get; set; }
 
-		public abstract Question ToQuestionWithoutCorrectChoices();
+		public abstract Question NullifyChoices();
+
+		public virtual Question NullifyFeedback() {
+			Feedback = null;
+			CorrectFeedback = null;
+			IncorrectFeedback = null;
+
+			return this;
+		}
 
 		public virtual Question Clone() {
 			return (Question)this.MemberwiseClone(); // ToDo: deep cloning needed?

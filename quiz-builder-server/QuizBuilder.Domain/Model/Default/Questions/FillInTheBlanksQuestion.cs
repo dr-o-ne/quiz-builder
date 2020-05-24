@@ -23,7 +23,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			set { }
 		}
 
-		public override Question ToQuestionWithoutCorrectChoices() {
+		public override Question NullifyChoices() {
 			return this;
 		}
 
