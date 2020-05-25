@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizService } from './_service/quiz.service';
@@ -36,7 +35,10 @@ import { MultiSelectPreviewComponent } from './question/question-preview/multi-s
 import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
 import { LongAnswerPreviewComponent } from './question/question-preview/long-answer-preview/long-answer-preview.component';
 import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
-
+import { QuizAttemptComponent } from './quiz/quiz-attempt/quiz-attempt.component';
+import { appRoutes } from './routes';
+import { QuestionNavComponent } from './quiz/quiz-attempt/question-nav/question-nav.component';
+import { AttemptService } from './_service/attempt.service';
 
 @NgModule( {
   declarations: [
@@ -60,7 +62,9 @@ import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
     TrueFalsePreviewComponent,
     MultiSelectPreviewComponent,
     LongAnswerComponent,
-    LongAnswerPreviewComponent
+    LongAnswerPreviewComponent,
+    QuizAttemptComponent,
+    QuestionNavComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,12 @@ import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    RouterModule.forRoot( appRoutes ),
+    RouterModule.forRoot(appRoutes, {
+        useHash: false,
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled'
+      }
+    ),
     MatNativeDateModule,
     MatTooltipModule
   ],
@@ -80,7 +89,8 @@ import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
     QuestionService,
     QuizResolver,
     QuestionResolver,
-    QuizPreviewResolver
+    QuizPreviewResolver,
+    AttemptService
   ],
   bootstrap: [
     AppComponent

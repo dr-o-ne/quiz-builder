@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, ExtraOptions, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
@@ -8,6 +8,7 @@ import { QuestionPageComponent } from './question/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
 import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
+import { QuizAttemptComponent } from './quiz/quiz-attempt/quiz-attempt.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +28,7 @@ export const appRoutes: Routes = [
     canActivate: [ AuthGuard ],
     children:
       [
-        { path: '', component: PreviewQuizComponent, resolve: { quizResolver: QuizPreviewResolver } },
+        { path: '', component: QuizAttemptComponent },
         { path: 'edit', children:
           [
             {path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },

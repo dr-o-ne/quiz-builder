@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
-import {Location} from '@angular/common';
 import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { QuestionType } from 'src/app/_models/question';
@@ -38,8 +37,7 @@ export class QuizPageComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private quizService: QuizService,
-    private location: Location
+    private quizService: QuizService
   ) {
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
   }
@@ -180,10 +178,19 @@ export class QuizPageComponent implements OnInit {
   }
 
   navigateToParent(): void {
+    if (this.quiz.id) {
+      this.router.navigate(
+        ['../../'],
+        {
+          relativeTo: this.activeRoute.parent
+        }
+      );
+      return;
+    }
     this.router.navigate(
-      ['../../'],
+      ['../'],
       {
-        relativeTo: this.activeRoute.parent
+        relativeTo: this.activeRoute
       }
     );
   }

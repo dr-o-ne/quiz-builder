@@ -1,3 +1,5 @@
+import { Choice } from './choice';
+
 export class Option {
   constructor(
     public name: string,
@@ -20,4 +22,10 @@ export class BtnGroupControl {
     public action: Action,
     public isHide: boolean = false
   ) {}
+}
+
+export class InfoChoice {
+    public questionId: string;
+    public choices?: Choice[];
+    public cssclass: any;
 }

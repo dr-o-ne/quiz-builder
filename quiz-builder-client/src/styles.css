@@ -18,12 +18,15 @@ mat-sidenav-content {
   width: 100%;
 }
 
-.header-stick {
+.header-stick, .attempt-stick {
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
+.attempt-stick {
+  top: 30%;
+}
 
 button:focus {
     outline: 0px dotted;

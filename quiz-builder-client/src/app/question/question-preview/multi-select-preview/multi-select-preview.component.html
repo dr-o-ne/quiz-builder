@@ -1,7 +1,7 @@
 <div class="vertical" *ngIf="settings.choicesDisplayType === choicesDisplayType.Vertical">
   <div  class="row" *ngFor="let choice of choices; let i = index">
     <div class="col-md-12">
-      <mat-checkbox labelPosition="before"
+      <mat-checkbox labelPosition="before" (change)="changeCheckbox()"
         [(ngModel)]="choice.isCorrect">{{enumChoice ? enumChoice[i] + baseSeparator: ''}}{{choice.text}}</mat-checkbox>
     </div>
   </div>
@@ -10,7 +10,7 @@
 <div class="horizontal" *ngIf="settings.choicesDisplayType === choicesDisplayType.Horizontal">
   <div class="row">
     <div class="col-md-3" *ngFor="let choice of choices; let i = index">
-      <mat-checkbox labelPosition="before"
+      <mat-checkbox labelPosition="before" (change)="changeCheckbox()"
         [(ngModel)]="choice.isCorrect">{{enumChoice ? enumChoice[i] + baseSeparator: ''}}{{choice.text}}</mat-checkbox>
     </div>
   </div>
