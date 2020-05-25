@@ -11,6 +11,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class MultipleChoiceQuestion : Question {
 
+		public override QuestionType Type { get => MultiChoice; }
+
 		public List<BinaryChoice> Choices { get; set; } = new List<BinaryChoice>();
 
 		public List<BinaryChoice> GetChoicesRandomized() {
@@ -30,8 +32,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			choice.Order = Choices.Count;
 			Choices.Add( choice );
 		}
-
-		public override QuestionType Type { get => MultiChoice; }
 
 		public override Question NullifyChoices() {
 			foreach( BinaryChoice item in Choices ) {
