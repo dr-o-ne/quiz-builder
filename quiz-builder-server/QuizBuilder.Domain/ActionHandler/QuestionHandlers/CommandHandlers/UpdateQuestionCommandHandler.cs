@@ -29,6 +29,9 @@ namespace QuizBuilder.Domain.ActionHandler.QuestionHandlers.CommandHandlers {
 
 			Question question = _mapper.Map<UpdateQuestionCommand, Question>( command );
 
+			if( !question.IsValid() )
+				return new CommandResult { Success = false };
+
 			question.Id = currentQuestionDto.Id;
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
 			await _questionDataProvider.Update( questionDto );
