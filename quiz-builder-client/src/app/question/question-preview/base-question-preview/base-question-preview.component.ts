@@ -1,4 +1,4 @@
-import {OnInit} from '@angular/core';
+import {OnInit, Injector} from '@angular/core';
 import {Choice} from 'src/app/_models/choice';
 import {
   ChoicesDisplayType,
@@ -7,6 +7,8 @@ import {
   DefaultEnumChoice
 } from 'src/app/_models/settings/answer.settings';
 import {QuestionType, Question} from 'src/app/_models/question';
+import { InfoChoice } from 'src/app/_models/option';
+import { AttemptService } from 'src/app/_service/attempt.service';
 
 export class BaseQuestionPreviewComponent implements OnInit {
   question: Question;
@@ -22,7 +24,11 @@ export class BaseQuestionPreviewComponent implements OnInit {
 
   baseSeparator = '. ';
 
-  ngOnInit() {
+  constructor(
+    private attemptService: AttemptService
+  ) {}
+
+  ngOnInit(): void {
     this.initDefaults();
   }
 
@@ -44,7 +50,7 @@ export class BaseQuestionPreviewComponent implements OnInit {
     this.settings = JSON.parse(this.question.settings);
   }
 
-  initEnumChoice() {
+  initEnumChoice(): void {
       const index = this.choicesEnumerationType[this.settings.choicesEnumerationType];
       this.enumChoice = this.defaultEnumChoice[index];
   }
@@ -54,9 +60,6 @@ export class BaseQuestionPreviewComponent implements OnInit {
   }
 
   changeCorrectChoice(event): void {
-    if (!event.value) {
-        return;
-    }
     this.choices.forEach(item => {
         if (item.id === event.value) {
             item.isCorrect = true;
@@ -64,9 +67,30 @@ export class BaseQuestionPreviewComponent implements OnInit {
         }
         item.isCorrect = false;
     });
+    this.initCheck();
   }
 
-  initRandom() {
+  initCheck(): void {
+    const check = this.choices.some(c => c.isCorrect === true);
+    this.attemptService.changeInfoChoice(this.initInfoChoice(check));
+  }
+
+  initInfoChoice(isCheck: boolean): InfoChoice {
+    const infoChoice = new InfoChoice();
+    infoChoice.questionId = this.question.id;
+    infoChoice.choices = this.choices;
+    infoChoice.cssclass = this.getCssQuestionNav(isCheck);
+    return infoChoice;
+  }
+
+  getCssQuestionNav(isCheck: boolean): object {
+    return {
+      'question-border-check': isCheck,
+      'question-border-uncheck': !isCheck
+    };
+  }
+
+  initRandom(): void {
       if (this.question.type === this.questionType.TrueFalse) {
         return;
       }
@@ -75,7 +99,7 @@ export class BaseQuestionPreviewComponent implements OnInit {
       }
   }
 
-  shuffleArray() {
+  shuffleArray(): void {
       this.choices.sort(() => Math.random() - 0.5);
   }
 }
