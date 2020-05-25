@@ -11,8 +11,7 @@ namespace QuizBuilder.Test.Unit.Questions {
 
 	public sealed class FillInTheBlanksQuestionTests {
 
-		private readonly IMapper _mapper = new Mapper(
-			new MapperConfiguration( cfg => cfg.AddProfile<QuizBuilderProfile>() ) );
+		private readonly IMapper _mapper = new Mapper( new MapperConfiguration( cfg => cfg.AddProfile<QuizBuilderProfile>() ) );
 
 		[Fact]
 		public void Serialize_Deserialize_Test() {

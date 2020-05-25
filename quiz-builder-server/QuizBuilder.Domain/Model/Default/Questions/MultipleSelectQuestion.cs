@@ -12,6 +12,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class MultipleSelectQuestion : Question {
 
+		public override QuestionType Type { get => MultiSelect; }
+
 		public List<BinaryChoice> Choices { get; set; } = new List<BinaryChoice>();
 
 		public List<BinaryChoice> GetChoicesRandomized() {
@@ -34,8 +36,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			Choices.Add( choice );
 		}
 
-		public override QuestionType Type { get => MultiSelect; }
-
 		public override Question NullifyChoices() {
 			foreach( var item in Choices ) {
 				item.IsCorrect = null;
@@ -44,10 +44,21 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			return this;
 		}
 
-		public override bool IsValid() =>
-			!string.IsNullOrWhiteSpace( Text ) &&
-			Choices.All( x => x.IsCorrect != null ) &&
-			Choices.Count( x => x.IsCorrect != null && x.IsCorrect.Value ) == 1 &&
-			Choices.Count( x => !x.IsValid() ) == 0;
+		public override bool IsValid() {
+
+			if( string.IsNullOrWhiteSpace( Text ) )
+				return false;
+
+			if( Choices.Any( x => !x.IsValid() ) )
+				return false;
+
+			if( Choices.Count < 2 )
+				return false;
+
+			if( Choices.Count( x => x.IsCorrect == true ) == 0 )
+				return false;
+
+			return true;
+		}
 	}
 }

@@ -8,6 +8,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class TrueFalseQuestion : Question {
 
+		public override QuestionType Type { get => TrueFalse; }
+
 		public BinaryChoice TrueChoice { get; set; } = new BinaryChoice();
 
 		public BinaryChoice FalseChoice { get; set; } = new BinaryChoice();
@@ -15,8 +17,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 		public ChoicesDisplayType ChoicesDisplayType { get; set; } = Vertical;
 
 		public ChoicesEnumerationType ChoicesEnumerationType { get; set; } = NoEnumeration;
-
-		public override QuestionType Type { get => TrueFalse; }
 
 		public override Question NullifyChoices() {
 			TrueChoice.IsCorrect = null;
