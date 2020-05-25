@@ -49,13 +49,13 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			if( string.IsNullOrWhiteSpace( Text ) )
 				return false;
 
-			if( Choices.All( x => x.IsCorrect == null ) )
+			if( Choices.Any( x => !x.IsValid() ) )
+				return false;
+
+			if( Choices.Count < 2 )
 				return false;
 
 			if( Choices.Count( x => x.IsCorrect == true ) == 0 )
-				return false;
-
-			if( Choices.Any( x => !x.IsValid() ) )
 				return false;
 
 			return true;
