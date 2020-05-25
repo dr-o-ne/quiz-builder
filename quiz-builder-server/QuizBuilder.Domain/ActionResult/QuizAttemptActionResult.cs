@@ -14,6 +14,8 @@ namespace QuizBuilder.Domain.ActionResult {
 
 	public sealed class EndQuizAttemptCommandResult : CommandResult {
 
+		public double Score { get; set; }
+
 	}
 
 }

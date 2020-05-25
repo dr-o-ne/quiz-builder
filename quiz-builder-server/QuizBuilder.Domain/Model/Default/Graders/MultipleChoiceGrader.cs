@@ -11,7 +11,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 
 		public double Grade( MultipleChoiceQuestion question, MultipleChoiceAnswer answer ) {
 
-			if( question.IsValid() || answer.IsValid() )
+			if( !question.IsValid() || !answer.IsValid() )
 				return 0;
 
 			if( question.UId != answer.QuestionUId )

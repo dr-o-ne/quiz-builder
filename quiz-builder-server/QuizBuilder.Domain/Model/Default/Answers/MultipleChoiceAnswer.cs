@@ -8,10 +8,17 @@ namespace QuizBuilder.Domain.Model.Default.Answers {
 
 		public List<BinaryChoiceSelection> ChoiceSelections { get; set; }
 
-		public override bool IsValid() =>
-			base.IsValid() &&
-			ChoiceSelections != null &&
-			!ChoiceSelections.Any();
+		public override bool IsValid() {
+
+			if( !base.IsValid() )
+				return false;
+
+			if( ChoiceSelections == null || !ChoiceSelections.Any() )
+				return false;
+
+			return true;
+
+		}
 	}
 
 }

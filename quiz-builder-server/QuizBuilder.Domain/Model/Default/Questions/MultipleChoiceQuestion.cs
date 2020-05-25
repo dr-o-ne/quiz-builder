@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Enums;
@@ -35,18 +34,29 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 		public override QuestionType Type { get => MultiChoice; }
 
 		public override Question NullifyChoices() {
-			foreach( var item in Choices ) {
+			foreach( BinaryChoice item in Choices ) {
 				item.IsCorrect = null;
 				item.Feedback = null;
 			}
 			return this;
 		}
 
-		public override bool IsValid() =>
-			!string.IsNullOrWhiteSpace( Text ) &&
-			Choices.All(  x => x.IsCorrect != null ) &&
-		    Choices.Count( x => x.IsCorrect != null && x.IsCorrect.Value ) == 1 &&
-		    Choices.Count( x => !x.IsValid() ) == 0;
+		public override bool IsValid() {
+
+			if( string.IsNullOrWhiteSpace( Text ) ) 
+				return false;
+
+			if( Choices.All( x => x.IsCorrect == null ) )
+				return false;
+
+			if( Choices.Count( x => x.IsCorrect == true ) != 1 ) 
+				return false;
+
+			if( Choices.Any( x => !x.IsValid() ) )
+				return false;
+
+			return true;
+		}
 	}
 
 }

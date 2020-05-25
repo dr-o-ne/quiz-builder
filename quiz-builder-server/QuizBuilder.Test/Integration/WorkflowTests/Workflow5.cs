@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
-using QuizBuilder.Domain.Action;
-using QuizBuilder.Domain.Action.ViewModel;
 using QuizBuilder.Domain.ActionResult;
-using QuizBuilder.Domain.Model.Default.ChoiceSelections;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -38,9 +34,9 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				QuizId = uid1,
 				Name = "Question Name 1",
 				Text = "Question Text 1",
-				Type = 1,
+				Type = 2,
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
-				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
+				Choices = "[{\"Id\":0,\"isCorrect\":true,\"text\":\"Choice 1\"},{\"Id\":1,\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
 			(HttpStatusCode statusCode, QuestionCommandResult data) result2 = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", content1 );
 			string questionUId1 = result2.data.Question.Id;
@@ -50,12 +46,12 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				QuizId = uid1,
 				Name = "Question Name 2",
 				Text = "Question Text 2",
-				Type = 1,
+				Type = 2,
 				Feedback = "Feedback",
 				CorrectFeedback = "Correct Feedback",
 				IncorrectFeedback = "Incorrect Feedback",
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
-				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
+				Choices = "[{\"Id\":0,\"isCorrect\":true,\"text\":\"Choice 1\"},{\"Id\":1,\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
 			(HttpStatusCode statusCode, QuestionCommandResult data) result3 = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", content2 );
 			string questionUId2 = result3.data.Question.Id;
@@ -74,37 +70,28 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.Null( result4.data.Questions[1].CorrectFeedback );
 			Assert.Null( result4.data.Questions[1].IncorrectFeedback );
 
-
-			var contentObj = new EndQuizAttemptCommand {
-				UId = "123", QuestionAnswers = new List<QuestionAttemptViewModel> {
-					new QuestionAttemptViewModel()
-				}
-			};
-			contentObj.QuestionAnswers[0].QuestionUId = "3234234";
-			contentObj.QuestionAnswers[0].BinaryChoiceSelections = new List<BinaryChoiceSelection> {};
-			contentObj.QuestionAnswers[0].BinaryChoiceSelections.Add( new BinaryChoiceSelection() {Id = 1, IsSelected = true } );
-			contentObj.QuestionAnswers[0].BinaryChoiceSelections.Add( new BinaryChoiceSelection() { Id = 2, IsSelected = false } );
-
-			// EndAttempt 1
-			var content4 = @"{
-   ""Id"":""123"",
+			// End Attempt 1
+			var content4 = $@"{{
+   ""Id"":""{result4.data.QuizAttempt.Id}"",
    ""QuestionAnswers"":[
-      {
-         ""QuestionId"":""3234234"",
+      {{
+         ""QuestionId"":""{questionUId1}"",
          ""BinaryChoiceSelections"":[
-            {
-               ""Id"":1,
+            {{
+               ""Id"":0,
                ""IsSelected"":true
-            },
-            {
-               ""Id"":2,
+            }},
+            {{
+               ""Id"":1,
                ""IsSelected"":false
-            }
+            }}
          ]
-      }
+      }}
    ]
-}";
-			var result5 = await _httpClient.PutValueAsync<EndQuizAttemptCommandResult>( "/attempts/", content4 );
+}}";
+			(HttpStatusCode statusCode, EndQuizAttemptCommandResult data) result5 = await _httpClient.PutValueAsync<EndQuizAttemptCommandResult>( "/attempts/", content4 );
+			Assert.Equal( HttpStatusCode.OK, result5.statusCode );
+			Assert.Equal( 1, result5.data.Score );
 
 		}
 

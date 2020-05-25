@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action;
@@ -8,6 +9,7 @@ using QuizBuilder.Domain.Mapper.Default.ModelToDto;
 using QuizBuilder.Domain.Mapper.Default.ModelToModel;
 using QuizBuilder.Domain.Mapper.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Domain.Model.Default.Answers;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
@@ -48,6 +50,10 @@ namespace QuizBuilder.Domain.Mapper {
 
 		private void AddAttemptMapping() {
 			CreateMap<QuizAttempt, AttemptDto>().ConvertUsing<QuizAttemptToAttemptDtoConverter>();
+			CreateMap<EndQuizAttemptCommand, List<QuestionAnswerDU>>().ConvertUsing<EndQuizAttemptCommand2ListOfQuestionAnswerDU>();
+
+			CreateMap<QuestionAnswerDU, MultipleChoiceAnswer>().ConvertUsing<QuestionAnswerDUToMultipleChoiceAnswer>();
+			CreateMap<QuestionAnswerDU, MultipleSelectAnswer>().ConvertUsing<QuestionAnswerDUToMultipleSelectAnswer>();
 		}
 	}
 }
