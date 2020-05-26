@@ -77,11 +77,11 @@ VALUES (
 
 		public async Task DeleteQuizQuestionRelationship( string quizUId, string quizItemUId ) {
 			const string sql = @"
-DELETE qqi 
+DELETE qqi
 FROM dbo.QuizQuizItem qqi
 INNER JOIN dbo.Quiz q ON q.Id = qqi.QuizId
 INNER JOIN dbo.QuizItem qi ON qi.Id = qqi.QuizItemId
-WHERE 
+WHERE
 	q.UId = @QuizUId AND
 	qi.UId = @QuizItemId";
 
@@ -109,6 +109,41 @@ INNER JOIN @QuizQuizItemIds AS temp ON temp.Id = q.Id
 			return await conn.QueryAsync<(string, int)>( sql, new { QuizUId = quizUId } );
 		}
 
+		public async Task<int> RemoveQuizItemRelationships( string quizItemUId ) {
+			const string sql = @"
+			UPDATE
+				dbo.QuizItem
+			SET
+				ParentId = NULL
+			WHERE
+				ParentId = (
+					SELECT TOP 1
+						Id
+					FROM
+						dbo.QuizItem WITH(NOLOCK)
+					WHERE
+						UId = @UId
+				)";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.ExecuteAsync( sql, new { UId = quizItemUId } );
+		}
+
+		public async Task<int> DeleteQuizQuizItemRelationships( string quizItemUId ) {
+			const string sql = @"
+			DELETE
+				qqi
+			FROM
+				dbo.QuizQuizItem qqi WITH(NOLOCK)
+			INNER JOIN
+				dbo.QuizItem qi WITH(NOLOCK)
+					ON qqi.QuizItemId = qi.Id
+						AND qi.UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.ExecuteAsync( sql, new { UId = quizItemUId } );
+		}
+
 		private IDbConnection GetConnection() {
 			IDbConnection conn = _dbConnectionFactory.GetConnection();
 			conn.Open();
@@ -119,7 +154,7 @@ INNER JOIN @QuizQuizItemIds AS temp ON temp.Id = q.Id
 			const string sql = @"
 			SELECT TOP 1
 				qi.Id
-			FROM 
+			FROM
 				dbo.QuizItem qi WITH(NOLOCK)
 			INNER JOIN
 				dbo.Question q WITH(NOLOCK)

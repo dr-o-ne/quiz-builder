@@ -49,16 +49,33 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			} );
 		}
 
-		public Task Update( GroupDto dto ) {
-			throw new System.NotImplementedException();
-		}
-
-		public async Task Delete( string uid ) {
-			const string sql =
-				@"DELETE FROM dbo.QuizItem WHERE UId=@UId";
+		public async Task<int> Update( GroupDto dto ) {
+			const string sql = @"
+			UPDATE
+				dbo.QuizItem
+			SET
+				Name = @Name,
+				ModifiedOn = @ModifiedOn
+			WHERE Id = @Id";
 
 			using IDbConnection conn = GetConnection();
-			await conn.ExecuteAsync( sql, new { UId = uid } );
+			return await conn.ExecuteAsync( sql, new {
+				dto.Id,
+				dto.Name,
+				ModifiedOn = DateTime.UtcNow
+			} );
+		}
+
+		public async Task<int> Delete( string uid ) {
+			const string sql = @"
+			DELETE
+			FROM
+			     dbo.QuizItem
+			WHERE
+			      UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.ExecuteAsync( sql, new { UId = uid } );
 		}
 
 		public async Task<GroupDto> Get( string uid ) {
