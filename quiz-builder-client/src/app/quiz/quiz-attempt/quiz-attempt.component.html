@@ -4,7 +4,9 @@
 
     <app-question-nav *ngIf="questions"
       [questions]="questions"
-      [anchor]="anchor">
+      [anchor]="anchor"
+      [quizAttemptId]="quizAttemptId"
+      (updateQuizAttempt)="updateQuizAttempt($event)">
     </app-question-nav>
       
   </div>

@@ -40,7 +40,7 @@ export class BaseQuestionPreviewComponent implements OnInit {
   }
 
   initChoice(): void {
-    if (!this.choices) {
+    if ( !this.choices ) {
       const choices = JSON.parse(this.question.choices);
       this.choices = choices.map(choice => new Choice(choice.id, choice.text, false));
     }

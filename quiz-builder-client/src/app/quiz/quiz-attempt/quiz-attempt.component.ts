@@ -4,6 +4,9 @@ import { Question } from 'src/app/_models/question';
 import { Choice } from 'src/app/_models/choice';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AttemptService } from 'src/app/_service/attempt.service';
+import { QuizAttempt } from 'src/app/_models/attempt';
+import { ModalWindowAttemptComponent } from './modal-window-attempt/modal-window-attempt.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -13,12 +16,14 @@ import { AttemptService } from 'src/app/_service/attempt.service';
 export class QuizAttemptComponent implements OnInit {
   quiz: Quiz;
   questions: Question[];
+  quizAttemptId: string;
 
   anchor = 'q';
 
   constructor( private router: Router,
                private activeRoute: ActivatedRoute,
-               private attemptService: AttemptService
+               private attemptService: AttemptService,
+               public dialog: MatDialog
   ) {
   }
 
@@ -28,18 +33,42 @@ export class QuizAttemptComponent implements OnInit {
       return;
     }
     this.quiz = history.state.quiz;
+    this.createQuizAttempt();
+  }
 
+  createQuizAttempt(): void {
     this.attemptService.createAttempt(this.quiz.id).subscribe( (response: any) => {
-      if ( response.hasOwnProperty( 'questions' ) ) {
+      if ( response.hasOwnProperty( 'questions' ) && response.hasOwnProperty( 'quizAttempt' ) ) {
+        this.quizAttemptId = response.quizAttempt.id;
         this.questions = response.questions;
         this.initPreview();
       }
     }, error => console.log(error));
-
   }
 
   initPreview(): void {
-    this.questions.every(q => q.choices = JSON.parse( q.choices ));
+    this.questions.forEach(q => {
+      q.choices = q.choices ? JSON.parse( q.choices ) : [new Choice(1, '', false)];
+    });
+  }
+
+  updateQuizAttempt(quizAttempt: QuizAttempt): void {
+    this.attemptService.updateAttempt(quizAttempt).subscribe((response: any) => {
+      if (response.hasOwnProperty( 'score' )) {
+        this.openResult(response.score);
+      }
+    }, error => console.log(error));
+  }
+
+  openResult(socore: number): void {
+    const dialogRef = this.dialog.open( ModalWindowAttemptComponent, {
+      width: '50em',
+      data: { socore }
+    } );
+
+    dialogRef.afterClosed().subscribe( result => {
+      this.router.navigate([''], { relativeTo: this.activeRoute.parent });
+    } );
   }
 
 }

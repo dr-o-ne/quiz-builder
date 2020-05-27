@@ -39,6 +39,7 @@ import { QuizAttemptComponent } from './quiz/quiz-attempt/quiz-attempt.component
 import { appRoutes } from './routes';
 import { QuestionNavComponent } from './quiz/quiz-attempt/question-nav/question-nav.component';
 import { AttemptService } from './_service/attempt.service';
+import { ModalWindowAttemptComponent } from './quiz/quiz-attempt/modal-window-attempt/modal-window-attempt.component';
 
 @NgModule( {
   declarations: [
@@ -59,6 +60,7 @@ import { AttemptService } from './_service/attempt.service';
     DynamicChoiceComponent,
     DynamicQuestionPreviewComponent,
     ModalWindowPreviewQuestionComponent,
+    ModalWindowAttemptComponent,
     TrueFalsePreviewComponent,
     MultiSelectPreviewComponent,
     LongAnswerComponent,
@@ -82,7 +84,12 @@ import { AttemptService } from './_service/attempt.service';
     MatNativeDateModule,
     MatTooltipModule
   ],
-  entryComponents: [ QuestionListComponent, QuestionPageComponent, ModalWindowPreviewQuestionComponent ],
+  entryComponents: [
+    QuestionListComponent,
+    QuestionPageComponent,
+    ModalWindowPreviewQuestionComponent,
+    ModalWindowAttemptComponent
+  ],
   providers: [
     AuthGuard,
     QuizService,
