@@ -54,6 +54,14 @@ export class QuizService {
     return this.http.post( this.apiUrl + 'groups', group );
   }
 
+  updateGroup( group: Group ): Observable<object> {
+    return this.http.put( this.apiUrl + 'groups', group );
+  }
+
+  deleteGroup( id: string ): Observable<object> {
+    return this.http.delete( this.apiUrl + 'groups/' + id );
+  }
+
   deleteQuestion( quizId: string, id: string ): Observable<object> {
     return this.http.delete( this.apiUrl + 'quizzes/' + quizId + '/questions/' + id );
   }

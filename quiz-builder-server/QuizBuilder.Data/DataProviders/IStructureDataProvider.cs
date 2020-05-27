@@ -15,6 +15,10 @@ namespace QuizBuilder.Data.DataProviders {
 
 		Task<IEnumerable<(string, int)>> DeleteQuizRelationships( string quizUId );
 
+		Task<int> RemoveQuizItemRelationships( string quizItemUId );
+
+		Task<int> DeleteQuizQuizItemRelationships( string quizItemUId );
+
 		Task<long> GetQuizItemIdByQuestionUid( string uid );
 
 	}

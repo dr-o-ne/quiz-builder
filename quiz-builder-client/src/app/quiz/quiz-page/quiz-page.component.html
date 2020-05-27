@@ -70,7 +70,7 @@
 
     <div class="row">
 
-      <div *ngIf="!groupForm.isHide; else hide" class="col-md-2">
+      <div *ngIf="groupForm.visible; else hide" class="col-md-2">
         <button mat-raised-button class="full-width" color="primary" [matMenuTriggerFor]="menu">
           Add New
         </button>
@@ -109,7 +109,7 @@
             </div>
 
             <div *ngFor="let btn of btnGroupControls">
-              <div class="btn-vertical"  *ngIf="!btn.isHide">
+              <div class="btn-vertical"  *ngIf="btn.visible">
                 <button mat-icon-button color="accent" (click)="btn.action()">
                   <mat-icon>{{btn.name}}</mat-icon>
                 </button>
@@ -117,7 +117,7 @@
             </div>
 
           </div>
-  
+
         </div>
 
       </ng-template>

@@ -11,7 +11,7 @@ export class Option {
 
 export class GroupForm {
   public name: string;
-  public isHide = false;
+  public visible = true;
 }
 
 export type Action = () => void;
@@ -20,7 +20,7 @@ export class BtnGroupControl {
   constructor(
     public name: string,
     public action: Action,
-    public isHide: boolean = false
+    public visible: boolean = true
   ) {}
 }
 

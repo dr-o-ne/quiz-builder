@@ -7,9 +7,10 @@ import { Group } from 'src/app/_models/group';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { MatTabGroup } from '@angular/material/tabs';
 import { GroupForm, BtnGroupControl } from 'src/app/_models/option';
+import { finalize } from 'rxjs/operators';
 
 @Component( {
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'app-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: [ './quiz-page.component.css' ]
@@ -28,9 +29,9 @@ export class QuizPageComponent implements OnInit {
 
   groupForm = new GroupForm();
   btnGroupControls: BtnGroupControl[] = [
-    new BtnGroupControl('add', this.addGroup.bind(this), false),
-    new BtnGroupControl('edit', this.saveEditTab.bind(this), true),
-    new BtnGroupControl('cancel', this.resetGroupForm.bind(this), false)
+    new BtnGroupControl( 'add', this.addGroup.bind( this ), true ),
+    new BtnGroupControl( 'edit', this.saveEditTab.bind( this ), false ),
+    new BtnGroupControl( 'cancel', this.resetGroupForm.bind( this ), true )
   ];
 
   constructor(
@@ -64,7 +65,7 @@ export class QuizPageComponent implements OnInit {
   initActiveGroup() {
     const groupId = history.state.groupId;
     if ( groupId ) {
-      this.selectedIndex = this.groups.findIndex(gr => gr.id === groupId);
+      this.selectedIndex = this.groups.findIndex( gr => gr.id === groupId );
     }
   }
 
@@ -73,41 +74,44 @@ export class QuizPageComponent implements OnInit {
   }
 
   addTab(): void {
-    this.groupForm.isHide = true;
+    this.groupForm.visible = false;
     this.groupFormControl = new FormControl( '', [
       Validators.required
     ] );
   }
 
   removeTab( index: number ): void {
-    this.groups.splice( index, 1 );
+    const group = this.groups[index];
+    this.quizService.deleteGroup( group.id ).subscribe(
+      response => this.groups.splice( index, 1 ),
+      error => console.log( error ) );
   }
 
   addGroup() {
     if ( this.groupFormControl.valid ) {
       const group = new Group( '', this.quiz.id, this.groupForm.name );
-      this.quizService.createGroup( group ).subscribe( ( response: any ) => {
-          group.id = response.group.groupId;
+      this.quizService.createGroup( group ).pipe(
+        finalize( () => this.resetGroupForm() )
+      ).subscribe( ( response: any ) => {
+          group.id = response.group.id;
           this.groups.push( group );
           this.setActiveGroup( group.id );
         },
-        error => console.log( error ),
-        () => {
-          this.resetGroupForm();
-        } );
+        error => console.log( error )
+      );
     }
   }
 
   resetGroupForm(): void {
-    this.groupForm.isHide = false;
-    this.setupBtnGroup('edit');
+    this.groupForm.visible = true;
+    this.setupBtnGroup( 'edit' );
     this.groupFormControl.reset();
   }
 
   setupBtnGroup( action: string ) {
     this.btnGroupControls.forEach( btn => {
-      btn.isHide = btn.name === action;
-    });
+      btn.visible = btn.name !== action;
+    } );
   }
 
   editTab( index: number ): void {
@@ -116,16 +120,25 @@ export class QuizPageComponent implements OnInit {
       Validators.required
     ] );
     this.groupForm.name = this.groups[index].name;
-    this.groupForm.isHide = true;
-    this.setupBtnGroup('add');
+    this.groupForm.visible = false;
+    this.setupBtnGroup( 'add' );
   }
 
   saveEditTab(): void {
-    if ( this.groupFormControl.valid ) {
-      this.groupForm.isHide = false;
-      this.setupBtnGroup('edit');
-      this.groups[this.currentIndexTab].name = this.groupForm.name;
+    if ( !this.groupFormControl.valid ) {
+      return;
     }
+    const currentGroup = this.groups[this.currentIndexTab];
+    const newGroup = Object.assign( {}, currentGroup );
+    newGroup.name = this.groupForm.name;
+    this.quizService.updateGroup( newGroup ).pipe(
+      finalize( () => {
+        this.groupForm.visible = true;
+        this.setupBtnGroup( 'edit' );
+      } ) ).subscribe(
+      response => this.groups[this.currentIndexTab] = newGroup,
+      error => console.log( error )
+    );
   }
 
   initValidate(): void {
@@ -178,9 +191,9 @@ export class QuizPageComponent implements OnInit {
   }
 
   navigateToParent(): void {
-    if (this.quiz.id) {
+    if ( this.quiz.id ) {
       this.router.navigate(
-        ['../../'],
+        [ '../../' ],
         {
           relativeTo: this.activeRoute.parent
         }
@@ -188,7 +201,7 @@ export class QuizPageComponent implements OnInit {
       return;
     }
     this.router.navigate(
-      ['../'],
+      [ '../' ],
       {
         relativeTo: this.activeRoute
       }
