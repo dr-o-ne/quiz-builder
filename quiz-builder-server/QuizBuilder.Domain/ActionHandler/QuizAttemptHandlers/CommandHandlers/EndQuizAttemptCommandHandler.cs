@@ -62,7 +62,8 @@ namespace QuizBuilder.Domain.ActionHandler.QuizAttemptHandlers.CommandHandlers {
 						break;
 
 					default:
-						throw new ArgumentOutOfRangeException();
+						// throw new ArgumentOutOfRangeException();
+						continue;
 				}
 
 			}

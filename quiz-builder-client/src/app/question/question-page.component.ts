@@ -78,7 +78,7 @@ export class QuestionPageComponent implements OnInit {
     if ( this.question.choices ) {
       this.choices = JSON.parse( this.question.choices );
     }
-    this.settings = JSON.parse( this.question.settings );
+    this.settings = JSON.parse( this.question.settings || '{}' );
   }
 
   initValidate(): void {
@@ -166,7 +166,7 @@ export class QuestionPageComponent implements OnInit {
   openPreview(): void {
     this.updateQuestionModel();
     const dialogRef = this.dialog.open( ModalWindowPreviewQuestionComponent, {
-      width: '500px',
+      width: '50em',
       data: { question: this.question }
     } );
 
