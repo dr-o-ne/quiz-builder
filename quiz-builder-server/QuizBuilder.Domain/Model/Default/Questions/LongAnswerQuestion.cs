@@ -13,6 +13,5 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override bool IsValid() => !string.IsNullOrWhiteSpace( Text );
 
-		public string AnswerText { get; set; }
 	}
 }

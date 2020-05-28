@@ -44,10 +44,7 @@ namespace QuizBuilder.Domain.Mapper.Default.ModelToViewModel {
 					choices = JsonSerializer.Serialize( binaryChoices, Consts.JsonSerializerOptions );
 					break;
 				case LongAnswerQuestion question:
-					var settingsLongAnswer = new {
-						AnswerText = question.AnswerText
-					};
-					settings = JsonSerializer.Serialize( settingsLongAnswer, Consts.JsonSerializerOptions );
+					settings = JsonSerializer.Serialize( new {}, Consts.JsonSerializerOptions );
 					choices = string.Empty;
 					break;
 				default:

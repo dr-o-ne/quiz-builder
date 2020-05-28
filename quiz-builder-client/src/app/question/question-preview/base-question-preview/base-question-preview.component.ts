@@ -73,6 +73,7 @@ export class BaseQuestionPreviewComponent implements OnInit {
   initCheck(): void {
     const check = this.choices.some(c => c.isCorrect === true);
     this.attemptService.changeInfoChoice(this.initInfoChoice(check));
+    this.attemptService.resetInfoChoice();
   }
 
   initInfoChoice(isCheck: boolean): InfoChoice {

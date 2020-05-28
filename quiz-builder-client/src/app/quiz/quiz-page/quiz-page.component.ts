@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { QuestionType } from 'src/app/_models/question';
@@ -15,7 +15,7 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './quiz-page.component.html',
   styleUrls: [ './quiz-page.component.css' ]
 } )
-export class QuizPageComponent implements OnInit {
+export class QuizPageComponent implements OnInit, AfterViewInit {
   quiz: Quiz;
   selectedIndex = 0;
   quizForm: FormGroup;
@@ -38,12 +38,13 @@ export class QuizPageComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private cdr: ChangeDetectorRef
   ) {
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initValidate();
     this.activeRoute.data.subscribe( response => {
       if ( response && response.quizResolver ) {
@@ -56,13 +57,17 @@ export class QuizPageComponent implements OnInit {
     } );
   }
 
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
+  }
+
   initGroups( quiz: Quiz ): void {
     const defaultGroup = new Group( '', quiz.id );
     this.groups.push( defaultGroup );
     this.groups.push( ...quiz.groups );
   }
 
-  initActiveGroup() {
+  initActiveGroup(): void {
     const groupId = history.state.groupId;
     if ( groupId ) {
       this.selectedIndex = this.groups.findIndex( gr => gr.id === groupId );
@@ -87,7 +92,7 @@ export class QuizPageComponent implements OnInit {
       error => console.log( error ) );
   }
 
-  addGroup() {
+  addGroup(): void {
     if ( this.groupFormControl.valid ) {
       const group = new Group( '', this.quiz.id, this.groupForm.name );
       this.quizService.createGroup( group ).pipe(
@@ -108,7 +113,7 @@ export class QuizPageComponent implements OnInit {
     this.groupFormControl.reset();
   }
 
-  setupBtnGroup( action: string ) {
+  setupBtnGroup( action: string ): void {
     this.btnGroupControls.forEach( btn => {
       btn.visible = btn.name !== action;
     } );

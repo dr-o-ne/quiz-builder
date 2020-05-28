@@ -8,7 +8,11 @@ import { BaseQuestionPreviewComponent } from '../base-question-preview/base-ques
 })
 export class LongAnswerPreviewComponent extends BaseQuestionPreviewComponent {
 
-  changeLongAnswer(): void {
+  changeLongAnswer(value: string): void {
+    if ( !this.choices.length ) {
+      return;
+    }
+    this.choices[0].text = value;
     this.choices[0].isCorrect = !!this.choices[0].text;
     this.initCheck();
   }

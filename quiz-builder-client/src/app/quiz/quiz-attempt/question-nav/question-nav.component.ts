@@ -51,7 +51,6 @@ export class QuestionNavComponent implements OnInit {
         return;
       }
       this.currentQuestionPassed(infoChoice);
-      this.attemptService.changeInfoChoice(null);
     });
   }
 
