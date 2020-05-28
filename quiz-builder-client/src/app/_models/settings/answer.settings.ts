@@ -2,7 +2,6 @@ export class BaseChoiceSettings {
   choicesDisplayType = ChoicesDisplayType.Vertical;
   choicesEnumerationType = ChoicesEnumerationType.one_two_three;
   randomize = false;
-  answerText = '';
 }
 
 export class SettingsTrueFalse extends BaseChoiceSettings {
