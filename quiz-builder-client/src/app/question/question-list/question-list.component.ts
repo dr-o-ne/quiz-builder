@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuestionService } from 'src/app/_service/question.service';
 import { QuizService } from 'src/app/_service/quiz.service';
-import { clonedeep } from 'lodash.clonedeep';
 import { CdkDropList, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Group } from '../../_models/group';
 import { ActivatedRoute, Router } from '@angular/router';
