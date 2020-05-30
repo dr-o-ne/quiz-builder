@@ -1,0 +1,36 @@
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+ tr.cdk-row:hover{
+    background-color: #f2f2f2;
+}
+  
+.version-info {
+    font-size: 8pt;
+    float: right;
+    margin: 8px;
+}
+
+.radio-align-vertical {
+    margin-top: 2%;
+}
+
+.btn-align-vertical {
+    margin-top: 1%;
+}
+
+.container-option-btn {
+    justify-content: flex-end;
+    position: relative;
+}
+
+.option-btn {
+    position: absolute;
+    margin-left: -1%;
+    z-index: 2;
+}

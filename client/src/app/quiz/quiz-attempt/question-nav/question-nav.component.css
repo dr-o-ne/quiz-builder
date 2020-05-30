@@ -1,0 +1,17 @@
+.question-container {
+    margin-top: 10%;
+} 
+
+.question-align {
+    text-align: center;
+    margin: 4%;
+    padding: 0;
+}
+
+.question-border-check {
+    border: 1px solid green;
+}
+
+.question-border-uncheck {
+    border: 1px solid #e6e6e6;
+}

@@ -1,0 +1,121 @@
+<div class="main-color">
+  <div class="row container-option-btn">
+    <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let option of options" (click)="clickOption($event, option)">
+        <mat-icon *ngIf="option.enabled">done</mat-icon>
+        <span>{{option.displayName}}</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <mat-tab-group>
+    <mat-tab label="Choices">
+      <ng-template matTabContent>
+
+        <div class="row mt-3">
+          <div class="col-md-3">
+            <button class="full-width" mat-raised-button color="primary" (click)="addChoice()">New choice</button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+
+          <div class="col-md-12">
+
+            <div class="container-choice" *ngFor="let choice of choices">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <mat-label>Text</mat-label>
+                    <input matInput type="text" [(ngModel)]="choice.text" required>
+                    <button mat-button *ngIf="choice.text" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="choice.text =''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-1 radio-align-vertical">
+                  <mat-checkbox [(ngModel)]="choice.isCorrect">Correct</mat-checkbox>
+                </div>
+                <div class="col-md-1 btn-align-vertical">
+                  <button mat-icon-button color="accent" (click)="deleteChoice(choice)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+              </div>
+
+              <div *ngFor="let option of options">
+                <div *ngIf="option.enabled" class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                      <mat-label>{{option.displayName}}</mat-label>
+                      <input matInput type="{{option.type}}" [(ngModel)]="choice[option.name]">
+                      <button mat-button *ngIf="choice[option.name] && option.type === 'text'" matSuffix mat-icon-button
+                              aria-label="Clear"
+                              (click)="choice[option.name] =''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Settings">
+      <ng-template matTabContent>
+
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <mat-label>Display Type</mat-label>
+              <mat-select [(ngModel)]="settings.choicesDisplayType">
+                <mat-option *ngFor="let key of choicesDisplayTypesKeys" [value]="key">
+                  {{choicesDisplayTypes[key]}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="settings.choicesDisplayType != choicesDisplayTypes.Dropdown" class="col-md-4">
+            <mat-form-field class="full-width">
+              <mat-label>Enumeration Type</mat-label>
+              <mat-select [(ngModel)]="settings.choicesEnumerationType">
+                <mat-option *ngFor="let key of choicesEnumerationTypesKeys" [value]="key">
+                  {{choicesEnumerationTypes[key]}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 radio-align-vertical">
+            <mat-checkbox [(ngModel)]="settings.randomize">Randomize</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <mat-label>Grading Type</mat-label>
+              <mat-select [(ngModel)]="settings.gradingType">
+                <mat-option *ngFor="let key of questionGradingTypesKeys" [value]="key">
+                  {{questionGradingTypes[key]}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
