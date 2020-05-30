@@ -39,6 +39,7 @@ import { ModalWindowAttemptComponent } from './quiz/quiz-attempt/modal-window-at
 import { AppRoutingModule } from './app-routing.module';
 import { VexModule } from '../@vex/vex.module';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
+import { CommingSoonComponent } from './common/comming-soon/comming-soon.component';
 
 @NgModule( {
   declarations: [
@@ -63,7 +64,8 @@ import { CustomLayoutModule } from './custom-layout/custom-layout.module';
     LongAnswerComponent,
     LongAnswerPreviewComponent,
     QuizAttemptComponent,
-    QuestionNavComponent
+    QuestionNavComponent,
+    CommingSoonComponent
   ],
   imports: [
     BrowserModule,

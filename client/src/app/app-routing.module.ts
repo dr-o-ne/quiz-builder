@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
+import { CommingSoonComponent } from './common/comming-soon/comming-soon.component';
+
 const routes: Routes = [
   {
     path: '',
     component: CustomLayoutComponent,
+    children: []
+  },
+  {
+    path: 'comming-soon',
+    component: CommingSoonComponent,
     children: []
   }
 ];
