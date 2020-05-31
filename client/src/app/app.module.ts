@@ -41,6 +41,15 @@ import { VexModule } from '../@vex/vex.module';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
 import { CommingSoonComponent } from './common/comming-soon/comming-soon.component';
 
+import { PageLayoutModule } from '../@vex/components/page-layout/page-layout.module';
+import { SecondaryToolbarModule } from '../@vex/components/secondary-toolbar/secondary-toolbar.module';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BreadcrumbsModule } from '../@vex/components/breadcrumbs/breadcrumbs.module';
+import { IconModule } from '@visurel/iconify-angular';
+import { MatIconModule } from '@angular/material/icon';
+import { ContainerModule } from '../@vex/directives/container/container.module';
+
 @NgModule( {
   declarations: [
     AppComponent,
@@ -80,7 +89,20 @@ import { CommingSoonComponent } from './common/comming-soon/comming-soon.compone
 	
     // Vex
     VexModule,
-    CustomLayoutModule
+    CustomLayoutModule,
+
+
+    //TOTO: check copy-pasted from VEX ui single page - not sure if all of them are required
+    PageLayoutModule,
+    SecondaryToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    BreadcrumbsModule,
+    IconModule,
+    MatIconModule,
+    ContainerModule
+    //TOTO: check
+
   ],
   entryComponents: [
     QuestionListComponent,

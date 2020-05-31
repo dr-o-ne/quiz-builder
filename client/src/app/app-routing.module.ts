@@ -12,23 +12,23 @@ const routes: Routes = [
   {
     path: '',
     component: CustomLayoutComponent,
-    children: []
+    children: [  {
+      path: 'quizzes',
+      runGuardsAndResolvers: 'always',
+      canActivate: [ AuthGuard ],
+      children:
+        [
+          { path: '', component: QuizListComponent },
+          { path: 'new', component: QuizPageComponent }
+        ]
+    }]
   },
   {
     path: 'comming-soon',
     component: CommingSoonComponent,
     children: []
   },
-  {
-    path: 'quizzes',
-    runGuardsAndResolvers: 'always',
-    canActivate: [ AuthGuard ],
-    children:
-      [
-        { path: '', component: QuizListComponent },
-        { path: 'new', component: QuizPageComponent }
-      ]
-  }
+
 ];
 
 @NgModule({
