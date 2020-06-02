@@ -92,15 +92,15 @@
             <mat-menu #bulkMenu="matMenu">
               <button mat-menu-item (click)="clickMultiSelection()">
                 <mat-icon>done_all</mat-icon>
-                <span>Multiselect</span>
+                <span>Bulk Select</span>
               </button>
               <button mat-menu-item (click)="bulkPublish()" [disabled]="!isAnySelected()">
                 <mat-icon>cloud_upload</mat-icon>
-                <span>Bulk publish</span>
+                <span>Bulk Publish</span>
               </button>
               <button mat-menu-item (click)="bulkDelete()" [disabled]="!isAnySelected()">
                 <mat-icon>delete</mat-icon>
-                <span>Bulk delete</span>
+                <span>Bulk Delete</span>
               </button>
             </mat-menu>
           </th>
@@ -130,9 +130,7 @@
       </table>
   
       <mat-paginator *ngIf="isPaginatorEnabled()" [pageSizeOptions]="tablePageSizeOptions"></mat-paginator>
-  
-      <router-outlet></router-outlet>
-      
+        
     </div>
 
   </vex-page-layout-content>
