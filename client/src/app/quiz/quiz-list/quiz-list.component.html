@@ -33,13 +33,6 @@
 
         
       
-        <div class="main-color">
-      
-          <div class="row">
-      
-
-      
-          </div>
       
           <table mat-table [dataSource]="dataSource" matSort>
       
@@ -150,7 +143,6 @@
       
           <mat-paginator *ngIf="isPaginatorEnabled()" [pageSizeOptions]="tablePageSizeOptions"
           ></mat-paginator>
-        </div>
       
         <router-outlet></router-outlet>
       
