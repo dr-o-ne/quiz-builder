@@ -14,3 +14,27 @@
   All possible variables can be found in @vex/styles/core or by simply inspecting the element you want to change
   in Chrome/Firefox DevTools
 */
+
+.main-color {
+  background-color: white;
+  padding: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 3px;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.header-stick, .attempt-stick {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.attempt-stick {
+  top: 30%;
+}

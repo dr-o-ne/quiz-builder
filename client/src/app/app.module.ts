@@ -108,7 +108,14 @@ import { ContainerModule } from '../@vex/directives/container/container.module';
     QuestionListComponent,
     QuestionPageComponent,
     ModalWindowPreviewQuestionComponent,
-    ModalWindowAttemptComponent
+    ModalWindowAttemptComponent,
+    MultipleChoiceAnswerComponent,
+    TrueFalseAnswerComponent,
+    MultiSelectChoiceComponent,
+    LongAnswerComponent,
+    TrueFalsePreviewComponent,
+    MultiSelectPreviewComponent,
+    LongAnswerPreviewComponent
   ],
   providers: [
     AuthGuard,

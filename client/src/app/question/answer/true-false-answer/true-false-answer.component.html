@@ -1,6 +1,6 @@
 <div class="main-color">
 
-  <div class="row container-option-btn">
+  <div class="row container-option-btn" fxLayoutAlign="flex-end">
     <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
     </button>
     <mat-menu #menu="matMenu">
@@ -15,27 +15,39 @@
     <mat-tab label="Choices">
       <ng-template matTabContent>
 
-        <div class="row mt-3">
+        <div class="row mt-3"
+          fxLayout
+          fxLayout.xs="column"
+          fxLayoutWrap="wrap">
 
-          <div class="col-md-12">
+          <div class="col-md-12" fxFlex="100%">
             <mat-radio-group (change)="changeCorrectChoice($event.value)">
 
               <div class="container-choice" *ngFor="let choice of choices">
-                <div class="row">
-                  <div class="col-md-6">
+                <div class="row"
+                  fxLayout
+                  fxLayout.xs="column"
+                  fxLayoutAlign="flex-start"
+                  fxLayoutWrap="wrap"
+                  fxLayoutGap="1%">
+                  
+                  <div class="col-md-6" fxFlex="50%">
                     <mat-form-field class="full-width">
                       <mat-label>Text</mat-label>
                       <input matInput type="text" [(ngModel)]="choice.text">
                     </mat-form-field>
                   </div>
-                  <div class="col-md-1 radio-align-vertical">
+                  <div class="col-md-1 radio-align-vertical" fxFlex="8%">
                     <mat-radio-button [value]="choice.id" [checked]="choice.isCorrect">Correct</mat-radio-button>
                   </div>
                 </div>
 
                 <div *ngFor="let option of options">
-                  <div *ngIf="option.enabled" class="row">
-                    <div class="col-md-6">
+                  <div *ngIf="option.enabled" class="row"
+                      fxLayout
+                      fxLayout.xs="column"
+                      fxLayoutWrap="wrap">
+                    <div class="col-md-6" fxFlex="50%">
                       <mat-form-field class="full-width">
                         <mat-label>{{option.displayName}}</mat-label>
                         <input matInput type="{{option.type}}" [(ngModel)]="choice[option.name]">
@@ -62,8 +74,14 @@
     <mat-tab label="Settings">
       <ng-template matTabContent>
 
-        <div class="row mt-3">
-          <div class="col-md-6">
+        <div class="row mt-3"
+          fxLayout
+          fxLayout.xs="column"
+          fxLayoutAlign="flex-start"
+          fxLayoutWrap="wrap"
+          fxLayoutGap="1%">
+
+          <div class="col-md-6" fxFlex="50%">
             <mat-form-field class="full-width">
               <mat-label>Display Type</mat-label>
               <mat-select [(ngModel)]="settings.choicesDisplayType">
@@ -73,7 +91,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div *ngIf="settings.choicesDisplayType != choicesDisplayTypes.Dropdown" class="col-md-6">
+          <div *ngIf="settings.choicesDisplayType != choicesDisplayTypes.Dropdown" class="col-md-6" fxFlex="50%">
             <mat-form-field class="full-width">
               <mat-label>Enumeration Type</mat-label>
               <mat-select [(ngModel)]="settings.choicesEnumerationType">
