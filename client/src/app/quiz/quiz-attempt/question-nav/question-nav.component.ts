@@ -40,7 +40,7 @@ export class QuestionNavComponent implements OnInit {
     this.activeRoute.fragment.subscribe((fragment: string) => {
       const elem = document.getElementById(fragment);
       if ( fragment && elem ) {
-        elem.scrollIntoView();
+        elem.scrollIntoView({behavior: 'auto'});
       }
     });
   }

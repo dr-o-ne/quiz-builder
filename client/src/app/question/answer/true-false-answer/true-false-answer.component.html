@@ -74,14 +74,9 @@
     <mat-tab label="Settings">
       <ng-template matTabContent>
 
-        <div class="row mt-3"
-          fxLayout
-          fxLayout.xs="column"
-          fxLayoutAlign="flex-start"
-          fxLayoutWrap="wrap"
-          fxLayoutGap="1%">
+        <div class="row mt-3">
 
-          <div class="col-md-6" fxFlex="50%">
+          <div class="col-md-6">
             <mat-form-field class="full-width">
               <mat-label>Display Type</mat-label>
               <mat-select [(ngModel)]="settings.choicesDisplayType">
@@ -91,7 +86,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div *ngIf="settings.choicesDisplayType != choicesDisplayTypes.Dropdown" class="col-md-6" fxFlex="50%">
+          <div *ngIf="settings.choicesDisplayType != choicesDisplayTypes.Dropdown" class="col-md-6">
             <mat-form-field class="full-width">
               <mat-label>Enumeration Type</mat-label>
               <mat-select [(ngModel)]="settings.choicesEnumerationType">

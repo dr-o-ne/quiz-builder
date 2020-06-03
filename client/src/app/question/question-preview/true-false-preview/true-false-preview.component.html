@@ -1,11 +1,8 @@
 <div class="vertical" *ngIf="settings.choicesDisplayType === choicesDisplayType.Vertical">
   <mat-radio-group (change)="changeCorrectChoice($event)">  
-    <div  class="row" *ngFor="let choice of choices; let i = index"
-      fxLayout
-      fxLayout.xs="column"
-      fxLayoutWrap="wrap">
+    <div  class="row" *ngFor="let choice of choices; let i = index">
 
-      <div class="col-md-12" fxFlex="100%">
+      <div class="col-md-12">
         <mat-radio-button labelPosition="before" 
           [value]="choice.id" [checked]="choice.isCorrect">{{enumChoice ? enumChoice[i] + baseSeparator: ''}}{{choice.text}}</mat-radio-button>
       </div>
@@ -15,14 +12,9 @@
 
 <div class="horizontal" *ngIf="settings.choicesDisplayType === choicesDisplayType.Horizontal">
   <mat-radio-group (change)="changeCorrectChoice($event)">
-    <div class="row"
-      fxLayout
-      fxLayout.xs="column"
-      fxLayoutAlign="flex-start"
-      fxLayoutWrap="wrap"
-      fxLayoutGap="1%">
+    <div class="row">
 
-      <div class="col-md-3" fxFlex="30%" *ngFor="let choice of choices; let i = index">
+      <div class="col-md-3" *ngFor="let choice of choices; let i = index">
         <mat-radio-button labelPosition="before" 
           [value]="choice.id" [checked]="choice.isCorrect">{{enumChoice ? enumChoice[i] + baseSeparator: ''}}{{choice.text}}</mat-radio-button>
       </div>

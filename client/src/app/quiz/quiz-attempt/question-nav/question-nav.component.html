@@ -1,11 +1,6 @@
-<div class="row main-color attempt-stick"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-    xLayoutWrap="wrap"
-    fxLayoutGap="1% grid"
-    >
+<div class="row main-color attempt-stick">
 
-  <div *ngFor="let question of questions; let i = index" class="col-md-3 question-align" fxFlex="25">
+  <div *ngFor="let question of questions; let i = index" class="col-md-3 question-align">
     <a mat-flat-button [routerLink]='"."'
       class="full-width"
       [ngClass]="infoChoiceArr[i].cssclass" 
