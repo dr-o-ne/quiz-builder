@@ -1,0 +1,15 @@
+<div class="row main-color attempt-stick">
+
+  <div *ngFor="let question of questions; let i = index" class="col-md-3 question-align">
+    <a mat-flat-button [routerLink]='"."'
+      class="full-width"
+      [ngClass]="infoChoiceArr[i].cssclass" 
+      [fragment]="anchor + ( i + 1 )">{{i + 1}}</a>
+  </div>
+
+  <button class="full-width question-align" 
+    mat-raised-button color="primary"
+    [disabled]="validSubmit()" 
+    (click)="clickSubmit()">Submit</button>
+  
+</div>
