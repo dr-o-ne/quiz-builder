@@ -1,24 +1,25 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
-using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Domain.Action;
 
 namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.CommandHandlers {
 
 	public sealed class DeleteQuizzesCommandHandler : ICommandHandler<DeleteQuizzesCommand, CommandResult> {
 
-		private readonly IQuizDataProvider _quizDataProvider;
+		private readonly IDispatcher _dispatcher;
 
-		public DeleteQuizzesCommandHandler( IQuizDataProvider quizDataProvider ) {
-			_quizDataProvider = quizDataProvider;
+		public DeleteQuizzesCommandHandler( IDispatcher dispatcher ) {
+			_dispatcher = dispatcher;
 		}
 
 		public async Task<CommandResult> HandleAsync( DeleteQuizzesCommand command ) {
-			//TODO: delete questions
-			//TODO: delete groups
-			await _quizDataProvider.Delete( command.UIds.ToList() );
+
+			foreach( string uid in command.UIds ) {
+				await _dispatcher.SendAsync( new DeleteQuizCommand {UId = uid} );
+			}
+
 			return new CommandResult( success: true, message: string.Empty );
 		}
 
