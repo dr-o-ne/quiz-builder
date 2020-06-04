@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -19,11 +18,9 @@ export class QuizListComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'isVisible', 'edit', 'preview', 'statistic', 'menu' ];
   filterData: string;
   isMultiSelectMode = false;
-  tablePageSizeOptions = [ 15, 20 ];
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
 
-  @ViewChild( MatPaginator, { static: true } ) paginator: MatPaginator;
   @ViewChild( MatSort, { static: true } ) sort: MatSort;
   @ViewChild( MatTable, { static: true } ) table: MatTable<any>;
 
@@ -47,7 +44,6 @@ export class QuizListComponent implements OnInit {
 
   initDataSource( quizzes: Quiz[] ): void {
     this.dataSource = new MatTableDataSource<Quiz>( quizzes );
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.selection = new SelectionModel<Quiz>( true, [] );
   }
@@ -84,10 +80,6 @@ export class QuizListComponent implements OnInit {
 
   isItemSelected( item: Quiz ): boolean {
     return this.selection.isSelected( item );
-  }
-
-  isPaginatorEnabled(): boolean {
-    return this.dataSource?.data?.length > 15;
   }
 
   checkItemToggle( item: Quiz ): void {
