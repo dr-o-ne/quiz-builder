@@ -15,7 +15,7 @@ import { PageLayoutModule } from '../../../@vex/components/page-layout/page-layo
   styleUrls: [ './quiz-list.component.css' ]
 } )
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'isVisible', 'edit', 'preview', 'statistic', 'menu' ];
+  displayedColumns: string[] = [ 'name', 'isVisible', 'statistic', 'preview', 'menu' ];
   filterData: string;
   isMultiSelectMode = false;
   dataSource: MatTableDataSource<Quiz>;
