@@ -117,4 +117,9 @@ export class QuestionNavComponent implements OnInit {
     return !isValid;
   }
 
+  clickNav(anchor: string) {
+    const elem = document.getElementById(anchor);
+    elem?.scrollIntoView({behavior: 'smooth'});
+  }
+
 }
