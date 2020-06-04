@@ -6,9 +6,6 @@ import { QuizService } from 'src/app/_service/quiz.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
-import { PageLayoutModule } from '../../../@vex/components/page-layout/page-layout.module';
-
 @Component( {
   selector: 'app-quiz-list',
   templateUrl: './quiz-list.component.html',
