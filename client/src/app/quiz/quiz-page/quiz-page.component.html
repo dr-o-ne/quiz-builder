@@ -14,7 +14,7 @@
 
           <div class="col-md-6" fxFlex="50%">
             <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Name</mat-label>
+              <mat-label>Quiz Name</mat-label>
               <input matInput type="text" [(ngModel)]="quiz.name" required formControlName="name">
               <button mat-button *ngIf="quiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="quiz.name =''">
                   <mat-icon>close</mat-icon>
