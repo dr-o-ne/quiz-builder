@@ -1,79 +1,31 @@
 <div class="container">
 
-  <div class="main-color header-stick">
-
-    <div class="row" 
-        fxLayout
-        fxLayout.xs="column"
-        fxLayoutAlign="flex-start"
-        fxLayoutWrap="wrap"
-        fxLayoutGap="1%">
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button
-        color="accent"
-        type="submit"
-        (click)="saveChange()"
-        [disabled]="!quizForm.valid">Save</button>
-      </div>
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button (click)="replyClick()">
-          <mat-icon>reply</mat-icon>
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-
   <div class="main-color">
 
-    <mat-tab-group>
 
-      <mat-tab label="Quiz">
-        <ng-template matTabContent>
+      <form [formGroup]="quizForm" class="mt-3">
 
-          <form [formGroup]="quizForm" class="mt-3">
+        <div class="row"
+          fxLayout
+          fxLayout.xs="column"
+          fxLayoutAlign="flex-start"
+          fxLayoutWrap="wrap"
+          fxLayoutGap="1%">
 
-            <div class="row"
-              fxLayout
-              fxLayout.xs="column"
-              fxLayoutAlign="flex-start"
-              fxLayoutWrap="wrap"
-              fxLayoutGap="1%">
+          <div class="col-md-6" fxFlex="50%">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput type="text" [(ngModel)]="quiz.name" required formControlName="name">
+              <button mat-button *ngIf="quiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="quiz.name =''">
+                  <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
 
-              <div class="col-md-6" fxFlex="50%">
-                <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Name</mat-label>
-                  <input matInput type="text" [(ngModel)]="quiz.name" required formControlName="name">
-                  <button mat-button *ngIf="quiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="quiz.name =''">
-                      <mat-icon>close</mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
+        </div>
 
-              <div class="col-md-6 mrgn-container-toogle" fxFlex="20%">
-                <div class="row">
-                  <mat-label class="">Visible</mat-label>
-                  <mat-slide-toggle class="mrgn-lft-toogle" color="primary" [checked]="quiz.isVisible" (change)="clickToggle($event.checked)"></mat-slide-toggle>
-                </div>
-              </div>
+      </form>
 
-            </div>
-
-          </form>
-
-        </ng-template>
-      </mat-tab>
-
-      <mat-tab label="Advanced settings">
-        <ng-template matTabContent>
-              Settings
-        </ng-template>
-      </mat-tab>
-
-    </mat-tab-group>
 
   </div>
 
@@ -159,6 +111,33 @@
 
       </mat-tab>
     </mat-tab-group>
+
+  </div>
+
+  <div class="main-color footer-stick">
+
+    <div class="row" 
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="flex-start"
+        fxLayoutWrap="wrap"
+        fxLayoutGap="1%">
+
+      <div class="col-md-2" fxFlex="20%">
+        <button class="full-width" mat-raised-button
+        color="accent"
+        type="submit"
+        (click)="saveChange()"
+        [disabled]="!quizForm.valid">Save</button>
+      </div>
+
+      <div class="col-md-2" fxFlex="20%">
+        <button class="full-width" mat-raised-button (click)="replyClick()">
+          <mat-icon>reply</mat-icon>
+        </button>
+      </div>
+
+    </div>
 
   </div>
 

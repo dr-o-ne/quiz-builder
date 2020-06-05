@@ -187,10 +187,6 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
     );
   }
 
-  clickToggle( checked: boolean ): void {
-    this.quiz.isVisible = checked;
-  }
-
   replyClick(): void {
     this.navigateToParent();
   }

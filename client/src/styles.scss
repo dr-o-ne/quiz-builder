@@ -30,6 +30,12 @@
   width: 100%;
 }
 
+.footer-stick {
+  position: sticky; 
+  bottom: 0;
+  z-index: 10;
+}
+
 .header-stick, .attempt-stick {
   position: sticky;
   top: 0;
