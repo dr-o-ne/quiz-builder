@@ -161,8 +161,8 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
   }
 
   createQuiz(): void {
-    this.quizService.createQuiz( this.quiz ).subscribe( response => {
-      this.navigateToParent();
+    this.quizService.createQuiz( this.quiz ).subscribe( (response: any) => {
+      this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit');
     }, error => console.log( error ) );
   }
 
