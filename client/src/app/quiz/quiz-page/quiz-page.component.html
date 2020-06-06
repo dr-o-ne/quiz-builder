@@ -1,146 +1,158 @@
-<div class="container">
-
-  <div class="main-color">
+<vex-page-layout>
 
 
-      <form [formGroup]="quizForm" class="mt-3">
+  <vex-page-layout-content class="container">
 
+
+      <div class="main-color">
+    
+          <form [formGroup]="quizForm" class="mt-3">
+    
+            <div class="row"
+              fxLayout
+              fxLayout.xs="column"
+              fxLayoutAlign="flex-start"
+              fxLayoutWrap="wrap"
+              fxLayoutGap="1%">
+    
+              <div class="col-md-6" fxFlex="50%">
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Quiz Name</mat-label>
+                  <input matInput type="text" [(ngModel)]="quiz.name" required formControlName="name">
+                  <button mat-button *ngIf="quiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="quiz.name =''">
+                      <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+    
+            </div>
+    
+          </form>
+    
+    
+      </div>
+    
+      <div *ngIf="quiz.id" class="main-color">
+    
         <div class="row"
           fxLayout
           fxLayout.xs="column"
           fxLayoutAlign="flex-start"
           fxLayoutWrap="wrap"
           fxLayoutGap="1%">
-
-          <div class="col-md-6" fxFlex="50%">
-            <mat-form-field class="full-width" appearance="outline">
-              <mat-label>Quiz Name</mat-label>
-              <input matInput type="text" [(ngModel)]="quiz.name" required formControlName="name">
-              <button mat-button *ngIf="quiz.name" matSuffix mat-icon-button aria-label="Clear" (click)="quiz.name =''">
-                  <mat-icon>close</mat-icon>
+    
+          <div *ngIf="groupForm.visible; else hide" class="col-md-2" fxFlex="20%">
+            <button mat-raised-button class="full-width" color="primary" [matMenuTriggerFor]="menu">
+              Add New
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="typeQuestion">
+                <mat-icon>help_outline</mat-icon>
+                <span>Question</span>
               </button>
-            </mat-form-field>
+              <button mat-menu-item (click)="addTab()">
+                <mat-icon>group_work</mat-icon>
+                <span>Group</span>
+              </button>
+            </mat-menu>
+            <mat-menu #typeQuestion="matMenu">
+              <button mat-menu-item *ngFor="let key of questionTypeKeys"
+                (click)="addNewQuestion(tabGroup, key)">{{questionTypes[key]}}</button>
+            </mat-menu>
           </div>
-
-        </div>
-
-      </form>
-
-
-  </div>
-
-  <div *ngIf="quiz.id" class="main-color">
-
-    <div class="row"
-      fxLayout
-      fxLayout.xs="column"
-      fxLayoutAlign="flex-start"
-      fxLayoutWrap="wrap"
-      fxLayoutGap="1%">
-
-      <div *ngIf="groupForm.visible; else hide" class="col-md-2" fxFlex="20%">
-        <button mat-raised-button class="full-width" color="primary" [matMenuTriggerFor]="menu">
-          Add New
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="typeQuestion">
-            <mat-icon>help_outline</mat-icon>
-            <span>Question</span>
-          </button>
-          <button mat-menu-item (click)="addTab()">
-            <mat-icon>group_work</mat-icon>
-            <span>Group</span>
-          </button>
-        </mat-menu>
-        <mat-menu #typeQuestion="matMenu">
-          <button mat-menu-item *ngFor="let key of questionTypeKeys"
-            (click)="addNewQuestion(tabGroup, key)">{{questionTypes[key]}}</button>
-        </mat-menu>
-      </div>
-
-      <ng-template #hide>
-
-        <div class="col-md-6" fxFlex="60%">
-
-          <div class="row"
-              fxLayout
-              fxLayout.xs="column"
-              fxLayoutAlign="flex-start"
-              fxLayoutWrap="wrap">
-            <div class="col-md-8" fxFlex="83%">
-              <mat-form-field class="full-width">
-                <mat-label>Name</mat-label>
-                <input matInput type="text" [(ngModel)]="groupForm.name" required [formControl]="groupFormControl">
-                <button mat-button *ngIf="groupForm.name" matSuffix mat-icon-button aria-label="Clear" (click)="groupForm.name =''">
-                    <mat-icon>close</mat-icon>
-                </button>
-                <mat-error *ngIf="groupFormControl.hasError('required')">
-                  Name group <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div *ngFor="let btn of btnGroupControls">
-              <div class="btn-vertical"  *ngIf="btn.visible">
-                <button mat-icon-button color="accent" (click)="btn.action()">
-                  <mat-icon>{{btn.name}}</mat-icon>
-                </button>
+    
+          <ng-template #hide>
+    
+            <div class="col-md-6" fxFlex="60%">
+    
+              <div class="row"
+                  fxLayout
+                  fxLayout.xs="column"
+                  fxLayoutAlign="flex-start"
+                  fxLayoutWrap="wrap">
+                <div class="col-md-8" fxFlex="83%">
+                  <mat-form-field class="full-width">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="groupForm.name" required [formControl]="groupFormControl">
+                    <button mat-button *ngIf="groupForm.name" matSuffix mat-icon-button aria-label="Clear" (click)="groupForm.name =''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="groupFormControl.hasError('required')">
+                      Name group <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+    
+                <div *ngFor="let btn of btnGroupControls">
+                  <div class="btn-vertical"  *ngIf="btn.visible">
+                    <button mat-icon-button color="accent" (click)="btn.action()">
+                      <mat-icon>{{btn.name}}</mat-icon>
+                    </button>
+                  </div>
+                </div>
+    
               </div>
+    
             </div>
-
-          </div>
-
+    
+          </ng-template>
+    
         </div>
+    
+        <mat-tab-group #tabGroup [selectedIndex]="selectedIndex">
+          <mat-tab *ngFor="let tab of groups; let index = index">
+    
+            <ng-template mat-tab-label>{{ tab.name }}
+              <i *ngIf="groups?.length !== 1" class="material-icons" (click)="removeTab(index)">close</i>
+              <i class="material-icons" (click)="editTab(index)">edit</i>
+            </ng-template>
+            <ng-template matTabContent>
+    
+              <app-question-list [quizId]="quiz.id" [group]="groups[index]" [groups]="groups"></app-question-list>
+    
+            </ng-template>
+    
+          </mat-tab>
+        </mat-tab-group>
+    
+      </div> 
+    
+        <div class="footer-stick row"
+            fxLayout
+            fxLayoutAlign="center"
+            fxLayout.xs="column"
+            fxLayoutWrap="wrap"
+            fxLayoutGap="1%">
 
-      </ng-template>
+            <button mat-raised-button 
+              color="accent" 
+              fxFlex="none" 
+              fxHide.xs 
+              type="submit"
+              (click)="saveChange()"
+              [disabled]="!quizForm.valid">
+              
+              <span>Save</span>
+  
+            </button>
 
-    </div>
+            <button mat-raised-button 
+              color="accent" 
+              fxFlex="none" 
+              fxHide.xs 
+              type="button"
+              (click)="onCancel()">
+              
+              <span>Return</span>
+  
+            </button>
+    
+        </div>
+    
 
-    <mat-tab-group #tabGroup [selectedIndex]="selectedIndex">
-      <mat-tab *ngFor="let tab of groups; let index = index">
-
-        <ng-template mat-tab-label>{{ tab.name }}
-          <i *ngIf="groups?.length !== 1" class="material-icons" (click)="removeTab(index)">close</i>
-          <i class="material-icons" (click)="editTab(index)">edit</i>
-        </ng-template>
-        <ng-template matTabContent>
-
-          <app-question-list [quizId]="quiz.id" [group]="groups[index]" [groups]="groups"></app-question-list>
-
-        </ng-template>
-
-      </mat-tab>
-    </mat-tab-group>
-
-  </div>
-
-  <div class="main-color footer-stick">
-
-    <div class="row" 
-        fxLayout
-        fxLayout.xs="column"
-        fxLayoutAlign="flex-start"
-        fxLayoutWrap="wrap"
-        fxLayoutGap="1%">
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button
-        color="accent"
-        type="submit"
-        (click)="saveChange()"
-        [disabled]="!quizForm.valid">Save</button>
-      </div>
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button (click)="replyClick()">
-          <mat-icon>reply</mat-icon>
-        </button>
-      </div>
-
-    </div>
-
-  </div>
+  </vex-page-layout-content>
 
 
-</div>
+</vex-page-layout>
+
 
