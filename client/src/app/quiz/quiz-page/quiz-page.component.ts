@@ -168,7 +168,7 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
 
   updateQuiz(): void {
     this.quizService.updateQuiz( this.quiz ).subscribe( response => {
-      this.navigateToParent();
+      //this.navigateToParent();
     }, error => console.log( error ) );
   }
 
@@ -187,8 +187,8 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
     );
   }
 
-  replyClick(): void {
-    this.navigateToParent();
+  onCancel(): void {
+    this.navigateToParent();  
   }
 
   navigateToParent(): void {
