@@ -66,34 +66,43 @@
                 </mat-form-field>
               </div>
 
-          </form>
+              <div *ngFor="let option of getQuestionOptions()">
 
-
-
-          <div class="mt-3">
-            <div class="row"
-              fxLayout
-              fxLayout.xs="column"
-              fxLayoutAlign="flex-start"
-              fxLayoutWrap="wrap">
-          </div>
-
-            <div *ngFor="let option of options">
-              <div class="row" *ngIf="option.enabled"
-                fxLayout
-                fxLayout.xs="column"
-                fxLayoutWrap="wrap">
-
-                <div class="col-md-12" fxFlex="100%">
-                  <mat-form-field class="full-width">
-                    <mat-label>{{option.displayName}}</mat-label>
-                    <textarea matInput [(ngModel)]="question[option.name]"></textarea>
-                  </mat-form-field>
+                <div *ngIf="option.type == 'wysiwyg'">
+    
+                  <div class="p-gutter container">
+                    <div class="card editor">
+                      <quill-editor
+                            @fadeInUp
+                            formControlName={{option.name}}
+                            [styles]="{ flex: '1 1 auto' }"
+                            (onContentChanged)="onContentChanged($event);">
+                      </quill-editor>
+                    </div>
+                  </div>
+    
                 </div>
+    
+                <div *ngIf="option.type != 'wysiwyg'">
+    
+                  <div class="row"
+                    fxLayout
+                    fxLayout.xs="column"
+                    fxLayoutWrap="wrap">
+    
+                    <div class="col-md-12" fxFlex="100%">
+                      <mat-form-field class="full-width">
+                        <mat-label>{{option.displayName}}</mat-label>
+                        <textarea matInput [(ngModel)]="question[option.name]"></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+    
+                </div>
+    
               </div>
-            </div>
 
-          </div>
+          </form>
 
         </ng-template>
       </mat-tab>

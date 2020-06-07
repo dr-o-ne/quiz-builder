@@ -34,9 +34,9 @@ export class QuestionPageComponent implements OnInit {
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
   options: Option[] = [
-    new Option( 'feedback', 'Feedback', 'text' ),
-    new Option( 'correctFeedback', 'Correct feedback', 'text' ),
-    new Option( 'incorrectFeedback', 'Incorrect feedback', 'text' ),
+    new Option( 'feedback', 'Feedback', 'wysiwyg' ),
+    new Option( 'correctFeedback', 'Correct feedback', 'wysiwyg' ),
+    new Option( 'incorrectFeedback', 'Incorrect feedback', 'wysiwyg' ),
   ];
 
   constructor( private fb: FormBuilder,
@@ -50,9 +50,12 @@ export class QuestionPageComponent implements OnInit {
     this.questionForm = this.fb.group( {
       name: [ '', Validators.required ],
       type: [ '', Validators.required ],
-      text: [ '', Validators.required ]
+      text: [ '', Validators.required ],
+      feedback: ['', Validators.nullValidator ],
+      correctFeedback: ['', Validators.nullValidator ],
+      incorrectFeedback: ['', Validators.nullValidator ],
     } );
-
+    //TODO: add dynamic, how?
   }
 
   ngOnInit() {
@@ -69,7 +72,10 @@ export class QuestionPageComponent implements OnInit {
 
         this.questionForm.patchValue({
           name: this.question.name, 
-          text: this.question.text
+          text: this.question.text,
+          feedback: this.question.feedback,
+          correctFeedback: this.question.correctFeedback,
+          incorrectFeedback: this.question.incorrectFeedback
         });
 
         this.initAnswersAndSettings();
@@ -138,6 +144,8 @@ export class QuestionPageComponent implements OnInit {
   }
 
   onReturn = () => this.navigateToParent();
+
+  getQuestionOptions = () => this.options.filter( x => x.enabled );
 
   createQuestion(): void {
     if ( !this.questionForm.valid ) {
