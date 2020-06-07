@@ -34,7 +34,6 @@ export class QuestionPageComponent implements OnInit {
   choices: Choice[] = [];
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
-
   options: Option[] = [
     new Option( 'feedback', 'Feedback', 'text' ),
     new Option( 'correctFeedback', 'Correct feedback', 'text' ),
@@ -53,16 +52,17 @@ export class QuestionPageComponent implements OnInit {
       type: [ '', Validators.required ],
       text: [ '', Validators.required ]
     } );
+
   }
 
   ngOnInit() {
+
     if ( !history.state.quizId ) {
       this.router.navigate(['../'], { relativeTo: this.activeRoute.parent });
       return;
     }
     this.quizId = history.state.quizId;
     this.groupResurce = history.state.groups;
-    this.initValidate();
     this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {
         this.question = data.questionResolver.question;
@@ -86,8 +86,6 @@ export class QuestionPageComponent implements OnInit {
     this.question.type = questionType;
     this.question.name = 'Question ' + Math.floor(Math.random() * 100);
     this.question.text = 'default';
-
-
   }
 
   initGroup(groupId: string): void {
@@ -103,23 +101,13 @@ export class QuestionPageComponent implements OnInit {
     this.settings = JSON.parse( this.question.settings || '{}' );
   }
 
-  initValidate(): void {
- 
-  }
-
   updateQuestionModel(): void {
-
-    
-
     this.question = Object.assign( this.question, this.questionForm.value );
     this.question.choices = JSON.stringify( this.choices );
     this.question.settings = JSON.stringify( this.settings );
   }
 
   saveChange(): void {
-
-    console.log(this.questionForm.value.text);
-
     if ( !this.question.id ) {
       this.createQuestion();
       return;
@@ -164,7 +152,6 @@ export class QuestionPageComponent implements OnInit {
   }
 
   isDisabledBtn(): boolean {
-    return false;
     return !this.questionForm?.valid || !this.isChoicesValid();
   }
 
@@ -204,4 +191,7 @@ export class QuestionPageComponent implements OnInit {
     option.enabled = !option.enabled;
     event.stopPropagation();
   }
+
+  onContentChanged($event: any) { /*HACK*/}
+
 }
