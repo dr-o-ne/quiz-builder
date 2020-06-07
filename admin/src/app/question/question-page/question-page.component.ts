@@ -47,6 +47,12 @@ export class QuestionPageComponent implements OnInit {
                private questionService: QuestionService,
                public dialog: MatDialog ) {        
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
+
+    this.questionForm = this.fb.group( {
+      name: [ '', Validators.required ],
+      type: [ '', Validators.required ],
+      text: [ '', Validators.required ]
+    } );
   }
 
   ngOnInit() {
@@ -60,6 +66,12 @@ export class QuestionPageComponent implements OnInit {
     this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {
         this.question = data.questionResolver.question;
+
+        this.questionForm.patchValue({
+          name: this.question.name, 
+          text: this.question.text
+        });
+
         this.initAnswersAndSettings();
       } else {
         this.createNewQuestion(history.state.questionType);
@@ -74,6 +86,8 @@ export class QuestionPageComponent implements OnInit {
     this.question.type = questionType;
     this.question.name = 'Question ' + Math.floor(Math.random() * 100);
     this.question.text = 'default';
+
+
   }
 
   initGroup(groupId: string): void {
@@ -90,20 +104,22 @@ export class QuestionPageComponent implements OnInit {
   }
 
   initValidate(): void {
-    this.questionForm = this.fb.group( {
-      name: [ '', Validators.required ],
-      type: [ '', Validators.required ],
-      text: [ '', Validators.required ]
-    } );
+ 
   }
 
   updateQuestionModel(): void {
+
+    
+
     this.question = Object.assign( this.question, this.questionForm.value );
     this.question.choices = JSON.stringify( this.choices );
     this.question.settings = JSON.stringify( this.settings );
   }
 
   saveChange(): void {
+
+    console.log(this.questionForm.value.text);
+
     if ( !this.question.id ) {
       this.createQuestion();
       return;
@@ -148,6 +164,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   isDisabledBtn(): boolean {
+    return false;
     return !this.questionForm?.valid || !this.isChoicesValid();
   }
 

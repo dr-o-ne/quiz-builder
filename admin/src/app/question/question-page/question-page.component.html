@@ -22,24 +22,17 @@
               fxLayoutAlign="flex-start"
               fxLayoutWrap="wrap">
 
-
-
             <form [formGroup]="questionForm">
 
-              <div class="row">
-
-
-                <div class="p-gutter container">
-                  <div class="card">
-                    <quill-editor @fadeInUp
-                                  formControlName="text"
-                                  [styles]="{ flex: '1 1 auto' }">
-                    </quill-editor>
-                  </div>
-                  <div style="visibility: hidden;">
-                    <textarea matInput formControlName="text" [(ngModel)]="question.text" required></textarea>
-                  </div>
+              <div class="p-gutter container">
+                <div class="card">
+                  <quill-editor @fadeInUp
+                                formControlName="text"
+                                [styles]="{ flex: '1 1 auto' }">
+                  </quill-editor>
                 </div>
+
+              </div>
 
                 <div class="col-md-6">
                   <mat-form-field class="full-width">
@@ -65,9 +58,6 @@
                     <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
                   </mat-form-field>
                 </div>
-              </div>
-
-
 
             </form>
 
