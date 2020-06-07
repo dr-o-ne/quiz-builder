@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { Choice } from 'src/app/_models/choice';
@@ -9,14 +9,21 @@ import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalWindowPreviewQuestionComponent } from '../modal-window/modal-window-preview-question.component';
 import { Option } from 'src/app/_models/option';
+import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 
 @Component( {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-question-page',
   templateUrl: './question-page.component.html',
-  styleUrls: [ './question-page.component.css' ]
+  styleUrls: [ './question-page.component.css',
+  '../../../../node_modules/quill/dist/quill.snow.css',
+  '../../../@vex/styles/partials/plugins/_quill.scss' ],
+  encapsulation: ViewEncapsulation.None,
+  animations: [fadeInUp400ms]
 } )
 export class QuestionPageComponent implements OnInit {
+
+  form: FormControl;
   quizId: string;
   question: Question;
   questionForm: FormGroup;
@@ -37,21 +44,34 @@ export class QuestionPageComponent implements OnInit {
                private router: Router,
                private activeRoute: ActivatedRoute,
                private questionService: QuestionService,
-               public dialog: MatDialog ) {
+               public dialog: MatDialog ) {        
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
+
+    this.questionForm = this.fb.group( {
+      name: [ '', Validators.required ],
+      type: [ '', Validators.required ],
+      text: [ '', Validators.required ]
+    } );
+
   }
 
   ngOnInit() {
+
     if ( !history.state.quizId ) {
       this.router.navigate(['../'], { relativeTo: this.activeRoute.parent });
       return;
     }
     this.quizId = history.state.quizId;
     this.groupResurce = history.state.groups;
-    this.initValidate();
     this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {
         this.question = data.questionResolver.question;
+
+        this.questionForm.patchValue({
+          name: this.question.name, 
+          text: this.question.text
+        });
+
         this.initAnswersAndSettings();
       } else {
         this.createNewQuestion(history.state.questionType);
@@ -79,14 +99,6 @@ export class QuestionPageComponent implements OnInit {
       this.choices = JSON.parse( this.question.choices );
     }
     this.settings = JSON.parse( this.question.settings || '{}' );
-  }
-
-  initValidate(): void {
-    this.questionForm = this.fb.group( {
-      name: [ '', Validators.required ],
-      type: [ '', Validators.required ],
-      text: [ '', Validators.required ]
-    } );
   }
 
   updateQuestionModel(): void {
@@ -179,4 +191,7 @@ export class QuestionPageComponent implements OnInit {
     option.enabled = !option.enabled;
     event.stopPropagation();
   }
+
+  onContentChanged($event: any) { /*HACK*/}
+
 }
