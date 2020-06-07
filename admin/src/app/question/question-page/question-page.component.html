@@ -1,37 +1,5 @@
 <div class="container">
 
-  <div class="main-color header-stick">
-    <div class="row"
-      fxLayout
-      fxLayout.xs="column"
-      fxLayoutAlign="flex-start"
-      fxLayoutWrap="wrap"
-      fxLayoutGap="1%">
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button
-                color="accent"
-                type="submit"
-                (click)="saveChange()"
-                [disabled]="isDisabledBtn()">Save</button>
-      </div>
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button (click)="replyClick()">
-          <mat-icon>reply</mat-icon>
-        </button>
-      </div>
-
-      <div class="col-md-2" fxFlex="20%">
-        <button class="full-width" mat-raised-button (click)="openPreview()" [disabled]="isDisabledBtn()">
-          <mat-icon>visibility</mat-icon>
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-
   <div class="main-color">
     <div class="row container-option-btn" fxLayoutAlign="flex-end">
       <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
@@ -142,5 +110,41 @@
     [choices]="choices"
     [settings]="settings">
   </app-dynamic-choice>
+
+  <div class="footer-stick row"
+    fxLayout
+    fxLayoutAlign="center"
+    fxLayout.xs="column"
+    fxLayoutWrap="wrap"
+    fxLayoutGap="1%">
+
+    <button mat-raised-button 
+      color="accent" 
+      type="submit"
+      (click)="saveChange()"
+      [disabled]="isDisabledBtn()">
+      
+      Save
+
+    </button>
+
+    <button mat-raised-button 
+      color="accent" 
+      (click)="replyClick()">
+
+      Return
+
+    </button>
+
+    <button mat-raised-button 
+      color="primary"
+      (click)="openPreview()">
+
+      Preview
+
+    </button>
+
+</div>
+
 
 </div>
