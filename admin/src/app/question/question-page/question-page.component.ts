@@ -34,6 +34,7 @@ export class QuestionPageComponent implements OnInit {
   choices: Choice[] = [];
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
+
   options: Option[] = [
     new Option( 'feedback', 'Feedback', 'text' ),
     new Option( 'correctFeedback', 'Correct feedback', 'text' ),
