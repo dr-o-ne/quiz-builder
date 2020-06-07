@@ -187,9 +187,7 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onCancel(): void {
-    this.navigateToParent();  
-  }
+  onReturn = () => this.navigateToParent();
 
   navigateToParent(): void {
     if ( this.quiz.id ) {

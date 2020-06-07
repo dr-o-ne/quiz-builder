@@ -30,41 +30,41 @@
                 </div>
               </div>
 
-                <div class="col-md-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Name</mat-label>
-                    <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
-                    <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="question.name =''">
-                      <mat-icon>close</mat-icon>
-                    </button>
-                  </mat-form-field>
-                </div>
-  
-                <div class="col-md-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Type</mat-label>
-                    <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="question.id"
-                                (selectionChange)="selectChangeType()">
-                      <mat-option>--</mat-option>
-                      <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
-                        {{questionTypes[key]}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
-                  </mat-form-field>
-                </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
+                  <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear"
+                          (click)="question.name =''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
 
-                <div class="col-md-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Group</mat-label>
-                    <mat-select #select [value]="question.groupId" (selectionChange)="selectGroup(select)">
-                      <mat-option *ngFor="let groupRes of groupResurce" [value]="groupRes.id">
-                        {{groupRes.name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Type</mat-label>
+                  <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="question.id"
+                              (selectionChange)="selectChangeType()">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
+                      {{questionTypes[key]}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Group</mat-label>
+                  <mat-select #select [value]="question.groupId" (selectionChange)="selectGroup(select)">
+                    <mat-option *ngFor="let groupRes of groupResurce" [value]="groupRes.id">
+                      {{groupRes.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
 
           </form>
 
@@ -132,7 +132,7 @@
 
     <button mat-raised-button 
       color="accent" 
-      (click)="replyClick()">
+      (click)="onReturn()">
 
       Return
 

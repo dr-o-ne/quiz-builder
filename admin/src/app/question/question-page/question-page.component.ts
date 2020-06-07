@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { Choice } from 'src/app/_models/choice';
@@ -23,7 +23,6 @@ import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 } )
 export class QuestionPageComponent implements OnInit {
 
-  form: FormControl;
   quizId: string;
   question: Question;
   questionForm: FormGroup;
@@ -44,7 +43,8 @@ export class QuestionPageComponent implements OnInit {
                private router: Router,
                private activeRoute: ActivatedRoute,
                private questionService: QuestionService,
-               public dialog: MatDialog ) {        
+               public dialog: MatDialog ) {     
+                    
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
 
     this.questionForm = this.fb.group( {
@@ -137,9 +137,7 @@ export class QuestionPageComponent implements OnInit {
     );
   }
 
-  replyClick(): void {
-    this.navigateToParent();
-  }
+  onReturn = () => this.navigateToParent();
 
   createQuestion(): void {
     if ( !this.questionForm.valid ) {
