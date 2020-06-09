@@ -37,4 +37,5 @@ th.mat-sort-header-sorted {
 
 .editor{
     min-height: 200px;
+    box-shadow: none;
 }
