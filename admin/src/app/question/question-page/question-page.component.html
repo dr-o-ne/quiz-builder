@@ -19,7 +19,31 @@
 
           <form [formGroup]="questionForm">
 
-              <div class="p-gutter container">
+              <div class="container pt-gutter">
+
+                <mat-form-field fxFlex="25" appearance="outline">
+                  <mat-label>Type</mat-label>
+                  <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="question.id"
+                              (selectionChange)="selectChangeType()">
+                    <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
+                      {{questionTypes[key]}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="25" fxFlexOffset="5" appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
+                  <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear"
+                          (click)="question.name =''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+
+              </div>
+
+              <div class="container pb-gutter">
                 <div class="card editor">
                   <quill-editor
                         @fadeInUp
@@ -28,31 +52,6 @@
                         (onContentChanged)="onContentChanged($event);">
                   </quill-editor>
                 </div>
-              </div>
-
-              <div class="col-md-6">
-                <mat-form-field class="full-width">
-                  <mat-label>Name</mat-label>
-                  <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
-                  <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear"
-                          (click)="question.name =''">
-                    <mat-icon>close</mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-6">
-                <mat-form-field class="full-width">
-                  <mat-label>Type</mat-label>
-                  <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="question.id"
-                              (selectionChange)="selectChangeType()">
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
-                      {{questionTypes[key]}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="questionForm.get('type').hasError('required')">Choice type</mat-error>
-                </mat-form-field>
               </div>
 
               <div class="col-md-6">
