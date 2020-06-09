@@ -113,13 +113,8 @@ export class QuestionPageComponent implements OnInit {
     this.question.settings = JSON.stringify( this.settings );
   }
 
-  saveChange(): void {
-    if ( !this.question.id ) {
-      this.createQuestion();
-      return;
-    }
-    this.updateQuestion();
-  }
+  saveChange = () => 
+    this.isEditMode() ? this.updateQuestion() : this.createQuestion();
 
   updateQuestion(): void {
     if ( !this.questionForm.valid ) {
@@ -198,6 +193,8 @@ export class QuestionPageComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onContentChanged($event: any) { /*HACK*/}
+  onContentChanged(_) {/*HACK*/}
+
+  isEditMode = () => this.question.id;
 
 }

@@ -23,7 +23,7 @@
 
                 <mat-form-field fxFlex="25" appearance="outline">
                   <mat-label>Type</mat-label>
-                  <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="question.id"
+                  <mat-select formControlName="type" required [(ngModel)]="question.type" [disabled]="isEditMode()"
                               (selectionChange)="selectChangeType()">
                     <mat-option *ngFor="let key of questionTypeKeys" [value]="key">
                       {{questionTypes[key]}}
@@ -34,9 +34,8 @@
 
                 <mat-form-field fxFlex="25" fxFlexOffset="5" appearance="outline">
                   <mat-label>Name</mat-label>
-                  <input matInput type="text" [(ngModel)]="question.name" required formControlName="name">
-                  <button mat-button *ngIf="question.name" matSuffix mat-icon-button aria-label="Clear"
-                          (click)="question.name =''">
+                  <input matInput type="text" formControlName="name">
+                  <button mat-icon-button matSuffix aria-label="Clear" *ngIf="question.name" (click)="question.name =''">
                     <mat-icon>close</mat-icon>
                   </button>
                 </mat-form-field>
@@ -106,11 +105,6 @@
         </ng-template>
       </mat-tab>
 
-      <mat-tab label="Settings">
-        <ng-template matTabContent>
-          Settings
-        </ng-template>
-      </mat-tab>
     </mat-tab-group>
 
   </div>
