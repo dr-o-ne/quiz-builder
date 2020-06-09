@@ -6,7 +6,7 @@ th.mat-sort-header-sorted {
     color: black;
 }
 
- tr.cdk-row:hover{
+tr.cdk-row:hover{
     background-color: #f2f2f2;
 }
   
@@ -38,4 +38,9 @@ th.mat-sort-header-sorted {
 .editor{
     min-height: 200px;
     box-shadow: none;
+}
+
+.ql-toolbar.ql-snow {
+    border-width: 0px 0px 1px 0px !important;
+    box-shadow: none !important;
 }
