@@ -8,6 +8,7 @@
     <ItemGroup>
       <ProjectReference Include="..\QuizBuilder.Common\QuizBuilder.Common.csproj" />
       <ProjectReference Include="..\QuizBuilder.Data\QuizBuilder.Data.csproj" />
+      <ProjectReference Include="..\QuizBuilder.Domain.Model\QuizBuilder.Domain.Model.csproj" />
       <ProjectReference Include="..\QuizBuilder.Utils\QuizBuilder.Utils.csproj" />
     </ItemGroup>
 

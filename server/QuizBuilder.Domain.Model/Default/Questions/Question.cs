@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using QuizBuilder.Domain.Model.Default.Structure;
-using static QuizBuilder.Domain.Model.Enums;
+using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 

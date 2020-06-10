@@ -9,6 +9,7 @@ using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Answers;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Graders;

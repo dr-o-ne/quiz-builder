@@ -4,6 +4,7 @@ using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.ActionResult;
 using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.Action {
 

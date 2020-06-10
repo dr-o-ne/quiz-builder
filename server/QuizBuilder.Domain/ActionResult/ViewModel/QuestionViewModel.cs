@@ -1,4 +1,5 @@
 using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.ActionResult.ViewModel {
 	public sealed class QuestionViewModel {
