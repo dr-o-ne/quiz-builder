@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.ActionResult;
+using QuizBuilder.Domain.Action.ActionResult;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
