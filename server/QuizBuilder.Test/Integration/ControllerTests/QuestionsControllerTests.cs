@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Action.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -56,7 +56,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Questions_GetById_OK_Test() {
 
-			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.GetValueAsync<QuestionQueryResult>( "/questions/000000001" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.GetValueAsync<QuestionQueryResult>( "admin/questions/000000001" );
 
 			Assert.Equal( HttpStatusCode.OK, result.statusCode );
 			Assert.Equal( "000000001", result.data.Question.Id );
@@ -66,7 +66,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Questions_GetById_NoContent_Test() {
 
-			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.GetValueAsync<QuestionQueryResult>( "/questions/001230001" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.GetValueAsync<QuestionQueryResult>( "admin/questions/001230001" );
 
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
@@ -83,7 +83,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
 
-			(HttpStatusCode statusCode, QuestionCommandResult data) result = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", content );
+			(HttpStatusCode statusCode, QuestionCommandResult data) result = await _httpClient.PostValueAsync<QuestionCommandResult>( "admin/questions/", content );
 
 			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 			Assert.False( string.IsNullOrWhiteSpace( result.data.Question.Id ) );
@@ -94,7 +94,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Question_Create_BadRequest_Test() {
 
-			(HttpStatusCode statusCode, QuestionCommandResult data) result = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", new { Unknown = "" } );
+			(HttpStatusCode statusCode, QuestionCommandResult data) result = await _httpClient.PostValueAsync<QuestionCommandResult>( "admin/questions/", new { Unknown = "" } );
 
 			Assert.Equal( HttpStatusCode.BadRequest, result.statusCode );
 		}
@@ -111,7 +111,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
 
-			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.PutValueAsync<QuestionQueryResult>( "/questions/", content );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result = await _httpClient.PutValueAsync<QuestionQueryResult>( "admin/questions/", content );
 
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
