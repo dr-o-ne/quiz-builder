@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using QuizBuilder.Domain.Model.Default.Base;
 using QuizBuilder.Domain.Model.Default.Choices;
-using static QuizBuilder.Domain.Model.Enums;
-using static QuizBuilder.Domain.Model.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums;
+using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 

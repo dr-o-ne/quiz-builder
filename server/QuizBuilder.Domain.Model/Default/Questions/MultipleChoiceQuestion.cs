@@ -2,17 +2,16 @@
 using System.Linq;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Utils.Extensions;
-using static QuizBuilder.Domain.Model.Enums;
-using static QuizBuilder.Domain.Model.Enums.ChoicesDisplayType;
-using static QuizBuilder.Domain.Model.Enums.ChoicesEnumerationType;
-using static QuizBuilder.Domain.Model.Enums.QuestionGradingType;
-using static QuizBuilder.Domain.Model.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums;
+using static QuizBuilder.Domain.Model.Default.Enums.ChoicesDisplayType;
+using static QuizBuilder.Domain.Model.Default.Enums.ChoicesEnumerationType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
-	public sealed class MultipleSelectQuestion : Question {
+	public sealed class MultipleChoiceQuestion : Question {
 
-		public override QuestionType Type { get => MultiSelect; }
+		public override QuestionType Type { get => MultiChoice; }
 
 		public List<BinaryChoice> Choices { get; set; } = new List<BinaryChoice>();
 
@@ -25,8 +24,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public bool Randomize { get; set; }
 
-		public QuestionGradingType GradingType { get; set; } = AllOrNothing;
-
 		public ChoicesDisplayType ChoicesDisplayType { get; set; } = Vertical;
 
 		public ChoicesEnumerationType ChoicesEnumerationType { get; set; } = NoEnumeration;
@@ -37,7 +34,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 		}
 
 		public override Question NullifyChoices() {
-			foreach( var item in Choices ) {
+			foreach( BinaryChoice item in Choices ) {
 				item.IsCorrect = null;
 				item.Feedback = null;
 			}
@@ -46,7 +43,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override bool IsValid() {
 
-			if( string.IsNullOrWhiteSpace( Text ) )
+			if( string.IsNullOrWhiteSpace( Text ) ) 
 				return false;
 
 			if( Choices.Any( x => !x.IsValid() ) )
@@ -55,10 +52,11 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			if( Choices.Count < 2 )
 				return false;
 
-			if( Choices.Count( x => x.IsCorrect == true ) == 0 )
+			if( Choices.Count( x => x.IsCorrect == true ) != 1 ) 
 				return false;
 
 			return true;
 		}
 	}
+
 }

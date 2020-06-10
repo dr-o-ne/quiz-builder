@@ -1,8 +1,8 @@
 ﻿using QuizBuilder.Domain.Model.Default.Choices;
-using static QuizBuilder.Domain.Model.Enums;
-using static QuizBuilder.Domain.Model.Enums.ChoicesDisplayType;
-using static QuizBuilder.Domain.Model.Enums.ChoicesEnumerationType;
-using static QuizBuilder.Domain.Model.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums;
+using static QuizBuilder.Domain.Model.Default.Enums.ChoicesDisplayType;
+using static QuizBuilder.Domain.Model.Default.Enums.ChoicesEnumerationType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 

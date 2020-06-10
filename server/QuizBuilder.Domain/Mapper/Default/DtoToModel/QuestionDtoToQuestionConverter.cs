@@ -3,8 +3,9 @@ using System.Text.Json;
 using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
-using static QuizBuilder.Domain.Model.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
 
 namespace QuizBuilder.Domain.Mapper.Default.DtoToModel {
 

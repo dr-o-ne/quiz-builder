@@ -1,4 +1,4 @@
-﻿namespace QuizBuilder.Domain.Model {
+﻿namespace QuizBuilder.Domain.Model.Default {
 
 	public static class Enums {
 

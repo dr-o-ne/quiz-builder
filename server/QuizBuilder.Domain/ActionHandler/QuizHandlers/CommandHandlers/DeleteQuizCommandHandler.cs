@@ -6,6 +6,7 @@ using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.ActionHandler.QuizHandlers.CommandHandlers {
 
