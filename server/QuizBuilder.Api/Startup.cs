@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuizBuilder.Common;
 using QuizBuilder.Data;
-using QuizBuilder.Domain;
 using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Model;
 using QuizBuilder.Utils;

@@ -1,13 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Action.Action;
 
-namespace QuizBuilder.Api.Controllers {
+namespace QuizBuilder.Api.Admin.Api.Internal {
 
+	[Obsolete]
 	[ApiController]
-	[Route( "[controller]" )]
+	[Route( "admin/[controller]" )]
 	public sealed class AttemptsController : ControllerBase {
 
 		private readonly IDispatcher _dispatcher;

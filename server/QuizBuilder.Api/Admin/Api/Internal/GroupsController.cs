@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Action.Action;
 using QuizBuilder.Domain.Action.ActionResult;
 
-namespace QuizBuilder.Api.Controllers {
+namespace QuizBuilder.Api.Admin.Api.Internal {
 
 	[ApiController]
-	[Route( "[controller]" )]
+	[Route( "admin/[controller]" )]
 	public sealed class GroupsController : ControllerBase {
 
 		private readonly IDispatcher _dispatcher;
