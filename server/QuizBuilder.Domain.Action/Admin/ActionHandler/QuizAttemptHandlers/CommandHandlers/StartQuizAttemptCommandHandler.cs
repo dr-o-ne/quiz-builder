@@ -7,7 +7,6 @@ using AutoMapper;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Action.Action;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;

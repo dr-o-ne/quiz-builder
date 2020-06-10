@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using AutoMapper;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Action.Action;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Mapper.Default.ActionToModel;

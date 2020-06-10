@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Domain.Action.Action;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using QuizBuilder.Domain.Action.Action;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default.Structure;
 
