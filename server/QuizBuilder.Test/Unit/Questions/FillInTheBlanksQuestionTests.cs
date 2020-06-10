@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Mapper;
-using QuizBuilder.Domain.Model;
+using QuizBuilder.Domain.Action.Mapper;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;

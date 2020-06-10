@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Action;
+using QuizBuilder.Domain.Action.Action;
 
 namespace QuizBuilder.Api.Controllers {
 
