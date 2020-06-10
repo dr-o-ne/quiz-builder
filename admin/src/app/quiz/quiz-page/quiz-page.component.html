@@ -3,8 +3,7 @@
 
   <vex-page-layout-content class="container">
 
-
-      <div class="main-color">
+      <div class="card main-color">
     
           <form [formGroup]="quizForm" class="mt-3">
     
@@ -28,11 +27,9 @@
             </div>
     
           </form>
-    
-    
       </div>
     
-      <div *ngIf="quiz.id" class="main-color">
+      <div *ngIf="quiz.id" class="card main-color">
     
         <div class="row"
           fxLayout
