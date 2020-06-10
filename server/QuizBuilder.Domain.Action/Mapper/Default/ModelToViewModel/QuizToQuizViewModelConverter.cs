@@ -1,5 +1,5 @@
 using AutoMapper;
-using QuizBuilder.Domain.Action.ActionResult.ViewModel;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel {

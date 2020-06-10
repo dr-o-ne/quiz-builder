@@ -1,6 +1,6 @@
 using System;
 using AutoMapper;
-using QuizBuilder.Domain.Action.ActionResult.ViewModel;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Utils;

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Action.Action;
 using QuizBuilder.Domain.Action.ActionResult;
+using QuizBuilder.Domain.Action.Admin.Action;
+using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
