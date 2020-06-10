@@ -26,12 +26,12 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Name = "Quiz 1" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new { Name = "Quiz 1" } );
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Group 1
 			var content = new { QuizId = uid1, Name = "Group Name" };
-			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "/groups/", content );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", content );
 			string uid2 = result.data.Group.Id;
 
 			// Create Question 1
@@ -44,7 +44,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
-			(HttpStatusCode statusCode, QuestionQueryResult data) result2 = await _httpClient.PostValueAsync<QuestionQueryResult>( "/questions/", content1 );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result2 = await _httpClient.PostValueAsync<QuestionQueryResult>( "admin/questions/", content1 );
 			string questionUId1 = result2.data.Question.Id;
 
 			// Delete Quiz 1

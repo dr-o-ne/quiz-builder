@@ -26,7 +26,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Name = "Quiz 1" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new { Name = "Quiz 1" } );
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Question 1
@@ -38,13 +38,13 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
-			(HttpStatusCode statusCode, QuestionQueryResult data) result2 = await _httpClient.PostValueAsync<QuestionQueryResult>( "/questions/", content1 );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result2 = await _httpClient.PostValueAsync<QuestionQueryResult>( "admin/questions/", content1 );
 			string questionUId1 = result2.data.Question.Id;
 
 			// Delete Quiz 1
-			var result3 = await _httpClient.DeleteAsync( $"/quizzes/{uid1}" );
+			var result3 = await _httpClient.DeleteAsync( $"admin/quizzes/{uid1}" );
 
-			(HttpStatusCode statusCode, QuestionQueryResult data) result4 = await _httpClient.GetValueAsync<QuestionQueryResult>( $"/questions/{questionUId1}" );
+			(HttpStatusCode statusCode, QuestionQueryResult data) result4 = await _httpClient.GetValueAsync<QuestionQueryResult>( $"admin/questions/{questionUId1}" );
 			Assert.Equal( HttpStatusCode.NoContent, result4.statusCode );
 		}
 

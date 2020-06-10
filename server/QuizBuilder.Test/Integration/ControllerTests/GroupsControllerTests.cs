@@ -39,7 +39,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 
 			var content = new { QuizId = "quiz-1", Name = "Group Name" };
 
-			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "/groups/", content );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", content );
 
 			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 		}
@@ -49,7 +49,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 
 			var content = new { QuizId = "quiz-empty", Name = "Group Name" };
 
-			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "/groups/", content );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", content );
 
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, result.statusCode );
 		}

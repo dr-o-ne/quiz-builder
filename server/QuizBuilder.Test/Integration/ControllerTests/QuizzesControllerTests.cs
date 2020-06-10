@@ -64,7 +64,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_GetById_OK_Test() {
 
-			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.GetValueAsync<QuizQueryResult>( "/quizzes/0000000001" );
+			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.GetValueAsync<QuizQueryResult>( "admin/quizzes/0000000001" );
 
 			Assert.Equal( HttpStatusCode.OK, result.statusCode );
 			Assert.Equal( "0000000001", result.data.Quiz.Id );
@@ -75,7 +75,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_GetById_NoContent_Test() {
 
-			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.GetValueAsync<QuizQueryResult>( "/quizzes/00" );
+			(HttpStatusCode statusCode, QuizQueryResult data) result = await _httpClient.GetValueAsync<QuizQueryResult>( "admin/quizzes/00" );
 
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
@@ -83,7 +83,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_GetAll_OK_Test() {
 
-			(HttpStatusCode statusCode, QuizzesQueryResult data) result = await _httpClient.GetValueAsync<QuizzesQueryResult>( "/quizzes" );
+			(HttpStatusCode statusCode, QuizzesQueryResult data) result = await _httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes" );
 
 			Assert.Equal( HttpStatusCode.OK, result.statusCode );
 			Assert.Equal( 5, result.data.Quizzes.Count );
@@ -97,7 +97,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Create_Created_Test() {
 
-			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new {Name = "New Quiz"} );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new {Name = "New Quiz"} );
 
 			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 			Assert.False( string.IsNullOrWhiteSpace( result.data.Quiz.Id ) );
@@ -108,7 +108,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Create_BadRequest_Test() {
 
-			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Unknown = "" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new { Unknown = "" } );
 
 			Assert.Equal( HttpStatusCode.BadRequest, result.statusCode );
 		}
@@ -116,7 +116,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Update_Success_Test() {
 
-			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PutValueAsync<QuizCommandResult>( "/quizzes/", new { Id = "0000000001", Name = "New Quiz Name" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = "0000000001", Name = "New Quiz Name" } );
 
 			Assert.Equal( HttpStatusCode.NoContent, result.statusCode );
 		}
@@ -124,7 +124,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_Update_Fail_Test() {
 
-			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PutValueAsync<QuizCommandResult>( "/quizzes/", new { Id = "0000000100", Name = "New Quiz Name" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = "0000000100", Name = "New Quiz Name" } );
 
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, result.statusCode );
 		}
@@ -132,7 +132,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_DeleteById_NoContent_Test() {
 
-			var response = await _httpClient.DeleteAsync( "/quizzes/0000001000" );
+			var response = await _httpClient.DeleteAsync( "admin/quizzes/0000001000" );
 
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
@@ -140,7 +140,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Quiz_DeleteById_NoItem_NoContent_Test() {
 
-			using var response = await _httpClient.DeleteAsync( "/quizzes/0000002000" );
+			using var response = await _httpClient.DeleteAsync( "admin/quizzes/0000002000" );
 
 			Assert.Equal( HttpStatusCode.NoContent, response.StatusCode );
 		}
@@ -151,7 +151,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 
 			using var request = new HttpRequestMessage {
 				Method = HttpMethod.Delete,
-				RequestUri = new Uri( _httpClient.BaseAddress + "quizzes/" ),
+				RequestUri = new Uri( _httpClient.BaseAddress + "admin/quizzes/" ),
 				Content = new StringContent( content, Encoding.UTF8, "application/json" )
 			};
 

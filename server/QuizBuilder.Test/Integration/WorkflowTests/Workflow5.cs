@@ -26,7 +26,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "/quizzes/", new { Name = "Quiz 1" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new { Name = "Quiz 1" } );
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Question 1
@@ -38,7 +38,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"Id\":0,\"isCorrect\":true,\"text\":\"Choice 1\"},{\"Id\":1,\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
-			(HttpStatusCode statusCode, QuestionCommandResult data) result2 = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", content1 );
+			(HttpStatusCode statusCode, QuestionCommandResult data) result2 = await _httpClient.PostValueAsync<QuestionCommandResult>( "admin/questions/", content1 );
 			string questionUId1 = result2.data.Question.Id;
 
 			// Create Question 2
@@ -53,12 +53,12 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"Id\":0,\"isCorrect\":true,\"text\":\"Choice 1\"},{\"Id\":1,\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			};
-			(HttpStatusCode statusCode, QuestionCommandResult data) result3 = await _httpClient.PostValueAsync<QuestionCommandResult>( "/questions/", content2 );
+			(HttpStatusCode statusCode, QuestionCommandResult data) result3 = await _httpClient.PostValueAsync<QuestionCommandResult>( "admin/questions/", content2 );
 			string questionUId2 = result3.data.Question.Id;
 
 			// Start Attempt 1
 			var content3 = new { QuizId = uid1 };
-			(HttpStatusCode statusCode, StartQuizAttemptCommandResult data) result4 = await _httpClient.PostValueAsync<StartQuizAttemptCommandResult>( "/attempts/", content3 );
+			(HttpStatusCode statusCode, StartQuizAttemptCommandResult data) result4 = await _httpClient.PostValueAsync<StartQuizAttemptCommandResult>( "admin/attempts/", content3 );
 			Assert.Equal( HttpStatusCode.Created, result4.statusCode );
 
 			Assert.False( string.IsNullOrWhiteSpace( result4.data.QuizAttempt.Id ) );
@@ -89,7 +89,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
       }}
    ]
 }}";
-			(HttpStatusCode statusCode, EndQuizAttemptCommandResult data) result5 = await _httpClient.PutValueAsync<EndQuizAttemptCommandResult>( "/attempts/", content4 );
+			(HttpStatusCode statusCode, EndQuizAttemptCommandResult data) result5 = await _httpClient.PutValueAsync<EndQuizAttemptCommandResult>( "admin/attempts/", content4 );
 			Assert.Equal( HttpStatusCode.OK, result5.statusCode );
 			Assert.Equal( 1, result5.data.Score );
 
