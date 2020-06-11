@@ -15,6 +15,16 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "quiz" )]
 		public QuizAttemptInfo Quiz { get; set; }
 
+		[JsonPropertyName( "appearance" )]
+		public Appearance Appearance { get; set; }
+
+	}
+
+	public sealed class Appearance {
+
+		[JsonPropertyName( "mainBackground" )]
+		public string MainBackground { get; set; }
+
 	}
 
 	public sealed class QuizAttemptInfo {
@@ -67,5 +77,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		public string Text { get; set; }
 
 	}
+
+
 
 }
