@@ -15,7 +15,7 @@ export class AttemptService {
   constructor( private http: HttpClient ) {}
 
   startAttempt(quizId: string): Observable<AttemptInfo> {
-    return this.http.post<AttemptInfo>( this.apiUrl + 'attempts', { quizId } )
+    return this.http.post<AttemptInfo>( this.apiUrl + 'attempts', { quizId } );
   }
 
 }

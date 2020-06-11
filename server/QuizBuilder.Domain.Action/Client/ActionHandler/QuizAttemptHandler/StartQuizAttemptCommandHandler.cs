@@ -80,7 +80,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			await _attemptDataProvider.Add( quizAttemptDto );
 
 			return quizAttempt;
-
 		}
 
 		private static AttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions ) {
@@ -93,7 +92,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			return new AttemptInfo {
 				UId = uid,
-				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ) )
+				Appearance = new Appearance { MainBackground = "#13293d" }, //TODO: load from DB
+				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ) ),
 			};
 
 		}

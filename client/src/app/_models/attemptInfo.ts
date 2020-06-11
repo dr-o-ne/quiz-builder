@@ -1,7 +1,9 @@
-import {QuestionType} from './_enums';
+import { QuestionType } from './_enums';
+import { Appearance } from './appearance';
 
 export class AttemptInfo {
     id: string;
+    appearance: Appearance;
     quiz: QuizAttemptInfo; 
 }
 
@@ -25,3 +27,4 @@ export class ChoiceAttemptInfo {
     id: number;
     text: string;
 }
+
