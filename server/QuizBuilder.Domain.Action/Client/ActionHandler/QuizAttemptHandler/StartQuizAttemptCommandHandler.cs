@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
@@ -44,18 +44,22 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			if( string.IsNullOrWhiteSpace( quizUId ) )
 				return new StartQuizAttemptCommandResult { Success = false };
 
-			if( await _quizDataProvider.Get( quizUId ) == null )
+			QuizDto quizDto = await _quizDataProvider.Get( quizUId );
+
+			if( quizDto == null )
 				return new StartQuizAttemptCommandResult { Success = false };
 
-			var quizAttempt = await CreateQuizAttempt( quizUId );
-			var questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
+			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
+
+			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
+			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );
+
+			QuizAttempt quizAttempt = await CreateQuizAttempt( quizUId );
 
 			return new StartQuizAttemptCommandResult {
 				Success = true,
 				Message = string.Empty,
-				Payload = new AttemptInfo {
-					UId = quizAttempt.UId
-				}
+				Payload = BuildPayload( quizAttempt.UId, quiz, questions )
 			};
 
 		}
@@ -77,12 +81,23 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 		}
 
-		/*private AttemptInfo BuildPayoad( string uid, Quiz quiz, IEnumerable<Question> questions ) {
+		private static AttemptInfo BuildPayload( string uid, Quiz quiz, IEnumerable<Question> questions ) {
 
-			var groups = new List<GroupAttemptInfo> {new GroupAttemptInfo()}.ToImmutableArray();
+			var group = new GroupAttemptInfo {
+				UId = string.Empty,
+				Name = string.Empty,
+				Questions = questions.Select( x => new QuestionAttemptInfo {UId = x.UId, Text = x.Text} ).ToImmutableArray()
+			};
 
-			return new AttemptInfo {UId = uid, Quiz = new QuizAttemptInfo {UId = quiz.UId, Name = quiz.Name}};
-		}*/
+			return new AttemptInfo {
+				UId = uid,
+				Quiz = new QuizAttemptInfo {
+					UId = quiz.UId,
+					Name = quiz.Name,
+					Groups = new List<GroupAttemptInfo> { group }.ToImmutableArray()
+				}
+			};
+		}
 	}
 
 }
