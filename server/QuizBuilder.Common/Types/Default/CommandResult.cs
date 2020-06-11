@@ -15,4 +15,10 @@ namespace QuizBuilder.Common.Types.Default {
 		}
 
 	}
+
+	public class CommandResult<T> : CommandResult {
+
+		public T Payload { get; set; }
+
+	}
 }
