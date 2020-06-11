@@ -20,8 +20,8 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 			StartQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
 
 			return result.Success
-				? (ActionResult)Created( nameof( string.Empty ), result )
-				: UnprocessableEntity( result );
+				? (ActionResult)Created( nameof( string.Empty ), result.Payload )
+				: UnprocessableEntity( string.Empty );
 		}
 	}
 }

@@ -7,6 +7,12 @@ export class AttemptInfo {
 
 export class QuizAttemptInfo {
     id: string;
+    groups: GroupAttemptInfo[]
+}
+
+export class GroupAttemptInfo {
+    id: string;
+    questions: QuestionAttemptInfo[]
 }
 
 export class QuestionAttemptInfo {
