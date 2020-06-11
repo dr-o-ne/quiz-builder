@@ -47,6 +47,22 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "id" )]
 		public string UId { get; set; }
 
+		[JsonPropertyName( "type" )]
+		public string Type { get; set; }
+
+		[JsonPropertyName( "text" )]
+		public string Text { get; set; }
+
+		[JsonPropertyName( "choices" )]
+		public ImmutableArray<ChoiceAttemptInfo> Choices { get; set; }
+
+	}
+
+	public sealed class ChoiceAttemptInfo {
+
+		[JsonPropertyName( "id" )]
+		public long Id { get; set; }
+
 		[JsonPropertyName( "text" )]
 		public string Text { get; set; }
 

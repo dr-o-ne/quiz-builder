@@ -18,6 +18,7 @@ export class GroupAttemptInfo {
 export class QuestionAttemptInfo {
     id: string;
     type: QuestionType;
+    choices: ChoiceAttemptInfo[]
 }
 
 export class ChoiceAttemptInfo {

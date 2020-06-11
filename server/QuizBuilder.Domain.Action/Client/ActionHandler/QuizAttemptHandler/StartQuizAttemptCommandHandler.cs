@@ -11,6 +11,7 @@ using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Attempts;
+using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Utils.Services;
 
@@ -30,6 +31,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			IQuizDataProvider quizDataProvider,
 			IQuestionDataProvider questionDataProvider,
 			IQuizAttemptDataProvider attemptDataProvider ) {
+
 			_mapper = mapper;
 			_uIdService = uIdService;
 			_quizDataProvider = quizDataProvider;
@@ -59,7 +61,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return new StartQuizAttemptCommandResult {
 				Success = true,
 				Message = string.Empty,
-				Payload = BuildPayload( quizAttempt.UId, quiz, questions )
+				Payload = MapPayload( quizAttempt.UId, quiz, questions )
 			};
 
 		}
@@ -81,23 +83,60 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 		}
 
-		private static AttemptInfo BuildPayload( string uid, Quiz quiz, IEnumerable<Question> questions ) {
+		private static AttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions ) {
 
 			var group = new GroupAttemptInfo {
 				UId = string.Empty,
 				Name = string.Empty,
-				Questions = questions.Select( x => new QuestionAttemptInfo {UId = x.UId, Text = x.Text} ).ToImmutableArray()
+				Questions = questions.Select( MapQuestion ).ToImmutableArray()
 			};
 
 			return new AttemptInfo {
 				UId = uid,
-				Quiz = new QuizAttemptInfo {
-					UId = quiz.UId,
-					Name = quiz.Name,
-					Groups = new List<GroupAttemptInfo> { group }.ToImmutableArray()
-				}
+				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ) )
 			};
+
 		}
+
+		private static QuizAttemptInfo MapQuiz( Quiz quiz, ImmutableArray<GroupAttemptInfo> groups ) =>
+			new QuizAttemptInfo {
+				UId = quiz.UId,
+				Name = quiz.Name,
+				Groups = groups
+			};
+
+		private static QuestionAttemptInfo MapQuestion( Question question ) =>
+			new QuestionAttemptInfo {
+				UId = question.UId,
+				Type = question.Type.ToString(),
+				Text = question.Text,
+				Choices = MapChoices( question )
+			};
+
+		private static ImmutableArray<ChoiceAttemptInfo> MapChoices( Question question ) {
+
+			static ChoiceAttemptInfo MapBinaryChoice( BinaryChoice choice ) => new ChoiceAttemptInfo { Id = choice.Id, Text = choice.Text };
+
+			switch( question.Type ) {
+				case Enums.QuestionType.TrueFalse: {
+					var x = (TrueFalseQuestion)question;
+					return ImmutableArray.Create( MapBinaryChoice( x.TrueChoice ), MapBinaryChoice( x.FalseChoice ) );
+				}
+				case Enums.QuestionType.MultiChoice: {
+					var x = (MultipleChoiceQuestion)question;
+					return x.GetChoicesRandomized().Select( MapBinaryChoice ).ToImmutableArray();
+				}
+				case Enums.QuestionType.MultiSelect: {
+					var x = (MultipleSelectQuestion)question;
+					return x.GetChoicesRandomized().Select( MapBinaryChoice ).ToImmutableArray();
+				}
+				case Enums.QuestionType.LongAnswer: 
+					return ImmutableArray<ChoiceAttemptInfo>.Empty;
+			}
+
+			throw null;
+		}
+
 	}
 
 }
