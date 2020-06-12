@@ -22,8 +22,14 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	public sealed class Appearance {
 
+		[JsonPropertyName( "headerBackground" )]
+		public string HeaderColor { get; set; }
+
 		[JsonPropertyName( "mainBackground" )]
-		public string MainBackground { get; set; }
+		public string MainColor { get; set; }
+
+		[JsonPropertyName( "footerBackground" )]
+		public string FooterColor { get; set; }
 
 	}
 

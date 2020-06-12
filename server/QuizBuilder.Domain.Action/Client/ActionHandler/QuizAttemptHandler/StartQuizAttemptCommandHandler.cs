@@ -92,7 +92,11 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			return new AttemptInfo {
 				UId = uid,
-				Appearance = new Appearance { MainBackground = "#13293d" }, //TODO: load from DB
+				Appearance = new Appearance {
+					HeaderColor = "#2e3d13",
+					MainColor = "#13293d",
+					FooterColor = "#3d1323"
+				}, //TODO: load from DB
 				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ) ),
 			};
 

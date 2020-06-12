@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AttemptService } from 'src/app/_services/attempt.service';
 
@@ -16,6 +16,10 @@ export class QuizAttemptComponent implements OnInit {
 
   private attempt: AttemptInfo;
 
+  @ViewChild("header") headerView: ElementRef;
+  @ViewChild("content") contentView: ElementRef;
+  @ViewChild("footer") footerView: ElementRef;
+
   constructor(
     private elementRef: ElementRef,
     private route: ActivatedRoute,
@@ -26,8 +30,7 @@ export class QuizAttemptComponent implements OnInit {
   ngOnInit(): void {
     const quizId = this.route.snapshot.paramMap.get('id') || '';
     
-    this.startQuizAttempt( quizId );
-    
+    this.startQuizAttempt( quizId );   
   }
 
   startQuizAttempt( quizId: string ): void {
@@ -39,7 +42,9 @@ export class QuizAttemptComponent implements OnInit {
   }
   
   setAppearance( appearance: Appearance ) {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = appearance.mainBackground;
+    this.headerView.nativeElement.style.backgroundColor = appearance.headerBackground;
+    this.contentView.nativeElement.style.backgroundColor = appearance.mainBackground;
+    this.footerView.nativeElement.style.backgroundColor = appearance.footerBackground;
   }
 
 }
