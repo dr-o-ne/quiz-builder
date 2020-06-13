@@ -1,17 +1,30 @@
 <div fxLayout="column" fxFlexFill>
+
     <div #header fxFlex="5" fxLayout="row" fxLayoutAlign="center center"> 
         <div>
             {{attempt.quiz.name}}
         </div> 
     </div>
+
     <div #content fxFlex fxLayout="row">
         <div fxFlex="70" fxFlexOffset="15">
-            Hello Quiz Attempt
+            
+            <div *ngFor="let question of getQuestions(); let i = index">
+  
+                <div>
+                    Test
+                </div>
+            
+              </div>
+
+
         </div>
     </div>
+
     <div #footer fxFlexOffset="auto" fxFlex="5">
         Footer
     </div>
+
 </div>
 
 
