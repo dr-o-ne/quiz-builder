@@ -64,7 +64,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		public string UId { get; set; }
 
 		[JsonPropertyName( "type" )]
-		public string Type { get; set; }
+		public long Type { get; set; }
 
 		[JsonPropertyName( "text" )]
 		public string Text { get; set; }

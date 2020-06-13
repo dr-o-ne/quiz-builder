@@ -20,7 +20,7 @@ export class GroupAttemptInfo {
 
 export class QuestionAttemptInfo {
     id: string;
-    type: QuestionType;
+    type: number;
     choices: ChoiceAttemptInfo[]
 }
 
