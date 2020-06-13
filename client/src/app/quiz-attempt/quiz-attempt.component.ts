@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AttemptService } from 'src/app/_services/attempt.service';
 
 import { AttemptInfo } from '../_models/attemptInfo';
 import { Appearance } from '../_models/appearance';
@@ -22,11 +21,9 @@ export class QuizAttemptComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private route: ActivatedRoute,
-    private attemptService: AttemptService
+    private route: ActivatedRoute
     ) { 
       this.attempt = this.route.snapshot.data.attempt;
-      console.log(this.attempt);
    }
 
   ngOnInit(): void {
