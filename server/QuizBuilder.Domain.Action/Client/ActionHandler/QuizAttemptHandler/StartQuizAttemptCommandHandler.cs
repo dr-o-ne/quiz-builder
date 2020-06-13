@@ -124,7 +124,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		private static QuestionAttemptInfo MapQuestion( Question question ) =>
 			new QuestionAttemptInfo {
 				UId = question.UId,
-				Type = question.Type.ToString(),
+				Type = (long) question.Type,
 				Text = question.Text,
 				Choices = MapChoices( question )
 			};

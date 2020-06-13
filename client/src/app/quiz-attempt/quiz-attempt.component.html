@@ -12,7 +12,8 @@
             <div *ngFor="let question of getQuestions(); let i = index">
   
                 <div>
-                    Test
+                    <app-question-dynamic [question]="question">
+                    </app-question-dynamic>
                 </div>
             
               </div>

@@ -10,11 +10,19 @@ import { QuizAttemptComponent } from './quiz-attempt/quiz-attempt.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { QuizAttemptResolver } from './_resolvers/quiz-attempt.resolver';
+import { QuestionDynamicComponent } from './quiz-attempt/questions/question-dynamic.component';
+import { TrueFalseQuestionComponent } from './quiz-attempt/questions/true-false-question/true-false-question.component';
+import { MultipleChoiceQuestionComponent } from './quiz-attempt/questions/multiple-choice-question/multiple-choice-question.component';
+import { QuestionHostDirective } from './_directives/question-host.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuizAttemptComponent
+    QuizAttemptComponent,
+    QuestionHostDirective,
+    QuestionDynamicComponent,
+    TrueFalseQuestionComponent,
+    MultipleChoiceQuestionComponent
   ],
   imports: [
     BrowserModule,

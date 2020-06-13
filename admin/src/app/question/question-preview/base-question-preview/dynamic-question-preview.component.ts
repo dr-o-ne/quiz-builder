@@ -31,9 +31,7 @@ export class DynamicQuestionPreviewComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('question') && changes.question.currentValue) {
-      this.loadComponent(changes.question.currentValue.type);
-    }
+    this.loadComponent(changes.question.currentValue.type);
   }
 
   loadComponent(questionType: QuestionType): void {
