@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { QuizAttemptComponent } from './quiz-attempt/quiz-attempt.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { QuizAttemptResolver } from './_resolvers/quiz-attempt.resolver';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [QuizAttemptResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

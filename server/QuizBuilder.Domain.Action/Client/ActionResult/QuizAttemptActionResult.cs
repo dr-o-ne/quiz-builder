@@ -16,11 +16,11 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		public QuizAttemptInfo Quiz { get; set; }
 
 		[JsonPropertyName( "appearance" )]
-		public Appearance Appearance { get; set; }
+		public AppearanceInfo AppearanceInfo { get; set; }
 
 	}
 
-	public sealed class Appearance {
+	public sealed class AppearanceInfo {
 
 		[JsonPropertyName( "headerBackground" )]
 		public string HeaderColor { get; set; }

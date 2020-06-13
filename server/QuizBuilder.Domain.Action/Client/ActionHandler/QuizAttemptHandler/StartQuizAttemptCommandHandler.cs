@@ -10,6 +10,7 @@ using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Domain.Model.Default.Appearance;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
@@ -51,6 +52,14 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			if( quizDto == null )
 				return new StartQuizAttemptCommandResult { Success = false };
 
+			//TODO: load from DB
+			var appearance = new Appearance {
+				ShowQuizName = true,
+				HeaderColor = "#2e3d13",
+				MainColor = "#13293d",
+				FooterColor = "#3d1323",
+			};
+
 			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
 
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
@@ -61,7 +70,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return new StartQuizAttemptCommandResult {
 				Success = true,
 				Message = string.Empty,
-				Payload = MapPayload( quizAttempt.UId, quiz, questions )
+				Payload = MapPayload( quizAttempt.UId, quiz, questions, appearance )
 			};
 
 		}
@@ -82,7 +91,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return quizAttempt;
 		}
 
-		private static AttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions ) {
+		private static AttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions, Appearance appearance ) {
 
 			var group = new GroupAttemptInfo {
 				UId = string.Empty,
@@ -92,20 +101,23 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			return new AttemptInfo {
 				UId = uid,
-				Appearance = new Appearance {
-					HeaderColor = "#2e3d13",
-					MainColor = "#13293d",
-					FooterColor = "#3d1323"
-				}, //TODO: load from DB
-				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ) ),
+				AppearanceInfo = MapAppearance( appearance ),
+				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ), appearance )
 			};
 
 		}
 
-		private static QuizAttemptInfo MapQuiz( Quiz quiz, ImmutableArray<GroupAttemptInfo> groups ) =>
+		private static AppearanceInfo MapAppearance( Appearance appearance ) =>
+			new AppearanceInfo {
+				HeaderColor = appearance.HeaderColor,
+				MainColor = appearance.MainColor,
+				FooterColor = appearance.FooterColor
+			};
+
+		private static QuizAttemptInfo MapQuiz( Quiz quiz, ImmutableArray<GroupAttemptInfo> groups, Appearance appearance ) =>
 			new QuizAttemptInfo {
 				UId = quiz.UId,
-				Name = quiz.Name,
+				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				Groups = groups
 			};
 

@@ -14,7 +14,7 @@ import { Appearance } from '../_models/appearance';
 
 export class QuizAttemptComponent implements OnInit {
 
-  private attempt: AttemptInfo;
+  attempt: AttemptInfo;
 
   @ViewChild("header") headerView: ElementRef;
   @ViewChild("content") contentView: ElementRef;
@@ -25,26 +25,21 @@ export class QuizAttemptComponent implements OnInit {
     private route: ActivatedRoute,
     private attemptService: AttemptService
     ) { 
-  }
+      this.attempt = this.route.snapshot.data.attempt;
+      console.log(this.attempt);
+   }
 
   ngOnInit(): void {
-    const quizId = this.route.snapshot.paramMap.get('id') || '';
-    
-    this.startQuizAttempt( quizId );   
   }
 
-  startQuizAttempt( quizId: string ): void {
-    this.attemptService.startAttempt( quizId ).subscribe( (attempt: AttemptInfo) => {
-      this.attempt = attempt;
-      this.setAppearance( attempt.appearance );
-    } );
-
-  }
-  
   setAppearance( appearance: Appearance ) {
     this.headerView.nativeElement.style.backgroundColor = appearance.headerBackground;
     this.contentView.nativeElement.style.backgroundColor = appearance.mainBackground;
     this.footerView.nativeElement.style.backgroundColor = appearance.footerBackground;
+  }
+
+  ngAfterViewInit() {
+    this.setAppearance(this.attempt.appearance);
   }
 
 }
