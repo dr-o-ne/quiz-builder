@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuestionComponent } from '../question.component';
-import { QuestionAttemptInfo } from 'src/app/_models/attemptInfo';
+import { BinaryChoiceAttemptInfo, TrueFalseQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 
 @Component({
   selector: 'app-true-false-question',
@@ -8,4 +8,16 @@ import { QuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 })
 
 export class TrueFalseQuestionComponent extends QuestionComponent {
+
+  question: TrueFalseQuestionAttemptInfo;
+
+  getChoices(): BinaryChoiceAttemptInfo[] {
+
+    return this.question.choices;
+
+  }
+
+
 }
+
+

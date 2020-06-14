@@ -1,46 +1,52 @@
-import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, Type, SimpleChanges } from '@angular/core';
-import { QuestionAttemptInfo } from 'src/app/_models/attemptInfo';
-import { QuestionType } from 'src/app/_models/_enums';
+import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { QuestionAttemptInfo, TrueFalseQuestionAttemptInfo, MultipleChoiceQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
-import { QuestionComponent } from './question.component';
 import { QuestionHostDirective } from 'src/app/_directives/question-host.directive';
-import { Appearance } from 'src/app/_models/appearance';
+import { QuestionType } from 'src/app/_models/_enums';
 
 @Component({
   selector: 'app-question-dynamic',
   template: '<ng-template question-host></ng-template>'
 })
 
-export class QuestionDynamicComponent implements OnInit, OnDestroy {
-
-  private readonly components = new Map();
+export class QuestionDynamicComponent implements OnInit {
 
   @Input() question: QuestionAttemptInfo;
   @ViewChild(QuestionHostDirective, { static: true }) host: QuestionHostDirective;
 
-  constructor(private resolver: ComponentFactoryResolver) { 
-    this.components.set(QuestionType.TrueFalse, TrueFalseQuestionComponent);
-    this.components.set(QuestionType.MultipleChoice, MultipleChoiceQuestionComponent);
+  constructor(private resolver: ComponentFactoryResolver) {
   }
 
-  ngOnInit() {
-    this.loadComponent( this.question.type );
+  ngOnInit(): void {
+    this.loadComponent();
   }
 
-  ngOnDestroy() {
-  }
+  loadComponent(): void {
 
-  loadComponent( questionType: QuestionType ) {
-
-    const componentFactory = this.resolver.resolveComponentFactory(this.components.get(questionType));
     const viewContainerRef = this.host.viewContainerRef;
-
     viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent(componentFactory);
-    (<QuestionComponent>componentRef.instance).question = this.question;
-  }
+    console.log(QuestionType[this.question.type]);
 
+    switch (+this.question.type) {
+      case QuestionType.TrueFalse: {
+        const componentFactory = this.resolver.resolveComponentFactory(TrueFalseQuestionComponent);
+        const componentRef = viewContainerRef.createComponent(componentFactory);
+        (<TrueFalseQuestionComponent>componentRef.instance).question = this.question as TrueFalseQuestionAttemptInfo;
+        return;
+      }
+      case QuestionType.MultipleChoice: {
+        const componentFactory = this.resolver.resolveComponentFactory(MultipleChoiceQuestionComponent);
+        const componentRef = viewContainerRef.createComponent(componentFactory);
+        (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question as MultipleChoiceQuestionAttemptInfo;
+        return;
+      }
+      
+    }
+
+    throw Error('Unsupported question type');
+
+  }
 
 }

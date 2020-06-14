@@ -72,6 +72,12 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "text" )]
 		public string Text { get; set; }
 
+		[JsonPropertyName( "setting1" )]
+		public bool Setting1 { get; set; }
+
+		[JsonPropertyName( "setting2" )]
+		public bool Setting2 { get; set; }
+
 		[JsonPropertyName( "choices" )]
 		public ImmutableArray<ChoiceAttemptInfo> Choices { get; set; }
 
