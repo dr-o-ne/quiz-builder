@@ -17,11 +17,11 @@
         fxLayout="row"
         [style.backgroundColor]="attempt.appearance.mainBackground">
 
-        <div fxFlex="70" fxFlexOffset="15">
+        <div fxFlex="50" fxFlexOffset="25" >
             
             <div *ngFor="let question of getQuestions(); let i = index">
   
-                <div [style.backgroundColor]="attempt.appearance.footerBackground">
+                <div [style.backgroundColor]="attempt.appearance.footerBackground" class="card">
                     <app-question-dynamic 
                         [question]="question">
                     </app-question-dynamic>
