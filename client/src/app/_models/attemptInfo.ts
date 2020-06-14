@@ -21,6 +21,7 @@ export class GroupAttemptInfo {
 export class QuestionAttemptInfo {
     id: string;
     type: number;
+    text: string;
     choices: ChoiceAttemptInfo[]
 }
 
