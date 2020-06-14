@@ -15,6 +15,11 @@ import { TrueFalseQuestionComponent } from './quiz-attempt/questions/true-false-
 import { MultipleChoiceQuestionComponent } from './quiz-attempt/questions/multiple-choice-question/multiple-choice-question.component';
 import { QuestionHostDirective } from './_directives/question-host.directive';
 
+
+
+import { QuillModule } from 'ngx-quill';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +34,8 @@ import { QuestionHostDirective } from './_directives/question-host.directive';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    QuillModule.forRoot()
   ],
   providers: [QuizAttemptResolver],
   bootstrap: [AppComponent]
