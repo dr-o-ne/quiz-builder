@@ -15,15 +15,12 @@ export class QuizAttemptComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute
-    ) { 
-      this.attempt = this.route.snapshot.data.attempt;
-      this.currentGroupIndex = 0;
-   }
-
-  ngOnInit(): void {
+  ) {
+    this.attempt = this.route.snapshot.data.attempt;
+    this.currentGroupIndex = 0;
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
   }
 
   getQuestions(): QuestionAttemptInfo[] {
