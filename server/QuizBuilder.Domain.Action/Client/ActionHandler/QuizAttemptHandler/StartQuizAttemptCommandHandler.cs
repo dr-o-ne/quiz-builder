@@ -123,15 +123,25 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				Groups = groups
 			};
 
-		private static QuestionAttemptInfo MapQuestion( Question question ) =>
-			new QuestionAttemptInfo {
+		private static QuestionAttemptInfo MapQuestion( Question question ) {
+
+			long GetChoicesDisplayType() {
+				if( question is TrueFalseQuestion trueFalseQuestion ) return (long)trueFalseQuestion.ChoicesDisplayType;
+				if( question is MultipleChoiceQuestion multipleChoiceQuestion ) return (long)multipleChoiceQuestion.ChoicesDisplayType;
+
+				return 0;
+			}
+
+			return new QuestionAttemptInfo {
 				UId = question.UId,
-				Type = (long) question.Type,
+				Type = (long)question.Type,
 				Text = question.Text,
+				ChoicesDisplayType = GetChoicesDisplayType(),
 				Setting1 = true,
 				Setting2 = true,
 				Choices = MapChoices( question )
 			};
+		}
 
 		private static ImmutableArray<ChoiceAttemptInfo> MapChoices( Question question ) {
 

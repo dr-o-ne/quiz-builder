@@ -12,3 +12,8 @@ export class ChoiceAttemptResult {
     id: number;
     text: string;
 }
+
+export class BinaryChoiceAttemptResult {
+    id: number;
+    isSelected: boolean;
+}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { QuestionComponent } from '../question.component';
-import { MultipleChoiceQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
+import { MultipleChoiceQuestionAttemptInfo, BinaryChoiceAttemptInfo } from 'src/app/_models/attemptInfo';
+import { ChoicesDisplayType } from 'src/app/_models/_enums';
 
 @Component({
   selector: 'app-multiple-choice-question',
@@ -10,5 +11,10 @@ import { MultipleChoiceQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 export class MultipleChoiceQuestionComponent extends QuestionComponent {
 
   question: MultipleChoiceQuestionAttemptInfo;
+  choicesDisplayType = ChoicesDisplayType;
+
+  getChoices(): BinaryChoiceAttemptInfo[] {
+    return this.question.choices;
+  }
 
 }

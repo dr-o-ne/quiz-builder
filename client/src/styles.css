@@ -26,3 +26,19 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: 1px solid #e6e6e6;
     box-sizing: border-box;
 }
+
+.radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.radio-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+}
+
+.radio-button {
+    margin: 5px;
+ }
