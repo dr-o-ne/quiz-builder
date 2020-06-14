@@ -128,6 +128,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				UId = question.UId,
 				Type = (long) question.Type,
 				Text = question.Text,
+				Setting1 = true,
+				Setting2 = true,
 				Choices = MapChoices( question )
 			};
 

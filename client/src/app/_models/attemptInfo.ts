@@ -1,5 +1,5 @@
-import { QuestionType } from './_enums';
 import { Appearance } from './appearance';
+import { ChoicesDisplayType } from './_enums';
 
 export class AttemptInfo {
     id: string;
@@ -18,15 +18,27 @@ export class GroupAttemptInfo {
     questions: QuestionAttemptInfo[]
 }
 
-export class QuestionAttemptInfo {
+export type QuestionAttemptInfo = TrueFalseQuestionAttemptInfo | MultipleChoiceQuestionAttemptInfo;
+
+export class TrueFalseQuestionAttemptInfo {
     id: string;
-    type: number;
     text: string;
-    choices: ChoiceAttemptInfo[]
+    type: number;
+    choices: BinaryChoiceAttemptInfo[];
+    choicesDisplayType: ChoicesDisplayType;
+    setting1: boolean;
 }
 
-export class ChoiceAttemptInfo {
+export class MultipleChoiceQuestionAttemptInfo {
+    id: string;
+    text: string;
+    type: number;
+    choices: BinaryChoiceAttemptInfo[];
+    choicesDisplayType: ChoicesDisplayType;
+    setting2: boolean;
+}
+
+export class BinaryChoiceAttemptInfo {
     id: number;
     text: string;
 }
-
