@@ -28,6 +28,9 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "mainBackground" )]
 		public string MainColor { get; set; }
 
+		[JsonPropertyName( "cardBackground" )]
+		public string CardColor { get; set; }
+
 		[JsonPropertyName( "footerBackground" )]
 		public string FooterColor { get; set; }
 

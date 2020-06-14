@@ -8,6 +8,8 @@
 
 		public string MainColor { get; set; }
 
+		public string CardColor { get; set; }
+
 		public string FooterColor { get; set; }
 
 	}
