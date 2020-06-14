@@ -5,6 +5,7 @@ import { TrueFalseQuestionComponent } from './true-false-question/true-false-que
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
 import { QuestionComponent } from './question.component';
 import { QuestionHostDirective } from 'src/app/_directives/question-host.directive';
+import { Appearance } from 'src/app/_models/appearance';
 
 @Component({
   selector: 'app-question-dynamic',
@@ -21,7 +22,6 @@ export class QuestionDynamicComponent implements OnInit, OnDestroy {
   constructor(private resolver: ComponentFactoryResolver) { 
     this.components.set(QuestionType.TrueFalse, TrueFalseQuestionComponent);
     this.components.set(QuestionType.MultipleChoice, MultipleChoiceQuestionComponent);
-
   }
 
   ngOnInit() {

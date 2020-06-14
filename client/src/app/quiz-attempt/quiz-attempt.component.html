@@ -1,29 +1,45 @@
 <div fxLayout="column" fxFlexFill>
 
-    <div #header fxFlex="5" fxLayout="row" fxLayoutAlign="center center"> 
+    <div 
+        fxFlex="5" 
+        fxLayout="row" 
+        fxLayoutAlign="center center"
+        [style.backgroundColor]="attempt.appearance.headerBackground"> 
+
         <div>
             {{attempt.quiz.name}}
         </div> 
+
     </div>
 
-    <div #content fxFlex fxLayout="row">
+    <div 
+        fxFlex 
+        fxLayout="row"
+        [style.backgroundColor]="attempt.appearance.mainBackground">
+
         <div fxFlex="70" fxFlexOffset="15">
             
             <div *ngFor="let question of getQuestions(); let i = index">
   
-                <div>
-                    <app-question-dynamic [question]="question">
+                <div [style.backgroundColor]="attempt.appearance.footerBackground">
+                    <app-question-dynamic 
+                        [question]="question">
                     </app-question-dynamic>
                 </div>
             
               </div>
 
-
         </div>
     </div>
 
-    <div #footer fxFlexOffset="auto" fxFlex="5">
+    <div 
+        fxFlex="5" 
+        fxFlexOffset="auto"
+        fxLayoutAlign="center center"
+        [style.backgroundColor]="attempt.appearance.footerBackground">
+
         Footer
+
     </div>
 
 </div>

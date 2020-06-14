@@ -55,9 +55,10 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			//TODO: load from DB
 			var appearance = new Appearance {
 				ShowQuizName = true,
-				HeaderColor = "#2e3d13",
-				MainColor = "#13293d",
-				FooterColor = "#3d1323",
+				HeaderColor = "#1a202e",
+				MainColor = "#f5f5f8",
+				CardColor = "#fff",
+				FooterColor = "#fff"
 			};
 
 			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
@@ -111,6 +112,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			new AppearanceInfo {
 				HeaderColor = appearance.HeaderColor,
 				MainColor = appearance.MainColor,
+				CardColor = appearance.CardColor,
 				FooterColor = appearance.FooterColor
 			};
 
