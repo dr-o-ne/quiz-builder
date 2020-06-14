@@ -6,9 +6,7 @@
         fxLayoutAlign="center center"
         [style.backgroundColor]="attempt.appearance.headerBackground"> 
 
-        <div>
-            {{attempt.quiz.name}}
-        </div> 
+        <span> </span>
 
     </div>
 
@@ -18,6 +16,10 @@
         [style.backgroundColor]="attempt.appearance.mainBackground">
 
         <div fxFlex="50" fxFlexOffset="25" >
+
+            <div [style.backgroundColor]="attempt.appearance.footerBackground" class="card">
+                <span> {{attempt.quiz.name}} </span>
+            </div>
             
             <div *ngFor="let question of getQuestions(); let i = index">
   

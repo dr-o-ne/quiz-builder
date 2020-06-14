@@ -1,3 +1,22 @@
 <quill-view [content]="question.text"></quill-view>
 
-{{question.setting2}}
+<div *ngIf="question.choicesDisplayType === choicesDisplayType.Horizontal || 
+            question.choicesDisplayType === choicesDisplayType.Vertical">
+
+    <mat-radio-group
+        [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'radio-group-horizontal':'radio-group-vertical'">
+
+        <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id" class="radio-button">
+            {{choice.text}}
+        </mat-radio-button>
+
+    </mat-radio-group>
+
+</div>
+
+
+<div *ngIf="question.choicesDisplayType === choicesDisplayType.Dropdown">
+
+    TODO:
+
+</div>
