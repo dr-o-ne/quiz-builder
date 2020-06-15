@@ -8,7 +8,7 @@ import { ChoicesDisplayType } from 'src/app/_models/_enums';
   templateUrl: './multiple-choice-question.component.html'
 })
 
-export class MultipleChoiceQuestionComponent extends QuestionComponent {
+export class MultipleChoiceQuestionComponent implements QuestionComponent {
 
   question: MultipleChoiceQuestionAttemptInfo;
   choicesDisplayType = ChoicesDisplayType;

@@ -3,14 +3,24 @@ export class QuizAttemptResult {
     quizId: string;
 }
 
-export class QuestionAttemptResult {
+export type QuestionAttemptResult = 
+    TrueFalseQuestionAttemptResult |
+    MultipleChoiceQuestionAttemptInfo |
+    MultipleSelectQuestionAttemptInfo;
+
+export class TrueFalseQuestionAttemptResult {
     id: string;
-    questionId: string;
+    choices: BinaryChoiceAttemptResult;
 }
 
-export class ChoiceAttemptResult {
-    id: number;
-    text: string;
+export class MultipleChoiceQuestionAttemptInfo {
+    id: string;
+    choices: BinaryChoiceAttemptResult;
+}
+
+export class MultipleSelectQuestionAttemptInfo {
+    id: string;
+    choices: BinaryChoiceAttemptResult[];
 }
 
 export class BinaryChoiceAttemptResult {

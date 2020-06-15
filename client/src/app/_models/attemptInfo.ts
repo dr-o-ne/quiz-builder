@@ -18,7 +18,10 @@ export class GroupAttemptInfo {
     questions: QuestionAttemptInfo[]
 }
 
-export type QuestionAttemptInfo = TrueFalseQuestionAttemptInfo | MultipleChoiceQuestionAttemptInfo;
+export type QuestionAttemptInfo = 
+    TrueFalseQuestionAttemptInfo | 
+    MultipleChoiceQuestionAttemptInfo |
+    MultipleSelectQuestionAttemptInfo;
 
 export class TrueFalseQuestionAttemptInfo {
     id: string;
