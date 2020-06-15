@@ -8,7 +8,7 @@ import { AttemptInfo } from '../_models/attemptInfo';
   providedIn: 'root'
 })
 
-export class AttemptService {
+export class DataProviderService {
 
   readonly apiUrl = environment.apiUrl;
 

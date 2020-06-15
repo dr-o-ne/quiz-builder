@@ -3,13 +3,13 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, NEVER } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AttemptInfo } from '../_models/attemptInfo';
-import { AttemptService } from 'src/app/_services/attempt.service';
+import { DataProviderService } from 'src/app/_services/dataProvider.service';
 
 @Injectable()
 export class QuizAttemptResolver implements Resolve<AttemptInfo> {
 
     constructor(
-        private attemptService: AttemptService,
+        private dataProviderService: DataProviderService,
         private router: Router) {
     }
 
@@ -17,7 +17,7 @@ export class QuizAttemptResolver implements Resolve<AttemptInfo> {
 
         const quizId = route.params['id'];
 
-        return this.attemptService.startAttempt(quizId).pipe(
+        return this.dataProviderService.startAttempt(quizId).pipe(
             attempt => {
                 return attempt ? attempt : this.onError();
             }, catchError(() => this.onError())
