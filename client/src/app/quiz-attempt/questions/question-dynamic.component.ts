@@ -23,6 +23,7 @@ export class QuestionDynamicComponent implements OnInit {
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
+  
 
   ngOnInit(): void {
     this.loadComponent();

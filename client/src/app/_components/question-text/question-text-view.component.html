@@ -1,0 +1,7 @@
+<div *ngIf="isHtml">
+    <quill-view [content]="text"></quill-view>
+</div>
+
+<div *ngIf="!isHtml">
+    {{text}}
+</div>

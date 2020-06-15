@@ -19,6 +19,7 @@ import { QuestionHostDirective } from './_directives/question-host.directive';
 
 import { QuillModule } from 'ngx-quill';
 import { MaterialModule } from './_material/material.module';
+import { QuestionTextViewComponent } from './_components/question-text/question-text-view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MaterialModule } from './_material/material.module';
     QuestionDynamicComponent,
     TrueFalseQuestionComponent,
     MultipleChoiceQuestionComponent,
-    MultipleSelectQuestionComponent
+    MultipleSelectQuestionComponent,
+    QuestionTextViewComponent
   ],
   imports: [
     BrowserModule,
