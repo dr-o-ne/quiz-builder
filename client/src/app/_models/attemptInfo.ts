@@ -26,7 +26,6 @@ export class TrueFalseQuestionAttemptInfo {
     type: number;
     choices: BinaryChoiceAttemptInfo[];
     choicesDisplayType: ChoicesDisplayType;
-    setting1: boolean;
 }
 
 export class MultipleChoiceQuestionAttemptInfo {
@@ -35,7 +34,14 @@ export class MultipleChoiceQuestionAttemptInfo {
     type: number;
     choices: BinaryChoiceAttemptInfo[];
     choicesDisplayType: ChoicesDisplayType;
-    setting2: boolean;
+}
+
+export class MultipleSelectQuestionAttemptInfo {
+    id: string;
+    text: string;
+    type: number;
+    choices: BinaryChoiceAttemptInfo[];
+    choicesDisplayType: ChoicesDisplayType;
 }
 
 export class BinaryChoiceAttemptInfo {

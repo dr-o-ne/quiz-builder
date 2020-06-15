@@ -13,8 +13,4 @@ export class MultipleChoiceQuestionComponent extends QuestionComponent {
   question: MultipleChoiceQuestionAttemptInfo;
   choicesDisplayType = ChoicesDisplayType;
 
-  getChoices(): BinaryChoiceAttemptInfo[] {
-    return this.question.choices;
-  }
-
 }

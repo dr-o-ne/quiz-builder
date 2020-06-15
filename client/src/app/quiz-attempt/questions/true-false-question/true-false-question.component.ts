@@ -13,11 +13,6 @@ export class TrueFalseQuestionComponent extends QuestionComponent {
   question: TrueFalseQuestionAttemptInfo;
   choicesDisplayType = ChoicesDisplayType;
 
-  ngOnInit(): void {
-    console.log(this.question);
-  }
-
-
 }
 
 
