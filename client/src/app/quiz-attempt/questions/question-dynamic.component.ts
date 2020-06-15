@@ -1,9 +1,15 @@
 import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
-import { QuestionAttemptInfo, TrueFalseQuestionAttemptInfo, MultipleChoiceQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
+import { QuestionHostDirective } from 'src/app/_directives/question-host.directive';
+import { 
+  QuestionAttemptInfo, 
+  TrueFalseQuestionAttemptInfo, 
+  MultipleChoiceQuestionAttemptInfo, 
+  MultipleSelectQuestionAttemptInfo 
+} from 'src/app/_models/attemptInfo';
+import { QuestionType } from 'src/app/_models/_enums';
+import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
-import { QuestionHostDirective } from 'src/app/_directives/question-host.directive';
-import { QuestionType } from 'src/app/_models/_enums';
 
 @Component({
   selector: 'app-question-dynamic',
@@ -42,7 +48,12 @@ export class QuestionDynamicComponent implements OnInit {
         (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question as MultipleChoiceQuestionAttemptInfo;
         return;
       }
-      
+      case QuestionType.MultipleSelect: {
+        const componentFactory = this.resolver.resolveComponentFactory(MultipleSelectQuestionComponent);
+        const componentRef = viewContainerRef.createComponent(componentFactory);
+        (<MultipleSelectQuestionComponent>componentRef.instance).question = this.question as MultipleSelectQuestionAttemptInfo;
+        return;
+      }
     }
 
     throw Error('Unsupported question type');

@@ -3,14 +3,16 @@
 <div *ngIf="question.choicesDisplayType === choicesDisplayType.Horizontal || 
             question.choicesDisplayType === choicesDisplayType.Vertical">
 
-    <mat-radio-group
+    <div
         [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'item-group-horizontal':'item-group-vertical'">
 
-        <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id" class="item-box">
-            {{choice.text}}
-        </mat-radio-button>
+        <div *ngFor="let choice of question.choices let i = index">
+            <mat-checkbox class="item-box">
+                {{choice.text}}
+            </mat-checkbox>
+        </div>
 
-    </mat-radio-group>
+    </div>
 
 </div>
 

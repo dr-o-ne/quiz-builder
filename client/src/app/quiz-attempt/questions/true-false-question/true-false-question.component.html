@@ -5,9 +5,9 @@
             question.choicesDisplayType === choicesDisplayType.Vertical">
 
   <mat-radio-group
-    [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'radio-group-horizontal':'radio-group-vertical'">
+    [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'item-group-horizontal':'item-group-vertical'">
 
-    <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id" class="radio-button">
+    <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id" class="item-box">
       {{choice.text}}
     </mat-radio-button>
 

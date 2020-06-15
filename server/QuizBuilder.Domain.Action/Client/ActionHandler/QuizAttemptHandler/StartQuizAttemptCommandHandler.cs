@@ -128,6 +128,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			long GetChoicesDisplayType() {
 				if( question is TrueFalseQuestion trueFalseQuestion ) return (long)trueFalseQuestion.ChoicesDisplayType;
 				if( question is MultipleChoiceQuestion multipleChoiceQuestion ) return (long)multipleChoiceQuestion.ChoicesDisplayType;
+				if( question is MultipleSelectQuestion multipleSelectQuestion ) return (long)multipleSelectQuestion.ChoicesDisplayType;
+
 
 				return 0;
 			}

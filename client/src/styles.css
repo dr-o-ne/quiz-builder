@@ -27,18 +27,18 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
     box-sizing: border-box;
 }
 
-.radio-group-vertical {
+.item-group-vertical {
     display: flex;
     flex-direction: column;
     margin: 15px 0;
 }
 
-.radio-group-horizontal {
+.item-group-horizontal {
     display: flex;
     flex-direction: row;
     margin: 15px 0;
 }
 
-.radio-button {
+.item-box {
     margin: 5px;
- }
+}

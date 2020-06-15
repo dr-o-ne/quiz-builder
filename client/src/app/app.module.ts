@@ -13,6 +13,8 @@ import { QuizAttemptResolver } from './_resolvers/quiz-attempt.resolver';
 import { QuestionDynamicComponent } from './quiz-attempt/questions/question-dynamic.component';
 import { TrueFalseQuestionComponent } from './quiz-attempt/questions/true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './quiz-attempt/questions/multiple-choice-question/multiple-choice-question.component';
+import { MultipleSelectQuestionComponent } from './quiz-attempt/questions/multiple-select-question/multiple-select-question.component';
+
 import { QuestionHostDirective } from './_directives/question-host.directive';
 
 import { QuillModule } from 'ngx-quill';
@@ -25,7 +27,8 @@ import { MaterialModule } from './_material/material.module';
     QuestionHostDirective,
     QuestionDynamicComponent,
     TrueFalseQuestionComponent,
-    MultipleChoiceQuestionComponent
+    MultipleChoiceQuestionComponent,
+    MultipleSelectQuestionComponent
   ],
   imports: [
     BrowserModule,
