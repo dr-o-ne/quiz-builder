@@ -27,6 +27,10 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
     box-sizing: border-box;
 }
 
+.borderless{
+    border: 0px;
+}
+
 .item-group-vertical {
     display: flex;
     flex-direction: column;

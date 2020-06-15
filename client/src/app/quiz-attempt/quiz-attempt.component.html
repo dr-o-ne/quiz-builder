@@ -5,9 +5,6 @@
         fxLayout="row" 
         fxLayoutAlign="center center"
         [style.backgroundColor]="attempt.appearance.headerBackground"> 
-
-        <span> </span>
-
     </div>
 
     <div 
@@ -17,30 +14,36 @@
 
         <div fxFlex="50" fxFlexOffset="25" >
 
-            <div [style.backgroundColor]="attempt.appearance.footerBackground" class="card">
+            <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card"
+                fxLayoutAlign="center center">
                 <span> {{attempt.quiz.name}} </span>
             </div>
             
             <div *ngFor="let question of getQuestions(); let i = index">
   
-                <div [style.backgroundColor]="attempt.appearance.footerBackground" class="card">
+                <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card">
                     <app-question-dynamic 
                         [question]="question">
                     </app-question-dynamic>
                 </div>
-            
-              </div>
+
+            </div>
+
+            <div class="borderless card"
+                fxLayout="row"
+                fxLayoutAlign="center center">
+
+                <button mat-raised-button color="primary">Submit</button>
+
+            </div>
 
         </div>
     </div>
 
     <div 
         fxFlex="40px;" 
-        fxFlexOffset="auto"
         fxLayoutAlign="center center"
         [style.backgroundColor]="attempt.appearance.footerBackground">
-
-        Footer
 
     </div>
 
