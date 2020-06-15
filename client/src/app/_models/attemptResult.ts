@@ -5,20 +5,20 @@ export class QuizAttemptResult {
 
 export type QuestionAttemptResult = 
     TrueFalseQuestionAttemptResult |
-    MultipleChoiceQuestionAttemptInfo |
-    MultipleSelectQuestionAttemptInfo;
+    MultipleChoiceQuestionAttemptResult |
+    MultipleSelectQuestionAttemptResult;
 
 export class TrueFalseQuestionAttemptResult {
     id: string;
     choices: BinaryChoiceAttemptResult;
 }
 
-export class MultipleChoiceQuestionAttemptInfo {
+export class MultipleChoiceQuestionAttemptResult {
     id: string;
     choices: BinaryChoiceAttemptResult;
 }
 
-export class MultipleSelectQuestionAttemptInfo {
+export class MultipleSelectQuestionAttemptResult {
     id: string;
     choices: BinaryChoiceAttemptResult[];
 }
