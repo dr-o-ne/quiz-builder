@@ -1,11 +1,6 @@
 import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { QuestionHostDirective } from 'src/app/_directives/question-host.directive';
-import { 
-  QuestionAttemptInfo, 
-  TrueFalseQuestionAttemptInfo, 
-  MultipleChoiceQuestionAttemptInfo, 
-  MultipleSelectQuestionAttemptInfo 
-} from 'src/app/_models/attemptInfo';
+import { QuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 import { QuestionType } from 'src/app/_models/_enums';
 import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
@@ -23,7 +18,6 @@ export class QuestionDynamicComponent implements OnInit {
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
-  
 
   ngOnInit(): void {
     this.loadComponent();
@@ -34,25 +28,23 @@ export class QuestionDynamicComponent implements OnInit {
     const viewContainerRef = this.host.viewContainerRef;
     viewContainerRef.clear();
 
-    console.log(QuestionType[this.question.type]);
-
     switch (+this.question.type) {
       case QuestionType.TrueFalse: {
         const componentFactory = this.resolver.resolveComponentFactory(TrueFalseQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        (<TrueFalseQuestionComponent>componentRef.instance).question = this.question as TrueFalseQuestionAttemptInfo;
+        (<TrueFalseQuestionComponent>componentRef.instance).question = this.question;
         return;
       }
       case QuestionType.MultipleChoice: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleChoiceQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question as MultipleChoiceQuestionAttemptInfo;
+        (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question;
         return;
       }
       case QuestionType.MultipleSelect: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleSelectQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        (<MultipleSelectQuestionComponent>componentRef.instance).question = this.question as MultipleSelectQuestionAttemptInfo;
+        (<MultipleSelectQuestionComponent>componentRef.instance).question = this.question;
         return;
       }
     }

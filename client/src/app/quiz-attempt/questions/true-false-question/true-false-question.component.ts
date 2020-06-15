@@ -8,9 +8,8 @@ import { ChoicesDisplayType } from 'src/app/_models/_enums';
   templateUrl: './true-false-question.component.html'
 })
 
-export class TrueFalseQuestionComponent extends QuestionComponent {
+export class TrueFalseQuestionComponent extends QuestionComponent<TrueFalseQuestionAttemptInfo> {
 
-  question: TrueFalseQuestionAttemptInfo;
   choicesDisplayType = ChoicesDisplayType;
 
 }
