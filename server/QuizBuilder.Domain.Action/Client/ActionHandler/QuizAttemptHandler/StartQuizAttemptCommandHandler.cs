@@ -15,6 +15,7 @@ using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Utils.Services;
+using QuizBuilder.Utils.Utils;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
@@ -130,14 +131,17 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				if( question is MultipleChoiceQuestion multipleChoiceQuestion ) return (long)multipleChoiceQuestion.ChoicesDisplayType;
 				if( question is MultipleSelectQuestion multipleSelectQuestion ) return (long)multipleSelectQuestion.ChoicesDisplayType;
 
-
 				return 0;
 			}
+
+			//TODO: save in db
+			(string content, bool isHtml) = QuillEditorHelper.NormalizeText( question.Text );
 
 			return new QuestionAttemptInfo {
 				UId = question.UId,
 				Type = (long)question.Type,
-				Text = question.Text,
+				Text = content,
+				IsHtmlText = isHtml,
 				ChoicesDisplayType = GetChoicesDisplayType(),
 				Setting1 = true,
 				Setting2 = true,

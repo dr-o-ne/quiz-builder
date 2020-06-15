@@ -1,5 +1,4 @@
-<quill-view [content]="question.text"></quill-view>
-
+<app-question-text-view [text]="question.text" [isHtml]="question.isHtmlText"></app-question-text-view>
 
 <div *ngIf="question.choicesDisplayType === choicesDisplayType.Horizontal || 
             question.choicesDisplayType === choicesDisplayType.Vertical">
