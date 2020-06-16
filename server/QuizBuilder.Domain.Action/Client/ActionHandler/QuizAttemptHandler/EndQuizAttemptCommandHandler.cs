@@ -66,7 +66,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return new EndQuizAttemptCommandResult {
 				Success = true,
 				Message = string.Empty,
-				Payload = new AttemptResultInfo {Score = totalScore}
+				Payload = new AttemptFeedback {Score = totalScore}
 			};
 
 		}

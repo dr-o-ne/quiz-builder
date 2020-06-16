@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
 import { QuestionAttemptResult, QuizAttemptResult } from '../_models/attemptResult';
 import { DataProviderService } from '../_services/dataProvider.service';
+import { QuizAttemptFeedback } from '../_models/attemptFeedback';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -42,7 +43,9 @@ export class QuizAttemptComponent implements OnInit {
     result.id = this.attempt.id;
     result.answers = [...this.answers.values()];
 
-    this.dataProviderService.endAttempt(result).subscribe((response: any) => { });
+    this.dataProviderService.endAttempt(result).subscribe(
+      (quizAttemptFeedback: QuizAttemptFeedback) => { console.log(quizAttemptFeedback.score); }
+    );
   }
 
 }

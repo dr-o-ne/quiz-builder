@@ -7,7 +7,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 	public sealed class StartQuizAttemptCommandResult : CommandResult<QuizAttemptInfo> {
 	}
 
-	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptResultInfo> {
+	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptFeedback> {
 	}
 
 	public sealed class QuizAttemptInfo {
@@ -86,8 +86,9 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	}
 
-	public sealed class AttemptResultInfo {
+	public sealed class AttemptFeedback {
 
+		[JsonPropertyName( "score" )]
 		public double Score { get; set; }
 
 	}

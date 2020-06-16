@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { QuizAttemptInfo } from '../_models/attemptInfo';
 import { QuizAttemptResult } from '../_models/attemptResult';
+import { QuizAttemptFeedback } from '../_models/attemptFeedback';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class DataProviderService {
     return this.http.post<QuizAttemptInfo>(this.apiUrl + 'attempts', { quizId });
   }
 
-  endAttempt(quizAttempt: QuizAttemptResult): Observable<object> {
-    return this.http.put(this.apiUrl + 'attempts', quizAttempt);
+  endAttempt(quizAttempt: QuizAttemptResult): Observable<QuizAttemptFeedback> {
+    return this.http.put<QuizAttemptFeedback>(this.apiUrl + 'attempts', quizAttempt);
   }
 
 }

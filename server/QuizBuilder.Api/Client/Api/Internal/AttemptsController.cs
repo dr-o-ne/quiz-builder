@@ -29,7 +29,7 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 		[HttpPut]
 		public async Task<ActionResult> Update( [FromBody] EndQuizAttemptCommand command ) {
 			EndQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
-			AttemptResultInfo payload = result.Payload;
+			AttemptFeedback payload = result.Payload;
 
 			return result.Success
 				? (ActionResult)Ok( payload )
