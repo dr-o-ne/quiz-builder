@@ -143,8 +143,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				Text = content,
 				IsHtmlText = isHtml,
 				ChoicesDisplayType = GetChoicesDisplayType(),
-				Setting1 = true,
-				Setting2 = true,
 				Choices = MapChoices( question )
 			};
 		}

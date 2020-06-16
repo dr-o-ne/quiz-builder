@@ -13,4 +13,12 @@ namespace QuizBuilder.Domain.Action.Client.Action {
 
 	}
 
+	public sealed class EndQuizAttemptCommand : ICommand<EndQuizAttemptCommandResult> {
+
+		[Required]
+		[JsonPropertyName( "Id" )]
+		public string AttemptUId { get; set; }
+
+	}
+
 }

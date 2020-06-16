@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AttemptInfo } from '../_models/attemptInfo';
+import { QuizAttemptResult } from '../_models/attemptResult';
 
 @Injectable({
   providedIn: 'root'

@@ -7,6 +7,11 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 	public sealed class StartQuizAttemptCommandResult : CommandResult<AttemptInfo> {
 	}
 
+	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptResult> {
+	}
+
+	#region Dto Input
+
 	public sealed class AttemptInfo {
 
 		[JsonPropertyName( "id" )]
@@ -78,12 +83,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "choicesDisplayType" )]
 		public long ChoicesDisplayType { get; set; }
 
-		[JsonPropertyName( "setting1" )]
-		public bool Setting1 { get; set; }
-
-		[JsonPropertyName( "setting2" )]
-		public bool Setting2 { get; set; }
-
 		[JsonPropertyName( "choices" )]
 		public ImmutableArray<ChoiceAttemptInfo> Choices { get; set; }
 
@@ -99,6 +98,16 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	}
 
+	#endregion
 
+	#region Dto Output
+
+	public sealed class AttemptResult {
+
+		public double Score { get; set; }
+
+	}
+
+	#endregion
 
 }
