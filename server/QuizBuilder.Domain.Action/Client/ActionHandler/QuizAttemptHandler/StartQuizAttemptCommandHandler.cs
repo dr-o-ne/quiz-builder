@@ -119,7 +119,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 		private static QuizAttemptInfo MapQuiz( Quiz quiz, ImmutableArray<GroupAttemptInfo> groups, Appearance appearance ) =>
 			new QuizAttemptInfo {
-				UId = quiz.UId,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				Groups = groups
 			};

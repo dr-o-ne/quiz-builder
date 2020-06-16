@@ -43,9 +43,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	public sealed class QuizAttemptInfo {
 
-		[JsonPropertyName( "id" )]
-		public string UId { get; set; }
-
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 

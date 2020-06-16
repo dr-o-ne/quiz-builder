@@ -8,7 +8,6 @@ export class AttemptInfo {
 }
 
 export class QuizAttemptInfo {
-    id: string;
     name: string;
     groups: GroupAttemptInfo[]
 }
