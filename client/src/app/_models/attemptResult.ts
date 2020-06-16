@@ -9,21 +9,16 @@ export type QuestionAttemptResult =
     MultipleSelectQuestionAttemptResult;
 
 export class TrueFalseQuestionAttemptResult {
-    id: string;
-    choices: BinaryChoiceAttemptResult;
+    questionId: string;
+    choice: number;
 }
 
 export class MultipleChoiceQuestionAttemptResult {
-    id: string;
-    choices: BinaryChoiceAttemptResult;
+    questionId: string;
+    choice: number;
 }
 
 export class MultipleSelectQuestionAttemptResult {
-    id: string;
-    choices: BinaryChoiceAttemptResult[];
-}
-
-export class BinaryChoiceAttemptResult {
-    id: number;
-    isSelected: boolean;
+    questionId: string;
+    choices: number[];
 }

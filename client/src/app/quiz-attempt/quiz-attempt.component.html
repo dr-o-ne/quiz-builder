@@ -23,7 +23,8 @@
   
                 <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card">
                     <app-question-dynamic 
-                        [question]="question">
+                        [question]="question"
+                        (answer)="onAnswer($event)">
                     </app-question-dynamic>
                 </div>
 
@@ -44,7 +45,6 @@
         fxFlex="40px;" 
         fxLayoutAlign="center center"
         [style.backgroundColor]="attempt.appearance.footerBackground">
-
     </div>
 
 </div>
