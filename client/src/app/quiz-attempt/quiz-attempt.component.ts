@@ -40,6 +40,7 @@ export class QuizAttemptComponent implements OnInit {
 
     const result = new QuizAttemptResult();
     result.id = this.attempt.id;
+    result.answers = [...this.answers.values()];
 
     this.dataProviderService.endAttempt(result).subscribe((response: any) => { });
   }

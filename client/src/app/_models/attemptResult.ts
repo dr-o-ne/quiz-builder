@@ -1,5 +1,6 @@
 export class QuizAttemptResult {
     id: string;
+    answers: QuestionAttemptResult[];
 }
 
 export type QuestionAttemptResult = 

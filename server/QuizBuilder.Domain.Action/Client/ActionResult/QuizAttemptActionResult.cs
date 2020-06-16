@@ -7,10 +7,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 	public sealed class StartQuizAttemptCommandResult : CommandResult<QuizAttemptInfo> {
 	}
 
-	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptResult> {
+	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptResultInfo> {
 	}
-
-	#region Dto Input
 
 	public sealed class QuizAttemptInfo {
 
@@ -88,16 +86,10 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	}
 
-	#endregion
-
-	#region Dto Output
-
-	public sealed class AttemptResult {
+	public sealed class AttemptResultInfo {
 
 		public double Score { get; set; }
 
 	}
-
-	#endregion
 
 }

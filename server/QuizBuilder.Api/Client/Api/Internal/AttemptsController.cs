@@ -29,9 +29,10 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 		[HttpPut]
 		public async Task<ActionResult> Update( [FromBody] EndQuizAttemptCommand command ) {
 			EndQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
+			AttemptResultInfo payload = result.Payload;
 
 			return result.Success
-				? (ActionResult)Ok( result )
+				? (ActionResult)Ok( payload )
 				: UnprocessableEntity( result );
 		}
 
