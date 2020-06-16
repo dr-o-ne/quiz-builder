@@ -105,7 +105,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				UId = uid,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				AppearanceInfo = MapAppearance( appearance ),
-				Groups = ImmutableArray.Create( @group )
+				Groups = ImmutableArray.Create( group )
 			};
 
 			return result;
@@ -117,11 +117,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				MainColor = appearance.MainColor,
 				CardColor = appearance.CardColor,
 				FooterColor = appearance.FooterColor
-			};
-
-		private static QuizAttemptInfo MapQuiz( Quiz quiz, ImmutableArray<GroupAttemptInfo> groups, Appearance appearance ) =>
-			new QuizAttemptInfo {
-				Groups = groups
 			};
 
 		private static QuestionAttemptInfo MapQuestion( Question question ) {
