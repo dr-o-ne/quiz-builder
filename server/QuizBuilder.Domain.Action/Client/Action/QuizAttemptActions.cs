@@ -31,10 +31,10 @@ namespace QuizBuilder.Domain.Action.Client.Action {
 		public string QuestionUId { get; set; }
 
 		[JsonPropertyName( "choice" )]
-		public long Choice { get; set; }
+		public long ChoiceId { get; set; }
 
 		[JsonPropertyName( "choices" )]
-		public List<long> Choices { get; set; }
+		public List<long> ChoiceIds { get; set; }
 
 	}
 

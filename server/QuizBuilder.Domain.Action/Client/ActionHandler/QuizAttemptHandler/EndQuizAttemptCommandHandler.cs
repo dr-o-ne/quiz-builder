@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,6 +8,8 @@ using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default;
+using QuizBuilder.Domain.Model.Default.Answers;
+using QuizBuilder.Domain.Model.Default.Graders;
 using QuizBuilder.Domain.Model.Default.Questions;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
@@ -35,14 +36,25 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			List<Question> questions = await GetQuestions( command.AttemptUId );
 
-			foreach( var item in command.Answers ) {
+			double totalScore = 0;
+
+			foreach( QuestionAttemptResult item in command.Answers ) {
 				Question question = questions.SingleOrDefault( x => x.UId == item.QuestionUId );
-				if( question == null ) 
-					throw null; //TODO: wtf?
+				if( question == null ) {
+					return new EndQuizAttemptCommandResult { Success = false, Message = string.Empty };
+				}
 				//TODO: check required;
 
 				switch( question.Type ) {
+
 					case Enums.QuestionType.TrueFalse:
+
+						var trueFalseGrader = new TrueFalseGrader();
+						var trueFalseQuestion = (TrueFalseQuestion)question;
+						var trueFalseAnswer = new TrueFalseAnswer( question.UId, item.ChoiceId );
+						double result = trueFalseGrader.Grade( trueFalseQuestion, trueFalseAnswer );
+						totalScore += result;
+
 						break;
 					default:
 						throw null;
@@ -51,7 +63,12 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			}
 
-			return new EndQuizAttemptCommandResult();
+			return new EndQuizAttemptCommandResult {
+				Success = true,
+				Message = string.Empty,
+				Payload = new AttemptResultInfo {Score = totalScore}
+			};
+
 		}
 
 		private async Task<List<Question>> GetQuestions( string attemptUId ) {
