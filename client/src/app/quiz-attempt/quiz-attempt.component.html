@@ -16,7 +16,7 @@
 
             <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card"
                 fxLayoutAlign="center center">
-                <span> {{attempt.quiz.name}} </span>
+                <span> {{attempt.name}} </span>
             </div>
             
             <div *ngFor="let question of getQuestions(); let i = index">

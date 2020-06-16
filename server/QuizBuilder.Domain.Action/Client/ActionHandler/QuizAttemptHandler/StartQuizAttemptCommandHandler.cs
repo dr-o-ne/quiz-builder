@@ -93,7 +93,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return quizAttempt;
 		}
 
-		private static AttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions, Appearance appearance ) {
+		private static QuizAttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions, Appearance appearance ) {
 
 			var group = new GroupAttemptInfo {
 				UId = string.Empty,
@@ -101,12 +101,14 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				Questions = questions.Select( MapQuestion ).ToImmutableArray()
 			};
 
-			return new AttemptInfo {
+			var result = new QuizAttemptInfo {
 				UId = uid,
+				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				AppearanceInfo = MapAppearance( appearance ),
-				Quiz = MapQuiz( quiz, ImmutableArray.Create( group ), appearance )
+				Groups = ImmutableArray.Create( @group )
 			};
 
+			return result;
 		}
 
 		private static AppearanceInfo MapAppearance( Appearance appearance ) =>
@@ -119,7 +121,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 		private static QuizAttemptInfo MapQuiz( Quiz quiz, ImmutableArray<GroupAttemptInfo> groups, Appearance appearance ) =>
 			new QuizAttemptInfo {
-				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				Groups = groups
 			};
 

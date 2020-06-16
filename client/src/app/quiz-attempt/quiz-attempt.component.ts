@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
+import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
 import { QuestionAttemptResult } from '../_models/attemptResult';
 
 @Component({
@@ -11,7 +11,7 @@ import { QuestionAttemptResult } from '../_models/attemptResult';
 
 export class QuizAttemptComponent implements OnInit {
 
-  attempt: AttemptInfo;
+  attempt: QuizAttemptInfo;
   currentGroupIndex: number;
   answers: Map<string, QuestionAttemptResult>;
 
@@ -27,7 +27,7 @@ export class QuizAttemptComponent implements OnInit {
   }
 
   getQuestions(): QuestionAttemptInfo[] {
-    return this.attempt.quiz.groups[this.currentGroupIndex].questions;
+    return this.attempt.groups[this.currentGroupIndex].questions;
   }
 
   onAnswer(answer: QuestionAttemptResult) {

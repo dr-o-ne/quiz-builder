@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, NEVER } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AttemptInfo } from '../_models/attemptInfo';
+import { QuizAttemptInfo } from '../_models/attemptInfo';
 import { DataProviderService } from 'src/app/_services/dataProvider.service';
 
 @Injectable()
-export class QuizAttemptResolver implements Resolve<AttemptInfo> {
+export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
 
     constructor(
         private dataProviderService: DataProviderService,
         private router: Router) {
     }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<AttemptInfo> | Observable<never> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<QuizAttemptInfo> | Observable<never> {
 
         const quizId = route.params['id'];
 

@@ -4,7 +4,7 @@ using QuizBuilder.Common.Types.Default;
 
 namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
-	public sealed class StartQuizAttemptCommandResult : CommandResult<AttemptInfo> {
+	public sealed class StartQuizAttemptCommandResult : CommandResult<QuizAttemptInfo> {
 	}
 
 	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptResult> {
@@ -12,16 +12,19 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	#region Dto Input
 
-	public sealed class AttemptInfo {
+	public sealed class QuizAttemptInfo {
 
 		[JsonPropertyName( "id" )]
 		public string UId { get; set; }
 
-		[JsonPropertyName( "quiz" )]
-		public QuizAttemptInfo Quiz { get; set; }
+		[JsonPropertyName( "name" )]
+		public string Name { get; set; }
 
 		[JsonPropertyName( "appearance" )]
 		public AppearanceInfo AppearanceInfo { get; set; }
+
+		[JsonPropertyName( "groups" )]
+		public ImmutableArray<GroupAttemptInfo> Groups { get; set; }
 
 	}
 
@@ -38,16 +41,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 		[JsonPropertyName( "footerBackground" )]
 		public string FooterColor { get; set; }
-
-	}
-
-	public sealed class QuizAttemptInfo {
-
-		[JsonPropertyName( "name" )]
-		public string Name { get; set; }
-
-		[JsonPropertyName( "groups" )]
-		public ImmutableArray<GroupAttemptInfo> Groups { get; set; }
 
 	}
 

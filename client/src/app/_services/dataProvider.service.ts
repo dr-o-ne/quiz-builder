@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { AttemptInfo } from '../_models/attemptInfo';
-import { QuizAttemptResult } from '../_models/attemptResult';
+import { QuizAttemptInfo } from '../_models/attemptInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,8 @@ export class DataProviderService {
 
   constructor( private http: HttpClient ) {}
 
-  startAttempt(quizId: string): Observable<AttemptInfo> {
-    return this.http.post<AttemptInfo>( this.apiUrl + 'attempts', { quizId } );
+  startAttempt(quizId: string): Observable<QuizAttemptInfo> {
+    return this.http.post<QuizAttemptInfo>( this.apiUrl + 'attempts', { quizId } );
   }
 
 }

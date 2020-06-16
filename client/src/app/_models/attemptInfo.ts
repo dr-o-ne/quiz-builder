@@ -1,13 +1,9 @@
 import { Appearance } from './appearance';
 import { ChoicesDisplayType } from './_enums';
 
-export class AttemptInfo {
+export class QuizAttemptInfo {
     id: string;
     appearance: Appearance;
-    quiz: QuizAttemptInfo; 
-}
-
-export class QuizAttemptInfo {
     name: string;
     groups: GroupAttemptInfo[]
 }
