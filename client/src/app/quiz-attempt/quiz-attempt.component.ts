@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
-import { QuestionAttemptResult } from '../_models/attemptResult';
+import { QuestionAttemptResult, QuizAttemptResult } from '../_models/attemptResult';
+import { DataProviderService } from '../_services/dataProvider.service';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -16,7 +17,8 @@ export class QuizAttemptComponent implements OnInit {
   answers: Map<string, QuestionAttemptResult>;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataProviderService: DataProviderService
   ) {
     this.attempt = this.route.snapshot.data.attempt;
     this.answers = new Map<string, QuestionAttemptResult>();
@@ -32,8 +34,14 @@ export class QuizAttemptComponent implements OnInit {
 
   onAnswer(answer: QuestionAttemptResult) {
     this.answers.set(answer.questionId, answer);
+  }
 
-    console.log('got an answer');
+  onSubmit(): void {
+
+    const result = new QuizAttemptResult();
+    result.id = this.attempt.id;
+
+    this.dataProviderService.endAttempt(result).subscribe((response: any) => { });
   }
 
 }

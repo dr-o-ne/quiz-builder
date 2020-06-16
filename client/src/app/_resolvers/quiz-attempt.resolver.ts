@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, NEVER } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { QuizAttemptInfo } from '../_models/attemptInfo';
@@ -13,7 +13,7 @@ export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
         private router: Router) {
     }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<QuizAttemptInfo> | Observable<never> {
+    resolve(route: ActivatedRouteSnapshot): Observable<QuizAttemptInfo> | Observable<never> {
 
         const quizId = route.params['id'];
 
@@ -25,7 +25,7 @@ export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
     }
 
     onError(): Observable<never> {
-        this.router.navigate(['/404']); //TODO: check and add page. Quiz not found | not visible | error
+        this.router.navigate(['/404']); // TODO: check and add page. Quiz not found | not visible | error
         return NEVER;
     }
 

@@ -28,7 +28,7 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 
 		[HttpPut]
 		public async Task<ActionResult> Update( [FromBody] EndQuizAttemptCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+			EndQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
 
 			return result.Success
 				? (ActionResult)Ok( result )

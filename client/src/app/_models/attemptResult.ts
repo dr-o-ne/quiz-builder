@@ -1,6 +1,5 @@
 export class QuizAttemptResult {
     id: string;
-    quizId: string;
 }
 
 export type QuestionAttemptResult = 
