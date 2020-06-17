@@ -9,7 +9,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 
 		public double Grade( MultipleSelectQuestion question, MultipleSelectAnswer answer ) {
 
-			if( question.IsValid() || answer.IsValid() )
+			/*if( question.IsValid() || answer.IsValid() )
 				return 0;
 
 			if( question.UId != answer.QuestionUId )
@@ -19,7 +19,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 				return 0;
 
 			if( answer.ChoiceSelections.Count( x => x.IsSelected ) != 1 )
-				return 0;
+				return 0;*/
 
 			throw null; //TODO: depends on settings
 
