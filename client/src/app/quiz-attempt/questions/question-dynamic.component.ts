@@ -36,8 +36,8 @@ export class QuestionDynamicComponent implements OnInit {
         const componentFactory = this.resolver.resolveComponentFactory(TrueFalseQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
         (<TrueFalseQuestionComponent>componentRef.instance).question = this.question;
-        (<TrueFalseQuestionComponent>componentRef.instance).answer.subscribe( 
-          (answer: QuestionAttemptResult) => this.answer.emit(answer) 
+        (<TrueFalseQuestionComponent>componentRef.instance).answer.subscribe(
+          (answer: QuestionAttemptResult) => this.answer.emit(answer)
         );
 
         return;
@@ -46,8 +46,8 @@ export class QuestionDynamicComponent implements OnInit {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleChoiceQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
         (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question;
-        (<MultipleChoiceQuestionComponent>componentRef.instance).answer.subscribe( 
-          (answer: QuestionAttemptResult) => this.answer.emit(answer) 
+        (<MultipleChoiceQuestionComponent>componentRef.instance).answer.subscribe(
+          (answer: QuestionAttemptResult) => this.answer.emit(answer)
         );
 
         return;
@@ -56,7 +56,9 @@ export class QuestionDynamicComponent implements OnInit {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleSelectQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
         (<MultipleSelectQuestionComponent>componentRef.instance).question = this.question;
-        
+        (<MultipleSelectQuestionComponent>componentRef.instance).answer.subscribe(
+          (answer: QuestionAttemptResult) => this.answer.emit(answer)
+        );
         return;
       }
 

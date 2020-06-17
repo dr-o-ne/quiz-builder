@@ -36,7 +36,7 @@ export class QuizAttemptComponent implements OnInit {
     return this.attempt.groups[this.currentGroupIndex].questions;
   }
 
-  onAnswer(answer: QuestionAttemptResult) {
+  onAnswer(answer: QuestionAttemptResult): void {
     this.answers.set(answer.questionId, answer);
   }
 

@@ -7,7 +7,7 @@
         [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'item-group-horizontal':'item-group-vertical'">
 
         <div *ngFor="let choice of question.choices let i = index">
-            <mat-checkbox class="item-box">
+            <mat-checkbox class="item-box" [value]="choice.id" (change)="onChange($event)">
                 {{choice.text}}
             </mat-checkbox>
         </div>
