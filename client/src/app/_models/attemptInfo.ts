@@ -1,14 +1,14 @@
 import { Appearance } from './appearance';
 import { ChoicesDisplayType } from './_enums';
 
-export class QuizAttemptInfo {
+export interface QuizAttemptInfo {
     id: string;
     appearance: Appearance;
     name: string;
     groups: GroupAttemptInfo[]
 }
 
-export class GroupAttemptInfo {
+export interface GroupAttemptInfo {
     id: string;
     questions: QuestionAttemptInfo[]
 }
@@ -18,7 +18,7 @@ export type QuestionAttemptInfo =
     MultipleChoiceQuestionAttemptInfo |
     MultipleSelectQuestionAttemptInfo;
 
-export class TrueFalseQuestionAttemptInfo {
+export interface TrueFalseQuestionAttemptInfo {
     id: string;
     text: string;
     isHtmlText: boolean;
@@ -27,7 +27,7 @@ export class TrueFalseQuestionAttemptInfo {
     choicesDisplayType: ChoicesDisplayType;
 }
 
-export class MultipleChoiceQuestionAttemptInfo {
+export interface MultipleChoiceQuestionAttemptInfo {
     id: string;
     text: string;
     isHtmlText: boolean;
@@ -36,7 +36,7 @@ export class MultipleChoiceQuestionAttemptInfo {
     choicesDisplayType: ChoicesDisplayType;
 }
 
-export class MultipleSelectQuestionAttemptInfo {
+export interface MultipleSelectQuestionAttemptInfo {
     id: string;
     text: string;
     isHtmlText: boolean;
@@ -45,7 +45,7 @@ export class MultipleSelectQuestionAttemptInfo {
     choicesDisplayType: ChoicesDisplayType;
 }
 
-export class BinaryChoiceAttemptInfo {
+export interface BinaryChoiceAttemptInfo {
     id: number;
     text: string;
 }

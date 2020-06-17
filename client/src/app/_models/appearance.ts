@@ -1,4 +1,4 @@
-export class Appearance {
+export interface Appearance {
 
     headerBackground: string;
     mainBackground: string;

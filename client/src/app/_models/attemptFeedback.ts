@@ -1,4 +1,4 @@
-export class QuizAttemptFeedback {
+export interface QuizAttemptFeedback {
     score: number;
     feedback: string;
 }
