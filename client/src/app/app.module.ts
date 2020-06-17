@@ -21,6 +21,7 @@ import { QuestionHostDirective } from './_directives/question-host.directive';
 import { QuillModule } from 'ngx-quill';
 import { MaterialModule } from './_material/material.module';
 import { QuestionTextViewComponent } from './_components/question-text/question-text-view.component';
+import { EndPageModalDialog } from './quiz-attempt/end-page/end-page-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { QuestionTextViewComponent } from './_components/question-text/question-
     TrueFalseQuestionComponent,
     MultipleChoiceQuestionComponent,
     MultipleSelectQuestionComponent,
-    QuestionTextViewComponent
+    QuestionTextViewComponent,
+    EndPageModalDialog
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,9 @@ import { QuestionTextViewComponent } from './_components/question-text/question-
     FlexLayoutModule,
     QuillModule.forRoot(),
     MaterialModule
+  ],
+  entryComponents: [
+    EndPageModalDialog
   ],
   providers: [QuizAttemptResolver],
   bootstrap: [AppComponent]
