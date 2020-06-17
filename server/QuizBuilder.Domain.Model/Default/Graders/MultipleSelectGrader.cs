@@ -9,20 +9,23 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 
 		public double Grade( MultipleSelectQuestion question, MultipleSelectAnswer answer ) {
 
-			/*if( question.IsValid() || answer.IsValid() )
+			if( !question.IsValid() || !answer.IsValid() )
 				return 0;
 
 			if( question.UId != answer.QuestionUId )
 				return 0;
 
-			if( answer.ChoiceSelections.Count > question.Choices.Count )
+			if( answer.ChoiceIds.Count > question.Choices.Count )
 				return 0;
 
-			if( answer.ChoiceSelections.Count( x => x.IsSelected ) != 1 )
-				return 0;*/
+			bool result = question.Choices
+				.Where( x => x.IsCorrect == true )
+				.Select( x => x.Id )
+				.SequenceEqual(
+					answer.ChoiceIds.OrderBy( a => a )
+				);
 
-			throw null; //TODO: depends on settings
-
+			return result ? 1 : 0;
 		}
 
 	}

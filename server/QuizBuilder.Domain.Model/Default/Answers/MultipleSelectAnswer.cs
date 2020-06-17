@@ -7,11 +7,13 @@ namespace QuizBuilder.Domain.Model.Default.Answers {
 
 		public List<long> ChoiceIds { get; set; }
 
+		public MultipleSelectAnswer( string questionUId, List<long> choiceIds ) : base( questionUId ) {
+			ChoiceIds = choiceIds;
+		}
+
 		public override bool IsValid() =>
 			base.IsValid() &&
 			ChoiceIds != null &&
-			!ChoiceIds.Any();
-
+			ChoiceIds.Any();
 	}
-
 }

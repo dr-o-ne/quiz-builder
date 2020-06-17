@@ -67,6 +67,16 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 						break;
 
+					case Enums.QuestionType.MultiSelect:
+
+						var multipleSelectGrader = new MultipleSelectGrader();
+						var multipleSelectQuestion = (MultipleSelectQuestion)question;
+						var multipleSelectAnswer = new MultipleSelectAnswer( question.UId, item.ChoiceIds );
+						double multipleSelectResult = multipleSelectGrader.Grade( multipleSelectQuestion, multipleSelectAnswer );
+						totalScore += multipleSelectResult;
+
+						break;
+
 					default:
 						throw null;
 				}
