@@ -53,7 +53,6 @@ namespace QuizBuilder.Domain.Action.Mapper {
 			CreateMap<QuizAttempt, AttemptDto>().ConvertUsing<QuizAttemptToAttemptDtoConverter>();
 			CreateMap<EndQuizAttemptCommand, List<QuestionAnswerDU>>().ConvertUsing<EndQuizAttemptCommand2ListOfQuestionAnswerDU>();
 
-			CreateMap<QuestionAnswerDU, MultipleChoiceAnswer>().ConvertUsing<QuestionAnswerDUToMultipleChoiceAnswer>();
 			CreateMap<QuestionAnswerDU, MultipleSelectAnswer>().ConvertUsing<QuestionAnswerDUToMultipleSelectAnswer>();
 		}
 	}

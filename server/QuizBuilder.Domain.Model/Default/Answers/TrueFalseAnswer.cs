@@ -4,12 +4,13 @@
 
 		public long ChoiceId { get; }
 
-		public TrueFalseAnswer(string questionUId, long choiceId ) : base(questionUId) {
+		public TrueFalseAnswer( string questionUId, long choiceId ) : base( questionUId ) {
 			ChoiceId = choiceId;
 		}
 
-		public override bool IsValid() => ChoiceId == 0 || ChoiceId == 1;
+		public override bool IsValid() =>
+			base.IsValid() &&
+			( ChoiceId == 0 || ChoiceId == 1 );
 
 	}
-
 }

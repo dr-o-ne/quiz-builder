@@ -52,10 +52,21 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 						var trueFalseGrader = new TrueFalseGrader();
 						var trueFalseQuestion = (TrueFalseQuestion)question;
 						var trueFalseAnswer = new TrueFalseAnswer( question.UId, item.ChoiceId );
-						double result = trueFalseGrader.Grade( trueFalseQuestion, trueFalseAnswer );
-						totalScore += result;
+						double trueFalseResult = trueFalseGrader.Grade( trueFalseQuestion, trueFalseAnswer );
+						totalScore += trueFalseResult;
 
 						break;
+
+					case Enums.QuestionType.MultiChoice:
+
+						var multipleChoiceGrader = new MultipleChoiceGrader();
+						var multipleChoiceQuestion = (MultipleChoiceQuestion)question;
+						var multipleChoiceAnswer = new MultipleChoiceAnswer( question.UId, item.ChoiceId );
+						double multipleChoiceResult = multipleChoiceGrader.Grade( multipleChoiceQuestion, multipleChoiceAnswer );
+						totalScore += multipleChoiceResult;
+
+						break;
+
 					default:
 						throw null;
 				}
