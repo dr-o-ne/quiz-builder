@@ -6,7 +6,6 @@ import { QuestionHostDirective } from 'src/app/_directives/question-host.directi
 import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
-import { QuestionComponent } from './question.component';
 
 @Component({
   selector: 'app-question-dynamic',

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
@@ -13,7 +13,7 @@ import { EndPageModalDialog } from './end-page/end-page-modal.component';
   templateUrl: './quiz-attempt.component.html'
 })
 
-export class QuizAttemptComponent implements OnInit {
+export class QuizAttemptComponent {
 
   attempt: QuizAttemptInfo;
   currentGroupIndex: number;
@@ -27,9 +27,6 @@ export class QuizAttemptComponent implements OnInit {
     this.attempt = this.route.snapshot.data.attempt;
     this.answers = new Map<string, QuestionAttemptResult>();
     this.currentGroupIndex = 0;
-  }
-
-  ngOnInit(): void {
   }
 
   getQuestions(): QuestionAttemptInfo[] {
@@ -57,7 +54,7 @@ export class QuizAttemptComponent implements OnInit {
       data: quizAttemptFeedback
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
