@@ -34,7 +34,6 @@ import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
 import { QuizAttemptComponent } from './quiz/quiz-attempt/quiz-attempt.component';
 import { QuestionNavComponent } from './quiz/quiz-attempt/question-nav/question-nav.component';
 import { AttemptService } from './_service/attempt.service';
-import { ModalWindowAttemptComponent } from './quiz/quiz-attempt/modal-window-attempt/modal-window-attempt.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { VexModule } from '../@vex/vex.module';
@@ -68,7 +67,6 @@ import { QuillModule } from 'ngx-quill';
     DynamicChoiceComponent,
     DynamicQuestionPreviewComponent,
     ModalWindowPreviewQuestionComponent,
-    ModalWindowAttemptComponent,
     TrueFalsePreviewComponent,
     MultiSelectPreviewComponent,
     LongAnswerComponent,
@@ -133,7 +131,6 @@ import { QuillModule } from 'ngx-quill';
     QuestionListComponent,
     QuestionPageComponent,
     ModalWindowPreviewQuestionComponent,
-    ModalWindowAttemptComponent,
     MultipleChoiceAnswerComponent,
     TrueFalseAnswerComponent,
     MultiSelectChoiceComponent,

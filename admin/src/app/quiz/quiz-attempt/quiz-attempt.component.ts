@@ -5,7 +5,6 @@ import { Choice } from 'src/app/_models/choice';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AttemptService } from 'src/app/_service/attempt.service';
 import { QuizAttempt } from 'src/app/_models/attempt';
-import { ModalWindowAttemptComponent } from './modal-window-attempt/modal-window-attempt.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -57,14 +56,7 @@ export class QuizAttemptComponent implements OnInit {
   }
 
   openResult(socore: number): void {
-    const dialogRef = this.dialog.open( ModalWindowAttemptComponent, {
-      width: '50em',
-      data: { socore }
-    } );
 
-    dialogRef.afterClosed().subscribe( result => {
-      this.router.navigate([''], { relativeTo: this.activeRoute.parent });
-    } );
   }
 
 }
