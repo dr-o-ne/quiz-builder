@@ -7,41 +7,56 @@
         [style.backgroundColor]="attempt.appearance.headerBackground"> 
     </div>
 
-    <div 
-        fxFlex 
-        fxLayout="row"
-        [style.backgroundColor]="attempt.appearance.mainBackground">
+    <div fxFlex fxLayout="row" [style.backgroundColor]="attempt.appearance.mainBackground">
 
-        <div fxFlex="50" fxFlexOffset="25" >
+        <div
+            fxFlexOffset="5" 
+            fxFlex="15">
 
-            <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card"
-                fxLayoutAlign="center center">
-                <span> {{attempt.name}} </span>
-            </div>
-            
-            <div *ngFor="let question of getQuestions(); let i = index">
-  
-                <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card">
-                    <app-question-dynamic 
-                        [question]="question"
-                        (answer)="onAnswer($event)">
-                    </app-question-dynamic>
-                </div>
-
-            </div>
-
-            <div class="borderless card"
-                fxLayout="row"
-                fxLayoutAlign="center center">
-
-                <button mat-raised-button color="primary"
-                    (click)="onSubmit()">
-                    Submit
-                </button>
-
-            </div>
+            <app-quiz-nav-panel 
+                [appearance]="attempt.appearance"
+                [questionCount]="getQuestions().length">
+            </app-quiz-nav-panel>
 
         </div>
+
+        <div>
+
+            <div fxFlex="65" fxFlexOffset="5">
+
+                <div [style.backgroundColor]="attempt.appearance.cardBackground" class="card"
+                    fxLayoutAlign="center center">
+                    <span> {{attempt.name}} </span>
+                </div>
+                
+                <div *ngFor="let question of getQuestions(); let i = index">
+                    
+                    <div [attr.id]="getAnchor(i)" [style.backgroundColor]="attempt.appearance.cardBackground" class="card">
+                        <app-question-dynamic 
+                            [question]="question"
+                            (answer)="onAnswer($event)">
+                        </app-question-dynamic>
+                    </div>
+
+                </div>
+
+                <div class="borderless card"
+                    fxLayout="row"
+                    fxLayoutAlign="center center">
+
+                    <button mat-raised-button color="primary"
+                        (click)="onSubmit()">
+                        Submit
+                    </button>
+
+                </div>
+
+        </div>
+
+    
+    
+    </div>
+
     </div>
 
     <div 

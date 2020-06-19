@@ -29,6 +29,10 @@ export class QuizAttemptComponent {
     this.currentGroupIndex = 0;
   }
 
+  getAnchor(i: number): string {
+    return 'q' + (i + 1);
+  }
+
   getQuestions(): QuestionAttemptInfo[] {
     return this.attempt.groups[this.currentGroupIndex].questions;
   }

@@ -1,0 +1,16 @@
+<div class="card quiz-nav-panel-outer"  [style.backgroundColor]="appearance.cardBackground">
+
+  <div fxLayout="row wrap" fxLayoutWrap fxLayoutGap="1rem" class="quiz-nav-panel-inner">
+    <div fxFlex="25%" *ngFor="let i of this.questionIds" class="quiz-nav-panel-button">
+
+      <a mat-stroked-button 
+        (click)="onNavClick(i)">
+          
+          {{i + 1}}
+
+      </a>
+
+    </div>
+  </div>
+
+</div>

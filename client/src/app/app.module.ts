@@ -22,6 +22,7 @@ import { QuillModule } from 'ngx-quill';
 import { MaterialModule } from './_material/material.module';
 import { QuestionTextViewComponent } from './_components/question-text/question-text-view.component';
 import { EndPageModalDialog } from './quiz-attempt/end-page/end-page-modal.component';
+import { QuizNavPanelComponent } from './quiz-attempt/quiz-nav-panel/quiz-nav-panel.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EndPageModalDialog } from './quiz-attempt/end-page/end-page-modal.compo
     MultipleChoiceQuestionComponent,
     MultipleSelectQuestionComponent,
     QuestionTextViewComponent,
-    EndPageModalDialog
+    EndPageModalDialog,
+    QuizNavPanelComponent
   ],
   imports: [
     BrowserModule,
