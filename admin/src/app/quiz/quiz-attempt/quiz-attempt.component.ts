@@ -37,13 +37,9 @@ export class QuizAttemptComponent implements OnInit {
   }
 
   createQuizAttempt(): void {
-    this.attemptService.createAttempt(this.quiz.id).subscribe( (response: any) => {
-      if ( response.hasOwnProperty( 'questions' ) && response.hasOwnProperty( 'quizAttempt' ) ) {
-        this.quizAttemptId = response.quizAttempt.id;
-        this.questions = response.questions;
-        this.initPreview();
-      }
-    }, error => console.log(error));
+
+    this.attemptService.runAttempt(this.quiz.id);
+
   }
 
   initPreview(): void {
