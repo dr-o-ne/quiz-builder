@@ -31,7 +31,6 @@ import { MultiSelectPreviewComponent } from './question/question-preview/multi-s
 import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
 import { LongAnswerPreviewComponent } from './question/question-preview/long-answer-preview/long-answer-preview.component';
 import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
-import { QuizAttemptComponent } from './quiz/quiz-attempt/quiz-attempt.component';
 import { AttemptService } from './_service/attempt.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -70,7 +69,6 @@ import { QuillModule } from 'ngx-quill';
     MultiSelectPreviewComponent,
     LongAnswerComponent,
     LongAnswerPreviewComponent,
-    QuizAttemptComponent,
     CommingSoonComponent
   ],
   imports: [

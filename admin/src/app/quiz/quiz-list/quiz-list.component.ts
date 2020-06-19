@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AttemptService } from 'src/app/_service/attempt.service';
 
 @Component( {
   selector: 'app-quiz-list',
@@ -23,7 +24,8 @@ export class QuizListComponent implements OnInit {
 
   constructor( private quizService: QuizService,
                private router: Router,
-               private activeRoute: ActivatedRoute
+               private activeRoute: ActivatedRoute,
+               private attemptService: AttemptService
   ) {
   }
 
@@ -113,14 +115,8 @@ export class QuizListComponent implements OnInit {
     this.selection.selected.forEach( x => this.clickVisibleToggle( true, x ) );
   }
 
-  onAttemptClick(item: Quiz ) {
-    this.router.navigate(
-      [ item.id],
-      {
-        relativeTo: this.activeRoute,
-        state: { quiz: item }
-      }
-    );
+  onAttemptClick(item: Quiz): void {
+    this.attemptService.runAttempt(item.id);
   }
 
   onEditClick(item: Quiz ) {
