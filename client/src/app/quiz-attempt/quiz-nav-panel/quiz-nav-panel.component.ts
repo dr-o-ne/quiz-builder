@@ -15,14 +15,26 @@ export class QuizNavPanelComponent implements OnInit {
     questionIds: number[];
 
     ngOnInit(): void {
-        console.log(this.questionCount);
         this.questionIds = [...Array(this.questionCount).keys()];
         console.log(this.questionIds);
     }
 
-    onNavClick(i: number) {
+    onNavClick(i: number): void {
         const elem = document.getElementById('q' + (i + 1));
         elem?.scrollIntoView({ behavior: 'smooth' });
     }
+
+    setCheckedValue(i: number, isCompleted: boolean): void {
+        const elem = document.getElementById('nav' + (i + 1));
+        if (isCompleted)
+            elem?.classList.add("question-border-check");
+        else
+            elem?.classList.remove("question-border-check");
+    }
+
+    getAnchor(i: number): string {
+        return 'nav' + (i + 1);
+    }
+
 
 }

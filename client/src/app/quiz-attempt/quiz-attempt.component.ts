@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
@@ -7,6 +7,7 @@ import { DataProviderService } from '../_services/dataProvider.service';
 import { QuizAttemptFeedback } from '../_models/attemptFeedback';
 import { MatDialog } from '@angular/material/dialog';
 import { EndPageModalDialog } from './end-page/end-page-modal.component';
+import { QuizNavPanelComponent } from './quiz-nav-panel/quiz-nav-panel.component';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -18,6 +19,9 @@ export class QuizAttemptComponent {
   attempt: QuizAttemptInfo;
   currentGroupIndex: number;
   answers: Map<string, QuestionAttemptResult>;
+
+  @ViewChild(QuizNavPanelComponent)
+  private navPanelComponent: QuizNavPanelComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +42,9 @@ export class QuizAttemptComponent {
   }
 
   onAnswer(answer: QuestionAttemptResult): void {
+    const i = this.getQuestions().map(x => x.id).indexOf(answer.questionId);
+    this.navPanelComponent.setCheckedValue(i, answer.isCompleted());
+
     this.answers.set(answer.questionId, answer);
   }
 
@@ -48,7 +55,7 @@ export class QuizAttemptComponent {
     result.answers = [...this.answers.values()];
 
     this.dataProviderService.endAttempt(result).subscribe(
-      (quizAttemptFeedback: QuizAttemptFeedback) => { console.log(quizAttemptFeedback.score); this.openDialog(quizAttemptFeedback); }
+      (quizAttemptFeedback: QuizAttemptFeedback) => { this.openDialog(quizAttemptFeedback); }
     );
   }
 

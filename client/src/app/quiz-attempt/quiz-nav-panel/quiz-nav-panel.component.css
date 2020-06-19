@@ -10,3 +10,7 @@
 .quiz-nav-panel-button{
     margin-top: 1rem;
 }
+
+.question-border-check {
+    border-color: green;
+}
