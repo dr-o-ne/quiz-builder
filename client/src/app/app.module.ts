@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -23,6 +23,7 @@ import { MaterialModule } from './_material/material.module';
 import { QuestionTextViewComponent } from './_components/question-text/question-text-view.component';
 import { EndPageModalDialog } from './quiz-attempt/end-page/end-page-modal.component';
 import { QuizNavPanelComponent } from './quiz-attempt/quiz-nav-panel/quiz-nav-panel.component';
+import { LongAnswerQuestionComponent } from './quiz-attempt/questions/long-answer-question/long-answer-question.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { QuizNavPanelComponent } from './quiz-attempt/quiz-nav-panel/quiz-nav-pa
     TrueFalseQuestionComponent,
     MultipleChoiceQuestionComponent,
     MultipleSelectQuestionComponent,
+    LongAnswerQuestionComponent,
     QuestionTextViewComponent,
     EndPageModalDialog,
     QuizNavPanelComponent
@@ -43,6 +45,7 @@ import { QuizNavPanelComponent } from './quiz-attempt/quiz-nav-panel/quiz-nav-pa
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     QuillModule.forRoot(),
     MaterialModule

@@ -1,7 +1,8 @@
 export enum QuestionType {
   TrueFalse = 1,
   MultipleChoice = 2,
-  MultipleSelect = 4
+  MultipleSelect = 4,
+  LongAnswer = 5
 }
 
 export enum ChoicesDisplayType {

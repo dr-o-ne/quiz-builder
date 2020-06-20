@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, Output, EventEmitter } from '@angular/core';
 import { QuestionType } from 'src/app/_models/_enums';
-import { QuestionAttemptInfo } from 'src/app/_models/attemptInfo';
+import { QuestionAttemptInfo, MultipleSelectQuestionAttemptInfo, MultipleChoiceQuestionAttemptInfo, TrueFalseQuestionAttemptInfo, LongAnswerQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 import { QuestionAttemptResult } from 'src/app/_models/attemptResult';
 import { QuestionHostDirective } from 'src/app/_directives/question-host.directive';
 import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
+import { LongAnswerQuestionComponent } from './long-answer-question/long-answer-question.component';
 
 @Component({
   selector: 'app-question-dynamic',
@@ -34,17 +35,16 @@ export class QuestionDynamicComponent implements OnInit {
       case QuestionType.TrueFalse: {
         const componentFactory = this.resolver.resolveComponentFactory(TrueFalseQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        (<TrueFalseQuestionComponent>componentRef.instance).question = this.question;
+        (<TrueFalseQuestionComponent>componentRef.instance).question = this.question as TrueFalseQuestionAttemptInfo;
         (<TrueFalseQuestionComponent>componentRef.instance).answer.subscribe(
           (answer: QuestionAttemptResult) => this.answer.emit(answer)
         );
-
         return;
       }
       case QuestionType.MultipleChoice: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleChoiceQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question;
+        (<MultipleChoiceQuestionComponent>componentRef.instance).question = this.question as MultipleChoiceQuestionAttemptInfo;
         (<MultipleChoiceQuestionComponent>componentRef.instance).answer.subscribe(
           (answer: QuestionAttemptResult) => this.answer.emit(answer)
         );
@@ -54,8 +54,17 @@ export class QuestionDynamicComponent implements OnInit {
       case QuestionType.MultipleSelect: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleSelectQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
-        (<MultipleSelectQuestionComponent>componentRef.instance).question = this.question;
+        (<MultipleSelectQuestionComponent>componentRef.instance).question = this.question as MultipleSelectQuestionAttemptInfo;
         (<MultipleSelectQuestionComponent>componentRef.instance).answer.subscribe(
+          (answer: QuestionAttemptResult) => this.answer.emit(answer)
+        );
+        return;
+      }
+      case QuestionType.LongAnswer: {
+        const componentFactory = this.resolver.resolveComponentFactory(LongAnswerQuestionComponent);
+        const componentRef = viewContainerRef.createComponent(componentFactory);
+        (<LongAnswerQuestionComponent>componentRef.instance).question = this.question as LongAnswerQuestionAttemptInfo;
+        (<LongAnswerQuestionComponent>componentRef.instance).answer.subscribe(
           (answer: QuestionAttemptResult) => this.answer.emit(answer)
         );
         return;

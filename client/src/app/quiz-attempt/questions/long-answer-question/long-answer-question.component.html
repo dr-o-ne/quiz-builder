@@ -1,0 +1,16 @@
+<div fxFlex fxLayout="column">
+
+    <app-question-text-view [text]="question.text" [isHtml]="question.isHtmlText"></app-question-text-view>
+
+    <mat-form-field>
+        <textarea matInput 
+            [formControl]="answerControl"
+            cdkTextareaAutosize 
+            cdkAutosizeMinRows="5" 
+            cdkAutosizeMaxRows="10" 
+            (keyup)="onChange($event)">
+        </textarea>
+    </mat-form-field>
+
+</div>
+

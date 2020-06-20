@@ -13,10 +13,11 @@ export interface GroupAttemptInfo {
     questions: QuestionAttemptInfo[]
 }
 
-export type QuestionAttemptInfo = 
-    TrueFalseQuestionAttemptInfo | 
+export type QuestionAttemptInfo =
+    TrueFalseQuestionAttemptInfo |
     MultipleChoiceQuestionAttemptInfo |
-    MultipleSelectQuestionAttemptInfo;
+    MultipleSelectQuestionAttemptInfo |
+    LongAnswerQuestionAttemptInfo
 
 export interface TrueFalseQuestionAttemptInfo {
     id: string;
@@ -43,6 +44,13 @@ export interface MultipleSelectQuestionAttemptInfo {
     type: number;
     choices: BinaryChoiceAttemptInfo[];
     choicesDisplayType: ChoicesDisplayType;
+}
+
+export interface LongAnswerQuestionAttemptInfo {
+    id: string;
+    text: string;
+    isHtmlText: boolean;
+    type: number;
 }
 
 export interface BinaryChoiceAttemptInfo {
