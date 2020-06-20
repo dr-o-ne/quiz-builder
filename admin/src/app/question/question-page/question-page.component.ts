@@ -51,6 +51,7 @@ export class QuestionPageComponent implements OnInit {
       name: [ '', Validators.required ],
       type: [ '', Validators.required ],
       text: [ '', Validators.required ],
+      points: [ '', Validators.nullValidator ],
       feedback: ['', Validators.nullValidator ],
       correctFeedback: ['', Validators.nullValidator ],
       incorrectFeedback: ['', Validators.nullValidator ],
@@ -73,6 +74,7 @@ export class QuestionPageComponent implements OnInit {
         this.questionForm.patchValue({
           name: this.question.name, 
           text: this.question.text,
+          points: this.question.points,
           feedback: this.question.feedback,
           correctFeedback: this.question.correctFeedback,
           incorrectFeedback: this.question.incorrectFeedback

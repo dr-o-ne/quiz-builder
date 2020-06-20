@@ -4,6 +4,7 @@ export class Question {
   id: string;
   name: string;
   text: string;
+  points: number;
   feedback: string;
   correctFeedback: string;
   incorrectFeedback: string;
