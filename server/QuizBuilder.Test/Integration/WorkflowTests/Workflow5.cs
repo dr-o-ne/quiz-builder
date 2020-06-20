@@ -1,9 +1,11 @@
-﻿using System;
+﻿/*
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -98,3 +100,4 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public void Dispose() => _db.Cleanup();
 	}
 }
+*/
