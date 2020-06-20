@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Action.Admin.Action;
+using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
@@ -17,7 +18,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 
 		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> Get( [FromRoute] GetQuestionByIdQuery query ) {
-			var result = await _dispatcher.QueryAsync( query );
+			QuestionQueryResult result = await _dispatcher.QueryAsync( query );
 
 			return result is null
 				? (ActionResult)NoContent()

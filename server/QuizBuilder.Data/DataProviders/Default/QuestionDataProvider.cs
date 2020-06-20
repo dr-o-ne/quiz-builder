@@ -51,6 +51,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.TypeId,
 				q.Name,
 				q.Text,
+				q.Points,
 				q.Settings
 			FROM
 				dbo.Question q WITH(NOLOCK)
@@ -78,6 +79,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			q.TypeId,
 			q.Name,
 			q.Text,
+			q.Points,
 			q.Settings
 		FROM
 			dbo.Question q WITH(NOLOCK)
@@ -102,6 +104,7 @@ SELECT
 	TypeId,
 	Name,
 	Text,
+	Points,
 	Settings
 FROM dbo.Question ( NOLOCK )
 WHERE UId = @UId";
@@ -120,6 +123,7 @@ WHERE UId = @UId";
 		    TypeId,
 		    Name,
 		    Text,
+			Points,
 		    Settings,
 		    CreatedOn,
 		    ModifiedOn
@@ -130,6 +134,7 @@ WHERE UId = @UId";
 		    @TypeId,
 		    @Name,
 		    @Text,
+			@Points,
 		    @Settings,
 		    @CreatedOn,
 		    @ModifiedOn
@@ -163,6 +168,7 @@ WHERE UId = @UId";
 				dto.TypeId,
 				dto.Name,
 				dto.Text,
+				dto.Points,
 				dto.Settings,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow
@@ -179,6 +185,7 @@ UPDATE dbo.Question
 SET TypeId = @TypeId,
 	Name = @Name,
 	Text = @Text,
+	Points = @Points,
 	Settings = @Settings,
 	ModifiedOn = @ModifiedOn
 WHERE Id = @Id";
@@ -188,6 +195,7 @@ WHERE Id = @Id";
 				dto.Id,
 				dto.Name,
 				dto.Text,
+				dto.Points,
 				dto.Settings,
 				dto.TypeId,
 				ModifiedOn = DateTime.UtcNow

@@ -47,6 +47,7 @@ CREATE TABLE dbo.Question(
 	[TypeId] BIGINT NOT NULL,
 	[Name] NVARCHAR(255) NOT NULL,
 	[Text] NVARCHAR(MAX) NOT NULL,
+	[Points] [decimal](18, 0) NULL,
 	[Settings] NVARCHAR(MAX) NOT NULL,
 	[CreatedOn] DATETIME2(7) NOT NULL,
 	[ModifiedOn] DATETIME2(7) NOT NULL,

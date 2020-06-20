@@ -23,6 +23,8 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 		public string Text { get; set; }
 
+		public decimal? Points { get; set; }
+
 		public string Feedback { get; set; }
 
 		public string CorrectFeedback { get; set; }
@@ -49,6 +51,8 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		public Enums.QuestionType Type { get; set; }
 
 		public string Text { get; set; }
+
+		public decimal? Points { get; set; }
 
 		public string Feedback { get; set; }
 
