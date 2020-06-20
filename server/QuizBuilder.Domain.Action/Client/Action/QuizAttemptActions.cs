@@ -36,6 +36,9 @@ namespace QuizBuilder.Domain.Action.Client.Action {
 		[JsonPropertyName( "choices" )]
 		public List<long> ChoiceIds { get; set; }
 
+		[JsonPropertyName( "text" )]
+		public string Text { get; set; }
+
 	}
 
 }

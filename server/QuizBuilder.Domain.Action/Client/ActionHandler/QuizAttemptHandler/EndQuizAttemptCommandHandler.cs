@@ -77,6 +77,16 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 						break;
 
+					case Enums.QuestionType.LongAnswer:
+
+						var longAnswerGrader = new LongAnswerGrader();
+						var longAnswerQuestion = (LongAnswerQuestion)question;
+						var longAnswerAnswer = new LongAnswerAnswer( question.UId, item.Text );
+						double longAnswerResult = longAnswerGrader.Grade( longAnswerQuestion, longAnswerAnswer );
+						totalScore += longAnswerResult;
+
+						break;
+
 					default:
 						throw null;
 				}
