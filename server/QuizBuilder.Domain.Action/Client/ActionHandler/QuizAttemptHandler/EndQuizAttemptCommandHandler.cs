@@ -36,7 +36,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			List<Question> questions = await GetQuestions( command.AttemptUId );
 
-			double totalScore = 0;
+			decimal totalScore = 0;
 
 			foreach( QuestionAttemptResult item in command.Answers ) {
 				Question question = questions.SingleOrDefault( x => x.UId == item.QuestionUId );
@@ -52,7 +52,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 						var trueFalseGrader = new TrueFalseGrader();
 						var trueFalseQuestion = (TrueFalseQuestion)question;
 						var trueFalseAnswer = new TrueFalseAnswer( question.UId, item.ChoiceId );
-						double trueFalseResult = trueFalseGrader.Grade( trueFalseQuestion, trueFalseAnswer );
+						decimal trueFalseResult = trueFalseGrader.Grade( trueFalseQuestion, trueFalseAnswer );
 						totalScore += trueFalseResult;
 
 						break;
@@ -62,7 +62,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 						var multipleChoiceGrader = new MultipleChoiceGrader();
 						var multipleChoiceQuestion = (MultipleChoiceQuestion)question;
 						var multipleChoiceAnswer = new MultipleChoiceAnswer( question.UId, item.ChoiceId );
-						double multipleChoiceResult = multipleChoiceGrader.Grade( multipleChoiceQuestion, multipleChoiceAnswer );
+						decimal multipleChoiceResult = multipleChoiceGrader.Grade( multipleChoiceQuestion, multipleChoiceAnswer );
 						totalScore += multipleChoiceResult;
 
 						break;
@@ -72,7 +72,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 						var multipleSelectGrader = new MultipleSelectGrader();
 						var multipleSelectQuestion = (MultipleSelectQuestion)question;
 						var multipleSelectAnswer = new MultipleSelectAnswer( question.UId, item.ChoiceIds );
-						double multipleSelectResult = multipleSelectGrader.Grade( multipleSelectQuestion, multipleSelectAnswer );
+						decimal multipleSelectResult = multipleSelectGrader.Grade( multipleSelectQuestion, multipleSelectAnswer );
 						totalScore += multipleSelectResult;
 
 						break;
@@ -82,7 +82,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 						var longAnswerGrader = new LongAnswerGrader();
 						var longAnswerQuestion = (LongAnswerQuestion)question;
 						var longAnswerAnswer = new LongAnswerAnswer( question.UId, item.Text );
-						double longAnswerResult = longAnswerGrader.Grade( longAnswerQuestion, longAnswerAnswer );
+						decimal longAnswerResult = longAnswerGrader.Grade( longAnswerQuestion, longAnswerAnswer );
 						totalScore += longAnswerResult;
 
 						break;

@@ -7,7 +7,7 @@ namespace QuizBuilder.Domain.Model.Default.Base {
 		where TQ : Question
 		where TA : Answer {
 
-		public double Grade( TQ question, TA answer );
+		public decimal Grade( TQ question, TA answer );
 	}
 
 }

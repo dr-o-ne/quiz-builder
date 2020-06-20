@@ -89,7 +89,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 	public sealed class AttemptFeedback {
 
 		[JsonPropertyName( "score" )]
-		public double Score { get; set; }
+		public decimal Score { get; set; }
 
 	}
 

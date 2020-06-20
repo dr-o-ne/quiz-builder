@@ -6,7 +6,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 
 	public sealed class TrueFalseGrader : IQuestionGrader<TrueFalseQuestion, TrueFalseAnswer> {
 
-		public double Grade( TrueFalseQuestion question, TrueFalseAnswer answer ) {
+		public decimal Grade( TrueFalseQuestion question, TrueFalseAnswer answer ) {
 			if( !question.IsValid() || !answer.IsValid() )
 				return 0;
 
@@ -14,9 +14,9 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 				return 0;
 
 			if( answer.ChoiceId == question.TrueChoice.Id && question.TrueChoice.IsCorrect == true )
-				return 1;
+				return question.GetPoints();
 			if( answer.ChoiceId == question.FalseChoice.Id && question.FalseChoice.IsCorrect == true )
-				return 1;
+				return question.GetPoints();
 
 			return 0;
 

@@ -7,7 +7,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 
 	public sealed class MultipleSelectGrader : IQuestionGrader<MultipleSelectQuestion, MultipleSelectAnswer> {
 
-		public double Grade( MultipleSelectQuestion question, MultipleSelectAnswer answer ) {
+		public decimal Grade( MultipleSelectQuestion question, MultipleSelectAnswer answer ) {
 
 			if( !question.IsValid() || !answer.IsValid() )
 				return 0;
@@ -25,7 +25,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 					answer.ChoiceIds.OrderBy( a => a )
 				);
 
-			return result ? 1 : 0;
+			return result ? question.GetPoints() : 0;
 		}
 
 	}

@@ -6,7 +6,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 
 	public sealed class LongAnswerGrader : IQuestionGrader<LongAnswerQuestion, LongAnswerAnswer> {
 
-		public double Grade( LongAnswerQuestion question, LongAnswerAnswer answer ) {
+		public decimal Grade( LongAnswerQuestion question, LongAnswerAnswer answer ) {
 
 			if( !question.IsValid() || !answer.IsValid() )
 				return 0;
@@ -14,7 +14,7 @@ namespace QuizBuilder.Domain.Model.Default.Graders {
 			if( question.UId != answer.QuestionUId )
 				return 0;
 
-			return !string.IsNullOrWhiteSpace( answer.Text ) ? 1 : 0;
+			return !string.IsNullOrWhiteSpace( answer.Text ) ? question.GetPoints() : 0;
 
 		}
 	}

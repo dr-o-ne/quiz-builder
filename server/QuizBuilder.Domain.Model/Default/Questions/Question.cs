@@ -31,6 +31,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			return this;
 		}
 
+		public decimal GetPoints() => Points ?? 0;
+
 		public virtual Question Clone() {
 			return (Question)this.MemberwiseClone(); // ToDo: deep cloning needed?
 		}
