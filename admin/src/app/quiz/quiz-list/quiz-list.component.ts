@@ -116,7 +116,7 @@ export class QuizListComponent implements OnInit {
   }
 
   onAttemptClick(item: Quiz): void {
-    this.attemptService.runAttempt(item.id);
+    this.attemptService.tryAttempt(item.id);
   }
 
   onEditClick(item: Quiz ) {

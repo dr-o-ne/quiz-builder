@@ -17,7 +17,7 @@ export class AttemptService {
   constructor(private http: HttpClient) {
   }
 
-  runAttempt(quizId: string): void {
+  tryAttempt(quizId: string): void {
     window.open(this.clientUrl + 'quizzes/' + quizId, "_blank");
   }
 
