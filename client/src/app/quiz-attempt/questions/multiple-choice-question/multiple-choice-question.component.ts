@@ -4,6 +4,7 @@ import { ChoicesDisplayType } from 'src/app/_models/_enums';
 import { MultipleChoiceQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 import { MultipleChoiceQuestionAttemptResult } from 'src/app/_models/attemptResult';
 import { MatRadioChange } from '@angular/material/radio';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-multiple-choice-question',
@@ -14,7 +15,7 @@ export class MultipleChoiceQuestionComponent extends QuestionComponent<MultipleC
   
   choicesDisplayType = ChoicesDisplayType;
 
-  onChange(event: MatRadioChange): void {
+  onChange(event: MatRadioChange | MatSelectChange): void {
     const value = new MultipleChoiceQuestionAttemptResult();
     value.questionId = this.question.id;
     value.choice = event.value;

@@ -4,6 +4,7 @@ import { QuestionComponent } from '../question.component';
 import { ChoicesDisplayType } from 'src/app/_models/_enums';
 import { TrueFalseQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 import { TrueFalseQuestionAttemptResult } from 'src/app/_models/attemptResult';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-true-false-question',
@@ -14,7 +15,7 @@ export class TrueFalseQuestionComponent extends QuestionComponent<TrueFalseQuest
 
   choicesDisplayType = ChoicesDisplayType;
 
-  onChange(event: MatRadioChange): void {
+  onChange(event: MatRadioChange | MatSelectChange): void {
     const value = new TrueFalseQuestionAttemptResult();
     value.questionId = this.question.id;
     value.choice = event.value;

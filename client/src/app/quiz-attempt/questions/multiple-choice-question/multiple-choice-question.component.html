@@ -17,6 +17,12 @@
 
 <div *ngIf="question.choicesDisplayType === choicesDisplayType.Dropdown">
 
-    TODO:
+    <mat-form-field appearance="outline">
+        <mat-select (selectionChange)="onChange($event)">
+            <mat-option *ngFor="let choice of question.choices" [value]="choice.id">
+                {{choice.text}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
 </div>
