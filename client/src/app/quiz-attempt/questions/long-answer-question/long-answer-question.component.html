@@ -2,7 +2,7 @@
 
     <app-question-text-view [text]="question.text" [isHtml]="question.isHtmlText"></app-question-text-view>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
         <textarea matInput 
             [formControl]="answerControl"
             cdkTextareaAutosize 
