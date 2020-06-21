@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSelectChange } from '@angular/material/select';
 import { QuestionComponent } from '../question.component';
 import { ChoicesDisplayType } from 'src/app/_models/_enums';
 import { MultipleSelectQuestionAttemptInfo } from 'src/app/_models/attemptInfo';
 import { MultipleSelectQuestionAttemptResult } from 'src/app/_models/attemptResult';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-multiple-select-question',
   templateUrl: './multiple-select-question.component.html'
 })
-
 export class MultipleSelectQuestionComponent extends QuestionComponent<MultipleSelectQuestionAttemptInfo, MultipleSelectQuestionAttemptResult> {
 
   constructor() {
@@ -20,12 +20,18 @@ export class MultipleSelectQuestionComponent extends QuestionComponent<MultipleS
   choicesDisplayType = ChoicesDisplayType;
   choices: Set<string>;
 
-  onChange(event: MatCheckboxChange): void {
+  onChange(event: MatCheckboxChange | MatSelectChange): void {
 
-    if (event.checked)
-      this.choices.add(event.source.value);
-    else
-      this.choices.delete(event.source.value);
+    if (event instanceof MatCheckboxChange) {
+      if (event.checked)
+        this.choices.add(event.source.value);
+      else
+        this.choices.delete(event.source.value);
+    }
+
+    if (event instanceof MatSelectChange) {
+      this.choices = new Set<string>(event.value);
+    }
 
     const value = new MultipleSelectQuestionAttemptResult();
     value.questionId = this.question.id;
@@ -33,6 +39,5 @@ export class MultipleSelectQuestionComponent extends QuestionComponent<MultipleS
 
     this.answer.emit(value);
   }
-
 
 }
