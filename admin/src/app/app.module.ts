@@ -13,7 +13,6 @@ import { QuestionService } from './_service/question.service';
 import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
@@ -30,7 +29,6 @@ import { TrueFalsePreviewComponent } from './question/question-preview/true-fals
 import { MultiSelectPreviewComponent } from './question/question-preview/multi-select-preview/multi-select-preview.component';
 import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
 import { LongAnswerPreviewComponent } from './question/question-preview/long-answer-preview/long-answer-preview.component';
-import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
 import { AttemptService } from './_service/attempt.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -54,7 +52,6 @@ import { QuillModule } from 'ngx-quill';
     QuizListComponent,
     QuizPageComponent,
     QuestionPageComponent,
-    PreviewQuizComponent,
     QuestionListComponent,
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
@@ -141,7 +138,6 @@ import { QuillModule } from 'ngx-quill';
     QuestionService,
     QuizResolver,
     QuestionResolver,
-    QuizPreviewResolver,
     AttemptService
   ],
   bootstrap: [

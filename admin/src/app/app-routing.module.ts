@@ -10,8 +10,6 @@ import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { PreviewQuizComponent } from './quiz/quiz-preview/preview-quiz.component';
-import { QuizPreviewResolver } from './_resolvers/quizpreview.resolver';
 
 const routes: Routes = [
   {
@@ -49,12 +47,6 @@ const routes: Routes = [
                 resolve: { questionResolver: QuestionResolver }
               }
             ]
-          },
-          {
-            path: 'preview', children:
-              [
-                { path: '', component: PreviewQuizComponent, resolve: { quizResolver: QuizPreviewResolver } }
-              ]
           }
         ]
     }]
