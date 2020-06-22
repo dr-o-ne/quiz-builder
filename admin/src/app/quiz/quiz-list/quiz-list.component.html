@@ -59,10 +59,10 @@
         </ng-container>
   
         <ng-container matColumnDef="isEnabled">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Visible</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Enabled</th>
           <td mat-cell *matCellDef="let element">
             <mat-slide-toggle color="primary" [checked]="element.isEnabled"
-              (change)="clickVisibleToggle($event.checked, element)">
+              (change)="onChangeQuizState($event.checked, element)">
             </mat-slide-toggle>
           </td>
         </ng-container>
@@ -95,9 +95,13 @@
                 <mat-icon>done_all</mat-icon>
                 <span>Bulk Select</span>
               </button>
-              <button mat-menu-item (click)="bulkPublish()" [disabled]="!isAnySelected()">
+              <button mat-menu-item (click)="bulkEnable()" [disabled]="!isAnySelected()">
                 <mat-icon>cloud_upload</mat-icon>
-                <span>Bulk Publish</span>
+                <span>Bulk Enable</span>
+              </button>
+              <button mat-menu-item (click)="bulkDisable()" [disabled]="!isAnySelected()">
+                <mat-icon>cloud_off</mat-icon>
+                <span>Bulk Disable</span>
               </button>
               <button mat-menu-item (click)="bulkDelete()" [disabled]="!isAnySelected()">
                 <mat-icon>delete</mat-icon>

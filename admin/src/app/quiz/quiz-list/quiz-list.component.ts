@@ -7,25 +7,25 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttemptService } from 'src/app/_service/attempt.service';
 
-@Component( {
+@Component({
   selector: 'app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: [ './quiz-list.component.css' ]
-} )
+  styleUrls: ['./quiz-list.component.css']
+})
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'isEnabled', 'statistic', 'preview', 'menu' ];
+  displayedColumns: string[] = ['name', 'isEnabled', 'statistic', 'preview', 'menu'];
   filterData: string;
   isMultiSelectMode = false;
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
 
-  @ViewChild( MatSort, { static: true } ) sort: MatSort;
-  @ViewChild( MatTable, { static: true } ) table: MatTable<any>;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
 
-  constructor( private quizService: QuizService,
-               private router: Router,
-               private activeRoute: ActivatedRoute,
-               private attemptService: AttemptService
+  constructor(private quizService: QuizService,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private attemptService: AttemptService
   ) {
   }
 
@@ -34,17 +34,17 @@ export class QuizListComponent implements OnInit {
   }
 
   initDataQuiz(): void {
-    this.quizService.getAllQuizzes().subscribe( ( response: any ) => {
-      this.initDataSource( response.quizzes );
+    this.quizService.getAllQuizzes().subscribe((response: any) => {
+      this.initDataSource(response.quizzes);
     }, error => {
-      console.log( error );
-    } );
+      console.log(error);
+    });
   }
 
-  initDataSource( quizzes: Quiz[] ): void {
-    this.dataSource = new MatTableDataSource<Quiz>( quizzes );
+  initDataSource(quizzes: Quiz[]): void {
+    this.dataSource = new MatTableDataSource<Quiz>(quizzes);
     this.dataSource.sort = this.sort;
-    this.selection = new SelectionModel<Quiz>( true, [] );
+    this.selection = new SelectionModel<Quiz>(true, []);
   }
 
   isEmptyFilter(): boolean {
@@ -56,14 +56,14 @@ export class QuizListComponent implements OnInit {
     this.filterData = '';
   }
 
-  applyFilter( filterValue: string ): void {
+  applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   clickMultiSelection(): void {
     this.isMultiSelectMode
       ? this.displayedColumns.shift()
-      : this.displayedColumns.unshift( 'select' );
+      : this.displayedColumns.unshift('select');
 
     this.isMultiSelectMode = !this.isMultiSelectMode;
     this.table.renderRows();
@@ -77,51 +77,55 @@ export class QuizListComponent implements OnInit {
     return this.selection?.hasValue();
   }
 
-  isItemSelected( item: Quiz ): boolean {
-    return this.selection.isSelected( item );
+  isItemSelected(item: Quiz): boolean {
+    return this.selection.isSelected(item);
   }
 
-  checkItemToggle( item: Quiz ): void {
-    this.selection.toggle( item );
+  checkItemToggle(item: Quiz): void {
+    this.selection.toggle(item);
   }
 
-  checkAllToggle( checked: boolean ): void {
+  checkAllToggle(checked: boolean): void {
     checked
-      ? this.selection.select( ...this.dataSource.data )
+      ? this.selection.select(...this.dataSource.data)
       : this.selection.clear();
   }
 
-  clickVisibleToggle( checked: boolean, quiz: Quiz ): void {
-    quiz.isEnabled = checked;
-    this.quizService.updateQuiz( quiz ).subscribe( error => console.log( error ) );
-  }
-
-  deleteQuiz( quiz: Quiz ): void {
-    this.quizService.deleteQuiz( quiz.id ).subscribe( response => {
+  deleteQuiz(quiz: Quiz): void {
+    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
       this.initDataQuiz();
-    }, error => console.log( error ) );
+    }, error => console.log(error));
   }
 
   bulkDelete(): void {
-    const ids = this.selection.selected.map( x => x.id );
-    this.quizService.deleteQuizzes( ids ).subscribe(
+    const ids = this.selection.selected.map(x => x.id);
+    this.quizService.deleteQuizzes(ids).subscribe(
       response => {
         this.initDataQuiz();
       },
-      error => console.log( error ) );
+      error => console.log(error));
   }
 
-  bulkPublish(): void {
-    this.selection.selected.forEach( x => this.clickVisibleToggle( true, x ) );
+  onChangeQuizState(isEnabled: boolean, quiz: Quiz): void {
+    quiz.isEnabled = isEnabled;
+    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+  }
+
+  bulkEnable(): void {
+    this.selection.selected.forEach(x => this.onChangeQuizState(true, x));
+  }
+
+  bulkDisable(): void {
+    this.selection.selected.forEach(x => this.onChangeQuizState(false, x));
   }
 
   onAttemptClick(item: Quiz): void {
     this.attemptService.tryAttempt(item.id);
   }
 
-  onEditClick(item: Quiz ) {
+  onEditClick(item: Quiz) {
     this.router.navigate(
-      [ item.id, 'edit'],
+      [item.id, 'edit'],
       {
         relativeTo: this.activeRoute,
         state: { quiz: item }
@@ -129,9 +133,9 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  onPreviewClick( item: Quiz ) {
+  onPreviewClick(item: Quiz) {
     this.router.navigate(
-      [ item.id, 'preview' ],
+      [item.id, 'preview'],
       {
         relativeTo: this.activeRoute,
         state: { quiz: item }
