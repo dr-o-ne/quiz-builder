@@ -119,11 +119,7 @@ export class QuizListComponent implements OnInit {
     this.selection.selected.forEach(x => this.onChangeQuizState(false, x));
   }
 
-  onAttemptClick(item: Quiz): void {
-    this.attemptService.tryAttempt(item.id);
-  }
-
-  onEditClick(item: Quiz) {
+  onEditClick(item: Quiz): void {
     this.router.navigate(
       [item.id, 'edit'],
       {
@@ -133,13 +129,7 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  onPreviewClick(item: Quiz) {
-    this.router.navigate(
-      [item.id, 'preview'],
-      {
-        relativeTo: this.activeRoute,
-        state: { quiz: item }
-      }
-    );
+  onPreviewClick(item: Quiz): void {
+    this.attemptService.tryAttempt(item.id);
   }
 }
