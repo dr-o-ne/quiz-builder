@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
 import { MatSort } from '@angular/material/sort';
 import { QuizService } from 'src/app/_service/quiz.service';
@@ -20,20 +20,20 @@ export class QuizListComponent implements OnInit {
   selection: SelectionModel<Quiz>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
 
-  constructor(private quizService: QuizService,
+  constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private attemptService: AttemptService
+    private attemptService: AttemptService,
+    private quizService: QuizService
   ) {
   }
 
-  ngOnInit() {
-    this.initDataQuiz();
+  ngOnInit(): void {
+    this.loadData();
   }
 
-  initDataQuiz(): void {
+  loadData(): void {
     this.quizService.getAllQuizzes().subscribe((response: any) => {
       this.initDataSource(response.quizzes);
     }, error => {
@@ -66,7 +66,6 @@ export class QuizListComponent implements OnInit {
       : this.displayedColumns.unshift('select');
 
     this.isMultiSelectMode = !this.isMultiSelectMode;
-    this.table.renderRows();
   }
 
   isAllSelected(): boolean {
@@ -92,16 +91,16 @@ export class QuizListComponent implements OnInit {
   }
 
   deleteQuiz(quiz: Quiz): void {
-    this.quizService.deleteQuiz(quiz.id).subscribe(response => {
-      this.initDataQuiz();
+    this.quizService.deleteQuiz(quiz.id).subscribe(() => {
+      this.loadData();
     }, error => console.log(error));
   }
 
   bulkDelete(): void {
     const ids = this.selection.selected.map(x => x.id);
     this.quizService.deleteQuizzes(ids).subscribe(
-      response => {
-        this.initDataQuiz();
+      () => {
+        this.loadData();
       },
       error => console.log(error));
   }
