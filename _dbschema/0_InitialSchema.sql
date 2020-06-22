@@ -2,7 +2,7 @@ CREATE TABLE dbo.Quiz(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[UId] NVARCHAR(10) NOT NULL,
 	[Name] NVARCHAR(255) NOT NULL,
-	[IsVisible] BIT NOT NULL,
+	[IsEnabled] BIT NOT NULL,
 	[CreatedOn] DATETIME2(7) NOT NULL,
 	[ModifiedOn] DATETIME2(7) NOT NULL,
 
@@ -17,7 +17,7 @@ GO
 ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Quiz_ModifiedOn] DEFAULT (getutcdate()) FOR [ModifiedOn]
 GO
 
-ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Quiz_IsVisible]  DEFAULT ((0)) FOR [IsVisible]
+ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Quiz_IsEnabled]  DEFAULT ((0)) FOR [IsEnabled]
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX [UI_Quiz_UId] ON dbo.Quiz ( [UId] ASC ) ON [PRIMARY]

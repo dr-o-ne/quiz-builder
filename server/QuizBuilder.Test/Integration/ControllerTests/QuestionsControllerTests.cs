@@ -21,7 +21,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 				Id = 1,
 				UId = "1000000001",
 				Name = "Quiz 1",
-				IsVisible = true
+				IsEnabled = true
 			}
 		}.ToImmutableArray();
 

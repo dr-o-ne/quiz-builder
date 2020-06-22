@@ -8,7 +8,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToDto {
 			if( source is null )
 				return null;
 
-			return new QuizDto {Id = source.Id, UId = source.UId, Name = source.Name, IsVisible = source.IsVisible};
+			return new QuizDto {Id = source.Id, UId = source.UId, Name = source.Name, IsEnabled = source.IsEnabled};
 		}
 	}
 }

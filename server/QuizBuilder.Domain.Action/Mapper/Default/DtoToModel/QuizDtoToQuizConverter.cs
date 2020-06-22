@@ -10,7 +10,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.DtoToModel {
 				return null;
 
 			return new Quiz {
-				Id = source.Id, UId = source.UId, Name = source.Name, IsVisible = source.IsVisible,
+				Id = source.Id, UId = source.UId, Name = source.Name, IsEnabled = source.IsEnabled,
 			};
 		}
 	}

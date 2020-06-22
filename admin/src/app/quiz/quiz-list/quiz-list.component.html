@@ -58,10 +58,10 @@
           <td mat-cell *matCellDef="let element" (click)="onEditClick(element)"> {{element.name}} </td>
         </ng-container>
   
-        <ng-container matColumnDef="isVisible">
+        <ng-container matColumnDef="isEnabled">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Visible</th>
           <td mat-cell *matCellDef="let element">
-            <mat-slide-toggle color="primary" [checked]="element.isVisible"
+            <mat-slide-toggle color="primary" [checked]="element.isEnabled"
               (change)="clickVisibleToggle($event.checked, element)">
             </mat-slide-toggle>
           </td>

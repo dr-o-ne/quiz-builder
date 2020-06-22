@@ -23,31 +23,31 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 				Id = 1,
 				UId = "0000000001",
 				Name = "Quiz 1",
-				IsVisible = true
+				IsEnabled = true
 			},
 			new QuizDto {
 				Id = 2,
 				UId = "0000000002",
 				Name = "Quiz 2",
-				IsVisible = false
+				IsEnabled = false
 			},
 			new QuizDto {
 				Id = 1000,
 				UId = "0000001000",
 				Name = "Quiz To Be Deleted",
-				IsVisible = false
+				IsEnabled = false
 			},
 			new QuizDto {
 				Id = 1001,
 				UId = "0000001001",
 				Name = "Quiz To Be BulkDeleted",
-				IsVisible = true
+				IsEnabled = true
 			},
 			new QuizDto {
 				Id = 1002,
 				UId = "0000001002",
 				Name = "Quiz To Be BulkDeleted",
-				IsVisible = false
+				IsEnabled = false
 			}
 
 		}.ToImmutableArray();
@@ -69,7 +69,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 			Assert.Equal( HttpStatusCode.OK, result.statusCode );
 			Assert.Equal( "0000000001", result.data.Quiz.Id );
 			Assert.Equal( "Quiz 1", result.data.Quiz.Name );
-			Assert.True( result.data.Quiz.IsVisible );
+			Assert.True( result.data.Quiz.IsEnabled );
 		}
 
 		[Fact]
@@ -102,7 +102,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 			Assert.False( string.IsNullOrWhiteSpace( result.data.Quiz.Id ) );
 			Assert.Equal( "New Quiz", result.data.Quiz.Name );
-			Assert.False( result.data.Quiz.IsVisible );
+			Assert.False( result.data.Quiz.IsEnabled );
 		}
 
 		[Fact]

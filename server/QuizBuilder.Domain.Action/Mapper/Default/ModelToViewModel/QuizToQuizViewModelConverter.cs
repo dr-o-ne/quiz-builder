@@ -8,7 +8,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel {
 			if( source is null )
 				return null;
 
-			return new QuizViewModel { Id = source.UId, Name = source.Name, IsVisible = source.IsVisible };
+			return new QuizViewModel { Id = source.UId, Name = source.Name, IsEnabled = source.IsEnabled };
 		}
 	}
 }

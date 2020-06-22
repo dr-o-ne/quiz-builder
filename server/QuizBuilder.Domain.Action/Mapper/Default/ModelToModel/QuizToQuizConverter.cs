@@ -15,7 +15,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToModel {
 			Quiz merged = destination.Clone();
 
 			merged.Name = source.Name;
-			merged.IsVisible = source.IsVisible;
+			merged.IsEnabled = source.IsEnabled;
 
 			return merged;
 		}

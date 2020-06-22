@@ -10,7 +10,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ActionToModel {
 			if( source is null )
 				return null;
 
-			return new Quiz {Name = source.Name, IsVisible = source.IsVisible};
+			return new Quiz {Name = source.Name, IsEnabled = source.IsEnabled};
 		}
 	}
 }

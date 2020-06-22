@@ -49,21 +49,21 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.Equal( "Quiz 1", result4.data.Quizzes[0].Name );
 			Assert.Equal( "Quiz 2", result4.data.Quizzes[1].Name );
 			Assert.Equal( "Quiz 3", result4.data.Quizzes[2].Name );
-			Assert.False( result4.data.Quizzes[0].IsVisible );
-			Assert.False( result4.data.Quizzes[1].IsVisible );
-			Assert.False( result4.data.Quizzes[2].IsVisible );
+			Assert.False( result4.data.Quizzes[0].IsEnabled );
+			Assert.False( result4.data.Quizzes[1].IsEnabled );
+			Assert.False( result4.data.Quizzes[2].IsEnabled );
 
 			// Update Quiz 1
 			(HttpStatusCode statusCode, QuizCommandResult data) result5 = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = uid1, Name = "Quiz 1 New Name" } );
 
 			// Update Quiz 3
-			(HttpStatusCode statusCode, QuizCommandResult data) result6 = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = uid3, Name = "Quiz 3", IsVisible = true } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result6 = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = uid3, Name = "Quiz 3", IsEnabled = true } );
 
 			// Get All Quizzes
 			(HttpStatusCode statusCode, QuizzesQueryResult data) result7 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes" );
 			Assert.Equal( 3, result7.data.Quizzes.Count );
 			Assert.Equal( "Quiz 1 New Name", result7.data.Quizzes[0].Name );
-			Assert.True( result7.data.Quizzes[2].IsVisible );
+			Assert.True( result7.data.Quizzes[2].IsEnabled );
 
 			// Delete Quiz 1
 			var response8 = await _httpClient.DeleteAsync( "admin/quizzes/" + uid1 );

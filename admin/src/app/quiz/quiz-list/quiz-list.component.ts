@@ -13,7 +13,7 @@ import { AttemptService } from 'src/app/_service/attempt.service';
   styleUrls: [ './quiz-list.component.css' ]
 } )
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'isVisible', 'statistic', 'preview', 'menu' ];
+  displayedColumns: string[] = [ 'name', 'isEnabled', 'statistic', 'preview', 'menu' ];
   filterData: string;
   isMultiSelectMode = false;
   dataSource: MatTableDataSource<Quiz>;
@@ -92,7 +92,7 @@ export class QuizListComponent implements OnInit {
   }
 
   clickVisibleToggle( checked: boolean, quiz: Quiz ): void {
-    quiz.isVisible = checked;
+    quiz.isEnabled = checked;
     this.quizService.updateQuiz( quiz ).subscribe( error => console.log( error ) );
   }
 

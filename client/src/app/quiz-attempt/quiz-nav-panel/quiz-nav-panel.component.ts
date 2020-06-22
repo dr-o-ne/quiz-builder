@@ -16,7 +16,6 @@ export class QuizNavPanelComponent implements OnInit {
 
     ngOnInit(): void {
         this.questionIds = [...Array(this.questionCount).keys()];
-        console.log(this.questionIds);
     }
 
     onNavClick(i: number): void {

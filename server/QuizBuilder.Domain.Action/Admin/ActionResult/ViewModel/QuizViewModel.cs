@@ -4,7 +4,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 	public sealed class QuizViewModel {
 		public string Id { get; set; }
 		public string Name { get; set; }
-		public bool IsVisible { get; set; }
+		public bool IsEnabled { get; set; }
 		public IEnumerable<GroupViewModel> Groups { get; set; }
 	}
 }
