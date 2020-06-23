@@ -17,7 +17,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class QuestionListComponent implements OnInit {
   @Input() group: Group;
   @Input() quizId: string;
-  @Input() groups: Group[];
 
   displayedColumns: string[] = [ 'name', 'type', 'edit', 'move to group', 'delete' ];
 
@@ -83,8 +82,7 @@ export class QuestionListComponent implements OnInit {
         relativeTo: this.activeRout,
         state: {
           quizId: this.quizId,
-          groupId: this.group.id,
-          groups: this.groups
+          groupId: this.group.id
         }
       } );
   }

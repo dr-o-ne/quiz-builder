@@ -29,7 +29,6 @@ export class QuestionPageComponent implements OnInit {
   questionTypes = QuestionType;
   questionTypeKeys: number[];
 
-  groupResurce: Group[] = [];
   choices: Choice[] = [];
   settings: BaseChoiceSettings = new BaseChoiceSettings();
 
@@ -66,7 +65,6 @@ export class QuestionPageComponent implements OnInit {
       return;
     }
     this.quizId = history.state.quizId;
-    this.groupResurce = history.state.groups;
     this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {
         this.question = data.questionResolver.question;
@@ -172,10 +170,6 @@ export class QuestionPageComponent implements OnInit {
 
   selectChangeType(): void {
     this.choices = [];
-  }
-
-  selectGroup( select ): void {
-    this.question.groupId = this.groupResurce.filter( group => group.id === select.selected.value )[0].id;
   }
 
   openPreview(): void {
