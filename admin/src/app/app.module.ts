@@ -18,8 +18,8 @@ import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/tr
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
+
+
 import { ChoiceDirective } from './_directive/choice.directive';
 import { DynamicChoiceComponent } from './question/answer/base-choice/dynamic-choice.component';
 import { ModalWindowPreviewQuestionComponent } from './question/modal-window/modal-window-preview-question.component';
@@ -38,11 +38,9 @@ import { CommingSoonComponent } from './common/comming-soon/comming-soon.compone
 
 import { PageLayoutModule } from '../@vex/components/page-layout/page-layout.module';
 import { SecondaryToolbarModule } from '../@vex/components/secondary-toolbar/secondary-toolbar.module';
-import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BreadcrumbsModule } from '../@vex/components/breadcrumbs/breadcrumbs.module';
 import { IconModule } from '@visurel/iconify-angular';
-import { MatIconModule } from '@angular/material/icon';
 import { ContainerModule } from '../@vex/directives/container/container.module';
 import { QuillModule } from 'ngx-quill';
 
@@ -76,8 +74,6 @@ import { QuillModule } from 'ngx-quill';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    MatNativeDateModule,
-    MatTooltipModule,
 	
     // Vex
     VexModule,
@@ -87,11 +83,9 @@ import { QuillModule } from 'ngx-quill';
     //TOTO: check copy-pasted from VEX ui single page - not sure if all of them are required
     PageLayoutModule,
     SecondaryToolbarModule,
-    MatButtonModule,
     FlexLayoutModule,
     BreadcrumbsModule,
     IconModule,
-    MatIconModule,
     ContainerModule,
     //TOTO: check
 
