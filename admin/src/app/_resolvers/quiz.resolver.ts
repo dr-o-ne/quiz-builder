@@ -2,23 +2,30 @@ import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Quiz } from '../_models/quiz';
 import { QuizService } from '../_service/quiz.service';
-import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, NEVER } from 'rxjs';
+import { catchError, single, tap } from 'rxjs/operators';
 
 @Injectable()
 export class QuizResolver implements Resolve<Quiz> {
-  constructor( private quizService: QuizService, private router: Router ) {
+
+  constructor(
+    private quizService: QuizService,
+    private router: Router) {
   }
 
-  resolve( route: ActivatedRouteSnapshot ) {
+  resolve(route: ActivatedRouteSnapshot): Observable<Quiz> {
     const id = route.params.id;
-    return this.quizService.getQuiz( id )
+
+    return this.quizService.getQuiz(id)
       .pipe(
-        catchError( error => {
-          console.log( 'Problem retrieving data' );
-          this.router.navigate( [ '/quizzes' ] );
-          return of( null );
-        } )
+        single(),
+        tap(quiz => { return quiz ? quiz : this.onEmpty(); }),
+        catchError(() => this.onEmpty())
       );
+  }
+
+  onEmpty(): Observable<never> {
+    this.router.navigate(['/404']);
+    return NEVER;
   }
 }
