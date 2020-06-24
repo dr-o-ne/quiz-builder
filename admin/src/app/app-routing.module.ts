@@ -10,6 +10,7 @@ import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
+import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
       children:
         [
           { path: '', component: QuizListComponent },
-          { path: 'new', component: QuizPageComponent }
+          { path: 'new', component: QuizInfoComponent }
         ]
     },
     {
