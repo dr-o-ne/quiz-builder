@@ -46,6 +46,7 @@ import { QuillModule } from 'ngx-quill';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
 import { Error500Component } from './common/500/error-500.component';
+import { QuizInfoSettingsComponent } from './quiz/quiz-info/quiz-info-settings/quiz-info-settings.component';
 
 @NgModule( {
   declarations: [
@@ -70,7 +71,8 @@ import { Error500Component } from './common/500/error-500.component';
     CommingSoonComponent,
     Error404Component,
     Error500Component,
-    QuizInfoComponent
+    QuizInfoComponent,
+    QuizInfoSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +132,8 @@ import { Error500Component } from './common/500/error-500.component';
     LongAnswerComponent,
     TrueFalsePreviewComponent,
     MultiSelectPreviewComponent,
-    LongAnswerPreviewComponent
+    LongAnswerPreviewComponent,
+    QuizInfoSettingsComponent
   ],
   providers: [
     AuthGuard,

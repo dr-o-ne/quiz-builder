@@ -50,7 +50,7 @@ const routes: Routes = [
             {
               path: 'edit', children:
                 [
-                  { path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },
+                  { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
                   {
                     path: 'questions', children:
                       [

@@ -1,0 +1,49 @@
+<div class="card main-color">
+
+    <form [formGroup]="form">
+
+        <div class="row"
+            fxLayout
+            fxLayout.xs="column"
+            fxLayoutAlign="flex-start"
+            fxLayoutWrap="wrap"
+            fxLayoutGap="1%">
+
+            <mat-form-field fxFlex fxFlexOffset="1" appearance="outline">
+                <mat-label>Quiz Name</mat-label>
+                <input matInput type="text" formControlName="name">
+            </mat-form-field>
+
+        </div>
+
+    </form>
+
+    <div class="footer-stick row"
+        fxLayout
+        fxLayoutAlign="center"
+        fxLayout.xs="column"
+        fxLayoutWrap="wrap"
+        fxLayoutGap="1%">
+
+        <button mat-raised-button 
+        color="accent" 
+        type="submit"
+        (click)="onSave()"
+        [disabled]="!form.valid">
+        
+        Save
+
+        </button>
+
+        <button mat-raised-button 
+        color="accent" 
+        (click)="onReturn()">
+        
+        Return
+
+        </button>
+
+    </div>
+
+</div>
+
