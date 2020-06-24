@@ -12,6 +12,7 @@ import { QuestionPageComponent } from './question/question-page/question-page.co
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
+import { Error500Component } from './common/500/error-500.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path: '404',
         component: Error404Component
+      },
+      {
+        path: '500',
+        component: Error500Component
       },
       {
         path: 'quizzes/:id',

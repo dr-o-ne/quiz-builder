@@ -20,12 +20,17 @@ export class QuizResolver implements Resolve<Quiz> {
       .pipe(
         single(),
         tap(quiz => { return quiz ? quiz : this.onEmpty(); }),
-        catchError(() => this.onEmpty())
+        catchError(() => this.onError())
       );
   }
 
   onEmpty(): Observable<never> {
     this.router.navigate(['/404']);
+    return NEVER;
+  }
+
+  onError(): Observable<never> {
+    this.router.navigate(['/500']);
     return NEVER;
   }
 }

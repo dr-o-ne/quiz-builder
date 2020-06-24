@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Action.Admin.Action;
@@ -18,6 +19,8 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> Get( [FromRoute] GetQuizByIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
+
+			throw new Exception();
 
 			return result is null
 				? (ActionResult)NoContent()

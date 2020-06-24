@@ -45,6 +45,7 @@ import { ContainerModule } from '../@vex/directives/container/container.module';
 import { QuillModule } from 'ngx-quill';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
+import { Error500Component } from './common/500/error-500.component';
 
 @NgModule( {
   declarations: [
@@ -68,6 +69,7 @@ import { Error404Component } from './common/404/error-404.component';
     LongAnswerPreviewComponent,
     CommingSoonComponent,
     Error404Component,
+    Error500Component,
     QuizInfoComponent
   ],
   imports: [
