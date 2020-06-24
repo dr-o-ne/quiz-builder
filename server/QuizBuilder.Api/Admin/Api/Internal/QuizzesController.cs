@@ -20,8 +20,6 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Get( [FromRoute] GetQuizByIdQuery query ) {
 			var result = await _dispatcher.QueryAsync( query );
 
-			throw new Exception();
-
 			return result is null
 				? (ActionResult)NoContent()
 				: Ok( result );
