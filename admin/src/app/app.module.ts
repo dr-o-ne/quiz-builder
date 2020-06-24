@@ -43,6 +43,7 @@ import { BreadcrumbsModule } from '../@vex/components/breadcrumbs/breadcrumbs.mo
 import { IconModule } from '@visurel/iconify-angular';
 import { ContainerModule } from '../@vex/directives/container/container.module';
 import { QuillModule } from 'ngx-quill';
+import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 
 @NgModule( {
   declarations: [
@@ -64,7 +65,8 @@ import { QuillModule } from 'ngx-quill';
     MultiSelectPreviewComponent,
     LongAnswerComponent,
     LongAnswerPreviewComponent,
-    CommingSoonComponent
+    CommingSoonComponent,
+    QuizInfoComponent
   ],
   imports: [
     BrowserModule,
