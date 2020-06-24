@@ -11,52 +11,58 @@ import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
+import { Error404Component } from './common/404/error-404.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CustomLayoutComponent,
-    children: [  {
-      path: 'quizzes',
-      runGuardsAndResolvers: 'always',
-      canActivate: [ AuthGuard ],
-      children:
-        [
-          { path: '', component: QuizListComponent },
-          { path: 'new', component: QuizInfoComponent }
-        ]
-    },
-    {
-      path: 'quizzes/:id',
-      runGuardsAndResolvers: 'always',
-      canActivate: [ AuthGuard ],
-      children:
-        [
-          { path: 'edit', children:
-            [
-              {path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },
-              {
-                path: 'questions', children:
-                  [
-                    { path: '', redirectTo: 'new', pathMatch: 'full' },
-                    { path: 'new', component: QuestionPageComponent }
-                  ]
-              },
-              {
-                path: 'questions/:id',
-                component: QuestionPageComponent,
-                resolve: { questionResolver: QuestionResolver }
-              }
-            ]
-          }
-        ]
-    }]
-  },
-  {
-    path: 'comming-soon',
-    component: CommingSoonComponent,
-    children: []
-  },
+    children: [
+      {
+        path: 'quizzes',
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
+        children:
+          [
+            { path: '', component: QuizListComponent },
+            { path: 'new', component: QuizInfoComponent }
+          ]
+      },
+      {
+        path: 'comming-soon',
+        component: CommingSoonComponent
+      },
+      {
+        path: '404',
+        component: Error404Component
+      },
+      {
+        path: 'quizzes/:id',
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
+        children:
+          [
+            {
+              path: 'edit', children:
+                [
+                  { path: '', component: QuizPageComponent, resolve: { quizResolver: QuizResolver } },
+                  {
+                    path: 'questions', children:
+                      [
+                        { path: '', redirectTo: 'new', pathMatch: 'full' },
+                        { path: 'new', component: QuestionPageComponent }
+                      ]
+                  },
+                  {
+                    path: 'questions/:id',
+                    component: QuestionPageComponent,
+                    resolve: { questionResolver: QuestionResolver }
+                  }
+                ]
+            }
+          ]
+      }]
+  }
 
 ];
 

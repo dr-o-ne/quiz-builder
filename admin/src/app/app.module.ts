@@ -44,6 +44,7 @@ import { IconModule } from '@visurel/iconify-angular';
 import { ContainerModule } from '../@vex/directives/container/container.module';
 import { QuillModule } from 'ngx-quill';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
+import { Error404Component } from './common/404/error-404.component';
 
 @NgModule( {
   declarations: [
@@ -66,6 +67,7 @@ import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
     LongAnswerComponent,
     LongAnswerPreviewComponent,
     CommingSoonComponent,
+    Error404Component,
     QuizInfoComponent
   ],
   imports: [
