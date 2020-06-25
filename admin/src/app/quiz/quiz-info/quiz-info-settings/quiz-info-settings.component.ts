@@ -45,13 +45,15 @@ export class QuizInfoSettingsComponent implements OnInit {
 
     createQuiz(): void {
         this.quizService.createQuiz(this.quiz).subscribe((response: any) => {
+
+            console.log(response);
+
             this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit');
-        }, error => console.log(error));
+        });
     }
 
     updateQuiz(): void {
-        this.quizService.updateQuiz(this.quiz).subscribe(() => {
-        }, error => console.log(error));
+        this.quizService.updateQuiz(this.quiz).subscribe();
     }
 
 }

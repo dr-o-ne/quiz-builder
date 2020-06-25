@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './_material/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
@@ -47,8 +47,9 @@ import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
 import { Error500Component } from './common/500/error-500.component';
 import { QuizInfoSettingsComponent } from './quiz/quiz-info/quiz-info-settings/quiz-info-settings.component';
+import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interceptor';
 
-@NgModule( {
+@NgModule({
   declarations: [
     AppComponent,
     QuizListComponent,
@@ -82,7 +83,7 @@ import { QuizInfoSettingsComponent } from './quiz/quiz-info/quiz-info-settings/q
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-	
+
     // Vex
     VexModule,
     CustomLayoutModule,
@@ -141,11 +142,16 @@ import { QuizInfoSettingsComponent } from './quiz/quiz-info/quiz-info-settings/q
     QuestionService,
     QuizResolver,
     QuestionResolver,
-    AttemptService
+    AttemptService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [
     AppComponent
   ]
-} )
+})
 export class AppModule {
 }

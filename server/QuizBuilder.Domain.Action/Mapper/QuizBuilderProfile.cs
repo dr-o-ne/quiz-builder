@@ -28,7 +28,6 @@ namespace QuizBuilder.Domain.Action.Mapper {
 			CreateMap<Quiz, QuizDto>().ConvertUsing<QuizToQuizDtoConverter>();
 			CreateMap<QuizDto, Quiz>().ConvertUsing<QuizDtoToQuizConverter>();
 			CreateMap<Quiz, QuizViewModel>().ConvertUsing<QuizToQuizViewModelConverter>();
-			CreateMap<CreateQuizCommand, Quiz>().ConvertUsing<CreateQuizCommandToQuizConverter>();
 			CreateMap<UpdateQuizCommand, Quiz>().ConvertUsing<UpdateQuizCommandToQuizConverter>();
 		}
 

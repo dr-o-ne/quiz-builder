@@ -3,7 +3,7 @@ import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Quiz } from '../_models/quiz';
 import { QuizService } from '../_service/quiz.service';
 import { Observable, NEVER } from 'rxjs';
-import { catchError, single, tap } from 'rxjs/operators';
+import { single, tap } from 'rxjs/operators';
 
 @Injectable()
 export class QuizResolver implements Resolve<Quiz> {
@@ -19,8 +19,7 @@ export class QuizResolver implements Resolve<Quiz> {
     return this.quizService.getQuiz(id)
       .pipe(
         single(),
-        tap(quiz => { return quiz ? quiz : this.onEmpty(); }),
-        catchError(() => this.onError())
+        tap(quiz => { return quiz ? quiz : this.onEmpty(); })
       );
   }
 
@@ -29,8 +28,4 @@ export class QuizResolver implements Resolve<Quiz> {
     return NEVER;
   }
 
-  onError(): Observable<never> {
-    this.router.navigate(['/500']);
-    return NEVER;
-  }
 }

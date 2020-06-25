@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Common.Types.Default;
@@ -19,6 +18,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 
 		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> Get( [FromRoute] GetQuizByIdQuery query ) {
+
 			var result = await _dispatcher.QueryAsync( query );
 
 			return result is null
@@ -52,6 +52,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] CreateQuizCommand command ) {
+
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.Success
