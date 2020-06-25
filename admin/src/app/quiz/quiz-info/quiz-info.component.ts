@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
 import { ActivatedRoute } from '@angular/router';
 import { MatTabGroup } from '@angular/material/tabs';

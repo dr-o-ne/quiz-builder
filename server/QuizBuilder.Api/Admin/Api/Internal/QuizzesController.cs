@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
+using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
@@ -42,7 +43,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 
 		[HttpDelete( "{quizUId}/questions/{uid}" )]
 		public async Task<ActionResult> Delete( [FromRoute] DeleteQuestionCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+			CommandResult result = await _dispatcher.SendAsync( command );
 
 			return result.Success
 				? (ActionResult)NoContent()

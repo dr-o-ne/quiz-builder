@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
+import { Quiz } from 'src/app/_models/quiz';
+import { QuizService } from 'src/app/_service/quiz.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-quiz-info-settings',
@@ -12,21 +15,43 @@ export class QuizInfoSettingsComponent implements OnInit {
 
     form: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private location: Location,
+        private router: Router,
+        private quizService: QuizService) {
+
     }
 
     ngOnInit(): void {
-
         this.form = this.fb.group({
             name: [this.quiz.name, Validators.required]
         });
-        
     }
 
     isEditMode = () => this.quiz.id ? true : false;
 
-    onSave = () => { }
+    onSubmit() {
 
-    onReturn = () => { }
+        this.quiz.name = this.form.value.name as string;
+
+        if (!this.isEditMode())
+            this.createQuiz();
+        else
+            this.updateQuiz();
+    }
+
+    onReturn = () => this.location.back();
+
+    createQuiz(): void {
+        this.quizService.createQuiz(this.quiz).subscribe((response: any) => {
+            this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit');
+        }, error => console.log(error));
+    }
+
+    updateQuiz(): void {
+        this.quizService.updateQuiz(this.quiz).subscribe(() => {
+        }, error => console.log(error));
+    }
 
 }
