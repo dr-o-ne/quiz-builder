@@ -34,11 +34,8 @@ export class QuizListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.quizService.getAllQuizzes().subscribe((response: any) => {
-      this.initDataSource(response.quizzes);
-    }, error => {
-      console.log(error);
-    });
+    this.quizService.getAllQuizzes()
+      .subscribe((response: any) => { this.initDataSource(response.quizzes); });
   }
 
   initDataSource(quizzes: Quiz[]): void {
@@ -91,18 +88,14 @@ export class QuizListComponent implements OnInit {
   }
 
   deleteQuiz(quiz: Quiz): void {
-    this.quizService.deleteQuiz(quiz.id).subscribe(() => {
-      this.loadData();
-    }, error => console.log(error));
+    this.quizService.deleteQuiz(quiz.id)
+      .subscribe(() => { this.loadData(); });
   }
 
   bulkDelete(): void {
     const ids = this.selection.selected.map(x => x.id);
-    this.quizService.deleteQuizzes(ids).subscribe(
-      () => {
-        this.loadData();
-      },
-      error => console.log(error));
+    this.quizService.deleteQuizzes(ids)
+      .subscribe(() => { this.loadData(); });
   }
 
   onChangeQuizState(isEnabled: boolean, quiz: Quiz): void {
