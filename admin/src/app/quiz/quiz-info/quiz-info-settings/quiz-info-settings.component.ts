@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { retry } from 'rxjs/operators';
 
 @Component({
     selector: 'app-quiz-info-settings',
