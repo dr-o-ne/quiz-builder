@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { Quiz } from 'src/app/_models/quiz';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { QuestionType } from 'src/app/_models/question';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/_models/group';
@@ -18,7 +18,6 @@ import { finalize } from 'rxjs/operators';
 export class QuizPageComponent implements OnInit, AfterViewInit {
   quiz: Quiz;
   selectedIndex = 0;
-  quizForm: FormGroup;
   groupFormControl: FormControl;
 
   groups: Group[] = [];
@@ -35,7 +34,6 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private quizService: QuizService,
@@ -45,7 +43,6 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.initValidate();
     this.activeRoute.data.subscribe( response => {
       if ( response && response.quizResolver ) {
         this.quiz = response.quizResolver.quiz;
@@ -146,30 +143,8 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
     );
   }
 
-  initValidate(): void {
-    this.quizForm = this.fb.group( {
-      name: [ '', Validators.required ]
-    } );
-  }
-
   saveChange(): void {
-    if ( !this.quiz.id ) {
-      this.createQuiz();
-      return;
-    }
-    this.updateQuiz();
-  }
-
-  createQuiz(): void {
-    this.quizService.createQuiz( this.quiz ).subscribe( (response: any) => {
-      this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit');
-    }, error => console.log( error ) );
-  }
-
-  updateQuiz(): void {
-    this.quizService.updateQuiz( this.quiz ).subscribe( response => {
-      //this.navigateToParent();
-    }, error => console.log( error ) );
+    this.quizService.updateQuiz( this.quiz ).subscribe();
   }
 
   addNewQuestion( tabGroup: MatTabGroup, typeQuestion: QuestionType ): void {

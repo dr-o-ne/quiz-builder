@@ -41,15 +41,13 @@ export class QuizInfoSettingsComponent implements OnInit {
             this.updateQuiz();
     }
 
-    onReturn = () => this.location.back();
+    onReturn = () => this.location.back(); //TODO: fix: Add-Return-500
 
     createQuiz(): void {
-        this.quizService.createQuiz(this.quiz).subscribe((response: any) => {
-
-            console.log(response);
-
-            this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit');
-        });
+        this.quizService.createQuiz(this.quiz)
+            .subscribe(
+                (response: any) => { this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit'); }
+            );
     }
 
     updateQuiz(): void {

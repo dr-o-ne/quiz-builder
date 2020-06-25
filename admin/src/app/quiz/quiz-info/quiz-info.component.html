@@ -3,8 +3,9 @@
   <vex-page-layout-content class="vex-tabs p-0" vexContainer>
     
     <mat-tab-group>
-      <mat-tab label="Questions">
+      <mat-tab label="Questions" [disabled]='!isEditMode()'>
         <div class="p-6">
+          <app-quiz-page></app-quiz-page>
         </div>
       </mat-tab>
 
@@ -16,7 +17,7 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Appearance">
+      <mat-tab label="Appearance" [disabled]='!isEditMode()'>
         <div class="p-6">
         </div>
       </mat-tab>
