@@ -162,23 +162,4 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onReturn = () => this.navigateToParent();
-
-  navigateToParent(): void {
-    if ( this.quiz.id ) {
-      this.router.navigate(
-        [ '../../' ],
-        {
-          relativeTo: this.activeRoute.parent
-        }
-      );
-      return;
-    }
-    this.router.navigate(
-      [ '../' ],
-      {
-        relativeTo: this.activeRoute
-      }
-    );
-  }
 }
