@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form">
 
     <div class="card main-color">
 
@@ -13,16 +13,6 @@
 
     </div>
 
-    <div class="footer-stick row" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutGap="1%">
 
-        <button mat-raised-button color="accent" type="submit" [disabled]="!form.valid">
-            Save
-        </button>
-
-        <button mat-raised-button color="accent" (click)="onReturn()">
-            Return
-        </button>
-
-    </div>
 
 </form>

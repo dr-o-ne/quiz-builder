@@ -1,7 +1,7 @@
 <vex-page-layout>
 
   <vex-page-layout-content class="vex-tabs p-0" vexContainer>
-    
+
     <mat-tab-group>
       <mat-tab label="Questions" [disabled]='!isEditMode()'>
         <div class="p-6">
@@ -11,8 +11,7 @@
 
       <mat-tab label="Settings">
         <div class="p-6">
-          <app-quiz-info-settings 
-            [quiz]="quiz">
+          <app-quiz-info-settings [form]="quizForm.get('settings')">
           </app-quiz-info-settings>
         </div>
       </mat-tab>
@@ -22,6 +21,18 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+
+    <div class="footer-stick row" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutGap="1%">
+
+      <button mat-raised-button color="accent" type="submit" [disabled]="!quizForm.valid" (click)="onSave()">
+        Save
+      </button>
+
+      <button mat-raised-button color="accent" (click)="onReturn()">
+        Return
+      </button>
+
+    </div>
 
   </vex-page-layout-content>
 
