@@ -10,11 +10,11 @@ import { Group } from '../../_models/group';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component( {
-  selector: 'app-question-list',
+  selector: 'app-question-list-old',
   templateUrl: './question-list.component.html',
   styleUrls: [ './question-list.component.css' ]
 } )
-export class QuestionListComponent implements OnInit {
+export class QuestionListComponentOld implements OnInit {
   @Input() group: Group;
   @Input() quizId: string;
 
@@ -38,6 +38,7 @@ export class QuestionListComponent implements OnInit {
   ngOnInit() {
     this.initQuestions( this.quizId, this.group.id );
   }
+
 
   initQuestions( quizId: string, groupId: string ): void {
     this.questionService.getQuestionsByParent( quizId, groupId ).subscribe( ( response: any ) => {

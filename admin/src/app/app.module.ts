@@ -13,7 +13,7 @@ import { QuestionService } from './_service/question.service';
 import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { QuestionListComponent } from './question/question-list/question-list.component';
+import { QuestionListComponentOld } from './question/question-list/question-list.component';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
@@ -55,7 +55,7 @@ import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interce
     QuizListComponent,
     QuizPageComponent,
     QuestionPageComponent,
-    QuestionListComponent,
+    QuestionListComponentOld,
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
@@ -124,7 +124,7 @@ import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interce
     })
   ],
   entryComponents: [
-    QuestionListComponent,
+    QuestionListComponentOld,
     QuestionPageComponent,
     ModalWindowPreviewQuestionComponent,
     MultipleChoiceAnswerComponent,
