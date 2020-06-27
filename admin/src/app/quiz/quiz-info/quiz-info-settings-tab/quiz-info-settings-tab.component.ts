@@ -3,10 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { Quiz } from 'src/app/_models/quiz';
 
 @Component({
-    selector: 'app-quiz-info-settings',
-    templateUrl: './quiz-info-settings.component.html'
+    selector: 'app-quiz-info-settings-tab',
+    templateUrl: './quiz-info-settings-tab.component.html'
 })
-export class QuizInfoSettingsComponent {
+export class QuizInfoSettingsTabComponent {
 
     @Input() form: FormGroup;
     

@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTabGroup } from '@angular/material/tabs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuizService } from 'src/app/_service/quiz.service';
-import { QuizInfoSettingsComponent } from './quiz-info-settings/quiz-info-settings.component';
+import { QuizInfoSettingsTabComponent } from './quiz-info-settings-tab/quiz-info-settings-tab.component';
+
 
 @Component({
     selector: 'app-quiz-info',
@@ -14,7 +15,7 @@ import { QuizInfoSettingsComponent } from './quiz-info-settings/quiz-info-settin
 export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
-    @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
+    @ViewChild(QuizInfoSettingsTabComponent) settingsControl: QuizInfoSettingsTabComponent;
 
     quiz: Quiz;
     quizForm: FormGroup;
