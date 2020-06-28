@@ -19,31 +19,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 
 		public async Task<IEnumerable<QuestionDto>> GetByQuiz( string uid ) {
 
-// 			//	tODO: Add WHERE quiz.UId = @UId
-// 			const string sql = @"
-// WITH
-// cte_root_ids AS (
-// 	SELECT qi.Id FROM dbo.Quiz AS quiz (NOLOCK)
-// 	INNER JOIN dbo.QuizQuizItem AS qqi (NOLOCK) ON quiz.Id = qqi.QuizId
-// 	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = qqi.QuizItemId
-//
-// ),
-// cte_all_ids AS ( --TODO: add recursion + optimize by types
-// 	SELECT id FROM cte_root_ids
-// 	UNION
-// 	SELECT qi.Id FROM cte_root_ids AS ids (NOLOCK)
-// 	INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON ids.Id = qi.ParentId
-// )
-// SELECT
-// 	q.Id,
-// 	q.UId,
-// 	q.TypeId,
-// 	q.Name,
-// 	q.Text,
-// 	q.Settings
-// FROM cte_all_ids AS ids
-// INNER JOIN dbo.QuizItem AS qi (NOLOCK) ON qi.Id = ids.Id
-// INNER JOIN dbo.Question AS q  (NOLOCK) ON qi.QuestionId = q.Id";
 			const string sql = @"
 			SELECT
 				q.Id,
@@ -52,8 +27,9 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.Name,
 				q.Text,
 				q.Points,
-				q.Settings
-			FROM
+				q.Settings,
+				pqi.UId AS ParentUId
+			FROM 
 				dbo.Question q WITH(NOLOCK)
 			INNER JOIN
 				dbo.QuizItem qi WITH(NOLOCK) ON q.Id = qi.QuestionId
@@ -61,7 +37,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				dbo.QuizQuizItem qqi WITH(NOLOCK) ON qi.Id = qqi.QuizItemId
 			INNER JOIN
 				dbo.Quiz qz WITH(NOLOCK) ON qz.Id = qqi.QuizId
-			WHERE qz.UId = @QuizUId";
+			INNER JOIN 
+				dbo.QuizItem pqi WITH(NOLOCK) ON qi.ParentId = pqi.Id";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );

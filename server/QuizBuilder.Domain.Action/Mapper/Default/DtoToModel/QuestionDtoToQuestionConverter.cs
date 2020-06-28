@@ -26,6 +26,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.DtoToModel {
 
 			entity.Id = source.Id;
 			entity.UId = source.UId;
+			entity.ParentUId = source.ParentUId;
 			entity.Name = source.Name;
 			entity.Text = source.Text;
 			entity.Points = source.Points;

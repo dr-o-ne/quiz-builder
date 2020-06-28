@@ -53,6 +53,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel {
 
 			return new QuestionViewModel {
 				Id = source.UId,
+				GroupId = source.ParentUId,
 				Type = source.Type,
 				Name = source.Name,
 				Text = source.Text,

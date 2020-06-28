@@ -9,6 +9,9 @@ namespace QuizBuilder.Domain.Model.Default.Structure {
 		public string UId { get; set; }
 
 		[JsonIgnore]
+		public string ParentUId { get; set; }
+
+		[JsonIgnore]
 		public string Name { get; set; }
 
 		public abstract bool IsValid();

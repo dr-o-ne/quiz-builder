@@ -11,13 +11,17 @@
 
       <mat-tab label="Settings">
         <div class="p-6">
-          <app-quiz-info-settings-tab [form]="quizForm.get('settings')">
+          <app-quiz-info-settings-tab 
+            [form]="quizForm.get('settings')">
           </app-quiz-info-settings-tab>
         </div>
       </mat-tab>
 
       <mat-tab label="Appearance" [disabled]='!isEditMode()'>
         <div class="p-6">
+          <app-quiz-info-questions-tab
+            [quiz]="quiz">
+          </app-quiz-info-questions-tab>
         </div>
       </mat-tab>
     </mat-tab-group>
