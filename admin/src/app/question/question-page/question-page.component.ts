@@ -47,7 +47,7 @@ export class QuestionPageComponent implements OnInit {
     this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
 
     this.questionForm = this.fb.group( {
-      name: [ '', Validators.required ],
+      name: [ '', Validators.nullValidator ],
       type: [ '', Validators.required ],
       text: [ '', Validators.required ],
       points: [ '', Validators.nullValidator ],

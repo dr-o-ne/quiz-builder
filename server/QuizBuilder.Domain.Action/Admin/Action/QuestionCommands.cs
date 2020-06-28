@@ -9,7 +9,6 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	public sealed class CreateQuestionCommand : ICommand<QuestionCommandResult> {
 
-		[Required]
 		public string Name { get; set; }
 
 		[Required]
