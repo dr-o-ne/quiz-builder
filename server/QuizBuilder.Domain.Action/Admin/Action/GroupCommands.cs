@@ -12,7 +12,6 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "QuizId" )]
 		public string QuizUId { get; set; }
 
-		[Required]
 		public string Name { get; set; }
 
 	}

@@ -59,7 +59,11 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
   }
 
   initGroups( quiz: Quiz ): void {
-    const defaultGroup = new Group( '', quiz.id );
+    const defaultGroup = new Group();
+
+    defaultGroup.id = '';
+    defaultGroup.quizId = quiz.id;
+
     this.groups.push( defaultGroup );
     this.groups.push( ...quiz.groups );
   }
@@ -91,7 +95,12 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
 
   addGroup(): void {
     if ( this.groupFormControl.valid ) {
-      const group = new Group( '', this.quiz.id, this.groupForm.name );
+      const group = new Group(  );
+
+      group.name = this.groupForm.name;
+      group.quizId = this.quiz.id;
+      group.id = '';
+
       this.quizService.createGroup( group ).pipe(
         finalize( () => this.resetGroupForm() )
       ).subscribe( ( response: any ) => {

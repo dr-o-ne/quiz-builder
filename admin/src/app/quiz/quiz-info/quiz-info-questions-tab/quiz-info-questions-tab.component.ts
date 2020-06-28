@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { Question } from 'src/app/_models/question';
+import { Group } from 'src/app/_models/group';
 
 @Component({
     selector: 'app-quiz-info-questions-tab',
@@ -34,11 +35,19 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 this.quiz.groups.find(g => g.id === question.groupId).questions.push(question);
             }
 
-            this.quiz.groups.forEach(x => this.groupDataSources.push(new MatTableDataSource(x.questions)));
+            this.quiz.groups.forEach(x => this.addGroupForm(x));
         });
     }
 
-    drop(event: CdkDragDrop<string[]>) {
+    addGroup(): void {
+
+    }
+
+    addGroupForm(group: Group): void {
+        this.groupDataSources.push(new MatTableDataSource(group.questions))
+    }
+
+    drop(event: CdkDragDrop<string[]>): void {
         if (event.previousContainer === event.container) {
             moveItemInArray(
                 event.container.data,
