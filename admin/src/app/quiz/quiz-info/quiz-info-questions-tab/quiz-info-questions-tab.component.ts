@@ -17,7 +17,7 @@ export class DataInfo {
 })
 export class QuizInfoQuestionsTabComponent implements OnInit {
 
-    @ViewChildren(MatTable) table !: QueryList<MatTable<Question>>;
+    @ViewChildren(MatTable) tables !: QueryList<MatTable<Question>>;
 
     @Input() quiz: Quiz;
 
@@ -25,15 +25,12 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     dataInfos: DataInfo[] = new Array<DataInfo>();
 
-
     constructor(private quizService: QuizService) {
     }
-
 
     ngOnInit(): void {
         this.loadData(this.quiz.id);
     }
-    
 
     loadData(quizId: string): void {
 
@@ -70,10 +67,17 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         dataInfo.id = group.id;
         dataInfo.dataSource = new MatTableDataSource(group.questions);
 
-        this.dataInfos.push( dataInfo );
+        this.dataInfos.push(dataInfo);
     }
 
-    drop(event: CdkDragDrop<string[]>): void {
+    dropGroup(event: CdkDragDrop<string[]>): void {
+        moveItemInArray(
+            this.dataInfos,
+            event.previousIndex,
+            event.currentIndex);
+    }
+
+    dropQuestion(event: CdkDragDrop<string[]>): void {
         if (event.previousContainer === event.container) {
             moveItemInArray(
                 event.container.data,
@@ -86,8 +90,11 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 event.currentIndex);
         }
 
-        this.table.forEach(x => x.renderRows());
+        this.tables.forEach(x => x.renderRows());
+    }
 
+    getConnectedList(): string[] {
+        return this.dataInfos.map(x => `${x.id}`);
     }
 
 }

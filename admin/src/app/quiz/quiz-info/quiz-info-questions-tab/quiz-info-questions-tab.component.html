@@ -4,13 +4,8 @@
 
     <div class="title my-0 ltr:pr-4 rtl:pl-4 ltr:border-r rtl:border-l" fxFlex="none" fxHide.xs>
 
-      <button mat-raised-button 
-        (click)="addGroup()" 
-        color="primary" 
-        fxFlex="none" 
-        fxHide.xs 
-        type="button">
-        
+      <button mat-raised-button (click)="addGroup()" color="primary" fxFlex="none" fxHide.xs type="button">
+
         <span>Add Group</span>
 
       </button>
@@ -18,15 +13,16 @@
     </div>
 
   </div>
-    
+
 </div>
 
-<div cdkDropListGroup>
+<div cdkDropList [cdkDropListData]="dataInfos" (cdkDropListDropped)="dropGroup($event)">
 
-  <div *ngFor="let dataInfo of dataInfos">
+  <div *ngFor="let dataInfo of dataInfos" cdkDrag>
 
-    <mat-table [dataSource]="dataInfo.dataSource" cdkDropList [cdkDropListData]="dataInfo.dataSource.data"
-      (cdkDropListDropped)="drop($event)">
+    <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
+      [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"
+      (cdkDropListDropped)="dropQuestion($event)">
 
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -45,5 +41,3 @@
   </div>
 
 </div>
-
-
