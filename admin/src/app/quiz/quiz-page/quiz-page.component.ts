@@ -96,7 +96,6 @@ export class QuizPageComponent implements OnInit, AfterViewInit {
   addGroup(): void {
     if ( this.groupFormControl.valid ) {
       const group = new Group(  );
-
       group.name = this.groupForm.name;
       group.quizId = this.quiz.id;
       group.id = '';
