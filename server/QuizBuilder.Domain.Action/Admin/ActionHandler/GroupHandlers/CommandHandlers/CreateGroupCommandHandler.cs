@@ -33,8 +33,10 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 		}
 
 		public async Task<GroupCommandResult> HandleAsync( CreateGroupCommand command ) {
-			Group model = _mapper.Map<CreateGroupCommand, Group>( command );
-			model.UId = _uIdService.GetUId();
+
+			var model = new Group {
+				UId = _uIdService.GetUId()
+			};
 
 			if( !model.IsValid() )
 				return new GroupCommandResult { Success = false };

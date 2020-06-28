@@ -12,8 +12,6 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "QuizId" )]
 		public string QuizUId { get; set; }
 
-		public string Name { get; set; }
-
 	}
 
 	public sealed class UpdateGroupCommand : ICommand<CommandResult> {

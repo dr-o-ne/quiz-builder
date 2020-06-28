@@ -43,7 +43,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         const group = new Group();
         group.quizId = this.quiz.id;
-        group.name = 'TODO';
 
         this.quizService.createGroup( group ).subscribe(
             (response: any) => { 

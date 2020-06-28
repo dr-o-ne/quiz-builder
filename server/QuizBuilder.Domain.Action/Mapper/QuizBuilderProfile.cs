@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
@@ -9,7 +8,6 @@ using QuizBuilder.Domain.Action.Mapper.Default.ModelToDto;
 using QuizBuilder.Domain.Action.Mapper.Default.ModelToModel;
 using QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Domain.Model.Default.Answers;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
@@ -41,7 +39,6 @@ namespace QuizBuilder.Domain.Action.Mapper {
 		}
 
 		private void AddGroupMapping() {
-			CreateMap<CreateGroupCommand, Group>().ConvertUsing<CreateGroupCommandToGroupConverter>();
 			CreateMap<UpdateGroupCommand, Group>().ConvertUsing<UpdateGroupCommandToGroupConverter>();
 			CreateMap<Group, GroupDto>().ConvertUsing<GroupToGroupDtoConverter>();
 			CreateMap<GroupDto, Group>().ConvertUsing<GroupDtoToGroupConverter>();
