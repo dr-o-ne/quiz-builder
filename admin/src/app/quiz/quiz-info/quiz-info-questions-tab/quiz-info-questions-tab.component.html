@@ -23,9 +23,9 @@
 
 <div cdkDropListGroup>
 
-  <div *ngFor="let groupDataSource of groupDataSources">
+  <div *ngFor="let dataInfo of dataInfos">
 
-    <mat-table [dataSource]="groupDataSource" cdkDropList [cdkDropListData]="groupDataSource.data"
+    <mat-table [dataSource]="dataInfo.dataSource" cdkDropList [cdkDropListData]="dataInfo.dataSource.data"
       (cdkDropListDropped)="drop($event)">
 
       <ng-container matColumnDef="name">

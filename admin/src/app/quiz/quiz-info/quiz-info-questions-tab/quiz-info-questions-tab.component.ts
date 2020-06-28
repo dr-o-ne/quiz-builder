@@ -1,10 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, QueryList, ViewChildren } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
 import { QuizService } from 'src/app/_service/quiz.service';
 import { Question } from 'src/app/_models/question';
 import { Group } from 'src/app/_models/group';
+
+export class DataInfo {
+    id: string;
+    dataSource: MatTableDataSource<Question>;
+}
 
 @Component({
     selector: 'app-quiz-info-questions-tab',
@@ -12,18 +17,23 @@ import { Group } from 'src/app/_models/group';
 })
 export class QuizInfoQuestionsTabComponent implements OnInit {
 
+    @ViewChildren(MatTable) table !: QueryList<MatTable<Question>>;
+
     @Input() quiz: Quiz;
 
     displayedColumns: string[] = ['name', 'type'];
 
-    groupDataSources: MatTableDataSource<Question>[] = [];
+    dataInfos: DataInfo[] = new Array<DataInfo>();
+
 
     constructor(private quizService: QuizService) {
     }
 
+
     ngOnInit(): void {
         this.loadData(this.quiz.id);
     }
+    
 
     loadData(quizId: string): void {
 
@@ -44,18 +54,23 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         const group = new Group();
         group.quizId = this.quiz.id;
 
-        this.quizService.createGroup( group ).subscribe(
-            (response: any) => { 
+        this.quizService.createGroup(group).subscribe(
+            (response: any) => {
                 const group = response.group;
                 this.quiz.groups.push(group);
-                this.addGroupForm(group);   
+                this.addGroupForm(group);
             }
         );
 
     }
 
     addGroupForm(group: Group): void {
-        this.groupDataSources.push(new MatTableDataSource(group.questions))
+
+        var dataInfo = new DataInfo();
+        dataInfo.id = group.id;
+        dataInfo.dataSource = new MatTableDataSource(group.questions);
+
+        this.dataInfos.push( dataInfo );
     }
 
     drop(event: CdkDragDrop<string[]>): void {
@@ -71,7 +86,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 event.currentIndex);
         }
 
-        this.groupDataSources.forEach(x => x.data = x.data);
+        this.table.forEach(x => x.renderRows());
 
     }
 
