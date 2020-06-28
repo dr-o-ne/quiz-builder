@@ -5,4 +5,8 @@ export class Quiz {
     name: string;
     isEnabled: boolean;
     groups: Group[];
+
+    constructor() {
+        this.groups = new Array<Group>();
+    }
 }
