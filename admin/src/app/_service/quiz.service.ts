@@ -4,6 +4,7 @@ import { Quiz } from '../_models/quiz';
 import { Observable } from 'rxjs';
 import { Group } from '../_models/group';
 import { environment } from 'src/environments/environment';
+import { Question } from '../_models/question';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class QuizService {
     return this.http.get(this.apiUrl + 'quizzes');
   }
 
-  getAllQuestions(id: string): Observable<object> {
-    return this.http.get(this.apiUrl + 'quizzes/' + id + '/questions');
+  getAllQuestions(id: string): Observable<Question[]> {
+    return this.http.get<Question[]>(this.apiUrl + 'quizzes/' + id + '/questions');
   }
 
   getQuiz(id: string): Observable<Quiz> {
