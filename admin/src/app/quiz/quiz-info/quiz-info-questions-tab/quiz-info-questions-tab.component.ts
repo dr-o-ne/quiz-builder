@@ -73,7 +73,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     dropGroup(event: CdkDragDrop<string[]>): void {
         moveItemInArray(
-            this.dataInfos,
+            event.container.data,
             event.previousIndex,
             event.currentIndex);
     }
