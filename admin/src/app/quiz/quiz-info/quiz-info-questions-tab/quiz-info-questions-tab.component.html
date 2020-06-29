@@ -56,6 +56,19 @@
           <mat-cell *matCellDef="let element">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button 
+              mat-icon-button color="primary" 
+              matTooltip="Delete Question" 
+              fxFlex="nogrow"
+              (click)="deleteQuestion(dataInfo.id, element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></mat-row>
       </mat-table>

@@ -25,7 +25,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     @Input() quiz: Quiz;
 
     questionType = QuestionType;
-    displayedColumns: string[] = ['name', 'type'];
+    displayedColumns: string[] = ['name', 'type', 'delete'];
     dataInfos: DataInfo[] = new Array<DataInfo>();
     questionTypeKeys: number[];
 
@@ -70,15 +70,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     }
 
-    deleteGroup(groupId: string): void {
-        this.quizService.deleteGroup(groupId).subscribe(
-            () => {
-                this.deleteGroupData(groupId);
-                this.deleteGroupForm(groupId);
-            }
-        );
-    }
-
     addGroupData(group: Group): void {
         this.quiz.groups.push(group);
     }
@@ -90,6 +81,15 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         dataInfo.dataSource = new MatTableDataSource(group.questions);
 
         this.dataInfos.push(dataInfo);
+    }
+
+    deleteGroup(groupId: string): void {
+        this.quizService.deleteGroup(groupId).subscribe(
+            () => {
+                this.deleteGroupData(groupId);
+                this.deleteGroupForm(groupId);
+            }
+        );
     }
 
     deleteGroupData(groupId: string): void {
@@ -141,6 +141,32 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 }
             }
         );
+    }
+
+    deleteQuestion(groupId: string, questionId: string): void {
+        this.quizService.deleteQuestion(this.quiz.id, questionId).subscribe(
+            () => {
+                this.deleteQuestionData(groupId, questionId);
+                this.deleteQuestionForm(groupId, questionId);
+                this.tables.forEach(x => x.renderRows());
+            }
+        );
+    }
+
+    deleteQuestionData(groupId: string, questionId: string): void {
+        const groupIndex = this.quiz.groups.map(x => x.id).indexOf(groupId);
+        const group = this.quiz.groups[groupIndex];
+
+        const questionIndex = group.questions.map(x => x.id).indexOf(questionId);
+        group.questions.splice(questionIndex, 1);
+    }
+
+    deleteQuestionForm(groupId: string, questionId: string): void {
+        const groupIndex = this.dataInfos.map(x => x.id).indexOf(groupId);
+        const group = this.dataInfos[groupIndex];
+
+        const questionIndex = group.dataSource.data.map(x => x.id).indexOf(questionId);
+        group.dataSource.data.splice(questionIndex, 1);
     }
 
 }
