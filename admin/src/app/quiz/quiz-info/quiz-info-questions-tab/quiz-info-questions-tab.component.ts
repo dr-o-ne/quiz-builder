@@ -63,12 +63,24 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         this.quizService.createGroup(group).subscribe(
             (response: any) => {
-                const group = response.group;
-                this.quiz.groups.push(group);
-                this.addGroupForm(group);
+                this.addGroupData(response.group);
+                this.addGroupForm(response.group);
             }
         );
 
+    }
+
+    deleteGroup(groupId: string): void {
+        this.quizService.deleteGroup(groupId).subscribe(
+            () => {
+                this.deleteGroupData(groupId);
+                this.deleteGroupForm(groupId);
+            }
+        );
+    }
+
+    addGroupData(group: Group): void {
+        this.quiz.groups.push(group);
     }
 
     addGroupForm(group: Group): void {
@@ -78,6 +90,16 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         dataInfo.dataSource = new MatTableDataSource(group.questions);
 
         this.dataInfos.push(dataInfo);
+    }
+
+    deleteGroupData(groupId: string): void {
+        const index = this.quiz.groups.map(x => x.id).indexOf(groupId);
+        this.quiz.groups.splice(index, 1);
+    }
+
+    deleteGroupForm(groupId: string): void {
+        const index = this.dataInfos.map(x => x.id).indexOf(groupId);
+        this.dataInfos.splice(index, 1);
     }
 
     dropGroup(event: CdkDragDrop<string[]>): void {

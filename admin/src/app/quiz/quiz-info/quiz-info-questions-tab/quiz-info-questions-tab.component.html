@@ -29,8 +29,18 @@
           </mat-menu>
 
         </div>
-      </div>
 
+        <div fxFlex></div>
+
+        <button 
+          mat-icon-button color="primary" 
+          matTooltip="Delete Group" 
+          fxFlex="nogrow"
+          (click)="deleteGroup(dataInfo.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </div>
 
       <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
         [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"
