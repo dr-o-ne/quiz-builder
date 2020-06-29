@@ -13,7 +13,8 @@ export class DataInfo {
 
 @Component({
     selector: 'app-quiz-info-questions-tab',
-    templateUrl: './quiz-info-questions-tab.component.html'
+    templateUrl: './quiz-info-questions-tab.component.html',
+    styleUrls: [ './quiz-info-questions-tab.component.css' ]
 })
 export class QuizInfoQuestionsTabComponent implements OnInit {
 

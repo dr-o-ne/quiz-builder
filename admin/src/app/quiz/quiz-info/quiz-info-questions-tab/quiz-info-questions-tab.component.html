@@ -1,43 +1,51 @@
 <div class="card overflow-auto">
-
   <div class="bg-app-bar px-4 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
-
     <div class="title my-0 ltr:pr-4 rtl:pl-4 ltr:border-r rtl:border-l" fxFlex="none" fxHide.xs>
-
       <button mat-raised-button (click)="addGroup()" color="primary" fxFlex="none" fxHide.xs type="button">
-
         <span>Add Group</span>
-
       </button>
+    </div>
+  </div>
+</div>
+
+<div cdkDropList [cdkDropListData]="dataInfos" (cdkDropListDropped)="dropGroup($event)">
+
+
+  <div *ngFor="let dataInfo of dataInfos" cdkDrag>
+
+    <div class="card group-box">
+
+      <div class="bg-app-bar px-4 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
+        <div class="title my-0 ltr:pr-4 rtl:pl-4 ltr:border-r rtl:border-l" fxFlex="none" fxHide.xs>
+          <button mat-raised-button (click)="addGroup()" color="primary" fxFlex="none" fxHide.xs type="button">
+            <span>Add Question</span>
+          </button>
+        </div>
+      </div>
+
+
+      <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
+        [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"
+        (cdkDropListDropped)="dropQuestion($event)">
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></mat-row>
+      </mat-table>
 
     </div>
 
   </div>
 
-</div>
 
-<div cdkDropList [cdkDropListData]="dataInfos" (cdkDropListDropped)="dropGroup($event)">
-
-  <div *ngFor="let dataInfo of dataInfos" cdkDrag>
-
-    <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
-      [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"
-      (cdkDropListDropped)="dropQuestion($event)">
-
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="type">
-        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></mat-row>
-    </mat-table>
-
-  </div>
 
 </div>
