@@ -49,7 +49,6 @@ import { Error500Component } from './common/500/error-500.component';
 import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interceptor';
 import { QuizInfoSettingsTabComponent } from './quiz/quiz-info/quiz-info-settings-tab/quiz-info-settings-tab.component';
 import { QuizInfoQuestionsTabComponent } from './quiz/quiz-info/quiz-info-questions-tab/quiz-info-questions-tab.component';
-import { QuestionListComponent } from './quiz/quiz-info/quiz-info-questions-tab/question-list.component/question-list.component';
 import { QuestionLangService } from './_service/lang/question.lang.service';
 
 @NgModule({
@@ -78,7 +77,6 @@ import { QuestionLangService } from './_service/lang/question.lang.service';
     QuizInfoComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
-    QuestionListComponent
   ],
   imports: [
     BrowserModule,
@@ -140,8 +138,7 @@ import { QuestionLangService } from './_service/lang/question.lang.service';
     MultiSelectPreviewComponent,
     LongAnswerPreviewComponent,
     QuizInfoSettingsTabComponent,
-    QuizInfoQuestionsTabComponent,
-    QuestionListComponent
+    QuizInfoQuestionsTabComponent
   ],
   providers: [
     AuthGuard,
