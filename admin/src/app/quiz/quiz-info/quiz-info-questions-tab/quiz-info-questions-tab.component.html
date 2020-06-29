@@ -17,9 +17,17 @@
 
       <div class="bg-app-bar px-4 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
         <div class="title my-0 ltr:pr-4 rtl:pl-4 ltr:border-r rtl:border-l" fxFlex="none" fxHide.xs>
-          <button mat-raised-button (click)="addGroup()" color="primary" fxFlex="none" fxHide.xs type="button">
+
+          <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
             <span>Add Question</span>
           </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let key of questionTypeKeys; let i = index">
+              {{questionTypeNames[i]}}
+            </button>
+          </mat-menu>
+
         </div>
       </div>
 

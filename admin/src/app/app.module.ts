@@ -50,6 +50,7 @@ import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interce
 import { QuizInfoSettingsTabComponent } from './quiz/quiz-info/quiz-info-settings-tab/quiz-info-settings-tab.component';
 import { QuizInfoQuestionsTabComponent } from './quiz/quiz-info/quiz-info-questions-tab/quiz-info-questions-tab.component';
 import { QuestionListComponent } from './quiz/quiz-info/quiz-info-questions-tab/question-list.component/question-list.component';
+import { QuestionLangService } from './_service/lang/question.lang.service';
 
 @NgModule({
   declarations: [
@@ -144,6 +145,7 @@ import { QuestionListComponent } from './quiz/quiz-info/quiz-info-questions-tab/
   ],
   providers: [
     AuthGuard,
+    QuestionLangService,
     QuizService,
     QuestionService,
     QuizResolver,

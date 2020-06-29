@@ -3,8 +3,9 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
 import { QuizService } from 'src/app/_service/quiz.service';
-import { Question } from 'src/app/_models/question';
+import { Question, QuestionType } from 'src/app/_models/question';
 import { Group } from 'src/app/_models/group';
+import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 
 export class DataInfo {
     id: string;
@@ -14,7 +15,7 @@ export class DataInfo {
 @Component({
     selector: 'app-quiz-info-questions-tab',
     templateUrl: './quiz-info-questions-tab.component.html',
-    styleUrls: [ './quiz-info-questions-tab.component.css' ]
+    styleUrls: ['./quiz-info-questions-tab.component.css']
 })
 export class QuizInfoQuestionsTabComponent implements OnInit {
 
@@ -22,11 +23,18 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     @Input() quiz: Quiz;
 
+    questionType = QuestionType;
     displayedColumns: string[] = ['name', 'type'];
-
     dataInfos: DataInfo[] = new Array<DataInfo>();
+    questionTypeKeys: number[];
+    questionTypeNames: string[];
 
-    constructor(private quizService: QuizService) {
+    constructor(
+        private quizService: QuizService,
+        questionLangService: QuestionLangService) {
+
+        this.questionTypeKeys = Object.keys(this.questionType).filter(Number).map(x => Number(x));
+        this.questionTypeNames = this.questionTypeKeys.map(x => questionLangService.getQuestionTypeLangTerm(x));
     }
 
     ngOnInit(): void {
