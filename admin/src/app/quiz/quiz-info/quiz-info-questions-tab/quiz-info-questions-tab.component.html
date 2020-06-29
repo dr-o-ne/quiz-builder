@@ -24,7 +24,7 @@
 
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let questionType of questionTypeKeys; let i = index" (click)="addQuestion(dataInfo.id, questionType)">
-              {{questionTypeNames[i]}}
+              {{questionLangService.getQuestionTypeLangTerm(questionType)}}
             </button>
           </mat-menu>
 
@@ -37,13 +37,13 @@
         (cdkDropListDropped)="dropQuestion($event)">
 
         <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
           <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type">
           <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
+          <mat-cell *matCellDef="let element">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

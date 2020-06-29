@@ -28,16 +28,14 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     displayedColumns: string[] = ['name', 'type'];
     dataInfos: DataInfo[] = new Array<DataInfo>();
     questionTypeKeys: number[];
-    questionTypeNames: string[];
 
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
         private quizService: QuizService,
-        questionLangService: QuestionLangService) {
+        public questionLangService: QuestionLangService) {
 
         this.questionTypeKeys = Object.keys(this.questionType).filter(Number).map(x => Number(x));
-        this.questionTypeNames = this.questionTypeKeys.map(x => questionLangService.getQuestionTypeLangTerm(x));
     }
 
     ngOnInit(): void {
