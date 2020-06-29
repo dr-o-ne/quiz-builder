@@ -23,7 +23,7 @@
           </button>
 
           <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let key of questionTypeKeys; let i = index">
+            <button mat-menu-item *ngFor="let questionType of questionTypeKeys; let i = index" (click)="addQuestion(dataInfo.id, questionType)">
               {{questionTypeNames[i]}}
             </button>
           </mat-menu>

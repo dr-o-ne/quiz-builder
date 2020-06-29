@@ -6,6 +6,7 @@ import { QuizService } from 'src/app/_service/quiz.service';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { Group } from 'src/app/_models/group';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class DataInfo {
     id: string;
@@ -30,6 +31,8 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     questionTypeNames: string[];
 
     constructor(
+        private router: Router,
+        private activeRoute: ActivatedRoute,
         private quizService: QuizService,
         questionLangService: QuestionLangService) {
 
@@ -104,6 +107,20 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     getConnectedList(): string[] {
         return this.dataInfos.map(x => `${x.id}`);
+    }
+
+    addQuestion(groupId: string, typeQuestion: QuestionType): void {
+        this.router.navigate(
+            ['questions'],
+            {
+                relativeTo: this.activeRoute,
+                state: {
+                    quizId: this.quiz.id,
+                    groupId: groupId,
+                    questionType: typeQuestion
+                }
+            }
+        );
     }
 
 }
