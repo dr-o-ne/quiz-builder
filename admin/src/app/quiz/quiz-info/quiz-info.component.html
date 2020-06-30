@@ -5,28 +5,27 @@
     <mat-tab-group>
       <mat-tab label="Questions" [disabled]='!isEditMode()'>
         <div class="p-6">
-          <app-quiz-page></app-quiz-page>
+          <app-quiz-info-questions-tab [quiz]="quiz">
+          </app-quiz-info-questions-tab>
         </div>
       </mat-tab>
 
       <mat-tab label="Settings">
         <div class="p-6">
-          <app-quiz-info-settings-tab 
-            [form]="quizForm.get('settings')">
+          <app-quiz-info-settings-tab [form]="quizForm.get('settings')">
           </app-quiz-info-settings-tab>
         </div>
       </mat-tab>
 
       <mat-tab label="Appearance" [disabled]='!isEditMode()'>
         <div class="p-6">
-          <app-quiz-info-questions-tab
-            [quiz]="quiz">
-          </app-quiz-info-questions-tab>
+          <app-quiz-page></app-quiz-page>
         </div>
       </mat-tab>
     </mat-tab-group>
 
-    <div class="footer-stick row" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutGap="1%">
+    <div class="footer-stick row" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutWrap="wrap"
+      fxLayoutGap="1%">
 
       <button mat-raised-button color="accent" type="submit" [disabled]="!quizForm.valid" (click)="onSave()">
         Save

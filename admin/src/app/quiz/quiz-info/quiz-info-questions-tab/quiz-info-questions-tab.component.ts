@@ -53,6 +53,9 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
             }
 
             this.quiz.groups.forEach(x => this.addGroupForm(x));
+
+
+            console.log(this.dataInfos);
         });
     }
 
@@ -144,10 +147,11 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     }
 
     deleteQuestion(groupId: string, questionId: string): void {
+
         this.quizService.deleteQuestion(this.quiz.id, questionId).subscribe(
             () => {
                 this.deleteQuestionData(groupId, questionId);
-                this.deleteQuestionForm(groupId, questionId);
+                //form data is binded to data
                 this.tables.forEach(x => x.renderRows());
             }
         );
@@ -159,14 +163,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         const questionIndex = group.questions.map(x => x.id).indexOf(questionId);
         group.questions.splice(questionIndex, 1);
-    }
-
-    deleteQuestionForm(groupId: string, questionId: string): void {
-        const groupIndex = this.dataInfos.map(x => x.id).indexOf(groupId);
-        const group = this.dataInfos[groupIndex];
-
-        const questionIndex = group.dataSource.data.map(x => x.id).indexOf(questionId);
-        group.dataSource.data.splice(questionIndex, 1);
     }
 
 }
