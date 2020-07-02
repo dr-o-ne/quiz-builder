@@ -68,6 +68,7 @@ GO
 CREATE TABLE dbo.QuizItem(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[UId] NVARCHAR(10) NOT NULL,
+	[SortOrder] INT NULL,
 	[TypeId] BIGINT NOT NULL,
 	[ParentId] BIGINT NULL,
 	[QuestionId] BIGINT NULL,
