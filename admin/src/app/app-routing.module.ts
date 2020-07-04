@@ -54,6 +54,7 @@ const routes: Routes = [
                     path: 'questions', children:
                       [
                         { path: '', redirectTo: 'new', pathMatch: 'full' },
+                        { path: 'new', component: QuestionPageComponent }
                       ]
                   },
                   {
