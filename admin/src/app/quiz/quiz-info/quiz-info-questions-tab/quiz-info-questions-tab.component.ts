@@ -64,7 +64,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         const group = new Group();
         group.quizId = this.quiz.id;
 
-        this.quizService.createGroup(group).subscribe(
+        this.groupDataProvider.createGroup(group).subscribe(
             (response: any) => {
                 this.addGroupData(response.group);
                 this.addGroupForm(response.group);
@@ -88,7 +88,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     }
 
     deleteGroup(groupId: string): void {
-        this.quizService.deleteGroup(groupId).subscribe(
+        this.groupDataProvider.deleteGroup(groupId).subscribe(
             () => {
                 this.deleteGroupData(groupId);
                 this.deleteGroupForm(groupId);
