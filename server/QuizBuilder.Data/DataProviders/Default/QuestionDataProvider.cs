@@ -44,35 +44,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
 		}
 
-		public async Task<IEnumerable<QuestionDto>> GetByParent( string quizUid, string groupUid ) {
-			string groupFilter = string.IsNullOrWhiteSpace( groupUid )
-				? " IS NULL"
-				: " = (SELECT TOP 1 Id FROM dbo.QuizItem WITH(NOLOCK) WHERE UId = @GroupUId)"; // ToDo: update to normal state
-
-			string sql = @"
-			SELECT
-				q.Id,
-				q.UId,
-				q.TypeId,
-				q.Name,
-				q.Text,
-				q.Points,
-				q.Settings
-			FROM
-				dbo.Question q WITH(NOLOCK)
-			INNER JOIN
-				dbo.QuizItem qi WITH(NOLOCK) ON qi.QuestionId = q.Id
-			INNER JOIN
-				dbo.QuizQuizItem qqi WITH(NOLOCK) ON qqi.QuizItemId = qi.Id
-			INNER JOIN
-				dbo.Quiz qz WITH(NOLOCK) ON qqi.QuizId = qz.Id
-			WHERE
-				qz.UId = @QuizUid AND qi.ParentId" + groupFilter;
-
-			using IDbConnection conn = GetConnection();
-			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUid = quizUid, GroupUId = groupUid } );
-		}
-
 		public async Task<QuestionDto> Get( string uid ) {
 			const string sql = @"
 SELECT

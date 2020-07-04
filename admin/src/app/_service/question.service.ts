@@ -14,11 +14,6 @@ export class QuestionService {
   constructor( private http: HttpClient ) {
   }
 
-  getQuestionsByParent( quizId: string, groupId: string ): Observable<object> {
-    const options = { params: { quizUId: quizId, groupUId: groupId } };
-    return this.http.get( this.apiUrl + 'questions', options );
-  }
-
   getQuestion( id: string ): Observable<object> {
     return this.http.get( this.apiUrl + 'questions/' + id );
   }

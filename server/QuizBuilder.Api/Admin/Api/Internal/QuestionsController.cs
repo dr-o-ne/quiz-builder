@@ -25,13 +25,6 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 				: Ok( result );
 		}
 
-		[HttpGet]
-		public async Task<ActionResult> Get( [FromQuery] GetQuestionsByParentQuery query ) {
-			var result = await _dispatcher.QueryAsync( query );
-
-			return Ok( result );
-		}
-
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] CreateQuestionCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
