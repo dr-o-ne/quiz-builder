@@ -126,10 +126,9 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex);
 
-            console.log(event);
-
             const questionIds = event.container.data.map(x => x.id);
-            this.questionDataProvider.reorderQuestions(event.container.connectedTo.toString(), questionIds).subscribe();    
+            const groupId = event.container.connectedTo.toString()
+            this.questionDataProvider.reorderQuestions(groupId, questionIds).subscribe();    
 
         } else {
             transferArrayItem(event.previousContainer.data,
