@@ -39,29 +39,6 @@ VALUES (
 			} );
 		}
 
-		public async Task AddQuizGroupRelationship( long quizId, long groupId ) {
-			const string sql = @"
-INSERT INTO dbo.QuizQuizItem (
-	QuizId,
-    QuizItemId,
-    CreatedOn,
-    ModifiedOn
-)
-VALUES (
-	@QuizId,
-    @QuizItemId,
-    @CreatedOn,
-    @ModifiedOn
-)";
-			using IDbConnection conn = GetConnection();
-			await conn.ExecuteAsync( sql, new {
-				QuizId = quizId,
-				QuizItemId = groupId,
-				CreatedOn = DateTime.UtcNow,
-				ModifiedOn = DateTime.UtcNow
-			} );
-		}
-
 		public async Task AddGroupQuestionRelationship( long? groupId, long questionId ) {
 			const string sql = @"
 		UPDATE
