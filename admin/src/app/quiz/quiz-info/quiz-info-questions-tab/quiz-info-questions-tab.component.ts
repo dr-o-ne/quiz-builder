@@ -8,7 +8,6 @@ import { Group } from 'src/app/_models/group';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
-import { Console } from 'console';
 
 export class DataInfo {
     id: string;

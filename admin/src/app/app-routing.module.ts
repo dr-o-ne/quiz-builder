@@ -6,7 +6,6 @@ import { CommingSoonComponent } from './common/comming-soon/comming-soon.compone
 
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
-import { QuizPageComponent } from './quiz/quiz-page/quiz-page.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
@@ -55,7 +54,6 @@ const routes: Routes = [
                     path: 'questions', children:
                       [
                         { path: '', redirectTo: 'new', pathMatch: 'full' },
-                        { path: 'new', component: QuestionPageComponent }
                       ]
                   },
                   {
