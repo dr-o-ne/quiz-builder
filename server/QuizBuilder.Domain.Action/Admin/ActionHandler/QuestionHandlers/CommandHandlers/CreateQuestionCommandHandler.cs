@@ -41,15 +41,16 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			if( quizDto == null )
 				return new QuestionCommandResult { Success = false };
 
-			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
-			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( questionDto );
+			if( string.IsNullOrWhiteSpace( command.GroupUId ) )
+				return new QuestionCommandResult { Success = false };
 
-			if( !string.IsNullOrWhiteSpace( command.GroupUId ) ) {
-				GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
-				if( groupDto != null ) {
-					await _structureDataProvider.AddGroupQuestionRelationship(groupDto.Id, ids.quizItemId);
-				}
-			}
+			GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
+			if( groupDto == null )
+				return new QuestionCommandResult { Success = false };
+
+			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
+			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( groupDto.Id, questionDto );
+			await _structureDataProvider.AddGroupQuestionRelationship(groupDto.Id, ids.quizItemId);
 
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
 

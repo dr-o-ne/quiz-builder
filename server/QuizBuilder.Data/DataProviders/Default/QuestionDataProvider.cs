@@ -25,7 +25,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.UId,
 				q.TypeId,
 				q.Name,
-				q.SortOrder,
 				q.Text,
 				q.Points,
 				q.Settings,
@@ -56,7 +55,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.UId,
 				q.TypeId,
 				q.Name,
-				q.SortOrder,
 				q.Text,
 				q.Points,
 				q.Settings
@@ -82,7 +80,6 @@ SELECT
 	UId,
 	TypeId,
 	Name,
-	SortOrder,
 	Text,
 	Points,
 	Settings
@@ -93,7 +90,7 @@ WHERE UId = @UId";
 			return await conn.QuerySingleOrDefaultAsync<QuestionDto>( sql, new { UId = uid } );
 		}
 
-		public async Task<(long, long)> Add( QuestionDto dto ) {
+		public async Task<(long, long)> Add( long groupId, QuestionDto dto ) {
 
 			const string sql = @"
 		DECLARE @ID TABLE (ID INT)
@@ -101,7 +98,6 @@ WHERE UId = @UId";
 		INSERT INTO dbo.Question(
 			UId,
 		    TypeId,
-			SortOrder,
 		    Name,
 		    Text,
 			Points,
@@ -113,7 +109,6 @@ WHERE UId = @UId";
 		VALUES (
 			@UId,
 		    @TypeId,
-			0, --TODO
 		    @Name,
 		    @Text,
 			@Points,
@@ -127,6 +122,7 @@ WHERE UId = @UId";
 		    TypeId,
 		    ParentId,
 		    QuestionId,
+			SortOrder,
 			Name,
 		    CreatedOn,
 		    ModifiedOn
@@ -135,8 +131,14 @@ WHERE UId = @UId";
 		VALUES(
 			@UId,
 		    1,
-		    NULL,
+		    @ParentId,
 		    (SELECT TOP 1 ID FROM @ID),
+			1 + (
+ SELECT ISNULL(MAX(qi.SortOrder), 0)  FROM dbo.Question AS q
+ INNER JOIN dbo.QuizItem AS qi ON qi.QuestionId = q.Id
+ WHERE
+	qi.TypeId = 1 AND
+	qi.ParentId = @ParentId),
 			'',
 		    @CreatedOn,
 		    @ModifiedOn
@@ -152,6 +154,7 @@ WHERE UId = @UId";
 				dto.Text,
 				dto.Points,
 				dto.Settings,
+				ParentId = groupId,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow
 			} )).ToList();
@@ -166,7 +169,6 @@ WHERE UId = @UId";
 UPDATE dbo.Question
 SET TypeId = @TypeId,
 	Name = @Name,
-	SortOrder = @SortOrder,
 	Text = @Text,
 	Points = @Points,
 	Settings = @Settings,
@@ -177,7 +179,6 @@ WHERE Id = @Id";
 			await conn.ExecuteAsync( sql, new {
 				dto.Id,
 				dto.Name,
-				dto.SortOrder,
 				dto.Text,
 				dto.Points,
 				dto.Settings,
