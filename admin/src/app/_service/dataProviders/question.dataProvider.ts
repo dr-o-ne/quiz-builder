@@ -18,4 +18,9 @@ export class QuestionDataProvider {
         return this.http.get<Question[]>(this.apiUrl + 'quizzes/' + quizId + '/questions');
     }
 
+    reorderQuestions(groupId: string, questionIds: string[]): Observable<object> {
+        const body = { groupId, questionIds };
+        return this.http.put(this.apiUrl + 'questions/reorder', body);
+    }
+
 }

@@ -75,4 +75,16 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
+	public sealed class ReorderQuestionsCommand : ICommand<CommandResult> {
+
+		[Required]
+		[JsonPropertyName( "groupId" )]
+		public string GroupUId { get; set; }
+
+		[Required]
+		[JsonPropertyName( "questionIds" )]
+		public string[] QuestionUIds { get; set; }
+
+	}
+
 }

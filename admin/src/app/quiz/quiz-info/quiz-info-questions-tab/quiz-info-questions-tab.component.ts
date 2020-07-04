@@ -116,16 +116,19 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
             event.currentIndex);
 
         const groupIds = event.container.data.map(x => x.id);
-
         this.groupDataProvider.reorderGroups(this.quiz.id, groupIds).subscribe();
     }
 
-    dropQuestion(event: CdkDragDrop<string[]>): void {
+    dropQuestion(event: CdkDragDrop<Question[]>): void {
         if (event.previousContainer === event.container) {
             moveItemInArray(
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex);
+
+            const questionIds = event.container.data.map(x => x.id);
+            this.questionDataProvider.reorderQuestions(this.quiz.id, questionIds).subscribe();    
+
         } else {
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
