@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
@@ -27,6 +29,18 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 	public sealed class DeleteGroupCommand : ICommand<CommandResult> {
 
 		public string UId { get; set; }
+
+	}
+
+	public sealed class ReorderGroupsCommand : ICommand<CommandResult> {
+
+		[Required]
+		[JsonPropertyName( "quizId" )]
+		public string QuizUId { get; set; }
+
+		[Required]
+		[JsonPropertyName( "groupIds" )]
+		public string[] GroupUIds { get; set; }
 
 	}
 

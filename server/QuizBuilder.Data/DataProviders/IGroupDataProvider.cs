@@ -5,7 +5,7 @@ using QuizBuilder.Data.Dto;
 namespace QuizBuilder.Data.DataProviders {
 	public interface IGroupDataProvider {
 
-		public Task<long> Add( GroupDto dto );
+		public Task<long> Add( long quizId, GroupDto dto );
 
 		public Task<int> Update( GroupDto dto );
 

@@ -16,7 +16,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			_dbConnectionFactory = dbConnectionFactory;
 		}
 
-		public async Task<long> Add( GroupDto dto ) {
+		public async Task<long> Add( long quizId, GroupDto dto ) {
 
 			const string sql = @"
 
@@ -26,16 +26,23 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    ParentId,
 		    QuestionId,
 			Name,
+			SortOrder,
 		    CreatedOn,
 		    ModifiedOn
 		)
 		OUTPUT INSERTED.Id
 		VALUES(
-			@UId,
+		    @UId,
 		    2,
 		    NULL,
 		    NULL,
 			@Name,
+			1 + (
+				SELECT ISNULL(MAX(SortOrder), 0) FROM dbo.QuizItem AS qi
+				INNER JOIN dbo.QuizQuizItem AS qqi ON qqi.QuizItemId = qi.id
+				WHERE 
+					qi.TypeId = 2 AND
+					QuizId = @QuizId ),
 		    @CreatedOn,
 		    @ModifiedOn
 		)";
@@ -44,6 +51,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.ExecuteScalarAsync<long>( sql, new {
 				dto.UId,
 				dto.Name,
+				QuizId = quizId,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow
 			} );
@@ -55,6 +63,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				dbo.QuizItem
 			SET
 				Name = @Name,
+				SortOrder = @SortOrder,
 				ModifiedOn = @ModifiedOn
 			WHERE Id = @Id";
 
@@ -62,6 +71,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.ExecuteAsync( sql, new {
 				dto.Id,
 				dto.Name,
+				dto.SortOrder,
 				ModifiedOn = DateTime.UtcNow
 			} );
 		}
@@ -84,7 +94,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		SELECT
 			qi.Id,
 		    qi.Uid,
-			qi.Name
+			qi.Name,
+			qi.SortOrder
 		FROM
 			dbo.QuizItem qi WITH(NOLOCK)
 		WHERE
@@ -97,8 +108,10 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		public async Task<IEnumerable<GroupDto>> GetByQuiz( string uid ) {
 			const string sql = @"
 		SELECT
+			qi.Id,
 			qi.UId,
-			qi.Name
+			qi.Name,
+			qi.SortOrder
 		FROM
 			dbo.QuizItem qi WITH(NOLOCK)
 		INNER JOIN dbo.QuizQuizItem qqi WITH(NOLOCK)

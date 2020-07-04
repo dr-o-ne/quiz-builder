@@ -47,7 +47,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 			GroupDto dto = _mapper.Map<Group, GroupDto>( model );
 
-			long id = await _groupDataProvider.Add( dto );
+			long id = await _groupDataProvider.Add( quizDto.Id, dto );
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, id );
 
 			var addedGroup = _mapper.Map<GroupDto, Group>( dto );

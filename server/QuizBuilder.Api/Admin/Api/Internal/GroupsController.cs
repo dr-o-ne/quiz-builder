@@ -42,6 +42,16 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
+
+		[HttpPut( "reorder" )]
+		public async Task<ActionResult> Reorder( [FromBody] ReorderGroupsCommand command ) {
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.Success
+				? (ActionResult)NoContent()
+				: UnprocessableEntity( result );
+		}
+
 	}
 
 }

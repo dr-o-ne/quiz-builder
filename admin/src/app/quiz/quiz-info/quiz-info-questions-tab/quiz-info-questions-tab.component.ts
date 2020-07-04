@@ -7,6 +7,7 @@ import { Question, QuestionType } from 'src/app/_models/question';
 import { Group } from 'src/app/_models/group';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
 
 export class DataInfo {
     id: string;
@@ -33,7 +34,8 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         private router: Router,
         private activeRoute: ActivatedRoute,
         private quizService: QuizService,
-        public questionLangService: QuestionLangService) {
+        public questionLangService: QuestionLangService,
+        private groupDataProvider: GroupDataProvider) {
 
         this.questionTypeKeys = Object.keys(this.questionType).filter(Number).map(x => Number(x));
     }
@@ -105,11 +107,16 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         this.dataInfos.splice(index, 1);
     }
 
-    dropGroup(event: CdkDragDrop<string[]>): void {
+    dropGroup(event: CdkDragDrop<DataInfo[]>): void {
+
         moveItemInArray(
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+
+        const groupIds = event.container.data.map(x => x.id);
+
+        this.groupDataProvider.reorderGroups(this.quiz.id, groupIds).subscribe();
     }
 
     dropQuestion(event: CdkDragDrop<string[]>): void {

@@ -50,6 +50,7 @@ import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interce
 import { QuizInfoSettingsTabComponent } from './quiz/quiz-info/quiz-info-settings-tab/quiz-info-settings-tab.component';
 import { QuizInfoQuestionsTabComponent } from './quiz/quiz-info/quiz-info-questions-tab/quiz-info-questions-tab.component';
 import { QuestionLangService } from './_service/lang/question.lang.service';
+import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
 
 @NgModule({
   declarations: [
@@ -152,7 +153,8 @@ import { QuestionLangService } from './_service/lang/question.lang.service';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
-    }
+    },
+    GroupDataProvider
   ],
   bootstrap: [
     AppComponent
