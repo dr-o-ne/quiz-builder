@@ -25,6 +25,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.UId,
 				q.TypeId,
 				q.Name,
+				q.SortOrder,
 				q.Text,
 				q.Points,
 				q.Settings,
@@ -50,24 +51,25 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				: " = (SELECT TOP 1 Id FROM dbo.QuizItem WITH(NOLOCK) WHERE UId = @GroupUId)"; // ToDo: update to normal state
 
 			string sql = @"
-		SELECT
-			q.Id,
-			q.UId,
-			q.TypeId,
-			q.Name,
-			q.Text,
-			q.Points,
-			q.Settings
-		FROM
-			dbo.Question q WITH(NOLOCK)
-		INNER JOIN
-			dbo.QuizItem qi WITH(NOLOCK) ON qi.QuestionId = q.Id
-		INNER JOIN
-			dbo.QuizQuizItem qqi WITH(NOLOCK) ON qqi.QuizItemId = qi.Id
-		INNER JOIN
-			dbo.Quiz qz WITH(NOLOCK) ON qqi.QuizId = qz.Id
-		WHERE
-			qz.UId = @QuizUid AND qi.ParentId" + groupFilter;
+			SELECT
+				q.Id,
+				q.UId,
+				q.TypeId,
+				q.Name,
+				q.SortOrder,
+				q.Text,
+				q.Points,
+				q.Settings
+			FROM
+				dbo.Question q WITH(NOLOCK)
+			INNER JOIN
+				dbo.QuizItem qi WITH(NOLOCK) ON qi.QuestionId = q.Id
+			INNER JOIN
+				dbo.QuizQuizItem qqi WITH(NOLOCK) ON qqi.QuizItemId = qi.Id
+			INNER JOIN
+				dbo.Quiz qz WITH(NOLOCK) ON qqi.QuizId = qz.Id
+			WHERE
+				qz.UId = @QuizUid AND qi.ParentId" + groupFilter;
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUid = quizUid, GroupUId = groupUid } );
@@ -80,6 +82,7 @@ SELECT
 	UId,
 	TypeId,
 	Name,
+	SortOrder,
 	Text,
 	Points,
 	Settings
@@ -98,6 +101,7 @@ WHERE UId = @UId";
 		INSERT INTO dbo.Question(
 			UId,
 		    TypeId,
+			SortOrder,
 		    Name,
 		    Text,
 			Points,
@@ -109,6 +113,7 @@ WHERE UId = @UId";
 		VALUES (
 			@UId,
 		    @TypeId,
+			0, --TODO
 		    @Name,
 		    @Text,
 			@Points,
@@ -161,6 +166,7 @@ WHERE UId = @UId";
 UPDATE dbo.Question
 SET TypeId = @TypeId,
 	Name = @Name,
+	SortOrder = @SortOrder,
 	Text = @Text,
 	Points = @Points,
 	Settings = @Settings,
@@ -171,6 +177,7 @@ WHERE Id = @Id";
 			await conn.ExecuteAsync( sql, new {
 				dto.Id,
 				dto.Name,
+				dto.SortOrder,
 				dto.Text,
 				dto.Points,
 				dto.Settings,

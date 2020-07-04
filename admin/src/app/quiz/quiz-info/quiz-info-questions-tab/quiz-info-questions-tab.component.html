@@ -31,12 +31,12 @@
 
         </div>
 
-        <div fxFlex></div>
-
         <mat-form-field fxFlex="15" fxFlexOffset="1" appearance="outline" style="margin-bottom: -1.4em">
           <mat-label>Group Name</mat-label>
           <input matInput type="text" [(ngModel)]="dataInfo.name" (focusout)="onPageNameFocusOut(dataInfo.id, dataInfo.name)">
         </mat-form-field>
+
+        <div fxFlex></div>
 
         <button mat-icon-button color="primary" matTooltip="Delete Group" fxFlex="nogrow"
           (click)="deleteGroup(dataInfo.id)">
