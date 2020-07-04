@@ -25,6 +25,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.UId,
 				q.TypeId,
 				q.Name,
+				qi.SortOrder,
 				q.Text,
 				q.Points,
 				q.Settings,
@@ -44,18 +45,41 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
 		}
 
+		public async Task<IEnumerable<QuestionDto>> GetByGroup( string uid ) {
+			const string sql = @"
+			SELECT
+				q.Id,
+				q.UId,
+				q.TypeId,
+				q.Name,
+				qi.SortOrder,
+				q.Text,
+				q.Points,
+				q.Settings
+			FROM dbo.Question AS q WITH(NOLOCK)
+			INNER JOIN dbo.QuizItem AS qi WITH(NOLOCK)
+				ON q.Id = qi.QuestionId
+			WHERE qi.ParentId = (SELECT TOP 1 Id FROM dbo.QuizItem WITH(NOLOCK) WHERE UId = @GroupUId)";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QueryAsync<QuestionDto>( sql, new { GroupUId = uid } );
+		}
+
 		public async Task<QuestionDto> Get( string uid ) {
 			const string sql = @"
-SELECT
-	Id,
-	UId,
-	TypeId,
-	Name,
-	Text,
-	Points,
-	Settings
-FROM dbo.Question ( NOLOCK )
-WHERE UId = @UId";
+			SELECT
+				Id,
+				UId,
+				TypeId,
+				Name,
+				qi.SortOrder,
+				Text,
+				Points,
+				Settings
+			FROM dbo.Question AS q (NOLOCK)
+			INNER JOIN dbo.QuizItem AS qi WITH(NOLOCK)
+				ON q.Id = qi.QuestionId
+			WHERE UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QuerySingleOrDefaultAsync<QuestionDto>( sql, new { UId = uid } );
@@ -137,14 +161,18 @@ WHERE UId = @UId";
 		public async Task Update( QuestionDto dto ) {
 
 			const string sql = @"
-UPDATE dbo.Question
-SET TypeId = @TypeId,
-	Name = @Name,
-	Text = @Text,
-	Points = @Points,
-	Settings = @Settings,
-	ModifiedOn = @ModifiedOn
-WHERE Id = @Id";
+			UPDATE dbo.Question
+			SET TypeId = @TypeId,
+				Name = @Name,
+				Text = @Text,
+				Points = @Points,
+				Settings = @Settings,
+				ModifiedOn = @ModifiedOn
+			WHERE Id = @Id
+
+			UPDATE dbo.QuizItem
+			SET SortOrder = @SortOrder
+			WHERE QuestionId = @Id";
 
 			using IDbConnection conn = GetConnection();
 			await conn.ExecuteAsync( sql, new {
@@ -154,6 +182,7 @@ WHERE Id = @Id";
 				dto.Points,
 				dto.Settings,
 				dto.TypeId,
+				dto.SortOrder,
 				ModifiedOn = DateTime.UtcNow
 			} );
 		}

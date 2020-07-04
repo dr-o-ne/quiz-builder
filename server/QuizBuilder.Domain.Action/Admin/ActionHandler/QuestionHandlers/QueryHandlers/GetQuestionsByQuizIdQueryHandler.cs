@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
@@ -23,7 +24,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 		}
 
 		public async Task<QuestionsQueryResult> HandleAsync( GetQuestionsByQuizIdQuery query ) {
-			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( query.QuizUId );
+			IEnumerable<QuestionDto> questionDtos = (await _questionDataProvider.GetByQuiz( query.QuizUId )).OrderBy( x => x.SortOrder );
 			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );
 			IEnumerable<QuestionViewModel> questionViewModels = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionViewModel>>( questions );
 

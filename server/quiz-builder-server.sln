@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Data", "QuizBui
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Domain.Model", "QuizBuilder.Domain.Model\QuizBuilder.Domain.Model.csproj", "{0CAE5FC5-06B1-4133-AB48-1CC8058FCFDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizBuilder.Domain.Action", "QuizBuilder.Domain.Action\QuizBuilder.Domain.Action.csproj", "{03532787-7417-462A-87F6-C446F3DB5B84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Domain.Action", "QuizBuilder.Domain.Action\QuizBuilder.Domain.Action.csproj", "{03532787-7417-462A-87F6-C446F3DB5B84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

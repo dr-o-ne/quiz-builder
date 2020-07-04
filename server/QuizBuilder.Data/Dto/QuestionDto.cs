@@ -6,6 +6,8 @@
 
 		public string UId { get; set; }
 
+		public int SortOrder { get; set; }
+
 		public string Name { get; set; }
 
 		public int TypeId { get; set; }
@@ -17,6 +19,7 @@
 		public string Settings { get; set; }
 
 		public string ParentUId { get; set; }
+
 	}
 
 }

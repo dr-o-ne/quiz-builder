@@ -126,8 +126,10 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex);
 
+            console.log(event);
+
             const questionIds = event.container.data.map(x => x.id);
-            this.questionDataProvider.reorderQuestions(this.quiz.id, questionIds).subscribe();    
+            this.questionDataProvider.reorderQuestions(event.container.connectedTo.toString(), questionIds).subscribe();    
 
         } else {
             transferArrayItem(event.previousContainer.data,
@@ -177,7 +179,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     }
 
     onPageNameFocusOut(groupId: string, name: string): void {
-        console.log(groupId + ' ' + name);
         this.groupDataProvider.renameGroup(groupId, name).subscribe();
     }
 

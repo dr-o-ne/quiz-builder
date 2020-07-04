@@ -8,6 +8,8 @@ namespace QuizBuilder.Data.DataProviders {
 
 		public Task<IEnumerable<QuestionDto>> GetByQuiz( string uid );
 
+		public Task<IEnumerable<QuestionDto>> GetByGroup( string uid );
+
 		public Task<QuestionDto> Get( string uid );
 
 		public Task<(long, long)> Add( long groupId, QuestionDto dto );
