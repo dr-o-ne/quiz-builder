@@ -12,12 +12,10 @@ import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionService } from './_service/question.service';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { QuestionListComponentOld } from './question/question-list/question-list.component';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
-
 
 import { ChoiceDirective } from './_directive/choice.directive';
 import { DynamicChoiceComponent } from './question/answer/base-choice/dynamic-choice.component';
@@ -56,7 +54,6 @@ import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
     AppComponent,
     QuizListComponent,
     QuestionPageComponent,
-    QuestionListComponentOld,
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
@@ -126,7 +123,6 @@ import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
     })
   ],
   entryComponents: [
-    QuestionListComponentOld,
     QuestionPageComponent,
     ModalWindowPreviewQuestionComponent,
     MultipleChoiceAnswerComponent,
