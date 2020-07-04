@@ -4,7 +4,7 @@ export class Group {
 
   id: string;
   quizId: string;
-  name: string = 'Default';
+  name: string;
   questions: Question[] = new Array<Question>();
 
 }

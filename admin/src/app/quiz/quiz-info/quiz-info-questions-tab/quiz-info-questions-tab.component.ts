@@ -8,9 +8,11 @@ import { Group } from 'src/app/_models/group';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
+import { Console } from 'console';
 
 export class DataInfo {
     id: string;
+    name: string;
     dataSource: MatTableDataSource<Question>;
 }
 
@@ -55,9 +57,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
             }
 
             this.quiz.groups.forEach(x => this.addGroupForm(x));
-
-
-            console.log(this.dataInfos);
         });
     }
 
@@ -83,6 +82,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         var dataInfo = new DataInfo();
         dataInfo.id = group.id;
+        dataInfo.name = group.name;
         dataInfo.dataSource = new MatTableDataSource(group.questions);
 
         this.dataInfos.push(dataInfo);
@@ -158,7 +158,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         this.quizService.deleteQuestion(this.quiz.id, questionId).subscribe(
             () => {
                 this.deleteQuestionData(groupId, questionId);
-                //form data is binded to data
+                //form data is bound to data
                 this.tables.forEach(x => x.renderRows());
             }
         );
@@ -170,6 +170,11 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         const questionIndex = group.questions.map(x => x.id).indexOf(questionId);
         group.questions.splice(questionIndex, 1);
+    }
+
+    onPageNameFocusOut(groupId: string, name: string): void {
+        console.log(groupId + ' ' + name);
+        this.groupDataProvider.renameGroup(groupId, name).subscribe();
     }
 
 }

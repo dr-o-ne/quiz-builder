@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 using QuizBuilder.Common.Types;
 using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
@@ -22,6 +20,17 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "Id" )]
 		public string UId { get; set; }
 
+		public string Name { get; set; }
+
+	}
+
+	public sealed class UpdateGroupNameCommand : ICommand<CommandResult> {
+
+		[Required]
+		[JsonPropertyName( "groupId" )]
+		public string UId { get; set; }
+
+		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
 	}

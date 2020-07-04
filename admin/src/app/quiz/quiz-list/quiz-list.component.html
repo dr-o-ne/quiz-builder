@@ -21,7 +21,7 @@
   
         </div>
   
-        <mat-form-field appearance="outline" style="margin-bottom: -1.25em" fxFlex="500px">
+        <mat-form-field appearance="outline" style="margin-bottom: -1.4em" fxFlex="500px">
           <mat-label>Search...</mat-label>
           <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterData">
           <mat-icon matSuffix *ngIf="isEmptyFilter()">search</mat-icon>
