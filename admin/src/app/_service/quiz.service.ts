@@ -20,9 +20,7 @@ export class QuizService {
     return this.http.get(this.apiUrl + 'quizzes');
   }
 
-  getAllQuestions(id: string): Observable<Question[]> {
-    return this.http.get<Question[]>(this.apiUrl + 'quizzes/' + id + '/questions');
-  }
+
 
   getQuiz(id: string): Observable<Quiz> {
     return this.http.get<Quiz>(this.apiUrl + 'quizzes/' + id);

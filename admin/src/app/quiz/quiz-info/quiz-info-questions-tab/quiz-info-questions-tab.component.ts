@@ -8,6 +8,7 @@ import { Group } from 'src/app/_models/group';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
+import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 
 export class DataInfo {
     id: string;
@@ -36,7 +37,8 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         private activeRoute: ActivatedRoute,
         private quizService: QuizService,
         public questionLangService: QuestionLangService,
-        private groupDataProvider: GroupDataProvider) {
+        private groupDataProvider: GroupDataProvider,
+        private questionDataProvider: QuestionDataProvider) {
 
         this.questionTypeKeys = Object.keys(this.questionType).filter(Number).map(x => Number(x));
     }
@@ -49,7 +51,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         this.quiz.groups.forEach(x => x.questions = new Array<Question>());
 
-        this.quizService.getAllQuestions(quizId).subscribe((response: any) => {
+        this.questionDataProvider.getAllQuestions(quizId).subscribe((response: any) => {
 
             for (const question of response.questions) {
                 this.quiz.groups.find(g => g.id === question.groupId).questions.push(question);

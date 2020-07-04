@@ -48,6 +48,7 @@ import { QuizInfoSettingsTabComponent } from './quiz/quiz-info/quiz-info-setting
 import { QuizInfoQuestionsTabComponent } from './quiz/quiz-info/quiz-info-questions-tab/quiz-info-questions-tab.component';
 import { QuestionLangService } from './_service/lang/question.lang.service';
 import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
+import { QuestionDataProvider } from './_service/dataProviders/question.dataProvider';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
       useClass: HttpErrorInterceptor,
       multi: true,
     },
-    GroupDataProvider
+    GroupDataProvider,
+    QuestionDataProvider
   ],
   bootstrap: [
     AppComponent
