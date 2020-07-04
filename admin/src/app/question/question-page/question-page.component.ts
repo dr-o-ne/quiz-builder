@@ -50,7 +50,7 @@ export class QuestionPageComponent implements OnInit {
       name: [ '', Validators.nullValidator ],
       type: [ '', Validators.required ],
       text: [ '', Validators.required ],
-      points: [ '', Validators.nullValidator ],
+      points: [ '', Validators.required ],
       feedback: ['', Validators.nullValidator ],
       correctFeedback: ['', Validators.nullValidator ],
       incorrectFeedback: ['', Validators.nullValidator ],
