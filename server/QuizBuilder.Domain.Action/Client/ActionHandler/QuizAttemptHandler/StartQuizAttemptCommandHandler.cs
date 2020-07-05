@@ -62,7 +62,9 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				FooterColor = "#fff"
 			};
 
-			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
+			List<QuestionDto> questionDtos = (await _questionDataProvider.GetByQuiz( command.QuizUId ))
+				.OrderBy( x => x.SortOrder )
+				.ToList();
 
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );

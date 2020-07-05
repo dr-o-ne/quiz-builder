@@ -120,6 +120,9 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     }
 
     dropQuestion(event: CdkDragDrop<Question[]>): void {
+
+        console.log(event);
+
         if (event.previousContainer === event.container) {
             moveItemInArray(
                 event.container.data,
@@ -127,7 +130,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 event.currentIndex);
 
             const questionIds = event.container.data.map(x => x.id);
-            const groupId = event.container.connectedTo.toString()
+            const groupId = event.container.id;
             this.questionDataProvider.reorderQuestions(groupId, questionIds).subscribe();    
 
         } else {

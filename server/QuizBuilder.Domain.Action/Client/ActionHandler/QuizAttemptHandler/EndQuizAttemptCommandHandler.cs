@@ -105,7 +105,9 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		private async Task<List<Question>> GetQuestions( string attemptUId ) {
 			AttemptDto attemptDto = await _attemptDataProvider.Get( attemptUId );
 			QuizDto quizDto = await _quizDataProvider.Get( attemptDto.QuizId );
-			IEnumerable<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( quizDto.UId );
+			List<QuestionDto> questionDtos = ( await _questionDataProvider.GetByQuiz( quizDto.UId ) )
+				.OrderBy( x => x.SortOrder )
+				.ToList();
 			return _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos ).ToList();
 		}
 
