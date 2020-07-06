@@ -31,15 +31,16 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.Settings,
 				pqi.UId AS ParentUId
 			FROM 
-				dbo.Question q WITH(NOLOCK)
+				dbo.Question AS q WITH(NOLOCK)
 			INNER JOIN
-				dbo.QuizItem qi WITH(NOLOCK) ON q.Id = qi.QuestionId
+				dbo.QuizItem AS qi WITH(NOLOCK) ON q.Id = qi.QuestionId
 			INNER JOIN
-				dbo.QuizQuizItem qqi WITH(NOLOCK) ON qi.Id = qqi.QuizItemId
+				dbo.QuizQuizItem AS qqi WITH(NOLOCK) ON qi.Id = qqi.QuizItemId
 			INNER JOIN
-				dbo.Quiz qz WITH(NOLOCK) ON qz.Id = qqi.QuizId
+				dbo.Quiz AS qz WITH(NOLOCK) ON qz.Id = qqi.QuizId
 			INNER JOIN 
-				dbo.QuizItem pqi WITH(NOLOCK) ON qi.ParentId = pqi.Id";
+				dbo.QuizItem AS pqi WITH(NOLOCK) ON qi.ParentId = pqi.Id
+			WHERE qz.UId = @QuizUId";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
