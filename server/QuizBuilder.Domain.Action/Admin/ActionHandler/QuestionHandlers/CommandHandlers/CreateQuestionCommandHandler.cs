@@ -50,7 +50,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
 			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( groupDto.Id, questionDto );
-			await _structureDataProvider.AddGroupQuestionRelationship(groupDto.Id, ids.quizItemId);
+			await _structureDataProvider.UpdateGroupQuizItemRelationship(groupDto.Id, ids.quizItemId);
 
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
 

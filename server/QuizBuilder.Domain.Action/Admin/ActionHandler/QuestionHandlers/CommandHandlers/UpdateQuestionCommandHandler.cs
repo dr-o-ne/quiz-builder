@@ -39,7 +39,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			GroupDto groupDto = string.IsNullOrWhiteSpace(command.GroupUId) ? default : await _groupDataProvider.Get( command.GroupUId );
 			
 			long quizItemId = await _structureDataProvider.GetQuizItemIdByQuestionUid( command.UId );
-			await _structureDataProvider.AddGroupQuestionRelationship( groupDto?.Id, quizItemId );
+			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupDto?.Id, quizItemId );
 			
 			return new CommandResult( success: true, message: string.Empty );
 		}

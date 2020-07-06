@@ -131,13 +131,28 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
             const questionIds = event.container.data.map(x => x.id);
             const groupId = event.container.id;
-            this.questionDataProvider.reorderQuestions(groupId, questionIds).subscribe();    
+            this.questionDataProvider.reorderQuestions(groupId, questionIds).subscribe();
 
         } else {
+
+
+
+
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex);
+
+                const oldGroupId = event.previousContainer.id;
+                const newGroupId = event.container.id;
+                const questionId = event.container.data[event.currentIndex].id;
+                const questionIds = event.container.data.map(x => x.id);
+
+            this.questionDataProvider.moveQuestion(
+                oldGroupId,
+                newGroupId,
+                questionId,
+                questionIds).subscribe();
         }
 
         this.tables.forEach(x => x.renderRows());

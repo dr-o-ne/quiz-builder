@@ -39,7 +39,7 @@ VALUES (
 			} );
 		}
 
-		public async Task AddGroupQuestionRelationship( long? groupId, long questionId ) {
+		public async Task UpdateGroupQuizItemRelationship( long? groupId, long quizItemId ) {
 			const string sql = @"
 		UPDATE
 			dbo.QuizItem
@@ -49,8 +49,22 @@ VALUES (
 			Id = @Id";
 
 			using IDbConnection conn = GetConnection();
-			await conn.ExecuteAsync( sql, new { GroupId = groupId, Id = questionId } );
+			await conn.ExecuteAsync( sql, new { GroupId = groupId, Id = quizItemId } );
 		}
+
+		public async Task UpdateGroupQuizItemRelationship( long groupId, string quizItemUId ) {
+			const string sql = @"
+		UPDATE
+			dbo.QuizItem
+		SET
+			ParentId = @GroupId
+		WHERE
+			UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			await conn.ExecuteAsync( sql, new { GroupId = groupId, UId = quizItemUId } );
+		}
+
 
 		public async Task DeleteQuizQuestionRelationship( string quizUId, string quizItemUId ) {
 			const string sql = @"

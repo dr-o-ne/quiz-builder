@@ -68,18 +68,18 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		public async Task<QuestionDto> Get( string uid ) {
 			const string sql = @"
 			SELECT
-				Id,
-				UId,
-				TypeId,
-				Name,
+				q.Id,
+				q.UId,
+				q.TypeId,
+				q.Name,
 				qi.SortOrder,
-				Text,
-				Points,
-				Settings
+				q.Text,
+				q.Points,
+				q.Settings
 			FROM dbo.Question AS q (NOLOCK)
 			INNER JOIN dbo.QuizItem AS qi WITH(NOLOCK)
 				ON q.Id = qi.QuestionId
-			WHERE UId = @UId";
+			WHERE q.UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QuerySingleOrDefaultAsync<QuestionDto>( sql, new { UId = uid } );

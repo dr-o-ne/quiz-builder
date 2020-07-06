@@ -23,4 +23,9 @@ export class QuestionDataProvider {
         return this.http.put(this.apiUrl + 'questions/reorder', body);
     }
 
+    moveQuestion(oldGroupId: string, newGroupId: string, questionId: string, questionIds: string[]): Observable<object> {
+        const body = { oldGroupId, newGroupId, questionId, questionIds };
+        return this.http.put(this.apiUrl + 'questions/move', body);
+    }
+
 }

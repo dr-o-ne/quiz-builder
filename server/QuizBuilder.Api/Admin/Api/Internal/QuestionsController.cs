@@ -52,6 +52,15 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 				: UnprocessableEntity( result );
 		}
 
+		[HttpPut( "move" )]
+		public async Task<ActionResult> Move( [FromBody] MoveQuestionCommand command ) {
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.Success
+				? (ActionResult)NoContent()
+				: UnprocessableEntity( result );
+		}
+
 
 	}
 }
