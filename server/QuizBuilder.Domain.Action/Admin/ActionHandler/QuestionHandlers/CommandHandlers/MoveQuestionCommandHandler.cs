@@ -27,7 +27,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 		}
 
 		public async Task<CommandResult> HandleAsync( MoveQuestionCommand command ) {
-			GroupDto groupDto = await _groupDataProvider.Get( command.NewGroupUId );
+			GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
 			if( groupDto == null )
 				return new QuestionCommandResult {Success = false};
 
@@ -37,7 +37,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupDto.Id, command.QuestionUId );
 
-			List<QuestionDto> dtos = ( await _questionDataProvider.GetByGroup( command.NewGroupUId ) )
+			List<QuestionDto> dtos = ( await _questionDataProvider.GetByGroup( command.GroupUId ) )
 				.OrderBy( x => x.SortOrder )
 				.ToList();
 

@@ -90,12 +90,8 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 	public sealed class MoveQuestionCommand : ICommand<CommandResult> {
 
 		[Required]
-		[JsonPropertyName( "oldGroupId" )]
-		public string OldGroupUId { get; set; }
-
-		[Required]
-		[JsonPropertyName( "newGroupId" )]
-		public string NewGroupUId { get; set; }
+		[JsonPropertyName( "groupId" )]
+		public string GroupUId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "questionId" )]
