@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
 import { MatSort } from '@angular/material/sort';
-import { QuizService } from 'src/app/_service/quiz.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttemptService } from 'src/app/_service/attempt.service';
+import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
 
 @Component({
   selector: 'app-quiz-list',
@@ -25,7 +25,7 @@ export class QuizListComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private attemptService: AttemptService,
-    private quizService: QuizService
+    private quizDataProvider: QuizDataProvider
   ) {
   }
 
@@ -34,7 +34,7 @@ export class QuizListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.quizService.getAllQuizzes()
+    this.quizDataProvider.getAllQuizzes()
       .subscribe((response: any) => { this.initDataSource(response.quizzes); });
   }
 
@@ -88,19 +88,19 @@ export class QuizListComponent implements OnInit {
   }
 
   deleteQuiz(quiz: Quiz): void {
-    this.quizService.deleteQuiz(quiz.id)
+    this.quizDataProvider.deleteQuiz(quiz.id)
       .subscribe(() => { this.loadData(); });
   }
 
   bulkDelete(): void {
     const ids = this.selection.selected.map(x => x.id);
-    this.quizService.deleteQuizzes(ids)
+    this.quizDataProvider.deleteQuizzes(ids)
       .subscribe(() => { this.loadData(); });
   }
 
   onChangeQuizState(isEnabled: boolean, quiz: Quiz): void {
     quiz.isEnabled = isEnabled;
-    this.quizService.updateQuiz(quiz).subscribe(error => console.log(error));
+    this.quizDataProvider.updateQuiz(quiz).subscribe(error => console.log(error));
   }
 
   bulkEnable(): void {

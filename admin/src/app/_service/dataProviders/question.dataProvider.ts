@@ -27,5 +27,9 @@ export class QuestionDataProvider {
         const body = { groupId, questionId, questionIds };
         return this.http.put(this.apiUrl + 'questions/move', body);
     }
+    
+    deleteQuestion(quizId: string, id: string): Observable<object> {
+        return this.http.delete(this.apiUrl + 'quizzes/' + quizId + '/questions/' + id);
+    }
 
 }

@@ -7,7 +7,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
-import { QuizService } from './_service/quiz.service';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionService } from './_service/question.service';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
@@ -49,6 +48,7 @@ import { QuizInfoQuestionsTabComponent } from './quiz/quiz-info/quiz-info-questi
 import { QuestionLangService } from './_service/lang/question.lang.service';
 import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from './_service/dataProviders/question.dataProvider';
+import { QuizDataProvider } from './_service/dataProviders/quiz.dataProvider';
 
 @NgModule({
   declarations: [
@@ -139,7 +139,6 @@ import { QuestionDataProvider } from './_service/dataProviders/question.dataProv
   providers: [
     AuthGuard,
     QuestionLangService,
-    QuizService,
     QuestionService,
     QuizResolver,
     QuestionResolver,
@@ -149,6 +148,7 @@ import { QuestionDataProvider } from './_service/dataProviders/question.dataProv
       useClass: HttpErrorInterceptor,
       multi: true,
     },
+    QuizDataProvider,
     GroupDataProvider,
     QuestionDataProvider
   ],

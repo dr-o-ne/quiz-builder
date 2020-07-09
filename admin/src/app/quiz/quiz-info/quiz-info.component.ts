@@ -4,8 +4,8 @@ import { Quiz } from 'src/app/_models/quiz';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTabGroup } from '@angular/material/tabs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { QuizService } from 'src/app/_service/quiz.service';
 import { QuizInfoSettingsTabComponent } from './quiz-info-settings-tab/quiz-info-settings-tab.component';
+import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         private fb: FormBuilder,
         private router: Router,
         private location: Location,
-        private quizService: QuizService
+        private quizDataProvider: QuizDataProvider
     ) {
         if (this.route.snapshot.data.quizResolver)
             this.quiz = this.route.snapshot.data.quizResolver.quiz;
@@ -61,14 +61,14 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     }
 
     createQuiz(): void {
-        this.quizService.createQuiz(this.quiz)
+        this.quizDataProvider.createQuiz(this.quiz)
             .subscribe(
                 (response: any) => { this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit'); }
             );
     }
 
     updateQuiz(): void {
-        this.quizService.updateQuiz(this.quiz).subscribe();
+        this.quizDataProvider.updateQuiz(this.quiz).subscribe();
     }
 
 }

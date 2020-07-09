@@ -2,13 +2,13 @@ import { Component, OnInit, Input, QueryList, ViewChildren } from '@angular/core
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Quiz } from 'src/app/_models/quiz';
-import { QuizService } from 'src/app/_service/quiz.service';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { Group } from 'src/app/_models/group';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
+import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
 
 export class DataInfo {
     id: string;
@@ -35,7 +35,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
-        private quizService: QuizService,
+        private quizDataProvider: QuizDataProvider,
         public questionLangService: QuestionLangService,
         private groupDataProvider: GroupDataProvider,
         private questionDataProvider: QuestionDataProvider) {
@@ -176,7 +176,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     deleteQuestion(groupId: string, questionId: string): void {
 
-        this.quizService.deleteQuestion(this.quiz.id, questionId).subscribe(
+        this.questionDataProvider.deleteQuestion(this.quiz.id, questionId).subscribe(
             () => {
                 this.deleteQuestionData(groupId, questionId);
                 //form data is bound to data
