@@ -16,9 +16,10 @@ export class TrueFalseQuestionComponent extends QuestionComponent<TrueFalseQuest
   choicesDisplayType = ChoicesDisplayType;
 
   onChange(event: MatRadioChange | MatSelectChange): void {
-    const value = new TrueFalseQuestionAttemptResult();
-    value.questionId = this.question.id;
-    value.choice = event.value;
+    const value = new TrueFalseQuestionAttemptResult(
+      this.question.id,
+      event.value
+    );
 
     this.answer.emit(value);
   }

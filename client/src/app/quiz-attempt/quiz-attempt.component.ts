@@ -21,7 +21,7 @@ export class QuizAttemptComponent {
   answers: Map<string, QuestionAttemptResult>;
 
   @ViewChild(QuizNavPanelComponent)
-  private navPanelComponent: QuizNavPanelComponent;
+  private navPanelComponent!: QuizNavPanelComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,9 +50,7 @@ export class QuizAttemptComponent {
 
   onSubmit(): void {
 
-    const result = new QuizAttemptResult();
-    result.id = this.attempt.id;
-    result.answers = [...this.answers.values()];
+    const result = new QuizAttemptResult(this.attempt.id, [...this.answers.values()]);
 
     this.dataProviderService.endAttempt(result).subscribe(
       (quizAttemptFeedback: QuizAttemptFeedback) => { this.openDialog(quizAttemptFeedback); }

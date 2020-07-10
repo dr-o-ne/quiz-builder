@@ -15,9 +15,9 @@ import { LongAnswerQuestionComponent } from './long-answer-question/long-answer-
 
 export class QuestionDynamicComponent implements OnInit {
 
-  @Input() question: QuestionAttemptInfo;
+  @Input() question!: QuestionAttemptInfo;
   @Output() answer: EventEmitter<QuestionAttemptResult> = new EventEmitter<QuestionAttemptResult>();
-  @ViewChild(QuestionHostDirective, { static: true }) host: QuestionHostDirective;
+  @ViewChild(QuestionHostDirective, { static: true }) host!: QuestionHostDirective;
 
   constructor(private resolver: ComponentFactoryResolver) {
   }

@@ -12,13 +12,14 @@ import { MatSelectChange } from '@angular/material/select';
 })
 
 export class MultipleChoiceQuestionComponent extends QuestionComponent<MultipleChoiceQuestionAttemptInfo, MultipleChoiceQuestionAttemptResult> {
-  
+
   choicesDisplayType = ChoicesDisplayType;
 
   onChange(event: MatRadioChange | MatSelectChange): void {
-    const value = new MultipleChoiceQuestionAttemptResult();
-    value.questionId = this.question.id;
-    value.choice = event.value;
+    const value = new MultipleChoiceQuestionAttemptResult(
+      this.question.id,
+      event.value
+    );
 
     this.answer.emit(value);
   }

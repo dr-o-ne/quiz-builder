@@ -14,9 +14,10 @@ export class LongAnswerQuestionComponent extends QuestionComponent<LongAnswerQue
   answerControl = new FormControl();
 
   onChange(i: any): void {
-    const value = new LongAnswerQuestionAttemptResult();
-    value.questionId = this.question.id;
-    value.text = this.answerControl.value;
+    const value = new LongAnswerQuestionAttemptResult(
+      this.question.id,
+      this.answerControl.value
+    );
 
     this.answer.emit(value);
   }

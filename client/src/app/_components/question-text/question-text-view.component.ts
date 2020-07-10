@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
 })
 
 export class QuestionTextViewComponent {
-    @Input() text: string;
-    @Input() isHtml: boolean;
+    @Input() text!: string;
+    @Input() isHtml!: boolean;
 
 }
 

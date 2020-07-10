@@ -9,10 +9,10 @@ import { Appearance } from 'src/app/_models/appearance';
 
 export class QuizNavPanelComponent implements OnInit {
 
-    @Input() questionCount: number;
-    @Input() appearance: Appearance;
+    @Input() questionCount!: number;
+    @Input() appearance!: Appearance;
 
-    questionIds: number[];
+    questionIds!: number[];
 
     ngOnInit(): void {
         this.questionIds = [...Array(this.questionCount).keys()];

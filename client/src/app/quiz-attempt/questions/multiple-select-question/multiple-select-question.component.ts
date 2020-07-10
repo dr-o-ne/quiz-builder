@@ -33,9 +33,10 @@ export class MultipleSelectQuestionComponent extends QuestionComponent<MultipleS
       this.choices = new Set<string>(event.value);
     }
 
-    const value = new MultipleSelectQuestionAttemptResult();
-    value.questionId = this.question.id;
-    value.choices = [...this.choices].map(x => parseInt(x));
+    const value = new MultipleSelectQuestionAttemptResult(
+      this.question.id,
+      [...this.choices].map(x => parseInt(x))
+    );
 
     this.answer.emit(value);
   }
