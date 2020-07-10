@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using QuizBuilder.Data.Dto;
 
@@ -6,7 +7,7 @@ namespace QuizBuilder.Data.DataProviders {
 
 	public interface IQuizDataProvider {
 
-		public Task<IEnumerable<QuizDto>> GetAll();
+		public Task<ImmutableArray<QuizDto>> GetAll();
 
 		public Task<QuizDto> Get( long id );
 

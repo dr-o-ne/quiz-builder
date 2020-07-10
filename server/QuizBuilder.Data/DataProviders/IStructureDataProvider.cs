@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 
 namespace QuizBuilder.Data.DataProviders {
@@ -13,7 +14,7 @@ namespace QuizBuilder.Data.DataProviders {
 
 		Task DeleteQuizQuestionRelationship( string quizUId, string quizItemUId );
 
-		Task<IEnumerable<(string, int)>> DeleteQuizRelationships( string quizUId );
+		Task<ImmutableArray<(string, int)>> DeleteQuizRelationships( string quizUId );
 
 		Task<int> RemoveQuizItemRelationships( string quizItemUId );
 

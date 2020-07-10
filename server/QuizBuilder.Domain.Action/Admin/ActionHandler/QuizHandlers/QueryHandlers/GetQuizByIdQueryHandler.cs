@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -29,7 +30,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 				return null;
 
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
-			IEnumerable<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( quiz.UId );
+			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( quiz.UId );
 			IEnumerable<Group> groups = _mapper.Map<IEnumerable<GroupDto>, IEnumerable<Group>>( groupDtos.OrderBy( x => x.SortOrder ) );
 			IEnumerable<GroupViewModel> groupViewModels = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>( groups );
 			QuizViewModel quizViewModel = _mapper.Map<QuizViewModel>( quiz );

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			_dbConnectionFactory = dbConnectionFactory;
 		}
 
-		public async Task<IEnumerable<QuestionDto>> GetByQuiz( string uid ) {
+		public async Task<ImmutableArray<QuestionDto>> GetByQuiz( string uid ) {
 
 			const string sql = @"
 			SELECT
@@ -43,10 +44,12 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			WHERE qz.UId = @QuizUId";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
+			IEnumerable<QuestionDto> data = await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
+
+			return data.ToImmutableArray();
 		}
 
-		public async Task<IEnumerable<QuestionDto>> GetByGroup( string uid ) {
+		public async Task<ImmutableArray<QuestionDto>> GetByGroup( string uid ) {
 			const string sql = @"
 			SELECT
 				q.Id,
@@ -63,7 +66,9 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			WHERE qi.ParentId = (SELECT TOP 1 Id FROM dbo.QuizItem WITH(NOLOCK) WHERE UId = @GroupUId)";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QueryAsync<QuestionDto>( sql, new { GroupUId = uid } );
+			IEnumerable<QuestionDto> data = await conn.QueryAsync<QuestionDto>( sql, new { GroupUId = uid } );
+
+			return data.ToImmutableArray();
 		}
 
 		public async Task<QuestionDto> Get( string uid ) {

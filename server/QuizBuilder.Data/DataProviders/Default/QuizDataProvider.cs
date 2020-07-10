@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
@@ -16,7 +17,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			_dbConnectionFactory = dbConnectionFactory;
 		}
 
-		public async Task<IEnumerable<QuizDto>> GetAll() {
+		public async Task<ImmutableArray<QuizDto>> GetAll() {
 
 			const string sql = @"
 SELECT
@@ -27,7 +28,9 @@ SELECT
 FROM dbo.Quiz( NOLOCK )";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QueryAsync<QuizDto>( sql );
+			IEnumerable<QuizDto> data = await conn.QueryAsync<QuizDto>( sql );
+
+			return data.ToImmutableArray();
 		}
 
 		public async Task<QuizDto> Get( long id ) {

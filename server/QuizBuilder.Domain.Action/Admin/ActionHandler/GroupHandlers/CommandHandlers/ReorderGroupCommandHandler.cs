@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Data.DataProviders;
+using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHandlers {
@@ -17,7 +19,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 		public async Task<CommandResult> HandleAsync( ReorderGroupsCommand command ) {
 
-			var groupDtos = ( await _groupDataProvider.GetByQuiz( command.QuizUId ) ).ToList();
+			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
 
 			for( int i = 0; i < command.GroupUIds.Length; i++ ) {
 				var groupDto = groupDtos.Single( x => x.UId == command.GroupUIds[i] );

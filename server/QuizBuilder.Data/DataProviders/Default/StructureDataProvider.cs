@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
@@ -80,7 +81,7 @@ WHERE
 			await conn.ExecuteAsync( sql, new { QuizUId = quizUId, QuizItemId = quizItemUId } );
 		}
 
-		public async Task<IEnumerable<(string, int)>> DeleteQuizRelationships( string quizUId ) {
+		public async Task<ImmutableArray<(string, int)>> DeleteQuizRelationships( string quizUId ) {
 			const string sql = @"
 DECLARE @QuizQuizItemIds TABLE
 ( Id BIGINT )
@@ -97,7 +98,9 @@ INNER JOIN @QuizQuizItemIds AS temp ON temp.Id = q.Id
 ";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QueryAsync<(string, int)>( sql, new { QuizUId = quizUId } );
+			IEnumerable<(string, int)> data = await conn.QueryAsync<(string, int)>( sql, new { QuizUId = quizUId } );
+
+			return data.ToImmutableArray();
 		}
 
 		public async Task<int> RemoveQuizItemRelationships( string quizItemUId ) {
