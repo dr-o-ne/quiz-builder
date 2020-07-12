@@ -69,8 +69,8 @@
           </td>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></mat-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns" style="visibility: hidden"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag ></mat-row>
       </mat-table>
 
     </div>
