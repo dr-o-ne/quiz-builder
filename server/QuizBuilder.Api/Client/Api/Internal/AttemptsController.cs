@@ -21,7 +21,7 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 			StartQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
 			QuizAttemptInfo payload = result.Payload;
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)Created( nameof( string.Empty ), payload )
 				: UnprocessableEntity( string.Empty );
 		}
@@ -31,7 +31,7 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 			EndQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
 			AttemptFeedback payload = result.Payload;
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)Ok( payload )
 				: UnprocessableEntity( result );
 		}

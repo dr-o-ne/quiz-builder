@@ -29,11 +29,11 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 		public async Task<CommandResult> HandleAsync( MoveQuestionCommand command ) {
 			GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
 			if( groupDto == null )
-				return new QuestionCommandResult {Success = false};
+				return new QuestionCommandResult {IsSuccess = false};
 
 			QuestionDto questionDto = await _questionDataProvider.Get( command.QuestionUId );
 			if( questionDto == null )
-				return new QuestionCommandResult { Success = false };
+				return new QuestionCommandResult { IsSuccess = false };
 
 			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupDto.Id, command.QuestionUId );
 

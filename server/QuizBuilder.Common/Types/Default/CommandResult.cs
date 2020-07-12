@@ -2,19 +2,22 @@ namespace QuizBuilder.Common.Types.Default {
 
 	public class CommandResult : ICommandResult {
 
-		public bool Success { get; set; }
+		public bool IsSuccess { get; set; }
 		public string Message { get; set; }
 
 		public CommandResult() {
 		}
 
-		public CommandResult( bool success, string message ) {
-			Success = success;
+		public CommandResult( bool isSuccess, string message ) {
+			IsSuccess = isSuccess;
 			Message = message;
 		}
 
-		public static CommandResult Failed( string message = "" ) =>
-			new CommandResult {Success = false, Message = message};
+		public static CommandResult Fail( string message = "" ) =>
+			new CommandResult {IsSuccess = false, Message = message};
+
+		public static CommandResult Success( string message = "" ) =>
+			new CommandResult { IsSuccess = true, Message = message };
 	}
 
 	public class CommandResult<T> : CommandResult {

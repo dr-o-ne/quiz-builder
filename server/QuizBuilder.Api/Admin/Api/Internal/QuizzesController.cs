@@ -45,7 +45,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Delete( [FromRoute] DeleteQuestionCommand command ) {
 			CommandResult result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
@@ -55,7 +55,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)Created( nameof( Create ), result )
 				: UnprocessableEntity( result );
 		}
@@ -64,7 +64,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Update( [FromBody] UpdateQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
@@ -73,7 +73,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Delete( [FromRoute] DeleteQuizCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
@@ -82,7 +82,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Delete( [FromBody] DeleteQuizzesCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}

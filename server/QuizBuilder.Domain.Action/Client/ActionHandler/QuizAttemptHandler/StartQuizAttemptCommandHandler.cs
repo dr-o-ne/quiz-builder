@@ -46,12 +46,12 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			string quizUId = command.QuizUId;
 
 			if( string.IsNullOrWhiteSpace( quizUId ) )
-				return new StartQuizAttemptCommandResult { Success = false };
+				return new StartQuizAttemptCommandResult { IsSuccess = false };
 
 			QuizDto quizDto = await _quizDataProvider.Get( quizUId );
 
 			if( quizDto == null )
-				return new StartQuizAttemptCommandResult { Success = false };
+				return new StartQuizAttemptCommandResult { IsSuccess = false };
 
 			//TODO: load from DB
 			var appearance = new Appearance {
@@ -72,7 +72,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			QuizAttempt quizAttempt = await CreateQuizAttempt( quizUId );
 
 			return new StartQuizAttemptCommandResult {
-				Success = true,
+				IsSuccess = true,
 				Message = string.Empty,
 				Payload = MapPayload( quizAttempt.UId, quiz, questions, appearance )
 			};

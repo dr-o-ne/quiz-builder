@@ -48,7 +48,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 
 			await _quizDataProvider.Delete( command.UId );
 
-			return new CommandResult( success: true, message: string.Empty );
+			return new CommandResult( isSuccess: true, message: string.Empty );
 		}
 	}
 }

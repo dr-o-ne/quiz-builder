@@ -21,7 +21,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 		public async Task<CommandResult> HandleAsync( ReorderGroupsCommand command ) {
 
 			if( command.GroupUIds.ContainsDuplicates() )
-				return CommandResult.Failed();
+				return CommandResult.Fail();
 
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
 
@@ -31,7 +31,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 				await _groupDataProvider.Update( groupDto );
 			}
 
-			return new CommandResult( success: true, message: string.Empty );
+			return new CommandResult( isSuccess: true, message: string.Empty );
 		}
 
 	}

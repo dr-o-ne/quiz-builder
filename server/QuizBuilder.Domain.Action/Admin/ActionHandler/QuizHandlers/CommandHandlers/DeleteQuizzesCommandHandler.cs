@@ -20,7 +20,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				await _dispatcher.SendAsync( new DeleteQuizCommand {UId = uid} );
 			}
 
-			return new CommandResult( success: true, message: string.Empty );
+			return new CommandResult( isSuccess: true, message: string.Empty );
 		}
 
 	}

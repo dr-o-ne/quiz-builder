@@ -28,11 +28,11 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 			QuizDto quizDto = await _quizDataProvider.Get( query.UId );
 			if( quizDto == null )
 				return null;
+			Quiz quiz = _mapper.Map<Quiz>( quizDto );
 
-			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( quiz.UId );
-			IEnumerable<Group> groups = _mapper.Map<IEnumerable<GroupDto>, IEnumerable<Group>>( groupDtos.OrderBy( x => x.SortOrder ) );
-			IEnumerable<GroupViewModel> groupViewModels = _mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>( groups );
+			List<Group> groups = _mapper.Map<List<Group>>( groupDtos.OrderBy( x => x.SortOrder ) );
+			List<GroupViewModel> groupViewModels = _mapper.Map<List<GroupViewModel>>( groups );
 			QuizViewModel quizViewModel = _mapper.Map<QuizViewModel>( quiz );
 
 			if( quizViewModel is null ) {
@@ -41,7 +41,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 
 			quizViewModel.Groups = groupViewModels.ToImmutableArray();
 
-			return new QuizQueryResult { Quiz = quizViewModel };
+			return new QuizQueryResult {Quiz = quizViewModel};
 		}
 	}
 }

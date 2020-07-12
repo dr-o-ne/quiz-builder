@@ -30,7 +30,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			Question question = _mapper.Map<UpdateQuestionCommand, Question>( command );
 
 			if( !question.IsValid() )
-				return new CommandResult { Success = false };
+				return new CommandResult { IsSuccess = false };
 
 			question.Id = currentQuestionDto.Id;
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
@@ -41,7 +41,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			long quizItemId = await _structureDataProvider.GetQuizItemIdByQuestionUid( command.UId );
 			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupDto?.Id, quizItemId );
 			
-			return new CommandResult( success: true, message: string.Empty );
+			return new CommandResult( isSuccess: true, message: string.Empty );
 		}
 	}
 }

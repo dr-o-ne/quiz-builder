@@ -41,7 +41,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			foreach( QuestionAttemptResult item in command.Answers ) {
 				Question question = questions.SingleOrDefault( x => x.UId == item.QuestionUId );
 				if( question == null ) {
-					return new EndQuizAttemptCommandResult { Success = false, Message = string.Empty };
+					return new EndQuizAttemptCommandResult { IsSuccess = false, Message = string.Empty };
 				}
 				//TODO: check required;
 
@@ -95,7 +95,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			}
 
 			return new EndQuizAttemptCommandResult {
-				Success = true,
+				IsSuccess = true,
 				Message = string.Empty,
 				Payload = new AttemptFeedback {Score = totalScore}
 			};

@@ -36,7 +36,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			var quizViewModel = _mapper.Map<Quiz, QuizViewModel>( addedQuiz );
 
 			return new QuizCommandResult {
-				Success = true,
+				IsSuccess = true,
 				Message = string.Empty,
 				Quiz = quizViewModel
 			};

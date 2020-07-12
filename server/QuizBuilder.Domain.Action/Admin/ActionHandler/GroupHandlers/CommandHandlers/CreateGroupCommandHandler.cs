@@ -39,11 +39,11 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 			};
 
 			if( !model.IsValid() )
-				return new GroupCommandResult { Success = false };
+				return new GroupCommandResult { IsSuccess = false };
 
 			QuizDto quizDto = await _quizDataProvider.Get( command.QuizUId );
 			if( quizDto == null )
-				return new GroupCommandResult { Success = false };
+				return new GroupCommandResult { IsSuccess = false };
 
 			GroupDto dto = _mapper.Map<Group, GroupDto>( model );
 
@@ -53,7 +53,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 			var addedGroup = _mapper.Map<GroupDto, Group>( dto );
 			var groupViewModel = _mapper.Map<Group, GroupViewModel>( addedGroup );
 
-			return new GroupCommandResult { Success = true, Group = groupViewModel };
+			return new GroupCommandResult { IsSuccess = true, Group = groupViewModel };
 		}
 
 	}

@@ -21,7 +21,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 			await _structureDataProvider.DeleteQuizQuizItemRelationships( command.UId );
 			int rowsAffected = await _groupDataProvider.Delete( command.UId );
 
-			return new CommandResult( success: rowsAffected > 0, message: string.Empty );
+			return new CommandResult( isSuccess: rowsAffected > 0, message: string.Empty );
 		}
 	}
 }

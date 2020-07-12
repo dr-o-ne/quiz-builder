@@ -2,7 +2,7 @@
 {
     public interface ICommandResult
     {
-        bool Success { get; }
+        bool IsSuccess { get; }
         string Message { get; }
     }
 }

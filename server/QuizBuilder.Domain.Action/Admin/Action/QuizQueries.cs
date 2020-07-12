@@ -1,4 +1,5 @@
-﻿using QuizBuilder.Common.Types;
+﻿using System.ComponentModel.DataAnnotations;
+using QuizBuilder.Common.Types;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
@@ -8,6 +9,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	public sealed class GetQuizByIdQuery : IQuery<QuizQueryResult> {
 
+		[Required]
 		public string UId { get; set; }
 
 	}

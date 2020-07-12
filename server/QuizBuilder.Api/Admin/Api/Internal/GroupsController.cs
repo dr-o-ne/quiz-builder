@@ -20,7 +20,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Create( [FromBody] CreateGroupCommand command ) {
 			GroupCommandResult result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)Created( nameof( Create ), result )
 				: UnprocessableEntity( result );
 		}
@@ -29,7 +29,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Rename( [FromBody] UpdateGroupNameCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
@@ -38,7 +38,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Delete( [FromRoute] DeleteGroupCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}
@@ -47,7 +47,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		public async Task<ActionResult> Reorder( [FromBody] ReorderGroupsCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
 
-			return result.Success
+			return result.IsSuccess
 				? (ActionResult)NoContent()
 				: UnprocessableEntity( result );
 		}

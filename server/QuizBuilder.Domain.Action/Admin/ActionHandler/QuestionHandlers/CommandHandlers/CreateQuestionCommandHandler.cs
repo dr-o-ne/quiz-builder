@@ -35,18 +35,18 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			question.UId = _uIdService.GetUId();
 
 			if( !question.IsValid() )
-				return new QuestionCommandResult { Success = false };
+				return new QuestionCommandResult { IsSuccess = false };
 
 			QuizDto quizDto = await _quizDataProvider.Get( command.QuizUId );
 			if( quizDto == null )
-				return new QuestionCommandResult { Success = false };
+				return new QuestionCommandResult { IsSuccess = false };
 
 			if( string.IsNullOrWhiteSpace( command.GroupUId ) )
-				return new QuestionCommandResult { Success = false };
+				return new QuestionCommandResult { IsSuccess = false };
 
 			GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
 			if( groupDto == null )
-				return new QuestionCommandResult { Success = false };
+				return new QuestionCommandResult { IsSuccess = false };
 
 			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
 			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( groupDto.Id, questionDto );
@@ -57,7 +57,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			var addedQuestion = _mapper.Map<QuestionDto, Question>( questionDto );
 			var questionViewModel = _mapper.Map<Question, QuestionViewModel>( addedQuestion );
 
-			return new QuestionCommandResult { Success = true, Question = questionViewModel };
+			return new QuestionCommandResult { IsSuccess = true, Question = questionViewModel };
 		}
 	}
 }

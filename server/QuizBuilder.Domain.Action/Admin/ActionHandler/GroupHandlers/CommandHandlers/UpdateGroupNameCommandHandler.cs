@@ -24,7 +24,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 				await _groupDataProvider.Update( groupDto );
 			}
 
-			return new CommandResult( success: true, message: string.Empty );
+			return new CommandResult( isSuccess: true, message: string.Empty );
 		}
 
 	}

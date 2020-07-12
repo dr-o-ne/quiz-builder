@@ -21,7 +21,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			await _structureDataProvider.DeleteQuizQuestionRelationship( command.QuizUId, command.UId );
 			await _questionDataProvider.Delete( command.UId );
 
-			return new CommandResult( success: true, message: string.Empty );
+			return new CommandResult( isSuccess: true, message: string.Empty );
 		}
 	}
 }
