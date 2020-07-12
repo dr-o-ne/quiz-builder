@@ -27,8 +27,19 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Group 1
-			(HttpStatusCode statusCode, GroupCommandResult data) result2 = await _apiClient.GroupCreate( new { QuizId = uid1 } );
+			var result2 = await _apiClient.GroupCreate( new { QuizId = uid1 } );
 			string uid2 = result2.data.Group.Id;
+
+			// Create Group 2
+			var result3 = await _apiClient.GroupCreate( new { QuizId = uid1 } );
+			string uid3 = result3.data.Group.Id;
+
+			// Get Quiz, check group order
+			var result4 = await _apiClient.QuizGet( uid1 );
+			var groups = result4.data.Quiz.Groups;
+			Assert.Equal( uid2, groups[0].Id );
+			Assert.Equal( uid3, groups[1].Id );
+
 
 		}
 

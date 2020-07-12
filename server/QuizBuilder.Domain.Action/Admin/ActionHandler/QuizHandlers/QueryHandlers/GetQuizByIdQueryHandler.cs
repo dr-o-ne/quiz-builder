@@ -39,7 +39,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 				return null;
 			}
 
-			quizViewModel.Groups = groupViewModels;
+			quizViewModel.Groups = groupViewModels.ToImmutableArray();
 
 			return new QuizQueryResult { Quiz = quizViewModel };
 		}
