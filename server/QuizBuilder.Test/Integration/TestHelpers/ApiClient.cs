@@ -11,7 +11,7 @@ using QuizBuilder.Utils;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {
 
-	internal sealed class ApiClient {
+	public sealed class ApiClient {
 
 		private readonly HttpClient _httpClient;
 
@@ -53,11 +53,18 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 		public Task<(HttpStatusCode statusCode, GroupCommandResult data)> GroupCreate( object content ) =>
 			_httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", ToCommand<CreateGroupCommand>( content ) );
 
+		public Task<(HttpStatusCode statusCode, GroupCommandResult data)> GroupUpdateName( object content ) =>
+			_httpClient.PutValueAsync<GroupCommandResult>( "admin/groups/rename/", ToCommand<UpdateGroupNameCommand>( content ) );
+
+		public Task<(HttpStatusCode statusCode, GroupCommandResult data)> GroupReorder( object content ) =>
+			_httpClient.PutValueAsync<GroupCommandResult>( "admin/groups/reorder/", ToCommand<ReorderGroupsCommand>( content ) );
+
+		public Task<HttpResponseMessage> GroupDelete( string uid ) =>
+			_httpClient.DeleteAsync( "admin/groups/" + uid );
+
 		#endregion
 
 		#region Question
-
-		
 
 		#endregion
 

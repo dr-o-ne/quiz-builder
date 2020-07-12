@@ -27,6 +27,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	public sealed class DeleteGroupCommand : ICommand<CommandResult> {
 
+		[Required]
 		public string UId { get; set; }
 
 	}

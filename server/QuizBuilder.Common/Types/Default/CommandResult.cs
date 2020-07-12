@@ -5,8 +5,7 @@ namespace QuizBuilder.Common.Types.Default {
 		public bool Success { get; set; }
 		public string Message { get; set; }
 
-		public CommandResult()
-		{
+		public CommandResult() {
 		}
 
 		public CommandResult( bool success, string message ) {
@@ -14,11 +13,11 @@ namespace QuizBuilder.Common.Types.Default {
 			Message = message;
 		}
 
+		public static CommandResult Failed( string message = "" ) =>
+			new CommandResult {Success = false, Message = message};
 	}
 
 	public class CommandResult<T> : CommandResult {
-
 		public T Payload { get; set; }
-
 	}
 }

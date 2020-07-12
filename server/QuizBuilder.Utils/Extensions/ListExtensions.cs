@@ -18,6 +18,13 @@ namespace QuizBuilder.Utils.Extensions {
 			}
 		}
 
+		public static bool ContainsDuplicates<T>( this IList<T> list ) {
+
+			var set = new HashSet<T>( list );
+			return set.Count != list.Count;
+
+		}
+
 	}
 
 }

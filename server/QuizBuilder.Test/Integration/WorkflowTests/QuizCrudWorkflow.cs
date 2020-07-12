@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,16 +10,9 @@ using Xunit;
 namespace QuizBuilder.Test.Integration.WorkflowTests {
 
 	[Trait( "Category", "Integration" )]
-	[Collection( "DB" )]
-	public sealed class Workflow1 : IClassFixture<TestApplicationFactory<Startup>>, IDisposable {
+	public sealed class QuizCrudWorkflow : _WorkflowBase {
 
-		private readonly ApiClient _apiClient;
-		private readonly TestDatabaseWrapper _db;
-
-		public Workflow1( TestApplicationFactory<Startup> factory ) {
-			_apiClient = new ApiClient( factory.CreateClient() );
-			_db = factory.GetTestDatabaseWrapper();
-			_db.Cleanup();
+		public QuizCrudWorkflow( TestApplicationFactory<Startup> factory ) : base( factory ) {
 		}
 
 		[Fact]
@@ -77,7 +69,6 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.Empty( result11.data.Quizzes );
 		}
 
-		public void Dispose() => _db.Cleanup();
 	}
 
 }

@@ -6,6 +6,7 @@ using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
+using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHandlers {
 
@@ -18,6 +19,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 		}
 
 		public async Task<CommandResult> HandleAsync( ReorderGroupsCommand command ) {
+
+			if( command.GroupUIds.ContainsDuplicates() )
+				return CommandResult.Failed();
 
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
 

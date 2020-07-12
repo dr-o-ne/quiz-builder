@@ -7,7 +7,7 @@ using ServiceStack.OrmLite;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {
 
-	internal sealed class TestDatabaseWrapper {
+	public sealed class TestDatabaseWrapper {
 
 		private static readonly ImmutableArray<string> DataTables = new List<string> {
 			"dbo.QuizQuizItem",
