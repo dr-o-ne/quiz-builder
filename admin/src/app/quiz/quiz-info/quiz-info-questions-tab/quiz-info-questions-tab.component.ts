@@ -8,7 +8,6 @@ import { QuestionLangService } from 'src/app/_service/lang/question.lang.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
-import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
 
 export class DataInfo {
     id: string;
@@ -35,7 +34,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
-        private quizDataProvider: QuizDataProvider,
         public questionLangService: QuestionLangService,
         private groupDataProvider: GroupDataProvider,
         private questionDataProvider: QuestionDataProvider) {
@@ -44,21 +42,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.loadData(this.quiz.id);
-    }
-
-    loadData(quizId: string): void {
-
-        this.quiz.groups.forEach(x => x.questions = new Array<Question>());
-
-        this.questionDataProvider.getAllQuestions(quizId).subscribe((response: any) => {
-
-            for (const question of response.questions) {
-                this.quiz.groups.find(g => g.id === question.groupId).questions.push(question);
-            }
-
-            this.quiz.groups.forEach(x => this.addGroupForm(x));
-        });
+        this.quiz.groups.forEach(x => this.addGroupForm(x));
     }
 
     addGroup(): void {
@@ -197,4 +181,4 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         this.groupDataProvider.renameGroup(groupId, name).subscribe();
     }
 
-}
+} 
