@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Data.Dto;
@@ -25,11 +24,11 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 			}
 		}.ToImmutableArray();
 
-		private readonly HttpClient _httpClient;
+		private readonly ApiClient _apiClient;
 		private readonly TestDatabaseWrapper _db;
 
 		public GroupsControllerTests( TestApplicationFactory<Startup> factory ) {
-			_httpClient = factory.CreateClient();
+			_apiClient = new ApiClient( factory.CreateClient() );
 			_db = factory.GetTestDatabaseWrapper();
 			SetupData();
 		}
@@ -37,9 +36,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Group_Create_Created_Test() {
 
-			var content = new { QuizId = "quiz-1", Name = "Group Name" };
-
-			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", content );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _apiClient.GroupCreate( new { QuizId = "quiz-1", Name = "Group Name" } );
 
 			Assert.Equal( HttpStatusCode.Created, result.statusCode );
 		}
@@ -47,9 +44,7 @@ namespace QuizBuilder.Test.Integration.ControllerTests {
 		[Fact]
 		public async Task Group_Create_NoParent_UnprocessableEntity_Test() {
 
-			var content = new { QuizId = "quiz-empty", Name = "Group Name" };
-
-			(HttpStatusCode statusCode, GroupCommandResult data) result = await _httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", content );
+			(HttpStatusCode statusCode, GroupCommandResult data) result = await _apiClient.GroupCreate( new { QuizId = "quiz-empty", Name = "Group Name" } );
 
 			Assert.Equal( HttpStatusCode.UnprocessableEntity, result.statusCode );
 		}

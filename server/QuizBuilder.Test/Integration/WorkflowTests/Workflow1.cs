@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
@@ -16,11 +14,11 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 	[Collection( "DB" )]
 	public sealed class Workflow1 : IClassFixture<TestApplicationFactory<Startup>>, IDisposable {
 
-		private readonly HttpClient _httpClient;
+		private readonly ApiClient _apiClient;
 		private readonly TestDatabaseWrapper _db;
 
 		public Workflow1( TestApplicationFactory<Startup> factory ) {
-			_httpClient = factory.CreateClient();
+			_apiClient = new ApiClient( factory.CreateClient() );
 			_db = factory.GetTestDatabaseWrapper();
 			_db.Cleanup();
 		}
@@ -29,19 +27,19 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new {Name = "Quiz 1"} );
+			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _apiClient.QuizCreate( new { Name = "Quiz 1" } );
 			string uid1 = result1.data.Quiz.Id;
 
 			// Create Quiz 2
-			(HttpStatusCode statusCode, QuizCommandResult data) result2 = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new {Name = "Quiz 2"} );
+			(HttpStatusCode statusCode, QuizCommandResult data) result2 = await _apiClient.QuizCreate( new { Name = "Quiz 2" } );
 			string uid2 = result2.data.Quiz.Id;
 
 			// Create Quiz 3
-			(HttpStatusCode statusCode, QuizCommandResult data) result3 = await _httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", new { Name = "Quiz 3" } );
+			(HttpStatusCode statusCode, QuizCommandResult data) result3 = await _apiClient.QuizCreate( new { Name = "Quiz 3" } );
 			string uid3 = result3.data.Quiz.Id;
-
+			
 			// Get All Quizzes
-			(HttpStatusCode statusCode, QuizzesQueryResult data) result4 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes" );
+			(HttpStatusCode statusCode, QuizzesQueryResult data) result4 = await _apiClient.QuizGetAll();
 			Assert.Equal( 3, result4.data.Quizzes.Count );
 			Assert.Equal( uid1, result4.data.Quizzes[0].Id );
 			Assert.Equal( uid2, result4.data.Quizzes[1].Id );
@@ -54,35 +52,28 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			Assert.False( result4.data.Quizzes[2].IsEnabled );
 
 			// Update Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result5 = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = uid1, Name = "Quiz 1 New Name" } );
+			await _apiClient.QuizUpdate( new { Id = uid1, Name = "Quiz 1 New Name" } );
 
 			// Update Quiz 3
-			(HttpStatusCode statusCode, QuizCommandResult data) result6 = await _httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", new { Id = uid3, Name = "Quiz 3", IsEnabled = true } );
+			await _apiClient.QuizUpdate( new { Id = uid3, Name = "Quiz 3", IsEnabled = true } );
 
 			// Get All Quizzes
-			(HttpStatusCode statusCode, QuizzesQueryResult data) result7 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes" );
+			(HttpStatusCode statusCode, QuizzesQueryResult data) result7 = await _apiClient.QuizGetAll();
 			Assert.Equal( 3, result7.data.Quizzes.Count );
 			Assert.Equal( "Quiz 1 New Name", result7.data.Quizzes[0].Name );
 			Assert.True( result7.data.Quizzes[2].IsEnabled );
 
 			// Delete Quiz 1
-			var response8 = await _httpClient.DeleteAsync( "admin/quizzes/" + uid1 );
+			using HttpResponseMessage response8 = await _apiClient.QuizDelete( uid1 );
 
 			// Get All Quizzes
-			(HttpStatusCode statusCode, QuizzesQueryResult data) result9 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes" );
+			(HttpStatusCode statusCode, QuizzesQueryResult data) result9 = await _apiClient.QuizGetAll();
 			Assert.Equal( 2, result9.data.Quizzes.Count );
 
-			// Delete Bulk Quiz 2 and Quiz 3
-			var content = JsonSerializer.Serialize( new { Ids = new List<string> { uid2, uid3 } } );
-			using var request = new HttpRequestMessage {
-				Method = HttpMethod.Delete,
-				RequestUri = new Uri( _httpClient.BaseAddress + "admin/quizzes/" ),
-				Content = new StringContent( content, Encoding.UTF8, "application/json" )
-			};
-			using var response = await _httpClient.SendAsync( request );
+			using HttpResponseMessage response = await _apiClient.QuizDelete( new List<string> { uid2, uid3 } );
 
-			//Final Check
-			(HttpStatusCode statusCode, QuizzesQueryResult data) result11 = await _httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes" );
+			// Final Check
+			(HttpStatusCode statusCode, QuizzesQueryResult data) result11 = await _apiClient.QuizGetAll();
 			Assert.Empty( result11.data.Quizzes );
 		}
 
