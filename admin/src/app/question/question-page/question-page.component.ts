@@ -60,10 +60,6 @@ export class QuestionPageComponent implements OnInit {
 
   ngOnInit() {
 
-    if ( !history.state.quizId ) {
-      this.router.navigate(['../'], { relativeTo: this.activeRoute.parent });
-      return;
-    }
     this.quizId = history.state.quizId;
     this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {

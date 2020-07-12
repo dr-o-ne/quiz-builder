@@ -181,4 +181,15 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         this.groupDataProvider.renameGroup(groupId, name).subscribe();
     }
 
+    onEditClick(question: Question): void {
+        this.router.navigate(
+            ['questions', question.id],
+            {
+                relativeTo: this.activeRoute,
+                state: {
+                    groupId: question.groupId
+                }
+            });
+    }
+
 } 

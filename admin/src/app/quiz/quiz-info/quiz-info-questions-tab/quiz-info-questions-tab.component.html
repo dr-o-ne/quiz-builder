@@ -51,12 +51,12 @@
 
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+          <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{element.name}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type">
           <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-          <mat-cell *matCellDef="let element">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
+          <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="delete">
