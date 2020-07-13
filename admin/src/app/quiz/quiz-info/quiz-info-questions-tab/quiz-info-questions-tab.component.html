@@ -54,7 +54,7 @@
           <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{element.name}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="type">
+        <ng-container matColumnDef="type" >
           <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
           <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
         </ng-container>
@@ -70,7 +70,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns" style="visibility: hidden"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag ></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag class="hover:bg-hover cursor-pointer"></mat-row>
       </mat-table>
 
     </div>

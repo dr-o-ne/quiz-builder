@@ -1,3 +1,7 @@
 .group-box {
     margin-top: 2%;
 }
+
+.mat-header-row {
+    min-height: 0px;
+}
