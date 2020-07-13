@@ -51,7 +51,7 @@
 
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
-          <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{element.name}}</mat-cell>
+          <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{getDisplayName(element)}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type" >

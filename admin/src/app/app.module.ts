@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
-import { QuestionService } from './_service/question.service';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
@@ -139,7 +138,6 @@ import { QuizDataProvider } from './_service/dataProviders/quiz.dataProvider';
   providers: [
     AuthGuard,
     QuestionLangService,
-    QuestionService,
     QuizResolver,
     QuestionResolver,
     AttemptService,

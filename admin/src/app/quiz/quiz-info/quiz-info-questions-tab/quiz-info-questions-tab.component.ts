@@ -192,4 +192,8 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
             });
     }
 
+    getDisplayName(question: Question): string {
+        return question.name ? question.name : question.text.slice(3).slice(0, -4);
+    }
+
 } 

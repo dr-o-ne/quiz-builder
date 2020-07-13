@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseQuestionPreviewComponent } from '../base-question-preview/base-question-preview.component';
-import { QuestionService } from 'src/app/_service/question.service';
 
 @Component({
   selector: 'app-multi-select-preview',

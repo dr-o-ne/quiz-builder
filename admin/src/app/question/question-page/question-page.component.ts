@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { Choice } from 'src/app/_models/choice';
-import { QuestionService } from 'src/app/_service/question.service';
 import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalWindowPreviewQuestionComponent } from '../modal-window/modal-window-preview-question.component';
