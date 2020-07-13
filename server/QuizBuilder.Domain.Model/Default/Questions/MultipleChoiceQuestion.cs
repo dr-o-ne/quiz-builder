@@ -33,14 +33,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 			Choices.Add( choice );
 		}
 
-		public override Question NullifyChoices() {
-			foreach( BinaryChoice item in Choices ) {
-				item.IsCorrect = null;
-				item.Feedback = null;
-			}
-			return this;
-		}
-
 		public override bool IsValid() {
 
 			if( string.IsNullOrWhiteSpace( Text ) ) 

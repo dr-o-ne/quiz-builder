@@ -14,15 +14,13 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToModel {
 				return destination;
 			}
 
-			Question merged = destination.Clone();
+			destination.Name = source.Name;
+			destination.Text = source.Text;
+			destination.Feedback = source.Feedback;
+			destination.CorrectFeedback = source.CorrectFeedback;
+			destination.IncorrectFeedback = source.IncorrectFeedback;
 
-			merged.Name = source.Name;
-			merged.Text = source.Text;
-			merged.Feedback = source.Feedback;
-			merged.CorrectFeedback = source.CorrectFeedback;
-			merged.IncorrectFeedback = source.IncorrectFeedback;
-
-			return merged;
+			return destination;
 		}
 	}
 }

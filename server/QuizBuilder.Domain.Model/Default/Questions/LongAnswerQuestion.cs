@@ -7,10 +7,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public override QuestionType Type { get => LongAnswer; }
 
-		public override Question NullifyChoices() {
-			return this;
-		}
-
 		public override bool IsValid() => !string.IsNullOrWhiteSpace( Text );
 
 	}

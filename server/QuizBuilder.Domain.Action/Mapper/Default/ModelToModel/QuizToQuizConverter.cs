@@ -12,12 +12,10 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToModel {
 				return destination;
 			}
 
-			Quiz merged = destination.Clone();
+			destination.Name = source.Name;
+			destination.IsEnabled = source.IsEnabled;
 
-			merged.Name = source.Name;
-			merged.IsEnabled = source.IsEnabled;
-
-			return merged;
+			return destination;
 		}
 	}
 }

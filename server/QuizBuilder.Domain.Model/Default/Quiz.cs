@@ -10,8 +10,5 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public bool IsEnabled { get; set; }
 
-		public Quiz Clone() {
-			return (Quiz)this.MemberwiseClone(); // ToDo: deep cloning needed?
-		}
 	}
 }

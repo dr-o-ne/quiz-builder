@@ -21,21 +21,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public string IncorrectFeedback { get; set; }
 
-		public abstract Question NullifyChoices();
-
-		public virtual Question NullifyFeedback() {
-			Feedback = null;
-			CorrectFeedback = null;
-			IncorrectFeedback = null;
-
-			return this;
-		}
-
 		public decimal GetPoints() => Points ?? 0;
-
-		public virtual Question Clone() {
-			return (Question)this.MemberwiseClone(); // ToDo: deep cloning needed?
-		}
 
 	}
 }

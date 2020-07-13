@@ -18,14 +18,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public ChoicesEnumerationType ChoicesEnumerationType { get; set; } = NoEnumeration;
 
-		public override Question NullifyChoices() {
-			TrueChoice.IsCorrect = null;
-			FalseChoice.IsCorrect = null;
-			TrueChoice.Feedback = null;
-			FalseChoice.Feedback = null;
-			return this;
-		}
-
 		public override bool IsValid() =>
 			!string.IsNullOrWhiteSpace( Text ) &&
 			TrueChoice.IsCorrect != null &&
