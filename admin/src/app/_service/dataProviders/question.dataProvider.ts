@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Question } from 'src/app/_models/question';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,18 @@ export class QuestionDataProvider {
     constructor(private http: HttpClient) {
     }
 
+    getQuestion(id: string): Observable<object> {
+        return this.http.get(this.apiUrl + 'questions/' + id);
+    }
+
+    updateQuestion(question: Question): Observable<object> {
+        return this.http.put(this.apiUrl + 'questions', question);
+    }
+
+    createQuestion(question: Question): Observable<object> {
+        return this.http.post(this.apiUrl + 'questions', question);
+    }
+
     reorderQuestions(groupId: string, questionIds: string[]): Observable<object> {
         const body = { groupId, questionIds };
         return this.http.put(this.apiUrl + 'questions/reorder', body);
@@ -22,7 +35,7 @@ export class QuestionDataProvider {
         const body = { groupId, questionId, questionIds };
         return this.http.put(this.apiUrl + 'questions/move', body);
     }
-    
+
     deleteQuestion(quizId: string, id: string): Observable<object> {
         return this.http.delete(this.apiUrl + 'quizzes/' + quizId + '/questions/' + id);
     }

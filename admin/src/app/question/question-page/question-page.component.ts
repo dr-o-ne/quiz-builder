@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { Choice } from 'src/app/_models/choice';
-import { Group } from 'src/app/_models/group';
 import { QuestionService } from 'src/app/_service/question.service';
 import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalWindowPreviewQuestionComponent } from '../modal-window/modal-window-preview-question.component';
 import { Option } from 'src/app/_models/option';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
+import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 
 @Component( {
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,23 +38,24 @@ export class QuestionPageComponent implements OnInit {
     new Option( 'incorrectFeedback', 'Incorrect feedback', 'wysiwyg' ),
   ];
 
-  constructor( private fb: FormBuilder,
-               private router: Router,
-               private activeRoute: ActivatedRoute,
-               private questionService: QuestionService,
-               public dialog: MatDialog ) {     
-                    
-    this.questionTypeKeys = Object.keys( this.questionTypes ).filter( Number ).map( v => Number( v ) );
+  constructor(
+    private questionDataProvider: QuestionDataProvider,
+    private fb: FormBuilder,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    public dialog: MatDialog) {
 
-    this.questionForm = this.fb.group( {
-      name: [ '', Validators.nullValidator ],
-      type: [ '', Validators.required ],
-      text: [ '', Validators.required ],
-      points: [ '', Validators.required ],
-      feedback: ['', Validators.nullValidator ],
-      correctFeedback: ['', Validators.nullValidator ],
-      incorrectFeedback: ['', Validators.nullValidator ],
-    } );
+    this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
+
+    this.questionForm = this.fb.group({
+      name: ['', Validators.nullValidator],
+      type: ['', Validators.required],
+      text: ['', Validators.required],
+      points: ['', Validators.required],
+      feedback: ['', Validators.nullValidator],
+      correctFeedback: ['', Validators.nullValidator],
+      incorrectFeedback: ['', Validators.nullValidator],
+    });
     //TODO: add dynamic, how?
   }
 
@@ -117,7 +118,7 @@ export class QuestionPageComponent implements OnInit {
       return;
     }
     this.updateQuestionModel();
-    this.questionService.updateQuestion( this.question ).subscribe( response => {
+    this.questionDataProvider.updateQuestion( this.question ).subscribe( response => {
       this.navigateToParent();
     }, error => console.log( error ) );
   }
@@ -143,7 +144,7 @@ export class QuestionPageComponent implements OnInit {
       return;
     }
     this.updateQuestionModel();
-    this.questionService.createQuestion( this.question ).subscribe( response => {
+    this.questionDataProvider.createQuestion( this.question ).subscribe( response => {
       this.navigateToParent();
     }, error => console.log( error ) );
   }

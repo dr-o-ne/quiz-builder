@@ -14,16 +14,6 @@ export class QuestionService {
   constructor( private http: HttpClient ) {
   }
 
-  getQuestion( id: string ): Observable<object> {
-    return this.http.get( this.apiUrl + 'questions/' + id );
-  }
 
-  updateQuestion( question: Question ): Observable<object> {
-    return this.http.put( this.apiUrl + 'questions', question );
-  }
-
-  createQuestion( question: Question ): Observable<object> {
-    return this.http.post( this.apiUrl + 'questions', question );
-  }
 
 }
