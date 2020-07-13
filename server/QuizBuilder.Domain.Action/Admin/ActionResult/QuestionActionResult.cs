@@ -16,10 +16,4 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult {
 
 	}
 
-	public class QuestionsQueryResult {
-
-		public ImmutableList<QuestionViewModel> Questions { get; set; }
-
-	}
-
 }

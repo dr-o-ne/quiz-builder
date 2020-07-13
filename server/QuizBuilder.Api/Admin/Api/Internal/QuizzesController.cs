@@ -33,14 +33,6 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			return Ok( result );
 		}
 
-		//TODO: test
-		[HttpGet("{quizUId}/questions")]
-		public async Task<ActionResult> GetAll( [FromRoute] GetQuestionsByQuizIdQuery query ) {
-			var result = await _dispatcher.QueryAsync( query );
-
-			return Ok( result );
-		}
-
 		[HttpDelete( "{quizUId}/questions/{uid}" )]
 		public async Task<ActionResult> Delete( [FromRoute] DeleteQuestionCommand command ) {
 			CommandResult result = await _dispatcher.SendAsync( command );
