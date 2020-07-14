@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
@@ -30,7 +31,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 
 		public async Task<CommandResult> HandleAsync( DeleteQuizCommand command ) {
 
-			List<(string uid, int typeId)> result = (await _structureDataProvider.DeleteQuizRelationships( command.UId )).ToList();
+			ImmutableArray<(string uid, int typeId)> result = await _structureDataProvider.DeleteQuizRelationships( command.UId );
 			var questionUids = result
 				.Where( x => x.typeId == (int)Enums.QuizItemType.Question )
 				.Select( x => x.uid );
@@ -48,7 +49,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 
 			await _quizDataProvider.Delete( command.UId );
 
-			return new CommandResult( isSuccess: true, message: string.Empty );
+			return CommandResult.Success();
 		}
 	}
 }
