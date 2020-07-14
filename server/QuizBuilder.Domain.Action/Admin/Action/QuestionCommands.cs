@@ -15,11 +15,13 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "QuizId" )]
 		public string QuizUId { get; set; }
 
+		[Required]
 		[JsonPropertyName( "GroupId" )]
 		public string GroupUId { get; set; }
 
 		public Enums.QuestionType Type { get; set; }
 
+		[Required]
 		public string Text { get; set; }
 
 		public decimal? Points { get; set; }
