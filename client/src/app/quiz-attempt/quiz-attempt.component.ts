@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
@@ -8,13 +8,15 @@ import { QuizAttemptFeedback } from '../_models/attemptFeedback';
 import { MatDialog } from '@angular/material/dialog';
 import { EndPageModalDialog } from './end-page/end-page-modal.component';
 import { QuizNavPanelComponent } from './quiz-nav-panel/quiz-nav-panel.component';
+import { MatButton } from '@angular/material/button';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-quiz-attempt',
   templateUrl: './quiz-attempt.component.html'
 })
 
-export class QuizAttemptComponent {
+export class QuizAttemptComponent implements AfterViewInit {
 
   attempt: QuizAttemptInfo;
   currentGroupIndex: number;
@@ -22,6 +24,12 @@ export class QuizAttemptComponent {
 
   @ViewChild(QuizNavPanelComponent)
   private navPanelComponent!: QuizNavPanelComponent;
+
+  @ViewChild("prev", { static: false })
+  private prevButton!: MatButton;
+
+  @ViewChild("next", { static: false })
+  private nextButton!: MatButton;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +39,11 @@ export class QuizAttemptComponent {
     this.attempt = this.route.snapshot.data.attempt;
     this.answers = new Map<string, QuestionAttemptResult>();
     this.currentGroupIndex = 0;
+  }
+
+  ngAfterViewInit(): void {
+    this.setPrevButtonVisibility();
+    this.setNextButtonVisibility();
   }
 
   getAnchor(i: number): string {
@@ -57,17 +70,48 @@ export class QuizAttemptComponent {
     );
   }
 
-  isPrevVisible = () => this.attempt.groups.length > 1;
+  onPrev(): void {
 
-  isPrevEnabled = () => this.currentGroupIndex > 0;
+    this.currentGroupIndex -= 1;
 
-  onPrev = () => this.currentGroupIndex -= 1;
+    this.setPrevButtonVisibility();
+    this.setNextButtonVisibility();
+  }
 
-  isNextVisible = () => this.attempt.groups.length > 1;
+  onNext(): void {
 
-  isNextEnabled = () => this.currentGroupIndex < this.attempt.groups.length - 1;
-  
-  onNext = () => this.currentGroupIndex += 1;
+    this.currentGroupIndex += 1;
+
+    this.setPrevButtonVisibility();
+    this.setNextButtonVisibility();
+  }
+
+  setNextButtonVisibility(): void {
+
+    let isVisible = true;
+
+    if (this.attempt.groups.length === 1) isVisible = false;
+    if (this.currentGroupIndex === this.attempt.groups.length - 1) isVisible = false;
+
+    this.setButtonVisibility(this.nextButton, isVisible);
+  }
+
+  setPrevButtonVisibility(): void {
+
+    let isVisible = true;
+
+    if (this.attempt.groups.length === 1) isVisible = false;
+    if (this.currentGroupIndex === 0) isVisible = false;
+
+    this.setButtonVisibility(this.prevButton, isVisible);
+  }
+
+  setButtonVisibility(button: MatButton, isVisible: boolean): void {
+    if (isVisible)
+      button._elementRef.nativeElement.classList.remove("hidden");
+    else
+      button._elementRef.nativeElement.classList.add("hidden");
+  }
 
   openDialog(quizAttemptFeedback: QuizAttemptFeedback): void {
     const dialogRef = this.dialog.open(EndPageModalDialog, {

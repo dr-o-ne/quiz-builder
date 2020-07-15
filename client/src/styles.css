@@ -30,6 +30,10 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: 0px;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .item-group-vertical {
     display: flex;
     flex-direction: column;

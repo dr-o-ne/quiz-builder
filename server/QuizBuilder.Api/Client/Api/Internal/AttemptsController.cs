@@ -17,7 +17,6 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] StartQuizAttemptCommand command ) {
-
 			StartQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
 			QuizAttemptInfo payload = result.Payload;
 

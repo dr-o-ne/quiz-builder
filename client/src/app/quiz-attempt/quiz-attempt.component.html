@@ -33,28 +33,16 @@
 
             <div class="borderless card" fxLayout="row" fxLayoutAlign="space-between center">
 
-                <button mat-stroked-button 
-                    color="primary" 
-                    (click)="onPrev()" 
-                    [disabled]="!isPrevEnabled()">
-
+                <button mat-stroked-button #prev color="primary" (click)="onPrev()">
                     Previous Page
-
                 </button>
 
                 <button mat-flat-button color="primary" (click)="onSubmit()">
-
                     Submit
-
                 </button>
 
-                <button mat-stroked-button 
-                    color="primary" 
-                    (click)="onNext()" 
-                    [disabled]="!isNextEnabled()">
-
+                <button mat-stroked-button #next color="primary" (click)="onNext()">
                     Next Page
-
                 </button>
 
             </div>
