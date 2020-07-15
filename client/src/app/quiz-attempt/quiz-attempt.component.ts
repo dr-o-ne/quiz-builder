@@ -57,6 +57,18 @@ export class QuizAttemptComponent {
     );
   }
 
+  isPrevVisible = () => this.attempt.groups.length > 1;
+
+  isPrevEnabled = () => this.currentGroupIndex > 0;
+
+  onPrev = () => this.currentGroupIndex -= 1;
+
+  isNextVisible = () => this.attempt.groups.length > 1;
+
+  isNextEnabled = () => this.currentGroupIndex < this.attempt.groups.length - 1;
+  
+  onNext = () => this.currentGroupIndex += 1;
+
   openDialog(quizAttemptFeedback: QuizAttemptFeedback): void {
     const dialogRef = this.dialog.open(EndPageModalDialog, {
       width: '500px',

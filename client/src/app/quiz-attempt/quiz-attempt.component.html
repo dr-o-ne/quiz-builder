@@ -31,10 +31,30 @@
 
             </div>
 
-            <div class="borderless card" fxLayout="row" fxLayoutAlign="center center">
+            <div class="borderless card" fxLayout="row" fxLayoutAlign="space-between center">
 
-                <button mat-raised-button color="primary" (click)="onSubmit()">
+                <button mat-stroked-button 
+                    color="primary" 
+                    (click)="onPrev()" 
+                    [disabled]="!isPrevEnabled()">
+
+                    Previous Page
+
+                </button>
+
+                <button mat-flat-button color="primary" (click)="onSubmit()">
+
                     Submit
+
+                </button>
+
+                <button mat-stroked-button 
+                    color="primary" 
+                    (click)="onNext()" 
+                    [disabled]="!isNextEnabled()">
+
+                    Next Page
+
                 </button>
 
             </div>

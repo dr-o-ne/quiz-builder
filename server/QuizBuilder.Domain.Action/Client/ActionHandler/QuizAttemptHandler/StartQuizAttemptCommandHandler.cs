@@ -14,6 +14,7 @@ using QuizBuilder.Domain.Model.Default.Appearance;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
+using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Utils.Services;
 using QuizBuilder.Utils.Utils;
 
@@ -26,19 +27,23 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		private readonly IQuizDataProvider _quizDataProvider;
 		private readonly IQuestionDataProvider _questionDataProvider;
 		private readonly IQuizAttemptDataProvider _attemptDataProvider;
+		private readonly IGroupDataProvider _groupDataProvider;
+
 
 		public StartQuizAttemptCommandHandler(
 			IMapper mapper,
 			IUIdService uIdService,
 			IQuizDataProvider quizDataProvider,
 			IQuestionDataProvider questionDataProvider,
-			IQuizAttemptDataProvider attemptDataProvider ) {
+			IQuizAttemptDataProvider attemptDataProvider,
+			IGroupDataProvider groupDataProvider ) {
 
 			_mapper = mapper;
 			_uIdService = uIdService;
 			_quizDataProvider = quizDataProvider;
 			_questionDataProvider = questionDataProvider;
 			_attemptDataProvider = attemptDataProvider;
+			_groupDataProvider = groupDataProvider;
 		}
 
 		public async Task<StartQuizAttemptCommandResult> HandleAsync( StartQuizAttemptCommand command ) {
@@ -66,15 +71,20 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				.OrderBy( x => x.SortOrder )
 				.ToList();
 
+			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
+			
+
 			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
-			IEnumerable<Question> questions = _mapper.Map<IEnumerable<QuestionDto>, IEnumerable<Question>>( questionDtos );
+
+			List<Question> questions = _mapper.Map<List<Question>>( questionDtos );
+			List<Group> groups = _mapper.Map<List<Group>>( groupDtos.OrderBy( x => x.SortOrder ) );
 
 			QuizAttempt quizAttempt = await CreateQuizAttempt( quizUId );
 
 			return new StartQuizAttemptCommandResult {
 				IsSuccess = true,
 				Message = string.Empty,
-				Payload = MapPayload( quizAttempt.UId, quiz, questions, appearance )
+				Payload = MapPayload( quizAttempt.UId, quiz, groups, questions, appearance )
 			};
 
 		}
@@ -89,25 +99,26 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				UpdatedDate = DateTime.UtcNow
 			};
 
-			var quizAttemptDto = _mapper.Map<QuizAttempt, AttemptDto>( quizAttempt );
+			var quizAttemptDto = _mapper.Map<AttemptDto>( quizAttempt );
 			await _attemptDataProvider.Add( quizAttemptDto );
 
 			return quizAttempt;
 		}
 
-		private static QuizAttemptInfo MapPayload( string uid, Quiz quiz, IEnumerable<Question> questions, Appearance appearance ) {
+		private static QuizAttemptInfo MapPayload( string uid, Quiz quiz, List<Group> groups, List<Question> questions, Appearance appearance ) {
 
-			var group = new GroupAttemptInfo {
-				UId = string.Empty,
-				Name = string.Empty,
-				Questions = questions.Select( MapQuestion ).ToImmutableArray()
-			};
+			var groupAttemptInfos = groups.Select(
+				g => new GroupAttemptInfo {
+					UId = string.Empty,
+					Name = string.Empty,
+					Questions = questions.Where( x => x.ParentUId == g.UId ).Select( MapQuestion ).ToImmutableArray()
+				} ).ToList();
 
 			var result = new QuizAttemptInfo {
 				UId = uid,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				AppearanceInfo = MapAppearance( appearance ),
-				Groups = ImmutableArray.Create( group )
+				Groups = groupAttemptInfos.Where( g => g.Questions.Any() ).ToImmutableArray()
 			};
 
 			return result;

@@ -6,8 +6,6 @@
 
 		public string UId { get; set; }
 
-		public long ParentId { get; set; }
-
 		public string Name { get; set; }
 
 		public int SortOrder { get; set; }
