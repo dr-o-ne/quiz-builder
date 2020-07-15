@@ -36,7 +36,8 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.quizForm = this.fb.group({
             settings: this.fb.group({
-                name: [this.quiz.name, Validators.required]
+                name: [this.quiz.name, Validators.required],
+                isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled, Validators.nullValidator]
             })
         })
     }

@@ -6,6 +6,8 @@ export class Quiz {
     isEnabled: boolean;
     groups: Group[];
 
+    isPrevButtonEnabled: boolean;
+
     constructor() {
         this.groups = new Array<Group>();
     }
