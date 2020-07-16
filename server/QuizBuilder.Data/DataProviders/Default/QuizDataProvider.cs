@@ -24,6 +24,7 @@ SELECT
 	Id, 
 	UId,
 	Name,
+	Settings,
 	IsEnabled
 FROM dbo.Quiz( NOLOCK )";
 
@@ -39,6 +40,7 @@ SELECT
 	Id, 
 	UId,
 	Name,
+	Settings,
 	IsEnabled
 FROM dbo.Quiz( NOLOCK )
 WHERE Id = @Id";
@@ -53,6 +55,7 @@ SELECT
 	Id, 
 	UId,
 	Name,
+	Settings,
 	IsEnabled
 FROM dbo.Quiz ( NOLOCK )
 WHERE UId = @UId";
@@ -66,7 +69,8 @@ WHERE UId = @UId";
 			const string sql = @"
 INSERT INTO dbo.Quiz(
 	UId, 
-	Name, 
+	Name,
+	Settings,
 	IsEnabled,
 	CreatedOn,
 	ModifiedOn
@@ -75,13 +79,21 @@ OUTPUT INSERTED.Id
 VALUES
 (
 	@UId, 
-	@Name, 
+	@Name,
+	@Settings,
 	@IsEnabled,
 	@CreatedOn,
 	@ModifiedOn
 )";
 			using IDbConnection conn = GetConnection();
-			return await conn.ExecuteScalarAsync<long>( sql, new {dto.UId, dto.Name, dto.IsEnabled, CreatedOn = DateTime.UtcNow, ModifiedOn = DateTime.UtcNow} );
+			return await conn.ExecuteScalarAsync<long>( sql, new {
+				dto.UId,
+				dto.Name,
+				dto.Settings,
+				dto.IsEnabled,
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
+			} );
 		}
 
 		public async Task Update( QuizDto dto ) {
@@ -89,12 +101,19 @@ VALUES
 			const string sql = @"
 UPDATE dbo.Quiz
 SET Name = @Name,
+	Settings = @Settings,
     IsEnabled = @IsEnabled,
     ModifiedOn = @ModifiedOn
 WHERE Id = @Id";
 
 			using IDbConnection conn = GetConnection();
-			await conn.ExecuteAsync( sql, new { dto.Id, dto.Name, dto.IsEnabled, ModifiedOn = DateTime.UtcNow } );
+			await conn.ExecuteAsync( sql, new {
+				dto.Id,
+				dto.Name,
+				dto.Settings,
+				dto.IsEnabled,
+				ModifiedOn = DateTime.UtcNow
+			} );
 		}
 
 		public async Task Delete( string uid ) {

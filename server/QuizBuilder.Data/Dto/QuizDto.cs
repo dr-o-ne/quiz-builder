@@ -8,6 +8,8 @@
 
 		public string Name { get; set; }
 
+		public string Settings { get; set; }
+
 		public bool IsEnabled { get; set; }
 
 	}
