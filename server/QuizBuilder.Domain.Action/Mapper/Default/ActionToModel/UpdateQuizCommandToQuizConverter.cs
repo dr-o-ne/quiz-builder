@@ -7,10 +7,12 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ActionToModel {
 	internal sealed class UpdateQuizCommandToQuizConverter : ITypeConverter<UpdateQuizCommand, Quiz> {
 
 		public Quiz Convert( UpdateQuizCommand source, Quiz destination, ResolutionContext context ) {
-			if( source is null )
-				return null;
-
-			return new Quiz {UId = source.UId, IsEnabled = source.IsEnabled, Name = source.Name};
+			return new Quiz {
+				UId = source.UId,
+				IsEnabled = source.IsEnabled,
+				Name = source.Name,
+				IsPrevButtonEnabled = source.IsPrevButtonEnabled
+			};
 		}
 	}
 }

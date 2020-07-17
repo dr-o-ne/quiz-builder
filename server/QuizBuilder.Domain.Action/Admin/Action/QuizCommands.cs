@@ -24,6 +24,10 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 		public bool IsEnabled { get; set; }
 
+		[Required]
+		[JsonPropertyName( "isPrevButtonEnabled" )]
+		public bool IsPrevButtonEnabled { get; set; }
+
 	}
 
 	public sealed class DeleteQuizCommand : ICommand<CommandResult> {

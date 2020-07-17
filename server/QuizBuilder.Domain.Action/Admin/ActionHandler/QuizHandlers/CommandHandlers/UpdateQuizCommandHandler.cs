@@ -24,8 +24,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			QuizDto quizDto = await _quizDataProvider.Get( command.UId );
 			if( quizDto == null )
 				return new CommandResult( isSuccess: false, message: string.Empty );
-			Quiz currentQuiz = _mapper.Map<QuizDto, Quiz>( quizDto );
-			Quiz updatedQuiz = _mapper.Map<UpdateQuizCommand, Quiz>( command );
+			Quiz currentQuiz = _mapper.Map<Quiz>( quizDto );
+			Quiz updatedQuiz = _mapper.Map<Quiz>( command );
 			Quiz mergedQuiz = _mapper.Merge( updatedQuiz, currentQuiz );
 			QuizDto mergedQuizDto = _mapper.Map<Quiz, QuizDto>( mergedQuiz );
 			await _quizDataProvider.Update( mergedQuizDto );

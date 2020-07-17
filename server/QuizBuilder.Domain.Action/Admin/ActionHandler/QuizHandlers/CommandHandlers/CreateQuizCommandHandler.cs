@@ -24,16 +24,17 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 		}
 
 		public async Task<QuizCommandResult> HandleAsync( CreateQuizCommand command ) {
+
 			var quiz = new Quiz {
 				UId = _uIdService.GetUId(),
-				Name = command.Name
+				Name = command.Name,
+				IsPrevButtonEnabled = true
 			};
 
-			QuizDto quizDto = _mapper.Map<Quiz, QuizDto>( quiz );
+			var quizDto = _mapper.Map<QuizDto>( quiz );
 			await _quizDataProvider.Add( quizDto );
 
-			var addedQuiz = _mapper.Map<QuizDto, Quiz>( quizDto );
-			var quizViewModel = _mapper.Map<Quiz, QuizViewModel>( addedQuiz );
+			var quizViewModel = _mapper.Map<QuizViewModel>( quiz );
 
 			return new QuizCommandResult {
 				IsSuccess = true,

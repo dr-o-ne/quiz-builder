@@ -14,6 +14,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToModel {
 
 			destination.Name = source.Name;
 			destination.IsEnabled = source.IsEnabled;
+			destination.IsPrevButtonEnabled = source.IsPrevButtonEnabled;
 
 			return destination;
 		}
