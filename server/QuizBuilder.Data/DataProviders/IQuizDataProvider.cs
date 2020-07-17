@@ -19,8 +19,6 @@ namespace QuizBuilder.Data.DataProviders {
 
 		public Task Delete( string uid );
 
-		public Task Delete( List<string> uids );
-
 	}
 
 }

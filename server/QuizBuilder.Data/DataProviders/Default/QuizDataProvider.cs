@@ -121,11 +121,6 @@ WHERE Id = @Id";
 			await db.ExecuteAsync( "DELETE FROM dbo.Quiz WHERE UId=@UId", new { UId = uid } );
 		}
 
-		public async Task Delete( List<string> uids ) {
-			using IDbConnection db = GetConnection();
-			await db.ExecuteAsync( "DELETE FROM dbo.Quiz WHERE UId IN @UIds", new { UIds = uids } );
-		}
-
 		private IDbConnection GetConnection() {
 			IDbConnection conn = _dbConnectionFactory.GetConnection();
 			conn.Open();
