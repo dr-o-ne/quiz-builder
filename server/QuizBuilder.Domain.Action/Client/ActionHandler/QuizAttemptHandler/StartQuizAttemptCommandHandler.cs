@@ -117,6 +117,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			var result = new QuizAttemptInfo {
 				UId = uid,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
+				IsPrevButtonEnabled = quiz.IsPrevButtonEnabled,
 				AppearanceInfo = MapAppearance( appearance ),
 				Groups = groupAttemptInfos.Where( g => g.Questions.Any() ).ToImmutableArray()
 			};

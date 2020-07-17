@@ -5,6 +5,7 @@ export interface QuizAttemptInfo {
     id: string;
     appearance: Appearance;
     name: string;
+    isPrevButtonEnabled: boolean;
     groups: GroupAttemptInfo[]
 }
 

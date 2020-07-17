@@ -1,6 +1,5 @@
-import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { QuizAttemptInfo, QuestionAttemptInfo } from '../_models/attemptInfo';
 import { QuestionAttemptResult, QuizAttemptResult } from '../_models/attemptResult';
 import { DataProviderService } from '../_services/dataProvider.service';
@@ -9,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { EndPageModalDialog } from './end-page/end-page-modal.component';
 import { QuizNavPanelComponent } from './quiz-nav-panel/quiz-nav-panel.component';
 import { MatButton } from '@angular/material/button';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -102,6 +100,7 @@ export class QuizAttemptComponent implements AfterViewInit {
 
     if (this.attempt.groups.length === 1) isVisible = false;
     if (this.currentGroupIndex === 0) isVisible = false;
+    if (this.attempt.isPrevButtonEnabled === false ) isVisible = false;
 
     this.setButtonVisibility(this.prevButton, isVisible);
   }
