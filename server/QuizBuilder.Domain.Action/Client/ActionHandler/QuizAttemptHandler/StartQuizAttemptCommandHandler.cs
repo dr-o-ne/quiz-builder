@@ -117,13 +117,18 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			var result = new QuizAttemptInfo {
 				UId = uid,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
-				IsPrevButtonEnabled = quiz.IsPrevButtonEnabled,
+				SettingsInfo = MapSettings( quiz ),
 				AppearanceInfo = MapAppearance( appearance ),
 				Groups = groupAttemptInfos.Where( g => g.Questions.Any() ).ToImmutableArray()
 			};
 
 			return result;
 		}
+
+		private static SettingsInfo MapSettings( Quiz quiz ) =>
+			new SettingsInfo {
+				IsPrevButtonEnabled = quiz.IsPrevButtonEnabled
+			};
 
 		private static AppearanceInfo MapAppearance( Appearance appearance ) =>
 			new AppearanceInfo {

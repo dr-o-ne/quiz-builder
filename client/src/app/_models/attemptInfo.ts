@@ -1,11 +1,12 @@
 import { Appearance } from './appearance';
+import { QuizAttemptSettings } from './attemptSettings';
 import { ChoicesDisplayType } from './_enums';
 
 export interface QuizAttemptInfo {
     id: string;
-    appearance: Appearance;
     name: string;
-    isPrevButtonEnabled: boolean;
+    appearance: Appearance;
+    settings: QuizAttemptSettings;
     groups: GroupAttemptInfo[]
 }
 

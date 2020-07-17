@@ -18,14 +18,21 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
-		[JsonPropertyName( "isPrevButtonEnabled" )]
-		public bool IsPrevButtonEnabled { get; set; }
+		[JsonPropertyName( "settings" )]
+		public SettingsInfo SettingsInfo { get; set; }
 
 		[JsonPropertyName( "appearance" )]
 		public AppearanceInfo AppearanceInfo { get; set; }
 
 		[JsonPropertyName( "groups" )]
 		public ImmutableArray<GroupAttemptInfo> Groups { get; set; }
+
+	}
+
+	public sealed class SettingsInfo {
+
+		[JsonPropertyName( "isPrevButtonEnabled" )]
+		public bool IsPrevButtonEnabled { get; set; }
 
 	}
 

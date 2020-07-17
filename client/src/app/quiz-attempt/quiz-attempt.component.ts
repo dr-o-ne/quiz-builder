@@ -100,7 +100,7 @@ export class QuizAttemptComponent implements AfterViewInit {
 
     if (this.attempt.groups.length === 1) isVisible = false;
     if (this.currentGroupIndex === 0) isVisible = false;
-    if (this.attempt.isPrevButtonEnabled === false ) isVisible = false;
+    if (this.attempt.settings.isPrevButtonEnabled === false ) isVisible = false;
 
     this.setButtonVisibility(this.prevButton, isVisible);
   }
