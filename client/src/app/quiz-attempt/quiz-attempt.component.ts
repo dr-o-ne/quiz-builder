@@ -17,7 +17,7 @@ import { MatButton } from '@angular/material/button';
 export class QuizAttemptComponent implements AfterViewInit {
 
   attempt: QuizAttemptInfo;
-  currentGroupIndex: number;
+  currentPageIndex: number;
   answers: Map<string, QuestionAttemptResult>;
 
   @ViewChild(QuizNavPanelComponent)
@@ -36,7 +36,7 @@ export class QuizAttemptComponent implements AfterViewInit {
   ) {
     this.attempt = this.route.snapshot.data.attempt;
     this.answers = new Map<string, QuestionAttemptResult>();
-    this.currentGroupIndex = 0;
+    this.currentPageIndex = 0;
   }
 
   ngAfterViewInit(): void {
@@ -49,7 +49,7 @@ export class QuizAttemptComponent implements AfterViewInit {
   }
 
   getQuestions(): QuestionAttemptInfo[] {
-    return this.attempt.groups[this.currentGroupIndex].questions;
+    return this.attempt.pages[this.currentPageIndex].questions;
   }
 
   onAnswer(answer: QuestionAttemptResult): void {
@@ -70,7 +70,7 @@ export class QuizAttemptComponent implements AfterViewInit {
 
   onPrev(): void {
 
-    this.currentGroupIndex -= 1;
+    this.currentPageIndex -= 1;
 
     this.setPrevButtonVisibility();
     this.setNextButtonVisibility();
@@ -78,7 +78,7 @@ export class QuizAttemptComponent implements AfterViewInit {
 
   onNext(): void {
 
-    this.currentGroupIndex += 1;
+    this.currentPageIndex += 1;
 
     this.setPrevButtonVisibility();
     this.setNextButtonVisibility();
@@ -88,8 +88,8 @@ export class QuizAttemptComponent implements AfterViewInit {
 
     let isVisible = true;
 
-    if (this.attempt.groups.length === 1) isVisible = false;
-    if (this.currentGroupIndex === this.attempt.groups.length - 1) isVisible = false;
+    if (this.attempt.pages.length === 1) isVisible = false;
+    if (this.currentPageIndex === this.attempt.pages.length - 1) isVisible = false;
 
     this.setButtonVisibility(this.nextButton, isVisible);
   }
@@ -98,8 +98,8 @@ export class QuizAttemptComponent implements AfterViewInit {
 
     let isVisible = true;
 
-    if (this.attempt.groups.length === 1) isVisible = false;
-    if (this.currentGroupIndex === 0) isVisible = false;
+    if (this.attempt.pages.length === 1) isVisible = false;
+    if (this.currentPageIndex === 0) isVisible = false;
     if (this.attempt.settings.isPrevButtonEnabled === false ) isVisible = false;
 
     this.setButtonVisibility(this.prevButton, isVisible);

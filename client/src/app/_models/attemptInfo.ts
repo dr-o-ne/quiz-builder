@@ -7,10 +7,10 @@ export interface QuizAttemptInfo {
     name: string;
     appearance: Appearance;
     settings: QuizAttemptSettings;
-    groups: GroupAttemptInfo[]
+    pages: PageInfo[]
 }
 
-export interface GroupAttemptInfo {
+export interface PageInfo {
     id: string;
     questions: QuestionAttemptInfo[]
 }

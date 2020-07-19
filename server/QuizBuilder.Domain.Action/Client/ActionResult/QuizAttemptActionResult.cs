@@ -25,8 +25,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "appearance" )]
 		public AppearanceInfo AppearanceInfo { get; set; }
 
-		[JsonPropertyName( "groups" )]
-		public List<PageInfo> Groups { get; set; }
+		[JsonPropertyName( "pages" )]
+		public List<PageInfo> Pages { get; set; }
 
 	}
 

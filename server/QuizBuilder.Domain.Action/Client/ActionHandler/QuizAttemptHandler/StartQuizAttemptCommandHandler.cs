@@ -111,7 +111,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				SettingsInfo = _mapper.Map<SettingsInfo>( quiz ),
 				AppearanceInfo = _mapper.Map<AppearanceInfo>( appearance ),
-				Groups = _mapper.MapGroupAttemptInfos( quiz, groups, questions )
+				Pages = _mapper.MapGroupAttemptInfos( quiz, groups, questions )
 			};
 
 			return result;
