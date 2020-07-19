@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 using QuizBuilder.Common.Types.Default;
 
@@ -25,7 +26,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		public AppearanceInfo AppearanceInfo { get; set; }
 
 		[JsonPropertyName( "groups" )]
-		public ImmutableArray<GroupAttemptInfo> Groups { get; set; }
+		public List<PageInfo> Groups { get; set; }
 
 	}
 
@@ -52,7 +53,11 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	}
 
-	public sealed class GroupAttemptInfo {
+	public sealed class PageInfo {
+
+		public PageInfo() {
+			Questions = new List<QuestionAttemptInfo>();
+		}
 
 		[JsonPropertyName( "id" )]
 		public string UId { get; set; }
@@ -60,7 +65,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
-		public ImmutableArray<QuestionAttemptInfo> Questions { get; set; }
+		[JsonPropertyName( "questions" )]
+		public List<QuestionAttemptInfo> Questions { get; set; }
 
 	}
 

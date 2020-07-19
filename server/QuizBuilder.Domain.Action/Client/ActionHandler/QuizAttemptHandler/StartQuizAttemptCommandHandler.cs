@@ -9,6 +9,7 @@ using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
+using QuizBuilder.Domain.Action.Client.Map.Extensions;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Appearance;
 using QuizBuilder.Domain.Model.Default.Attempts;
@@ -105,19 +106,12 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 		private QuizAttemptInfo MapPayload( string uid, Quiz quiz, List<Group> groups, List<Question> questions, Appearance appearance ) {
 
-			var groupAttemptInfos = groups.Select(
-				g => new GroupAttemptInfo {
-					UId = string.Empty,
-					Name = string.Empty,
-					Questions = questions.Where( x => x.ParentUId == g.UId ).Select( _mapper.Map<QuestionAttemptInfo> ).ToImmutableArray()
-				} ).ToList();
-
 			var result = new QuizAttemptInfo {
 				UId = uid,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				SettingsInfo = _mapper.Map<SettingsInfo>( quiz ),
 				AppearanceInfo = _mapper.Map<AppearanceInfo>( appearance ),
-				Groups = groupAttemptInfos.Where( g => g.Questions.Any() ).ToImmutableArray()
+				Groups = _mapper.MapGroupAttemptInfos( quiz, groups, questions )
 			};
 
 			return result;
