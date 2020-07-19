@@ -12,11 +12,9 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Appearance;
 using QuizBuilder.Domain.Model.Default.Attempts;
-using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Utils.Services;
-using QuizBuilder.Utils.Utils;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
@@ -74,7 +72,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
 			
 
-			Quiz quiz = _mapper.Map<QuizDto, Quiz>( quizDto );
+			Quiz quiz = _mapper.Map<Quiz>( quizDto );
 
 			List<Question> questions = _mapper.Map<List<Question>>( questionDtos );
 			List<Group> groups = _mapper.Map<List<Group>>( groupDtos.OrderBy( x => x.SortOrder ) );
@@ -105,84 +103,24 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return quizAttempt;
 		}
 
-		private static QuizAttemptInfo MapPayload( string uid, Quiz quiz, List<Group> groups, List<Question> questions, Appearance appearance ) {
+		private QuizAttemptInfo MapPayload( string uid, Quiz quiz, List<Group> groups, List<Question> questions, Appearance appearance ) {
 
 			var groupAttemptInfos = groups.Select(
 				g => new GroupAttemptInfo {
 					UId = string.Empty,
 					Name = string.Empty,
-					Questions = questions.Where( x => x.ParentUId == g.UId ).Select( MapQuestion ).ToImmutableArray()
+					Questions = questions.Where( x => x.ParentUId == g.UId ).Select( _mapper.Map<QuestionAttemptInfo> ).ToImmutableArray()
 				} ).ToList();
 
 			var result = new QuizAttemptInfo {
 				UId = uid,
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
-				SettingsInfo = MapSettings( quiz ),
-				AppearanceInfo = MapAppearance( appearance ),
+				SettingsInfo = _mapper.Map<SettingsInfo>( quiz ),
+				AppearanceInfo = _mapper.Map<AppearanceInfo>( appearance ),
 				Groups = groupAttemptInfos.Where( g => g.Questions.Any() ).ToImmutableArray()
 			};
 
 			return result;
-		}
-
-		private static SettingsInfo MapSettings( Quiz quiz ) =>
-			new SettingsInfo {
-				IsPrevButtonEnabled = quiz.IsPrevButtonEnabled
-			};
-
-		private static AppearanceInfo MapAppearance( Appearance appearance ) =>
-			new AppearanceInfo {
-				HeaderColor = appearance.HeaderColor,
-				MainColor = appearance.MainColor,
-				CardColor = appearance.CardColor,
-				FooterColor = appearance.FooterColor
-			};
-
-		private static QuestionAttemptInfo MapQuestion( Question question ) {
-
-			long GetChoicesDisplayType() {
-				if( question is TrueFalseQuestion trueFalseQuestion ) return (long)trueFalseQuestion.ChoicesDisplayType;
-				if( question is MultipleChoiceQuestion multipleChoiceQuestion ) return (long)multipleChoiceQuestion.ChoicesDisplayType;
-				if( question is MultipleSelectQuestion multipleSelectQuestion ) return (long)multipleSelectQuestion.ChoicesDisplayType;
-
-				return 0;
-			}
-
-			//TODO: save in db
-			(string content, bool isHtml) = QuillEditorHelper.NormalizeText( question.Text );
-
-			return new QuestionAttemptInfo {
-				UId = question.UId,
-				Type = (long)question.Type,
-				Text = content,
-				IsHtmlText = isHtml,
-				ChoicesDisplayType = GetChoicesDisplayType(),
-				Choices = MapChoices( question )
-			};
-		}
-
-		private static ImmutableArray<ChoiceAttemptInfo> MapChoices( Question question ) {
-
-			static ChoiceAttemptInfo MapBinaryChoice( BinaryChoice choice ) => new ChoiceAttemptInfo { Id = choice.Id, Text = choice.Text };
-
-			switch( question.Type ) {
-				case Enums.QuestionType.TrueFalse: {
-					var x = (TrueFalseQuestion)question;
-					return ImmutableArray.Create( MapBinaryChoice( x.TrueChoice ), MapBinaryChoice( x.FalseChoice ) );
-				}
-				case Enums.QuestionType.MultiChoice: {
-					var x = (MultipleChoiceQuestion)question;
-					return x.GetChoicesRandomized().Select( MapBinaryChoice ).ToImmutableArray();
-				}
-				case Enums.QuestionType.MultiSelect: {
-					var x = (MultipleSelectQuestion)question;
-					return x.GetChoicesRandomized().Select( MapBinaryChoice ).ToImmutableArray();
-				}
-				case Enums.QuestionType.LongAnswer: 
-					return ImmutableArray<ChoiceAttemptInfo>.Empty;
-			}
-
-			throw null;
 		}
 
 	}
