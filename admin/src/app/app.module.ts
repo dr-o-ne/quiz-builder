@@ -48,6 +48,7 @@ import { QuestionLangService } from './_service/lang/question.lang.service';
 import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from './_service/dataProviders/question.dataProvider';
 import { QuizDataProvider } from './_service/dataProviders/quiz.dataProvider';
+import { QuizLangService } from './_service/lang/quiz.lang.service';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import { QuizDataProvider } from './_service/dataProviders/quiz.dataProvider';
   ],
   providers: [
     AuthGuard,
+    QuizLangService,
     QuestionLangService,
     QuizResolver,
     QuestionResolver,

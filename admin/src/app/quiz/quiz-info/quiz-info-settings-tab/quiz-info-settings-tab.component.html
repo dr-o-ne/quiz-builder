@@ -17,10 +17,28 @@
     
     <div *ngIf="isEditMode" class="card main-color">
 
-        <div fxFlex>
-            <mat-checkbox color="primary" formControlName="isPrevButtonEnabled">
-                Enable Previous Page Navigation
-            </mat-checkbox>
+        <div class="container pb-gutter">
+
+            <div fxFlex>
+                <mat-checkbox color="primary" formControlName="isPrevButtonEnabled">
+                    Enable Previous Page Navigation
+                </mat-checkbox>
+            </div>
+
+        </div>
+
+
+        <div class="container pb-gutter">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Page Settings</mat-label>
+                <mat-select formControlName="pageSettings">
+                    <mat-option *ngFor="let key of pageSettingsKeys" [value]="key">
+                        {{pageSettings[key]}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
         </div>
 
     </div>

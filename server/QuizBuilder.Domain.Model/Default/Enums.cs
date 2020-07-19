@@ -51,5 +51,12 @@
 			NoEnumeration = 6
 		}
 
+		public enum PageSettings {
+			None = 0,
+			PagePerGroup = 1,
+			PagePerQuiz = 2,
+			PagePerQuestion = 3,
+			Custom = 4
+		}
 	}
 }

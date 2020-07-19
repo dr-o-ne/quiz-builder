@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using QuizBuilder.Domain.Model.Default.Base;
+using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Domain.Model.Default {
 
@@ -15,6 +16,10 @@ namespace QuizBuilder.Domain.Model.Default {
 		public bool IsEnabled { get; set; }
 
 		public bool IsPrevButtonEnabled { get; set; }
+
+		public PageSettings PageSettings { get; set; }
+
+		public long? QuestionPerPage { get; set; }
 
 	}
 }
