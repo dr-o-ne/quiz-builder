@@ -5,6 +5,7 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
+using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Default.Enums.PageSettings;
 
 
@@ -40,11 +41,22 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 						page.Questions.Add( mapper.Map<QuestionAttemptInfo>( question ) );
 						result.Add( page );
 					}
-
 					break;
 				}
-				default:
-					throw null;
+				case Custom: {
+					var questionGroups = questions
+						.Select( mapper.Map<QuestionAttemptInfo> )
+						.ToList()
+						.ChunkBy( quiz.QuestionsPerPage );
+
+					foreach( var questionGroup in questionGroups ) {
+						var page = new PageInfo();
+						page.Questions.AddRange( questionGroup );
+						result.Add( page );
+					}
+					break;
+				}
+
 			}
 
 			return result;
