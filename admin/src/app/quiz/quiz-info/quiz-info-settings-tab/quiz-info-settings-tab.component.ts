@@ -19,10 +19,18 @@ export class QuizInfoSettingsTabComponent {
         this.pageSettingsKeys = Object.keys(this.pageSettings).filter(Number).map(x => Number(x));
     }
 
-    SaveFormData(quiz: Quiz): void {
+    saveFormData(quiz: Quiz): void {
+
+        console.log(this.form.value);
+
         quiz.name = this.form.value.name as string;
         quiz.pageSettings = this.form.value.pageSettings as number;
+        quiz.questionsPerPage = this.form.value.questionsPerPage as number;
         quiz.isPrevButtonEnabled = this.form.value.isPrevButtonEnabled as boolean;
     }
 
+    isQuestionsPerPageVisisble(): boolean {
+        return this.form.value.pageSettings === PageSettings.Custom;
+    }
+    
 }

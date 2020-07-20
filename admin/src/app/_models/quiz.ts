@@ -15,10 +15,11 @@ export class Quiz {
 
     isPrevButtonEnabled: boolean;
     pageSettings: PageSettings;
-    questionsPerPage?: number;
+    questionsPerPage: number;
 
     constructor() {
         this.groups = new Array<Group>();
+        this.questionsPerPage = 5;        
         this.pageSettings = PageSettings.PagePerGroup;
     }
 }

@@ -10,6 +10,7 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel {
 				Name = source.Name,
 				IsEnabled = source.IsEnabled,
 				PageSettings = source.PageSettings,
+				QuestionsPerPage = source.QuestionsPerPage,
 				IsPrevButtonEnabled = source.IsPrevButtonEnabled
 			};
 		}

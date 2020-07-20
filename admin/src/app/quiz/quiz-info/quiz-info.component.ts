@@ -38,6 +38,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
             settings: this.fb.group({
                 name: [this.quiz.name, Validators.required],
                 pageSettings: [this.quiz.pageSettings, Validators.nullValidator],
+                questionsPerPage: [this.quiz.questionsPerPage, Validators.min(1)],
                 isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled, Validators.nullValidator]
             })
         })
@@ -54,7 +55,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     onSave() {
 
-        this.settingsControl.SaveFormData(this.quiz);
+        this.settingsControl.saveFormData(this.quiz);
 
         if (!this.isEditMode())
             this.createQuiz();

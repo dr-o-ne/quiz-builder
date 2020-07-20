@@ -33,6 +33,10 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		public PageSettings PageSettings { get; set; }
 
 		[Required]
+		[JsonPropertyName( "questionsPerPage" )]
+		public long QuestionsPerPage { get; set; }
+
+		[Required]
 		[JsonPropertyName( "isPrevButtonEnabled" )]
 		public bool IsPrevButtonEnabled { get; set; }
 
