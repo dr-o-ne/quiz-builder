@@ -69,6 +69,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 			int defaultNumber = dtos.Where( x => regExp.IsMatch( x.Name ) )
 				.Select( x => x.Name.Substring( 6 ) )
 				.Select( x => Convert.ToInt32( x ) )
+				.DefaultIfEmpty( 0 )
 				.Max();
 
 			return $"Group {Math.Max( defaultNumber, dtos.Length ) + 1}";
