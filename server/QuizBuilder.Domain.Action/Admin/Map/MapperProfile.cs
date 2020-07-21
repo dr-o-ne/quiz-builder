@@ -2,19 +2,19 @@ using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
-using QuizBuilder.Domain.Action.Mapper.Default.ActionToModel;
-using QuizBuilder.Domain.Action.Mapper.Default.DtoToModel;
-using QuizBuilder.Domain.Action.Mapper.Default.ModelToDto;
-using QuizBuilder.Domain.Action.Mapper.Default.ModelToModel;
-using QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel;
+using QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel;
+using QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel;
+using QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto;
+using QuizBuilder.Domain.Action.Admin.Map.Default.ModelToModel;
+using QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
 
-namespace QuizBuilder.Domain.Action.Mapper {
-	public sealed class QuizBuilderProfile : Profile {
-		public QuizBuilderProfile() {
+namespace QuizBuilder.Domain.Action.Admin.Map {
+	public sealed class MapperProfile : Profile {
+		public MapperProfile() {
 			AddQuizMapping();
 			AddGroupMapping();
 			AddQuestionMapping();

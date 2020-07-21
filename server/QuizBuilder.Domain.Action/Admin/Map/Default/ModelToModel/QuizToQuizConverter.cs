@@ -1,7 +1,7 @@
 using AutoMapper;
 using QuizBuilder.Domain.Model.Default;
 
-namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToModel {
+namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToModel {
 	internal sealed class QuizToQuizConverter : ITypeConverter<Quiz, Quiz> {
 		public Quiz Convert( Quiz source, Quiz destination, ResolutionContext context ) {
 			if( source is null || destination is null )

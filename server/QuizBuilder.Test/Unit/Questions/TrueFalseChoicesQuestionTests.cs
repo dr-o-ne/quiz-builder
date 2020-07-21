@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Action.Mapper;
+using QuizBuilder.Domain.Action.Admin.Map;
 using QuizBuilder.Domain.Model.Default.Questions;
 using Xunit;
 
@@ -9,7 +9,7 @@ namespace QuizBuilder.Test.Unit.Questions {
 
 	public sealed class TrueFalseChoicesQuestionTests {
 
-		private readonly IMapper _mapper = new Mapper( new MapperConfiguration( cfg => cfg.AddProfile<QuizBuilderProfile>() ) );
+		private readonly IMapper _mapper = new Mapper( new MapperConfiguration( cfg => cfg.AddProfile<MapperProfile>() ) );
 
 		[Fact]
 		public void Serialize_Deserialize_Test() {

@@ -6,7 +6,7 @@ using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
 using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
 
-namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToDto {
+namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 	internal sealed class QuestionToQuestionDtoConverter : ITypeConverter<Question, QuestionDto> {
 		public QuestionDto Convert( Question source, QuestionDto destination, ResolutionContext context ) {
 			if( source == null )

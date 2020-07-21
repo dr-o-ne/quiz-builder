@@ -6,7 +6,7 @@ using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Utils;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToViewModel {
+namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel {
 	internal sealed class QuestionToQuestionViewModelConverter: ITypeConverter<Question, QuestionViewModel> {
 		public QuestionViewModel Convert( Question source, QuestionViewModel destination, ResolutionContext context ) {
 			if( source is null )

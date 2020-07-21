@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using QuizBuilder.Domain.Action.Client.Map;
-using QuizBuilder.Domain.Action.Mapper;
 using Xunit;
 
 namespace QuizBuilder.Test.Unit.AutoMapper {
@@ -9,13 +7,13 @@ namespace QuizBuilder.Test.Unit.AutoMapper {
 
 		[Fact]
 		public void AdminMapperProfileConfiguration_Test() {
-			var sut = new MapperConfiguration( cfg => cfg.AddProfile<QuizBuilderProfile>() );
+			var sut = new MapperConfiguration( cfg => cfg.AddProfile<Domain.Action.Admin.Map.MapperProfile>() );
 			sut.AssertConfigurationIsValid();
 		}
 
 		[Fact]
 		public void ClientMapperProfileConfiguration_Test() {
-			var sut = new MapperConfiguration( cfg => cfg.AddProfile<MapperProfile>() );
+			var sut = new MapperConfiguration( cfg => cfg.AddProfile<Domain.Action.Client.Map.MapperProfile>() );
 			sut.AssertConfigurationIsValid();
 		}
 	}

@@ -3,7 +3,7 @@ using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model.Default;
 
-namespace QuizBuilder.Domain.Action.Mapper.Default.ModelToDto {
+namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 	internal sealed class QuizToQuizDtoConverter : ITypeConverter<Quiz, QuizDto> {
 		public QuizDto Convert( Quiz source, QuizDto destination, ResolutionContext context ) {
 
