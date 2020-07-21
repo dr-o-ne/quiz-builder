@@ -39,7 +39,8 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                 name: [this.quiz.name, Validators.required],
                 pageSettings: [this.quiz.pageSettings, Validators.nullValidator],
                 questionsPerPage: [this.quiz.questionsPerPage, Validators.min(1)],
-                isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled, Validators.nullValidator]
+                isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled, Validators.nullValidator],
+                randomizeQuestions: [this.quiz.randomizeQuestions, Validators.nullValidator]
             })
         })
     }

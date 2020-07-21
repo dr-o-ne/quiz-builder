@@ -19,7 +19,11 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 			switch( quiz.PageSettings ) {
 				case PagePerQuiz: {
 					var page = new PageInfo();
+
 					page.Questions = questions.Select( mapper.Map<QuestionAttemptInfo> ).ToList();
+					if( quiz.RandomizeQuestions )
+						page.Questions.Shuffle();
+					 
 					result.Add( page );
 					break;
 				}
@@ -39,14 +43,24 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 					foreach( var question in questions ) {
 						var page = new PageInfo();
 						page.Questions.Add( mapper.Map<QuestionAttemptInfo>( question ) );
+
 						result.Add( page );
 					}
+
+					if( quiz.RandomizeQuestions )
+						result.Shuffle();
 					break;
 				}
 				case Custom: {
-					var questionGroups = questions
+
+					var questionItems = questions
 						.Select( mapper.Map<QuestionAttemptInfo> )
-						.ToList()
+						.ToList();
+
+					if(quiz.RandomizeQuestions)
+						questionItems.Shuffle();
+
+					var questionGroups = questionItems
 						.ChunkBy( quiz.QuestionsPerPage );
 
 					foreach( var questionGroup in questionGroups ) {

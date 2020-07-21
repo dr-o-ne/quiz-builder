@@ -40,6 +40,10 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "isPrevButtonEnabled" )]
 		public bool IsPrevButtonEnabled { get; set; }
 
+		[Required]
+		[JsonPropertyName( "randomizeQuestions" )]
+		public bool RandomizeQuestions { get; set; }
+
 	}
 
 	public sealed class DeleteQuizCommand : ICommand<CommandResult> {

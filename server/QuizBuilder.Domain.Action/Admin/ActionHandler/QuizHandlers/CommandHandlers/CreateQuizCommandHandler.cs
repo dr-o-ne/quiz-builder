@@ -8,6 +8,7 @@ using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Utils.Services;
+using static QuizBuilder.Domain.Model.Default.Enums.PageSettings;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHandlers {
 
@@ -28,10 +29,12 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			var quiz = new Quiz {
 				UId = _uIdService.GetUId(),
 				Name = command.Name,
-				IsPrevButtonEnabled = true
+				IsPrevButtonEnabled = true,
+				PageSettings = PagePerGroup,
+				QuestionsPerPage = 5
 			};
 
-			var quizDto = _mapper.Map<QuizDto>( quiz );
+			QuizDto quizDto = _mapper.Map<QuizDto>( quiz );
 			await _quizDataProvider.Add( quizDto );
 
 			var quizViewModel = _mapper.Map<QuizViewModel>( quiz );

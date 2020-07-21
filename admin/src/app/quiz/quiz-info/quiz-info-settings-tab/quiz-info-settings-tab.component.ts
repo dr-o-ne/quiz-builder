@@ -27,10 +27,16 @@ export class QuizInfoSettingsTabComponent {
         quiz.pageSettings = this.form.value.pageSettings as number;
         quiz.questionsPerPage = this.form.value.questionsPerPage as number;
         quiz.isPrevButtonEnabled = this.form.value.isPrevButtonEnabled as boolean;
+        quiz.randomizeQuestions = this.form.value.randomizeQuestions as boolean;
     }
 
     isQuestionsPerPageVisisble(): boolean {
         return this.form.value.pageSettings === PageSettings.Custom;
     }
-    
+
+    isRandomizeAllVisible(): boolean {
+        const pageSettings = this.form.value.pageSettings as PageSettings;
+        return pageSettings === PageSettings.Custom || pageSettings === PageSettings.PagePerQuiz || pageSettings === PageSettings.PagePerQuestion;
+    }
+
 }

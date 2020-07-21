@@ -13,7 +13,8 @@ namespace QuizBuilder.Domain.Action.Mapper.Default.ActionToModel {
 				Name = source.Name,
 				PageSettings = source.PageSettings,
 				QuestionsPerPage = source.QuestionsPerPage,
-				IsPrevButtonEnabled = source.IsPrevButtonEnabled
+				IsPrevButtonEnabled = source.IsPrevButtonEnabled,
+				RandomizeQuestions = source.RandomizeQuestions
 			};
 		}
 	}
