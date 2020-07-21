@@ -17,6 +17,46 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			_dbConnectionFactory = dbConnectionFactory;
 		}
 
+		public async Task<ImmutableArray<GroupDto>> GetByQuiz( string uid ) {
+
+			const string sql = @"
+				SELECT
+					qi.Id,
+					qi.UId,
+					qi.Name,
+					qi.SortOrder
+				FROM
+					dbo.QuizItem qi WITH(NOLOCK)
+				INNER JOIN dbo.QuizQuizItem qqi WITH(NOLOCK)
+					ON qi.Id = qqi.QuizItemId
+				INNER JOIN dbo.Quiz qz WITH(NOLOCK)
+					ON qz.Id = qqi.QuizId
+				WHERE
+					qi.TypeId = 2 AND qz.UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			IEnumerable<GroupDto> data = await conn.QueryAsync<GroupDto>( sql, new { UId = uid } );
+
+			return data.ToImmutableArray();
+		}
+
+		public async Task<GroupDto> Get( string uid ) {
+
+			const string sql = @"
+				SELECT
+					qi.Id,
+				    qi.Uid,
+					qi.Name,
+					qi.SortOrder
+				FROM
+					dbo.QuizItem qi WITH(NOLOCK)
+				WHERE
+					qi.TypeId = 2 AND qi.UId = @UId";
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QuerySingleOrDefaultAsync<GroupDto>( sql, new { UId = uid } );
+		}
+
 		public async Task<long> Add( long quizId, GroupDto dto ) {
 
 			const string sql = @"
@@ -87,46 +127,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 
 			using IDbConnection conn = GetConnection();
 			return await conn.ExecuteAsync( sql, new { UId = uid } );
-		}
-
-		public async Task<GroupDto> Get( string uid ) {
-
-			const string sql = @"
-				SELECT
-					qi.Id,
-				    qi.Uid,
-					qi.Name,
-					qi.SortOrder
-				FROM
-					dbo.QuizItem qi WITH(NOLOCK)
-				WHERE
-					qi.TypeId = 2 AND qi.UId = @UId";
-
-			using IDbConnection conn = GetConnection();
-			return await conn.QuerySingleOrDefaultAsync<GroupDto>( sql, new { UId = uid } );
-		}
-
-		public async Task<ImmutableArray<GroupDto>> GetByQuiz( string uid ) {
-
-			const string sql = @"
-				SELECT
-					qi.Id,
-					qi.UId,
-					qi.Name,
-					qi.SortOrder
-				FROM
-					dbo.QuizItem qi WITH(NOLOCK)
-				INNER JOIN dbo.QuizQuizItem qqi WITH(NOLOCK)
-					ON qi.Id = qqi.QuizItemId
-				INNER JOIN dbo.Quiz qz WITH(NOLOCK)
-					ON qz.Id = qqi.QuizId
-				WHERE
-					qi.TypeId = 2 AND qz.UId = @UId";
-
-			using IDbConnection conn = GetConnection();
-			IEnumerable<GroupDto> data = await conn.QueryAsync<GroupDto>( sql, new { UId = uid } );
-
-			return data.ToImmutableArray();
 		}
 
 		private IDbConnection GetConnection() {
