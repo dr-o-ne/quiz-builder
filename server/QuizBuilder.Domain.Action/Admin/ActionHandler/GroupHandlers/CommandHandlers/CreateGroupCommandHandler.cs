@@ -54,8 +54,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 			var dto = _mapper.Map<GroupDto>( model );
 
-			(long id, long sortOrder) = await _groupDataProvider.Add( quizDto.Id, dto );
-			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, id );
+			dto = await _groupDataProvider.Add( quizDto.Id, dto );
+			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, dto.Id );
 
 			var addedGroup = _mapper.Map<Group>( dto );
 			var groupViewModel = _mapper.Map<GroupViewModel>( addedGroup );

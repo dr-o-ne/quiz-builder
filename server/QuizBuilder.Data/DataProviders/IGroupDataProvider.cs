@@ -10,7 +10,7 @@ namespace QuizBuilder.Data.DataProviders {
 
 		public Task<GroupDto> Get( string uid );
 
-		public Task<(long, long)> Add( long quizId, GroupDto dto );
+		public Task<GroupDto> Add( long quizId, GroupDto dto );
 
 		public Task<int> Update( GroupDto dto );
 
