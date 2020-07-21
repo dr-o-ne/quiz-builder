@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using QuizBuilder.Data.Common;
@@ -140,7 +139,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    ModifiedOn
 		)
 		OUTPUT
-			INSERTED.Id
+			INSERTED.Id,
+			INSERTED.SortOrder
 		VALUES(
 			@UId,
 		    1,
@@ -171,10 +171,10 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			} );
 
 			var questionDto = result.ReadSingle<QuestionDto>();
-			var quizItemId = result.ReadSingle<long>();
+			(long quizItemId, int sortOrder) temp = result.ReadSingle<(long, int)>();
+			questionDto.SortOrder = temp.sortOrder;
 
-			return (quizItemId, questionDto);
-
+			return (temp.quizItemId, questionDto);
 		}
 
 		public async Task Update( QuestionDto dto ) {

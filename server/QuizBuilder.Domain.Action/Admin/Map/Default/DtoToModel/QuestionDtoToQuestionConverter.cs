@@ -10,8 +10,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 
 	internal sealed class QuestionDtoToQuestionConverter : ITypeConverter<QuestionDto, Question> {
 		public Question Convert( QuestionDto source, Question destination, ResolutionContext context ) {
-			if( source == null )
-				return null;
 
 			var questionType = (Enums.QuestionType)source.TypeId;
 
@@ -30,6 +28,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 			entity.Name = source.Name;
 			entity.Text = source.Text;
 			entity.Points = source.Points;
+			entity.SortOrder = source.SortOrder;
 
 			return entity;
 		}
