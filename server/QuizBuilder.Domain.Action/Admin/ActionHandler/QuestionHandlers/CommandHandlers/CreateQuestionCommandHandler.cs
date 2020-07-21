@@ -31,7 +31,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 		public async Task<QuestionCommandResult> HandleAsync( CreateQuestionCommand command ) {
 
-			Question question = _mapper.Map<CreateQuestionCommand, Question>( command );
+			Question question = _mapper.Map<Question>( command );
 			question.UId = _uIdService.GetUId();
 
 			if( !question.IsValid() )
@@ -48,14 +48,14 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			if( groupDto == null )
 				return new QuestionCommandResult { IsSuccess = false };
 
-			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
+			QuestionDto questionDto = _mapper.Map<QuestionDto>( question );
 			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( groupDto.Id, questionDto );
-			await _structureDataProvider.UpdateGroupQuizItemRelationship(groupDto.Id, ids.quizItemId);
+			await _structureDataProvider.UpdateGroupQuizItemRelationship(groupDto.Id, ids.quizItemId );
 
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
 
-			var addedQuestion = _mapper.Map<QuestionDto, Question>( questionDto );
-			var questionViewModel = _mapper.Map<Question, QuestionViewModel>( addedQuestion );
+			var addedQuestion = _mapper.Map<Question>( questionDto );
+			var questionViewModel = _mapper.Map<QuestionViewModel>( addedQuestion );
 
 			return new QuestionCommandResult { IsSuccess = true, Question = questionViewModel };
 		}

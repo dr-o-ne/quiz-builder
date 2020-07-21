@@ -57,7 +57,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.QuerySingleOrDefaultAsync<GroupDto>( sql, new { UId = uid } );
 		}
 
-		public async Task<long> Add( long quizId, GroupDto dto ) {
+		public async Task<(long, long)> Add( long quizId, GroupDto dto ) {
 
 			const string sql = @"
 				INSERT INTO dbo.QuizItem (
@@ -70,7 +70,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				    CreatedOn,
 				    ModifiedOn
 				)
-				OUTPUT INSERTED.Id
+				OUTPUT INSERTED.Id, INSERTED.SortOrder
 				VALUES(
 				    @UId,
 				    2,
@@ -86,16 +86,16 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				    @CreatedOn,
 				    @ModifiedOn
 				)";
-		
-					using IDbConnection conn = GetConnection();
-					return await conn.ExecuteScalarAsync<long>( sql, new {
-						dto.UId,
-						dto.Name,
-						QuizId = quizId,
-						CreatedOn = DateTime.UtcNow,
-						ModifiedOn = DateTime.UtcNow
-					} );
-				}
+
+			using IDbConnection conn = GetConnection();
+			return await conn.QueryFirstAsync<(long, long)>( sql, new {
+				dto.UId,
+				dto.Name,
+				QuizId = quizId,
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
+			} );
+		}
 
 		public async Task<int> Update( GroupDto dto ) {
 			const string sql = @"

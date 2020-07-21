@@ -54,7 +54,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 			var dto = _mapper.Map<GroupDto>( model );
 
-			long id = await _groupDataProvider.Add( quizDto.Id, dto );
+			(long id, long sortOrder) = await _groupDataProvider.Add( quizDto.Id, dto );
 			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, id );
 
 			var addedGroup = _mapper.Map<Group>( dto );
@@ -63,7 +63,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 			return new GroupCommandResult { IsSuccess = true, Group = groupViewModel };
 		}
 
-		private string GetNextGroupName( ImmutableArray<GroupDto> dtos ) {
+		private static string GetNextGroupName( ImmutableArray<GroupDto> dtos ) {
 			Regex regExp = new Regex( @"^Group \d+$" );
 
 			int defaultNumber = dtos.Where( x => regExp.IsMatch( x.Name ) )

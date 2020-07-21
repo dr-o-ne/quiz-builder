@@ -14,6 +14,9 @@ namespace QuizBuilder.Domain.Model.Default.Structure {
 		[JsonIgnore]
 		public string Name { get; set; }
 
+		[JsonIgnore]
+		public long SortOrder { get; set; }
+
 		public abstract bool IsValid();
 
 	}
