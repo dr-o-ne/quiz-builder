@@ -13,8 +13,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 	internal sealed class CreateQuestionCommandToQuestionConverter : ITypeConverter<CreateQuestionCommand, Question> {
 
 		public Question Convert( CreateQuestionCommand source, Question destination, ResolutionContext context ) {
-			if( source is null )
-				return null;
 
 			Question question;
 

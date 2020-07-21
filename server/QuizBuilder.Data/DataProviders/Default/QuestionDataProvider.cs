@@ -91,10 +91,9 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.QuerySingleOrDefaultAsync<QuestionDto>( sql, new { UId = uid } );
 		}
 
-		public async Task<(long, long)> Add( long groupId, QuestionDto dto ) {
+		public async Task<(long, QuestionDto)> Add( long groupId, QuestionDto dto ) {
 
 			const string sql = @"
-		DECLARE @ID TABLE (ID INT)
 
 		INSERT INTO dbo.Question(
 			UId,
@@ -106,7 +105,16 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    CreatedOn,
 		    ModifiedOn
 		)
-		OUTPUT INSERTED.Id INTO @ID
+		OUTPUT
+			INSERTED.Id,
+			INSERTED.UId,
+			INSERTED.TypeId,
+			INSERTED.Name,
+			INSERTED.Text,
+			INSERTED.Points,
+			INSERTED.Settings,
+			INSERTED.CreatedOn,
+			INSERTED.ModifiedOn
 		VALUES (
 			@UId,
 		    @TypeId,
@@ -118,6 +126,9 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    @ModifiedOn
 		)
 
+		DECLARE @ID INT
+		SELECT @ID = SCOPE_IDENTITY();
+
 		INSERT INTO dbo.QuizItem (
 			UId,
 		    TypeId,
@@ -128,12 +139,13 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    CreatedOn,
 		    ModifiedOn
 		)
-		OUTPUT INSERTED.Id INTO @ID
+		OUTPUT
+			INSERTED.Id
 		VALUES(
 			@UId,
 		    1,
 		    @ParentId,
-		    (SELECT TOP 1 ID FROM @ID),
+		    (SELECT @ID),
 			1 + (
  SELECT ISNULL(MAX(qi.SortOrder), 0)  FROM dbo.Question AS q
  INNER JOIN dbo.QuizItem AS qi ON qi.QuestionId = q.Id
@@ -143,12 +155,10 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			'',
 		    @CreatedOn,
 		    @ModifiedOn
-		)
-
-		SELECT TOP 2 ID FROM @ID";
+		)";
 
 			using IDbConnection conn = GetConnection();
-			var result  = (await conn.QueryAsync<long>( sql, new {
+			var result  = await conn.QueryMultipleAsync( sql, new {
 				dto.UId,
 				dto.TypeId,
 				dto.Name,
@@ -158,9 +168,12 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				ParentId = groupId,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow
-			} )).ToList();
+			} );
 
-			return (result[0], result[1]);
+			var questionDto = result.ReadSingle<QuestionDto>();
+			var quizItemId = result.ReadSingle<long>();
+
+			return (quizItemId, questionDto);
 
 		}
 

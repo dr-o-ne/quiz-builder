@@ -31,33 +31,38 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 		public async Task<QuestionCommandResult> HandleAsync( CreateQuestionCommand command ) {
 
-			Question question = _mapper.Map<Question>( command );
-			question.UId = _uIdService.GetUId();
-
-			if( !question.IsValid() )
-				return new QuestionCommandResult { IsSuccess = false };
-
-			QuizDto quizDto = await _quizDataProvider.Get( command.QuizUId );
+			var quizDto = await _quizDataProvider.Get( command.QuizUId );
 			if( quizDto == null )
-				return new QuestionCommandResult { IsSuccess = false };
-
-			if( string.IsNullOrWhiteSpace( command.GroupUId ) )
 				return new QuestionCommandResult { IsSuccess = false };
 
 			GroupDto groupDto = await _groupDataProvider.Get( command.GroupUId );
 			if( groupDto == null )
 				return new QuestionCommandResult { IsSuccess = false };
 
-			QuestionDto questionDto = _mapper.Map<QuestionDto>( question );
-			(long questionId, long quizItemId) ids = await _questionDataProvider.Add( groupDto.Id, questionDto );
-			await _structureDataProvider.UpdateGroupQuizItemRelationship(groupDto.Id, ids.quizItemId );
+			Question modelBefore = _mapper.Map<Question>( command );
+			modelBefore.UId = _uIdService.GetUId();
 
-			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, ids.quizItemId );
+			if( !modelBefore.IsValid() )
+				return new QuestionCommandResult { IsSuccess = false };
 
-			var addedQuestion = _mapper.Map<Question>( questionDto );
-			var questionViewModel = _mapper.Map<QuestionViewModel>( addedQuestion );
+			QuestionDto questionDtoBefore = _mapper.Map<QuestionDto>( modelBefore );
+			QuestionDto questionDtoAfter = await Save( quizDto.Id, groupDto.Id, questionDtoBefore );
 
-			return new QuestionCommandResult { IsSuccess = true, Question = questionViewModel };
+			var modelAfter = _mapper.Map<Question>( questionDtoAfter );
+			var viewModel = _mapper.Map<QuestionViewModel>( modelAfter );
+
+			return new QuestionCommandResult {
+				IsSuccess = true,
+				Question = viewModel
+			};
+		}
+
+		private async Task<QuestionDto> Save( long quizId, long groupId, QuestionDto dto ) {
+			(long quizItemId, QuestionDto questionDtoAfter) result = await _questionDataProvider.Add( groupId, dto );
+			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupId, result.quizItemId );
+			await _structureDataProvider.AddQuizQuestionRelationship( quizId, result.quizItemId );
+
+			return result.questionDtoAfter;
 		}
 	}
 }
