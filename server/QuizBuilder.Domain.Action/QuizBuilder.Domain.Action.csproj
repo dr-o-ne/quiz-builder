@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Mapper\**" />
+    <EmbeddedResource Remove="Mapper\**" />
+    <None Remove="Mapper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
@@ -13,10 +19,6 @@
     <ProjectReference Include="..\QuizBuilder.Common\QuizBuilder.Common.csproj" />
     <ProjectReference Include="..\QuizBuilder.Data\QuizBuilder.Data.csproj" />
     <ProjectReference Include="..\QuizBuilder.Domain.Model\QuizBuilder.Domain.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mapper\" />
   </ItemGroup>
 
 </Project>
