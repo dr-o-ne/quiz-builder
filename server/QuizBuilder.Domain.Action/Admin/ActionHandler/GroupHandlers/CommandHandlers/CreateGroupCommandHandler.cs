@@ -44,23 +44,24 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
 
-			var model = new Group {
+			var modelBefore = new Group {
 				UId = _uIdService.GetUId(),
-				Name = GetNextGroupName(groupDtos)
+				Name = GetNextGroupName( groupDtos )
 			};
 
-			if( !model.IsValid() )
+			if( !modelBefore.IsValid() )
 				return new GroupCommandResult { IsSuccess = false };
 
-			var dto = _mapper.Map<GroupDto>( model );
+			var dto = _mapper.Map<GroupDto>( modelBefore );
+			dto = await Save( quizDto.Id, dto );
 
-			dto = await _groupDataProvider.Add( quizDto.Id, dto );
-			await _structureDataProvider.AddQuizQuestionRelationship( quizDto.Id, dto.Id );
+			var modelAfter = _mapper.Map<Group>( dto );
+			var groupViewModel = _mapper.Map<GroupViewModel>( modelAfter );
 
-			var addedGroup = _mapper.Map<Group>( dto );
-			var groupViewModel = _mapper.Map<GroupViewModel>( addedGroup );
-
-			return new GroupCommandResult { IsSuccess = true, Group = groupViewModel };
+			return new GroupCommandResult {
+				IsSuccess = true,
+				Group = groupViewModel
+			};
 		}
 
 		private static string GetNextGroupName( ImmutableArray<GroupDto> dtos ) {
@@ -73,6 +74,13 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 				.Max();
 
 			return $"Group {Math.Max( defaultNumber, dtos.Length ) + 1}";
+		}
+
+		private async Task<GroupDto> Save( long quizId, GroupDto dto ) {
+			var result = await _groupDataProvider.Add( quizId, dto );
+			await _structureDataProvider.AddQuizQuestionRelationship( quizId, result.Id );
+
+			return result;
 		}
 
 	}
