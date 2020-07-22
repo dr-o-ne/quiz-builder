@@ -30,16 +30,15 @@
 
         </div>
 
-        <mat-form-field fxFlex="15" fxFlexOffset="1" appearance="outline" style="margin-bottom: -1.4em">
-          <mat-label>Group Name</mat-label>
-          <input matInput type="text" [(ngModel)]="dataInfo.name" (focusout)="onPageNameFocusOut(dataInfo.id, dataInfo.name)">
-        </mat-form-field>
-
         <div fxFlex></div>
+
+        <button mat-icon-button color="primary" (click)="mep.expanded = !mep.expanded">
+          <mat-icon>settings</mat-icon>
+        </button>     
 
         <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu">
           <mat-icon>more_vert</mat-icon>
-        </button>
+        </button>       
         <mat-menu #deleteGroupMenu="matMenu">
           <button mat-menu-item (click)="deleteGroup(dataInfo.id)" fxFlex="nogrow">
             <mat-icon>delete</mat-icon>
@@ -48,6 +47,18 @@
         </mat-menu>
 
       </div>
+
+      <mat-expansion-panel 
+        hideToggle 
+        [disabled]="true"
+        #mep="matExpansionPanel">
+          <div class="pt-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Group Name</mat-label>
+              <input matInput type="text" [(ngModel)]="dataInfo.name" (focusout)="onPageNameFocusOut(dataInfo.id, dataInfo.name)">
+            </mat-form-field>
+          </div>
+      </mat-expansion-panel>
 
       <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
         [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"

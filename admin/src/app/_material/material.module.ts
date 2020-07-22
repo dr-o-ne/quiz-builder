@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   exports: [
@@ -48,7 +49,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatRadioModule,
         MatSliderModule,
         MatSlideToggleModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatExpansionModule
     ]
 })
 export class MaterialModule { }
