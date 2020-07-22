@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.Handlers;
@@ -27,7 +26,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		private readonly IQuestionDataProvider _questionDataProvider;
 		private readonly IQuizAttemptDataProvider _attemptDataProvider;
 		private readonly IGroupDataProvider _groupDataProvider;
-
 
 		public StartQuizAttemptCommandHandler(
 			IMapper mapper,
@@ -66,17 +64,13 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				FooterColor = "#fff"
 			};
 
-			List<QuestionDto> questionDtos = (await _questionDataProvider.GetByQuiz( command.QuizUId ))
-				.OrderBy( x => x.SortOrder )
-				.ToList();
-
+			ImmutableArray<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
-			
 
 			Quiz quiz = _mapper.Map<Quiz>( quizDto );
 
 			List<Question> questions = _mapper.Map<List<Question>>( questionDtos );
-			List<Group> groups = _mapper.Map<List<Group>>( groupDtos.OrderBy( x => x.SortOrder ) );
+			List<Group> groups = _mapper.Map<List<Group>>( groupDtos );
 
 			QuizAttempt quizAttempt = await CreateQuizAttempt( quizUId );
 

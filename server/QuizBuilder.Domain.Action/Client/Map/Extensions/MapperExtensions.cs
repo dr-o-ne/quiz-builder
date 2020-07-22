@@ -14,6 +14,10 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 	internal static class MapperExtensions {
 
 		public static List<PageInfo> MapGroupAttemptInfos( this IMapper mapper, Quiz quiz, List<Group> groups, List<Question> questions ) {
+
+			groups = Sort( groups );
+			questions = Sort( groups, questions );
+
 			var result = new List<PageInfo>();
 
 			switch( quiz.PageSettings ) {
@@ -76,5 +80,17 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 			return result;
 		}
 
+		private static List<Group> Sort( IEnumerable<Group> groups ) =>
+			groups
+				.OrderBy( x => x.SortOrder )
+				.ToList();
+
+		private static List<Question> Sort( IEnumerable<Group> groups, IEnumerable<Question> questions ) {
+			var groupUIds = groups.Select( x => x.UId ).ToList();
+			return questions
+				.OrderBy( x => groupUIds.IndexOf( x.ParentUId ) )
+				.ThenBy( x => x.SortOrder )
+				.ToList();
+		}
 	}
 }
