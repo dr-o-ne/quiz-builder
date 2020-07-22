@@ -22,12 +22,13 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 
 		public async Task<QuestionQueryResult> HandleAsync( GetQuestionByIdQuery query ) {
 			QuestionDto questionDto = await _questionDataProvider.Get( query.UId );
+			if( questionDto == null )
+				return null;
+
 			Question question = _mapper.Map<QuestionDto, Question>( questionDto );
 			QuestionViewModel questionViewModel = _mapper.Map<Question, QuestionViewModel>( question );
 
-			return questionViewModel is null
-				? null
-				: new QuestionQueryResult {Question = questionViewModel};
+			return new QuestionQueryResult {Question = questionViewModel};
 		}
 	}
 }
