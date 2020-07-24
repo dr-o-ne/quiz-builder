@@ -49,6 +49,7 @@ import { GroupDataProvider } from './_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from './_service/dataProviders/question.dataProvider';
 import { QuizDataProvider } from './_service/dataProviders/quiz.dataProvider';
 import { QuizLangService } from './_service/lang/quiz.lang.service';
+import { GroupInfoComponent } from './quiz/quiz-info/quiz-info-questions-tab/group-info/group-info';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { QuizLangService } from './_service/lang/quiz.lang.service';
     QuizInfoComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
+    GroupInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,8 @@ import { QuizLangService } from './_service/lang/quiz.lang.service';
     MultiSelectPreviewComponent,
     LongAnswerPreviewComponent,
     QuizInfoSettingsTabComponent,
-    QuizInfoQuestionsTabComponent
+    QuizInfoQuestionsTabComponent,
+    GroupInfoComponent
   ],
   providers: [
     AuthGuard,

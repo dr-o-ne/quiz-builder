@@ -20,9 +20,6 @@ export class QuizInfoSettingsTabComponent {
     }
 
     saveFormData(quiz: Quiz): void {
-
-        console.log(this.form.value);
-
         quiz.name = this.form.value.name as string;
         quiz.pageSettings = this.form.value.pageSettings as number;
         quiz.questionsPerPage = this.form.value.questionsPerPage as number;

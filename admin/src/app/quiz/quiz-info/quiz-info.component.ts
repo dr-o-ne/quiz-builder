@@ -6,6 +6,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuizInfoSettingsTabComponent } from './quiz-info-settings-tab/quiz-info-settings-tab.component';
 import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
+import { QuizInfoQuestionsTabComponent } from './quiz-info-questions-tab/quiz-info-questions-tab.component';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvid
 export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
+
+    @ViewChild(QuizInfoQuestionsTabComponent) questionsControl: QuizInfoQuestionsTabComponent;
     @ViewChild(QuizInfoSettingsTabComponent) settingsControl: QuizInfoSettingsTabComponent;
 
     quiz: Quiz;
@@ -55,8 +58,10 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     onReturn = () => this.location.back();
 
     onSave() {
-
+        this.questionsControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
+
+        console.log(this.quiz);
 
         if (!this.isEditMode())
             this.createQuiz();
