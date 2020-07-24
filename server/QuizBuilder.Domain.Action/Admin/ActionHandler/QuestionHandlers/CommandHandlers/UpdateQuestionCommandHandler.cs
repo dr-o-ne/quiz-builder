@@ -27,13 +27,13 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 			QuestionDto currentQuestionDto = await _questionDataProvider.Get( command.UId );
 
-			Question question = _mapper.Map<UpdateQuestionCommand, Question>( command );
+			Question question = _mapper.Map<Question>( command );
 
 			if( !question.IsValid() )
-				return new CommandResult { IsSuccess = false };
+				return CommandResult.Fail();
 
 			question.Id = currentQuestionDto.Id;
-			QuestionDto questionDto = _mapper.Map<Question, QuestionDto>( question );
+			QuestionDto questionDto = _mapper.Map<QuestionDto>( question );
 			await _questionDataProvider.Update( questionDto );
 
 			GroupDto groupDto = string.IsNullOrWhiteSpace(command.GroupUId) ? default : await _groupDataProvider.Get( command.GroupUId );

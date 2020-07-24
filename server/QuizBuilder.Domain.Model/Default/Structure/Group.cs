@@ -10,10 +10,13 @@ namespace QuizBuilder.Domain.Model.Default.Structure {
 		public List<Question> Questions { get; set; }
 
 		[JsonIgnore]
-		public string Settings { get; set; } = "";
-
-		[JsonIgnore]
 		public bool IsEnabled { get; set; }
+
+		public bool SelectAllQuestions { get; set; }
+
+		public bool RandomizeQuestions { get; set; }
+
+		public int? CountOfQuestionsToSelect { get; set; }
 
 		public override bool IsValid() => true;
 
