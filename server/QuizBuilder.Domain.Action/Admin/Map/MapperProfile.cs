@@ -39,7 +39,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		}
 
 		private void AddGroupMapping() {
-			CreateMap<Group, GroupDto>();
+			CreateMap<Group, GroupDto>().ConvertUsing<GroupToGroupDtoConverter>();
 			CreateMap<GroupDto, Group>(MemberList.Source);
 			CreateMap<Group, GroupViewModel>().ConvertUsing<GroupToGroupViewModelConverter>();
 		}

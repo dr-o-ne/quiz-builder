@@ -8,13 +8,13 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 	internal sealed class QuizDtoToQuizConverter : ITypeConverter<QuizDto, Quiz> {
 		public Quiz Convert( QuizDto source, Quiz destination, ResolutionContext context ) {
 
-			var quiz = JsonSerializer.Deserialize<Quiz>( source.Settings );
-			quiz.Id = source.Id;
-			quiz.UId = source.UId;
-			quiz.Name = source.Name;
-			quiz.IsEnabled = source.IsEnabled;
+			var result = JsonSerializer.Deserialize<Quiz>( source.Settings );
+			result.Id = source.Id;
+			result.UId = source.UId;
+			result.Name = source.Name;
+			result.IsEnabled = source.IsEnabled;
 
-			return quiz;
+			return result;
 		}
 	}
 }

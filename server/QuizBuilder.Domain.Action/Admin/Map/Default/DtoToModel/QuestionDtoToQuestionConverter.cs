@@ -13,7 +13,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 
 			var questionType = (Enums.QuestionType)source.TypeId;
 
-			Question entity = questionType switch {
+			Question result = questionType switch {
 				TrueFalse => JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings ),
 				MultiChoice => JsonSerializer.Deserialize<MultipleChoiceQuestion>( source.Settings ),
 				FillInTheBlanks => JsonSerializer.Deserialize<FillInTheBlanksQuestion>( source.Settings ),
@@ -22,15 +22,15 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 				_ => throw new ArgumentException( "Unknown question type" )
 			};
 
-			entity.Id = source.Id;
-			entity.UId = source.UId;
-			entity.ParentUId = source.ParentUId;
-			entity.Name = source.Name;
-			entity.Text = source.Text;
-			entity.Points = source.Points;
-			entity.SortOrder = source.SortOrder;
+			result.Id = source.Id;
+			result.UId = source.UId;
+			result.ParentUId = source.ParentUId;
+			result.Name = source.Name;
+			result.Text = source.Text;
+			result.Points = source.Points;
+			result.SortOrder = source.SortOrder;
 
-			return entity;
+			return result;
 		}
 	}
 }
