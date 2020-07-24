@@ -28,6 +28,13 @@ export class GroupDataProvider {
         return this.http.post<Group>(this.apiUrl + 'groups', group);
     }
 
+    updateGroup(group: Group): Observable<Group> {
+        console.log('SEND');
+        console.log(group);
+
+        return this.http.put<Group>(this.apiUrl + 'groups', group);
+    }
+
     deleteGroup(id: string): Observable<object> {
         return this.http.delete(this.apiUrl + 'groups/' + id);
     }

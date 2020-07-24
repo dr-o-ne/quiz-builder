@@ -24,6 +24,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 					qi.Id,
 					qi.UId,
 					qi.Name,
+					qi.Settings,
+					qi.IsEnabled,
 					qi.SortOrder
 				FROM
 					dbo.QuizItem qi WITH(NOLOCK)
@@ -47,6 +49,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 					qi.Id,
 				    qi.Uid,
 					qi.Name,
+					qi.Settings,
+					qi.IsEnabled,
 					qi.SortOrder
 				FROM
 					dbo.QuizItem qi WITH(NOLOCK)
@@ -66,6 +70,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				    ParentId,
 				    QuestionId,
 					Name,
+					Settings,
+					IsEnabled,
 					SortOrder,
 				    CreatedOn,
 				    ModifiedOn
@@ -74,6 +80,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 					INSERTED.Id,
 					INSERTED.UId,
 					INSERTED.Name,
+					INSERTED.Settings,
+					INSERTED.IsEnabled,
 					INSERTED.SortOrder
 				VALUES(
 				    @UId,
@@ -81,6 +89,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				    NULL,
 				    NULL,
 					@Name,
+					@Settings,
+					@IsEnabled,
 					1 + (
 						SELECT ISNULL(MAX(SortOrder), 0) FROM dbo.QuizItem AS qi
 						INNER JOIN dbo.QuizQuizItem AS qqi ON qqi.QuizItemId = qi.id
@@ -95,6 +105,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.QueryFirstAsync<GroupDto>( sql, new {
 				dto.UId,
 				dto.Name,
+				dto.Settings,
+				dto.IsEnabled,
 				QuizId = quizId,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow
@@ -107,6 +119,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 					dbo.QuizItem
 				SET
 					Name = @Name,
+					Settings = @Settings,
+					IsEnabled = @IsEnabled,
 					SortOrder = @SortOrder,
 					ModifiedOn = @ModifiedOn
 				WHERE Id = @Id";
@@ -115,6 +129,8 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			return await conn.ExecuteAsync( sql, new {
 				dto.Id,
 				dto.Name,
+				dto.Settings,
+				dto.IsEnabled,
 				dto.SortOrder,
 				ModifiedOn = DateTime.UtcNow
 			} );

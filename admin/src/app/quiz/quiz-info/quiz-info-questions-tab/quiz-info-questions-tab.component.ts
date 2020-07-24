@@ -8,10 +8,14 @@ import { QuestionLangService } from 'src/app/_service/lang/question.lang.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
+import { GroupInfoComponent } from './group-info/group-info';
 
 export class DataInfo {
     id: string;
     name: string;
+    selectAllQuestions: boolean;
+    randomizeQuestions: boolean;
+    countOfQuestionsToSelect: number;
     dataSource: MatTableDataSource<Question>;
 }
 
@@ -22,7 +26,8 @@ export class DataInfo {
 })
 export class QuizInfoQuestionsTabComponent implements OnInit {
 
-    @ViewChildren(MatTable) tables !: QueryList<MatTable<Question>>;
+    @ViewChildren(MatTable) tables!: QueryList<MatTable<Question>>;
+    @ViewChildren(GroupInfoComponent) groupInfoControls!: QueryList<GroupInfoComponent>;
 
     @Input() quiz: Quiz;
 
@@ -68,6 +73,8 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         var dataInfo = new DataInfo();
         dataInfo.id = group.id;
         dataInfo.name = group.name;
+        dataInfo.countOfQuestionsToSelect = group.countOfQuestionsToSelect;
+        dataInfo.randomizeQuestions = group.randomizeQuestions;
         dataInfo.dataSource = new MatTableDataSource(group.questions);
 
         this.dataInfos.push(dataInfo);
@@ -194,6 +201,17 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     getDisplayName(question: Question): string {
         return question.name ? question.name : question.text.slice(3).slice(0, -4);
+    }
+
+    saveFormData(quiz: Quiz): void {
+        for (let groupInfo of this.groupInfoControls) {
+
+            const group = quiz.groups.find(x => x.id == groupInfo.viewModel.id);
+            const isDirty = groupInfo.saveFormData(group);
+
+            if (isDirty)
+                this.groupDataProvider.updateGroup(group).subscribe();
+        }
     }
 
 } 

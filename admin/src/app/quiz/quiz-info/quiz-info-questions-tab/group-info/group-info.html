@@ -1,0 +1,26 @@
+<form [formGroup]="form">
+
+    <div class="pt-4">
+        <mat-form-field appearance="outline" fxFlex="40%">
+          <mat-label>Group Name</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+    
+        <mat-checkbox class="pt-3" color="primary" fxFlexOffset="2" formControlName="selectAllQuestions">
+          Select All Questions
+        </mat-checkbox>
+    
+        <mat-form-field fxFlex="20%" fxFlexOffset="2" appearance="outline" *ngIf="!form.get('selectAllQuestions').value">
+          <mat-label>Number of Questions to Select</mat-label>
+          <input matInput type="number" formControlName="countOfQuestionsToSelect">
+        </mat-form-field>
+    
+        <div class="pt-3" fxFlexOffset="2" *ngIf="form.get('selectAllQuestions').value">
+          <mat-checkbox color="primary" formControlName="randomizeQuestions">
+            Randomize Questions
+          </mat-checkbox>
+        </div> 
+    </div>
+
+</form>
+

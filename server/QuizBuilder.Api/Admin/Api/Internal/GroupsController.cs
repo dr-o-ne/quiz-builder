@@ -25,6 +25,15 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 				: UnprocessableEntity( result );
 		}
 
+		[HttpPut]
+		public async Task<ActionResult> Update( [FromBody] UpdateGroupCommand command ) {
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.IsSuccess
+				? (ActionResult)NoContent()
+				: UnprocessableEntity( result );
+		}
+
 		[HttpPut( "rename" )]
 		public async Task<ActionResult> Rename( [FromBody] UpdateGroupNameCommand command ) {
 			var result = await _dispatcher.SendAsync( command );

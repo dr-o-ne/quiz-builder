@@ -10,7 +10,6 @@
 
 <div cdkDropList [cdkDropListData]="dataInfos" (cdkDropListDropped)="dropGroup($event)">
 
-
   <div *ngFor="let dataInfo of dataInfos" cdkDrag>
 
     <div class="card group-box">
@@ -18,9 +17,7 @@
       <div class="bg-app-bar px-4 h-16 border-b sticky left-0" fxLayout="row" fxLayoutAlign="start center">
         <div class="title my-0 ltr:pr-4 rtl:pl-4 ltr:border-r rtl:border-l" fxFlex="none" fxHide.xs>
 
-
-
-        <button mat-raised-button color="primary" [matMenuTriggerFor]="addQuestionMenu">
+          <button mat-raised-button color="primary" [matMenuTriggerFor]="addQuestionMenu">
             <span>Add Question</span>
           </button>
           <mat-menu #addQuestionMenu="matMenu">
@@ -31,8 +28,6 @@
           </mat-menu>
 
         </div>
-
-        
 
         <button mat-icon-button color="primary" matTooltip="Reorder Groups">
           <mat-icon cdkDragHandle>drag_indicator</mat-icon>
@@ -60,12 +55,10 @@
         hideToggle 
         [disabled]="true"
         #mep="matExpansionPanel">
-          <div class="pt-4">
-            <mat-form-field appearance="outline">
-              <mat-label>Group Name</mat-label>
-              <input matInput type="text" [(ngModel)]="dataInfo.name" (focusout)="onPageNameFocusOut(dataInfo.id, dataInfo.name)">
-            </mat-form-field>
-          </div>
+
+          <app-group-info [viewModel]="dataInfo">
+          </app-group-info>
+
       </mat-expansion-panel>
 
       <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
@@ -104,7 +97,5 @@
     </div>
 
   </div>
-
-
 
 </div>

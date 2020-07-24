@@ -9,6 +9,12 @@ namespace QuizBuilder.Domain.Model.Default.Structure {
 		[JsonIgnore]
 		public List<Question> Questions { get; set; }
 
+		[JsonIgnore]
+		public string Settings { get; set; } = "";
+
+		[JsonIgnore]
+		public bool IsEnabled { get; set; }
+
 		public override bool IsValid() => true;
 
 	}
