@@ -28,7 +28,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			Quiz currentQuiz = _mapper.Map<Quiz>( quizDto );
 			Quiz updatedQuiz = _mapper.Map<Quiz>( command );
 			Quiz mergedQuiz = _mapper.Merge( updatedQuiz, currentQuiz );
-			QuizDto mergedQuizDto = _mapper.Map<Quiz, QuizDto>( mergedQuiz );
+			QuizDto mergedQuizDto = _mapper.Map<QuizDto>( mergedQuiz );
 			await _quizDataProvider.Update( mergedQuizDto );
 
 			return new CommandResult( isSuccess: true, message: string.Empty );
