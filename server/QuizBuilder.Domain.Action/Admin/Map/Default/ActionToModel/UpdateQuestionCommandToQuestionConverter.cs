@@ -13,8 +13,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 	internal sealed class UpdateQuestionCommandToQuestionConverter : ITypeConverter<UpdateQuestionCommand, Question> {
 
 		public Question Convert( UpdateQuestionCommand source, Question destination, ResolutionContext context ) {
-			if( source is null )
-				return null;
 
 			Question question;
 			var serializerOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
