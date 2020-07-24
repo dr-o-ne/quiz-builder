@@ -21,19 +21,19 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 		public async Task<CommandResult> HandleAsync( UpdateGroupCommand command ) {
 
+			Group model = _mapper.Map<Group>( command );
+			if( !model.IsValid() )
+				return CommandResult.Fail();
+
 			GroupDto groupDto = await _groupDataProvider.Get( command.UId );
 			if( groupDto == null )
 				return CommandResult.Fail();
 
-			Group model = _mapper.Map<Group>( command );
-			if( !model.IsValid() ) 
-				return CommandResult.Fail();
+			var dto = _mapper.Map<GroupDto>( model );
+			dto.Id = groupDto.Id;
+			await _groupDataProvider.Update( dto );
 
-
-
-
-			throw new System.NotImplementedException();
-
+			return CommandResult.Success();
 		}
 	}
 }

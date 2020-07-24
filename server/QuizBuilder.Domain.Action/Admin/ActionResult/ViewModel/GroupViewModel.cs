@@ -21,6 +21,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		[JsonPropertyName( "countOfQuestionsToSelect" )]
 		public int? CountOfQuestionsToSelect { get; set; }
 
+		[JsonPropertyName( "selectAllQuestions" )]
+		public bool SelectAllQuestions { get; set; }
+
 		public ImmutableArray<QuestionViewModel> Questions { get; set; }
 	}
 }
