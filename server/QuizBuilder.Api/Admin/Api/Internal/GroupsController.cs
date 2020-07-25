@@ -34,15 +34,6 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 				: UnprocessableEntity( result );
 		}
 
-		[HttpPut( "rename" )]
-		public async Task<ActionResult> Rename( [FromBody] UpdateGroupNameCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
-
-			return result.IsSuccess
-				? (ActionResult)NoContent()
-				: UnprocessableEntity( result );
-		}
-
 		[HttpDelete( "{uid}" )]
 		public async Task<ActionResult> Delete( [FromRoute] DeleteGroupCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
@@ -64,5 +55,3 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 	}
 
 }
-
-//22 22

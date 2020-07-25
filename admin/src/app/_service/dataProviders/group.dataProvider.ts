@@ -19,11 +19,6 @@ export class GroupDataProvider {
         return this.http.put(this.apiUrl + 'groups/reorder', body);
     }
 
-    renameGroup(groupId: string, name: string): Observable<object> {
-        const body = { groupId, name }
-        return this.http.put(this.apiUrl + 'groups/rename', body);
-    }
-
     createGroup(group: Group): Observable<Group> {
         return this.http.post<Group>(this.apiUrl + 'groups', group);
     }

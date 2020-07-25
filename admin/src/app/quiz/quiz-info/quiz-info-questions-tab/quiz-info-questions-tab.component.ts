@@ -185,10 +185,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         group.questions.splice(questionIndex, 1);
     }
 
-    onPageNameFocusOut(groupId: string, name: string): void {
-        this.groupDataProvider.renameGroup(groupId, name).subscribe();
-    }
-
     onEditClick(question: Question): void {
         this.router.navigate(
             ['questions', question.id],

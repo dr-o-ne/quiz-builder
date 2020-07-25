@@ -53,9 +53,6 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 		public Task<(HttpStatusCode statusCode, GroupCommandResult data)> GroupCreate( object content ) =>
 			_httpClient.PostValueAsync<GroupCommandResult>( "admin/groups/", ToCommand<CreateGroupCommand>( content ) );
 
-		public Task<(HttpStatusCode statusCode, GroupCommandResult data)> GroupUpdateName( object content ) =>
-			_httpClient.PutValueAsync<GroupCommandResult>( "admin/groups/rename/", ToCommand<UpdateGroupNameCommand>( content ) );
-
 		public Task<(HttpStatusCode statusCode, GroupCommandResult data)> GroupReorder( object content ) =>
 			_httpClient.PutValueAsync<GroupCommandResult>( "admin/groups/reorder/", ToCommand<ReorderGroupsCommand>( content ) );
 

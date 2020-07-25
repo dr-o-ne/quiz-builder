@@ -24,13 +24,11 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 			var result2 = await _apiClient.GroupCreate( new {QuizId = uid1} );
 			string uid2 = result2.data.Group.Id;
 
-			await _apiClient.GroupUpdateName( new {groupId = uid2, name = "New Name"} );
-
 			// Get Quiz, check Groups
 			var result3 = await _apiClient.QuizGet( uid1 );
 			var groups = result3.data.Quiz.Groups;
 			Assert.Equal( uid2, groups[0].Id );
-			Assert.Equal( "New Name", groups[0].Name );
+			Assert.Equal( "Group 1", groups[0].Name );
 
 			// Delete Group Name
 			await _apiClient.GroupDelete( uid2 );
