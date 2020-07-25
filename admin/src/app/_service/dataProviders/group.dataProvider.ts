@@ -24,9 +24,6 @@ export class GroupDataProvider {
     }
 
     updateGroup(group: Group): Observable<Group> {
-        console.log('SEND');
-        console.log(group);
-
         return this.http.put<Group>(this.apiUrl + 'groups', group);
     }
 

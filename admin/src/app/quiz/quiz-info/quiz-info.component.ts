@@ -62,8 +62,6 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         this.questionsControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
 
-        console.log(this.quiz);
-
         if (!this.isEditMode())
             this.createQuiz();
         else
