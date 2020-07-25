@@ -41,6 +41,10 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		public bool IsPrevButtonEnabled { get; set; }
 
 		[Required]
+		[JsonPropertyName( "randomizeGroups" )]
+		public bool RandomizeGroups { get; set; }
+
+		[Required]
 		[JsonPropertyName( "randomizeQuestions" )]
 		public bool RandomizeQuestions { get; set; }
 

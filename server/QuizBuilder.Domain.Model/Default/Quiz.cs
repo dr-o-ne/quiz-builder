@@ -19,6 +19,8 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public PageSettings PageSettings { get; set; }
 
+		public bool RandomizeGroups { get; set; }
+
 		public bool RandomizeQuestions { get; set; }
 
 		public long QuestionsPerPage { get; set; }

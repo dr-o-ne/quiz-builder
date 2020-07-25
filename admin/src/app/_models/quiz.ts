@@ -16,6 +16,7 @@ export class Quiz {
     isPrevButtonEnabled: boolean;
     pageSettings: PageSettings;
     questionsPerPage: number;
+    randomizeGroups: boolean;
     randomizeQuestions: boolean;
 
     constructor() {

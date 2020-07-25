@@ -14,6 +14,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public PageSettings PageSettings { get; set; }
 		public long QuestionsPerPage { get; set; }
 		public bool IsPrevButtonEnabled { get; set; }
+		public bool RandomizeGroups { get; set; }
 		public bool RandomizeQuestions { get; set; }
 		public ImmutableArray<GroupViewModel> Groups { get; set; }
 	}

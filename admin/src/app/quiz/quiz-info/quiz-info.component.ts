@@ -40,10 +40,11 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         this.quizForm = this.fb.group({
             settings: this.fb.group({
                 name: [this.quiz.name, Validators.required],
-                pageSettings: [this.quiz.pageSettings, Validators.nullValidator],
+                pageSettings: [this.quiz.pageSettings],
                 questionsPerPage: [this.quiz.questionsPerPage, Validators.min(1)],
-                isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled, Validators.nullValidator],
-                randomizeQuestions: [this.quiz.randomizeQuestions, Validators.nullValidator]
+                isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled],
+                randomizeGroups: [this.quiz.randomizeGroups],
+                randomizeQuestions: [this.quiz.randomizeQuestions]
             })
         })
     }

@@ -43,10 +43,14 @@
                 <input matInput type="number" formControlName="questionsPerPage">
             </mat-form-field>
 
+            <mat-checkbox color="primary" formControlName="randomizeGroups" *ngIf="isRandomizeGroupsVisible()">
+                Randomize Groups
+            </mat-checkbox>
+
             <mat-checkbox color="primary" formControlName="randomizeQuestions" *ngIf="isRandomizeAllVisible()">
                 Randomize Questions
             </mat-checkbox>
-            
+
         </div>
 
     </div>

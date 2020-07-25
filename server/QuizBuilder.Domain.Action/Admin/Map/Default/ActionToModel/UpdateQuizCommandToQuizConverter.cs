@@ -14,6 +14,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 				PageSettings = source.PageSettings,
 				QuestionsPerPage = source.QuestionsPerPage,
 				IsPrevButtonEnabled = source.IsPrevButtonEnabled,
+				RandomizeGroups = source.RandomizeGroups,
 				RandomizeQuestions = source.RandomizeQuestions
 			};
 		}

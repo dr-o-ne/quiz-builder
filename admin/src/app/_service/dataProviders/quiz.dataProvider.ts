@@ -34,6 +34,9 @@ export class QuizDataProvider {
     }
 
     updateQuiz(quiz: Quiz): Observable<object> {
+
+        console.log(quiz);
+
         return this.http.put(this.apiUrl + 'quizzes/', quiz);
     }
 

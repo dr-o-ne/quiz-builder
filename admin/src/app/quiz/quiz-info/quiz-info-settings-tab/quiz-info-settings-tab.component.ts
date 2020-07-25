@@ -20,15 +20,23 @@ export class QuizInfoSettingsTabComponent {
     }
 
     saveFormData(quiz: Quiz): void {
-        quiz.name = this.form.value.name as string;
-        quiz.pageSettings = this.form.value.pageSettings as number;
-        quiz.questionsPerPage = this.form.value.questionsPerPage as number;
-        quiz.isPrevButtonEnabled = this.form.value.isPrevButtonEnabled as boolean;
-        quiz.randomizeQuestions = this.form.value.randomizeQuestions as boolean;
+        const value = this.form.value;
+
+        quiz.name = value.name as string;
+        quiz.pageSettings = value.pageSettings as number;
+        quiz.questionsPerPage = value.questionsPerPage as number;
+        quiz.isPrevButtonEnabled = value.isPrevButtonEnabled as boolean;
+        quiz.randomizeGroups = value.randomizeGroups as boolean;
+        quiz.randomizeQuestions = value.randomizeQuestions as boolean;
     }
 
     isQuestionsPerPageVisisble(): boolean {
         return this.form.value.pageSettings === PageSettings.Custom;
+    }
+
+    isRandomizeGroupsVisible(): boolean {
+        const pageSettings = this.form.value.pageSettings as PageSettings;
+        return pageSettings === PageSettings.PagePerGroup;
     }
 
     isRandomizeAllVisible(): boolean {
