@@ -13,7 +13,9 @@ using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
 
 namespace QuizBuilder.Domain.Action.Admin.Map {
+
 	public sealed class MapperProfile : Profile {
+
 		public MapperProfile() {
 			AddQuizMapping();
 			AddGroupMapping();
@@ -25,8 +27,11 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 			CreateMap<Quiz, Quiz>().ConvertUsing<QuizToQuizConverter>();
 			CreateMap<Quiz, QuizDto>().ConvertUsing<QuizToQuizDtoConverter>();
 			CreateMap<QuizDto, Quiz>().ConvertUsing<QuizDtoToQuizConverter>();
-			CreateMap<Quiz, QuizViewModel>().ConvertUsing<QuizToQuizViewModelConverter>();
 			CreateMap<UpdateQuizCommand, Quiz>().ConvertUsing<UpdateQuizCommandToQuizConverter>();
+
+			CreateMap<Quiz, QuizViewModel>()
+				.ForMember( x => x.Id, opt => opt.MapFrom( source => source.UId ) )
+				.ForMember( x => x.Groups, opt => opt.Ignore() );
 		}
 
 		private void AddQuestionMapping() {
@@ -42,7 +47,9 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 			CreateMap<UpdateGroupCommand, Group>().ConvertUsing<UpdateGroupCommandToGroupConverter>();
 			CreateMap<Group, GroupDto>().ConvertUsing<GroupToGroupDtoConverter>();
 			CreateMap<GroupDto, Group>().ConvertUsing<GroupDtoToGroupConverter>();
-			CreateMap<Group, GroupViewModel>().ConvertUsing<GroupToGroupViewModelConverter>();
+			CreateMap<Group, GroupViewModel>()
+				.ForMember( x => x.Id, opt => opt.MapFrom( source => source.UId ) )
+				.ForMember( x => x.Questions, opt => opt.Ignore() );
 		}
 
 		private void AddAttemptMapping() {
