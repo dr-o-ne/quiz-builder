@@ -8,14 +8,14 @@ import { QuestionLangService } from 'src/app/_service/lang/question.lang.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupDataProvider } from 'src/app/_service/dataProviders/group.dataProvider';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
-import { GroupInfoComponent } from './group-info/group-info';
+import { GroupInfoComponent, GroupInfoViewModel } from './group-info/group-info';
 
-export class DataInfo {
+export class DataInfo implements GroupInfoViewModel {
     id: string;
     name: string;
     selectAllQuestions: boolean;
     randomizeQuestions: boolean;
-    countOfQuestionsToSelect: number;
+    countOfQuestionsToSelect?: number;
     dataSource: MatTableDataSource<Question>;
 }
 
@@ -73,6 +73,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         var dataInfo = new DataInfo();
         dataInfo.id = group.id;
         dataInfo.name = group.name;
+        dataInfo.selectAllQuestions = group.selectAllQuestions;
         dataInfo.countOfQuestionsToSelect = group.countOfQuestionsToSelect;
         dataInfo.randomizeQuestions = group.randomizeQuestions;
         dataInfo.dataSource = new MatTableDataSource(group.questions);

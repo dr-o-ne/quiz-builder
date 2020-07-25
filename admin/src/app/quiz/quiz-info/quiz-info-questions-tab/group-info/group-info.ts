@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Group } from 'src/app/_models/group';
 
-interface GroupInfoViewModel {
+export interface GroupInfoViewModel {
     id: string;
     name: string;
     selectAllQuestions: boolean;
     randomizeQuestions: boolean;
-    countOfQuestionsToSelect: number;
+    countOfQuestionsToSelect?: number;
 }
 
 @Component({
