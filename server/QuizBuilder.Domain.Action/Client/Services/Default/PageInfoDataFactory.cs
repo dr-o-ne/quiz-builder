@@ -8,13 +8,17 @@ using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Default.Enums.PageSettings;
 
+namespace QuizBuilder.Domain.Action.Client.Services.Default {
 
-namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
+	public sealed class PageInfoDataFactory : IPageInfoDataFactory {
 
-	internal static class MapperExtensions {
+		private readonly IMapper _mapper;
 
-		public static List<PageInfo> MapGroupAttemptInfos( this IMapper mapper, Quiz quiz, List<Group> groups, List<Question> questions ) {
+		public PageInfoDataFactory( IMapper mapper ) {
+			_mapper = mapper;
+		}
 
+		public List<PageInfo> Create( Quiz quiz, List<Group> groups, List<Question> questions ) {
 			groups = Sort( groups );
 			questions = Sort( groups, questions );
 
@@ -24,10 +28,10 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 				case PagePerQuiz: {
 					var page = new PageInfo();
 
-					page.Questions = questions.Select( mapper.Map<QuestionAttemptInfo> ).ToList();
+					page.Questions = questions.Select( _mapper.Map<QuestionAttemptInfo> ).ToList();
 					if( quiz.RandomizeQuestions )
 						page.Questions.Shuffle();
-					 
+
 					result.Add( page );
 					break;
 				}
@@ -36,17 +40,30 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 						var page = new PageInfo();
 						page.Questions = questions
 							.Where( x => x.ParentUId == group.UId )
-							.Select( mapper.Map<QuestionAttemptInfo> )
+							.Select( _mapper.Map<QuestionAttemptInfo> )
 							.ToList();
+
+						if( !group.SelectAllQuestions && group.CountOfQuestionsToSelect != null && group.CountOfQuestionsToSelect.Value < group.Questions.Count ) {
+							page.Questions.Shuffle();
+							page.Questions = page.Questions.Take( group.CountOfQuestionsToSelect.Value ).ToList();
+						}
+
+						if( group.RandomizeQuestions)
+							page.Questions.Shuffle();
+
 						if( page.Questions.Any() )
 							result.Add( page );
 					}
+
+					if(quiz.RandomizeGroups)
+						result.Shuffle();
+
 					break;
 				}
 				case PagePerQuestion: {
 					foreach( var question in questions ) {
 						var page = new PageInfo();
-						page.Questions.Add( mapper.Map<QuestionAttemptInfo>( question ) );
+						page.Questions.Add( _mapper.Map<QuestionAttemptInfo>( question ) );
 
 						result.Add( page );
 					}
@@ -58,10 +75,10 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 				case Custom: {
 
 					var questionItems = questions
-						.Select( mapper.Map<QuestionAttemptInfo> )
+						.Select( _mapper.Map<QuestionAttemptInfo> )
 						.ToList();
 
-					if(quiz.RandomizeQuestions)
+					if( quiz.RandomizeQuestions )
 						questionItems.Shuffle();
 
 					var questionGroups = questionItems
@@ -74,6 +91,8 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 					}
 					break;
 				}
+				default:
+					throw null;
 
 			}
 
@@ -92,5 +111,6 @@ namespace QuizBuilder.Domain.Action.Client.Map.Extensions {
 				.ThenBy( x => x.SortOrder )
 				.ToList();
 		}
+
 	}
 }

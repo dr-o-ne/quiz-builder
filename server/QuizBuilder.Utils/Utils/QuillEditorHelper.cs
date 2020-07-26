@@ -8,6 +8,9 @@ namespace QuizBuilder.Utils.Utils {
 
 		public static (string, bool) NormalizeText( string input ) {
 
+			if( string.IsNullOrWhiteSpace( input ) )
+				return (input, false);
+
 			string copy = input;
 			if( copy.StartsWith( "<p>" ) && copy.EndsWith( "</p>" ) ) {
 				copy = input.Substring( 3, copy.Length - 7 );

@@ -3,10 +3,16 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using QuizBuilder.Common.Handlers;
+using QuizBuilder.Domain.Action.Client.Services;
+using QuizBuilder.Domain.Action.Client.Services.Default;
 
 namespace QuizBuilder.Domain.Action {
 
 	public static class DependencyLoader {
+
+		public static void AddServices( this IServiceCollection services ) {
+			services.AddSingleton<IPageInfoDataFactory, PageInfoDataFactory>();
+		}
 
 		public static void AddMappers( this IServiceCollection services ) {
 			services.AddAutoMapper( typeof( DependencyLoader ).Assembly );

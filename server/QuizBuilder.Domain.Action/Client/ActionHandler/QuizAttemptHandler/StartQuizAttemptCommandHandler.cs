@@ -8,7 +8,7 @@ using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
-using QuizBuilder.Domain.Action.Client.Map.Extensions;
+using QuizBuilder.Domain.Action.Client.Services;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Appearance;
 using QuizBuilder.Domain.Model.Default.Attempts;
@@ -26,6 +26,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		private readonly IQuestionDataProvider _questionDataProvider;
 		private readonly IQuizAttemptDataProvider _attemptDataProvider;
 		private readonly IGroupDataProvider _groupDataProvider;
+		private readonly IPageInfoDataFactory _pageInfoDataFactory;
 
 		public StartQuizAttemptCommandHandler(
 			IMapper mapper,
@@ -33,7 +34,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			IQuizDataProvider quizDataProvider,
 			IQuestionDataProvider questionDataProvider,
 			IQuizAttemptDataProvider attemptDataProvider,
-			IGroupDataProvider groupDataProvider ) {
+			IGroupDataProvider groupDataProvider,
+			IPageInfoDataFactory pageInfoDataFactory ) {
 
 			_mapper = mapper;
 			_uIdService = uIdService;
@@ -41,6 +43,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			_questionDataProvider = questionDataProvider;
 			_attemptDataProvider = attemptDataProvider;
 			_groupDataProvider = groupDataProvider;
+			_pageInfoDataFactory = pageInfoDataFactory;
 		}
 
 		public async Task<StartQuizAttemptCommandResult> HandleAsync( StartQuizAttemptCommand command ) {
@@ -105,7 +108,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				Name = appearance.ShowQuizName ? quiz.Name : string.Empty,
 				SettingsInfo = _mapper.Map<SettingsInfo>( quiz ),
 				AppearanceInfo = _mapper.Map<AppearanceInfo>( appearance ),
-				Pages = _mapper.MapGroupAttemptInfos( quiz, groups, questions )
+				Pages = _pageInfoDataFactory.Create( quiz, groups, questions )
 			};
 
 			return result;

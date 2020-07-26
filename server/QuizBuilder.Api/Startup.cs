@@ -40,6 +40,7 @@ namespace QuizBuilder.Api {
         private static void ConfigureApplication( IServiceCollection services ) {
 	        services.AddDispatchers();
 	        services.AddHandlers();
+			services.AddServices();
 	        services.AddMappers();
 	        services.AddModels();
 	        services.AddUtils();
