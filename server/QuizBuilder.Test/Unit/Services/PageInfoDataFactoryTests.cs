@@ -57,7 +57,8 @@ namespace QuizBuilder.Test.Unit.Services {
 			Assert.Equal( Questions.Count, result1[0].Questions.Count );
 			Assert.Equal( Questions.Count, result2[0].Questions.Count );
 
-			result1.Should().BeEquivalentTo( result2, options => options.WithoutStrictOrdering() );
+			//TODO: check sort order
+			result1.Should().BeEquivalentTo( result2, options => options.WithStrictOrdering() );
 		}
 
 		[Fact]
@@ -83,10 +84,12 @@ namespace QuizBuilder.Test.Unit.Services {
 
 			input1.Should().BeEquivalentTo( input2, options => options.WithoutStrictOrdering() );
 			for( int i = 0; i < input1.Count; i++ ) {
-				if( input1[i].UId == input2[i].UId )
-					Assert.True( false );
+				if( input1[i].UId != input2[i].UId ) {
+					Assert.True( true );
+					return;
+				}
 			}
-			Assert.True( true );
+			Assert.True( false );
 		}
 	}
 
