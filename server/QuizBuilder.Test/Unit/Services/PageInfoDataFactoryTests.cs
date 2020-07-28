@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using FluentAssertions;
 using QuizBuilder.Domain.Action.Client.ActionResult;
@@ -26,19 +27,34 @@ namespace QuizBuilder.Test.Unit.Services {
 
 		private static readonly List<Question> Questions = new List<Question> {
 			new TrueFalseQuestion { UId = "a1", SortOrder = 1, ParentUId = "a"},
+			new TrueFalseQuestion { UId = "b5", SortOrder = 5, ParentUId = "b"},
 			new TrueFalseQuestion { UId = "c2", SortOrder = 2, ParentUId = "c"},
 			new TrueFalseQuestion { UId = "c1", SortOrder = 1, ParentUId = "c"},
-			new TrueFalseQuestion { UId = "b6", SortOrder = 6, ParentUId = "b"},
-			new TrueFalseQuestion { UId = "b5", SortOrder = 5, ParentUId = "b"},
 			new TrueFalseQuestion { UId = "b4", SortOrder = 4, ParentUId = "b"},
+			new TrueFalseQuestion { UId = "b6", SortOrder = 6, ParentUId = "b"},
+			new TrueFalseQuestion { UId = "b1", SortOrder = 1, ParentUId = "b"},
 			new TrueFalseQuestion { UId = "b3", SortOrder = 3, ParentUId = "b"},
 			new TrueFalseQuestion { UId = "b2", SortOrder = 2, ParentUId = "b"},
-			new TrueFalseQuestion { UId = "b1", SortOrder = 1, ParentUId = "b"},
 		};
-
 
 		public PageInfoDataFactoryTests() {
 			_sut = new PageInfoDataFactory( new Mapper( new MapperConfiguration( cfg => cfg.AddProfile<MapperProfile>() ) ) );
+		}
+
+		[Fact]
+		public void PagePerQuiz_Order_Test() {
+
+			var expectedUIds = new List<string> { "c1", "c2", "b1", "b2", "b3", "b4", "b5", "b6", "a1" };
+
+			var quiz = new Quiz {
+				PageSettings = PagePerQuiz,
+				RandomizeQuestions = false
+			};
+
+			List<PageInfo> result = _sut.Create( quiz, Groups, Questions );
+			var resultUIds = result[0].Questions.Select( x => x.UId );
+
+			resultUIds.Should().BeEquivalentTo( expectedUIds, options => options.WithStrictOrdering() );
 		}
 
 		[Fact]
@@ -57,7 +73,6 @@ namespace QuizBuilder.Test.Unit.Services {
 			Assert.Equal( Questions.Count, result1[0].Questions.Count );
 			Assert.Equal( Questions.Count, result2[0].Questions.Count );
 
-			//TODO: check sort order
 			result1.Should().BeEquivalentTo( result2, options => options.WithStrictOrdering() );
 		}
 
@@ -79,6 +94,8 @@ namespace QuizBuilder.Test.Unit.Services {
 
 			AssertHasDifferentOrder( result1[0].Questions, result2[0].Questions );
 		}
+
+		//TODO: add other cases
 
 		private static void AssertHasDifferentOrder( IReadOnlyList<QuestionAttemptInfo> input1, IReadOnlyList<QuestionAttemptInfo> input2 ) {
 
