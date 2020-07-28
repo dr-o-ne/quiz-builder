@@ -27,7 +27,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.Name,
 				qi.SortOrder,
 				q.Text,
-				q.Points,
 				q.Settings,
 				pqi.UId AS ParentUId
 			FROM 
@@ -79,7 +78,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				q.Name,
 				qi.SortOrder,
 				q.Text,
-				q.Points,
 				q.Settings
 			FROM dbo.Question AS q (NOLOCK)
 			INNER JOIN dbo.QuizItem AS qi WITH(NOLOCK)
@@ -99,7 +97,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    TypeId,
 		    Name,
 		    Text,
-			Points,
 		    Settings,
 		    CreatedOn,
 		    ModifiedOn
@@ -110,7 +107,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			INSERTED.TypeId,
 			INSERTED.Name,
 			INSERTED.Text,
-			INSERTED.Points,
 			INSERTED.Settings,
 			INSERTED.CreatedOn,
 			INSERTED.ModifiedOn
@@ -119,7 +115,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		    @TypeId,
 		    @Name,
 		    @Text,
-			@Points,
 		    @Settings,
 		    @CreatedOn,
 		    @ModifiedOn
@@ -163,7 +158,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				dto.TypeId,
 				dto.Name,
 				dto.Text,
-				dto.Points,
 				dto.Settings,
 				ParentId = groupId,
 				CreatedOn = DateTime.UtcNow,
@@ -184,7 +178,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			SET TypeId = @TypeId,
 				Name = @Name,
 				Text = @Text,
-				Points = @Points,
 				Settings = @Settings,
 				ModifiedOn = @ModifiedOn
 			WHERE Id = @Id
@@ -198,7 +191,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				dto.Id,
 				dto.Name,
 				dto.Text,
-				dto.Points,
 				dto.Settings,
 				dto.TypeId,
 				dto.SortOrder,

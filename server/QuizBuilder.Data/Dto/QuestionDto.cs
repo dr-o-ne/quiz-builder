@@ -14,8 +14,6 @@
 
 		public string Text { get; set; }
 
-		public decimal? Points { get; set; }
-
 		public string Settings { get; set; }
 
 		public string ParentUId { get; set; }

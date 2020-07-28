@@ -9,6 +9,7 @@ using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 
 	internal sealed class QuestionDtoToQuestionConverter : ITypeConverter<QuestionDto, Question> {
+
 		public Question Convert( QuestionDto source, Question destination, ResolutionContext context ) {
 
 			var questionType = (Enums.QuestionType)source.TypeId;
@@ -27,7 +28,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 			result.ParentUId = source.ParentUId;
 			result.Name = source.Name;
 			result.Text = source.Text;
-			result.Points = source.Points;
 			result.SortOrder = source.SortOrder;
 
 			return result;

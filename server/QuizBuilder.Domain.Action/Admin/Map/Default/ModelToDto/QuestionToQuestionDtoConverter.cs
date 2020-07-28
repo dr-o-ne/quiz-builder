@@ -46,7 +46,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 				TypeId = (int)questionType,
 				Name = source.Name,
 				Text = source.Text,
-				Points = source.Points,
 				Settings = settings
 			};
 		}

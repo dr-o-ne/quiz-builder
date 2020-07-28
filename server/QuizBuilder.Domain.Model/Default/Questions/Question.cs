@@ -12,7 +12,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 		[JsonIgnore]
 		public virtual string Text { get; set; }
 
-		[JsonIgnore]
 		public decimal? Points { get; set; }
 
 		public string Feedback { get; set; }
