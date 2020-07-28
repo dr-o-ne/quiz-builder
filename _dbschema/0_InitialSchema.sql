@@ -37,30 +37,11 @@ GO
 INSERT INTO dbo.QuizItemType ([Name])
 VALUES
     ('Group'),
-    ('Question')
-GO
-
-CREATE TABLE dbo.Question(
-	[Id] BIGINT IDENTITY(1,1) NOT NULL,
-	[UId] NVARCHAR(10) NOT NULL,
-	[TypeId] BIGINT NOT NULL,
-	[Name] NVARCHAR(255) NULL,
-	[Text] NVARCHAR(MAX) NOT NULL,
-	[Settings] NVARCHAR(MAX) NOT NULL,
-	[CreatedOn] DATETIME2(7) NOT NULL,
-	[ModifiedOn] DATETIME2(7) NOT NULL,
-
-	CONSTRAINT [PK_Question] PRIMARY KEY CLUSTERED ( [Id] ASC ) ON [PRIMARY]
-) ON [PRIMARY] 
-GO
-
-ALTER TABLE dbo.Question ADD CONSTRAINT [DF_Question_CreatedOn]  DEFAULT (getutcdate()) FOR [CreatedOn]
-GO
-
-ALTER TABLE dbo.Question ADD CONSTRAINT [DF_Question_ModifiedOn]  DEFAULT (getutcdate()) FOR [ModifiedOn]
-GO
-
-CREATE UNIQUE NONCLUSTERED INDEX [UI_Question_UId] ON dbo.Question ( [UId] ASC ) ON [PRIMARY]
+    ('TrueFalse'),
+    ('MultiChoice'),
+    ('FillInTheBlanks'),
+    ('MultiSelect'),
+    ('LongAnswer')
 GO
 
 CREATE TABLE dbo.QuizItem(
@@ -73,7 +54,6 @@ CREATE TABLE dbo.QuizItem(
 	[IsEnabled] BIT NULL,
 	[SortOrder] INT NULL,
 	[Settings] NVARCHAR(MAX) NULL,
-	[QuestionId] BIGINT NULL,
 	[CreatedOn] DATETIME2(7) NOT NULL,
 	[ModifiedOn] DATETIME2(7) NOT NULL,
 
@@ -92,10 +72,6 @@ REFERENCES dbo.QuizItemType ([Id])
 GO
 
 ALTER TABLE dbo.QuizItem CHECK CONSTRAINT [FK_QuizItem_QuizItemType]
-GO
-
-ALTER TABLE dbo.QuizItem WITH CHECK ADD CONSTRAINT [FK_QuizItem_Question] FOREIGN KEY([QuestionId])
-REFERENCES [dbo].[Question] ([Id])
 GO
 
 ALTER TABLE [dbo].[QuizItem] CHECK CONSTRAINT [FK_QuizItem_Question]

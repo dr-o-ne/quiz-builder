@@ -58,11 +58,10 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 		}
 
 		private async Task<QuestionDto> Save( long quizId, long groupId, QuestionDto dto ) {
-			(long quizItemId, QuestionDto questionDtoAfter) result = await _questionDataProvider.Add( groupId, dto );
-			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupId, result.quizItemId );
-			await _structureDataProvider.AddQuizQuestionRelationship( quizId, result.quizItemId );
+			QuestionDto questionDtoAfter = await _questionDataProvider.Add( groupId, dto );
+			await _structureDataProvider.AddQuizQuestionRelationship( quizId, questionDtoAfter.Id );
 
-			return result.questionDtoAfter;
+			return questionDtoAfter;
 		}
 	}
 }

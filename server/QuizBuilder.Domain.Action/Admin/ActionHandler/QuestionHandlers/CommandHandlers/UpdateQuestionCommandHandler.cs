@@ -13,14 +13,10 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 		private readonly IMapper _mapper;
 		private readonly IQuestionDataProvider _questionDataProvider;
-		private readonly IStructureDataProvider _structureDataProvider;
-		private readonly IGroupDataProvider _groupDataProvider;
 
-		public UpdateQuestionCommandHandler( IMapper mapper, IQuestionDataProvider questionDataProvider, IStructureDataProvider structureDataProvider, IGroupDataProvider groupDataProvider ) {
+		public UpdateQuestionCommandHandler( IMapper mapper, IQuestionDataProvider questionDataProvider ) {
 			_mapper = mapper;
 			_questionDataProvider = questionDataProvider;
-			_structureDataProvider = structureDataProvider;
-			_groupDataProvider = groupDataProvider;
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuestionCommand command ) {
@@ -36,12 +32,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 			QuestionDto questionDto = _mapper.Map<QuestionDto>( question );
 			await _questionDataProvider.Update( questionDto );
 
-			GroupDto groupDto = string.IsNullOrWhiteSpace(command.GroupUId) ? default : await _groupDataProvider.Get( command.GroupUId );
-			
-			long quizItemId = await _structureDataProvider.GetQuizItemIdByQuestionUid( command.UId );
-			await _structureDataProvider.UpdateGroupQuizItemRelationship( groupDto?.Id, quizItemId );
-			
-			return new CommandResult( isSuccess: true, message: string.Empty );
+			return CommandResult.Success();
 		}
 	}
 }

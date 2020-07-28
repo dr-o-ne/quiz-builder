@@ -21,25 +21,23 @@ namespace QuizBuilder.Data.DataProviders.Default {
 
 			const string sql = @"
 			SELECT
-				q.Id,
-				q.UId,
-				q.TypeId,
-				q.Name,
+				qi.Id,
+				qi.UId,
+				qi.TypeId,
+				qi.Name,
+				qi.Text,
 				qi.SortOrder,
-				q.Text,
-				q.Settings,
+				qi.Settings,
 				pqi.UId AS ParentUId
 			FROM 
-				dbo.Question AS q WITH(NOLOCK)
-			INNER JOIN
-				dbo.QuizItem AS qi WITH(NOLOCK) ON q.Id = qi.QuestionId
+				dbo.QuizItem AS qi (NOLOCK)
 			INNER JOIN
 				dbo.QuizQuizItem AS qqi WITH(NOLOCK) ON qi.Id = qqi.QuizItemId
 			INNER JOIN
 				dbo.Quiz AS qz WITH(NOLOCK) ON qz.Id = qqi.QuizId
 			INNER JOIN 
 				dbo.QuizItem AS pqi WITH(NOLOCK) ON qi.ParentId = pqi.Id
-			WHERE qz.UId = @QuizUId";
+			WHERE qz.UId = @QuizUId AND qi.TypeId <> 1";
 
 			using IDbConnection conn = GetConnection();
 			IEnumerable<QuestionDto> data = await conn.QueryAsync<QuestionDto>( sql, new { QuizUId = uid } );
@@ -50,18 +48,17 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		public async Task<ImmutableArray<QuestionDto>> GetByGroup( string uid ) {
 			const string sql = @"
 			SELECT
-				q.Id,
-				q.UId,
-				q.TypeId,
-				q.Name,
-				qi.SortOrder,
-				q.Text,
-				q.Points,
-				q.Settings
-			FROM dbo.Question AS q WITH(NOLOCK)
-			INNER JOIN dbo.QuizItem AS qi WITH(NOLOCK)
-				ON q.Id = qi.QuestionId
-			WHERE qi.ParentId = (SELECT TOP 1 Id FROM dbo.QuizItem WITH(NOLOCK) WHERE UId = @GroupUId)";
+				Id,
+				UId,
+				TypeId,
+				Name,
+				Text,
+				SortOrder,
+				Settings
+			FROM dbo.QuizItem (NOLOCK)
+			WHERE
+				TypeId <> 1 AND
+				ParentId = (SELECT TOP 1 Id FROM dbo.QuizItem (NOLOCK) WHERE UId = @GroupUId)";
 
 			using IDbConnection conn = GetConnection();
 			IEnumerable<QuestionDto> data = await conn.QueryAsync<QuestionDto>( sql, new { GroupUId = uid } );
@@ -72,88 +69,66 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		public async Task<QuestionDto> Get( string uid ) {
 			const string sql = @"
 			SELECT
-				q.Id,
-				q.UId,
-				q.TypeId,
-				q.Name,
-				qi.SortOrder,
-				q.Text,
-				q.Settings
-			FROM dbo.Question AS q (NOLOCK)
-			INNER JOIN dbo.QuizItem AS qi WITH(NOLOCK)
-				ON q.Id = qi.QuestionId
-			WHERE q.UId = @UId";
+				Id,
+				UId,
+				TypeId,
+				Name,
+				SortOrder,
+				Text,
+				Settings
+			FROM dbo.QuizItem (NOLOCK)
+			WHERE UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QuerySingleOrDefaultAsync<QuestionDto>( sql, new { UId = uid } );
 		}
 
-		public async Task<(long, QuestionDto)> Add( long groupId, QuestionDto dto ) {
+		public async Task<QuestionDto> Add( long groupId, QuestionDto dto ) {
 
 			const string sql = @"
 
-		INSERT INTO dbo.Question(
+		INSERT INTO dbo.QuizItem (
 			UId,
+		    ParentId,
 		    TypeId,
-		    Name,
+			Name,
 		    Text,
-		    Settings,
+			IsEnabled,
+			SortOrder,
+			Settings,
 		    CreatedOn,
 		    ModifiedOn
 		)
 		OUTPUT
 			INSERTED.Id,
 			INSERTED.UId,
+			INSERTED.ParentId,
 			INSERTED.TypeId,
 			INSERTED.Name,
 			INSERTED.Text,
+			INSERTED.SortOrder,
 			INSERTED.Settings,
 			INSERTED.CreatedOn,
 			INSERTED.ModifiedOn
-		VALUES (
-			@UId,
-		    @TypeId,
-		    @Name,
-		    @Text,
-		    @Settings,
-		    @CreatedOn,
-		    @ModifiedOn
-		)
-
-		DECLARE @ID INT
-		SELECT @ID = SCOPE_IDENTITY();
-
-		INSERT INTO dbo.QuizItem (
-			UId,
-		    TypeId,
-		    ParentId,
-		    QuestionId,
-			SortOrder,
-			Name,
-		    CreatedOn,
-		    ModifiedOn
-		)
-		OUTPUT
-			INSERTED.Id,
-			INSERTED.SortOrder
 		VALUES(
 			@UId,
-		    1,
 		    @ParentId,
-		    (SELECT @ID),
+		    @TypeId,
+			@Name,
+		    @Text,
+			1,
 			1 + (
- SELECT ISNULL(MAX(qi.SortOrder), 0)  FROM dbo.Question AS q
- INNER JOIN dbo.QuizItem AS qi ON qi.QuestionId = q.Id
- WHERE
-	qi.TypeId = 1 AND
-	qi.ParentId = @ParentId),
-			'',
+				 SELECT ISNULL(MAX(SortOrder), 0)
+				 FROM dbo.QuizItem
+				 WHERE ParentId = @ParentId
+			),
+		    @Settings,
 		    @CreatedOn,
 		    @ModifiedOn
 		)";
 
 			using IDbConnection conn = GetConnection();
-			var result  = await conn.QueryMultipleAsync( sql, new {
+			return await conn.QueryFirstAsync<QuestionDto>( sql, new {
 				dto.UId,
 				dto.TypeId,
 				dto.Name,
@@ -163,28 +138,20 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow
 			} );
-
-			var questionDto = result.ReadSingle<QuestionDto>();
-			(long quizItemId, int sortOrder) temp = result.ReadSingle<(long, int)>();
-			questionDto.SortOrder = temp.sortOrder;
-
-			return (temp.quizItemId, questionDto);
 		}
 
 		public async Task Update( QuestionDto dto ) {
 
 			const string sql = @"
-			UPDATE dbo.Question
-			SET TypeId = @TypeId,
+			UPDATE dbo.QuizItem
+			SET
+				TypeId = @TypeId,
+				SortOrder = @SortOrder,
 				Name = @Name,
 				Text = @Text,
 				Settings = @Settings,
 				ModifiedOn = @ModifiedOn
-			WHERE Id = @Id
-
-			UPDATE dbo.QuizItem
-			SET SortOrder = @SortOrder
-			WHERE QuestionId = @Id";
+			WHERE Id = @Id";
 
 			using IDbConnection conn = GetConnection();
 			await conn.ExecuteAsync( sql, new {
@@ -201,8 +168,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 		public async Task Delete( string uid ) {
 
 			const string sql = @"
-DELETE FROM dbo.QuizItem WHERE UId=@UId
-DELETE FROM dbo.Question WHERE UId=@UId";
+			DELETE FROM dbo.QuizItem WHERE UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			await conn.ExecuteAsync( sql, new { UId = uid } );

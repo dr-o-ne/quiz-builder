@@ -12,7 +12,6 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 			"dbo.QuizQuizItem",
 			"dbo.QuizItem",
 			"dbo.Quiz",
-			"dbo.Question",
 			"dbo.Attempt"
 		}.ToImmutableArray();
 

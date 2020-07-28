@@ -34,7 +34,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				INNER JOIN dbo.Quiz qz WITH(NOLOCK)
 					ON qz.Id = qqi.QuizId
 				WHERE
-					qi.TypeId = 2 AND qz.UId = @UId";
+					qi.TypeId = 1 AND qz.UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			IEnumerable<GroupDto> data = await conn.QueryAsync<GroupDto>( sql, new { UId = uid } );
@@ -55,7 +55,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				FROM
 					dbo.QuizItem qi WITH(NOLOCK)
 				WHERE
-					qi.TypeId = 2 AND qi.UId = @UId";
+					qi.UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QuerySingleOrDefaultAsync<GroupDto>( sql, new { UId = uid } );
@@ -68,7 +68,6 @@ namespace QuizBuilder.Data.DataProviders.Default {
 					UId,
 				    TypeId,
 				    ParentId,
-				    QuestionId,
 					Name,
 					Settings,
 					IsEnabled,
@@ -85,8 +84,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 					INSERTED.SortOrder
 				VALUES(
 				    @UId,
-				    2,
-				    NULL,
+				    1,
 				    NULL,
 					@Name,
 					@Settings,
@@ -102,7 +100,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 				)";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QueryFirstAsync<GroupDto>( sql, new {
+			 return await conn.QueryFirstAsync<GroupDto>( sql, new {
 				dto.UId,
 				dto.Name,
 				dto.Settings,
