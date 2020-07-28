@@ -7,7 +7,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 	public abstract class Question : QuizEntity {
 
 		[JsonIgnore]
-		public abstract QuestionType Type { get; }
+		public abstract QuizItemType Type { get; }
 
 		[JsonIgnore]
 		public virtual string Text { get; set; }

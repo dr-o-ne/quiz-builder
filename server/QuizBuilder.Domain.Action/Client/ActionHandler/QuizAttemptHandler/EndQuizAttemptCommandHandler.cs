@@ -7,10 +7,10 @@ using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
-using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Answers;
 using QuizBuilder.Domain.Model.Default.Graders;
 using QuizBuilder.Domain.Model.Default.Questions;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
@@ -47,7 +47,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 				switch( question.Type ) {
 
-					case Enums.QuestionType.TrueFalse:
+					case TrueFalse:
 
 						var trueFalseGrader = new TrueFalseGrader();
 						var trueFalseQuestion = (TrueFalseQuestion)question;
@@ -57,7 +57,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 						break;
 
-					case Enums.QuestionType.MultiChoice:
+					case MultiChoice:
 
 						var multipleChoiceGrader = new MultipleChoiceGrader();
 						var multipleChoiceQuestion = (MultipleChoiceQuestion)question;
@@ -67,7 +67,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 						break;
 
-					case Enums.QuestionType.MultiSelect:
+					case MultiSelect:
 
 						var multipleSelectGrader = new MultipleSelectGrader();
 						var multipleSelectQuestion = (MultipleSelectQuestion)question;
@@ -77,7 +77,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 						break;
 
-					case Enums.QuestionType.LongAnswer:
+					case LongAnswer:
 
 						var longAnswerGrader = new LongAnswerGrader();
 						var longAnswerQuestion = (LongAnswerQuestion)question;

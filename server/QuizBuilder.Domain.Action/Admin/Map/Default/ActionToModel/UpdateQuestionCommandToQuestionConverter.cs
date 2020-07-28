@@ -6,7 +6,7 @@ using AutoMapper;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 

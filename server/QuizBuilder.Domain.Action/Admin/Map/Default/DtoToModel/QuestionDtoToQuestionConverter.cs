@@ -4,7 +4,7 @@ using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 
@@ -12,7 +12,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 
 		public Question Convert( QuestionDto source, Question destination, ResolutionContext context ) {
 
-			var questionType = (Enums.QuestionType)source.TypeId;
+			var questionType = (Enums.QuizItemType)source.TypeId;
 
 			Question result = questionType switch {
 				TrueFalse => JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings ),

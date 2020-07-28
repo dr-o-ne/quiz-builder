@@ -5,7 +5,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public string Id { get; set; }
 		public string GroupId { get; set; }
 		public string Name { get; set; }
-		public Enums.QuestionType Type { get; set; }
+		public Enums.QuizItemType Type { get; set; }
 		public string Text { get; set; }
 		public decimal? Points { get; set; }
 		public string Feedback { get; set; }

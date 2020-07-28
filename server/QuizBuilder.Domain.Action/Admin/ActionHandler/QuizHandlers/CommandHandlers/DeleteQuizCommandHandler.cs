@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +32,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 
 			ImmutableArray<(string uid, int typeId)> result = await _structureDataProvider.DeleteQuizRelationships( command.UId );
 			var questionUids = result
-				.Where( x => x.typeId == (int)Enums.QuizItemType.Question )
+				.Where( x => x.typeId != (int)Enums.QuizItemType.Group )
 				.Select( x => x.uid );
 
 			var groupUIds = result

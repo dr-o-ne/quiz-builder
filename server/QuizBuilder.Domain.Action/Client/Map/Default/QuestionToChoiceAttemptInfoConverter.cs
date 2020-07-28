@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default.Questions;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Client.Map.Default {
 

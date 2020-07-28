@@ -5,13 +5,13 @@ using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Default.Enums;
 using static QuizBuilder.Domain.Model.Default.Enums.ChoicesDisplayType;
 using static QuizBuilder.Domain.Model.Default.Enums.ChoicesEnumerationType;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class MultipleChoiceQuestion : Question {
 
-		public override QuestionType Type { get => MultiChoice; }
+		public override QuizItemType Type { get => MultiChoice; }
 
 		public List<BinaryChoice> Choices { get; set; } = new List<BinaryChoice>();
 

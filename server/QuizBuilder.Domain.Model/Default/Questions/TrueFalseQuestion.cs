@@ -2,13 +2,13 @@
 using static QuizBuilder.Domain.Model.Default.Enums;
 using static QuizBuilder.Domain.Model.Default.Enums.ChoicesDisplayType;
 using static QuizBuilder.Domain.Model.Default.Enums.ChoicesEnumerationType;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class TrueFalseQuestion : Question {
 
-		public override QuestionType Type { get => TrueFalse; }
+		public override QuizItemType Type { get => TrueFalse; }
 
 		public BinaryChoice TrueChoice { get; set; } = new BinaryChoice();
 

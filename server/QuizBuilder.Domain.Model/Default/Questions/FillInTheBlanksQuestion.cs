@@ -2,7 +2,7 @@
 using QuizBuilder.Domain.Model.Default.Base;
 using QuizBuilder.Domain.Model.Default.Choices;
 using static QuizBuilder.Domain.Model.Default.Enums;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Model.Default.Questions {
 
@@ -16,7 +16,7 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 	public sealed class FillInTheBlanksQuestion : Question {
 
-		public override QuestionType Type { get => FillInTheBlanks; }
+		public override QuizItemType Type { get => FillInTheBlanks; }
 
 		public override string Text {
 			get { return string.Empty; }

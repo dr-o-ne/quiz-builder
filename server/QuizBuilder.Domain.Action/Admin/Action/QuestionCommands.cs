@@ -19,7 +19,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "GroupId" )]
 		public string GroupUId { get; set; }
 
-		public Enums.QuestionType Type { get; set; }
+		public Enums.QuizItemType Type { get; set; }
 
 		[Required]
 		public string Text { get; set; }
@@ -49,7 +49,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "GroupId" )]
 		public string GroupUId { get; set; }
 
-		public Enums.QuestionType Type { get; set; }
+		public Enums.QuizItemType Type { get; set; }
 
 		public string Text { get; set; }
 

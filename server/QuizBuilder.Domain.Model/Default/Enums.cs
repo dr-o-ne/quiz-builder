@@ -2,22 +2,14 @@
 
 	public static class Enums {
 
-		public enum QuestionType {
-
-			None = 0,
-			TrueFalse = 1,
-			MultiChoice = 2,
-			FillInTheBlanks = 3,
-			MultiSelect = 4,
-			LongAnswer = 5
-		}
-
 		public enum QuizItemType {
 			None = 0,
-			Question = 1,
-			Group = 2,
-			FreeText = 3,
-			QuestionPool = 4
+			Group = 1,
+			TrueFalse = 2,
+			MultiChoice = 3,
+			FillInTheBlanks = 4,
+			MultiSelect = 5,
+			LongAnswer = 6
 		}
 
 		public enum TextEvaluationType {

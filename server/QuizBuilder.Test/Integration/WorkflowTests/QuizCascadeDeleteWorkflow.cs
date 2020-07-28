@@ -30,7 +30,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 				GroupId = uid2,
 				Name = "Question Name 1",
 				Text = "Question Text 1",
-				Type = 1,
+				Type = 2,
 				Settings = "{\"choicesDisplayType\":1,\"choicesEnumerationType\":2}",
 				Choices = "[{\"isCorrect\":true,\"text\":\"Choice 1\"},{\"isCorrect\":false,\"text\":\"Choice 2\"}]"
 			} );

@@ -4,7 +4,7 @@ using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
-using static QuizBuilder.Domain.Model.Default.Enums.QuestionType;
+using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 	internal sealed class QuestionToQuestionDtoConverter : ITypeConverter<Question, QuestionDto> {
@@ -13,7 +13,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 				return null;
 
 			string settings;
-			Enums.QuestionType questionType;
+			Enums.QuizItemType questionType;
 
 			switch( source ) {
 				case TrueFalseQuestion question:
