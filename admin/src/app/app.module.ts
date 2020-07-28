@@ -29,7 +29,6 @@ import { AttemptService } from './_service/attempt.service';
 import { AppRoutingModule } from './app-routing.module';
 import { VexModule } from '../@vex/vex.module';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
-import { CommingSoonComponent } from './common/comming-soon/comming-soon.component';
 
 import { PageLayoutModule } from '../@vex/components/page-layout/page-layout.module';
 import { SecondaryToolbarModule } from '../@vex/components/secondary-toolbar/secondary-toolbar.module';
@@ -69,7 +68,6 @@ import { GroupInfoComponent } from './quiz/quiz-info/quiz-info-questions-tab/gro
     MultiSelectPreviewComponent,
     LongAnswerComponent,
     LongAnswerPreviewComponent,
-    CommingSoonComponent,
     Error404Component,
     Error500Component,
     QuizInfoComponent,

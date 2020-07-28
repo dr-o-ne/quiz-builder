@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 
-import { CommingSoonComponent } from './common/comming-soon/comming-soon.component';
-
 import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
@@ -27,10 +25,6 @@ const routes: Routes = [
             { path: '', component: QuizListComponent },
             { path: 'new', component: QuizInfoComponent }
           ]
-      },
-      {
-        path: 'comming-soon',
-        component: CommingSoonComponent
       },
       {
         path: '404',
