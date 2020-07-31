@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IconModule } from '@visurel/iconify-angular';
 import { ChartModule } from '../../chart/chart.module';
-import { ColorFadeModule } from '../../../pipes/color/color-fade.module';
 
 
 @NgModule({
@@ -17,8 +16,7 @@ import { ColorFadeModule } from '../../../pipes/color/color-fade.module';
     MatButtonModule,
     MatIconModule,
     IconModule,
-    ChartModule,
-    ColorFadeModule
+    ChartModule
   ],
   exports: [WidgetLargeGoalChartComponent]
 })

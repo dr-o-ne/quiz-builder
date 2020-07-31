@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HIGHLIGHT_OPTIONS, HighlightConfig, HighlightLanguage, HighlightOptions, HighlightResult } from './highlight.model';
-import hljs from 'highlight.js/lib/highlight.js';
+import * as hljs from 'highlight.js';
 
 @Injectable()
 export class HighlightService {
@@ -26,13 +26,13 @@ export class HighlightService {
    * Core highlighting function.
    * @param name Accepts a language name, or an alias
    * @param value A string with the code to highlight.
-   * @param ignore_illegals When present and evaluates to a true value, forces highlighting to finish
+   * @param ignoreIllegals When present and evaluates to a true value, forces highlighting to finish
    * even in case of detecting illegal syntax for the language instead of throwing an exception.
    * @param continuation An optional mode stack representing unfinished parsing.
    * When present, the function will restart parsing from this state instead of initializing a new one
    */
-  highlight(name: string, value: string, ignore_illegals: boolean, continuation?: any): HighlightResult {
-    return hljs.highlight(name, value, ignore_illegals, continuation);
+  highlight(name: string, value: string, ignoreIllegals: boolean, continuation?: any): HighlightResult {
+    return hljs.highlight(name, value, ignoreIllegals, continuation);
   }
 
   /**
@@ -67,7 +67,6 @@ export class HighlightService {
 
   /**
    * Configures global options:
-   * @param config
    */
   configure(config: HighlightConfig) {
     hljs.configure(config);
@@ -86,7 +85,7 @@ export class HighlightService {
    * @param language A function that returns an object which represents the language definition.
    * The function is passed the hljs object to be able to use common regular expressions defined within it.
    */
-  registerLanguage(name: string, language: Function) {
+  registerLanguage(name: string, language: any) {
     hljs.registerLanguage(name, language);
   }
 

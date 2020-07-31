@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import icClose from '@iconify/icons-ic/twotone-close';
 import { LayoutService } from '../../services/layout.service';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { SearchService } from '../../services/search.service';
 
+@UntilDestroy()
 @Component({
   selector: 'vex-search',
   templateUrl: './search.component.html',

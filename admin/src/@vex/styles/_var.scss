@@ -9,48 +9,53 @@ $config: mat-typography-config(
   $display-3: mat-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
   $display-2: mat-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
   $display-1: mat-typography-level(34px, 40px, 400),
-  $headline: mat-typography-level(24px, 32px, 400),
-  $title: mat-typography-level(18px, 26px, 500),
-  $subheading-2: mat-typography-level(16px, 28px, 400),
-  $subheading-1: mat-typography-level(15px, 24px, 400),
-  $body-2: mat-typography-level(14px, 24px, 500),
-  $body-1: mat-typography-level(14px, 20px, 400),
-  $caption: mat-typography-level(12px, 20px, 400),
-  $button: mat-typography-level(14px, 14px, 500),
-  $input: mat-typography-level(14px, 1.125, 400)
+  $headline: mat-typography-level(24px, 32px, 400, $letter-spacing: -0.019em),
+  $title: mat-typography-level(18px, 26px, 500, $letter-spacing: -0.014em),
+  $subheading-2: mat-typography-level(16px, 28px, 400, $letter-spacing: -0.011em),
+  $subheading-1: mat-typography-level(15px, 24px, 400, $letter-spacing: -0.009em),
+  $body-2: mat-typography-level(14px, 24px, 500, $letter-spacing: -0.006em),
+  $body-1: mat-typography-level(14px, 20px, 400, $letter-spacing: -0.006em),
+  $caption: mat-typography-level(12px, 20px, 400, $letter-spacing: 0),
+  $button: mat-typography-level(14px, 14px, 500, $letter-spacing: -0.006em),
+  $input: mat-typography-level(14px, 1.125, 400, $letter-spacing: -0.006em)
 ) !default;
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $vex-primary: mat-palette((
-  50: #ecefff,
-  100: #ced7ff,
-  200: #aebcff,
-  300: #8ea1ff,
-  400: #758cff,
-  500: #5c77ff,
-  600: #5570ff,
-  700: #4b65ff,
-  800: #415bff,
-  900: #3048ff,
+  100: rgba(var(--color-primary), 0.1),
+  500: rgba(var(--color-primary), 1),
+  700: rgba(var(--color-primary), 1),
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #000,
-    400: #000,
-    500: #FFF,
-    600: #FFF,
-    700: #FFF,
-    800: #FFF,
-    900: #FFF,
+    100: rgba(var(--color-primary-contrast), 1),
+    500: rgba(var(--color-primary-contrast), 1),
+    700: rgba(var(--color-primary-contrast), 1),
   )
 )) !default;
-$vex-accent: mat-palette($mat-pink, A200, A100, A400) !default;
+
+$vex-accent: mat-palette((
+  100: rgba(var(--color-accent), 0.1),
+  500: rgba(var(--color-accent), 1),
+  700: rgba(var(--color-accent), 1),
+  contrast: (
+    100: rgba(var(--color-accent-contrast), 1),
+    500: rgba(var(--color-accent-contrast), 1),
+    700: rgba(var(--color-accent-contrast), 1),
+  )
+)) !default;
 
 // The warn palette is optional (defaults to red).
-$vex-warn: mat-palette($mat-red) !default;
+$vex-warn: mat-palette((
+  100: rgba(var(--color-warn), 0.1),
+  500: rgba(var(--color-warn), 1),
+  700: rgba(var(--color-warn), 1),
+  contrast: (
+    100: rgba(var(--color-warn-contrast), 1),
+    500: rgba(var(--color-warn-contrast), 1),
+    700: rgba(var(--color-warn-contrast), 1),
+  )
+)) !default;
 
 $vex-theme-foreground: (
   text: black,

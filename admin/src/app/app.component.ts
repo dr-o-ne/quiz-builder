@@ -7,8 +7,11 @@ import { NavigationService } from '../@vex/services/navigation.service';
 import icLayers from '@iconify/icons-ic/twotone-layers';
 import { LayoutService } from '../@vex/services/layout.service';
 import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SplashScreenService } from '../@vex/services/splash-screen.service';
-import { StyleService } from '../@vex/services/style.service';
+import { Style, StyleService } from '../@vex/services/style.service';
+import { ConfigName } from '../@vex/interfaces/config-name.model';
 
 @Component({
   selector: 'vex-root',
@@ -49,6 +52,29 @@ export class AppComponent {
      *    }
      *  });
      */
+
+    /**
+     * Config Related Subscriptions
+     * You can remove this if you don't need the functionality of being able to enable specific configs with queryParams
+     * Example: example.com/?layout=apollo&style=default
+     */
+    this.route.queryParamMap.pipe(
+      map(queryParamMap => queryParamMap.has('rtl') && coerceBooleanProperty(queryParamMap.get('rtl'))),
+    ).subscribe(isRtl => {
+      this.document.body.dir = isRtl ? 'rtl' : 'ltr';
+      this.configService.updateConfig({
+        rtl: isRtl
+      });
+    });
+
+    this.route.queryParamMap.pipe(
+      filter(queryParamMap => queryParamMap.has('layout'))
+    ).subscribe(queryParamMap => this.configService.setConfig(queryParamMap.get('layout') as ConfigName));
+
+    this.route.queryParamMap.pipe(
+      filter(queryParamMap => queryParamMap.has('style'))
+    ).subscribe(queryParamMap => this.styleService.setStyle(queryParamMap.get('style') as Style));
+
 
     this.navigationService.items = [
       {

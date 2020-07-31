@@ -17,8 +17,8 @@ code {
 }
 
 blockquote {
-  @apply bg-primary-50;
-  border-left: 3px solid theme('colors.primary.500');
+  background: theme('backgroundColor.primary.light');
+  border-left: 3px solid theme('backgroundColor.primary.default');
   color: rgba(0, 0, 0, .87);
   font-style: normal;
   margin: 1em 0 1.5em;

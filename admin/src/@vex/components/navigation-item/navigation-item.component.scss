@@ -12,14 +12,10 @@
   transition: var(--trans-ease-out);
 
   &:hover {
-    @apply text-primary-500;
+    @apply text-primary;
 
     .mat-icon {
-      @apply text-primary-500;
+      @apply text-primary;
     }
-  }
-
-  .mat-icon {
-    transition: var(--trans-ease-out);
   }
 }

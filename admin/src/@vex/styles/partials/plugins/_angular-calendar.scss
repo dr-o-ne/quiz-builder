@@ -45,7 +45,7 @@
   }
 
   .cal-open-day-events {
-    @apply bg-primary-500;
+    @apply bg-primary;
     border-bottom: 1px solid var(--foreground-divider);
     box-shadow: inset 0 0 4px 0 var(--text-secondary);
 

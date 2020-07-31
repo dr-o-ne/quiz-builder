@@ -7,7 +7,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { IconModule } from '@visurel/iconify-angular';
 import { ShareBottomSheetModule } from '../../share-bottom-sheet/share-bottom-sheet.module';
 import { MatButtonModule } from '@angular/material/button';
-import { ColorFadeModule } from '../../../pipes/color/color-fade.module';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { ColorFadeModule } from '../../../pipes/color/color-fade.module';
     FlexLayoutModule,
     IconModule,
     ShareBottomSheetModule,
-    MatButtonModule,
-    ColorFadeModule
+    MatButtonModule
   ],
   exports: [WidgetQuickLineChartComponent]
 })

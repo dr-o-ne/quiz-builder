@@ -55,6 +55,10 @@ export class WidgetLargeChartComponent implements OnInit {
     },
     legend: {
       show: true,
+      itemMargin: {
+        horizontal: 4,
+        vertical: 4
+      }
     }
   });
 

@@ -11,7 +11,7 @@
 }
 
 .ql-toolbar.ql-snow button.ql-active {
-  @apply bg-primary-500 rounded text-primary-contrast-500;
+  @apply bg-primary rounded text-primary-contrast;
 
   .ql-stroke {
     @apply stroke-current;

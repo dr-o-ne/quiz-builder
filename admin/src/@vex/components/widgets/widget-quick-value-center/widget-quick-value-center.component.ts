@@ -7,7 +7,6 @@ import icShare from '@iconify/icons-ic/twotone-share';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ShareBottomSheetComponent } from '../../share-bottom-sheet/share-bottom-sheet.component';
 import { scaleInOutAnimation } from '../../../animations/scale-in-out.animation';
-import { ColorDef } from '../../../utils/tailwindcss.interface';
 
 @Component({
   selector: 'vex-widget-quick-value-center',
@@ -22,7 +21,7 @@ export class WidgetQuickValueCenterComponent implements OnInit {
   @Input() label: string;
   @Input() change: number;
   @Input() helpText: string;
-  @Input() color: ColorDef;
+  @Input() iconClass: string;
 
   faCaretUp = faCaretUp;
   faCaretDown = faCaretDown;

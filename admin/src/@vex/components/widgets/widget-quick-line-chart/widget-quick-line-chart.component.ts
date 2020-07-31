@@ -6,7 +6,6 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ShareBottomSheetComponent } from '../../share-bottom-sheet/share-bottom-sheet.component';
 import icShare from '@iconify/icons-ic/twotone-share';
 import { scaleInOutAnimation } from '../../../animations/scale-in-out.animation';
-import { ColorDef } from '../../../utils/tailwindcss.interface';
 
 @Component({
   selector: 'vex-widget-quick-line-chart',
@@ -19,7 +18,7 @@ export class WidgetQuickLineChartComponent implements OnInit {
   @Input() icon: Icon;
   @Input() value: string;
   @Input() label: string;
-  @Input() color: ColorDef;
+  @Input() iconClass: string;
   @Input() options: ApexOptions = defaultChartOptions({
     chart: {
       type: 'area',

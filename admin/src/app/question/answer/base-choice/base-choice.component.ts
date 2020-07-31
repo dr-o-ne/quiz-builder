@@ -1,4 +1,4 @@
-import {OnInit, ViewChild} from '@angular/core';
+import {OnInit, ViewChild, Directive} from '@angular/core';
 import {Choice} from 'src/app/_models/choice';
 import {
   ChoicesDisplayType,
@@ -9,6 +9,7 @@ import {QuestionType} from 'src/app/_models/question';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {Option} from '../../../_models/option';
 
+@Directive()
 export class BaseChoiceComponent implements OnInit {
   @ViewChild(MatMenuTrigger) optionsMenu: MatMenuTrigger;
   choices: Choice[];

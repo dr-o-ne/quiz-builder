@@ -1,21 +1,21 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { LayoutService } from '../services/layout.service';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { Event, NavigationEnd, Router, Scroll } from '@angular/router';
 import { filter, map, startWith, withLatestFrom } from 'rxjs/operators';
 import { checkRouterChildsData } from '../utils/check-router-childs-data';
 import { DOCUMENT } from '@angular/common';
 import { ConfigService } from '../services/config.service';
-import theme from '../utils/tailwindcss';
 
+@UntilDestroy()
 @Component({
   selector: 'vex-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class LayoutComponent implements OnInit, AfterViewInit {
 
   @Input() sidenavRef: TemplateRef<any>;
   @Input() toolbarRef: TemplateRef<any>;
@@ -28,10 +28,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   isFooterFixed$ = this.configService.config$.pipe(map(config => config.footer.fixed));
   isFooterVisible$ = this.configService.config$.pipe(map(config => config.footer.visible));
   sidenavCollapsed$ = this.layoutService.sidenavCollapsed$;
-
-  isDesktop$ = this.breakpointObserver.observe(`(min-width: ${theme.screens.lg})`).pipe(
-    map(state => state.matches)
-  );
+  isDesktop$ = this.layoutService.isDesktop$;
 
   scrollDisabled$ = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
@@ -59,19 +56,32 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
               @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
+    /**
+     * Expand Sidenav when we switch from mobile to desktop view
+     */
     this.isDesktop$.pipe(
       filter(matches => !matches),
       untilDestroyed(this)
     ).subscribe(() => this.layoutService.expandSidenav());
 
+    /**
+     * Open/Close Quickpanel through LayoutService
+     */
     this.layoutService.quickpanelOpen$.pipe(
       untilDestroyed(this)
     ).subscribe(open => open ? this.quickpanel.open() : this.quickpanel.close());
 
+    /**
+     * Open/Close Sidenav through LayoutService
+     */
     this.layoutService.sidenavOpen$.pipe(
       untilDestroyed(this)
     ).subscribe(open => open ? this.sidenav.open() : this.sidenav.close());
 
+    /**
+     * Mobile only:
+     * Close Sidenav after Navigating somewhere (e.g. when a user clicks a link in the Sidenav)
+     */
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       withLatestFrom(this.isDesktop$),
@@ -81,6 +91,9 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    /**
+     * Enable Scrolling to specific parts of the page using the Router
+     */
     this.router.events.pipe(
       filter<Event, Scroll>((e: Event): e is Scroll => e instanceof Scroll),
       untilDestroyed(this)
@@ -119,6 +132,4 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-
-  ngOnDestroy(): void {}
 }

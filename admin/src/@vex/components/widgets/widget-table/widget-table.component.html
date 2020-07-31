@@ -27,13 +27,13 @@
         <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
         <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>
           <div *ngIf="row[column.property] === 'ready'"
-               class="w-3 h-3 rounded-full bg-green-500 cursor-pointer"
+               class="w-3 h-3 rounded-full bg-green cursor-pointer"
                matTooltip="Ready to ship"></div>
           <div *ngIf="row[column.property] === 'pending'"
-               class="w-3 h-3 rounded-full bg-orange-500 cursor-pointer"
+               class="w-3 h-3 rounded-full bg-orange cursor-pointer"
                matTooltip="Pending Payment"></div>
           <div *ngIf="row[column.property] === 'warn'"
-               class="w-3 h-3 rounded-full bg-red-500 cursor-pointer"
+               class="w-3 h-3 rounded-full bg-red cursor-pointer"
                matTooltip="Missing Payment"></div>
         </td>
       </ng-container>

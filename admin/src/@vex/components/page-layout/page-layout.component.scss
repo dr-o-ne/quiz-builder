@@ -32,7 +32,7 @@
 
 .vex-page-layout-header {
   align-items: center;
-  @apply bg-primary-500 text-primary-contrast-500;
+  @apply bg-primary text-primary-contrast;
   box-sizing: content-box !important;
   display: flex;
   flex-direction: row;
@@ -42,10 +42,10 @@
   place-content: center flex-start;
 
   .vex-breadcrumb {
-    @apply text-primary-contrast-500 opacity-50;
+    @apply text-primary-contrast opacity-50;
 
     &:hover {
-      @apply text-primary-contrast-500 opacity-100;
+      @apply text-primary-contrast opacity-100;
     }
   }
 }

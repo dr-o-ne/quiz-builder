@@ -1,5 +1,4 @@
-@import "../../var.scss";
-
+// @formatter:off
 :root {
   // Generic
   --padding-gutter: 1rem;
@@ -9,12 +8,21 @@
   --padding-8: 0.5rem;
   --padding-4: 0.25rem;
 
+  --color-primary: 92, 119, 255;
+  --color-primary-contrast: 255, 255, 255;
+
+  --color-accent: 255, 64, 129;
+  --color-accent-contrast: 255, 255, 255;
+
+  --color-warn: 244, 67, 54;
+  --color-warn-contrast: 255, 255, 255;
+
   @screen lg {
     --padding-gutter: 1.5rem;
   }
 
   // Typography
-  --font: Roboto, "Helvetica Neue", sans-serif;
+  --font: theme('fontFamily.sans');
   --font-weight-medium: 500;
   --font-caption: #{mat-font-weight($config, caption) #{mat-font-size($config, caption)}/#{mat-line-height($config, caption)} mat-font-family($config, caption)};
   --font-body-1: #{mat-font-weight($config, body-1) #{mat-font-size($config, body-1)}/#{mat-line-height($config, body-1)} mat-font-family($config, body-1)};
@@ -95,9 +103,11 @@
   --sidenav-item-color: #A1A2B6;
   --sidenav-item-color-active: #{$light-primary-text};
   --sidenav-item-icon-color: #494B74;
-  --sidenav-item-icon-color-active: theme('colors.primary.500');
+  --sidenav-item-icon-color-active: rgb(var(--color-primary));
   --sidenav-item-icon-gap: 16px;
   --sidenav-item-icon-size: 24px;
+  --sidenav-item-border-color: transparent;
+  --sidenav-item-border-color-active: rgb(var(--color-primary));
   --sidenav-item-dropdown-background: #{darken($sidenav-background, 3)};
   --sidenav-item-dropdown-background-hover: #{darken($sidenav-background, 4)};
   --sidenav-item-dropdown-gap: 12px;
@@ -106,7 +116,7 @@
   --toolbar-height: 64px;
   --toolbar-background: white;
   --toolbar-color: #{$dark-primary-text};
-  --toolbar-icon-color: theme('colors.primary.500');
+  --toolbar-icon-color: rgb(var(--color-primary));
 
   // Secondary Toolbar
   --secondary-toolbar-background: var(--background-card);
@@ -133,3 +143,4 @@
   --default-icon-size: 24px;
   --border-radius: 4px;
 }
+// @formatter:on

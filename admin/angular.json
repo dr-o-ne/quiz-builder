@@ -31,13 +31,40 @@
               "src/CHANGELOG.md"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/@vex/styles/tailwind.scss"
+              "src/@vex/styles/tailwind.scss",
+              "src/styles.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {
               "path": "./webpack.config.js"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "simplebar",
+              "highlight.js",
+              "faker",
+              "showdown",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.name",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.weak-map",
+              "core-js/modules/es.parse-int",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.object.assign",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/web.dom-collections.for-each",
+              "dom-set",
+              "dom-plane",
+              "angular-calendar/date-adapters/date-fns",
+              "calendar-utils/date-adapters/date-fns",
+              "@mattlewis92/dom-autoscroller"
+            ]
           },
           "configurations": {
             "production": {

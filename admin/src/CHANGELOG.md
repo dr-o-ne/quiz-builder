@@ -1,7 +1,69 @@
-<img height="60px" width="60px" style="float: left;" src="/assets/img/demo/logo.svg" alt="Vex Logo">
-<h2 style="height: 60px; line-height: 60px; margin-left: 70px; font-weight: 500; border: none;">VEX</h2>
+<img style="float: left; height: 80px; width: unset;" src="/assets/img/demo/logo.svg" alt="Vex Logo"/>
+<h1 style="height: 80px; line-height: 80px; margin: 0 0 0 70px; font-weight: 700; border: none;">VEX</h1>
 
 # Changelog
+
+## 10.0.0 (2020-07-06)
+
+### Features
+- Upgrade to Angular 10+
+- Upgrade all dependencies to latest compatible versions
+
+### Breaking Changes
+
+We switched from ngx-take-until-destroy to ngneat/until-destroy (the successor of the first library available for Angular 10+) and there are adjustments needed. There's an easy migration script:
+1. `cd src` (into your /src folder in the vex-angular folder)
+2. run `npx @ngneat/until-destroy --removeOnDestroy`
+
+A few occurences could still appear, because the automated script can't pick them up. Here's a step-by-step on how to manually adjust the entries:
+
+Replace:
+`import { untilDestroyed } from 'ngx-take-until-destroy';`
+
+With:
+`import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';`
+
+and add `@UntilDestroy()` above your `@Component()` or `@Injectable()`
+
+Example:
+
+```typescript
+@UntilDestroy()
+@Injectable()
+export class TestService {
+    test() {
+        test$.pipe(
+            untilDestroyed(this)
+        ).subscribe(value => doStuff(value));
+    }   
+}
+```
+
+This library and structure is needed so any subscriptions we create get automatically cleaned up (unsubscribed) when the component/service gets destroyed by Angular.
+
+## 9.2.0 (2020-06-03)
+
+### Features
+- Add [Mailbox](/apps/mail)
+- Improve letter-spacing/line-height of Typography for best readability: [Inter Dynamic Metrics](https://rsms.me/inter/dynmetrics/)
+
+### Fixes
+- Load icons on icons demo page deferred to improve build time when developing
+
+## 9.1.0 (2020-05-13)
+
+### Features
+- Add [Social/Timeline](/apps/social/timeline) page
+- Simplify color customization, simply change the CSS Variables
+- Add Progress Bar indicating lazy loaded routes being loaded
+- Changing direction (RTL/LTR) now doesn't require a reload and can be changed anytime
+- Upgrade dependencies
+- Change Font Family
+
+### Fixes
+- Sidenav now hidden correctly on Hermes/Ikaros (Vertical Layouts)
+- Input Dropdown Icon now correctly aligned (vertical & horizontal)
+- Ares Layout: Navigation active color correctly used now
 
 ## 9.0.0 (2020-03-24)
 

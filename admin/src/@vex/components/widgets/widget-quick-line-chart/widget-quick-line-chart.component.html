@@ -8,9 +8,7 @@
     </div>
 
 
-    <div *ngIf="color"
-         [style.background-color]="color['500'] | colorFade:0.9"
-         [style.color]="color['500']"
+    <div [ngClass]="iconClass"
          class="rounded-full w-12 h-12 flex items-center justify-center">
       <mat-icon [icIcon]="icon"></mat-icon>
     </div>

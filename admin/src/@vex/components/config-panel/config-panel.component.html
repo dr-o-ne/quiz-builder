@@ -5,6 +5,38 @@
   </h2>
 
   <div class="section">
+    <h5 class="subheading">THEME BASE</h5>
+
+    <div (click)="selectedStyle === Style.dark ? disableDarkMode() : enableDarkMode()"
+         *ngIf="selectedStyle$ | async as selectedStyle"
+         class="rounded-full mt-2 flex items-center cursor-pointer relative bg-contrast-black text-contrast-white"
+         matRipple>
+      <div class="m-2 h-6 w-6 rounded-full">
+        <ic-icon *ngIf="selectedStyle === Style.dark" [icon]="icCheck" size="24px"></ic-icon>
+        <ic-icon *ngIf="selectedStyle !== Style.dark" [icon]="icClose" size="24px"></ic-icon>
+      </div>
+      <p class="ml-1 font-medium text-sm">DARK MODE</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h5 class="subheading">THEME COLORS</h5>
+
+    <div (click)="selectColor(color.value)" *ngFor="let color of colorVariables | keyvalue"
+         [class.selected]="isSelectedColor(color.value)"
+         [style.backgroundColor]="color.value.light"
+         [style.color]="color.value.default"
+         class="vex-color-picker rounded-full mt-2 flex items-center cursor-pointer relative"
+         matRipple>
+      <div [style.backgroundColor]="color.value.default"
+           class="m-2 h-6 w-6 rounded-full">
+        <ic-icon *ngIf="isSelectedColor(color.value)" [icon]="icCheck" size="24px"></ic-icon>
+      </div>
+      <p class="ml-1 font-medium text-sm">{{ color.key | uppercase }}</p>
+    </div>
+  </div>
+
+  <div class="section">
     <h5 class="subheading">THEME STYLE</h5>
 
     <div *ngFor="let config of configs; let first = first"

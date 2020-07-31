@@ -3,7 +3,7 @@
 
 # Introduction
 
-Vex is a Creative, Responsive Material Design Admin Template built with Angular 9+ and the Angular-CLI. It extends the Material Design components built by the Angular team and it offers you everything you need to get started with your next CRM, CMS, Project Management, or other projects.
+Vex is a Creative, Responsive Material Design Admin Template built with Angular 10+ and the Angular-CLI. It extends the Material Design components built by the Angular team and it offers you everything you need to get started with your next CRM, CMS, Project Management, or other projects.
 
 Vex has **no dependency on jQuery or similiar libraries**, Angular's functionality is completely used.
 
@@ -105,46 +105,24 @@ Here are just a few example variables, almost everything is done through variabl
 
 ## Using Custom Colors for the Primary/Secondary/Warn Palettes
 
-> Inside the `style.scss` find the section below. The values behind the names are just `rgb` colors, so `--color-primary-500` would be `rgb(92, 119, 255)` if you want to customize these colors you can do that easily by changing the colors for these variables.
-
-The numbers behind the `--color-primary-` are called `hue`. Usually the `500-hue` is a strong colorful color e.g. a strong blue. The `400, 300, 200, 100, 50` are lighter versions of the base color and the `600, 700, 800, 900` are darker versions of the base color.
+> Inside the `style.scss` find the section below. The values behind the names are just `rgb` colors, so `--color-primary` would be `rgb(92, 119, 255)` (92, 119, 255) (just without the rgb()) if you want to customize these colors you can do that easily by changing the colors for these variables.
 
 For each `primary color` there is a `contrast` variable. The contrast variable is used when you want to display something on the `primary color`. 
 
-Example: You use `--color-primary-900` as your background color (and the 900 hue should be pretty dark), and want to display text on that background, then you want the `--color-primary-contrast-900` to be `white` and use that as the text color.
+Example: You use `--color-primary` as your background color (and the color is pretty dark), and want to display text on that background, then you want the `--color-primary-contrast` to be `white` and use that as the text color.
 
 This works the same for all the other colors too.
 
 ```typescript
-// Colors
-  --color-primary-50: rgb(236, 239, 255);
-  --color-primary-100: rgb(206, 215, 255);
-  --color-primary-200: rgb(174, 188, 255);
-  --color-primary-300: rgb(142, 161, 255);
-  --color-primary-400: rgb(117, 140, 255);
-  --color-primary-500: rgb(92, 119, 255);
-  --color-primary-600: rgb(85, 112, 255);
-  --color-primary-700: rgb(75, 101, 255);
-  --color-primary-800: rgb(65, 91, 255);
-  --color-primary-900: rgb(48, 72, 255);
-  --color-primary-A100: rgb(128, 216, 255);
-  --color-primary-A200: rgb(64, 196, 255);
-  --color-primary-A400: rgb(219, 223, 255);
-  --color-primary-A700: rgb(194, 200, 255);
-  --color-primary-contrast-50: #{$dark-primary-text};
-  --color-primary-contrast-100: #{$dark-primary-text};
-  --color-primary-contrast-200: #{$dark-primary-text};
-  --color-primary-contrast-300: #{$dark-primary-text};
-  --color-primary-contrast-400: #{$dark-primary-text};
-  --color-primary-contrast-500: #{$light-primary-text};
-  --color-primary-contrast-600: #{$light-primary-text};
-  --color-primary-contrast-700: #{$light-primary-text};
-  --color-primary-contrast-800: #{$light-primary-text};
-  --color-primary-contrast-900: #{$light-primary-text};
-  --color-primary-contrast-A100: #{$dark-primary-text};
-  --color-primary-contrast-A200: #{$dark-primary-text};
-  --color-primary-contrast-A400: #{$dark-primary-text};
-  --color-primary-contrast-A700: #{$dark-primary-text};
+// Colors (style.scss)
+--color-primary: 92, 119, 255;
+--color-primary-contrast: 255, 255, 255;
+
+--color-accent: 255, 64, 129;
+--color-accent-contrast: 255, 255, 255;
+
+--color-warn: 244, 67, 54;
+--color-warn-contrast: 255, 255, 255;
 ```
 
 ## Adding Menu Items

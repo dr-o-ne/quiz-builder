@@ -1,5 +1,5 @@
 <div [ngClass.gt-sm]="['mr-6']" class="card overflow-auto" fxLayout="row" fxLayout.lt-md="column">
-  <div class="bg-primary-500 text-primary-contrast-500 p-gutter" fxFlex="300px" fxFlex.lt-md="auto">
+  <div class="bg-primary text-primary-contrast p-gutter" fxFlex="300px" fxFlex.lt-md="auto">
     <h2 class="headline mb-4">Mega Menu</h2>
 
     <p class="caption">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
@@ -19,8 +19,8 @@
       <a (click)="close()"
          *ngFor="let feature of features"
          [routerLink]="feature.route"
-         class="text-dark p-3 text-center hover:bg-hover hover:text-primary-500 trans-ease-out rounded block no-underline">
-        <ic-icon [icon]="feature.icon" class="text-primary-500" size="32px"></ic-icon>
+         class="text-dark p-3 text-center hover:bg-hover hover:text-primary trans-ease-out rounded block no-underline">
+        <ic-icon [icon]="feature.icon" class="text-primary" size="32px"></ic-icon>
         <div class="body-1 mt-2">{{ feature.label }}</div>
       </a>
     </div>
@@ -33,7 +33,7 @@
       <a (click)="close()"
          *ngFor="let page of pages"
          [routerLink]="page.route"
-         class="text-dark body-1 no-underline hover:text-primary-500 trans-ease-out">{{ page.label }}</a>
+         class="text-dark body-1 no-underline hover:text-primary trans-ease-out">{{ page.label }}</a>
     </div>
   </div>
 </div>

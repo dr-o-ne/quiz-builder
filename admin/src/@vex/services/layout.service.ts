@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,31 @@ export class LayoutService {
   private _searchOpen = new BehaviorSubject<boolean>(false);
   searchOpen$ = this._searchOpen.asObservable();
 
-  constructor(private router: Router) { }
+  isDesktop$ = this.breakpointObserver.observe(`(min-width: 1280px)`).pipe(
+    map(state => state.matches)
+  );
+  ltLg$ = this.breakpointObserver.observe(`(max-width: 1279px)`).pipe(
+    map(state => state.matches)
+  );
+  gtMd$ = this.breakpointObserver.observe(`(min-width: 960px)`).pipe(
+    map(state => state.matches)
+  );
+  ltMd$ = this.breakpointObserver.observe(`(max-width: 959px)`).pipe(
+    map(state => state.matches)
+  );
+  gtSm$ = this.breakpointObserver.observe(`(min-width: 600px)`).pipe(
+    map(state => state.matches)
+  );
+  isMobile$ = this.breakpointObserver.observe(`(max-width: 599px)`).pipe(
+    map(state => state.matches)
+  );
+
+  isLtLg = () => this.breakpointObserver.isMatched(`(max-width: 1279px)`);
+
+  isMobile = () => this.breakpointObserver.isMatched(`(max-width: 599px)`);
+
+  constructor(private router: Router,
+              private breakpointObserver: BreakpointObserver) { }
 
   openQuickpanel() {
     this._quickpanelOpenSubject.next(true);
@@ -80,10 +106,6 @@ export class LayoutService {
       queryParams: {
         rtl: 'true'
       }
-    }).then(() => {
-      if (window) {
-        window.location.reload();
-      }
     });
   }
 
@@ -91,10 +113,6 @@ export class LayoutService {
     this.router.navigate([], {
       queryParams: {
         rtl: 'false'
-      }
-    }).then(() => {
-      if (window) {
-        window.location.reload();
       }
     });
   }

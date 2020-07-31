@@ -15,6 +15,6 @@
   --sidenav-item-dropdown-background: #{darken($sidenav-background, 2)};
   --sidenav-item-dropdown-background-hover: #{darken($sidenav-background, 3)};
   --sidenav-item-icon-color: #494B74;
-  --sidenav-item-icon-color-active: theme('colors.primary.500');
+  --sidenav-item-icon-color-active: rgb(var(--color-primary));
   --sidenav-toolbar-background: #{$sidenav-background};
 }

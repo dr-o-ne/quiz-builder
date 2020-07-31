@@ -61,6 +61,22 @@
   }
 }
 
+.vex-color-picker {
+  transition: var(--trans-ease-out);
+
+  &:hover, &.selected {
+    background: currentColor !important;
+
+    p, div {
+      color: white;
+    }
+  }
+
+  p {
+    transition: var(--trans-ease-out);
+  }
+}
+
 
 .color {
   align-items: center;

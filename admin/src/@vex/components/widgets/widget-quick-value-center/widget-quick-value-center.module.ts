@@ -7,7 +7,6 @@ import { IconModule } from '@visurel/iconify-angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { ShareBottomSheetModule } from '../../share-bottom-sheet/share-bottom-sheet.module';
-import { ColorFadeModule } from '../../../pipes/color/color-fade.module';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { ColorFadeModule } from '../../../pipes/color/color-fade.module';
     IconModule,
     MatTooltipModule,
     MatButtonModule,
-    ShareBottomSheetModule,
-    ColorFadeModule
+    ShareBottomSheetModule
   ],
   exports: [WidgetQuickValueCenterComponent]
 })

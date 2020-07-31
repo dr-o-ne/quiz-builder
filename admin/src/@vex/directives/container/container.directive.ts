@@ -1,12 +1,14 @@
-import { ChangeDetectorRef, Directive, HostBinding, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Directive, HostBinding } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+
+@UntilDestroy()
 @Directive({
   selector: '[vexContainer]'
 })
-export class ContainerDirective implements OnDestroy {
+export class ContainerDirective {
 
   @HostBinding('class.container') enabled: boolean;
 
@@ -21,6 +23,4 @@ export class ContainerDirective implements OnDestroy {
       this.cd.markForCheck();
     });
   }
-
-  ngOnDestroy(): void {}
 }

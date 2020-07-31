@@ -33,7 +33,7 @@ export class NavigationItemComponent implements OnInit {
 
   hasActiveChilds(parent: NavigationItem): boolean {
     if (this.isLink(parent)) {
-      return this.router.isActive(parent.route as string, false);
+      return this.router.isActive(parent.route as string, true);
     }
 
     if (this.isDropdown(parent) || this.isSubheading(parent)) {
@@ -43,7 +43,7 @@ export class NavigationItemComponent implements OnInit {
         }
 
         if (this.isLink(child) && !this.isFunction(child.route)) {
-          return this.router.isActive(child.route as string, false);
+          return this.router.isActive(child.route as string, true);
         }
 
         return false;

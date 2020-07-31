@@ -6,8 +6,16 @@ import { DateTime } from 'luxon';
 })
 export class RelativeDateTimePipe implements PipeTransform {
 
-  transform(value: DateTime | null, ...args: any[]): any {
-    return value ? value.toRelative() : null;
+  transform(value: DateTime | null | string, ...args: any[]): any {
+    if (!value) {
+      return;
+    }
+
+    if (!(value instanceof DateTime)) {
+      value = DateTime.fromISO(value);
+    }
+
+    return value.toRelative();
   }
 
 }

@@ -16,9 +16,11 @@
     </button>
   </div>
 
-  <div class="sidenav-items flex-auto" vexScrollbar>
-    <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute"
-                      [item]="item"
-                      [level]="0"></vex-sidenav-item>
-  </div>
+  <vex-scrollbar class="flex-auto">
+    <div class="sidenav-items">
+      <vex-sidenav-item *ngFor="let item of items; trackBy: trackByRoute"
+                        [item]="item"
+                        [level]="0"></vex-sidenav-item>
+    </div>
+  </vex-scrollbar>
 </div>

@@ -1,7 +1,7 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 export enum Style {
   light = 'vex-style-light',
@@ -9,10 +9,12 @@ export enum Style {
   dark = 'vex-style-dark'
 }
 
+
+@UntilDestroy()
 @Injectable({
   providedIn: 'root'
 })
-export class StyleService implements OnDestroy {
+export class StyleService {
 
   defaultStyle = Style.default;
 
@@ -26,8 +28,6 @@ export class StyleService implements OnDestroy {
   setStyle(style: Style) {
     this._styleSubject.next(style);
   }
-
-  ngOnDestroy(): void {}
 
   private _updateStyle(style: Style) {
     const body = this.document.body;

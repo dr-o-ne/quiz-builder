@@ -8,11 +8,11 @@ export interface NavigationLink {
   fragment?: string;
   label: string;
   icon?: Icon;
-  routerLinkActive?: { exact: boolean };
+  routerLinkActiveOptions?: { exact: boolean };
   badge?: {
     value: string;
-    background: string;
-    color: string;
+    bgClass: string;
+    textClass: string;
   };
 }
 
@@ -23,8 +23,8 @@ export interface NavigationDropdown {
   children: Array<NavigationLink | NavigationDropdown>;
   badge?: {
     value: string;
-    background: string;
-    color: string;
+    bgClass: string;
+    textClass: string;
   };
 }
 

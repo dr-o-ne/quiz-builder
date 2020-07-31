@@ -75,9 +75,9 @@
   }
 
   &.vex-style-default {
-    --sidenav-item-background-active: theme('colors.primary.500');
-    --sidenav-item-color-active: theme('textColor.primary-contrast.500');
+    --sidenav-item-background-active: theme('backgroundColor.primary.default');
+    --sidenav-item-color-active: theme('textColor.primary-contrast');
     --sidenav-item-dropdown-color-hover: var(--text-color);
-    --sidenav-item-icon-color-active: theme('textColor.primary-contrast.500');
+    --sidenav-item-icon-color-active: theme('textColor.primary-contrast');
   }
 }

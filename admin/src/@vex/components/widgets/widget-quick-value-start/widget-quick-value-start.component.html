@@ -6,15 +6,16 @@
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <h3 class="subheading-2 font-medium text-secondary m-0">{{ label }}</h3>
 
-    <div class="rounded-full bg-primary-50 w-12 h-12 flex items-center justify-center">
-      <mat-icon [icIcon]="icon" class="text-primary-500"></mat-icon>
+    <div class="rounded-full bg-primary-light w-12 h-12 flex items-center justify-center">
+      <mat-icon [icIcon]="icon" class="text-primary"></mat-icon>
     </div>
   </div>
 
   <h2 class="display-2 font-bold mt-4 mb-2">{{ value }}</h2>
 
 
-  <h4 [style.color]="change > 0 ? green : red"
+  <h4 [class.text-green]="change > 0"
+      [class.text-red]="change <= 0"
       class="subheading-1 font-medium mt-4 mb-0">
     <ic-icon *ngIf="change > 0"
              [icon]="icTrendingUp"

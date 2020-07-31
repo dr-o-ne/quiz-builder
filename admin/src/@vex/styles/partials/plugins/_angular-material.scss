@@ -33,14 +33,14 @@
 
   &.mat-focused .mat-form-field-prefix,
   &.mat-focused .mat-form-field-suffix {
-    @apply text-primary-500;
+    @apply text-primary;
   }
 }
 
 .mat-form-field.mat-form-field-invalid {
   &.mat-focused .mat-form-field-prefix,
   &.mat-focused .mat-form-field-suffix {
-    @apply text-red-500;
+    @apply text-red;
   }
 }
 
@@ -67,6 +67,10 @@
 
 .mat-select-panel {
   @apply text-base;
+}
+
+.mat-drawer-side {
+  border: 0;
 }
 
 textarea.mat-input-element {
@@ -108,3 +112,19 @@ textarea.mat-input-element {
 .uppercase > * > .mat-sort-header-button {
   @apply uppercase;
 }
+
+.mat-card-image {
+  max-width: none;
+}
+
+/*
+.mat-button-focus-overlay {
+  background: rgba(var(--palette-foreground-base), 1);
+}
+.mat-checkbox .mat-ripple-element {
+  background-color: rgb(var(--palette-foreground-base));
+}
+.mat-option.mat-option-disabled {
+  color: rgba(var(--palette-foreground-hint-text), 0.38);
+}
+*/

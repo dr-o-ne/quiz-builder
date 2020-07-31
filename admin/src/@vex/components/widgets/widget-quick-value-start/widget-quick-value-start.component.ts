@@ -7,7 +7,6 @@ import icTrendingDown from '@iconify/icons-ic/twotone-trending-down';
 import { scaleInOutAnimation } from '../../../animations/scale-in-out.animation';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ShareBottomSheetComponent } from '../../share-bottom-sheet/share-bottom-sheet.component';
-import theme from '../../../utils/tailwindcss';
 
 @Component({
   selector: 'vex-widget-quick-value-start',
@@ -27,9 +26,6 @@ export class WidgetQuickValueStartComponent implements OnInit {
   icTrendingDown = icTrendingDown;
   icHelp = icHelp;
   icShare = icShare;
-
-  green = theme.colors.green['500'];
-  red = theme.colors.red['500'];
 
   showButton: boolean;
 

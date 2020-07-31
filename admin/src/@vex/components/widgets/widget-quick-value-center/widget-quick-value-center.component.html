@@ -3,18 +3,15 @@
      class="card p-6 relative hover:shadow-16 trans-shadow"
      fxLayout="column"
      fxLayoutAlign="start center">
-  <div *ngIf="color"
-       [style.background-color]="color['500'] | colorFade:0.9"
-       [style.color]="color['500']"
-       class="rounded-full w-12 h-12 flex items-center justify-center">
+  <div [ngClass]="iconClass" class="rounded-full w-12 h-12 flex items-center justify-center">
     <mat-icon [icIcon]="icon"></mat-icon>
   </div>
 
   <h2 class="display-2 font-bold mt-4 mb-2">{{ value }}</h2>
   <h3 class="subheading-2 font-medium text-secondary m-0">{{ label }}</h3>
 
-  <h4 [class.text-green-500]="change > 0"
-      [class.text-red-500]="change <= 0"
+  <h4 [class.text-green]="change > 0"
+      [class.text-red]="change <= 0"
       class="subheading-1 font-medium mt-4 mb-0">
     <ic-icon *ngIf="change > 0"
              [icon]="faCaretUp"

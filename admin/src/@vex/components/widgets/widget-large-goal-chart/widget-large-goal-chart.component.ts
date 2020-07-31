@@ -6,7 +6,6 @@ import faCaretDown from '@iconify/icons-fa-solid/caret-down';
 import { ApexOptions } from '../../chart/chart.component';
 import { defaultChartOptions } from '../../../utils/default-chart-options';
 import { createDateArray } from '../../../utils/create-date-array';
-import theme from '../../../utils/tailwindcss';
 
 @Component({
   selector: 'vex-widget-large-goal-chart',
@@ -55,8 +54,6 @@ export class WidgetLargeGoalChartComponent implements OnInit {
   icCloudDownload = icCloudDownload;
   faCaretUp = faCaretUp;
   faCaretDown = faCaretDown;
-
-  theme = theme;
 
   constructor() { }
 
