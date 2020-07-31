@@ -5,7 +5,6 @@ import { Question, QuestionType } from 'src/app/_models/question';
 import { Choice } from 'src/app/_models/choice';
 import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalWindowPreviewQuestionComponent } from '../modal-window/modal-window-preview-question.component';
 import { Option } from 'src/app/_models/option';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
@@ -170,14 +169,14 @@ export class QuestionPageComponent implements OnInit {
 
   openPreview(): void {
     this.updateQuestionModel();
-    const dialogRef = this.dialog.open( ModalWindowPreviewQuestionComponent, {
+    /*const dialogRef = this.dialog.open( ModalWindowPreviewQuestionComponent, {
       width: '50em',
       data: { question: this.question }
     } );
 
     dialogRef.afterClosed().subscribe( result => {
       console.log( 'The dialog was closed' );
-    } );
+    } );*/
   }
 
   clickOption( event: MouseEvent, option: Option ): void {

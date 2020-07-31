@@ -17,13 +17,8 @@ import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-ch
 
 import { ChoiceDirective } from './_directive/choice.directive';
 import { DynamicChoiceComponent } from './question/answer/base-choice/dynamic-choice.component';
-import { ModalWindowPreviewQuestionComponent } from './question/modal-window/modal-window-preview-question.component';
 import { QuestionPreviewDirective } from './_directive/question.preview.directive';
-import { DynamicQuestionPreviewComponent } from './question/question-preview/base-question-preview/dynamic-question-preview.component';
-import { TrueFalsePreviewComponent } from './question/question-preview/true-false-preview/true-false-preview.component';
-import { MultiSelectPreviewComponent } from './question/question-preview/multi-select-preview/multi-select-preview.component';
 import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
-import { LongAnswerPreviewComponent } from './question/question-preview/long-answer-preview/long-answer-preview.component';
 import { AttemptService } from './_service/attempt.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -62,12 +57,7 @@ import { GroupInfoComponent } from './quiz/quiz-info/quiz-info-questions-tab/gro
     ChoiceDirective,
     QuestionPreviewDirective,
     DynamicChoiceComponent,
-    DynamicQuestionPreviewComponent,
-    ModalWindowPreviewQuestionComponent,
-    TrueFalsePreviewComponent,
-    MultiSelectPreviewComponent,
     LongAnswerComponent,
-    LongAnswerPreviewComponent,
     Error404Component,
     Error500Component,
     QuizInfoComponent,
@@ -125,14 +115,10 @@ import { GroupInfoComponent } from './quiz/quiz-info/quiz-info-questions-tab/gro
   ],
   entryComponents: [
     QuestionPageComponent,
-    ModalWindowPreviewQuestionComponent,
     MultipleChoiceAnswerComponent,
     TrueFalseAnswerComponent,
     MultiSelectChoiceComponent,
     LongAnswerComponent,
-    TrueFalsePreviewComponent,
-    MultiSelectPreviewComponent,
-    LongAnswerPreviewComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
     GroupInfoComponent
