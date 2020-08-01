@@ -20,3 +20,11 @@
             [quickpanelRef]="quickpanelRef"
             [sidenavRef]="sidenavRef"
             [toolbarRef]="toolbarRef"></vex-layout>
+
+<vex-config-panel-toggle (openConfig)="configpanel.open()"></vex-config-panel-toggle>
+
+<!-- CONFIGPANEL -->
+<vex-sidebar #configpanel [invisibleBackdrop]="true" position="right">
+  <vex-config-panel></vex-config-panel>
+</vex-sidebar>
+<!-- END CONFIGPANEL -->
