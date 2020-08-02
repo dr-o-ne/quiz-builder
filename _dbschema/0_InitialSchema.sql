@@ -74,9 +74,6 @@ GO
 ALTER TABLE dbo.QuizItem CHECK CONSTRAINT [FK_QuizItem_QuizItemType]
 GO
 
-ALTER TABLE [dbo].[QuizItem] CHECK CONSTRAINT [FK_QuizItem_Question]
-GO
-
 CREATE UNIQUE NONCLUSTERED INDEX [UI_QuizItem_UId] ON dbo.QuizItem ( [UId] ASC ) ON [PRIMARY]
 GO
 
