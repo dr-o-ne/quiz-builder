@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -7,6 +8,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Client.Action;
+using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Utils;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {
@@ -68,6 +71,13 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 
 		public Task<(HttpStatusCode statusCode, QuestionCommandResult data)> QuestionCreate( object content ) =>
 			_httpClient.PostValueAsync<QuestionCommandResult>( "admin/questions/", ToCommand<CreateQuestionCommand>( content ) );
+
+		#endregion
+
+		#region Attempt
+
+		public Task<(HttpStatusCode statusCode, StartQuizAttemptCommandResult data)> AttemptStart( string uid ) =>
+			_httpClient.PostValueAsync<StartQuizAttemptCommandResult>( "client/attempts/", ToCommand<StartQuizAttemptCommand>( new {QuizId = uid} ) );
 
 		#endregion
 
