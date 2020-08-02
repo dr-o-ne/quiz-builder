@@ -46,7 +46,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 			var modelBefore = new Group {
 				UId = _uIdService.GetUId(),
-				Name = GetNextGroupName( groupDtos )
+				Name = GetNextGroupName( groupDtos ),
+				SelectAllQuestions = true
 			};
 
 			if( !modelBefore.IsValid() )
