@@ -26,9 +26,15 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		}
 
 		private void AddQuizMapping() {
-			CreateMap<Quiz, QuizDto>().ConvertUsing<QuizToQuizDtoConverter>();
-			CreateMap<QuizDto, Quiz>().ConvertUsing<QuizDtoToQuizConverter>();
+
 			CreateMap<UpdateQuizCommand, Quiz>().ConvertUsing<UpdateQuizCommandToQuizConverter>();
+
+			CreateMap<Quiz, QuizDto>()
+				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, Consts.JsonSerializerOptions ) ) );
+
+			CreateMap<QuizDto, Quiz>( MemberList.Source )
+				.ConstructUsing( source => JsonSerializer.Deserialize<Quiz>( source.Settings, Consts.JsonSerializerOptions ) )
+				.ForSourceMember( x => x.Settings, opt => opt.DoNotValidate() );
 
 			CreateMap<Quiz, QuizViewModel>()
 				.ForMember( x => x.Id, opt => opt.MapFrom( source => source.UId ) )
