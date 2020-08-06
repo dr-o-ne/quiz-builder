@@ -12,6 +12,7 @@ using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
+using QuizBuilder.Utils;
 
 namespace QuizBuilder.Domain.Action.Admin.Map {
 
@@ -45,15 +46,16 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 
 		private void AddGroupMapping() {
 
-			CreateMap<GroupDto, Group>( MemberList.Source )
-				.ConstructUsing( source => JsonSerializer.Deserialize<Group>( source.Settings, null ) )
-				.ForSourceMember( x => x.Settings, opt => opt.DoNotValidate() );
-				
-			CreateMap<Group, GroupDto>()
-				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, null ) ) );
+			CreateMap<UpdateGroupCommand, Group>( MemberList.Source )
+				.ForMember( x => x.Questions, opt => opt.Ignore() )
+				.ForMember( x => x.IsEnabled, opt => opt.Ignore() );
 
-			CreateMap<UpdateGroupCommand, Group>()
-				.ConvertUsing<UpdateGroupCommandToGroupConverter>();
+			CreateMap<Group, GroupDto>()
+				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, Consts.JsonSerializerOptions ) ) );
+
+			CreateMap<GroupDto, Group>( MemberList.Source )
+				.ConstructUsing( source => JsonSerializer.Deserialize<Group>( source.Settings, Consts.JsonSerializerOptions ) )
+				.ForSourceMember( x => x.Settings, opt => opt.DoNotValidate() );
 
 			CreateMap<Group, GroupViewModel>()
 				.ForMember( x => x.Id, opt => opt.MapFrom( source => source.UId ) )
