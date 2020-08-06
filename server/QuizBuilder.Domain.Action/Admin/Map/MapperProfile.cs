@@ -1,3 +1,4 @@
+using System.Text.Json;
 using AutoMapper;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
@@ -43,9 +44,17 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		}
 
 		private void AddGroupMapping() {
-			CreateMap<UpdateGroupCommand, Group>().ConvertUsing<UpdateGroupCommandToGroupConverter>();
-			CreateMap<Group, GroupDto>().ConvertUsing<GroupToGroupDtoConverter>();
-			CreateMap<GroupDto, Group>().ConvertUsing<GroupDtoToGroupConverter>();
+
+			CreateMap<GroupDto, Group>( MemberList.Source )
+				.ConstructUsing( source => JsonSerializer.Deserialize<Group>( source.Settings, null ) )
+				.ForSourceMember( x => x.Settings, opt => opt.DoNotValidate() );
+				
+			CreateMap<Group, GroupDto>()
+				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, null ) ) );
+
+			CreateMap<UpdateGroupCommand, Group>()
+				.ConvertUsing<UpdateGroupCommandToGroupConverter>();
+
 			CreateMap<Group, GroupViewModel>()
 				.ForMember( x => x.Id, opt => opt.MapFrom( source => source.UId ) )
 				.ForMember( x => x.Questions, opt => opt.Ignore() );
