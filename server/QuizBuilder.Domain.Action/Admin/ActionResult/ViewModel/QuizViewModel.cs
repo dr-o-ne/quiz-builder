@@ -16,6 +16,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public bool IsPrevButtonEnabled { get; set; }
 		public bool RandomizeGroups { get; set; }
 		public bool RandomizeQuestions { get; set; }
+		public bool IsScheduleEnabled { get; set; }
 		public ImmutableArray<GroupViewModel> Groups { get; set; }
 	}
 }

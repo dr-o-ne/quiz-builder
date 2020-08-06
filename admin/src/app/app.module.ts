@@ -44,6 +44,13 @@ import { QuestionDataProvider } from './_service/dataProviders/question.dataProv
 import { QuizDataProvider } from './_service/dataProviders/quiz.dataProvider';
 import { QuizLangService } from './_service/lang/quiz.lang.service';
 import { GroupInfoComponent } from './quiz/quiz-info/quiz-info-questions-tab/group-info/group-info';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+
+import {
+  NgxMatDatetimePickerModule, 
+  NgxMatNativeDateModule, 
+  NgxMatTimepickerModule 
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -87,6 +94,12 @@ import { GroupInfoComponent } from './quiz/quiz-info/quiz-info-questions-tab/gro
     IconModule,
     ContainerModule,
     //TOTO: check
+
+    //DateTime Picker component
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    NgxMatMomentModule,
 
     QuillModule.forRoot({
       modules: {

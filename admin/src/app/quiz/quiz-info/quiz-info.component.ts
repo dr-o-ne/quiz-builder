@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuizInfoSettingsTabComponent } from './quiz-info-settings-tab/quiz-info-settings-tab.component';
 import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
 import { QuizInfoQuestionsTabComponent } from './quiz-info-questions-tab/quiz-info-questions-tab.component';
+import moment from 'moment';
 
 
 @Component({
@@ -44,7 +45,10 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                 questionsPerPage: [this.quiz.questionsPerPage, Validators.min(1)],
                 isPrevButtonEnabled: [this.quiz.isPrevButtonEnabled],
                 randomizeGroups: [this.quiz.randomizeGroups],
-                randomizeQuestions: [this.quiz.randomizeQuestions]
+                randomizeQuestions: [this.quiz.randomizeQuestions],
+                isScheduleEnabled: [this.quiz.isScheduleEnabled],
+                startDate: [moment(this.quiz.startDate).utc()],
+                endDate: [moment(this.quiz.endDate).utc()]
             })
         })
     }

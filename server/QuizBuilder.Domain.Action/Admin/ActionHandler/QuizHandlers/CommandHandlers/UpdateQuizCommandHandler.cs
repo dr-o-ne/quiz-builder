@@ -6,7 +6,6 @@ using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default;
-using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHandlers {
 
@@ -25,13 +24,11 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			if( quizDto == null )
 				return CommandResult.Fail();
 
-			Quiz currentQuiz = _mapper.Map<Quiz>( quizDto );
-			Quiz updatedQuiz = _mapper.Map<Quiz>( command );
-			Quiz mergedQuiz = _mapper.Merge( updatedQuiz, currentQuiz );
-			QuizDto mergedQuizDto = _mapper.Map<QuizDto>( mergedQuiz );
-			await _quizDataProvider.Update( mergedQuizDto );
+			Quiz quizModel = _mapper.Map<Quiz>( command );
+			QuizDto newQuizDto = _mapper.Map<QuizDto>( quizModel );
+			await _quizDataProvider.Update( newQuizDto );
 
-			return new CommandResult( isSuccess: true, message: string.Empty );
+			return CommandResult.Success();
 		}
 	}
 }

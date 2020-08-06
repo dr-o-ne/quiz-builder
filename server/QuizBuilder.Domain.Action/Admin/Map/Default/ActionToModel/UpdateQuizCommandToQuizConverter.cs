@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default;
@@ -15,7 +16,10 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 				QuestionsPerPage = source.QuestionsPerPage,
 				IsPrevButtonEnabled = source.IsPrevButtonEnabled,
 				RandomizeGroups = source.RandomizeGroups,
-				RandomizeQuestions = source.RandomizeQuestions
+				RandomizeQuestions = source.RandomizeQuestions,
+				IsScheduleEnabled = source.IsScheduleEnabled,
+				StartDate = source.StartDate == null ? (DateTime?)null : DateTimeOffset.FromUnixTimeSeconds( source.StartDate.Value ).UtcDateTime,
+				EndDate = source.EndDate == null ? (DateTime?)null : DateTimeOffset.FromUnixTimeSeconds( source.EndDate.Value ).UtcDateTime,
 			};
 		}
 	}

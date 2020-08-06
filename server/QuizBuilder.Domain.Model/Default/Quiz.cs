@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json.Serialization;
 using QuizBuilder.Domain.Model.Default.Base;
 using static QuizBuilder.Domain.Model.Default.Enums;
@@ -24,6 +25,12 @@ namespace QuizBuilder.Domain.Model.Default {
 		public bool RandomizeQuestions { get; set; }
 
 		public long QuestionsPerPage { get; set; }
+
+		public bool IsScheduleEnabled { get; set; }
+
+		public DateTime? StartDate { get; set; }
+
+		public DateTime? EndDate { get; set; }
 
 	}
 }

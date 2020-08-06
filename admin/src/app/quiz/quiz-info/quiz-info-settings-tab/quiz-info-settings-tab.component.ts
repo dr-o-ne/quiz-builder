@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Quiz, PageSettings } from 'src/app/_models/quiz';
 import { QuizLangService } from 'src/app/_service/lang/quiz.lang.service';
+import { utc } from 'moment';
 
 @Component({
     selector: 'app-quiz-info-settings-tab',
@@ -20,6 +21,10 @@ export class QuizInfoSettingsTabComponent {
     }
 
     saveFormData(quiz: Quiz): void {
+
+        console.log('before');
+        console.log(quiz);
+
         const value = this.form.value;
 
         quiz.name = value.name as string;
@@ -28,6 +33,12 @@ export class QuizInfoSettingsTabComponent {
         quiz.isPrevButtonEnabled = value.isPrevButtonEnabled as boolean;
         quiz.randomizeGroups = value.randomizeGroups as boolean;
         quiz.randomizeQuestions = value.randomizeQuestions as boolean;
+        quiz.isScheduleEnabled = value.isScheduleEnabled as boolean;
+        quiz.startDate = (value.startDate as moment.Moment).utc().unix();
+        quiz.endDate = (value.endDate as moment.Moment).utc().unix();
+
+        console.log('after');
+        console.log(quiz);
     }
 
     isQuestionsPerPageVisisble(): boolean {
@@ -42,6 +53,10 @@ export class QuizInfoSettingsTabComponent {
     isRandomizeAllVisible(): boolean {
         const pageSettings = this.form.value.pageSettings as PageSettings;
         return pageSettings === PageSettings.Custom || pageSettings === PageSettings.PagePerQuiz || pageSettings === PageSettings.PagePerQuestion;
+    }
+
+    isScheduleVisible(): boolean {
+        return this.form.value.isScheduleEnabled as boolean;
     }
 
 }

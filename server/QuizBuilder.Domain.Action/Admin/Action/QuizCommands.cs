@@ -48,6 +48,16 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "randomizeQuestions" )]
 		public bool RandomizeQuestions { get; set; }
 
+		[Required]
+		[JsonPropertyName( "isScheduleEnabled" )]
+		public bool IsScheduleEnabled { get; set; }
+
+		[JsonPropertyName( "startDate" )]
+		public long? StartDate { get; set; }
+
+		[JsonPropertyName( "endDate" )]
+		public long? EndDate { get; set; }
+
 	}
 
 	public sealed class DeleteQuizCommand : ICommand<CommandResult> {

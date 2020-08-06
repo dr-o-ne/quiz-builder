@@ -19,6 +19,10 @@ export class Quiz {
     randomizeGroups: boolean;
     randomizeQuestions: boolean;
 
+    isScheduleEnabled: boolean;
+    startDate: number;
+    endDate: number;
+
     constructor() {
         this.groups = new Array<Group>();
     }

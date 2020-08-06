@@ -104,11 +104,11 @@ SET Name = @Name,
 	Settings = @Settings,
     IsEnabled = @IsEnabled,
     ModifiedOn = @ModifiedOn
-WHERE Id = @Id";
-
+WHERE UId = @UId";
+			
 			using IDbConnection conn = GetConnection();
 			await conn.ExecuteAsync( sql, new {
-				dto.Id,
+				dto.UId,
 				dto.Name,
 				dto.Settings,
 				dto.IsEnabled,
