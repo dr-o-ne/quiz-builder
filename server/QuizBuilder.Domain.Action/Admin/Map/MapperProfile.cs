@@ -13,6 +13,7 @@ using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Utils;
+using QuizBuilder.Utils.Utils;
 
 namespace QuizBuilder.Domain.Action.Admin.Map {
 
@@ -27,7 +28,9 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 
 		private void AddQuizMapping() {
 
-			CreateMap<UpdateQuizCommand, Quiz>().ConvertUsing<UpdateQuizCommandToQuizConverter>();
+			CreateMap<UpdateQuizCommand, Quiz>( MemberList.Source )
+				.ForMember( x => x.StartDate, opt => opt.MapFrom( x => Converter.FromUnixTimeSeconds( x.StartDate ) ) )
+				.ForMember( x => x.EndDate, opt => opt.MapFrom( x => Converter.FromUnixTimeSeconds( x.EndDate ) ) );
 
 			CreateMap<Quiz, QuizDto>()
 				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, Consts.JsonSerializerOptions ) ) );
