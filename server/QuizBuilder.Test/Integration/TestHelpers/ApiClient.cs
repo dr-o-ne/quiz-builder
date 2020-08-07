@@ -76,8 +76,8 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 
 		#region Attempt
 
-		public Task<(HttpStatusCode statusCode, StartQuizAttemptCommandResult data)> AttemptStart( string uid ) =>
-			_httpClient.PostValueAsync<StartQuizAttemptCommandResult>( "client/attempts/", ToCommand<StartQuizAttemptCommand>( new {QuizId = uid} ) );
+		public Task<(HttpStatusCode statusCode, QuizAttemptInfo data)> AttemptStart( string uid ) =>
+			_httpClient.PostValueAsync<QuizAttemptInfo>( "client/attempts/", ToCommand<StartQuizAttemptCommand>( new {QuizId = uid} ) );
 
 		#endregion
 

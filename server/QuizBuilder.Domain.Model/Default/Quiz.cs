@@ -32,5 +32,27 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public DateTime? EndDate { get; set; }
 
+		public bool IsValid() {
+
+			if( StartDate != null && EndDate != null && StartDate.Value > EndDate.Value )
+				return false;
+
+			return true;
+		}
+
+		public bool IsAvailable() {
+
+			if( !IsEnabled ) return false;
+
+			if( IsScheduleEnabled ) {
+				if( StartDate != null && StartDate > DateTime.UtcNow )
+					return false;
+				if( EndDate != null && EndDate < DateTime.UtcNow )
+					return false;
+			}
+
+			return true;
+		}
+
 	}
 }

@@ -68,12 +68,15 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			};
 
 			Quiz quiz = _mapper.Map<Quiz>( quizDto );
-			if( !quiz.IsEnabled )
-				return new StartQuizAttemptCommandResult { IsSuccess = false };
+
+			if( !quiz.IsValid() )
+				return new StartQuizAttemptCommandResult {IsSuccess = false};
+
+			if( !quiz.IsAvailable() )
+				return new StartQuizAttemptCommandResult {IsSuccess = false};
 
 			ImmutableArray<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
-
 
 			List<Question> questions = _mapper.Map<List<Question>>( questionDtos );
 			List<Group> groups = _mapper.Map<List<Group>>( groupDtos );

@@ -5,7 +5,7 @@ using QuizBuilder.Domain.Action.Admin.Map;
 using QuizBuilder.Domain.Model.Default.Questions;
 using Xunit;
 
-namespace QuizBuilder.Test.Unit.Questions {
+namespace QuizBuilder.Test.Unit.Model.Questions {
 
 	public sealed class TrueFalseChoicesQuestionTests {
 
