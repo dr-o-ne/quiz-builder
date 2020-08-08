@@ -6,6 +6,10 @@ namespace QuizBuilder.Domain.Model.Default.Structure {
 
 	public sealed class Group : QuizEntity {
 
+		public Group() {
+			Questions = new List<Question>();
+		}
+
 		[JsonIgnore]
 		public List<Question> Questions { get; set; }
 
