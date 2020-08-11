@@ -39,6 +39,9 @@
           <mat-icon>settings</mat-icon>
         </button> 
 
+        <mat-slide-toggle color="primary" [checked]="dataInfo.isEnabled" (change)="onChangeGroupState($event.checked, dataInfo)" matTooltip="Disable \ Enable Group">
+        </mat-slide-toggle>
+
         <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu">
           <mat-icon>more_vert</mat-icon>
         </button>       

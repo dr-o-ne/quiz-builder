@@ -23,6 +23,9 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
+		[JsonPropertyName( "isEnabled" )]
+		public bool IsEnabled { get; set; }
+
 		[JsonPropertyName( "selectAllQuestions" )]
 		public bool SelectAllQuestions { get; set; }
 

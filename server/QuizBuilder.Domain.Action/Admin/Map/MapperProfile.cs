@@ -56,8 +56,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		private void AddGroupMapping() {
 
 			CreateMap<UpdateGroupCommand, Group>( MemberList.Source )
-				.ForMember( x => x.Questions, opt => opt.Ignore() )
-				.ForMember( x => x.IsEnabled, opt => opt.Ignore() );
+				.ForMember( x => x.Questions, opt => opt.Ignore() );
 
 			CreateMap<Group, GroupDto>()
 				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, Consts.JsonSerializerOptions ) ) );

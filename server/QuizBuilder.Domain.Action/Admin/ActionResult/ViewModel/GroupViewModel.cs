@@ -15,6 +15,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
+		[JsonPropertyName( "isEnabled" )]
+		public bool IsEnabled { get; set; }
+
 		[JsonPropertyName( "randomizeQuestions" )]
 		public bool RandomizeQuestions { get; set; }
 

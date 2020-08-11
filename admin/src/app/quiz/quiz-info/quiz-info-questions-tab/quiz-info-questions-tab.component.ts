@@ -13,6 +13,7 @@ import { GroupInfoComponent, GroupInfoViewModel } from './group-info/group-info'
 export class DataInfo implements GroupInfoViewModel {
     id: string;
     name: string;
+    isEnabled: boolean;
     selectAllQuestions: boolean;
     randomizeQuestions: boolean;
     countOfQuestionsToSelect?: number;
@@ -73,6 +74,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
         var dataInfo = new DataInfo();
         dataInfo.id = group.id;
         dataInfo.name = group.name;
+        dataInfo.isEnabled = group.isEnabled;
         dataInfo.selectAllQuestions = group.selectAllQuestions;
         dataInfo.countOfQuestionsToSelect = group.countOfQuestionsToSelect;
         dataInfo.randomizeQuestions = group.randomizeQuestions;
@@ -209,6 +211,13 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
             if (isDirty)
                 this.groupDataProvider.updateGroup(group).subscribe();
         }
+    }
+    
+    onChangeGroupState(isEnabled: boolean, dataInfo: DataInfo): void {
+        const group = this.quiz.groups.find(x => x.id == dataInfo.id);
+        dataInfo.isEnabled = isEnabled;
+        group.isEnabled = isEnabled;
+        this.groupDataProvider.updateGroup(group).subscribe();
     }
 
 } 

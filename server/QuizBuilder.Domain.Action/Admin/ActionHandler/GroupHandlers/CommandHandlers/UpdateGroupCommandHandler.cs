@@ -31,6 +31,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 			var dto = _mapper.Map<GroupDto>( model );
 			dto.Id = groupDto.Id;
+			dto.SortOrder = groupDto.SortOrder;
 			await _groupDataProvider.Update( dto );
 
 			return CommandResult.Success();
