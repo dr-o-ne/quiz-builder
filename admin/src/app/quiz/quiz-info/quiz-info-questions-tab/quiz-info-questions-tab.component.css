@@ -6,6 +6,14 @@
     min-height: 0px;
 }
 
+.mat-column-delete {
+    padding-right: 1rem !important;
+}
+
+.mat-column-name {
+    padding-left: 1rem !important;
+}
+
 ::ng-deep .mat-expansion-panel-body {
     padding-bottom: 0 !important;
 }
