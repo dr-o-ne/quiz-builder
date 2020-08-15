@@ -2,7 +2,7 @@
 
 namespace QuizBuilder.Data.Common {
 
-	internal interface IDatabaseConnectionFactory {
+	public interface IDatabaseConnectionFactory {
 
 		IDbConnection GetConnection();
 

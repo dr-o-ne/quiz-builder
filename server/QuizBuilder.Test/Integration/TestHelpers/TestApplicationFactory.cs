@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QuizBuilder.Api;
+using QuizBuilder.Data.Common;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {
 
@@ -13,7 +14,7 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 			builder.ConfigureAppConfiguration( config =>
 			{
 				var integrationConfig = new ConfigurationBuilder()
-					.AddJsonFile( "integrationsettings.json" )
+					.AddJsonFile( "appsettings.json" )
 					.Build();
 
 				config.AddConfiguration( integrationConfig );
@@ -25,8 +26,8 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 	internal static class TestApplicationFactoryExtensions {
 
 		public static TestDatabaseWrapper GetTestDatabaseWrapper( this TestApplicationFactory<Startup> factory ) {
-			IConfiguration config = factory.Services.GetRequiredService<IConfiguration>();
-			return new TestDatabaseWrapper( config );
+			IDatabaseConnectionFactory connectionFactory = factory.Services.GetRequiredService<IDatabaseConnectionFactory>();
+			return new TestDatabaseWrapper( connectionFactory );
 		}
 
 	}

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
-using Microsoft.Extensions.Configuration;
-using ServiceStack.OrmLite;
+using Dapper;
+using QuizBuilder.Data.Common;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {
 
@@ -15,22 +15,17 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 			"dbo.Attempt"
 		}.ToImmutableArray();
 
-		private readonly OrmLiteConnectionFactory _connectionFactory;
+		private readonly IDatabaseConnectionFactory _connectionFactory;
 
-		public TestDatabaseWrapper( IConfiguration config ) {
-			string connectionString = config.GetConnectionString( "defaultConnectionString" );
-			_connectionFactory = new OrmLiteConnectionFactory(
-				connectionString,
-				SqlServerDialect.Provider );
+		public TestDatabaseWrapper( IDatabaseConnectionFactory connectionFactory ) {
+			_connectionFactory = connectionFactory;
 		}
 
-		public IDbConnection CreateDbConnection() => _connectionFactory.CreateDbConnection();
-
 		public void Cleanup() {
-			using IDbConnection conn = CreateDbConnection();
+			using IDbConnection conn = _connectionFactory.GetConnection();
 			conn.Open();
 			foreach( string dataTable in DataTables )
-				conn.ExecuteSql( "DELETE FROM " + dataTable );
+				conn.Execute( "DELETE FROM " + dataTable );
 		}
 
 	}
