@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using QuizBuilder.Common;
 using QuizBuilder.Data;
 using QuizBuilder.Data.Dto;
@@ -52,6 +55,22 @@ namespace QuizBuilder.Api {
 		        options.Password.RequireLowercase = false;
 	        } );
 
+	        var key = Encoding.ASCII.GetBytes( Consts.JwtSecret );
+	        services.AddAuthentication( x => {
+			        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+			        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+		        } )
+		        .AddJwtBearer( x => {
+			        //x.RequireHttpsMetadata = false;
+			        x.SaveToken = true;
+			        x.TokenValidationParameters = new TokenValidationParameters {
+				        ValidateIssuerSigningKey = true,
+				        IssuerSigningKey = new SymmetricSecurityKey( key ),
+				        ValidateIssuer = false,
+				        ValidateAudience = false
+			        };
+		        } );
+
 			ConfigureApplication( services );
 		}
 
@@ -78,23 +97,19 @@ namespace QuizBuilder.Api {
             UpdateDatabase( app );
 
 			app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthorization();
 
+
+			app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
 		private static void UpdateDatabase( IApplicationBuilder app ) {
-			Console.WriteLine( "Creating Database..." );
-
 			using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
 			using var dbContext = serviceScope.ServiceProvider.GetService<UserDbContext>();
 
 			dbContext.Database.Migrate();
-
-			Console.WriteLine( "Database creation done." );
 		}
 	}
 }

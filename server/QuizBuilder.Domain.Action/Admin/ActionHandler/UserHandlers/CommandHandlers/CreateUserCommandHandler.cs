@@ -8,7 +8,7 @@ using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.UserHandlers.CommandHandlers {
 
-	public sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, CommandResult> {
+	public sealed class CreateUserCommandHandler : ICommandHandler<SignUpCommand, CommandResult> {
 
 		private readonly IMapper _mapper;
 		private readonly UserManager<UserDto> _userManager;
@@ -18,7 +18,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.UserHandlers.CommandHand
 			_userManager = userManager;
 		}
 
-		public async Task<CommandResult> HandleAsync( CreateUserCommand command ) {
+		public async Task<CommandResult> HandleAsync( SignUpCommand command ) {
 
 			UserDto userDto = _mapper.Map<UserDto>( command );
 

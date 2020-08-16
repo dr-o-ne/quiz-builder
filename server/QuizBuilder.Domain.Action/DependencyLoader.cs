@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Domain.Action.Client.Services;
 using QuizBuilder.Domain.Action.Client.Services.Default;
+using QuizBuilder.Domain.Action.Common.Services;
+using QuizBuilder.Domain.Action.Common.Services.Default;
 
 namespace QuizBuilder.Domain.Action {
 
@@ -12,6 +14,7 @@ namespace QuizBuilder.Domain.Action {
 
 		public static void AddServices( this IServiceCollection services ) {
 			services.AddSingleton<IPageInfoDataFactory, PageInfoDataFactory>();
+			services.AddSingleton<IJwtTokenFactory, JwtTokenFactory>();
 		}
 
 		public static void AddMappers( this IServiceCollection services ) {
