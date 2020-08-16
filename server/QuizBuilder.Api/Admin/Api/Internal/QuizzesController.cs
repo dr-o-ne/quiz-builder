@@ -7,6 +7,7 @@ using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
+	[Authorize]
 	[ApiController]
 	[Route( "admin/[controller]" )]
 	public sealed class QuizzesController : ControllerBase {

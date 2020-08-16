@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.Dispatchers;
 using QuizBuilder.Domain.Action.Admin.Action;
@@ -6,6 +7,7 @@ using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
+	[Authorize]
 	[ApiController]
 	[Route( "admin/[controller]" )]
 	public sealed class GroupsController : ControllerBase {

@@ -55,6 +55,7 @@ import { RegisterComponent } from './common/auth/register/register.component';
 import { AuthDataProvider } from './_service/dataProviders/auth.dataProvider';
 import { AuthService } from './_service/auth/auth.service';
 import { AuthGuard } from './_common/guards/auth.guard';
+import { JwtInterceptor } from './_common/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -143,6 +144,10 @@ import { AuthGuard } from './_common/guards/auth.guard';
     GroupInfoComponent
   ],
   providers: [
+
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+
     AuthGuard,
     AuthService,
     QuizLangService,
@@ -150,19 +155,11 @@ import { AuthGuard } from './_common/guards/auth.guard';
     QuizResolver,
     QuestionResolver,
     AttemptService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true,
-    },
     AuthDataProvider,
     QuizDataProvider,
     GroupDataProvider,
     QuestionDataProvider
   ],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule {
-}
+export class AppModule {}
