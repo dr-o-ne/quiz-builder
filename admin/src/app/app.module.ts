@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './_material/material.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './_guards/auth.guard';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionPageComponent } from './question/question-page/question-page.component';
@@ -35,7 +34,7 @@ import { QuillModule } from 'ngx-quill';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
 import { Error500Component } from './common/500/error-500.component';
-import { HttpErrorInterceptor } from './_common/_interceptors/http-error.interceptor';
+import { HttpErrorInterceptor } from './_common/interceptors/http-error.interceptor';
 import { QuizInfoSettingsTabComponent } from './quiz/quiz-info/quiz-info-settings-tab/quiz-info-settings-tab.component';
 import { QuizInfoQuestionsTabComponent } from './quiz/quiz-info/quiz-info-questions-tab/quiz-info-questions-tab.component';
 import { QuestionLangService } from './_service/lang/question.lang.service';
@@ -55,6 +54,7 @@ import { LoginComponent } from './common/auth/login/login.component';
 import { RegisterComponent } from './common/auth/register/register.component';
 import { AuthDataProvider } from './_service/dataProviders/auth.dataProvider';
 import { AuthService } from './_service/auth/auth.service';
+import { AuthGuard } from './_common/guards/auth.guard';
 
 @NgModule({
   declarations: [
