@@ -28,7 +28,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		}
 
 		private void AddUserMapping() {
-			CreateMap<SignUpCommand, UserDto>( MemberList.Source )
+			CreateMap<RegisterUserCommand, UserDto>( MemberList.Source )
 				.ForSourceMember( x => x.Password, opt => opt.DoNotValidate() )
 				.ForMember( x => x.UserName, map => map.MapFrom( x => x.Email ) );
 		}

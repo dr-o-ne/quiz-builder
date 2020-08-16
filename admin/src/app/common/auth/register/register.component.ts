@@ -4,7 +4,7 @@ import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
-import { AuthDataProvider } from 'src/app/_service/dataProviders/auth.dataProvider';
+import { AuthService } from 'src/app/_service/auth/auth.service';
 
 @Component({
   selector: 'vex-register',
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   icVisibilityOff = icVisibilityOff;
 
   constructor(
-    private authDataProvider: AuthDataProvider,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     const email = this.form.value.email as string;
     const password = this.form.value.password as string;
 
-    this.authDataProvider.signUp(email, password).subscribe();
+    this.authService.signUp(email, password);
     this.router.navigate(['/']);
   }
 

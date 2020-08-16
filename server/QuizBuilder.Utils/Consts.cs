@@ -18,6 +18,6 @@ namespace QuizBuilder.Utils {
 
 		}
 
-		public static string JwtSecret = "QB_SECRET"; //TODO: move to config
+		public static string JwtSecret = "QB_SECRET" + "12333333333333333331111111111111111111111244444444444"; //TODO: move to config
 	}
 }

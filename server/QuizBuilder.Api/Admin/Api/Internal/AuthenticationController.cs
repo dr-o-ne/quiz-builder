@@ -15,23 +15,23 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			_dispatcher = dispatcher;
 		}
 
-		[HttpPost]
-		public async Task<ActionResult> SignUp( [FromBody] SignUpCommand command ) {
+		[HttpPost( "register" )]
+		public async Task<ActionResult> Register( [FromBody] RegisterUserCommand userCommand ) {
 
-			var result = await _dispatcher.SendAsync( command );
+			var result = await _dispatcher.SendAsync( userCommand );
 
 			return result.IsSuccess
-				? (ActionResult)Created( nameof( SignUp ), result )
+				? (ActionResult)Created( nameof( Register ), result )
 				: UnprocessableEntity( result );
 		}
 
-		[HttpPost( "authenticate" )]
-		public async Task<ActionResult> Authenticate( AuthenticateUserCommand command ) {
+		[HttpPost( "login" )]
+		public async Task<ActionResult> Login( LoginUserCommand command ) {
 
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.IsSuccess
-				? (ActionResult)Created( nameof( Authenticate ), result )
+				? (ActionResult)Created( nameof( Login ), result )
 				: UnprocessableEntity( result );
 		}
 

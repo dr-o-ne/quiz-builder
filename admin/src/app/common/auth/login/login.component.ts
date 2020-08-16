@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
+import { AuthService } from 'src/app/_service/auth/auth.service';
 
 @Component({
   selector: 'vex-login',
@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit {
   icVisibility = icVisibility;
   icVisibilityOff = icVisibilityOff;
 
-  constructor(private router: Router,
-              private fb: FormBuilder,
-              private cd: ChangeDetectorRef,
-              private snackbar: MatSnackBar
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -38,10 +39,10 @@ export class LoginComponent implements OnInit {
   }
 
   send() {
+    const email = this.form.value.email as string;
+    const password = this.form.value.password as string;
+    this.authService.login( email, password );
     this.router.navigate(['/']);
-    this.snackbar.open('Lucky you! Looks like you didn\'t need a password or email address! For a real application we provide validators to prevent this. ;)', 'LOL THANKS', {
-      duration: 10000
-    });
   }
 
   toggleVisibility() {

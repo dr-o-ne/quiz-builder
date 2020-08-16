@@ -54,6 +54,7 @@ import {
 import { LoginComponent } from './common/auth/login/login.component';
 import { RegisterComponent } from './common/auth/register/register.component';
 import { AuthDataProvider } from './_service/dataProviders/auth.dataProvider';
+import { AuthService } from './_service/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -143,6 +144,7 @@ import { AuthDataProvider } from './_service/dataProviders/auth.dataProvider';
   ],
   providers: [
     AuthGuard,
+    AuthService,
     QuizLangService,
     QuestionLangService,
     QuizResolver,

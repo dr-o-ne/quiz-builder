@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using QuizBuilder.Common;
 using QuizBuilder.Data;
@@ -70,6 +71,8 @@ namespace QuizBuilder.Api {
 				        ValidateAudience = false
 			        };
 		        } );
+
+	        IdentityModelEventSource.ShowPII = true;
 
 			ConfigureApplication( services );
 		}

@@ -2,41 +2,42 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using QuizBuilder.Common.Handlers;
+using QuizBuilder.Common.Types.Default;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Common.Services;
 
-namespace QuizBuilder.Domain.Action.Admin.ActionHandler.UserHandlers.CommandHandlers {
+namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.CommandHandlers {
 
-	public sealed class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand, AuthenticateUserResult> {
+	public sealed class LoginUserCommandHandler : ICommandHandler<LoginUserCommand, CommandResult<LoginInfo>> {
 
 		private readonly IMapper _mapper;
 		private readonly SignInManager<UserDto> _signInManager;
 		private readonly UserManager<UserDto> _userManager;
 		private readonly IJwtTokenFactory _jwtTokenFactory;
 
-		public AuthenticateUserCommandHandler( IMapper mapper, SignInManager<UserDto> signInManager, UserManager<UserDto> userManager, IJwtTokenFactory jwtTokenFactory ) {
+		public LoginUserCommandHandler( IMapper mapper, SignInManager<UserDto> signInManager, UserManager<UserDto> userManager, IJwtTokenFactory jwtTokenFactory ) {
 			_mapper = mapper;
 			_signInManager = signInManager;
 			_userManager = userManager;
 			_jwtTokenFactory = jwtTokenFactory;
 		}
 
-		public async Task<AuthenticateUserResult> HandleAsync( AuthenticateUserCommand command ) {
+		public async Task<CommandResult<LoginInfo>> HandleAsync( LoginUserCommand command ) {
 
 			SignInResult signInResult = await _signInManager.PasswordSignInAsync( command.Email, command.Password, false, false );
 			if( !signInResult.Succeeded )
-				return new AuthenticateUserResult{ IsSuccess = false };
+				return new CommandResult<LoginInfo> { IsSuccess = false };
 
 			UserDto user = await _userManager.FindByEmailAsync( command.Email );
 
 			string token = _jwtTokenFactory.Create( user );
 
-			return new AuthenticateUserResult {
+			var payload = new LoginInfo { Username = user.UserName, Token = token };
+			return new CommandResult<LoginInfo> {
 				IsSuccess = true,
-				Username = user.UserName,
-				Token = token
+				Payload = payload
 			};
 
 		}

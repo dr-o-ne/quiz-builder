@@ -6,7 +6,7 @@ using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
 
-	public sealed class SignUpCommand : ICommand<CommandResult> {
+	public sealed class RegisterUserCommand : ICommand<CommandResult> {
 
 		[Required]
 		[JsonPropertyName( "email" )]
@@ -18,7 +18,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class AuthenticateUserCommand : ICommand<AuthenticateUserResult> {
+	public sealed class LoginUserCommand : ICommand<CommandResult<LoginInfo>> {
 
 		[Required]
 		[JsonPropertyName( "email" )]
