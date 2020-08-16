@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -50,7 +51,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatSliderModule,
         MatSlideToggleModule,
         MatTooltipModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatSnackBarModule
     ]
 })
 export class MaterialModule { }
