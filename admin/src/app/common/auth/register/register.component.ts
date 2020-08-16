@@ -4,6 +4,7 @@ import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
+import { UserDataProvider } from 'src/app/_service/dataProviders/user.dataProvider';
 
 @Component({
   selector: 'vex-register',
@@ -22,9 +23,11 @@ export class RegisterComponent implements OnInit {
   icVisibility = icVisibility;
   icVisibilityOff = icVisibilityOff;
 
-  constructor(private router: Router,
-              private fb: FormBuilder,
-              private cd: ChangeDetectorRef
+  constructor(
+    private userDataProvider: UserDataProvider,
+    private router: Router,
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -37,6 +40,7 @@ export class RegisterComponent implements OnInit {
   }
 
   send() {
+    this.userDataProvider.createUser("test", "test").subscribe();
     this.router.navigate(['/']);
   }
 

@@ -53,6 +53,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { LoginComponent } from './common/auth/login/login.component';
 import { RegisterComponent } from './common/auth/register/register.component';
+import { UserDataProvider } from './_service/dataProviders/user.dataProvider';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { RegisterComponent } from './common/auth/register/register.component';
       useClass: HttpErrorInterceptor,
       multi: true,
     },
+    UserDataProvider,
     QuizDataProvider,
     GroupDataProvider,
     QuestionDataProvider
