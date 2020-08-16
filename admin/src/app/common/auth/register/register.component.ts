@@ -40,7 +40,10 @@ export class RegisterComponent implements OnInit {
   }
 
   send() {
-    this.userDataProvider.createUser("test", "test").subscribe();
+    const email = this.form.value.email as string;
+    const password = this.form.value.password as string;
+
+    this.userDataProvider.createUser(email, password).subscribe();
     this.router.navigate(['/']);
   }
 

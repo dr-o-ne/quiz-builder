@@ -44,6 +44,14 @@ namespace QuizBuilder.Api {
 		        .AddDefaultTokenProviders()
 		        .AddEntityFrameworkStores<UserDbContext>();
 
+	        services.Configure<IdentityOptions>( options => {
+		        options.Password.RequiredLength = 1;
+		        options.Password.RequireDigit = false;
+		        options.Password.RequireNonAlphanumeric = false;
+		        options.Password.RequireUppercase = false;
+		        options.Password.RequireLowercase = false;
+	        } );
+
 			ConfigureApplication( services );
 		}
 

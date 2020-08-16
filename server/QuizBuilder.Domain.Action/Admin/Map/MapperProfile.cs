@@ -20,10 +20,17 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 	public sealed class MapperProfile : Profile {
 
 		public MapperProfile() {
+			AddUserMapping();
 			AddQuizMapping();
 			AddGroupMapping();
 			AddQuestionMapping();
 			AddAttemptMapping();
+		}
+
+		private void AddUserMapping() {
+			CreateMap<CreateUserCommand, UserDto>( MemberList.Source )
+				.ForSourceMember( x => x.Password, opt => opt.DoNotValidate() )
+				.ForMember( x => x.UserName, map => map.MapFrom( x => x.Email ) );
 		}
 
 		private void AddQuizMapping() {
