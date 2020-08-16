@@ -10,9 +10,11 @@ import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
 import { Error500Component } from './common/500/error-500.component';
 import { LoginComponent } from './common/auth/login/login.component';
+import { RegisterComponent } from './common/auth/register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '', component: CustomLayoutComponent,
     children: [

@@ -52,6 +52,7 @@ import {
   NgxMatTimepickerModule 
 } from '@angular-material-components/datetime-picker';
 import { LoginComponent } from './common/auth/login/login.component';
+import { RegisterComponent } from './common/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { LoginComponent } from './common/auth/login/login.component';
     Error404Component,
     Error500Component,
     LoginComponent,
+    RegisterComponent,
     QuizInfoComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
