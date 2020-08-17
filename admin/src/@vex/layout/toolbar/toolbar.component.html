@@ -81,8 +81,10 @@
   </div>
 
   <span fxFlex></span>
-
+  
   <div class="-mx-1 flex items-center">
+    
+    <!--
     <div class="px-1">
       <button (click)="openSearch()" mat-icon-button type="button">
         <mat-icon [icIcon]="icSearch"></mat-icon>
@@ -98,15 +100,11 @@
         <mat-icon [icIcon]="icBookmarks"></mat-icon>
       </button>
     </div>
-
+    
     <div class="px-1">
       <button [matMenuTriggerFor]="languageMenu" mat-icon-button type="button">
         <mat-icon [icIcon]="emojioneUS"></mat-icon>
       </button>
-    </div>
-
-    <div class="px-1">
-      <vex-toolbar-user></vex-toolbar-user>
     </div>
 
     <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
@@ -120,6 +118,12 @@
         <span>German</span>
       </button>
     </mat-menu>
+    -->
+
+    <div class="px-1">
+      <vex-toolbar-user></vex-toolbar-user>
+    </div>
+
   </div>
 </div>
 

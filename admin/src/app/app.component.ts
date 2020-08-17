@@ -79,7 +79,7 @@ export class AppComponent {
     this.navigationService.items = [
       {
         type: 'link',
-        label: 'Dashboard',
+        label: 'Quizzes',
         route: '/quizzes',
         icon: icLayers
       }
