@@ -48,8 +48,9 @@ export class RegisterComponent implements OnInit {
     const email = this.form.value.email as string;
     const password = this.form.value.password as string;
 
-    this.authService.signUp(name, email, password);
-    this.router.navigate(['/']);
+    this.authService.signUp(name, email, password).subscribe(
+      () => { this.router.navigate(['/login']); }
+    );
   }
 
   toggleVisibility() {
