@@ -47,8 +47,12 @@ export class LoginComponent implements OnInit {
     const email = this.form.value.email as string;
     const password = this.form.value.password as string;
 
-    this.authService.login( email, password );
-    this.router.navigate([this.returnUrl]);
+    this.authService.login( email, password ).subscribe(
+      () => {
+          console.log('Success');
+          this.router.navigate([this.returnUrl]);
+      },
+      error => { console.log('Oops'); });
   }
 
   toggleVisibility() {

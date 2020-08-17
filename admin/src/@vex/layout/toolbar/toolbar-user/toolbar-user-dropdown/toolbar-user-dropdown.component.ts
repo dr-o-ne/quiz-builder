@@ -19,6 +19,8 @@ import icLock from '@iconify/icons-ic/twotone-lock';
 import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
+import { AuthService } from 'src/app/_service/auth/auth.service';
+import { User } from 'src/app/_models/user';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -35,8 +37,10 @@ export interface OnlineStatus {
 })
 export class ToolbarUserDropdownComponent implements OnInit {
 
+  currentUser: User;
+
   items: MenuItem[] = [
-    {
+  {
       id: '1',
       icon: icAccountCircle,
       label: 'My Profile',
@@ -110,9 +114,11 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icNotificationsOff = icNotificationsOff;
 
   constructor(private cd: ChangeDetectorRef,
-              private popoverRef: PopoverRef<ToolbarUserDropdownComponent>) { }
+              private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
+              private authService: AuthService) { }
 
   ngOnInit() {
+    this.currentUser = this.authService.currentUserValue;
   }
 
   setStatus(status: OnlineStatus) {
@@ -121,6 +127,7 @@ export class ToolbarUserDropdownComponent implements OnInit {
   }
 
   close() {
+    this.authService.logout();
     this.popoverRef.close();
   }
 }

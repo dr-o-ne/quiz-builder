@@ -4,7 +4,7 @@
       <div class="dropdown-heading-icon" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon [icIcon]="icPerson"></mat-icon>
       </div>
-      <div class="dropdown-heading">David Smith</div>
+      <div class="dropdown-heading">{{currentUser.username}}</div>
     </div>
 
     <button [matMenuTriggerFor]="settingsMenu"
@@ -16,6 +16,7 @@
     </button>
   </div>
 
+  <!--
   <div class="dropdown-content">
     <a (click)="close()"
        *ngFor="let item of items; trackBy: trackById"
@@ -35,8 +36,10 @@
       <mat-icon [icIcon]="icChevronRight" class="notification-chevron" fxFlex="none"></mat-icon>
     </a>
   </div>
+  -->
 
   <div class="dropdown-footer" fxLayout="row" fxLayoutAlign="space-between center">
+    <!--
     <button [matMenuTriggerFor]="statusMenu" class="dropdown-footer-select" mat-button type="button">
       <ng-container *ngFor="let status of statuses; trackBy: trackById">
         <span *ngIf="status === activeStatus">
@@ -46,6 +49,7 @@
         </span>
       </ng-container>
     </button>
+    -->
     <a (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
   </div>
 </div>
