@@ -21,8 +21,13 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 		public async Task<CommandResult> HandleAsync( RegisterUserCommand userCommand ) {
 
 			UserDto userDto = _mapper.Map<UserDto>( userCommand );
+			if( string.IsNullOrEmpty( userDto.UserName ) )
+				userDto.UserName = userDto.Email;
 
-			var result = await _userManager.CreateAsync( userDto, userCommand.Password );
+			IdentityResult result = await _userManager.CreateAsync( userDto, userCommand.Password );
+			if( !result.Succeeded ) {
+				return CommandResult.Fail();
+			}
 
 			return CommandResult.Success();
 		}

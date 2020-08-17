@@ -21,8 +21,8 @@ export class AuthService {
         return this.currentUserSubject.value;
     }
 
-    signUp(email: string, password: string): void {
-        this.dataProvider.signUp(email, password).subscribe();
+    signUp(name: string, email: string, password: string): void {
+        this.dataProvider.signUp(name, email, password).subscribe();
     }
 
     login(email: string, password: string): Observable<User> {

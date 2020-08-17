@@ -21,8 +21,8 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			var result = await _dispatcher.SendAsync( userCommand );
 
 			return result.IsSuccess
-				? (ActionResult)Created( nameof( Register ), result )
-				: UnprocessableEntity( result );
+				? (ActionResult) Ok()
+				: NotFound( result );
 		}
 
 		[HttpPost( "login" )]

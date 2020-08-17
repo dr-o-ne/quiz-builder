@@ -44,6 +44,11 @@ export class LoginComponent implements OnInit {
   }
 
   send() {
+
+    if (this.form.invalid) {
+      return;
+    }
+
     const email = this.form.value.email as string;
     const password = this.form.value.password as string;
 

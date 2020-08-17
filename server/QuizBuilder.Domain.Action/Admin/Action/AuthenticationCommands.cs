@@ -8,6 +8,9 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	public sealed class RegisterUserCommand : ICommand<CommandResult> {
 
+		[JsonPropertyName( "name" )]
+		public string Name { get; set; }
+
 		[Required]
 		[JsonPropertyName( "email" )]
 		public string Email { get; set; }

@@ -15,8 +15,10 @@ export class AuthDataProvider {
     constructor(private http: HttpClient) {
     }
 
-    signUp(email: string, password: string): Observable<object> {
-        const body = { email, password };
+    signUp(name: string, email: string, password: string): Observable<object> {
+        const body = { name, email, password };
+
+        console.log(body);
         return this.http.post(this.apiUrl + 'authentication/register', body);
     }
 
