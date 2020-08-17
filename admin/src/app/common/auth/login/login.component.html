@@ -13,12 +13,12 @@
 
     <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
       <div fxFlex="auto" fxLayout="column">
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="outline">
           <mat-label>E-Mail</mat-label>
           <input formControlName="email" matInput required>
           <mat-error *ngIf="form.get('email').hasError('required')">We need an email address to log you in</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="outline">
           <mat-label>Password</mat-label>
           <input [type]="inputType" formControlName="password" matInput required>
           <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
@@ -41,7 +41,7 @@
 
       <p class="text-secondary text-center">
         Don't have an account?<br/>
-        <a [routerLink]="['/register']">Click here to create one</a>
+        <a [routerLink]="['/register']">Click <u>here</u> to create one</a>
       </p>
     </div>
   </div>

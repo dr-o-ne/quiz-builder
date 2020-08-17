@@ -13,46 +13,36 @@
 
     <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
       <div fxFlex="auto" fxLayout="column">
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="outline">
           <mat-label>Name</mat-label>
           <input formControlName="name" matInput required>
         </mat-form-field>
 
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="outline">
           <mat-label>E-Mail</mat-label>
           <input formControlName="email" matInput required>
         </mat-form-field>
 
-        <mat-form-field fxFlex="grow">
+        <mat-form-field fxFlex="grow" appearance="outline">
           <mat-label>Password</mat-label>
           <input [type]="inputType" formControlName="password" matInput required>
           <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
             <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
             <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
           </button>
-          <mat-hint>Click the eye to toggle visibility</mat-hint>
         </mat-form-field>
 
-        <mat-form-field fxFlex="grow">
-          <mat-label>Password (Confirm)</mat-label>
-          <input [type]="inputType" formControlName="passwordConfirm" matInput required>
-          <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
-            <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
-            <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
-          </button>
-          <mat-hint>Please repeat your password from above</mat-hint>
-        </mat-form-field>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center center">
-        <mat-checkbox class="caption">I accept the <a>terms and conditions.</a></mat-checkbox>
+        <mat-checkbox class="caption" color="primary">I accept the <a>terms and conditions.</a></mat-checkbox>
       </div>
       <button (click)="send()" color="primary" mat-raised-button type="button">
         CREATE ACCOUNT
       </button>
       <p class="text-secondary text-center">
         Already have an account?<br/>
-        <a [routerLink]="['/login']">Sign in here</a>
+        <a [routerLink]="['/login']">Sign in <u>here</u></a>
       </p>
     </div>
   </div>

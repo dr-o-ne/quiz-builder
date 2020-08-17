@@ -34,8 +34,7 @@ export class RegisterComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordConfirm: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
