@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
@@ -24,9 +24,12 @@ export class LoginComponent implements OnInit {
   icVisibility = icVisibility;
   icVisibilityOff = icVisibilityOff;
 
+  returnUrl: string;
+
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef
   ) {}
@@ -36,13 +39,16 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   send() {
     const email = this.form.value.email as string;
     const password = this.form.value.password as string;
+
     this.authService.login( email, password );
-    this.router.navigate(['/']);
+    this.router.navigate([this.returnUrl]);
   }
 
   toggleVisibility() {

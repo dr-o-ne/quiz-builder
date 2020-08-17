@@ -80,7 +80,7 @@ export class AppComponent {
       {
         type: 'link',
         label: 'Dashboard',
-        route: '/',
+        route: '/quizzes',
         icon: icLayers
       }
     ];
