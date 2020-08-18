@@ -1,4 +1,4 @@
-﻿using QuizBuilder.Utils.Utils;
+﻿using QuizBuilder.Common.Utils;
 using Xunit;
 
 namespace QuizBuilder.Test.Unit.Utils {

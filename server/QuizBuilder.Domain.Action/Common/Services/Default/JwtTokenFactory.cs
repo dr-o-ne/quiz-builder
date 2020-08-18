@@ -3,8 +3,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using QuizBuilder.Common;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Utils;
 
 namespace QuizBuilder.Domain.Action.Common.Services.Default {
 

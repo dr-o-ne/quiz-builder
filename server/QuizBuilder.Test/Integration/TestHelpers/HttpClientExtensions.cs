@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using QuizBuilder.Utils;
+using QuizBuilder.Common;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuizBuilder.Test.Integration.TestHelpers {

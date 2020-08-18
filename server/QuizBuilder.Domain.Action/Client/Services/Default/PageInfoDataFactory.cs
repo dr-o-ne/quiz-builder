@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using QuizBuilder.Common.Extensions;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
-using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Default.Enums.PageSettings;
 
 namespace QuizBuilder.Domain.Action.Client.Services.Default {

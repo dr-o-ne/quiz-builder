@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuizBuilder.Utils\QuizBuilder.Utils.csproj" />
+    <ProjectReference Include="..\QuizBuilder.Common\QuizBuilder.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Common.CQRS.Actions.Default;
+using QuizBuilder.Common.Extensions;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
-using QuizBuilder.Utils.Extensions;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHandlers {
 

@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Common", "QuizB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Test", "QuizBuilder.Test\QuizBuilder.Test.csproj", "{9CF372C6-5AD7-4C1C-99CC-C874A04C789D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Utils", "QuizBuilder.Utils\QuizBuilder.Utils.csproj", "{6890FF7F-E364-4789-A18C-F5EE88A73204}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Data", "QuizBuilder.Data\QuizBuilder.Data.csproj", "{772AD58C-DF57-4A4E-A909-B6AE41749BDC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizBuilder.Domain.Model", "QuizBuilder.Domain.Model\QuizBuilder.Domain.Model.csproj", "{0CAE5FC5-06B1-4133-AB48-1CC8058FCFDD}"
@@ -35,10 +33,6 @@ Global
 		{9CF372C6-5AD7-4C1C-99CC-C874A04C789D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF372C6-5AD7-4C1C-99CC-C874A04C789D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF372C6-5AD7-4C1C-99CC-C874A04C789D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6890FF7F-E364-4789-A18C-F5EE88A73204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6890FF7F-E364-4789-A18C-F5EE88A73204}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6890FF7F-E364-4789-A18C-F5EE88A73204}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6890FF7F-E364-4789-A18C-F5EE88A73204}.Release|Any CPU.Build.0 = Release|Any CPU
 		{772AD58C-DF57-4A4E-A909-B6AE41749BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{772AD58C-DF57-4A4E-A909-B6AE41749BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{772AD58C-DF57-4A4E-A909-B6AE41749BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU

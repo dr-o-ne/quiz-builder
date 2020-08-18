@@ -1,5 +1,7 @@
 using System.Text.Json;
 using AutoMapper;
+using QuizBuilder.Common;
+using QuizBuilder.Common.Utils;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
@@ -13,8 +15,6 @@ using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Organization;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
-using QuizBuilder.Utils;
-using QuizBuilder.Utils.Utils;
 
 namespace QuizBuilder.Domain.Action.Admin.Map {
 

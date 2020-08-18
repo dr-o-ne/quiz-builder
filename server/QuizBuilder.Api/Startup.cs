@@ -14,7 +14,6 @@ using QuizBuilder.Data;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action;
 using QuizBuilder.Domain.Model;
-using QuizBuilder.Utils;
 
 namespace QuizBuilder.Api {
 
@@ -75,12 +74,11 @@ namespace QuizBuilder.Api {
 
         private static void ConfigureApplication( IServiceCollection services ) {
 
-	        services.AddDispatchers();
+	        services.AddCommon();
 	        services.AddHandlers();
 			services.AddServices();
 	        services.AddMappers();
 	        services.AddModels();
-	        services.AddUtils();
 	        services.AddData();
 
 		}

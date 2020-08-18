@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using QuizBuilder.Common.Extensions;
 using QuizBuilder.Domain.Model.Default.Choices;
-using QuizBuilder.Utils.Extensions;
 using static QuizBuilder.Domain.Model.Default.Enums;
 using static QuizBuilder.Domain.Model.Default.Enums.ChoicesDisplayType;
 using static QuizBuilder.Domain.Model.Default.Enums.ChoicesEnumerationType;

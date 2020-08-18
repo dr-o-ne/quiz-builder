@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using AutoMapper;
+using QuizBuilder.Common.Utils;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Utils.Utils;
 
 namespace QuizBuilder.Domain.Action.Client.Map.Default {
 

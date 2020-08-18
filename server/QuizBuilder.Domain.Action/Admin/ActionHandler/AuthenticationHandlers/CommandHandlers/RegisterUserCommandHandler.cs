@@ -3,11 +3,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Common.CQRS.Actions.Default;
+using QuizBuilder.Common.Services;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default.Organization;
-using QuizBuilder.Utils.Services;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.CommandHandlers {
 

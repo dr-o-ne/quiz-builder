@@ -1,9 +1,9 @@
 using System;
 using AutoMapper;
+using QuizBuilder.Common;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
-using QuizBuilder.Utils;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel {
