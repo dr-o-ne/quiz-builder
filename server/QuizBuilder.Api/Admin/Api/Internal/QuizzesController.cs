@@ -43,8 +43,12 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpDelete( "{quizUId}/questions/{uid}" )]
-		public async Task<ActionResult> Delete( [FromRoute] DeleteQuestionCommand action ) {
+		public async Task<ActionResult> Delete( [FromRoute] string quizUId, [FromRoute] string uid ) {
 
+			var action = new DeleteQuestionCommand {
+				QuizUId = quizUId,
+				UId = uid
+			};
 			action.SetIdentity( User );
 
 			CommandResult result = await _dispatcher.SendAsync( action );
