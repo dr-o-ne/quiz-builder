@@ -1,14 +1,16 @@
 using System.Threading.Tasks;
 using QuizBuilder.Common.Types;
 
-namespace QuizBuilder.Common.Dispatchers
-{
-    public interface IDispatcher
-    {
-        Task SendAsync<TCommand>(TCommand command) where TCommand : ICommand;
+namespace QuizBuilder.Common.Dispatchers {
 
-        Task<TResult> SendAsync<TResult>(ICommand<TResult> command) where TResult : ICommandResult;
+	public interface IDispatcher {
 
-        Task<TResult> QueryAsync<TResult>(IQuery<TResult> query);
-    }
+		Task SendAsync<TCommand>( TCommand command ) where TCommand : ICommand;
+
+		Task<TResult> SendAsync<TResult>( ICommand<TResult> command ) where TResult : ICommandResult;
+
+		Task<TResult> QueryAsync<TResult>( IQuery<TResult> query );
+
+	}
+
 }

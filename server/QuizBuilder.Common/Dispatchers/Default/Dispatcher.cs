@@ -3,7 +3,7 @@ using QuizBuilder.Common.Types;
 
 namespace QuizBuilder.Common.Dispatchers.Default {
 
-	public sealed class Dispatcher : IDispatcher {
+	internal sealed class Dispatcher : IDispatcher {
 
 		private readonly ICommandDispatcher _commandDispatcher;
 		private readonly IQueryDispatcher _queryDispatcher;

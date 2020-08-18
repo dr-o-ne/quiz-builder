@@ -3,25 +3,24 @@ using System.Threading.Tasks;
 using QuizBuilder.Common.Handlers;
 using QuizBuilder.Common.Types;
 
-namespace QuizBuilder.Common.Dispatchers.Default
-{
-    public class QueryDispatcher : IQueryDispatcher
-    {
-        private readonly IServiceProvider _serviceProvider;
+namespace QuizBuilder.Common.Dispatchers.Default {
 
-        public QueryDispatcher(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+	internal sealed class QueryDispatcher : IQueryDispatcher {
 
-        public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
-        {
-            var handlerType = typeof(IQueryHandler<,>)
-                .MakeGenericType(query.GetType(), typeof(TResult));
+		private readonly IServiceProvider _serviceProvider;
 
-            dynamic handler = _serviceProvider.GetService(handlerType);
+		public QueryDispatcher( IServiceProvider serviceProvider ) {
+			_serviceProvider = serviceProvider;
+		}
 
-            return await handler.HandleAsync((dynamic)query);
-        }
-    }
+		public async Task<TResult> QueryAsync<TResult>( IQuery<TResult> query ) {
+			Type handlerType = typeof(IQueryHandler<,>)
+				.MakeGenericType( query.GetType(), typeof(TResult) );
+
+			dynamic handler = _serviceProvider.GetService( handlerType );
+
+			return await handler.HandleAsync( (dynamic)query );
+		}
+
+	}
 }
