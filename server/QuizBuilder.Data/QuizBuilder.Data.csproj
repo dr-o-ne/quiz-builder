@@ -21,4 +21,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuizBuilder.Common\QuizBuilder.Common.csproj" />
+  </ItemGroup>
+
 </Project>

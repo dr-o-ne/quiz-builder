@@ -79,8 +79,9 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpDelete( "{uid}" )]
-		public async Task<ActionResult> Delete( [FromRoute] DeleteQuizCommand action ) {
+		public async Task<ActionResult> Delete( [FromRoute] string uid ) {
 
+			var action = new DeleteQuizCommand { UId = uid };
 			action.SetIdentity( User );
 
 			var result = await _dispatcher.SendAsync( action );
