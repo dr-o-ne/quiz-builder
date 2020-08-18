@@ -20,8 +20,9 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpGet( "{uid}" )]
-		public async Task<ActionResult> Get( [FromRoute] GetQuestionByIdQuery action ) {
+		public async Task<ActionResult> Get( [FromRoute] string uid ) {
 
+			var action = new GetQuestionByIdQuery { UId = uid };
 			action.SetIdentity( User );
 
 			QuestionQueryResult result = await _dispatcher.QueryAsync( action );
