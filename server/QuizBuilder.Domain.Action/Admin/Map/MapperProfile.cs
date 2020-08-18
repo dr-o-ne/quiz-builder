@@ -47,7 +47,9 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 
 			CreateMap<UpdateQuizCommand, Quiz>( MemberList.Source )
 				.ForMember( x => x.StartDate, opt => opt.MapFrom( x => Converter.FromUnixTimeSeconds( x.StartDate ) ) )
-				.ForMember( x => x.EndDate, opt => opt.MapFrom( x => Converter.FromUnixTimeSeconds( x.EndDate ) ) );
+				.ForMember( x => x.EndDate, opt => opt.MapFrom( x => Converter.FromUnixTimeSeconds( x.EndDate ) ) )
+				.ForSourceMember( x => x.OrgId, opt => opt.DoNotValidate() )
+				.ForSourceMember( x => x.UserId, opt => opt.DoNotValidate() );
 
 			CreateMap<Quiz, QuizDto>()
 				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, Consts.JsonSerializerOptions ) ) );
@@ -62,18 +64,32 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		}
 
 		private void AddQuestionMapping() {
-			CreateMap<Question, Question>().ConvertUsing<QuestionToQuestionConverter>();
-			CreateMap<Question, QuestionDto>().ConvertUsing<QuestionToQuestionDtoConverter>();
-			CreateMap<QuestionDto, Question>().ConvertUsing<QuestionDtoToQuestionConverter>();
-			CreateMap<Question, QuestionViewModel>().ConvertUsing<QuestionToQuestionViewModelConverter>();
-			CreateMap<CreateQuestionCommand, Question>().ConvertUsing<CreateQuestionCommandToQuestionConverter>();
-			CreateMap<UpdateQuestionCommand, Question>().ConvertUsing<UpdateQuestionCommandToQuestionConverter>();
+
+			CreateMap<Question, Question>()
+				.ConvertUsing<QuestionToQuestionConverter>();
+
+			CreateMap<Question, QuestionDto>()
+				.ConvertUsing<QuestionToQuestionDtoConverter>();
+
+			CreateMap<QuestionDto, Question>()
+				.ConvertUsing<QuestionDtoToQuestionConverter>();
+
+			CreateMap<Question, QuestionViewModel>()
+				.ConvertUsing<QuestionToQuestionViewModelConverter>();
+
+			CreateMap<CreateQuestionCommand, Question>()
+				.ConvertUsing<CreateQuestionCommandToQuestionConverter>();
+
+			CreateMap<UpdateQuestionCommand, Question>()
+				.ConvertUsing<UpdateQuestionCommandToQuestionConverter>();
 		}
 
 		private void AddGroupMapping() {
 
 			CreateMap<UpdateGroupCommand, Group>( MemberList.Source )
-				.ForMember( x => x.Questions, opt => opt.Ignore() );
+				.ForMember( x => x.Questions, opt => opt.Ignore() )
+				.ForSourceMember( x => x.OrgId, opt => opt.DoNotValidate() )
+				.ForSourceMember( x => x.UserId, opt => opt.DoNotValidate() );
 
 			CreateMap<Group, GroupDto>()
 				.ForMember( x => x.Settings, opt => opt.MapFrom( source => JsonSerializer.Serialize( source, Consts.JsonSerializerOptions ) ) );
