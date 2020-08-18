@@ -44,8 +44,9 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpDelete( "{uid}" )]
-		public async Task<ActionResult> Delete( [FromRoute] DeleteGroupCommand action ) {
+		public async Task<ActionResult> Delete( [FromRoute] string uid ) {
 
+			DeleteGroupCommand action = new DeleteGroupCommand { UId = uid };
 			action.SetIdentity( User );
 
 			var result = await _dispatcher.SendAsync( action );
