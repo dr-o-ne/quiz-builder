@@ -1,6 +1,24 @@
+CREATE TABLE dbo.Organization(
+	[Id] BIGINT IDENTITY(1,1) NOT NULL,
+	[UId] NVARCHAR(10) NOT NULL,
+	[CreatedOn] DATETIME2(7) NOT NULL,
+	[ModifiedOn] DATETIME2(7) NOT NULL,
+
+	CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED ( [Id] ASC ) ON [PRIMARY]
+
+) ON [PRIMARY]
+GO
+
+ALTER TABLE dbo.Organization ADD CONSTRAINT [DF_Organization_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]
+GO
+
+ALTER TABLE dbo.Organization ADD CONSTRAINT [DF_Organization_ModifiedOn] DEFAULT (getutcdate()) FOR [ModifiedOn]
+GO
+
 CREATE TABLE dbo.Quiz(
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[UId] NVARCHAR(10) NOT NULL,
+	[OrgId] BIGINT NOT NULL,
 	[Name] NVARCHAR(255) NOT NULL,
 	[IsEnabled] BIT NOT NULL,
 	[Settings] NVARCHAR(MAX) NOT NULL,
@@ -131,21 +149,4 @@ ADD CONSTRAINT DF_Attempt_ModifiedOn DEFAULT GETUTCDATE() FOR ModifiedOn;
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX [UI_Attempt_UId] ON dbo.Attempt ( [UId] ASC ) ON [PRIMARY]
-GO
-
-CREATE TABLE dbo.Organization(
-	[Id] BIGINT IDENTITY(1,1) NOT NULL,
-	[UId] NVARCHAR(10) NOT NULL,
-	[CreatedOn] DATETIME2(7) NOT NULL,
-	[ModifiedOn] DATETIME2(7) NOT NULL,
-
-	CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED ( [Id] ASC ) ON [PRIMARY]
-
-) ON [PRIMARY]
-GO
-
-ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Organization_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]
-GO
-
-ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Organization_ModifiedOn] DEFAULT (getutcdate()) FOR [ModifiedOn]
 GO

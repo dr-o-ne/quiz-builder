@@ -26,15 +26,17 @@ SELECT
 	Name,
 	Settings,
 	IsEnabled
-FROM dbo.Quiz( NOLOCK )";
+FROM dbo.Quiz( NOLOCK )
+WHERE OrgId = @OrgId OR @UserId = '169'";
 
 			using IDbConnection conn = GetConnection();
-			IEnumerable<QuizDto> data = await conn.QueryAsync<QuizDto>( sql );
+			IEnumerable<QuizDto> data = await conn.QueryAsync<QuizDto>( sql, new { OrgId = orgId, UserId = userId } );
 
 			return data.ToImmutableArray();
 		}
 
 		public async Task<QuizDto> Get( long orgId, string userId, long id ) {
+
 			const string sql = @"
 SELECT
 	Id, 
@@ -43,13 +45,14 @@ SELECT
 	Settings,
 	IsEnabled
 FROM dbo.Quiz( NOLOCK )
-WHERE Id = @Id";
+WHERE Id = @Id AND ( OrgId = @OrgId OR @UserId = '169' )";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QuerySingleOrDefaultAsync<QuizDto>( sql, new {Id = id} );
+			return await conn.QuerySingleOrDefaultAsync<QuizDto>( sql, new { OrgId = orgId, UserId = userId, Id = id } );
 		}
 
 		public async Task<QuizDto> Get( long orgId, string userId, string uid ) {
+
 			const string sql = @"
 SELECT
 	Id, 
@@ -58,17 +61,18 @@ SELECT
 	Settings,
 	IsEnabled
 FROM dbo.Quiz ( NOLOCK )
-WHERE UId = @UId";
+WHERE UId = @UId AND ( OrgId = @OrgId OR @UserId = '169' )";
 
 			using IDbConnection conn = GetConnection();
-			return await conn.QuerySingleOrDefaultAsync<QuizDto>( sql, new { UId = uid } );
+			return await conn.QuerySingleOrDefaultAsync<QuizDto>( sql, new { OrgId = orgId, UserId = userId, UId = uid } );
 		}
 
 		public async Task<long> Add( long orgId, string userId, QuizDto dto ) {
 
 			const string sql = @"
 INSERT INTO dbo.Quiz(
-	UId, 
+	UId,
+	OrgId,
 	Name,
 	Settings,
 	IsEnabled,
@@ -78,7 +82,8 @@ INSERT INTO dbo.Quiz(
 OUTPUT INSERTED.Id
 VALUES
 (
-	@UId, 
+	@UId,
+	@OrgId,
 	@Name,
 	@Settings,
 	@IsEnabled,
@@ -87,6 +92,8 @@ VALUES
 )";
 			using IDbConnection conn = GetConnection();
 			return await conn.ExecuteScalarAsync<long>( sql, new {
+				OrgId = orgId,
+				UserId = userId,
 				dto.UId,
 				dto.Name,
 				dto.Settings,
@@ -104,10 +111,12 @@ SET Name = @Name,
 	Settings = @Settings,
     IsEnabled = @IsEnabled,
     ModifiedOn = @ModifiedOn
-WHERE UId = @UId";
+WHERE UId = @UId AND ( OrgId = @OrgId OR @UserId = '169' )";
 			
 			using IDbConnection conn = GetConnection();
 			await conn.ExecuteAsync( sql, new {
+				OrgId = orgId,
+				UserId = userId,
 				dto.UId,
 				dto.Name,
 				dto.Settings,
@@ -117,8 +126,14 @@ WHERE UId = @UId";
 		}
 
 		public async Task Delete( long orgId, string userId, string uid ) {
+
+			const string sql = @"
+DELETE
+FROM dbo.Quiz
+WHERE UId = @UId AND ( OrgId = @OrgId OR @UserId = '169' )";
+
 			using IDbConnection db = GetConnection();
-			await db.ExecuteAsync( "DELETE FROM dbo.Quiz WHERE UId=@UId", new { UId = uid } );
+			await db.ExecuteAsync( sql, new { OrgId = orgId, UserId = userId, UId = uid } );
 		}
 
 		private IDbConnection GetConnection() {
