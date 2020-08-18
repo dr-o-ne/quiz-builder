@@ -17,7 +17,7 @@ namespace QuizBuilder.Data.DataProviders.Default {
 			_dbConnectionFactory = dbConnectionFactory;
 		}
 
-		public async Task<ImmutableArray<QuizDto>> GetAll() {
+		public async Task<ImmutableArray<QuizDto>> GetAll( long orgId, string userId ) {
 
 			const string sql = @"
 SELECT
@@ -34,7 +34,7 @@ FROM dbo.Quiz( NOLOCK )";
 			return data.ToImmutableArray();
 		}
 
-		public async Task<QuizDto> Get( long id ) {
+		public async Task<QuizDto> Get( long orgId, string userId, long id ) {
 			const string sql = @"
 SELECT
 	Id, 
@@ -49,7 +49,7 @@ WHERE Id = @Id";
 			return await conn.QuerySingleOrDefaultAsync<QuizDto>( sql, new {Id = id} );
 		}
 
-		public async Task<QuizDto> Get( string uid ) {
+		public async Task<QuizDto> Get( long orgId, string userId, string uid ) {
 			const string sql = @"
 SELECT
 	Id, 
@@ -64,7 +64,7 @@ WHERE UId = @UId";
 			return await conn.QuerySingleOrDefaultAsync<QuizDto>( sql, new { UId = uid } );
 		}
 
-		public async Task<long> Add( QuizDto dto ) {
+		public async Task<long> Add( long orgId, string userId, QuizDto dto ) {
 
 			const string sql = @"
 INSERT INTO dbo.Quiz(
@@ -96,7 +96,7 @@ VALUES
 			} );
 		}
 
-		public async Task Update( QuizDto dto ) {
+		public async Task Update( long orgId, string userId, QuizDto dto ) {
 
 			const string sql = @"
 UPDATE dbo.Quiz
@@ -116,7 +116,7 @@ WHERE UId = @UId";
 			} );
 		}
 
-		public async Task Delete( string uid ) {
+		public async Task Delete( long orgId, string userId, string uid ) {
 			using IDbConnection db = GetConnection();
 			await db.ExecuteAsync( "DELETE FROM dbo.Quiz WHERE UId=@UId", new { UId = uid } );
 		}

@@ -16,7 +16,10 @@ namespace QuizBuilder.Domain.Action.Common.Services.Default {
 			byte[] key = Encoding.ASCII.GetBytes( Consts.JwtSecret );
 
 			SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor {
-				Subject = new ClaimsIdentity( new[] {new Claim( "id", user.Id )} ),
+				Subject = new ClaimsIdentity( new[] {
+					new Claim( ClaimTypes.NameIdentifier, user.Id ),
+					new Claim( Consts.Claim.OrgId, user.OrganizationId.ToString() )
+				} ),
 				Expires = DateTime.UtcNow.AddDays( 7 ),
 				SigningCredentials = new SigningCredentials( new SymmetricSecurityKey( key ), SecurityAlgorithms.HmacSha256Signature )
 			};

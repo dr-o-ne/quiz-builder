@@ -46,7 +46,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				await _groupDataProvider.Delete( uid );
 			}
 
-			await _quizDataProvider.Delete( command.UId );
+			await _quizDataProvider.Delete( command.OrgId, command.UserId, command.UId );
 
 			return CommandResult.Success();
 		}

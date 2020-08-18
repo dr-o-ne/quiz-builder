@@ -7,14 +7,22 @@ using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
 
-	public sealed class CreateQuizCommand : ICommand<QuizCommandResult> {
+	public sealed class CreateQuizCommand : ICommand<QuizCommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		public string Name { get; set; }
 
 	}
 
-	public sealed class UpdateQuizCommand : ICommand<CommandResult> {
+	public sealed class UpdateQuizCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "Id" )]
@@ -60,14 +68,22 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class DeleteQuizCommand : ICommand<CommandResult> {
+	public sealed class DeleteQuizCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		public string UId { get; set; }
 
 	}
 
-	public sealed class DeleteQuizzesCommand : ICommand<CommandResult> {
+	public sealed class DeleteQuizzesCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[JsonPropertyName( "Ids" )]
 		public string[] UIds { get; set; }

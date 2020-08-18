@@ -31,7 +31,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 
 		public async Task<QuestionCommandResult> HandleAsync( CreateQuestionCommand command ) {
 
-			var quizDto = await _quizDataProvider.Get( command.QuizUId );
+			var quizDto = await _quizDataProvider.Get( command.OrgId, command.UserId, command.QuizUId );
 			if( quizDto == null )
 				return new QuestionCommandResult { IsSuccess = false };
 

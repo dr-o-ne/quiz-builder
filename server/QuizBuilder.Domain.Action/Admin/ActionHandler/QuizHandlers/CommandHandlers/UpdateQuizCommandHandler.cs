@@ -20,13 +20,13 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 		}
 
 		public async Task<CommandResult> HandleAsync( UpdateQuizCommand command ) {
-			QuizDto quizDto = await _quizDataProvider.Get( command.UId );
+			QuizDto quizDto = await _quizDataProvider.Get( command.OrgId, command.UserId, command.UId );
 			if( quizDto == null )
 				return CommandResult.Fail();
 
 			Quiz quizModel = _mapper.Map<Quiz>( command );
 			QuizDto newQuizDto = _mapper.Map<QuizDto>( quizModel );
-			await _quizDataProvider.Update( newQuizDto );
+			await _quizDataProvider.Update( command.OrgId, command.UserId, newQuizDto );
 
 			return CommandResult.Success();
 		}

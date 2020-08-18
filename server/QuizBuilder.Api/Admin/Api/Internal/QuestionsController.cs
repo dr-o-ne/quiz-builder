@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Dispatchers;
+using QuizBuilder.Common.Extensions;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
 
@@ -19,8 +20,11 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpGet( "{uid}" )]
-		public async Task<ActionResult> Get( [FromRoute] GetQuestionByIdQuery query ) {
-			QuestionQueryResult result = await _dispatcher.QueryAsync( query );
+		public async Task<ActionResult> Get( [FromRoute] GetQuestionByIdQuery action ) {
+
+			action.SetIdentity( User );
+
+			QuestionQueryResult result = await _dispatcher.QueryAsync( action );
 
 			return result is null
 				? (ActionResult)NoContent()
@@ -28,8 +32,11 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create( [FromBody] CreateQuestionCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+		public async Task<ActionResult> Create( [FromBody] CreateQuestionCommand action ) {
+
+			action.SetIdentity( User );
+
+			var result = await _dispatcher.SendAsync( action );
 
 			return result.IsSuccess
 				? (ActionResult)Created( nameof( Create ), result )
@@ -37,8 +44,11 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> Update( [FromBody] UpdateQuestionCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+		public async Task<ActionResult> Update( [FromBody] UpdateQuestionCommand action ) {
+
+			action.SetIdentity( User );
+
+			var result = await _dispatcher.SendAsync( action );
 
 			return result.IsSuccess
 				? (ActionResult)NoContent()
@@ -46,8 +56,11 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpPut( "reorder" )]
-		public async Task<ActionResult> Reorder( [FromBody] ReorderQuestionsCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+		public async Task<ActionResult> Reorder( [FromBody] ReorderQuestionsCommand action ) {
+
+			action.SetIdentity( User );
+
+			var result = await _dispatcher.SendAsync( action );
 
 			return result.IsSuccess
 				? (ActionResult)NoContent()
@@ -55,8 +68,11 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		}
 
 		[HttpPut( "move" )]
-		public async Task<ActionResult> Move( [FromBody] MoveQuestionCommand command ) {
-			var result = await _dispatcher.SendAsync( command );
+		public async Task<ActionResult> Move( [FromBody] MoveQuestionCommand action ) {
+
+			action.SetIdentity( User );
+
+			var result = await _dispatcher.SendAsync( action );
 
 			return result.IsSuccess
 				? (ActionResult)NoContent()

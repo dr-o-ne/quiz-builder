@@ -36,7 +36,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 		public async Task<QuizQueryResult> HandleAsync( GetQuizByIdQuery query ) {
 			List<QuestionViewModel> questionViewModels = await GetQuestionViewModels( query.UId );
 			List<GroupViewModel> groupViewModels = await GetGroupViewModels( query.UId, questionViewModels );
-			QuizViewModel quizViewModel = await GetQuizViewModel( query.UId, groupViewModels );
+			QuizViewModel quizViewModel = await GetQuizViewModel( query, groupViewModels );
 
 			return new QuizQueryResult {Quiz = quizViewModel};
 		}
@@ -72,8 +72,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 			return groupViewModels;
 		}
 
-		private async Task<QuizViewModel> GetQuizViewModel( string quizUid, List<GroupViewModel> groupViewModels ) {
-			QuizDto quizDto = await _quizDataProvider.Get( quizUid );
+		private async Task<QuizViewModel> GetQuizViewModel( GetQuizByIdQuery query, List<GroupViewModel> groupViewModels ) {
+			QuizDto quizDto = await _quizDataProvider.Get( query.OrgId, query.UserId, query.UId );
 
 			if( quizDto == null )
 				return null;

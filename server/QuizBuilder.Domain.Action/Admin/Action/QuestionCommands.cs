@@ -3,11 +3,15 @@ using System.Text.Json.Serialization;
 using QuizBuilder.Common.CQRS.Actions;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
-using QuizBuilder.Domain.Model.Default;
+using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
 
-	public sealed class CreateQuestionCommand : ICommand<QuestionCommandResult> {
+	public sealed class CreateQuestionCommand : ICommand<QuestionCommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		public string Name { get; set; }
 
@@ -19,7 +23,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "GroupId" )]
 		public string GroupUId { get; set; }
 
-		public Enums.QuizItemType Type { get; set; }
+		public QuizItemType Type { get; set; }
 
 		[Required]
 		public string Text { get; set; }
@@ -38,7 +42,11 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class UpdateQuestionCommand : ICommand<CommandResult> {
+	public sealed class UpdateQuestionCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "Id" )]
@@ -49,7 +57,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "GroupId" )]
 		public string GroupUId { get; set; }
 
-		public Enums.QuizItemType Type { get; set; }
+		public QuizItemType Type { get; set; }
 
 		public string Text { get; set; }
 
@@ -67,7 +75,11 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class DeleteQuestionCommand : ICommand<CommandResult> {
+	public sealed class DeleteQuestionCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		public string QuizUId { get; set; }
@@ -77,7 +89,11 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class ReorderQuestionsCommand : ICommand<CommandResult> {
+	public sealed class ReorderQuestionsCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "groupId" )]
@@ -89,7 +105,11 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class MoveQuestionCommand : ICommand<CommandResult> {
+	public sealed class MoveQuestionCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "groupId" )]

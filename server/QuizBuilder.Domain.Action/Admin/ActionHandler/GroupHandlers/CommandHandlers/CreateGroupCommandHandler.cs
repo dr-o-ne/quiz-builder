@@ -38,7 +38,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.GroupHandlers.CommandHan
 
 		public async Task<GroupCommandResult> HandleAsync( CreateGroupCommand command ) {
 
-			var quizDto = await _quizDataProvider.Get( command.QuizUId );
+			var quizDto = await _quizDataProvider.Get( command.OrgId, command.UserId, command.QuizUId );
 			if( quizDto == null )
 				return new GroupCommandResult { IsSuccess = false };
 

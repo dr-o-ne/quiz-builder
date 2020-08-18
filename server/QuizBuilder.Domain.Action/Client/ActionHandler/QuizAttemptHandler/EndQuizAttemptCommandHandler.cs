@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using QuizBuilder.Common;
 using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
@@ -104,7 +105,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 		private async Task<List<Question>> GetQuestions( string attemptUId ) {
 			AttemptDto attemptDto = await _attemptDataProvider.Get( attemptUId );
-			QuizDto quizDto = await _quizDataProvider.Get( attemptDto.QuizId );
+			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, attemptDto.QuizId );
 			List<QuestionDto> questionDtos = ( await _questionDataProvider.GetByQuiz( quizDto.UId ) )
 				.OrderBy( x => x.SortOrder )
 				.ToList();

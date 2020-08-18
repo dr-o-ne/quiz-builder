@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoMapper;
+using QuizBuilder.Common;
 using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Common.Services;
 using QuizBuilder.Data.DataProviders;
@@ -53,7 +54,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			if( string.IsNullOrWhiteSpace( quizUId ) )
 				return new StartQuizAttemptCommandResult { IsSuccess = false };
 
-			QuizDto quizDto = await _quizDataProvider.Get( quizUId );
+			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, quizUId );
 
 			if( quizDto == null )
 				return new StartQuizAttemptCommandResult { IsSuccess = false };

@@ -35,7 +35,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			};
 
 			QuizDto quizDto = _mapper.Map<QuizDto>( quiz );
-			await _quizDataProvider.Add( quizDto );
+			await _quizDataProvider.Add( command.OrgId, command.UserId, quizDto );
 
 			var quizViewModel = _mapper.Map<QuizViewModel>( quiz );
 

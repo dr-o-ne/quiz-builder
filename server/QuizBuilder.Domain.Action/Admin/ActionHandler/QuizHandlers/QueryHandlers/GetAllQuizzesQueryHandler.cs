@@ -23,7 +23,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 		}
 
 		public async Task<QuizzesQueryResult> HandleAsync( GetAllQuizzesQuery query ) {
-			ImmutableArray<QuizDto> quizDtos = await _quizDataProvider.GetAll();
+			ImmutableArray<QuizDto> quizDtos = await _quizDataProvider.GetAll( query.OrgId, query.UserId );
 			List<Quiz> quizzes = _mapper.Map<List<Quiz>>( quizDtos );
 			List<QuizViewModel> quizViewModels = _mapper.Map<List<QuizViewModel>>( quizzes );
 

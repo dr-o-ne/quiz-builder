@@ -6,7 +6,11 @@ using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
 
-	public sealed class CreateGroupCommand : ICommand<GroupCommandResult> {
+	public sealed class CreateGroupCommand : ICommand<GroupCommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "QuizId" )]
@@ -14,7 +18,11 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class UpdateGroupCommand : ICommand<CommandResult> {
+	public sealed class UpdateGroupCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "id" )]
@@ -37,14 +45,22 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class DeleteGroupCommand : ICommand<CommandResult> {
+	public sealed class DeleteGroupCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		public string UId { get; set; }
 
 	}
 
-	public sealed class ReorderGroupsCommand : ICommand<CommandResult> {
+	public sealed class ReorderGroupsCommand : ICommand<CommandResult>, IIdentityAction {
+
+		public long OrgId { get; set; }
+
+		public string UserId { get; set; }
 
 		[Required]
 		[JsonPropertyName( "quizId" )]
