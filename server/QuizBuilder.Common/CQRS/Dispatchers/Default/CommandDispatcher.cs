@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using QuizBuilder.Common.Handlers;
-using QuizBuilder.Common.Types;
+using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions;
 
-namespace QuizBuilder.Common.Dispatchers.Default {
+namespace QuizBuilder.Common.CQRS.Dispatchers.Default {
 
 	internal sealed class CommandDispatcher : ICommandDispatcher {
 

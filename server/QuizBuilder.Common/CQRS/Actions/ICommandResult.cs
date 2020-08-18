@@ -1,4 +1,4 @@
-﻿namespace QuizBuilder.Common.Types {
+﻿namespace QuizBuilder.Common.CQRS.Actions {
 
 	public interface ICommandResult {
 

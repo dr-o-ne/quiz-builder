@@ -1,4 +1,4 @@
-namespace QuizBuilder.Common.Types.Default {
+namespace QuizBuilder.Common.CQRS.Actions.Default {
 
 	public class CommandResult : ICommandResult {
 

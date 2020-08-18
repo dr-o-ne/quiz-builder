@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using QuizBuilder.Common.Types;
+using QuizBuilder.Common.CQRS.Actions;
 
-namespace QuizBuilder.Common.Dispatchers.Default {
+namespace QuizBuilder.Common.CQRS.Dispatchers.Default {
 
 	internal sealed class Dispatcher : IDispatcher {
 

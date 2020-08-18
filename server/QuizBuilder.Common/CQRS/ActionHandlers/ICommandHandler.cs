@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using QuizBuilder.Common.Types;
+using QuizBuilder.Common.CQRS.Actions;
 
-namespace QuizBuilder.Common.Handlers {
+namespace QuizBuilder.Common.CQRS.ActionHandlers {
 
 	public interface ICommandHandler<in TCommand, TResult>
 		where TCommand : ICommand<TResult>

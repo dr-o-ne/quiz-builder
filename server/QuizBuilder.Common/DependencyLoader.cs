@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Common.Dispatchers.Default;
+using QuizBuilder.Common.CQRS.Dispatchers;
+using QuizBuilder.Common.CQRS.Dispatchers.Default;
 
 namespace QuizBuilder.Common {
 

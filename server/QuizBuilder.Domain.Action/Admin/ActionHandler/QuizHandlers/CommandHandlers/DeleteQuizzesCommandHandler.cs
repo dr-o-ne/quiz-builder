@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Common.Handlers;
-using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions.Default;
+using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHandlers {

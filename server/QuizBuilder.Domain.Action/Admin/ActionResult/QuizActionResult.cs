@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionResult {

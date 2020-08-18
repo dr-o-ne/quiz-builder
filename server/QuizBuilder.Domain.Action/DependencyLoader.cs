@@ -2,7 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using QuizBuilder.Common.Handlers;
+using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Domain.Action.Client.Services;
 using QuizBuilder.Domain.Action.Client.Services.Default;
 using QuizBuilder.Domain.Action.Common.Services;

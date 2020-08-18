@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QuizBuilder.Common.Dispatchers;
-using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Common.CQRS.Actions.Default;
+using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {

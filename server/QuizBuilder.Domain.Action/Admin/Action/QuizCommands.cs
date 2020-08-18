@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using QuizBuilder.Common.Types;
-using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Common.CQRS.Actions;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
 using static QuizBuilder.Domain.Model.Default.Enums;
 

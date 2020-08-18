@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.Json.Serialization;
-using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Common.CQRS.Actions.Default;
 
 namespace QuizBuilder.Domain.Action.Client.ActionResult {
 

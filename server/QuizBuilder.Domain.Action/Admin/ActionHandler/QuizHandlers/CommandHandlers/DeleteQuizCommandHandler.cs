@@ -1,8 +1,8 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using QuizBuilder.Common.Handlers;
-using QuizBuilder.Common.Types.Default;
+using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default;
