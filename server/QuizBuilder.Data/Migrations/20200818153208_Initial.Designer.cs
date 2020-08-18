@@ -10,7 +10,7 @@ using QuizBuilder.Data;
 namespace QuizBuilder.Data.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200815162713_Initial")]
+    [Migration("20200818153208_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,9 @@ namespace QuizBuilder.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
+
+                    b.Property<long>("OrganizationId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");

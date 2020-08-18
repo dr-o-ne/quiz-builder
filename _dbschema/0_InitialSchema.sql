@@ -132,3 +132,20 @@ GO
 
 CREATE UNIQUE NONCLUSTERED INDEX [UI_Attempt_UId] ON dbo.Attempt ( [UId] ASC ) ON [PRIMARY]
 GO
+
+CREATE TABLE dbo.Organization(
+	[Id] BIGINT IDENTITY(1,1) NOT NULL,
+	[UId] NVARCHAR(10) NOT NULL,
+	[CreatedOn] DATETIME2(7) NOT NULL,
+	[ModifiedOn] DATETIME2(7) NOT NULL,
+
+	CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED ( [Id] ASC ) ON [PRIMARY]
+
+) ON [PRIMARY]
+GO
+
+ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Organization_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]
+GO
+
+ALTER TABLE dbo.Quiz ADD CONSTRAINT [DF_Organization_ModifiedOn] DEFAULT (getutcdate()) FOR [ModifiedOn]
+GO

@@ -10,6 +10,7 @@ using QuizBuilder.Domain.Action.Admin.Map.Default.ModelToModel;
 using QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Attempts;
+using QuizBuilder.Domain.Model.Default.Organization;
 using QuizBuilder.Domain.Model.Default.Questions;
 using QuizBuilder.Domain.Model.Default.Structure;
 using QuizBuilder.Utils;
@@ -20,11 +21,19 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 	public sealed class MapperProfile : Profile {
 
 		public MapperProfile() {
+			AddOrganizationMapping();
 			AddUserMapping();
 			AddQuizMapping();
 			AddGroupMapping();
 			AddQuestionMapping();
 			AddAttemptMapping();
+		}
+
+		private void AddOrganizationMapping() {
+
+			CreateMap<Organization, OrganizationDto>();
+			CreateMap<OrganizationDto, Organization>( MemberList.Source );
+
 		}
 
 		private void AddUserMapping() {

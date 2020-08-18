@@ -12,6 +12,7 @@ namespace QuizBuilder.Data {
 
 			services.AddSingleton<IDatabaseConnectionFactory, DatabaseConnectionFactory>();
 
+			services.AddSingleton<IOrganizationDataProvider, OrganizationDataProvider>();
 			services.AddSingleton<IQuizDataProvider, QuizDataProvider>();
 			services.AddSingleton<IQuestionDataProvider, QuestionDataProvider>();
 			services.AddSingleton<IGroupDataProvider, GroupDataProvider>();
