@@ -82,7 +82,7 @@ namespace QuizBuilder.Api {
 	        services.AddMappers();
 	        services.AddModels();
 	        services.AddData();
-
+			
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

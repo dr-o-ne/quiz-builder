@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Common.Extensions;
+using QuizBuilder.Common.Services;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
@@ -14,13 +15,19 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 	public sealed class QuizzesController : ControllerBase {
 
 		private readonly IDispatcher _dispatcher;
+		private readonly IEmailService _test;
 
-		public QuizzesController( IDispatcher dispatcher ) {
+		public QuizzesController( IDispatcher dispatcher, IEmailService test ) {
+
+			_test = test;
 			_dispatcher = dispatcher;
 		}
 
 		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> Get( [FromRoute] string uid ) {
+
+			await _test.SendEmail( "studmm@ukr.net", "test", "test" );
+
 
 			var action = new GetQuizByIdQuery { UId = uid };
 			action.SetIdentity( User );

@@ -14,6 +14,7 @@ namespace QuizBuilder.Common {
 			services.AddScoped<IDispatcher, Dispatcher>();
 
 			services.AddSingleton<IUIdService, UIdService>();
+			services.AddSingleton<IEmailService, EmailService>();
 		}
 
 	}
