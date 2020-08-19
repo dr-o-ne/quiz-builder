@@ -69,6 +69,8 @@ namespace QuizBuilder.Api {
 			        };
 		        } );
 
+	        services.AddSwaggerGen();
+
 			ConfigureApplication( services );
 		}
 
@@ -92,6 +94,11 @@ namespace QuizBuilder.Api {
             }
 
             UpdateDatabase( app );
+
+            app.UseSwagger();
+            app.UseSwaggerUI( x => {
+	            x.SwaggerEndpoint( "/swagger/v1/swagger.json", "API V1" );
+            } );
 
 			app.UseHttpsRedirection();
 
