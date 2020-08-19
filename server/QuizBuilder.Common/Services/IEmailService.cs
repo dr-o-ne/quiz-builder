@@ -4,7 +4,7 @@ namespace QuizBuilder.Common.Services {
 
 	public interface IEmailService {
 
-		Task SendEmail( string address, string subject, string message );
+		Task<bool> SendEmail( string address, string subject, string message );
 
 	}
 
