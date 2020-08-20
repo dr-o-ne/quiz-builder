@@ -56,6 +56,7 @@ import { AuthDataProvider } from './_service/dataProviders/auth.dataProvider';
 import { AuthService } from './_service/auth/auth.service';
 import { AuthGuard } from './_common/guards/auth.guard';
 import { JwtInterceptor } from './_common/interceptors/jwt.interceptor';
+import { DebounceClickDirective } from './_common/directives/debounceClick.directive';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { JwtInterceptor } from './_common/interceptors/jwt.interceptor';
     QuizInfoComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
-    GroupInfoComponent
+    GroupInfoComponent,
+    DebounceClickDirective
   ],
   imports: [
     BrowserModule,
