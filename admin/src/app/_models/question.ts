@@ -1,5 +1,7 @@
 export class Question {
   id: string;
+  quizId: string;
+  groupId: string;
   name: string;
   text: string;
   points: number;
@@ -8,8 +10,6 @@ export class Question {
   incorrectFeedback: string;
   type: QuestionType;
   settings?: any;
-  quizId: string;
-  groupId?: string;
   choices?: any;
 }
 
