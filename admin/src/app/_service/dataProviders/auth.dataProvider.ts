@@ -15,11 +15,11 @@ export class AuthDataProvider {
     constructor(private http: HttpClient) {
     }
 
-    signUp(name: string, email: string, password: string): Observable<object> {
+    signUp(name: string, email: string, password: string): Observable<ApiResponse<User>> {
         const body = { name, email, password };
 
         console.log(body);
-        return this.http.post(this.apiUrl + 'authentication/register', body);
+        return this.http.post<ApiResponse<User>>(this.apiUrl + 'authentication/register', body);
     }
 
     login(email: string, password: string): Observable<ApiResponse<User>> {

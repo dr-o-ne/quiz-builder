@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Common.CQRS.Actions.Default;
@@ -12,25 +11,27 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 
 	public sealed class LoginUserCommandHandler : ICommandHandler<LoginUserCommand, CommandResult<LoginInfo>> {
 
-		private readonly IMapper _mapper;
 		private readonly SignInManager<UserDto> _signInManager;
 		private readonly UserManager<UserDto> _userManager;
 		private readonly IJwtTokenFactory _jwtTokenFactory;
 
-		public LoginUserCommandHandler( IMapper mapper, SignInManager<UserDto> signInManager, UserManager<UserDto> userManager, IJwtTokenFactory jwtTokenFactory ) {
-			_mapper = mapper;
+		public LoginUserCommandHandler( SignInManager<UserDto> signInManager, UserManager<UserDto> userManager, IJwtTokenFactory jwtTokenFactory ) {
 			_signInManager = signInManager;
 			_userManager = userManager;
 			_jwtTokenFactory = jwtTokenFactory;
 		}
 
 		public async Task<CommandResult<LoginInfo>> HandleAsync( LoginUserCommand command ) {
+			return await Login( command.Email, command.Password );
+		}
 
-			SignInResult signInResult = await _signInManager.PasswordSignInAsync( command.Email, command.Password, false, false );
+		private async Task<CommandResult<LoginInfo>> Login( string email, string password ) {
+
+			SignInResult signInResult = await _signInManager.PasswordSignInAsync( email, password, false, false );
 			if( !signInResult.Succeeded )
 				return new CommandResult<LoginInfo> { IsSuccess = false };
 
-			UserDto user = await _userManager.FindByEmailAsync( command.Email );
+			UserDto user = await _userManager.FindByEmailAsync( email );
 
 			string token = _jwtTokenFactory.Create( user );
 

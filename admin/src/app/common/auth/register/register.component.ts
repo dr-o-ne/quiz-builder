@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import icVisibility from '@iconify/icons-ic/twotone-visibility';
 import icVisibilityOff from '@iconify/icons-ic/twotone-visibility-off';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
 import { AuthService } from 'src/app/_service/auth/auth.service';
 
@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
   inputType = 'password';
   visible = false;
+  returnUrl: string;
 
   icVisibility = icVisibility;
   icVisibilityOff = icVisibilityOff;
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef
   ) { }
@@ -36,6 +38,8 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   send() {
@@ -49,8 +53,11 @@ export class RegisterComponent implements OnInit {
     const password = this.form.value.password as string;
 
     this.authService.signUp(name, email, password).subscribe(
-      () => { this.router.navigate(['/login']); }
-    );
+      () => {
+          console.log('Success');
+          this.router.navigate([this.returnUrl]);
+      },
+      error => { console.log('Oops'); });
   }
 
   toggleVisibility() {

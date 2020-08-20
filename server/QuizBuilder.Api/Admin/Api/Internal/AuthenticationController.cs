@@ -21,7 +21,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			var result = await _dispatcher.SendAsync( userCommand );
 
 			return result.IsSuccess
-				? (ActionResult) Ok()
+				? (ActionResult) Ok( result )
 				: NotFound( result );
 		}
 
@@ -31,7 +31,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			var result = await _dispatcher.SendAsync( command );
 
 			return result.IsSuccess
-				? (ActionResult)Created( nameof( Login ), result )
+				? (ActionResult)Ok( result )
 				: UnprocessableEntity( result );
 		}
 

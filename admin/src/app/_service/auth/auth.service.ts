@@ -21,8 +21,16 @@ export class AuthService {
         return this.currentUserSubject.value;
     }
 
-    signUp(name: string, email: string, password: string): Observable<any> {
-        return this.dataProvider.signUp(name, email, password);
+    signUp(name: string, email: string, password: string): Observable<User> {
+        return this.dataProvider.signUp(name, email, password).pipe(
+            map( response => {       
+                const user = response.payload;
+                localStorage.setItem('currentUser', JSON.stringify(user));    
+                this.currentUserSubject.next(user);
+
+                return user;            
+            } ) 
+        );
     }
 
     login(email: string, password: string): Observable<User> {
