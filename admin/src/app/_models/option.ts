@@ -8,9 +8,3 @@ export class Option {
     public enabled: boolean = false,
   ) {}
 }
-
-export class InfoChoice {
-    public questionId: string;
-    public choices?: Choice[];
-    public cssclass: any;
-}
