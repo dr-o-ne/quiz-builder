@@ -160,18 +160,6 @@ export class QuestionPageComponent implements OnInit {
     this.choices = [];
   }
 
-  openPreview(): void {
-    this.updateQuestionModel();
-    /*const dialogRef = this.dialog.open( ModalWindowPreviewQuestionComponent, {
-      width: '50em',
-      data: { question: this.question }
-    } );
-
-    dialogRef.afterClosed().subscribe( result => {
-      console.log( 'The dialog was closed' );
-    } );*/
-  }
-
   clickOption( event: MouseEvent, option: Option ): void {
     option.enabled = !option.enabled;
     event.stopPropagation();
