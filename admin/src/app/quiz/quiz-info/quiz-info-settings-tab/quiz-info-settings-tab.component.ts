@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Quiz, PageSettings } from 'src/app/_models/quiz';
 import { QuizLangService } from 'src/app/_service/lang/quiz.lang.service';
-import { utc } from 'moment';
 
 @Component({
     selector: 'app-quiz-info-settings-tab',
