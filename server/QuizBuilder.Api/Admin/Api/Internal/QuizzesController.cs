@@ -26,9 +26,6 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 		[HttpGet( "{uid}" )]
 		public async Task<ActionResult> Get( [FromRoute] string uid ) {
 
-			await _test.SendEmail( "studmm@ukr.net", "test", "test" );
-
-
 			var action = new GetQuizByIdQuery { UId = uid };
 			action.SetIdentity( User );
 
