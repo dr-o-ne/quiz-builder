@@ -77,7 +77,14 @@ export class QuestionPageComponent implements OnInit {
       } else {
         this.createNewQuestion(history.state.questionType);
       }
+      this.initGroup(history.state.groupId);
     } );
+  }
+
+  initGroup(groupId: string): void {
+    if ( !this.question.groupId ) {
+      this.question.groupId = groupId || '';
+    }
   }
 
   createNewQuestion(questionType: QuestionType): void {
