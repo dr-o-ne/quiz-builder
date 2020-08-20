@@ -1,12 +1,12 @@
-import {Component, ComponentFactoryResolver, Input, OnChanges, SimpleChanges, Type, ViewChild} from '@angular/core';
-import {Choice} from 'src/app/_models/choice';
-import {BaseChoiceSettings} from 'src/app/_models/settings/answer.settings';
-import {ChoiceDirective} from '../../../_directive/choice.directive';
-import {QuestionType} from '../../../_models/question';
-import {TrueFalseAnswerComponent} from '../true-false-answer/true-false-answer.component';
-import {MultiSelectChoiceComponent} from '../multi-select-choice/multi-select-choice.component';
-import {BaseChoiceComponent} from './base-choice.component';
-import {MultipleChoiceAnswerComponent} from '../multiple-choice-answer/multiple-choice-answer.component';
+import { Component, ComponentFactoryResolver, Input, OnChanges, SimpleChanges, Type, ViewChild } from '@angular/core';
+import { Choice } from 'src/app/_models/choice';
+import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
+import { ChoiceDirective } from '../../../_directive/choice.directive';
+import { QuestionType } from '../../../_models/question';
+import { TrueFalseAnswerComponent } from '../true-false-answer/true-false-answer.component';
+import { MultiSelectChoiceComponent } from '../multi-select-choice/multi-select-choice.component';
+import { BaseChoiceComponent } from './base-choice.component';
+import { MultipleChoiceAnswerComponent } from '../multiple-choice-answer/multiple-choice-answer.component';
 import { LongAnswerComponent } from '../long-answer/long-answer.component';
 
 @Component({
@@ -43,6 +43,5 @@ export class DynamicChoiceComponent implements OnChanges {
     const componentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
     componentRef.instance.settings = this.settings;
     componentRef.instance.choices = this.choices;
-    componentRef.instance.questionType = this.questionType;
   }
 }

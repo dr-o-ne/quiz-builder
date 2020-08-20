@@ -18,7 +18,6 @@ export class BaseChoiceComponent implements OnInit {
   choicesDisplayTypesKeys: number[] = [];
   choicesEnumerationTypes = ChoicesEnumerationType;
   choicesEnumerationTypesKeys: number[] = [];
-  questionType: QuestionType;
 
   options: Option[] = [
     new Option('feedback', 'Feedback', 'text')

@@ -23,6 +23,9 @@ export class QuestionDataProvider {
     }
 
     createQuestion(question: Question): Observable<object> {
+
+        console.log(question);
+
         return this.http.post(this.apiUrl + 'questions', question);
     }
 
