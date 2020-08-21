@@ -54,10 +54,8 @@ export class RegisterComponent implements OnInit {
 
     this.authService.signUp(name, email, password).subscribe(
       () => {
-          console.log('Success');
           this.router.navigate([this.returnUrl]);
-      },
-      error => { console.log('Oops'); });
+      });
   }
 
   toggleVisibility() {
