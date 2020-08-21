@@ -47,7 +47,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 				return new CommandResult<LoginInfo> { IsSuccess = false }; // TODO: add client error message
 			}
 
-			var organization = await CreateOrganization();
+			OrganizationDto organization = await CreateOrganization();
 			userDto.OrganizationId = organization.Id;
 
 			IdentityResult result = await _userManager.CreateAsync( userDto, command.Password );
@@ -56,7 +56,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 				return new CommandResult<LoginInfo> { IsSuccess = false }; // TODO: filter and add client error message
 			}
 
-			return await Login( command.Email, command.Password );
+			UserDto user = await _userManager.FindByEmailAsync( command.Email );
+
+			return await Login( user, command.Password );
 		}
 
 		private async Task<bool> CheckUserExists( UserDto userDto ) {
@@ -72,13 +74,11 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 			return await _organizationDataProvider.Add( organizationDto );
 		}
 
-		private async Task<CommandResult<LoginInfo>> Login( string email, string password ) {
+		private async Task<CommandResult<LoginInfo>> Login( UserDto user, string password ) {
 
-			SignInResult signInResult = await _signInManager.PasswordSignInAsync( email, password, false, false );
+			SignInResult signInResult = await _signInManager.PasswordSignInAsync( user, password, false, false );
 			if( !signInResult.Succeeded )
 				return new CommandResult<LoginInfo> { IsSuccess = false };
-
-			UserDto user = await _userManager.FindByEmailAsync( email );
 
 			string token = _jwtTokenFactory.Create( user );
 

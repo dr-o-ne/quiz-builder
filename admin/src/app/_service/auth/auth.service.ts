@@ -45,6 +45,10 @@ export class AuthService {
         );
     }
 
+    forgotPassword(email: string): Observable<any> {
+        return this.dataProvider.forgotPassord(email);
+    }
+
     logout(): void {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);

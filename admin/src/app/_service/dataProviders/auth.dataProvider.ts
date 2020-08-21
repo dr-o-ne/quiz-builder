@@ -27,4 +27,9 @@ export class AuthDataProvider {
         return this.http.post<ApiResponse<User>>(this.apiUrl + 'authentication/login', body);
     }
 
+    forgotPassord(email: string): Observable<any> {
+        const body = { email };
+        return this.http.post(this.apiUrl + 'authentication/forgot-password', body);
+    }
+
 }

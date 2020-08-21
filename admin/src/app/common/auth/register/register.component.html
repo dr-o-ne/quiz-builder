@@ -8,7 +8,7 @@
 
     <div class="text-center mt-4">
       <h2 class="title m-0">Register for an account</h2>
-      <h4 class="body-2 text-secondary m-0">Simply fill out the form below</h4>
+      <h4 class="body-2 text-secondary m-0">Sign up in seconds, cancel any time</h4>
     </div>
 
     <div [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
@@ -38,7 +38,7 @@
         <mat-checkbox class="caption" color="primary">I accept the <a>terms and conditions.</a></mat-checkbox>
       </div>
       <button appDebounceClick (debounceClick)="send()" [debounceTime]="1000" color="primary" mat-raised-button type="button">
-        CREATE ACCOUNT
+        Create account
       </button>
       <p class="text-secondary text-center">
         Already have an account?<br/>

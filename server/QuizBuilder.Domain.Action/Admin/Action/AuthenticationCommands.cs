@@ -33,4 +33,12 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
+	public sealed class ForgotPasswordCommand : ICommand<CommandResult> {
+
+		[Required]
+		[JsonPropertyName( "email" )]
+		public string Email { get; set; }
+
+	}
+
 }
