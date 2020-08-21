@@ -49,6 +49,19 @@ export class AuthService {
         return this.dataProvider.forgotPassord(email);
     }
 
+    newPassword(code: string, email: string, password: string): Observable<User> {
+        return this.dataProvider.newPassword(code, email, password).pipe(
+            map( response => {       
+                const user = response.payload;
+                localStorage.setItem('currentUser', JSON.stringify(user));    
+                this.currentUserSubject.next(user);
+
+                return user;            
+            } ) 
+        );
+    }
+
+
     logout(): void {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);

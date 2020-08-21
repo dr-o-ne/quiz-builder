@@ -41,4 +41,19 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
+	public sealed class NewPasswordCommand : ICommand<CommandResult<LoginInfo>> {
+
+		[JsonPropertyName( "code" )]
+		public string Code { get; set; }
+
+		[Required]
+		[JsonPropertyName( "email" )]
+		public string Email { get; set; }
+
+		[Required]
+		[JsonPropertyName( "password" )]
+		public string Password { get; set; }
+
+	}
+
 }

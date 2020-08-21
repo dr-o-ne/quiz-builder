@@ -58,6 +58,7 @@ import { AuthGuard } from './_common/guards/auth.guard';
 import { JwtInterceptor } from './_common/interceptors/jwt.interceptor';
 import { DebounceClickDirective } from './_common/directives/debounceClick.directive';
 import { ForgotPasswordComponent } from './common/auth/forgotPassword/forgotPassword.component';
+import { NewPasswordComponent } from './common/auth/newPassword/newPassword.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { ForgotPasswordComponent } from './common/auth/forgotPassword/forgotPass
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    NewPasswordComponent,
 
     QuizInfoComponent,
     QuizInfoSettingsTabComponent,

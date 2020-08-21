@@ -32,4 +32,9 @@ export class AuthDataProvider {
         return this.http.post(this.apiUrl + 'authentication/forgot-password', body);
     }
 
+    newPassword(code: string, email: string, password: string): Observable<ApiResponse<User>> {
+        const body = { code, email, password };
+        return this.http.post<ApiResponse<User>>(this.apiUrl + 'authentication/new-password', body);
+    }
+
 }

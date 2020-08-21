@@ -12,11 +12,13 @@ import { LoginComponent } from './common/auth/login/login.component';
 import { RegisterComponent } from './common/auth/register/register.component';
 import { AuthGuard } from './_common/guards/auth.guard';
 import { ForgotPasswordComponent } from './common/auth/forgotPassword/forgotPassword.component';
+import { NewPasswordComponent } from './common/auth/newPassword/newPassword.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'new-password/:code', component: NewPasswordComponent },
   {
     path: '', component: CustomLayoutComponent,
     children: [

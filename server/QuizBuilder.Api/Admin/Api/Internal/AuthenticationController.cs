@@ -45,6 +45,16 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 				: UnprocessableEntity( result );
 		}
 
+		[HttpPost( "new-password" )]
+		public async Task<ActionResult> NewPassword( NewPasswordCommand command ) {
+
+			var result = await _dispatcher.SendAsync( command );
+
+			return result.IsSuccess
+				? (ActionResult)Ok( result )
+				: UnprocessableEntity( result );
+		}
+
 
 	}
 
