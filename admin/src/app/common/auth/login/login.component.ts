@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.email],
       password: ['', Validators.required]
     });
 
