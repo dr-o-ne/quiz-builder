@@ -12,8 +12,7 @@ import { SidebarComponent } from '../../@vex/components/sidebar/sidebar.componen
 @UntilDestroy()
 @Component({
   selector: 'vex-custom-layout',
-  templateUrl: './custom-layout.component.html',
-  styleUrls: ['./custom-layout.component.scss']
+  templateUrl: './custom-layout.component.html'
 })
 export class CustomLayoutComponent implements OnInit {
 
