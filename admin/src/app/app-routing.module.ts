@@ -61,7 +61,7 @@ const routes: Routes = [
                 ]
             },
             { path: 'questions/new', component: QuestionInfoComponent },
-            { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuizResolver } }
+            { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuestionResolver } }
           ]
       }
     ]

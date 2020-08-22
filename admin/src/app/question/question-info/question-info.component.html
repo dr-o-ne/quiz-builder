@@ -18,7 +18,32 @@
     
             <ng-template matTabContent>
     
-Test
+              <form [formGroup]="questionForm">
+
+                <div class="container pt-gutter">
+
+                  <mat-form-field fxFlex="25" appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type" >
+                      <mat-option *ngFor="let key of questionTypeKeys" [value]="key"> 
+                        {{questionTypes[key]}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+  
+                  <mat-form-field fxFlex="25" fxFlexOffset="2" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" formControlName="name">
+                  </mat-form-field>
+  
+                  <mat-form-field fxFlex="10" fxFlexOffset="2" appearance="outline">
+                    <mat-label>Points</mat-label>
+                    <input matInput type="number" formControlName="points">
+                  </mat-form-field>
+  
+                </div>
+
+              </form>
     
             </ng-template>
 
