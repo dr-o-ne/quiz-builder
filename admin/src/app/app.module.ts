@@ -59,11 +59,29 @@ import { JwtInterceptor } from './_common/interceptors/jwt.interceptor';
 import { DebounceClickDirective } from './_common/directives/debounceClick.directive';
 import { ForgotPasswordComponent } from './common/auth/forgotPassword/forgotPassword.component';
 import { NewPasswordComponent } from './common/auth/newPassword/newPassword.component';
+import { QuestionInfoComponent } from './question/question-info/question-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    Error404Component,
+    Error500Component,
+
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    NewPasswordComponent,
+
+    DebounceClickDirective,
+
     QuizListComponent,
+    QuizInfoComponent,
+    QuizInfoSettingsTabComponent,
+    QuizInfoQuestionsTabComponent,
+    GroupInfoComponent,
+    QuestionInfoComponent,
+
     QuestionPageComponent,
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
@@ -73,19 +91,6 @@ import { NewPasswordComponent } from './common/auth/newPassword/newPassword.comp
     QuestionPreviewDirective,
     DynamicChoiceComponent,
     LongAnswerComponent,
-    Error404Component,
-    Error500Component,
-
-    LoginComponent,
-    RegisterComponent,
-    ForgotPasswordComponent,
-    NewPasswordComponent,
-
-    QuizInfoComponent,
-    QuizInfoSettingsTabComponent,
-    QuizInfoQuestionsTabComponent,
-    GroupInfoComponent,
-    DebounceClickDirective
   ],
   imports: [
     BrowserModule,

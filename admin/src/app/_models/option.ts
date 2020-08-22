@@ -1,5 +1,3 @@
-import { Choice } from './choice';
-
 export class Option {
   constructor(
     public name: string,

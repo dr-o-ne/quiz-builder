@@ -38,7 +38,9 @@ export class QuizDataProvider {
     }
 
     getQuiz(id: string): Observable<Quiz> {
-        return this.http.get<Quiz>(this.apiUrl + 'quizzes/' + id);
+        const res = this.http.get<Quiz>(this.apiUrl + 'quizzes/' + id);
+        console.log(res);
+        return res;
     }
 
     createQuiz(quiz: Quiz): Observable<object> {
