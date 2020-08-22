@@ -67,8 +67,8 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 
 		#region Question
 
-		public Task<(HttpStatusCode statusCode, QuestionQueryResult data)> QuestionGet( string uid ) =>
-			_httpClient.GetValueAsync<QuestionQueryResult>( "admin/questions/" + uid );
+		public Task<(HttpStatusCode statusCode, CommandResult<QuestionViewModel> data)> QuestionGet( string uid ) =>
+			_httpClient.GetValueAsync<CommandResult<QuestionViewModel>>( "admin/questions/" + uid );
 
 		public Task<(HttpStatusCode statusCode, QuestionCommandResult data)> QuestionCreate( object content ) =>
 			_httpClient.PostValueAsync<QuestionCommandResult>( "admin/questions/", ToCommand<CreateQuestionCommand>( content ) );

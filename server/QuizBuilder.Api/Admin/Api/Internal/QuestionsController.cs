@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Domain.Action.Admin.Action;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
@@ -25,7 +24,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			var action = new GetQuestionByIdQuery { UId = uid };
 			action.SetIdentity( User );
 
-			QuestionQueryResult result = await _dispatcher.QueryAsync( action );
+			var result = await _dispatcher.QueryAsync( action );
 
 			return result is null
 				? (ActionResult)NoContent()

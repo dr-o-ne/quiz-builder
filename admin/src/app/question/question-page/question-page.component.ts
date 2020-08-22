@@ -62,7 +62,7 @@ export class QuestionPageComponent implements OnInit {
     this.quizId = history.state.quizId;
     this.activeRoute.data.subscribe( data => {
       if ( data && data.questionResolver ) {
-        this.question = data.questionResolver.question;
+        this.question = data.questionResolver;
 
         this.questionForm.patchValue({
           name: this.question.name, 

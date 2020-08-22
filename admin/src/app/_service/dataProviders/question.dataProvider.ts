@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/_models/question';
+import { ApiResponse } from './apiResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,8 @@ export class QuestionDataProvider {
     constructor(private http: HttpClient) {
     }
 
-    getQuestion(id: string): Observable<object> {
-        return this.http.get(this.apiUrl + 'questions/' + id);
+    getQuestion(id: string): Observable<ApiResponse<Question>> {
+        return this.http.get<ApiResponse<Question>>(this.apiUrl + 'questions/' + id);
     }
 
     updateQuestion(question: Question): Observable<object> {
