@@ -6,3 +6,4 @@ export class Option {
     public enabled: boolean = false,
   ) {}
 }
+
