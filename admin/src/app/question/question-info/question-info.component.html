@@ -1,81 +1,89 @@
-<div class="container">
+<vex-page-layout> 
+  <vex-page-layout-content class="container">
+
     <div class="card main-color">
-      
-        <div class="row container-option-btn" fxLayoutAlign="flex-end">
-          <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
+      <div class="row container-option-btn" fxLayoutAlign="flex-end">
+        <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
+            <mat-icon *ngIf="option.enabled">done</mat-icon>
+            <span>{{option.displayName}}</span>
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
-              <mat-icon *ngIf="option.enabled">done</mat-icon>
-              <span>{{option.displayName}}</span>
-            </button>
-          </mat-menu>
-        </div>
-
-        <mat-tab-group>
-    
-          <mat-tab label="Question">
-    
-            <ng-template matTabContent>
-    
-              <form [formGroup]="questionForm">
-
-                <div class="container pt-gutter">
-
-                  <mat-form-field fxFlex="25" appearance="outline">
-                    <mat-label>Type</mat-label>
-                    <mat-select formControlName="type" >
-                      <mat-option *ngFor="let key of questionTypeKeys" [value]="key"> 
-                        {{questionTypes[key]}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+        </mat-menu>
+      </div>
   
-                  <mat-form-field fxFlex="25" fxFlexOffset="2" appearance="outline">
-                    <mat-label>Name</mat-label>
-                    <input matInput type="text" formControlName="name">
-                  </mat-form-field>
+      <mat-tab-group>
   
-                  <mat-form-field fxFlex="10" fxFlexOffset="2" appearance="outline">
-                    <mat-label>Points</mat-label>
-                    <input matInput type="number" formControlName="points">
-                  </mat-form-field>
+        <mat-tab label="Question">
   
+          <ng-template matTabContent>
+  
+            <form [formGroup]="questionForm">
+  
+              <div class="container pt-gutter">
+  
+                <mat-form-field fxFlex="25" appearance="outline">
+                  <mat-label>Type</mat-label>
+                  <mat-select formControlName="type" >
+                    <mat-option *ngFor="let key of questionTypeKeys" [value]="key"> 
+                      {{questionTypes[key]}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field fxFlex="25" fxFlexOffset="2" appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" formControlName="name">
+                </mat-form-field>
+  
+                <mat-form-field fxFlex="10" fxFlexOffset="2" appearance="outline">
+                  <mat-label>Points</mat-label>
+                  <input matInput type="number" formControlName="points">
+                </mat-form-field>
+  
+              </div>
+  
+              <div class="container pb-gutter">
+                <div class="card editor">
+                  <quill-editor
+                        @fadeInUp
+                        formControlName="text"
+                        [styles]="{ flex: '1 1 auto' }"
+                        (onContentChanged)="onContentChanged($event);">
+                  </quill-editor>
                 </div>
-
-                <div class="container pb-gutter">
-                  <div class="card editor">
-                    <quill-editor
-                          @fadeInUp
-                          formControlName="text"
-                          [styles]="{ flex: '1 1 auto' }"
-                          (onContentChanged)="onContentChanged($event);">
-                    </quill-editor>
-                  </div>
-                </div>
-
-                <div *ngFor="let option of getQuestionOptions()">
-                  <div *ngIf="option.type == 'wysiwyg'">
-                    <div class="p-gutter container">
-                      <div class="card editor">
-                        <quill-editor
-                              @fadeInUp
-                              formControlName={{option.name}}
-                              [styles]="{ flex: '1 1 auto' }"
-                              (onContentChanged)="onContentChanged($event);">
-                        </quill-editor>
-                      </div>
+              </div>
+  
+              <div *ngFor="let option of getQuestionOptions()">
+                <div *ngIf="option.type == 'wysiwyg'">
+                  <div class="p-gutter container">
+                    <div class="card editor">
+                      <quill-editor
+                            @fadeInUp
+                            formControlName={{option.name}}
+                            [styles]="{ flex: '1 1 auto' }"
+                            (onContentChanged)="onContentChanged($event);">
+                      </quill-editor>
                     </div>
                   </div>
                 </div>
+              </div>
+  
+            </form>
+  
+          </ng-template>
+  
+        </mat-tab>
+  
+      </mat-tab-group>
 
-              </form>
-    
-            </ng-template>
+    </div>
 
-          </mat-tab>
-    
-        </mat-tab-group>
-    
-      </div>
-</div>
+
+
+
+  </vex-page-layout-content>
+</vex-page-layout>
+
+ 
