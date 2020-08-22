@@ -3,7 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -19,16 +21,16 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _apiClient.QuizCreate( new { Name = "Quiz 1" } );
-			string uid1 = result1.data.Quiz.Id;
+			(HttpStatusCode statusCode, CommandResult<QuizViewModel> data) result1 = await _apiClient.QuizCreate( new { Name = "Quiz 1" } );
+			string uid1 = result1.data.Payload.Id;
 
 			// Create Quiz 2
-			(HttpStatusCode statusCode, QuizCommandResult data) result2 = await _apiClient.QuizCreate( new { Name = "Quiz 2" } );
-			string uid2 = result2.data.Quiz.Id;
+			(HttpStatusCode statusCode, CommandResult<QuizViewModel> data) result2 = await _apiClient.QuizCreate( new { Name = "Quiz 2" } );
+			string uid2 = result2.data.Payload.Id;
 
 			// Create Quiz 3
-			(HttpStatusCode statusCode, QuizCommandResult data) result3 = await _apiClient.QuizCreate( new { Name = "Quiz 3" } );
-			string uid3 = result3.data.Quiz.Id;
+			(HttpStatusCode statusCode, CommandResult<QuizViewModel> data) result3 = await _apiClient.QuizCreate( new { Name = "Quiz 3" } );
+			string uid3 = result3.data.Payload.Id;
 			
 			// Get All Quizzes
 			(HttpStatusCode statusCode, QuizzesQueryResult data) result4 = await _apiClient.QuizGetAll();

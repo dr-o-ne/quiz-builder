@@ -8,6 +8,7 @@ import { QuizInfoSettingsTabComponent } from './quiz-info-settings-tab/quiz-info
 import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvider';
 import { QuizInfoQuestionsTabComponent } from './quiz-info-questions-tab/quiz-info-questions-tab.component';
 import moment from 'moment';
+import { ApiResponse } from 'src/app/_service/dataProviders/apiResponse';
 
 
 @Component({
@@ -75,7 +76,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     createQuiz(): void {
         this.quizDataProvider.createQuiz(this.quiz)
             .subscribe(
-                (response: any) => { this.router.navigateByUrl('quizzes/' + response.quiz.id + '/edit'); }
+                (response: ApiResponse<Quiz>) => { this.router.navigateByUrl('quizzes/' + response.payload.id + '/edit'); }
             );
     }
 

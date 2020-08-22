@@ -1,7 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Common.CQRS.Actions.Default;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
@@ -18,8 +19,8 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _apiClient.QuizCreate( new { Name = nameof( QuizIsDisabledWorkflow ) } );
-			string uid1 = result1.data.Quiz.Id;
+			(HttpStatusCode statusCode, CommandResult<QuizViewModel> data) result1 = await _apiClient.QuizCreate( new { Name = nameof( QuizIsDisabledWorkflow ) } );
+			string uid1 = result1.data.Payload.Id;
 
 			// Create Attempt 1
 			(HttpStatusCode statusCode, QuizAttemptInfo data) attemptResult1 = await _apiClient.AttemptStart( uid1 );

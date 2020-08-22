@@ -31,11 +31,11 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 		public Task<(HttpStatusCode statusCode, QuizzesQueryResult data)> QuizGetAll() =>
 			_httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes/" );
 
-		public Task<(HttpStatusCode statusCode, QuizCommandResult data)> QuizCreate( object content ) =>
-			_httpClient.PostValueAsync<QuizCommandResult>( "admin/quizzes/", ToCommand<CreateQuizCommand>( content ) );
+		public Task<(HttpStatusCode statusCode, CommandResult<QuizViewModel> data)> QuizCreate( object content ) =>
+			_httpClient.PostValueAsync<CommandResult<QuizViewModel>>( "admin/quizzes/", ToCommand<CreateQuizCommand>( content ) );
 
-		public Task<(HttpStatusCode statusCode, QuizCommandResult data)> QuizUpdate( object content ) =>
-			_httpClient.PutValueAsync<QuizCommandResult>( "admin/quizzes/", ToCommand<UpdateQuizCommand>( content ) );
+		public Task<(HttpStatusCode statusCode, CommandResult<QuizViewModel> data)> QuizUpdate( object content ) =>
+			_httpClient.PutValueAsync<CommandResult<QuizViewModel>>( "admin/quizzes/", ToCommand<UpdateQuizCommand>( content ) );
 
 		public Task<HttpResponseMessage> QuizDelete( string uid ) =>
 			_httpClient.DeleteAsync( "admin/quizzes/" + uid );

@@ -1,7 +1,9 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
 
@@ -17,8 +19,8 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 		public async Task Test() {
 
 			// Create Quiz 1
-			(HttpStatusCode statusCode, QuizCommandResult data) result1 = await _apiClient.QuizCreate( new {Name = "Quiz 1"} );
-			string uid1 = result1.data.Quiz.Id;
+			(HttpStatusCode statusCode, CommandResult<QuizViewModel> data) result1 = await _apiClient.QuizCreate( new {Name = "Quiz 1"} );
+			string uid1 = result1.data.Payload.Id;
 
 			// Create Group 1
 			var result2 = await _apiClient.GroupCreate( new {QuizId = uid1} );

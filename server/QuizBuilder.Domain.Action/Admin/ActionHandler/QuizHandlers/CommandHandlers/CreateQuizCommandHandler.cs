@@ -1,18 +1,18 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Common.Services;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
 using static QuizBuilder.Domain.Model.Default.Enums.PageSettings;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHandlers {
 
-	public sealed class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, QuizCommandResult> {
+	public sealed class CreateQuizCommandHandler : ICommandHandler<CreateQuizCommand, CommandResult<QuizViewModel>> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -24,7 +24,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 			_uIdService = uIdService;
 		}
 
-		public async Task<QuizCommandResult> HandleAsync( CreateQuizCommand command ) {
+		public async Task<CommandResult<QuizViewModel>> HandleAsync( CreateQuizCommand command ) {
 
 			var quiz = new Quiz {
 				UId = _uIdService.GetUId(),
@@ -39,11 +39,12 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 
 			var quizViewModel = _mapper.Map<QuizViewModel>( quiz );
 
-			return new QuizCommandResult {
+			return new CommandResult<QuizViewModel> {
 				IsSuccess = true,
 				Message = string.Empty,
-				Quiz = quizViewModel
+				Payload = quizViewModel
 			};
+
 		}
 	}
 }

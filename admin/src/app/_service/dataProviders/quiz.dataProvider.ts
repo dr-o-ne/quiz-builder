@@ -42,8 +42,8 @@ export class QuizDataProvider {
         return this.http.get<ApiResponse<Quiz>>(this.apiUrl + 'quizzes/' + id);
     }
 
-    createQuiz(quiz: Quiz): Observable<object> {
-        return this.http.post(this.apiUrl + 'quizzes/', quiz);
+    createQuiz(quiz: Quiz): Observable<ApiResponse<Quiz>> {
+        return this.http.post<ApiResponse<Quiz>>(this.apiUrl + 'quizzes/', quiz);
     }
 
 
