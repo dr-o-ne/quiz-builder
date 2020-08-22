@@ -13,6 +13,7 @@ import { RegisterComponent } from './common/auth/register/register.component';
 import { AuthGuard } from './_common/guards/auth.guard';
 import { ForgotPasswordComponent } from './common/auth/forgotPassword/forgotPassword.component';
 import { NewPasswordComponent } from './common/auth/newPassword/newPassword.component';
+import { QuestionInfoComponent } from './question/question-info/question-info.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children:
           [
+            { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
             {
               path: 'edit', children:
                 [
@@ -57,7 +59,9 @@ const routes: Routes = [
                     resolve: { questionResolver: QuestionResolver }
                   }
                 ]
-            }
+            },
+            { path: 'questions/new', component: QuestionInfoComponent },
+            { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuizResolver } }
           ]
       }
     ]

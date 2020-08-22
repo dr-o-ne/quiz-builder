@@ -156,7 +156,8 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     addQuestion(groupId: string, typeQuestion: QuestionType): void {
         this.router.navigate(
-            ['questions'],
+            //['questions'], //TODO:
+            ['questions/new'],
             {
                 relativeTo: this.activeRoute,
                 state: {
@@ -188,6 +189,7 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
     }
 
     onEditClick(question: Question): void {
+
         this.router.navigate(
             ['questions', question.id],
             {
