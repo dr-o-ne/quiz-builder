@@ -9,8 +9,7 @@ import { Quiz } from '../_models/quiz';
 export class QuizResolver implements Resolve<Quiz> {
 
   constructor(
-    private quizDataProvider: QuizDataProvider,
-    private router: Router) {
+    private quizDataProvider: QuizDataProvider) {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Quiz> {
