@@ -32,7 +32,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         private quizDataProvider: QuizDataProvider
     ) {
         if (this.route.snapshot.data.quizResolver)
-            this.quiz = this.route.snapshot.data.quizResolver.quiz;
+            this.quiz = this.route.snapshot.data.quizResolver;
         else
             this.quiz = new Quiz();
     }

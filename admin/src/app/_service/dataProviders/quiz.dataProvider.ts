@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Quiz } from 'src/app/_models/quiz';
+import { ApiResponse } from './apiResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -37,10 +38,8 @@ export class QuizDataProvider {
         return this.http.put(this.apiUrl + 'quizzes/', quiz);
     }
 
-    getQuiz(id: string): Observable<Quiz> {
-        const res = this.http.get<Quiz>(this.apiUrl + 'quizzes/' + id);
-        console.log(res);
-        return res;
+    getQuiz(id: string): Observable<ApiResponse<Quiz>> {
+        return this.http.get<ApiResponse<Quiz>>(this.apiUrl + 'quizzes/' + id);
     }
 
     createQuiz(quiz: Quiz): Observable<object> {

@@ -10,12 +10,6 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult {
 
 	}
 
-	public sealed class QuizQueryResult {
-
-		public QuizViewModel Quiz { get; set; }
-
-	}
-
 	public sealed class QuizzesQueryResult {
 
 		public ImmutableList<QuizViewModel> Quizzes { get; set; }

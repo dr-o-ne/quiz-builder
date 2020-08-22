@@ -26,7 +26,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 
 			// Get Quiz, check Groups
 			var result3 = await _apiClient.QuizGet( uid1 );
-			var groups = result3.data.Quiz.Groups;
+			var groups = result3.data.Payload.Groups;
 			Assert.Equal( uid2, groups[0].Id );
 			Assert.Equal( "Group 1", groups[0].Name );
 
@@ -35,7 +35,7 @@ namespace QuizBuilder.Test.Integration.WorkflowTests {
 
 			// Get Quiz, check Groups
 			var result4 = await _apiClient.QuizGet( uid1 );
-			Assert.Empty( result4.data.Quiz.Groups );
+			Assert.Empty( result4.data.Payload.Groups );
 
 		}
 	}

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using QuizBuilder.Common;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 
@@ -24,8 +25,8 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 
 		#region Quiz
 
-		public Task<(HttpStatusCode statusCode, QuizQueryResult data)> QuizGet( string uid ) =>
-			_httpClient.GetValueAsync<QuizQueryResult>( "admin/quizzes/" + uid );
+		public Task<(HttpStatusCode statusCode, CommandResult<QuizViewModel> data)> QuizGet( string uid ) =>
+			_httpClient.GetValueAsync<CommandResult<QuizViewModel>>( "admin/quizzes/" + uid );
 
 		public Task<(HttpStatusCode statusCode, QuizzesQueryResult data)> QuizGetAll() =>
 			_httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes/" );

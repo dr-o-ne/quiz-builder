@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
@@ -15,7 +15,7 @@ using QuizBuilder.Domain.Model.Default.Structure;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandlers {
 
-	public sealed class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, QuizQueryResult> {
+	public sealed class GetQuizByIdQueryHandler : IQueryHandler<GetQuizByIdQuery, CommandResult<QuizViewModel>> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -33,12 +33,15 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.QueryHandle
 			_questionDataProvider = questionDataProvider;
 		}
 
-		public async Task<QuizQueryResult> HandleAsync( GetQuizByIdQuery query ) {
+		public async Task<CommandResult<QuizViewModel>> HandleAsync( GetQuizByIdQuery query ) {
 			List<QuestionViewModel> questionViewModels = await GetQuestionViewModels( query.UId );
 			List<GroupViewModel> groupViewModels = await GetGroupViewModels( query.UId, questionViewModels );
 			QuizViewModel quizViewModel = await GetQuizViewModel( query, groupViewModels );
 
-			return new QuizQueryResult {Quiz = quizViewModel};
+			return new CommandResult<QuizViewModel> {
+				IsSuccess = true,
+				Payload =  quizViewModel
+			};
 		}
 
 		private async Task<List<QuestionViewModel>> GetQuestionViewModels( string quizUid ) {
