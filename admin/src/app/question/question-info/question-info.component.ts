@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { ActivatedRoute } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
+import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 
 @Component({
     selector: 'app-question-info',
@@ -10,6 +11,8 @@ import { OptionItem } from 'src/app/_models/UI/optionItem';
     styleUrls: [ './question-info.component.css',
     '../../../../node_modules/quill/dist/quill.snow.css',
     '../../../@vex/styles/partials/plugins/_quill.scss' ],
+    encapsulation: ViewEncapsulation.None,
+    animations: [fadeInUp400ms]
 })
 export class QuestionInfoComponent {
 
@@ -21,9 +24,9 @@ export class QuestionInfoComponent {
     questionTypeKeys: number[];
 
     options: OptionItem[] = [
-        new OptionItem( 'feedback', 'Feedback', false ),
-        new OptionItem( 'correctFeedback', 'Correct feedback', false ),
-        new OptionItem( 'incorrectFeedback', 'Incorrect feedback', false ),
+        new OptionItem( 'feedback', 'Feedback', 'wysiwyg', false ),
+        new OptionItem( 'correctFeedback', 'Correct feedback', 'wysiwyg', false ),
+        new OptionItem( 'incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false ),
     ];
 
     constructor(
@@ -33,14 +36,9 @@ export class QuestionInfoComponent {
         this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
 
         if (this.activatedRoute.snapshot.data.questionResolver) {
-
-        
-            console.log(1);
             this.question = this.activatedRoute.snapshot.data.questionResolver; 
         }
         else {
-            console.log(2);
-
             this.question = new Question();
             this.question.quizId = history.state.quizId;
             this.question.groupId = history.state.groupId;
@@ -50,9 +48,6 @@ export class QuestionInfoComponent {
     } 
 
     ngOnInit(): void {
-
-        console.log(this.question);
-
         this.questionForm = this.fb.group({
             name: [this.question.name],
             type: [this.question.type, Validators.required],
@@ -68,4 +63,8 @@ export class QuestionInfoComponent {
         option.enabled = !option.enabled;
         event.stopPropagation();
     }
+
+    getQuestionOptions = () => this.options.filter( x => x.enabled );
+
+    onContentChanged(_) {/*HACK*/}
 }

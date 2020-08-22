@@ -43,6 +43,32 @@
   
                 </div>
 
+                <div class="container pb-gutter">
+                  <div class="card editor">
+                    <quill-editor
+                          @fadeInUp
+                          formControlName="text"
+                          [styles]="{ flex: '1 1 auto' }"
+                          (onContentChanged)="onContentChanged($event);">
+                    </quill-editor>
+                  </div>
+                </div>
+
+                <div *ngFor="let option of getQuestionOptions()">
+                  <div *ngIf="option.type == 'wysiwyg'">
+                    <div class="p-gutter container">
+                      <div class="card editor">
+                        <quill-editor
+                              @fadeInUp
+                              formControlName={{option.name}}
+                              [styles]="{ flex: '1 1 auto' }"
+                              (onContentChanged)="onContentChanged($event);">
+                        </quill-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </form>
     
             </ng-template>
