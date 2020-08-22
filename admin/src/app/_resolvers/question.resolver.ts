@@ -18,9 +18,4 @@ export class QuestionResolver implements Resolve<Question> {
     return this.questionDataProvider.getQuestion(id).pipe( map( x => x.payload ) );
   }
 
-  onEmpty(): Observable<never> {
-    this.router.navigate(['/404']);
-    return NEVER;
-  }
-
 }
