@@ -6,6 +6,7 @@ import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
+import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
 
 @Component({
     selector: 'app-question-info',
@@ -44,8 +45,8 @@ export class QuestionInfoComponent {
             this.question.quizId = history.state.quizId;
             this.question.groupId = history.state.groupId;
             this.question.type = history.state.questionType;
-            this.question.settings = JSON.stringify('{}');
-            this.question.choices = JSON.stringify('{}');
+            this.question.settings = new BaseChoiceSettings();
+            this.question.choices = [];
         }
 
     }
@@ -90,6 +91,9 @@ export class QuestionInfoComponent {
             return;
         }
         this.question = Object.assign(this.question, this.questionForm.value);
+
+        console.log(this.question);
+
         if (this.isEditMode()) {
             this.questionDataProvider.updateQuestion(this.question).subscribe(
                 response => { this.navigateToParent(); });

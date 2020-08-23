@@ -60,6 +60,8 @@ import { DebounceClickDirective } from './_common/directives/debounceClick.direc
 import { ForgotPasswordComponent } from './common/auth/forgotPassword/forgotPassword.component';
 import { NewPasswordComponent } from './common/auth/newPassword/newPassword.component';
 import { QuestionInfoComponent } from './question/question-info/question-info.component';
+import { ChoiceHostDirective } from './question/question-info/choice-info/choice-host.directive';
+import { ChoiceDynamicComponent } from './question/question-info/choice-info/choice-dynamic.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,9 @@ import { QuestionInfoComponent } from './question/question-info/question-info.co
     QuizInfoQuestionsTabComponent,
     GroupInfoComponent,
     QuestionInfoComponent,
+
+    ChoiceHostDirective,
+    ChoiceDynamicComponent,
 
     QuestionPageComponent,
     TrueFalseAnswerComponent,
