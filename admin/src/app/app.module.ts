@@ -11,9 +11,7 @@ import { QuestionResolver } from './_resolvers/question.resolver';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
-import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 
-import { QuestionPreviewDirective } from './_directive/question.preview.directive';
 import { AttemptService } from './_service/attempt.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -82,14 +80,11 @@ import { ChoiceBaseDirective } from './question/question-info/choice-info/choice
     QuestionInfoComponent,
 
     ChoiceHostDirective,
-    //ChoiceBaseComponent,
     ChoiceDynamicComponent,
 
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
-    SingleChoiceDropdownAnswerComponent,
-    QuestionPreviewDirective,
   ],
   imports: [
     BrowserModule,
