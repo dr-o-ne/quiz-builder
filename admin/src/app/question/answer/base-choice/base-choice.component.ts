@@ -7,10 +7,10 @@ import {
 } from 'src/app/_models/settings/answer.settings';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {Option} from '../../../_models/option';
-import { ChoiceBaseComponent } from '../../question-info/choice-info/choice-base-component';
+import { ChoiceBaseDirective } from '../../question-info/choice-info/choice-base.directive';
 
 @Directive()
-export class BaseChoiceComponent extends ChoiceBaseComponent implements OnInit {
+export class BaseChoiceComponent extends ChoiceBaseDirective implements OnInit {
   @ViewChild(MatMenuTrigger) optionsMenu: MatMenuTrigger;
   choices: Choice[];
   settings: BaseChoiceSettings;

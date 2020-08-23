@@ -14,7 +14,6 @@ import { MultiSelectChoiceComponent } from './question/answer/multi-select-choic
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 
 import { QuestionPreviewDirective } from './_directive/question.preview.directive';
-import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
 import { AttemptService } from './_service/attempt.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -59,7 +58,7 @@ import { NewPasswordComponent } from './common/auth/newPassword/newPassword.comp
 import { QuestionInfoComponent } from './question/question-info/question-info.component';
 import { ChoiceHostDirective } from './question/question-info/choice-info/choice-host.directive';
 import { ChoiceDynamicComponent } from './question/question-info/choice-info/choice-dynamic.component';
-import { ChoiceBaseComponent } from './question/question-info/choice-info/choice-base-component';
+import { ChoiceBaseDirective } from './question/question-info/choice-info/choice-base.directive';
 
 @NgModule({
   declarations: [
@@ -91,7 +90,6 @@ import { ChoiceBaseComponent } from './question/question-info/choice-info/choice
     MultiSelectChoiceComponent,
     SingleChoiceDropdownAnswerComponent,
     QuestionPreviewDirective,
-    LongAnswerComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,7 +149,6 @@ import { ChoiceBaseComponent } from './question/question-info/choice-info/choice
     MultipleChoiceAnswerComponent,
     TrueFalseAnswerComponent,
     MultiSelectChoiceComponent,
-    LongAnswerComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
     GroupInfoComponent

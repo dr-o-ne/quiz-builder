@@ -3,10 +3,10 @@ import { QuestionType, Question } from '../../../_models/question';
 import { TrueFalseAnswerComponent } from '../../answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from '../../answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from '../../answer/multi-select-choice/multi-select-choice.component';
-import { LongAnswerComponent } from '../../answer/long-answer/long-answer.component';
 import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
 import { ChoiceHostDirective } from './choice-host.directive';
-import { ChoiceBaseComponent } from './choice-base-component';
+import { ChoiceBaseDirective } from './choice-base.directive';
+import { ChoiceEmptyDirective } from './choice-empty.directive';
 
 @Component({
   selector: 'app-choice-dynamic',
@@ -19,11 +19,11 @@ export class ChoiceDynamicComponent implements OnInit {
   
   @ViewChild(ChoiceHostDirective, {static: true}) choiceHost: ChoiceHostDirective;
 
-  private components: { [id in QuestionType]: Type<ChoiceBaseComponent> } = {
+  private components: { [id in QuestionType]: Type<ChoiceBaseDirective> } = {
     [QuestionType.TrueFalse]: TrueFalseAnswerComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
-    [QuestionType.LongAnswer]: LongAnswerComponent
+    [QuestionType.LongAnswer]: ChoiceEmptyDirective
   };
 
   constructor(private resolver: ComponentFactoryResolver) {
@@ -38,9 +38,11 @@ export class ChoiceDynamicComponent implements OnInit {
     this.choiceHost.viewContainerRef.clear();
     const componentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
 
-    const instance = componentRef.instance as BaseChoiceComponent;
+    componentRef.instance.question = this.question;
 
-    instance.settings = this.question.settings;
-    instance.choices = this.question.choices;
+    if (componentRef.instance instanceof BaseChoiceComponent) {
+      componentRef.instance.settings = this.question.settings;
+      componentRef.instance.choices = this.question.choices;
+    }
   }
 }

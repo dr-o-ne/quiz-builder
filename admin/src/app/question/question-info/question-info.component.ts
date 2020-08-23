@@ -39,8 +39,15 @@ export class QuestionInfoComponent {
         if (this.activatedRoute.snapshot.data.questionResolver) {
             this.question = this.activatedRoute.snapshot.data.questionResolver;
 
+            console.log(this.question.choices);
+
             this.question.settings = JSON.parse(this.question.settings);
-            this.question.choices = JSON.parse(this.question.choices);
+
+            //TODO:
+            if (!this.question.choices || this.question.choices.length === 0){
+                this.question.choices = '{}';
+            }
+            this.question.choices = JSON.parse( this.question.choices );
         }
         else {
             this.question = new Question();
