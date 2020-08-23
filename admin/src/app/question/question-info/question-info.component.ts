@@ -39,6 +39,9 @@ export class QuestionInfoComponent {
 
         if (this.activatedRoute.snapshot.data.questionResolver) {
             this.question = this.activatedRoute.snapshot.data.questionResolver;
+
+            this.question.settings = JSON.parse(this.question.settings);
+            this.question.choices = JSON.parse(this.question.choices);
         }
         else {
             this.question = new Question();
@@ -90,7 +93,10 @@ export class QuestionInfoComponent {
         if (!this.questionForm.valid) {
             return;
         }
+        
         this.question = Object.assign(this.question, this.questionForm.value);
+        this.question.settings = JSON.stringify(this.question.settings);
+        this.question.choices = JSON.stringify(this.question.choices);
 
         console.log(this.question);
 

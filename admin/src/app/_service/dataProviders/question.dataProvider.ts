@@ -24,11 +24,6 @@ export class QuestionDataProvider {
     }
 
     createQuestion(question: Question): Observable<object> {
-
-        console.log(question);
-        question.settings = JSON.stringify(question.settings);
-        question.choices = JSON.stringify(question.choices);
-
         return this.http.post(this.apiUrl + 'questions', question);
     }
 
