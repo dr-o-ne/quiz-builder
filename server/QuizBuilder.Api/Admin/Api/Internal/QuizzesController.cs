@@ -15,11 +15,8 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 	public sealed class QuizzesController : ControllerBase {
 
 		private readonly IDispatcher _dispatcher;
-		private readonly IEmailService _test;
 
 		public QuizzesController( IDispatcher dispatcher, IEmailService test ) {
-
-			_test = test;
 			_dispatcher = dispatcher;
 		}
 
