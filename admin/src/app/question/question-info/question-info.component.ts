@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Question, QuestionType } from 'src/app/_models/question';
+import { Question } from 'src/app/_models/question';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
+import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 
 @Component({
     selector: 'app-question-info',
@@ -21,8 +22,6 @@ export class QuestionInfoComponent {
     questionForm: FormGroup;
 
     isEditMode = () => this.question.id;
-    questionTypes = QuestionType;
-    questionTypeKeys: number[];
 
     options: OptionItem[] = [
         new OptionItem('feedback', 'Feedback', 'wysiwyg', false),
@@ -34,9 +33,8 @@ export class QuestionInfoComponent {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
-        private questionDataProvider: QuestionDataProvider) {
-
-        this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
+        private questionDataProvider: QuestionDataProvider,
+        public questionLangService: QuestionLangService) {
 
         if (this.activatedRoute.snapshot.data.questionResolver) {
             this.question = this.activatedRoute.snapshot.data.questionResolver;

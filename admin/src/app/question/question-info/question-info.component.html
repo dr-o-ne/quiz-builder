@@ -15,24 +15,15 @@
   
       <mat-tab-group>
   
-        <mat-tab label="Question">
+        <mat-tab label="{{questionLangService.getQuestionTypeLangTerm(question.type)}}">
   
           <ng-template matTabContent>
   
             <form [formGroup]="questionForm">
   
               <div class="container pt-gutter">
-  
-                <mat-form-field fxFlex="25" appearance="outline">
-                  <mat-label>Type</mat-label>
-                  <mat-select formControlName="type" >
-                    <mat-option *ngFor="let key of questionTypeKeys" [value]="key"> 
-                      {{questionTypes[key]}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-  
-                <mat-form-field fxFlex="25" fxFlexOffset="2" appearance="outline">
+   
+                <mat-form-field fxFlex="50" appearance="outline">
                   <mat-label>Name</mat-label>
                   <input matInput type="text" formControlName="name">
                 </mat-form-field>
