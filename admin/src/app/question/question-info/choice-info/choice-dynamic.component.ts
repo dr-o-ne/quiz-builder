@@ -6,6 +6,7 @@ import { MultiSelectChoiceComponent } from '../../answer/multi-select-choice/mul
 import { LongAnswerComponent } from '../../answer/long-answer/long-answer.component';
 import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
 import { ChoiceHostDirective } from './choice-host.directive';
+import { ChoiceBaseComponent } from './choice-base-component';
 
 @Component({
   selector: 'app-choice-dynamic',
@@ -18,7 +19,7 @@ export class ChoiceDynamicComponent implements OnInit {
   
   @ViewChild(ChoiceHostDirective, {static: true}) choiceHost: ChoiceHostDirective;
 
-  private components: { [id in QuestionType]: Type<BaseChoiceComponent> } = {
+  private components: { [id in QuestionType]: Type<ChoiceBaseComponent> } = {
     [QuestionType.TrueFalse]: TrueFalseAnswerComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
@@ -36,7 +37,10 @@ export class ChoiceDynamicComponent implements OnInit {
     const componentFactory = this.resolver.resolveComponentFactory(this.components[this.question.type]);
     this.choiceHost.viewContainerRef.clear();
     const componentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
-    componentRef.instance.settings = this.question.settings;
-    componentRef.instance.choices = this.question.choices;
+
+    const instance = componentRef.instance as BaseChoiceComponent;
+
+    instance.settings = this.question.settings;
+    instance.choices = this.question.choices;
   }
 }

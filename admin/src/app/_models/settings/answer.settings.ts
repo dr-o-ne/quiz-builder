@@ -1,4 +1,6 @@
-export class BaseChoiceSettings {
+import { SettingsBase } from '../question';
+
+export class BaseChoiceSettings extends SettingsBase {
   choicesDisplayType = ChoicesDisplayType.Vertical;
   choicesEnumerationType = ChoicesEnumerationType.one_two_three;
   randomize = false;

@@ -13,6 +13,9 @@ export class Question {
   choices?: any;
 }
 
+export class SettingsBase {
+}
+
 export enum QuestionType {
   TrueFalse = 2,
   MultipleChoice = 3,

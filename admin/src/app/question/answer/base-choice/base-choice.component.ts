@@ -5,12 +5,12 @@ import {
   ChoicesEnumerationType,
   BaseChoiceSettings
 } from 'src/app/_models/settings/answer.settings';
-import {QuestionType} from 'src/app/_models/question';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {Option} from '../../../_models/option';
+import { ChoiceBaseComponent } from '../../question-info/choice-info/choice-base-component';
 
 @Directive()
-export class BaseChoiceComponent implements OnInit {
+export class BaseChoiceComponent extends ChoiceBaseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) optionsMenu: MatMenuTrigger;
   choices: Choice[];
   settings: BaseChoiceSettings;

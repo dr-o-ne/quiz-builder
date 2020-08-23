@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Question } from 'src/app/_models/question';
+import { Question, SettingsBase } from 'src/app/_models/question';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
-import { BaseChoiceSettings } from 'src/app/_models/settings/answer.settings';
 
 @Component({
     selector: 'app-question-info',
@@ -48,7 +47,7 @@ export class QuestionInfoComponent {
             this.question.quizId = history.state.quizId;
             this.question.groupId = history.state.groupId;
             this.question.type = history.state.questionType;
-            this.question.settings = new BaseChoiceSettings();
+            this.question.settings = new SettingsBase();
             this.question.choices = [];
         }
 
