@@ -98,15 +98,13 @@ export class QuestionInfoComponent {
         this.question.settings = JSON.stringify(this.question.settings);
         this.question.choices = JSON.stringify(this.question.choices);
 
-        console.log(this.question);
-
         if (this.isEditMode()) {
             this.questionDataProvider.updateQuestion(this.question).subscribe(
-                response => { this.navigateToParent(); });
+                () => { this.navigateToParent(); });
         }
         else {
             this.questionDataProvider.createQuestion(this.question).subscribe(
-                response => { this.navigateToParent(); });
+                () => { this.navigateToParent(); });
         }
     }
 
