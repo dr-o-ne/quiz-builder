@@ -1,22 +1,22 @@
 import { Component, ComponentFactoryResolver, Input, Type, ViewChild, OnInit } from '@angular/core';
-import { ChoiceDirective } from '../../../_directive/choice.directive';
 import { QuestionType, Question } from '../../../_models/question';
 import { TrueFalseAnswerComponent } from '../../answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from '../../answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from '../../answer/multi-select-choice/multi-select-choice.component';
 import { LongAnswerComponent } from '../../answer/long-answer/long-answer.component';
 import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
+import { ChoiceHostDirective } from './choice-host.directive';
 
 @Component({
   selector: 'app-choice-dynamic',
-  template: '<ng-template appDynamicChoiceHost></ng-template>'
+  template: '<ng-template choice-host></ng-template>'
 })
 
 export class ChoiceDynamicComponent implements OnInit {
 
   @Input() question: Question;
   
-  @ViewChild(ChoiceDirective, {static: true}) choiceHost: ChoiceDirective;
+  @ViewChild(ChoiceHostDirective, {static: true}) choiceHost: ChoiceHostDirective;
 
   private components: { [id in QuestionType]: Type<BaseChoiceComponent> } = {
     [QuestionType.TrueFalse]: TrueFalseAnswerComponent,
