@@ -63,7 +63,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     onReturn = () => this.location.back();
 
-    onSave() {
+    onSave(): void {
         this.questionsControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
 

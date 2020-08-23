@@ -1,9 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Question, QuestionType } from 'src/app/_models/question';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
+import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 
 @Component({
     selector: 'app-question-info',
@@ -24,28 +25,32 @@ export class QuestionInfoComponent {
     questionTypeKeys: number[];
 
     options: OptionItem[] = [
-        new OptionItem( 'feedback', 'Feedback', 'wysiwyg', false ),
-        new OptionItem( 'correctFeedback', 'Correct feedback', 'wysiwyg', false ),
-        new OptionItem( 'incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false ),
+        new OptionItem('feedback', 'Feedback', 'wysiwyg', false),
+        new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
+        new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
     ];
 
     constructor(
+        private router: Router,
         private activatedRoute: ActivatedRoute,
-        private fb: FormBuilder) {
+        private fb: FormBuilder,
+        private questionDataProvider: QuestionDataProvider) {
 
         this.questionTypeKeys = Object.keys(this.questionTypes).filter(Number).map(v => Number(v));
 
         if (this.activatedRoute.snapshot.data.questionResolver) {
-            this.question = this.activatedRoute.snapshot.data.questionResolver; 
+            this.question = this.activatedRoute.snapshot.data.questionResolver;
         }
         else {
             this.question = new Question();
             this.question.quizId = history.state.quizId;
             this.question.groupId = history.state.groupId;
             this.question.type = history.state.questionType;
+            this.question.settings = JSON.stringify('{}');
+            this.question.choices = JSON.stringify('{}');
         }
 
-    } 
+    }
 
     ngOnInit(): void {
         this.questionForm = this.fb.group({
@@ -59,12 +64,45 @@ export class QuestionInfoComponent {
         })
     }
 
-    onOptionItemClick( event: MouseEvent, option: OptionItem ): void {
+    onOptionItemClick(event: MouseEvent, option: OptionItem): void {
         option.enabled = !option.enabled;
         event.stopPropagation();
     }
 
-    getQuestionOptions = () => this.options.filter( x => x.enabled );
+    getQuestionOptions = () => this.options.filter(x => x.enabled);
 
-    onContentChanged(_) {/*HACK*/}
+    onContentChanged(_): void {/*HACK*/ }
+
+    navigateToParent(): void {
+        this.router.navigate(
+            ['../../'],
+            {
+                relativeTo: this.activatedRoute,
+                state: {
+                    groupId: this.question.groupId
+                }
+            }
+        );
+    }
+
+    onReturn = () => this.navigateToParent();
+
+    onSave(): void {
+        if (!this.questionForm.valid) {
+            return;
+        }
+        this.question = Object.assign(this.question, this.questionForm.value);
+        if (this.isEditMode()) {
+            this.questionDataProvider.updateQuestion(this.question).subscribe(
+                response => { this.navigateToParent(); });
+        }
+        else {
+            this.questionDataProvider.createQuestion(this.question).subscribe(
+                response => { this.navigateToParent(); });
+        }
+    }
+
+    isDisabledBtn(): boolean {
+        return !this.questionForm?.valid/* || !this.isChoicesValid()*/;
+    }
 }
