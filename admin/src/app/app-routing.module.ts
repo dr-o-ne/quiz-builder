@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
-import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { QuizInfoComponent } from './quiz/quiz-info/quiz-info.component';
 import { Error404Component } from './common/404/error-404.component';
@@ -42,24 +41,6 @@ const routes: Routes = [
         children:
           [
             { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
-            {
-              path: 'edit', children:
-                [
-                  { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
-                  {
-                    path: 'questions', children:
-                      [
-                        { path: '', redirectTo: 'new', pathMatch: 'full' },
-                        { path: 'new', component: QuestionPageComponent }
-                      ]
-                  },
-                  {
-                    path: 'questions/:id',
-                    component: QuestionPageComponent,
-                    resolve: { questionResolver: QuestionResolver }
-                  }
-                ]
-            },
             { path: 'questions/new', component: QuestionInfoComponent },
             { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuestionResolver } }
           ]

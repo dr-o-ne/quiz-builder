@@ -113,7 +113,7 @@ export class QuizListComponent implements OnInit {
 
   onEditClick(item: Quiz): void {
     this.router.navigate(
-      [item.id, 'edit'],
+      [item.id],
       {
         relativeTo: this.activeRoute,
         state: { quiz: item }

@@ -7,15 +7,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
-import { QuestionPageComponent } from './question/question-page/question-page.component';
 import { QuestionResolver } from './_resolvers/question.resolver';
 import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
 import { SingleChoiceDropdownAnswerComponent } from './question/answer/single-choice-dropdown-answer/single-choice-dropdown-answer.component';
 
-import { ChoiceDirective } from './_directive/choice.directive';
-import { DynamicChoiceComponent } from './question/answer/base-choice/dynamic-choice.component';
 import { QuestionPreviewDirective } from './_directive/question.preview.directive';
 import { LongAnswerComponent } from './question/answer/long-answer/long-answer.component';
 import { AttemptService } from './_service/attempt.service';
@@ -87,14 +84,11 @@ import { ChoiceDynamicComponent } from './question/question-info/choice-info/cho
     ChoiceHostDirective,
     ChoiceDynamicComponent,
 
-    QuestionPageComponent,
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
     SingleChoiceDropdownAnswerComponent,
-    ChoiceDirective,
     QuestionPreviewDirective,
-    DynamicChoiceComponent,
     LongAnswerComponent,
   ],
   imports: [
@@ -152,7 +146,6 @@ import { ChoiceDynamicComponent } from './question/question-info/choice-info/cho
     })
   ],
   entryComponents: [
-    QuestionPageComponent,
     MultipleChoiceAnswerComponent,
     TrueFalseAnswerComponent,
     MultiSelectChoiceComponent,
