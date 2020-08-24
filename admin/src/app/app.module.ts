@@ -56,6 +56,7 @@ import { NewPasswordComponent } from './common/auth/newPassword/newPassword.comp
 import { QuestionInfoComponent } from './question/question-info/question-info.component';
 import { ChoiceHostDirective } from './question/question-info/choice-info/choice-host.directive';
 import { ChoiceDynamicComponent } from './question/question-info/choice-info/choice-dynamic.component';
+import { NewQuestionResolver } from './_resolvers/new-question.resolver';
 
 @NgModule({
   declarations: [
@@ -158,6 +159,7 @@ import { ChoiceDynamicComponent } from './question/question-info/choice-info/cho
     QuestionLangService,
     QuizResolver,
     QuestionResolver,
+    NewQuestionResolver,
     AttemptService,
     AuthDataProvider,
     QuizDataProvider,

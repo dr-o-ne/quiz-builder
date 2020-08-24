@@ -1,13 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Common.Extensions;
 using QuizBuilder.Domain.Action.Admin.Action;
+using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
-	[Authorize]
+	//[Authorize]
 	[ApiController]
 	[Route( "admin/[controller]" )]
 	public sealed class QuestionsController : ControllerBase {
@@ -29,6 +31,22 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 			return result is null
 				? (ActionResult)NoContent()
 				: Ok( result );
+		}
+
+		[HttpGet( "template/{type}" )]
+		public async Task<ActionResult> GetTemplate( [FromRoute] int type ) {
+
+			GetQuestionTemplateQuery action = new GetQuestionTemplateQuery {
+				Type = (QuizItemType)type
+			};
+
+			action.SetIdentity( User );
+
+			var result = await _dispatcher.QueryAsync( action );
+
+			return result.IsSuccess
+				? (ActionResult)Ok(result)
+				: UnprocessableEntity( result );
 		}
 
 		[HttpPost]

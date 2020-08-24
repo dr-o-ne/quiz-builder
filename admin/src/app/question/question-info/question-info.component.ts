@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Question, SettingsBase } from 'src/app/_models/question';
+import { Question } from 'src/app/_models/question';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
@@ -35,32 +35,23 @@ export class QuestionInfoComponent {
         private fb: FormBuilder,
         private questionDataProvider: QuestionDataProvider,
         public questionLangService: QuestionLangService) {
-
-        if (this.activatedRoute.snapshot.data.questionResolver) {
-            this.question = this.activatedRoute.snapshot.data.questionResolver;
-
-            console.log(this.question.choices);
-
-            this.question.settings = JSON.parse(this.question.settings);
-
-            //TODO:
-            if (!this.question.choices || this.question.choices.length === 0){
-                this.question.choices = '{}';
-            }
-            this.question.choices = JSON.parse( this.question.choices );
-        }
-        else {
-            this.question = new Question();
-            this.question.quizId = history.state.quizId;
-            this.question.groupId = history.state.groupId;
-            this.question.type = history.state.questionType;
-            this.question.settings = new SettingsBase();
-            this.question.choices = [];
-        }
-
     }
 
     ngOnInit(): void {
+
+        this.question = this.activatedRoute.snapshot.data.questionResolver;
+
+        if (this.question.id == null) {
+            this.question.quizId = history.state.quizId;
+            this.question.groupId = history.state.groupId;
+        }
+        this.question.settings = JSON.parse(this.question.settings);
+        //TODO:
+        if (!this.question.choices || this.question.choices.length === 0){
+            this.question.choices = '{}';
+        }
+        this.question.choices = JSON.parse( this.question.choices );
+
         this.questionForm = this.fb.group({
             name: [this.question.name],
             type: [this.question.type, Validators.required],

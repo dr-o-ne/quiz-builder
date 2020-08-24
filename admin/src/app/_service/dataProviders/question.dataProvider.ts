@@ -19,6 +19,13 @@ export class QuestionDataProvider {
         return this.http.get<ApiResponse<Question>>(this.apiUrl + 'questions/' + id);
     }
 
+    getQuestionTemplate(type: number): Observable<ApiResponse<Question>> {
+
+        console.log('Test')
+
+        return this.http.get<ApiResponse<Question>>(this.apiUrl + 'questions/template/' + type);
+    }
+
     updateQuestion(question: Question): Observable<object> {
         return this.http.put(this.apiUrl + 'questions', question);
     }

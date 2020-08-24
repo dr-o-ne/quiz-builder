@@ -156,7 +156,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     addQuestion(groupId: string, typeQuestion: QuestionType): void {
         this.router.navigate(
-            //['questions'], //TODO:
             ['questions/new'],
             {
                 relativeTo: this.activeRoute,
@@ -167,6 +166,17 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
                 }
             }
         );
+    }
+
+    onEditClick(question: Question): void {
+        this.router.navigate(
+            ['questions', question.id],
+            {
+                relativeTo: this.activeRoute,
+                state: {
+                    groupId: question.groupId
+                }
+            });
     }
 
     deleteQuestion(groupId: string, questionId: string): void {
@@ -186,18 +196,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
         const questionIndex = group.questions.map(x => x.id).indexOf(questionId);
         group.questions.splice(questionIndex, 1);
-    }
-
-    onEditClick(question: Question): void {
-
-        this.router.navigate(
-            ['questions', question.id],
-            {
-                relativeTo: this.activeRoute,
-                state: {
-                    groupId: question.groupId
-                }
-            });
     }
 
     getDisplayName(question: Question): string {
