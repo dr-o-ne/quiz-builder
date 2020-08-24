@@ -63,11 +63,6 @@ export class QuestionInfoComponent {
         })
     }
 
-    onOptionItemClick(event: MouseEvent, option: OptionItem): void {
-        option.enabled = !option.enabled;
-        event.stopPropagation();
-    }
-
     getQuestionOptions = () => this.options.filter(x => x.enabled);
 
     onContentChanged(_): void {/*HACK*/ }

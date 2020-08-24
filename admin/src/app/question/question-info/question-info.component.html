@@ -2,16 +2,8 @@
   <vex-page-layout-content class="container">
 
     <div class="card main-color">
-      <div class="row container-option-btn" fxLayoutAlign="flex-end">
-        <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
-            <mat-icon *ngIf="option.enabled">done</mat-icon>
-            <span>{{option.displayName}}</span>
-          </button>
-        </mat-menu>
-      </div>
+
+      <app-options-menu [options]="options"></app-options-menu>
   
       <mat-tab-group>
   

@@ -57,6 +57,7 @@ import { QuestionInfoComponent } from './question/question-info/question-info.co
 import { ChoiceHostDirective } from './question/question-info/choice-info/choice-host.directive';
 import { ChoiceDynamicComponent } from './question/question-info/choice-info/choice-dynamic.component';
 import { NewQuestionResolver } from './_resolvers/new-question.resolver';
+import { OptionsMenuComponent } from './common-components/options-menu/options-menu.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,8 @@ import { NewQuestionResolver } from './_resolvers/new-question.resolver';
     NewPasswordComponent,
 
     DebounceClickDirective,
+
+    OptionsMenuComponent,
 
     QuizListComponent,
     QuizInfoComponent,
