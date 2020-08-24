@@ -7,6 +7,7 @@ import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.compon
 import { ChoiceHostDirective } from './choice-host.directive';
 import { ChoiceBaseDirective } from './choice-base.directive';
 import { ChoiceEmptyDirective } from './choice-empty.directive';
+import { TrueFalseChoiceComponent } from './true-false-choice/true-false-choice.component';
 
 @Component({
   selector: 'app-choice-dynamic',
@@ -20,7 +21,7 @@ export class ChoiceDynamicComponent implements OnInit {
   @ViewChild(ChoiceHostDirective, {static: true}) choiceHost: ChoiceHostDirective;
 
   private components: { [id in QuestionType]: Type<ChoiceBaseDirective> } = {
-    [QuestionType.TrueFalse]: TrueFalseAnswerComponent,
+    [QuestionType.TrueFalse]: TrueFalseChoiceComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
     [QuestionType.LongAnswer]: ChoiceEmptyDirective

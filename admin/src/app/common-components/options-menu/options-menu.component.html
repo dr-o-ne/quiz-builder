@@ -1,10 +1,11 @@
 <div class="row" fxLayoutAlign="flex-end">
-    <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu"> Options
+  <button class="option-btn" mat-stroked-button [matMenuTriggerFor]="menu" *ngIf="options.length > 0"> 
+    Options
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
+      <mat-icon *ngIf="option.enabled">done</mat-icon>
+      <span>{{option.displayName}}</span>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
-        <mat-icon *ngIf="option.enabled">done</mat-icon>
-        <span>{{option.displayName}}</span>
-      </button>
-    </mat-menu>
-  </div>
+  </mat-menu>
+</div>

@@ -58,6 +58,7 @@ import { ChoiceHostDirective } from './question/question-info/choice-info/choice
 import { ChoiceDynamicComponent } from './question/question-info/choice-info/choice-dynamic.component';
 import { NewQuestionResolver } from './_resolvers/new-question.resolver';
 import { OptionsMenuComponent } from './common-components/options-menu/options-menu.component';
+import { TrueFalseChoiceComponent } from './question/question-info/choice-info/true-false-choice/true-false-choice.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,8 @@ import { OptionsMenuComponent } from './common-components/options-menu/options-m
 
     ChoiceHostDirective,
     ChoiceDynamicComponent,
+
+    TrueFalseChoiceComponent,
 
     TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
@@ -144,6 +147,8 @@ import { OptionsMenuComponent } from './common-components/options-menu/options-m
     })
   ],
   entryComponents: [
+    TrueFalseChoiceComponent,
+    
     MultipleChoiceAnswerComponent,
     TrueFalseAnswerComponent,
     MultiSelectChoiceComponent,

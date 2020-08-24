@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { ChoiceBaseDirective } from '../choice-base.directive';
+import { OptionItem } from 'src/app/_models/UI/optionItem';
 
 @Component({
   selector: 'app-true-false-choice',
@@ -8,5 +9,7 @@ import { ChoiceBaseDirective } from '../choice-base.directive';
 })
 
 export class TrueFalseChoiceComponent extends ChoiceBaseDirective{
+
+  options: OptionItem[] = [];
 
 }
