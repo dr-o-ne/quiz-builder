@@ -11,6 +11,10 @@ import { ChoiceBaseDirective } from '../../question-info/choice-info/choice-base
 
 @Directive()
 export class BaseChoiceComponent extends ChoiceBaseDirective implements OnInit {
+  isValid(): boolean {
+    return true;
+  }
+
   @ViewChild(MatMenuTrigger) optionsMenu: MatMenuTrigger;
   choices: Choice[];
   settings: BaseChoiceSettings;

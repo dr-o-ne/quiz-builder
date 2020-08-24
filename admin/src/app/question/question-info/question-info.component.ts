@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Question } from 'src/app/_models/question';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
+import { ChoiceBaseDirective } from './choice-info/choice-base.directive';
+import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
 
 @Component({
     selector: 'app-question-info',
@@ -17,6 +19,9 @@ import { QuestionLangService } from 'src/app/_service/lang/question.lang.service
     animations: [fadeInUp400ms]
 })
 export class QuestionInfoComponent {
+
+    @ViewChild(ChoiceDynamicComponent)
+    private choicesForm!: ChoiceDynamicComponent;
 
     question: Question;
     questionForm: FormGroup;
@@ -101,6 +106,8 @@ export class QuestionInfoComponent {
     }
 
     isDisabledBtn(): boolean {
-        return !this.questionForm?.valid/* || !this.isChoicesValid()*/;
+
+        console.log(this.choicesForm?.isValid());
+        return !this.questionForm.valid || !this.choicesForm?.isValid();
     }
 }

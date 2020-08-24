@@ -40,13 +40,14 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 					quizEntity = new LongAnswerQuestion();
 					break;
 				case TrueFalse:
-					quizEntity = new TrueFalseQuestion();
-					break;
+					var trueFalseQuestion = new TrueFalseQuestion();
+					trueFalseQuestion.TrueChoice = new BinaryChoice {Id = 0, Order = 0, Text = "True", IsCorrect = true};
+					trueFalseQuestion.FalseChoice = new BinaryChoice {Id = 1, Text = "False", Order = 1};
+					return trueFalseQuestion;
 				case MultiChoice:
 					var multipleChoiceQuestion = new MultipleChoiceQuestion();
 					multipleChoiceQuestion.Choices.Add( new BinaryChoice() );
-					quizEntity = multipleChoiceQuestion;
-					break;
+					return multipleChoiceQuestion;
 				case MultiSelect:
 					quizEntity = new MultipleSelectQuestion();
 					break;

@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, Input, Type, ViewChild, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, Type, ViewChild, OnInit, ComponentRef } from '@angular/core';
 import { QuestionType, Question } from '../../../_models/question';
 import { TrueFalseAnswerComponent } from '../../answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from '../../answer/multiple-choice-answer/multiple-choice-answer.component';
@@ -16,9 +16,10 @@ import { TrueFalseChoiceComponent } from './true-false-choice/true-false-choice.
 
 export class ChoiceDynamicComponent implements OnInit {
 
-  @Input() question: Question;
-  
+  @Input() question: Question;  
   @ViewChild(ChoiceHostDirective, {static: true}) choiceHost: ChoiceHostDirective;
+
+  choiceComponentRef: ComponentRef<ChoiceBaseDirective>;
 
   private components: { [id in QuestionType]: Type<ChoiceBaseDirective> } = {
     [QuestionType.TrueFalse]: TrueFalseChoiceComponent,
@@ -37,13 +38,21 @@ export class ChoiceDynamicComponent implements OnInit {
   loadComponent(): void {
     const componentFactory = this.resolver.resolveComponentFactory(this.components[this.question.type]);
     this.choiceHost.viewContainerRef.clear();
-    const componentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
+    this.choiceComponentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
 
-    componentRef.instance.question = this.question;
+    this.choiceComponentRef.instance.question = this.question;
 
-    if (componentRef.instance instanceof BaseChoiceComponent) {
-      componentRef.instance.settings = this.question.settings;
-      componentRef.instance.choices = this.question.choices;
-    }
+    if (this.choiceComponentRef.instance instanceof BaseChoiceComponent) {
+      this.choiceComponentRef.instance.settings = this.question.settings;
+      this.choiceComponentRef.instance.choices = this.question.choices;
+    }    
+
   }
+
+  isValid(): boolean {
+    return this.choiceComponentRef.instance.isValid();
+  }
+
+  
+
 }

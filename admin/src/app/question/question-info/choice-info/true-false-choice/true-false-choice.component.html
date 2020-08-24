@@ -4,11 +4,55 @@
 
   <mat-tab-group>
 
+
     <mat-tab label="Choices">
+
+      <ng-template matTabContent>
+
+        <div class="container pt-gutter">
+
+          <mat-radio-group>
+
+            <div *ngFor="let choice of question.choices" fxLayout>
+    
+                <mat-form-field fxFlex="50%" appearance="outline" fxFlexAlign="center">
+                  <mat-label>Text</mat-label>
+                  <input matInput type="text" [(ngModel)]="choice.text">
+                </mat-form-field>
+    
+                <mat-radio-button 
+                  [value]="choice.id" 
+                  [checked]="choice.isCorrect" 
+                  fxFlexOffset="2" 
+                  fxFlexAlign="center" 
+                  class="radio-button-fix"
+                  (change)="onChoiceChange($event)">
+                  Correct
+                </mat-radio-button>
+    
+            </div>
+    
+          </mat-radio-group>
+
+        </div>
+
+      </ng-template>
+
     </mat-tab>
     
     <mat-tab label="Settings">
+
+      <ng-template matTabContent>
+
+        <div class="container pt-gutter">
+
+          
+        </div>
+
+      </ng-template>
+
     </mat-tab>
+
 
   </mat-tab-group>
 
