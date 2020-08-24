@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { TrueFalseAnswerComponent } from './question/answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
 
@@ -59,6 +58,7 @@ import { ChoiceDynamicComponent } from './question/question-info/choice-info/cho
 import { NewQuestionResolver } from './_resolvers/new-question.resolver';
 import { OptionsMenuComponent } from './common-components/options-menu/options-menu.component';
 import { TrueFalseChoiceComponent } from './question/question-info/choice-info/true-false-choice/true-false-choice.component';
+import { EnumToArrayPipe } from './_common/pipes/enumToArray.pipe';
 
 @NgModule({
   declarations: [
@@ -74,6 +74,8 @@ import { TrueFalseChoiceComponent } from './question/question-info/choice-info/t
 
     DebounceClickDirective,
 
+    EnumToArrayPipe,
+
     OptionsMenuComponent,
 
     QuizListComponent,
@@ -88,7 +90,6 @@ import { TrueFalseChoiceComponent } from './question/question-info/choice-info/t
 
     TrueFalseChoiceComponent,
 
-    TrueFalseAnswerComponent,
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
   ],
@@ -150,7 +151,6 @@ import { TrueFalseChoiceComponent } from './question/question-info/choice-info/t
     TrueFalseChoiceComponent,
     
     MultipleChoiceAnswerComponent,
-    TrueFalseAnswerComponent,
     MultiSelectChoiceComponent,
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,

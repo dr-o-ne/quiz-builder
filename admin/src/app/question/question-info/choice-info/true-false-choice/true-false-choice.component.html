@@ -16,7 +16,6 @@
             <div *ngFor="let choice of question.choices" fxLayout>
     
                 <mat-form-field fxFlex="50%" appearance="outline" fxFlexAlign="center">
-                  <mat-label>Text</mat-label>
                   <input matInput type="text" [(ngModel)]="choice.text">
                 </mat-form-field>
     
@@ -46,7 +45,32 @@
 
         <div class="container pt-gutter">
 
-          
+          <div fxLayout>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Display Type</mat-label>
+              <mat-select [(ngModel)]="question.settings.choicesDisplayType">
+                <mat-option *ngFor="let item of choicesDisplayTypes | enumToArray" [value]="item.index">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <div *ngIf="question.settings.choicesDisplayType != choicesDisplayTypes.Dropdown">
+              <mat-form-field appearance="outline" fxFlexOffset="2">
+                <mat-label>Enumeration Type</mat-label>
+                <mat-select [(ngModel)]="question.settings.choicesEnumerationType">
+                  <mat-option *ngFor="let item of choicesEnumerationTypes | enumToArray" [value]="item.index">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+
+
         </div>
 
       </ng-template>

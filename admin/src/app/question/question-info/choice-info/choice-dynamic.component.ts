@@ -1,6 +1,5 @@
 import { Component, ComponentFactoryResolver, Input, Type, ViewChild, OnInit, ComponentRef } from '@angular/core';
 import { QuestionType, Question } from '../../../_models/question';
-import { TrueFalseAnswerComponent } from '../../answer/true-false-answer/true-false-answer.component';
 import { MultipleChoiceAnswerComponent } from '../../answer/multiple-choice-answer/multiple-choice-answer.component';
 import { MultiSelectChoiceComponent } from '../../answer/multi-select-choice/multi-select-choice.component';
 import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
@@ -52,7 +51,5 @@ export class ChoiceDynamicComponent implements OnInit {
   isValid(): boolean {
     return this.choiceComponentRef.instance.isValid();
   }
-
   
-
 }

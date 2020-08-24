@@ -3,6 +3,7 @@ import { ChoiceBaseDirective } from '../choice-base.directive';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { MatRadioChange } from '@angular/material/radio';
 import { Choice } from 'src/app/_models/choice';
+import { ChoicesDisplayType, ChoicesEnumerationType } from 'src/app/_models/settings/answer.settings';
 
 @Component({
   selector: 'app-true-false-choice',
@@ -13,6 +14,9 @@ import { Choice } from 'src/app/_models/choice';
 export class TrueFalseChoiceComponent extends ChoiceBaseDirective {
 
   options: OptionItem[] = [];
+
+  choicesDisplayTypes = ChoicesDisplayType;
+  choicesEnumerationTypes = ChoicesEnumerationType;
 
   isValid(): boolean {
 
