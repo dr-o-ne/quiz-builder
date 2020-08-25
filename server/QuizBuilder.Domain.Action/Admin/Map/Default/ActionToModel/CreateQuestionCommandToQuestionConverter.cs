@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using AutoMapper;
 using QuizBuilder.Common;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Model.Default.Choices;
 using QuizBuilder.Domain.Model.Default.Questions;
 using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 	internal sealed class CreateQuestionCommandToQuestionConverter : ITypeConverter<CreateQuestionCommand, Question> {
@@ -15,7 +15,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 		public Question Convert( CreateQuestionCommand source, Question destination, ResolutionContext context ) {
 
 			Question question;
-
 			switch( source.Type ) {
 				case TrueFalse: {
 					var entity = JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings, Consts.JsonSerializerOptions );
@@ -51,6 +50,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 			question.Feedback = source.Feedback;
 			question.CorrectFeedback = source.CorrectFeedback;
 			question.IncorrectFeedback = source.IncorrectFeedback;
+			question.IsRequired = source.IsRequired;
 
 			return question;
 		}

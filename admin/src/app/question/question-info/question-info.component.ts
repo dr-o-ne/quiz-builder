@@ -64,7 +64,8 @@ export class QuestionInfoComponent {
             points: [this.question.points, Validators.required],
             feedback: [this.question.feedback],
             correctFeedback: [this.question.correctFeedback],
-            incorrectFeedback: [this.question.incorrectFeedback]
+            incorrectFeedback: [this.question.incorrectFeedback],
+            isRequired: [this.question.isRequired]
         })
     }
 

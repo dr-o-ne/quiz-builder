@@ -11,6 +11,7 @@ export class Question {
   type: QuestionType;
   settings?: any;
   choices?: any;
+  isRequired: boolean;
 
   get isValid(): boolean {
 

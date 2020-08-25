@@ -20,6 +20,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public string IncorrectFeedback { get; set; }
 
+		public bool IsRequired { get; set; }
+
 		public decimal GetPoints() => Points ?? 0;
 
 	}

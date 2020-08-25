@@ -62,7 +62,8 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel {
 				IncorrectFeedback = source.IncorrectFeedback,
 				CorrectFeedback = source.CorrectFeedback,
 				Settings = settings,
-				Choices = choices
+				Choices = choices,
+				IsRequired = source.IsRequired
 			};
 		}
 
