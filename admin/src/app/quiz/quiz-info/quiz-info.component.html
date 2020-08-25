@@ -26,7 +26,7 @@
     <div class="footer-stick row" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutWrap="wrap"
       fxLayoutGap="1%">
 
-      <button mat-raised-button color="accent" type="submit" [disabled]="!quizForm.valid" (click)="onSave()">
+      <button mat-raised-button color="accent" type="submit" [disabled]="!quizForm.valid" appDebounceClick (debounceClick)="onSave()" [debounceTime]="1000">
         Save
       </button>
 
