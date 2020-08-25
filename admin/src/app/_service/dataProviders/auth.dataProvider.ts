@@ -17,8 +17,6 @@ export class AuthDataProvider {
 
     signUp(name: string, email: string, password: string): Observable<ApiResponse<User>> {
         const body = { name, email, password };
-
-        console.log(body);
         return this.http.post<ApiResponse<User>>(this.apiUrl + 'authentication/register', body);
     }
 

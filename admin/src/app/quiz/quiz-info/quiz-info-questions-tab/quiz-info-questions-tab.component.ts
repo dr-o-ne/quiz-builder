@@ -115,8 +115,6 @@ export class QuizInfoQuestionsTabComponent implements OnInit {
 
     dropQuestion(event: CdkDragDrop<Question[]>): void {
 
-        console.log(event);
-
         if (event.previousContainer === event.container) {
 
             moveItemInArray(

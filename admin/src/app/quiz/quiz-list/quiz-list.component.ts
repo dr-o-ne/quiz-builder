@@ -100,7 +100,7 @@ export class QuizListComponent implements OnInit {
 
   onChangeQuizState(isEnabled: boolean, quiz: Quiz): void {
     quiz.isEnabled = isEnabled;
-    this.quizDataProvider.updateQuiz(quiz).subscribe(error => console.log(error));
+    this.quizDataProvider.updateQuiz(quiz).subscribe();
   }
 
   bulkEnable(): void {

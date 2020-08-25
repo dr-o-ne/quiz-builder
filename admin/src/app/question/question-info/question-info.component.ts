@@ -107,8 +107,6 @@ export class QuestionInfoComponent {
     }
 
     isDisabledBtn(): boolean {
-
-        console.log(this.choicesForm?.isValid());
         return !this.questionForm.valid || !this.choicesForm?.isValid();
     }
 }

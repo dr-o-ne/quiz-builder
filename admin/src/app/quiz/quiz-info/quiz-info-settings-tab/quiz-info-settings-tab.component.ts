@@ -20,10 +20,6 @@ export class QuizInfoSettingsTabComponent {
     }
 
     saveFormData(quiz: Quiz): void {
-
-        console.log('before');
-        console.log(quiz);
-
         const value = this.form.value;
 
         quiz.name = value.name as string;
@@ -35,9 +31,6 @@ export class QuizInfoSettingsTabComponent {
         quiz.isScheduleEnabled = value.isScheduleEnabled as boolean;
         quiz.startDate = (value.startDate as moment.Moment).utc().unix();
         quiz.endDate = (value.endDate as moment.Moment).utc().unix();
-
-        console.log('after');
-        console.log(quiz);
     }
 
     isQuestionsPerPageVisisble(): boolean {
