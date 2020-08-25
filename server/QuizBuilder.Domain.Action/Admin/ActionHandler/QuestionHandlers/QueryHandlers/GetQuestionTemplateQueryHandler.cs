@@ -42,7 +42,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 				case TrueFalse:
 					var trueFalseQuestion = new TrueFalseQuestion();
 					trueFalseQuestion.TrueChoice = new BinaryChoice {Id = 0, Order = 0, Text = "True", IsCorrect = true};
-					trueFalseQuestion.FalseChoice = new BinaryChoice {Id = 1, Text = "False", Order = 1};
+					trueFalseQuestion.FalseChoice = new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false};
 					return trueFalseQuestion;
 				case MultiChoice:
 					var multipleChoiceQuestion = new MultipleChoiceQuestion();
