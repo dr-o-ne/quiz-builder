@@ -76,7 +76,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     createQuiz(): void {
         this.quizDataProvider.createQuiz(this.quiz)
             .subscribe(
-                (response: ApiResponse<Quiz>) => { this.router.navigateByUrl('quizzes/' + response.payload.id + '/edit'); }
+                (response: ApiResponse<Quiz>) => { this.router.navigateByUrl('quizzes/' + response.payload.id); }
             );
     }
 
