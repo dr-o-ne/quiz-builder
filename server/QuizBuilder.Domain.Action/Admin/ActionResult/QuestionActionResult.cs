@@ -9,10 +9,4 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult {
 
 	}
 
-	public sealed class QuestionQueryResult {
-
-		public QuestionViewModel Question { get; set; }
-
-	}
-
 }

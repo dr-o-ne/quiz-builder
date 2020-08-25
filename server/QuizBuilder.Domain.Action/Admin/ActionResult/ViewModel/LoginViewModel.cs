@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace QuizBuilder.Domain.Action.Admin.ActionResult {
+namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 
-	public sealed class LoginInfo {
+	public sealed class LoginViewModel {
 
 		[JsonPropertyName( "username" )]
 		public string Username { get; set; }

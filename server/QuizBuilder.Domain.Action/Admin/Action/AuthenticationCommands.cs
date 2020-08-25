@@ -3,10 +3,11 @@ using System.Text.Json.Serialization;
 using QuizBuilder.Common.CQRS.Actions;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
 
-	public sealed class RegisterUserCommand : ICommand<CommandResult<LoginInfo>> {
+	public sealed class RegisterUserCommand : ICommand<CommandResult<LoginViewModel>> {
 
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
@@ -21,7 +22,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class LoginUserCommand : ICommand<CommandResult<LoginInfo>> {
+	public sealed class LoginUserCommand : ICommand<CommandResult<LoginViewModel>> {
 
 		[Required]
 		[JsonPropertyName( "email" )]
@@ -41,7 +42,7 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 	}
 
-	public sealed class NewPasswordCommand : ICommand<CommandResult<LoginInfo>> {
+	public sealed class NewPasswordCommand : ICommand<CommandResult<LoginViewModel>> {
 
 		[JsonPropertyName( "code" )]
 		public string Code { get; set; }

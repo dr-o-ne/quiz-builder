@@ -8,12 +8,13 @@ using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Common.Services;
 using QuizBuilder.Domain.Model.Default.Organization;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.CommandHandlers {
 
-	public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, CommandResult<LoginInfo>> {
+	public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, CommandResult<LoginViewModel>> {
 
 		private readonly IMapper _mapper;
 		private readonly IUIdService _uIdService;
@@ -37,14 +38,14 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 			_signInManager = signInManager;
 		}
 
-		public async Task<CommandResult<LoginInfo>> HandleAsync( RegisterUserCommand command ) {
+		public async Task<CommandResult<LoginViewModel>> HandleAsync( RegisterUserCommand command ) {
 
 			UserDto userDto = _mapper.Map<UserDto>( command );
 			if( string.IsNullOrEmpty( userDto.UserName ) )
 				userDto.UserName = userDto.Email;
 
 			if( await CheckUserExists( userDto ) ) {
-				return new CommandResult<LoginInfo> { IsSuccess = false }; // TODO: add client error message
+				return new CommandResult<LoginViewModel> { IsSuccess = false }; // TODO: add client error message
 			}
 
 			OrganizationDto organization = await CreateOrganization();
@@ -53,7 +54,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 			IdentityResult result = await _userManager.CreateAsync( userDto, command.Password );
 			if( !result.Succeeded ) {
 				await _organizationDataProvider.Delete( organization.Id );
-				return new CommandResult<LoginInfo> { IsSuccess = false }; // TODO: filter and add client error message
+				return new CommandResult<LoginViewModel> { IsSuccess = false }; // TODO: filter and add client error message
 			}
 
 			UserDto user = await _userManager.FindByEmailAsync( command.Email );
@@ -74,16 +75,16 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 			return await _organizationDataProvider.Add( organizationDto );
 		}
 
-		private async Task<CommandResult<LoginInfo>> Login( UserDto user, string password ) {
+		private async Task<CommandResult<LoginViewModel>> Login( UserDto user, string password ) {
 
 			SignInResult signInResult = await _signInManager.PasswordSignInAsync( user, password, false, false );
 			if( !signInResult.Succeeded )
-				return new CommandResult<LoginInfo> { IsSuccess = false };
+				return new CommandResult<LoginViewModel> { IsSuccess = false };
 
 			string token = _jwtTokenFactory.Create( user );
 
-			var payload = new LoginInfo { Username = user.UserName, Token = token };
-			return new CommandResult<LoginInfo> {
+			var payload = new LoginViewModel { Username = user.UserName, Token = token };
+			return new CommandResult<LoginViewModel> {
 				IsSuccess = true,
 				Payload = payload
 			};

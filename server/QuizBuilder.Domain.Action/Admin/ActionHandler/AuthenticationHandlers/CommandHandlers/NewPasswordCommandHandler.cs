@@ -5,11 +5,12 @@ using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
+using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Common.Services;
 
 namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.CommandHandlers {
 
-	public sealed class NewPasswordCommandHandler : ICommandHandler<NewPasswordCommand, CommandResult<LoginInfo>> {
+	public sealed class NewPasswordCommandHandler : ICommandHandler<NewPasswordCommand, CommandResult<LoginViewModel>> {
 
 		private readonly IJwtTokenFactory _jwtTokenFactory;
 		private readonly SignInManager<UserDto> _signInManager;
@@ -25,29 +26,29 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 			_userManager = userManager;
 		}
 
-		public async Task<CommandResult<LoginInfo>> HandleAsync( NewPasswordCommand command ) {
+		public async Task<CommandResult<LoginViewModel>> HandleAsync( NewPasswordCommand command ) {
 
 			var user = await _userManager.FindByEmailAsync( command.Email );
 			if( user == null )
-				return new CommandResult<LoginInfo> { IsSuccess = false };
+				return new CommandResult<LoginViewModel> { IsSuccess = false };
 
 			var result = await _userManager.ResetPasswordAsync( user, command.Code, command.Password );
 			if( !result.Succeeded )
-				return new CommandResult<LoginInfo> { IsSuccess = false };
+				return new CommandResult<LoginViewModel> { IsSuccess = false };
 
 			return await Login( user, command.Password );
 		}
 
-		private async Task<CommandResult<LoginInfo>> Login( UserDto user, string password ) {
+		private async Task<CommandResult<LoginViewModel>> Login( UserDto user, string password ) {
 
 			SignInResult signInResult = await _signInManager.PasswordSignInAsync( user, password, false, false );
 			if( !signInResult.Succeeded )
-				return new CommandResult<LoginInfo> { IsSuccess = false };
+				return new CommandResult<LoginViewModel> { IsSuccess = false };
 
 			string token = _jwtTokenFactory.Create( user );
 
-			var payload = new LoginInfo { Username = user.UserName, Token = token };
-			return new CommandResult<LoginInfo> {
+			var payload = new LoginViewModel { Username = user.UserName, Token = token };
+			return new CommandResult<LoginViewModel> {
 				IsSuccess = true,
 				Payload = payload
 			};
