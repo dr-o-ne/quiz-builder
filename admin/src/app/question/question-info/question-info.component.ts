@@ -11,9 +11,9 @@ import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
 @Component({
     selector: 'app-question-info',
     templateUrl: './question-info.component.html',
-    styleUrls: [ './question-info.component.css',
-    '../../../../node_modules/quill/dist/quill.snow.css',
-    '../../../@vex/styles/partials/plugins/_quill.scss' ],
+    styleUrls: ['./question-info.component.css',
+        '../../../../node_modules/quill/dist/quill.snow.css',
+        '../../../@vex/styles/partials/plugins/_quill.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [fadeInUp400ms]
 })
@@ -55,10 +55,10 @@ export class QuestionInfoComponent {
         }
         this.question.settings = JSON.parse(this.question.settings);
         //TODO:
-        if (!this.question.choices || this.question.choices.length === 0){
+        if (!this.question.choices || this.question.choices.length === 0) {
             this.question.choices = '{}';
         }
-        this.question.choices = JSON.parse( this.question.choices );
+        this.question.choices = JSON.parse(this.question.choices);
 
         this.questionForm = this.fb.group({
             name: [this.question.name],
@@ -94,7 +94,7 @@ export class QuestionInfoComponent {
         if (!this.questionForm.valid) {
             return;
         }
-        
+
         this.question = Object.assign(this.question, this.questionForm.value);
         this.question.settings = JSON.stringify(this.question.settings);
         this.question.choices = JSON.stringify(this.question.choices);
@@ -112,6 +112,7 @@ export class QuestionInfoComponent {
     isEnabled(): boolean {
 
         if (!this.questionForm.valid) return false;
+        if (!this.choicesForm) return true;
         if (!this.choicesForm.isValid()) return false;
 
         return true;
