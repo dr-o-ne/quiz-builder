@@ -6,7 +6,6 @@ import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
-import { ChoiceBaseDirective } from './choice-info/choice-base.directive';
 import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
 
 @Component({
