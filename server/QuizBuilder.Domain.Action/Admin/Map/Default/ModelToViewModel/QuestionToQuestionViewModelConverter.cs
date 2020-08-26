@@ -8,9 +8,8 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel {
 	internal sealed class QuestionToQuestionViewModelConverter: ITypeConverter<Question, QuestionViewModel> {
+
 		public QuestionViewModel Convert( Question source, QuestionViewModel destination, ResolutionContext context ) {
-			if( source is null )
-				return null;
 
 			string settings;
 			string choices;
@@ -43,8 +42,12 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel {
 					var binaryChoices = new BinaryChoice[] { question.TrueChoice, question.FalseChoice };
 					choices = JsonSerializer.Serialize( binaryChoices, Consts.JsonSerializerOptions );
 					break;
-				case LongAnswerQuestion question:
+				case LongAnswerQuestion _:
 					settings = JsonSerializer.Serialize( new {}, Consts.JsonSerializerOptions );
+					choices = string.Empty;
+					break;
+				case EmptyQuestion _:
+					settings = JsonSerializer.Serialize( new { }, Consts.JsonSerializerOptions );
 					choices = string.Empty;
 					break;
 				default:

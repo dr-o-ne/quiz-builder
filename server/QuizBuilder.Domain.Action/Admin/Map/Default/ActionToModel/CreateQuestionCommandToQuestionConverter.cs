@@ -40,6 +40,10 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 					question = JsonSerializer.Deserialize<LongAnswerQuestion>( source.Settings, Consts.JsonSerializerOptions );
 					break;
 				}
+				case Empty: {
+					question = JsonSerializer.Deserialize<EmptyQuestion>( source.Settings, Consts.JsonSerializerOptions );
+					break;
+				}
 				default:
 					throw new ArgumentException( "Unknown question type" );
 			}

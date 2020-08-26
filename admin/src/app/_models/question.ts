@@ -26,7 +26,7 @@ export class Question {
 
       return true;
     }
-
+    //TODO:
     return true;
 
   }
@@ -40,5 +40,6 @@ export enum QuestionType {
   TrueFalse = 2,
   MultipleChoice = 3,
   MultiSelect = 5,
-  LongAnswer = 6
+  LongAnswer = 6,
+  Empty = 7
 }

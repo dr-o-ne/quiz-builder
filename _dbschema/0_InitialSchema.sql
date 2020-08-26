@@ -57,7 +57,8 @@ VALUES
     ('MultiChoice'),
     ('FillInTheBlanks'),
     ('MultiSelect'),
-    ('LongAnswer')
+    ('LongAnswer'),
+    ('Empty')
 GO
 
 CREATE TABLE dbo.QuizItem(

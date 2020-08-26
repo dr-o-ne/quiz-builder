@@ -20,7 +20,14 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.Command
 		private readonly IStructureDataProvider _structureDataProvider;
 		private readonly IGroupDataProvider _groupDataProvider;
 
-		public CreateQuestionCommandHandler( IMapper mapper, IUIdService uIdService, IQuizDataProvider quizDataProvider, IQuestionDataProvider questionDataProvider, IStructureDataProvider structureDataProvider, IGroupDataProvider groupDataProvider ) {
+		public CreateQuestionCommandHandler(
+			IMapper mapper,
+			IUIdService uIdService,
+			IQuizDataProvider quizDataProvider,
+			IQuestionDataProvider questionDataProvider,
+			IStructureDataProvider structureDataProvider,
+			IGroupDataProvider groupDataProvider ) {
+
 			_mapper = mapper;
 			_uIdService = uIdService;
 			_quizDataProvider = quizDataProvider;

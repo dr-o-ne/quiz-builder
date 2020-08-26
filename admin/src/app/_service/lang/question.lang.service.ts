@@ -13,6 +13,7 @@ export class QuestionLangService {
             case QuestionType.MultipleChoice: return "Multiple Choice";
             case QuestionType.MultiSelect: return "Multiple Select";
             case QuestionType.LongAnswer: return "Long Answer";
+            case QuestionType.Empty: return "Text Block";
         }
     }
 

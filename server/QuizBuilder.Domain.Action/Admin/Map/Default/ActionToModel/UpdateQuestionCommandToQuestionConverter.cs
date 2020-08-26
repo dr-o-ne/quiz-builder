@@ -18,29 +18,33 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 			Question question;
 			switch( source.Type ) {
 				case TrueFalse: {
-						var entity = JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings, Consts.JsonSerializerOptions );
-						var choices = JsonSerializer.Deserialize<List<BinaryChoice>>( source.Choices, Consts.JsonSerializerOptions );
-						entity.TrueChoice = choices.FirstOrDefault();
-						entity.FalseChoice = choices.LastOrDefault();
-						question = entity;
-						break;
-					}
+					var entity = JsonSerializer.Deserialize<TrueFalseQuestion>( source.Settings, Consts.JsonSerializerOptions );
+					var choices = JsonSerializer.Deserialize<List<BinaryChoice>>( source.Choices, Consts.JsonSerializerOptions );
+					entity.TrueChoice = choices.FirstOrDefault();
+					entity.FalseChoice = choices.LastOrDefault();
+					question = entity;
+					break;
+				}
 				case MultiChoice: {
-						var entity = JsonSerializer.Deserialize<MultipleChoiceQuestion>( source.Settings, Consts.JsonSerializerOptions );
-						entity.Choices = JsonSerializer.Deserialize<List<BinaryChoice>>( source.Choices, Consts.JsonSerializerOptions );
-						question = entity;
-						break;
-					}
+					var entity = JsonSerializer.Deserialize<MultipleChoiceQuestion>( source.Settings, Consts.JsonSerializerOptions );
+					entity.Choices = JsonSerializer.Deserialize<List<BinaryChoice>>( source.Choices, Consts.JsonSerializerOptions );
+					question = entity;
+					break;
+				}
 				case MultiSelect: {
-						var entity = JsonSerializer.Deserialize<MultipleSelectQuestion>( source.Settings, Consts.JsonSerializerOptions );
-						entity.Choices = JsonSerializer.Deserialize<List<BinaryChoice>>( source.Choices, Consts.JsonSerializerOptions );
-						question = entity;
-						break;
-					}
+					var entity = JsonSerializer.Deserialize<MultipleSelectQuestion>( source.Settings, Consts.JsonSerializerOptions );
+					entity.Choices = JsonSerializer.Deserialize<List<BinaryChoice>>( source.Choices, Consts.JsonSerializerOptions );
+					question = entity;
+					break;
+				}
 				case LongAnswer: {
-						question = JsonSerializer.Deserialize<LongAnswerQuestion>( source.Settings, Consts.JsonSerializerOptions );
-						break;
-					}
+					question = JsonSerializer.Deserialize<LongAnswerQuestion>( source.Settings, Consts.JsonSerializerOptions );
+					break;
+				}
+				case Empty: {
+					question = JsonSerializer.Deserialize<EmptyQuestion>( source.Settings, Consts.JsonSerializerOptions );
+					break;
+				}
 				default:
 					throw new ArgumentException( "Unknown question type" );
 			}

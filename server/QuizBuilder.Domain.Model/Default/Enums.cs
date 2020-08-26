@@ -9,7 +9,8 @@
 			MultiChoice = 3,
 			FillInTheBlanks = 4,
 			MultiSelect = 5,
-			LongAnswer = 6
+			LongAnswer = 6,
+			Empty = 7
 		}
 
 		public enum TextEvaluationType {

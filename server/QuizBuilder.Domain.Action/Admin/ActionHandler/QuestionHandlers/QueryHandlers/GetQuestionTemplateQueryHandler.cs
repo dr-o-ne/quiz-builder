@@ -33,7 +33,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 
 		}
 
-		private QuizEntity CreateQuizEntity( QuizItemType type ) {
+		private static QuizEntity CreateQuizEntity( QuizItemType type ) {
 			QuizEntity quizEntity;
 			switch( type ) {
 				case LongAnswer:
@@ -50,6 +50,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 					return multipleChoiceQuestion;
 				case MultiSelect:
 					quizEntity = new MultipleSelectQuestion();
+					break;
+				case Empty:
+					quizEntity = new EmptyQuestion();
 					break;
 				default:
 					quizEntity = null;

@@ -2,18 +2,18 @@ using System;
 using System.Text.Json;
 using AutoMapper;
 using QuizBuilder.Data.Dto;
-using QuizBuilder.Domain.Model.Default;
 using QuizBuilder.Domain.Model.Default.Questions;
+using static QuizBuilder.Domain.Model.Default.Enums;
 using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
+
 	internal sealed class QuestionToQuestionDtoConverter : ITypeConverter<Question, QuestionDto> {
+
 		public QuestionDto Convert( Question source, QuestionDto destination, ResolutionContext context ) {
-			if( source == null )
-				return null;
 
 			string settings;
-			Enums.QuizItemType questionType;
+			QuizItemType questionType;
 
 			switch( source ) {
 				case TrueFalseQuestion question:
@@ -30,11 +30,15 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 					break;
 				case MultipleSelectQuestion question:
 					settings = JsonSerializer.Serialize( question );
-					questionType = question.Type;
+					questionType = MultiSelect;
 					break;
 				case LongAnswerQuestion question:
 					settings = JsonSerializer.Serialize( question );
-					questionType = question.Type;
+					questionType = LongAnswer;
+					break;
+				case EmptyQuestion question:
+					settings = JsonSerializer.Serialize( question );
+					questionType = Empty;
 					break;
 				default:
 					throw new ArgumentException( "Unknown question type" );

@@ -24,7 +24,8 @@ export class ChoiceDynamicComponent implements OnInit {
     [QuestionType.TrueFalse]: TrueFalseChoiceComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
-    [QuestionType.LongAnswer]: ChoiceEmptyDirective
+    [QuestionType.LongAnswer]: ChoiceEmptyDirective,
+    [QuestionType.Empty]: ChoiceEmptyDirective
   };
 
   constructor(private resolver: ComponentFactoryResolver) {

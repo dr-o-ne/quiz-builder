@@ -20,6 +20,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.DtoToModel {
 				FillInTheBlanks => JsonSerializer.Deserialize<FillInTheBlanksQuestion>( source.Settings ),
 				MultiSelect => JsonSerializer.Deserialize<MultipleSelectQuestion>( source.Settings ),
 				LongAnswer => JsonSerializer.Deserialize<LongAnswerQuestion>( source.Settings ),
+				Empty => JsonSerializer.Deserialize<EmptyQuestion>( source.Settings ),
 				_ => throw new ArgumentException( "Unknown question type" )
 			};
 

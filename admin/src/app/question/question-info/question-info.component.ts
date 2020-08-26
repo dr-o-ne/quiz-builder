@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Question } from 'src/app/_models/question';
+import { Question, QuestionType } from 'src/app/_models/question';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
@@ -25,6 +25,8 @@ export class QuestionInfoComponent {
     question: Question;
     questionForm: FormGroup;
 
+    emptyQuestionType: QuestionType;
+
     isEditMode = () => this.question.id;
 
     options: OptionItem[] = [
@@ -39,6 +41,8 @@ export class QuestionInfoComponent {
         private fb: FormBuilder,
         private questionDataProvider: QuestionDataProvider,
         public questionLangService: QuestionLangService) {
+
+        this.emptyQuestionType = QuestionType.Empty;
     }
 
     ngOnInit(): void {
@@ -60,7 +64,7 @@ export class QuestionInfoComponent {
             name: [this.question.name],
             type: [this.question.type, Validators.required],
             text: [this.question.text, Validators.required],
-            points: [this.question.points, Validators.required],
+            points: [this.question.points],
             feedback: [this.question.feedback],
             correctFeedback: [this.question.correctFeedback],
             incorrectFeedback: [this.question.incorrectFeedback],
@@ -106,6 +110,10 @@ export class QuestionInfoComponent {
     }
 
     isDisabledBtn(): boolean {
-        return !this.questionForm.valid || !this.choicesForm?.isValid();
+
+        if(!this.questionForm.valid) return false;
+        if(this.choicesForm && !this.choicesForm.isValid()) return false;
+
+        return true;
     }
 }

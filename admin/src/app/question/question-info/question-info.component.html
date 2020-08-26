@@ -3,7 +3,10 @@
 
     <div class="card main-color">
 
-      <app-options-menu [options]="options"></app-options-menu>
+      <app-options-menu
+        *ngIf="question.type != emptyQuestionType" 
+        [options]="options">
+      </app-options-menu>
   
       <mat-tab-group>
   
@@ -20,13 +23,27 @@
                   <input matInput type="text" formControlName="name">
                 </mat-form-field>
                 
-                <mat-checkbox fxFlexOffset="23" fxFlexAlign="center" formControlName="isRequired" color="primary" class="padding-bottom-fix">
+                <mat-checkbox
+                  *ngIf="question.type != emptyQuestionType" 
+                  fxFlexOffset="23" 
+                  fxFlexAlign="center" 
+                  formControlName="isRequired" 
+                  color="primary" 
+                  class="padding-bottom-fix" >
+
                   Is Required
+
                 </mat-checkbox>
 
-                <mat-form-field fxFlex="7" fxFlexOffset="2" appearance="outline">
+                <mat-form-field
+                  *ngIf="question.type != emptyQuestionType" 
+                  fxFlex="7" 
+                  fxFlexOffset="2" 
+                  appearance="outline">
+
                   <mat-label>Points</mat-label>
                   <input matInput type="number" formControlName="points">
+
                 </mat-form-field>
   
               </div>
