@@ -5,7 +5,7 @@ import { MultiSelectChoiceComponent } from '../../answer/multi-select-choice/mul
 import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
 import { ChoiceHostDirective } from './choice-host.directive';
 import { ChoiceBaseDirective } from './choice-base.directive';
-import { ChoiceEmptyDirective } from './choice-empty.directive';
+import { ChoiceEmptyComponent } from './choice-empty.component';
 import { TrueFalseChoiceComponent } from './true-false-choice/true-false-choice.component';
 
 @Component({
@@ -24,8 +24,8 @@ export class ChoiceDynamicComponent implements OnInit {
     [QuestionType.TrueFalse]: TrueFalseChoiceComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
-    [QuestionType.LongAnswer]: ChoiceEmptyDirective,
-    [QuestionType.Empty]: ChoiceEmptyDirective
+    [QuestionType.LongAnswer]: ChoiceEmptyComponent,
+    [QuestionType.Empty]: ChoiceEmptyComponent
   };
 
   constructor(private resolver: ComponentFactoryResolver) {
