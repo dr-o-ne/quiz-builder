@@ -109,10 +109,10 @@ export class QuestionInfoComponent {
         }
     }
 
-    isDisabledBtn(): boolean {
+    isEnabled(): boolean {
 
-        if(!this.questionForm.valid) return false;
-        if(this.choicesForm && !this.choicesForm.isValid()) return false;
+        if (!this.questionForm.valid) return false;
+        if (!this.choicesForm.isValid()) return false;
 
         return true;
     }

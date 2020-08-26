@@ -50,6 +50,9 @@ export class ChoiceDynamicComponent implements OnInit {
   }
 
   isValid(): boolean {
+
+    if(!this.choiceComponentRef) return true;
+
     return this.choiceComponentRef.instance.isValid();
   }
   
