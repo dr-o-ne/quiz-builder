@@ -16,6 +16,8 @@ namespace QuizBuilder.Domain.Model.Default {
 		[JsonIgnore]
 		public bool IsEnabled { get; set; }
 
+		public string Introduction { get; set; }
+
 		public bool IsPrevButtonEnabled { get; set; }
 
 		public PageSettings PageSettings { get; set; }
