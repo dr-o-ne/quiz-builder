@@ -49,7 +49,8 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                 randomizeQuestions: [this.quiz.randomizeQuestions],
                 isScheduleEnabled: [this.quiz.isScheduleEnabled],
                 startDate: [moment(this.quiz.startDate).utc()],
-                endDate: [moment(this.quiz.endDate).utc()]
+                endDate: [moment(this.quiz.endDate).utc()],
+                introduction: [this.quiz.introduction]
             })
         })
     }

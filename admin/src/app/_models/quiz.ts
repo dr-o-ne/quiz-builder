@@ -13,6 +13,8 @@ export class Quiz {
     isEnabled: boolean;
     groups: Group[];
 
+    introduction: string;
+
     isPrevButtonEnabled: boolean;
     pageSettings: PageSettings;
     questionsPerPage: number;

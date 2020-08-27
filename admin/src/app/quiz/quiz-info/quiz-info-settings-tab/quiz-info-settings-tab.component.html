@@ -2,7 +2,7 @@
 
     <div class="card main-color">
 
-        <div class="row" fxLayout fxLayout.xs="column" fxLayoutAlign="flex-start" fxLayoutWrap="wrap" fxLayoutGap="1%">
+        <div class="container pt-gutter">
 
             <mat-form-field fxFlex appearance="outline">
                 <mat-label>Quiz Name</mat-label>
@@ -10,6 +10,11 @@
             </mat-form-field>
 
         </div>
+
+        <app-rich-text-editor 
+            displayName="Introduction"
+            textFormControlName="introduction">
+        </app-rich-text-editor>
 
     </div>
     
