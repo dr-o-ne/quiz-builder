@@ -59,6 +59,7 @@ import { NewQuestionResolver } from './_resolvers/new-question.resolver';
 import { OptionsMenuComponent } from './common-components/options-menu/options-menu.component';
 import { TrueFalseChoiceComponent } from './question/question-info/choice-info/true-false-choice/true-false-choice.component';
 import { EnumToArrayPipe } from './_common/pipes/enumToArray.pipe';
+import { RichTextEditorComponent } from './common-components/rich-text-editor/rich-text-editor.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { EnumToArrayPipe } from './_common/pipes/enumToArray.pipe';
     EnumToArrayPipe,
 
     OptionsMenuComponent,
+    RichTextEditorComponent,
 
     QuizListComponent,
     QuizInfoComponent,

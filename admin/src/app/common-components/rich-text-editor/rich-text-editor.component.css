@@ -1,0 +1,9 @@
+.ql-container{
+    min-height: 100px;
+    box-shadow: none;
+}
+
+.ql-snow {
+    border-width: 1px 1px 1px 1px !important;
+    box-shadow: none !important;
+}

@@ -1,0 +1,13 @@
+<div class="container pb-gutter">
+    <div class="card editor">
+
+        <span>{{displayName}}</span>
+
+        <quill-editor 
+            @fadeInUp 
+            [formControlName]="textFormControlName" 
+            [styles]="{ flex: '1 1 auto' }"
+            (onContentChanged)="onContentChanged($event);">
+        </quill-editor>
+    </div>
+</div>

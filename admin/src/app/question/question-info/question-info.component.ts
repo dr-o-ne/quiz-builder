@@ -1,9 +1,8 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Question, QuestionType } from 'src/app/_models/question';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
-import { fadeInUp400ms } from 'src/@vex/animations/fade-in-up.animation';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
@@ -11,11 +10,7 @@ import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
 @Component({
     selector: 'app-question-info',
     templateUrl: './question-info.component.html',
-    styleUrls: ['./question-info.component.css',
-        '../../../../node_modules/quill/dist/quill.snow.css',
-        '../../../@vex/styles/partials/plugins/_quill.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: [fadeInUp400ms]
+    styleUrls: ['./question-info.component.css']
 })
 export class QuestionInfoComponent {
 

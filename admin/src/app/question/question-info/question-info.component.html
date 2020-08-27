@@ -47,30 +47,21 @@
                 </mat-form-field>
   
               </div>
-  
-              <div class="container pb-gutter">
-                <div class="card editor">
-                  <quill-editor
-                        @fadeInUp
-                        formControlName="text"
-                        [styles]="{ flex: '1 1 auto' }"
-                        (onContentChanged)="onContentChanged($event);">
-                  </quill-editor>
-                </div>
-              </div>
+
+              <app-rich-text-editor 
+                displayName="Text"
+                textFormControlName="text">
+
+              </app-rich-text-editor>
   
               <div *ngFor="let option of getQuestionOptions()">
                 <div *ngIf="option.type == 'wysiwyg'">
-                  <div class="p-gutter container">
-                    <div class="card editor">
-                      <quill-editor
-                            @fadeInUp
-                            formControlName={{option.name}}
-                            [styles]="{ flex: '1 1 auto' }"
-                            (onContentChanged)="onContentChanged($event);">
-                      </quill-editor>
-                    </div>
-                  </div>
+
+                  <app-rich-text-editor 
+                    displayName="{{option.displayName}}"
+                    textFormControlName="{{option.name}}">
+                  </app-rich-text-editor>
+
                 </div>
               </div>
   
