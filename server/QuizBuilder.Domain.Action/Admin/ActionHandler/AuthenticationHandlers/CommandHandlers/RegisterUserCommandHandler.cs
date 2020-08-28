@@ -7,7 +7,6 @@ using QuizBuilder.Common.Services;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Common.Services;
 using QuizBuilder.Domain.Model.Default.Organization;

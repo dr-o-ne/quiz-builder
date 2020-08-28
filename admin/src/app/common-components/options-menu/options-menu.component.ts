@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { OptionItem } from 'src/app/_models/UI/optionItem';
 
 @Component({
@@ -8,11 +8,11 @@ import { OptionItem } from 'src/app/_models/UI/optionItem';
 })
 export class OptionsMenuComponent {
 
-    @Input() options: OptionItem[];
+  @Input() options: OptionItem[];
 
-    onOptionItemClick(event: MouseEvent, option: OptionItem): void {
-        option.enabled = !option.enabled;
-        event.stopPropagation();
-    }
- 
+  onOptionItemClick(event: MouseEvent, option: OptionItem): void {
+    option.enabled = !option.enabled;
+    event.stopPropagation();
+  }
+
 }

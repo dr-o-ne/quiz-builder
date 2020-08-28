@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using QuizBuilder.Common.CQRS.Actions;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
-using QuizBuilder.Domain.Model.Default;
 using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {

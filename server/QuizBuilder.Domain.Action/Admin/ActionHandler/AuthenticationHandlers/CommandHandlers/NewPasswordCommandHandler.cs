@@ -4,7 +4,6 @@ using QuizBuilder.Common.CQRS.ActionHandlers;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Admin.Action;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Domain.Action.Common.Services;
 

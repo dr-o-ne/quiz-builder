@@ -22,9 +22,6 @@ export class RichTextEditorComponent {
   @Input() textFormControlName: string;
   @Input() displayName: string;
 
-  constructor(){
-  }
-
   onContentChanged(_): void {/*HACK*/ }
 
 }

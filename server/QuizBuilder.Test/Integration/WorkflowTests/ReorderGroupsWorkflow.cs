@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using QuizBuilder.Api;
 using QuizBuilder.Common.CQRS.Actions.Default;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 using QuizBuilder.Test.Integration.TestHelpers;
 using Xunit;
