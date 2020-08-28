@@ -13,7 +13,7 @@ import { QuizDataProvider } from 'src/app/_service/dataProviders/quiz.dataProvid
   styleUrls: ['./quiz-list.component.css']
 })
 export class QuizListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'isEnabled', 'statistic', 'preview', 'menu'];
+  displayedColumns: string[] = ['name', 'isEnabled', 'statistic', 'preview', 'copyLink', 'menu'];
   filterData: string;
   isMultiSelectMode = false;
   dataSource: MatTableDataSource<Quiz>;
@@ -124,4 +124,19 @@ export class QuizListComponent implements OnInit {
   onPreviewClick(item: Quiz): void {
     this.attemptService.tryAttempt(item.id);
   }
+
+  copyLink(item: Quiz): void {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.attemptService.getLink(item.id);
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
 }

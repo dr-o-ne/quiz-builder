@@ -8,8 +8,12 @@ export class AttemptService {
 
   clientUrl = environment.clientUrl;
 
+  getLink(quizId: string): string {
+    return this.clientUrl + 'quizzes/' + quizId;
+  }
+
   tryAttempt(quizId: string): void {
-    window.open(this.clientUrl + 'quizzes/' + quizId, "_blank");
+    window.open(this.getLink(quizId), "_blank");
   }
 
 }
