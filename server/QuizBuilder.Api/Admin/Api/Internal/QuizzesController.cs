@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Common.Extensions;
-using QuizBuilder.Common.Services;
 using QuizBuilder.Domain.Action.Admin.Action;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
@@ -16,7 +15,7 @@ namespace QuizBuilder.Api.Admin.Api.Internal {
 
 		private readonly IDispatcher _dispatcher;
 
-		public QuizzesController( IDispatcher dispatcher, IEmailService test ) {
+		public QuizzesController( IDispatcher dispatcher ) {
 			_dispatcher = dispatcher;
 		}
 
