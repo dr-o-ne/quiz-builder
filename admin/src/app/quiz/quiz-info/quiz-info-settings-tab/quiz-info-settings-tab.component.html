@@ -11,7 +11,7 @@
 
         </div>
 
-        <app-rich-text-editor 
+        <app-rich-text-editor *ngIf="isEditMode"
             displayName="Introduction"
             textFormControlName="introduction">
         </app-rich-text-editor>
