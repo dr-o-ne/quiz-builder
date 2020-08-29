@@ -14,8 +14,6 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public decimal? Points { get; set; }
 
-		public string Feedback { get; set; }
-
 		public string CorrectFeedback { get; set; }
 
 		public string IncorrectFeedback { get; set; }

@@ -61,7 +61,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToViewModel {
 				Name = source.Name,
 				Text = source.Text,
 				Points = source.Points,
-				Feedback = source.Feedback,
 				IncorrectFeedback = source.IncorrectFeedback,
 				CorrectFeedback = source.CorrectFeedback,
 				Settings = settings,

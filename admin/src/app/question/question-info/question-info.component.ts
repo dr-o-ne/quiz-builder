@@ -25,7 +25,6 @@ export class QuestionInfoComponent {
     isEditMode = () => this.question.id;
 
     options: OptionItem[] = [
-        new OptionItem('feedback', 'Feedback', 'wysiwyg', false),
         new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
         new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
     ];
@@ -60,7 +59,6 @@ export class QuestionInfoComponent {
             type: [this.question.type, Validators.required],
             text: [this.question.text, Validators.required],
             points: [this.question.points],
-            feedback: [this.question.feedback],
             correctFeedback: [this.question.correctFeedback],
             incorrectFeedback: [this.question.incorrectFeedback],
             isRequired: [this.question.isRequired]

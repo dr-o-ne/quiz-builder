@@ -51,7 +51,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 			question.Name = source.Name;
 			question.Text = source.Text;
 			question.Points = source.Points;
-			question.Feedback = source.Feedback;
 			question.CorrectFeedback = source.CorrectFeedback;
 			question.IncorrectFeedback = source.IncorrectFeedback;
 			question.IsRequired = source.IsRequired;

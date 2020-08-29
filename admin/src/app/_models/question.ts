@@ -5,7 +5,6 @@ export class Question {
   name: string;
   text: string;
   points: number;
-  feedback: string;
   correctFeedback: string;
   incorrectFeedback: string;
   type: QuestionType;

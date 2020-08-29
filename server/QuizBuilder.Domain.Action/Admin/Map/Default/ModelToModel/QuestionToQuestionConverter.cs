@@ -16,7 +16,6 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToModel {
 
 			destination.Name = source.Name;
 			destination.Text = source.Text;
-			destination.Feedback = source.Feedback;
 			destination.CorrectFeedback = source.CorrectFeedback;
 			destination.IncorrectFeedback = source.IncorrectFeedback;
 
