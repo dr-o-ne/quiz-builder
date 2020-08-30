@@ -60,6 +60,9 @@ import { OptionsMenuComponent } from './common-components/options-menu/options-m
 import { TrueFalseChoiceComponent } from './question/question-info/choice-info/true-false-choice/true-false-choice.component';
 import { EnumToArrayPipe } from './_common/pipes/enumToArray.pipe';
 import { RichTextEditorComponent } from './common-components/rich-text-editor/rich-text-editor.component';
+import { QuestionInfoSettingsHostDirective } from './question/question-info/question-info-settings/question-info-settings-host.directive';
+import { QuestionInfoSettingsDynamicComponent } from './question/question-info/question-info-settings/question-info-settings-dynamic.component';
+import { TrueFalseInfoSettingsComponent } from './question/question-info/question-info-settings/true-false-info-settings/true-false-info-settings.component';
 
 @NgModule({
   declarations: [
@@ -87,10 +90,14 @@ import { RichTextEditorComponent } from './common-components/rich-text-editor/ri
     GroupInfoComponent,
     QuestionInfoComponent,
 
+    QuestionInfoSettingsHostDirective,
+    QuestionInfoSettingsDynamicComponent,
+
     ChoiceHostDirective,
     ChoiceDynamicComponent,
 
     TrueFalseChoiceComponent,
+    TrueFalseInfoSettingsComponent,
 
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
@@ -151,6 +158,7 @@ import { RichTextEditorComponent } from './common-components/rich-text-editor/ri
   ],
   entryComponents: [
     TrueFalseChoiceComponent,
+    TrueFalseInfoSettingsComponent,
     
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
