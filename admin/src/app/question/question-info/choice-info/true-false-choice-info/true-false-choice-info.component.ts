@@ -4,9 +4,9 @@ import { MatRadioChange } from '@angular/material/radio';
 import { Choice } from 'src/app/_models/choice';
 
 @Component({
-  selector: 'app-true-false-choice',
-  templateUrl: './true-false-choice.component.html',
-  styleUrls: ['./true-false-choice.component.css']
+  selector: 'app-true-false-choice-info',
+  templateUrl: './true-false-choice-info.component.html',
+  styleUrls: ['./true-false-choice-info.component.css']
 })
 
 export class TrueFalseChoiceComponent extends ChoiceBaseDirective {
