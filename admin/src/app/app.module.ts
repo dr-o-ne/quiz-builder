@@ -63,6 +63,7 @@ import { RichTextEditorComponent } from './common-components/rich-text-editor/ri
 import { QuestionInfoSettingsHostDirective } from './question/question-info/question-info-settings/question-info-settings-host.directive';
 import { QuestionInfoSettingsDynamicComponent } from './question/question-info/question-info-settings/question-info-settings-dynamic.component';
 import { TrueFalseInfoSettingsComponent } from './question/question-info/question-info-settings/true-false-info-settings/true-false-info-settings.component';
+import { MultipleChoiceInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-choice-info-settings/multiple-choice-info-settings.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { TrueFalseInfoSettingsComponent } from './question/question-info/questio
 
     TrueFalseChoiceComponent,
     TrueFalseInfoSettingsComponent,
+    MultipleChoiceInfoSettingsComponent,
 
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
@@ -159,6 +161,7 @@ import { TrueFalseInfoSettingsComponent } from './question/question-info/questio
   entryComponents: [
     TrueFalseChoiceComponent,
     TrueFalseInfoSettingsComponent,
+    MultipleChoiceInfoSettingsComponent,
     
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,

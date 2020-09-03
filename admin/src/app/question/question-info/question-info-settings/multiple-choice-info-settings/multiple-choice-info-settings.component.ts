@@ -3,11 +3,11 @@ import { QuestionInfoSettingsBaseDirective } from '../question-info-settings-bas
 import { ChoicesDisplayType, ChoicesEnumerationType } from 'src/app/_models/settings/answer.settings';
 
 @Component({
-  selector: 'app-true-false-info-settings',
-  templateUrl: './true-false-info-settings.component.html'
+  selector: 'app-multiple-choice-info-settings',
+  templateUrl: './multiple-choice-info-settings.component.html'
 })
 
-export class TrueFalseInfoSettingsComponent extends QuestionInfoSettingsBaseDirective {
+export class MultipleChoiceInfoSettingsComponent extends QuestionInfoSettingsBaseDirective {
 
   choicesDisplayTypes = ChoicesDisplayType;
   choicesEnumerationTypes = ChoicesEnumerationType;
