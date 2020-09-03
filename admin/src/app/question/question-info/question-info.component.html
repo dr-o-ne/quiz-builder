@@ -15,7 +15,7 @@
 
               <form [formGroup]="questionForm">
   
-                <div class="mt-5">
+                <div class="mt-8">
       
                   <mat-form-field fxFlex="60" appearance="outline">
                     <mat-label>Name</mat-label>
@@ -53,7 +53,7 @@
                 </app-rich-text-editor>
     
                 <div *ngFor="let option of getQuestionOptions()">
-                  <div *ngIf="option.type == 'wysiwyg'" class="mt-5">
+                  <div *ngIf="option.type == 'wysiwyg'" class="mt-8">
   
                     <app-rich-text-editor 
                       displayName="{{option.displayName}}"
@@ -65,7 +65,7 @@
     
               </form>
               
-              <div class="mt-5">
+              <div class="mt-8">
                 <app-choice-dynamic [question]="question"></app-choice-dynamic>
               </div>
 
@@ -74,9 +74,11 @@
         </mat-tab>
 
         <mat-tab label="Settings">
-          <div class="p-6">
+
+          <div class="container qb-card mt-4">
             <app-question-info-settings-dynamic [question]="question"></app-question-info-settings-dynamic>
           </div>
+
         </mat-tab>
   
       </mat-tab-group>

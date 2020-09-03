@@ -1,23 +1,23 @@
-<div fxLayout>
+<div fxLayout class="mt-8">
 
-  <mat-form-field appearance="outline">
-    <mat-label>Display Type</mat-label>
-    <mat-select [(ngModel)]="question.settings.choicesDisplayType">
-      <mat-option *ngFor="let item of choicesDisplayTypes | enumToArray" [value]="item.index">
-        {{item.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div *ngIf="question.settings.choicesDisplayType != choicesDisplayTypes.Dropdown">
-    <mat-form-field appearance="outline" fxFlexOffset="2">
-      <mat-label>Enumeration Type</mat-label>
-      <mat-select [(ngModel)]="question.settings.choicesEnumerationType">
-        <mat-option *ngFor="let item of choicesEnumerationTypes | enumToArray" [value]="item.index">
+    <mat-form-field appearance="outline">
+      <mat-label>Display Type</mat-label>
+      <mat-select [(ngModel)]="question.settings.choicesDisplayType">
+        <mat-option *ngFor="let item of choicesDisplayTypes | enumToArray" [value]="item.index">
           {{item.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
+  
+    <div *ngIf="question.settings.choicesDisplayType != choicesDisplayTypes.Dropdown">
+      <mat-form-field appearance="outline" fxFlexOffset="2">
+        <mat-label>Enumeration Type</mat-label>
+        <mat-select [(ngModel)]="question.settings.choicesEnumerationType">
+          <mat-option *ngFor="let item of choicesEnumerationTypes | enumToArray" [value]="item.index">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
 </div>
