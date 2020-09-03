@@ -6,7 +6,7 @@ import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.compon
 import { ChoiceHostDirective } from './choice-host.directive';
 import { ChoiceBaseDirective } from './choice-base.directive';
 import { ChoiceEmptyComponent } from './choice-empty.component';
-import { TrueFalseChoiceComponent } from './true-false-choice-info/true-false-choice-info.component';
+import { TrueFalseChoiceInfoComponent } from './true-false-choice-info/true-false-choice-info.component';
 
 @Component({
   selector: 'app-choice-dynamic',
@@ -21,7 +21,7 @@ export class ChoiceDynamicComponent implements OnInit {
   choiceComponentRef: ComponentRef<ChoiceBaseDirective>;
 
   private components: { [id in QuestionType]: Type<ChoiceBaseDirective> } = {
-    [QuestionType.TrueFalse]: TrueFalseChoiceComponent,
+    [QuestionType.TrueFalse]: TrueFalseChoiceInfoComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceAnswerComponent,
     [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
     [QuestionType.LongAnswer]: ChoiceEmptyComponent,

@@ -57,7 +57,7 @@ import { ChoiceHostDirective } from './question/question-info/choice-info/choice
 import { ChoiceDynamicComponent } from './question/question-info/choice-info/choice-dynamic.component';
 import { NewQuestionResolver } from './_resolvers/new-question.resolver';
 import { OptionsMenuComponent } from './common-components/options-menu/options-menu.component';
-import { TrueFalseChoiceComponent } from './question/question-info/choice-info/true-false-choice-info/true-false-choice-info.component';
+import { TrueFalseChoiceInfoComponent } from './question/question-info/choice-info/true-false-choice-info/true-false-choice-info.component';
 import { EnumToArrayPipe } from './_common/pipes/enumToArray.pipe';
 import { RichTextEditorComponent } from './common-components/rich-text-editor/rich-text-editor.component';
 import { QuestionInfoSettingsHostDirective } from './question/question-info/question-info-settings/question-info-settings-host.directive';
@@ -65,6 +65,7 @@ import { QuestionInfoSettingsDynamicComponent } from './question/question-info/q
 import { TrueFalseInfoSettingsComponent } from './question/question-info/question-info-settings/true-false-info-settings/true-false-info-settings.component';
 import { MultipleChoiceInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-choice-info-settings/multiple-choice-info-settings.component';
 import { MultipleSelectInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-select-info-settings/multiple-select-info-settings.component';
+import { MultipleChoiceChoiceInfoComponent } from './question/question-info/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
 
 @NgModule({
   declarations: [
@@ -98,8 +99,9 @@ import { MultipleSelectInfoSettingsComponent } from './question/question-info/qu
     ChoiceHostDirective,
     ChoiceDynamicComponent,
 
-    TrueFalseChoiceComponent,
+    TrueFalseChoiceInfoComponent,
     TrueFalseInfoSettingsComponent,
+    MultipleChoiceChoiceInfoComponent,
     MultipleChoiceInfoSettingsComponent,
     MultipleSelectInfoSettingsComponent,
 
@@ -161,8 +163,9 @@ import { MultipleSelectInfoSettingsComponent } from './question/question-info/qu
     })
   ],
   entryComponents: [
-    TrueFalseChoiceComponent,
+    TrueFalseChoiceInfoComponent,
     TrueFalseInfoSettingsComponent,
+    MultipleChoiceChoiceInfoComponent,
     MultipleChoiceInfoSettingsComponent,
     MultipleSelectInfoSettingsComponent,
     

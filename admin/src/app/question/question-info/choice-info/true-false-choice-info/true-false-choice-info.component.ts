@@ -9,7 +9,7 @@ import { Choice } from 'src/app/_models/choice';
   styleUrls: ['./true-false-choice-info.component.css']
 })
 
-export class TrueFalseChoiceComponent extends ChoiceBaseDirective {
+export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective {
 
   isValid(): boolean {
 
@@ -24,6 +24,7 @@ export class TrueFalseChoiceComponent extends ChoiceBaseDirective {
 
   }
 
+  
   onChoiceChange(event: MatRadioChange): void {
     this.question.choices.forEach((elem: Choice) => elem.isCorrect = elem.id === event.value);
   }
