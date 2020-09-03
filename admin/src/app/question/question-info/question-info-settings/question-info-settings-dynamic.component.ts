@@ -5,6 +5,7 @@ import { QuestionInfoSettingsBaseDirective } from './question-info-settings-base
 import { EmptyQuestionInfoSettingsComponent } from './question-info-settings-empty.component';
 import { TrueFalseInfoSettingsComponent } from './true-false-info-settings/true-false-info-settings.component';
 import { MultipleChoiceInfoSettingsComponent } from './multiple-choice-info-settings/multiple-choice-info-settings.component';
+import { MultipleSelectInfoSettingsComponent } from './multiple-select-info-settings/multiple-select-info-settings.component';
 
 @Component({
     selector: 'app-question-info-settings-dynamic',
@@ -21,7 +22,7 @@ export class QuestionInfoSettingsDynamicComponent implements OnInit {
     private components: { [id in QuestionType]: Type<QuestionInfoSettingsBaseDirective> } = {
         [QuestionType.TrueFalse]: TrueFalseInfoSettingsComponent,
         [QuestionType.MultipleChoice]: MultipleChoiceInfoSettingsComponent,
-        [QuestionType.MultiSelect]: EmptyQuestionInfoSettingsComponent,
+        [QuestionType.MultiSelect]: MultipleSelectInfoSettingsComponent,
         [QuestionType.LongAnswer]: EmptyQuestionInfoSettingsComponent,
         [QuestionType.Empty]: EmptyQuestionInfoSettingsComponent
     };

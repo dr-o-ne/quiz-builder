@@ -64,6 +64,7 @@ import { QuestionInfoSettingsHostDirective } from './question/question-info/ques
 import { QuestionInfoSettingsDynamicComponent } from './question/question-info/question-info-settings/question-info-settings-dynamic.component';
 import { TrueFalseInfoSettingsComponent } from './question/question-info/question-info-settings/true-false-info-settings/true-false-info-settings.component';
 import { MultipleChoiceInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-choice-info-settings/multiple-choice-info-settings.component';
+import { MultipleSelectInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-select-info-settings/multiple-select-info-settings.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { MultipleChoiceInfoSettingsComponent } from './question/question-info/qu
     TrueFalseChoiceComponent,
     TrueFalseInfoSettingsComponent,
     MultipleChoiceInfoSettingsComponent,
+    MultipleSelectInfoSettingsComponent,
 
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,
@@ -162,6 +164,7 @@ import { MultipleChoiceInfoSettingsComponent } from './question/question-info/qu
     TrueFalseChoiceComponent,
     TrueFalseInfoSettingsComponent,
     MultipleChoiceInfoSettingsComponent,
+    MultipleSelectInfoSettingsComponent,
     
     MultipleChoiceAnswerComponent,
     MultiSelectChoiceComponent,

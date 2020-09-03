@@ -88,52 +88,7 @@
 
       </ng-template>
     </mat-tab>
-    <mat-tab label="Settings">
-      <ng-template matTabContent>
 
-        <div class="row mt-3">
-
-          <div class="col-md-4">
-            <mat-form-field class="full-width">
-              <mat-label>Display Type</mat-label>
-              <mat-select [(ngModel)]="settings.choicesDisplayType">
-                <mat-option *ngFor="let key of choicesDisplayTypesKeys" [value]="key">
-                  {{choicesDisplayTypes[key]}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div *ngIf="settings.choicesDisplayType != choicesDisplayTypes.Dropdown" class="col-md-4">
-            <mat-form-field class="full-width">
-              <mat-label>Enumeration Type</mat-label>
-              <mat-select [(ngModel)]="settings.choicesEnumerationType">
-                <mat-option *ngFor="let key of choicesEnumerationTypesKeys" [value]="key">
-                  {{choicesEnumerationTypes[key]}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-4 radio-align-vertical">
-            <mat-checkbox [(ngModel)]="settings.randomize">Randomize</mat-checkbox>
-          </div>
-        </div>
-
-        <div class="row">
-
-          <div class="col-md-4">
-            <mat-form-field class="full-width">
-              <mat-label>Grading Type</mat-label>
-              <mat-select [(ngModel)]="settings.gradingType">
-                <mat-option *ngFor="let key of questionGradingTypesKeys" [value]="key">
-                  {{questionGradingTypes[key]}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-
-      </ng-template>
-    </mat-tab>
   </mat-tab-group>
 </div>
 
