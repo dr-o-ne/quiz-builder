@@ -11,73 +11,65 @@
   
         <mat-tab label="{{questionLangService.getQuestionTypeLangTerm(question.type)}}">
   
-          <ng-template matTabContent>
+            <div class="container qb-card mt-4">
 
-            <div class="">
-
-              <div class="card main-color">
-
-                <form [formGroup]="questionForm">
-    
-                  <div class="container pt-gutter">
-       
-                    <mat-form-field fxFlex="60" appearance="outline">
-                      <mat-label>Name</mat-label>
-                      <input matInput type="text" formControlName="name">
-                    </mat-form-field>
-                    
-                    <mat-checkbox
-                      *ngIf="question.type != emptyQuestionType" 
-                      fxFlexOffset="23" 
-                      fxFlexAlign="center" 
-                      formControlName="isRequired" 
-                      color="primary" 
-                      class="padding-bottom-fix" >
-    
-                      Is Required
-    
-                    </mat-checkbox>
-    
-                    <mat-form-field
-                      *ngIf="question.type != emptyQuestionType" 
-                      fxFlex="7" 
-                      fxFlexOffset="2" 
-                      appearance="outline">
-    
-                      <mat-label>Points</mat-label>
-                      <input matInput type="number" formControlName="points">
-    
-                    </mat-form-field>
+              <form [formGroup]="questionForm">
+  
+                <div class="mt-5">
       
-                  </div>
+                  <mat-form-field fxFlex="60" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" formControlName="name">
+                  </mat-form-field>
+                  
+                  <mat-checkbox
+                    *ngIf="question.type != emptyQuestionType" 
+                    fxFlexOffset="23" 
+                    fxFlexAlign="center" 
+                    formControlName="isRequired" 
+                    color="primary" 
+                    class="padding-bottom-fix" >
+  
+                    Is Required
+  
+                  </mat-checkbox>
+  
+                  <mat-form-field
+                    *ngIf="question.type != emptyQuestionType" 
+                    fxFlex="7" 
+                    fxFlexOffset="2" 
+                    appearance="outline">
+  
+                    <mat-label>Points</mat-label>
+                    <input matInput type="number" formControlName="points">
+  
+                  </mat-form-field>
     
-                  <app-rich-text-editor 
-                    displayName="Text"
-                    textFormControlName="text">
-                  </app-rich-text-editor>
-      
-                  <div *ngFor="let option of getQuestionOptions()">
-                    <div *ngIf="option.type == 'wysiwyg'">
-    
-                      <app-rich-text-editor 
-                        displayName="{{option.displayName}}"
-                        textFormControlName="{{option.name}}">
-                      </app-rich-text-editor>
-    
-                    </div>
-                  </div>
-      
-                </form>
-                
-                <div class="p-6">
-                  <app-choice-dynamic [question]="question"></app-choice-dynamic>
                 </div>
   
+                <app-rich-text-editor 
+                  displayName="Text"
+                  textFormControlName="text">
+                </app-rich-text-editor>
+    
+                <div *ngFor="let option of getQuestionOptions()">
+                  <div *ngIf="option.type == 'wysiwyg'" class="mt-5">
+  
+                    <app-rich-text-editor 
+                      displayName="{{option.displayName}}"
+                      textFormControlName="{{option.name}}">
+                    </app-rich-text-editor>
+  
+                  </div>
+                </div>
+    
+              </form>
+              
+              <div class="mt-5">
+                <app-choice-dynamic [question]="question"></app-choice-dynamic>
               </div>
 
             </div>
-  
-          </ng-template>
   
         </mat-tab>
 
