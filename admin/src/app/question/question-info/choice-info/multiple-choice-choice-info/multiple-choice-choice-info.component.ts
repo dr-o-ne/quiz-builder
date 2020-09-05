@@ -18,7 +18,7 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
   ) {
     super(fb);
   }
-  
+
   ngAfterViewChecked(): void {
     this.cdRef.detectChanges();
   }
@@ -48,12 +48,10 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
   }
 
   getNextChoiceId(): number {
-
-    if (!this.question.choices)
+    if (!Array.isArray(this.question.choices) || !this.question.choices.length)
       return 0;
 
     const ids = this.question.choices.map(x => x.id);
-
     return Math.max(...ids) + 1;
   }
 

@@ -1,8 +1,8 @@
-<button mat-raised-button color="primary" (click)="onAddChoice()">
+<button mat-raised-button color="primary" (click)="onAddChoice()" class="mb-4">
     Add Choice
 </button>
 
-<div *ngFor="let choice of question.choices" class="mt-4">
+<div *ngFor="let choice of question.choices">
 
     <div fxLayout>
 

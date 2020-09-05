@@ -45,8 +45,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 					trueFalseQuestion.FalseChoice = new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false};
 					return trueFalseQuestion;
 				case MultiChoice:
-					var multipleChoiceQuestion = new MultipleChoiceQuestion();
-					multipleChoiceQuestion.Choices.Add( new BinaryChoice() );
+					MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
+					multipleChoiceQuestion.Choices.Add( new BinaryChoice {Id = 0, Order = 0, Text = "True", IsCorrect = true} );
+					multipleChoiceQuestion.Choices.Add( new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false} );
 					return multipleChoiceQuestion;
 				case MultiSelect:
 					quizEntity = new MultipleSelectQuestion();
