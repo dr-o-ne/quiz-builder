@@ -8,8 +8,9 @@
 
     <div fxLayout>
 
-      <mat-form-field fxFlex="50%" appearance="outline" fxFlexAlign="center">
-        <input matInput type="text" [(ngModel)]="choice.text">
+      <mat-form-field fxFlex="50%" appearance="outline">
+        <mat-label>Choice Text</mat-label>
+        <textarea matInput [(ngModel)]="choice.text"></textarea>
       </mat-form-field>
   
       <mat-radio-button 
@@ -36,7 +37,8 @@
     <div fxLayout>
 
       <mat-form-field fxFlex="50%" appearance="outline">
-        <input matInput type="text" [(ngModel)]="choice.feedback">
+        <mat-label>Choice Feedback</mat-label>
+        <textarea matInput [(ngModel)]="choice.feedback"></textarea>
       </mat-form-field>
 
     </div>
