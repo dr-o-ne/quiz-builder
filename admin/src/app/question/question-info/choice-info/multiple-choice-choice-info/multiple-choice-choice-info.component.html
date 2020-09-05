@@ -1,0 +1,46 @@
+<button mat-raised-button color="primary" (click)="onAddChoice()">
+    Add Choice
+</button>
+
+<mat-radio-group>
+
+  <div *ngFor="let choice of question.choices">
+
+    <div fxLayout>
+
+      <mat-form-field fxFlex="50%" appearance="outline" fxFlexAlign="center">
+        <input matInput type="text" [(ngModel)]="choice.text">
+      </mat-form-field>
+  
+      <mat-radio-button 
+        color="primary"
+        [value]="choice.id" 
+        [checked]="choice.isCorrect" 
+        fxFlexOffset="2" 
+        fxFlexAlign="center" 
+        class="padding-bottom-fix"
+        (change)="onChoiceChange($event)">
+        Correct
+      </mat-radio-button>
+  
+      <button mat-icon-button 
+        color="primary" 
+        (click)="onDeleteChoice(choice)"
+        fxFlexOffset="2"
+        fxFlexAlign="center">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </div>
+    
+    <div fxLayout>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [(ngModel)]="choice.feedback">
+      </mat-form-field>
+
+    </div>
+   
+  </div>
+
+</mat-radio-group>

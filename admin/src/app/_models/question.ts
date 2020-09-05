@@ -1,3 +1,5 @@
+import { Choice } from './choice';
+
 export class Question {
   id: string;
   quizId: string;
@@ -9,7 +11,7 @@ export class Question {
   incorrectFeedback: string;
   type: QuestionType;
   settings?: any;
-  choices?: any;
+  choices: any;
   isRequired: boolean;
 
   get isValid(): boolean {

@@ -51,6 +51,8 @@ export class BaseChoiceComponent extends ChoiceBaseDirective implements OnInit {
   }
 
   changeCorrectChoice(choiceId: number): void {
+
+    console.log(131231313123);
     this.choices.forEach((elem, idx) => elem.isCorrect = idx === choiceId);
   }
 
