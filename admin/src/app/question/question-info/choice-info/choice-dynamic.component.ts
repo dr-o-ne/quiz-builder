@@ -1,6 +1,5 @@
 import { Component, ComponentFactoryResolver, Input, Type, ViewChild, OnInit, ComponentRef } from '@angular/core';
 import { QuestionType, Question } from '../../../_models/question';
-import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
 import { ChoiceHostDirective } from './choice-host.directive';
 import { ChoiceBaseDirective } from './choice-base.directive';
 import { ChoiceEmptyComponent } from './choice-empty.component';
@@ -41,14 +40,6 @@ export class ChoiceDynamicComponent implements OnInit {
     this.choiceComponentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
 
     this.choiceComponentRef.instance.question = this.question;
-
-    console.log(this.question);
-
-    if (this.choiceComponentRef.instance instanceof BaseChoiceComponent) {
-      this.choiceComponentRef.instance.settings = this.question.settings;
-      this.choiceComponentRef.instance.choices = this.question.choices;
-    }    
-
   }
 
   isValid(): boolean {

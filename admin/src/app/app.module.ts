@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizResolver } from './_resolvers/quiz.resolver';
 import { QuestionResolver } from './_resolvers/question.resolver';
-import { MultipleChoiceAnswerComponent } from './question/answer/multiple-choice-answer/multiple-choice-answer.component';
-import { MultiSelectChoiceComponent } from './question/answer/multi-select-choice/multi-select-choice.component';
 
 import { AttemptService } from './_service/attempt.service';
 
@@ -106,9 +104,6 @@ import { MultipleSelectChoiceInfoComponent } from './question/question-info/choi
     MultipleChoiceInfoSettingsComponent,
     MultipleSelectChoiceInfoComponent,
     MultipleSelectInfoSettingsComponent,
-
-    MultipleChoiceAnswerComponent,
-    MultiSelectChoiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -171,9 +166,7 @@ import { MultipleSelectChoiceInfoComponent } from './question/question-info/choi
     MultipleChoiceInfoSettingsComponent,
     MultipleSelectChoiceInfoComponent,
     MultipleSelectInfoSettingsComponent,
-    
-    MultipleChoiceAnswerComponent,
-    MultiSelectChoiceComponent,
+
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
     GroupInfoComponent
