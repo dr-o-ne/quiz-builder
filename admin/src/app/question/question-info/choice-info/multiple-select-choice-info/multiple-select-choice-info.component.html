@@ -1,6 +1,25 @@
-<button mat-raised-button color="primary" (click)="onAddChoice()" class="mb-4">
-    Add Choice
-</button>
+<div fxLayout>
+
+    <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="onAddChoice()" 
+        class="mb-4">
+
+        Add Choice
+    </button>
+
+    <mat-checkbox 
+        fxFlexOffset="2"
+        fxFlexAlign="center"
+        color="primary" 
+        class="padding-bottom-fix"
+        [(ngModel)]="question.settings.randomize">
+        
+        Randomize Choices
+    </mat-checkbox>
+
+</div>
 
 <div *ngFor="let choice of question.choices">
 
