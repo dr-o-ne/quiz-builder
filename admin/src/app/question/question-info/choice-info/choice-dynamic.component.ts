@@ -1,12 +1,12 @@
 import { Component, ComponentFactoryResolver, Input, Type, ViewChild, OnInit, ComponentRef } from '@angular/core';
 import { QuestionType, Question } from '../../../_models/question';
-import { MultiSelectChoiceComponent } from '../../answer/multi-select-choice/multi-select-choice.component';
 import { BaseChoiceComponent } from '../../answer/base-choice/base-choice.component';
 import { ChoiceHostDirective } from './choice-host.directive';
 import { ChoiceBaseDirective } from './choice-base.directive';
 import { ChoiceEmptyComponent } from './choice-empty.component';
 import { TrueFalseChoiceInfoComponent } from './true-false-choice-info/true-false-choice-info.component';
 import { MultipleChoiceChoiceInfoComponent } from './multiple-choice-choice-info/multiple-choice-choice-info.component';
+import { MultipleSelectChoiceInfoComponent } from './multiple-select-choice-info/multiple-select-choice-info.component';
 
 @Component({
   selector: 'app-choice-dynamic',
@@ -23,7 +23,7 @@ export class ChoiceDynamicComponent implements OnInit {
   private components: { [id in QuestionType]: Type<ChoiceBaseDirective> } = {
     [QuestionType.TrueFalse]: TrueFalseChoiceInfoComponent,
     [QuestionType.MultipleChoice]: MultipleChoiceChoiceInfoComponent,
-    [QuestionType.MultiSelect]: MultiSelectChoiceComponent,
+    [QuestionType.MultiSelect]: MultipleSelectChoiceInfoComponent,
     [QuestionType.LongAnswer]: ChoiceEmptyComponent,
     [QuestionType.Empty]: ChoiceEmptyComponent
   };

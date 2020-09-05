@@ -66,6 +66,7 @@ import { TrueFalseInfoSettingsComponent } from './question/question-info/questio
 import { MultipleChoiceInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-choice-info-settings/multiple-choice-info-settings.component';
 import { MultipleSelectInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-select-info-settings/multiple-select-info-settings.component';
 import { MultipleChoiceChoiceInfoComponent } from './question/question-info/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
+import { MultipleSelectChoiceInfoComponent } from './question/question-info/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { MultipleChoiceChoiceInfoComponent } from './question/question-info/choi
     TrueFalseInfoSettingsComponent,
     MultipleChoiceChoiceInfoComponent,
     MultipleChoiceInfoSettingsComponent,
+    MultipleSelectChoiceInfoComponent,
     MultipleSelectInfoSettingsComponent,
 
     MultipleChoiceAnswerComponent,
@@ -167,6 +169,7 @@ import { MultipleChoiceChoiceInfoComponent } from './question/question-info/choi
     TrueFalseInfoSettingsComponent,
     MultipleChoiceChoiceInfoComponent,
     MultipleChoiceInfoSettingsComponent,
+    MultipleSelectChoiceInfoComponent,
     MultipleSelectInfoSettingsComponent,
     
     MultipleChoiceAnswerComponent,
