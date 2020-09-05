@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { ChoiceBaseDirective } from '../choice-base.directive';
 import { MatRadioChange } from '@angular/material/radio';
 import { Choice } from 'src/app/_models/choice';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-multiple-choice-choice-info',
@@ -9,7 +10,18 @@ import { Choice } from 'src/app/_models/choice';
   styleUrls: ['./multiple-choice-choice-info.component.css']
 })
 
-export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective {
+export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective implements AfterViewChecked {
+
+  constructor(
+    protected fb: FormBuilder,
+    private cdRef: ChangeDetectorRef
+  ) {
+    super(fb);
+  }
+  
+  ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
+  }
 
   isValid(): boolean {
     const choices = this.question.choices;
