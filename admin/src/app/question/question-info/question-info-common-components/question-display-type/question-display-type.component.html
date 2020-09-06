@@ -1,4 +1,4 @@
-<div fxLayout class="mt-8">
+<div fxLayout>
 
     <mat-form-field appearance="outline">
       <mat-label>Display Type</mat-label>
@@ -20,15 +20,4 @@
       </mat-form-field>
     </div>
 
-</div>
-
-<div class="mt-8">
-  <mat-form-field appearance="outline">
-    <mat-label>Grading Type</mat-label>
-    <mat-select [(ngModel)]="question.settings.gradingType">
-      <mat-option *ngFor="let item of gradingTypes | enumToArray" [value]="item.index">
-        {{item.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
 </div>

@@ -65,6 +65,7 @@ import { MultipleChoiceInfoSettingsComponent } from './question/question-info/qu
 import { MultipleSelectInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-select-info-settings/multiple-select-info-settings.component';
 import { MultipleChoiceChoiceInfoComponent } from './question/question-info/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
 import { MultipleSelectChoiceInfoComponent } from './question/question-info/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
+import { QuestionDisplayTypeComponent } from './question/question-info/question-info-common-components/question-display-type/question-display-type.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,8 @@ import { MultipleSelectChoiceInfoComponent } from './question/question-info/choi
     MultipleChoiceInfoSettingsComponent,
     MultipleSelectChoiceInfoComponent,
     MultipleSelectInfoSettingsComponent,
+
+    QuestionDisplayTypeComponent,
   ],
   imports: [
     BrowserModule,

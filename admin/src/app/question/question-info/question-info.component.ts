@@ -27,6 +27,7 @@ export class QuestionInfoComponent {
     options: OptionItem[] = [
         new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
         new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
+        new OptionItem('questionDisplayType', 'Display Type', '', false),
     ];
 
     constructor(
@@ -66,6 +67,11 @@ export class QuestionInfoComponent {
     }
 
     getQuestionOptions = () => this.options.filter(x => x.enabled);
+
+    isOptionEnabled(name: string): boolean {
+        const option = this.options.find(x => x.name === name);
+        return option && option.enabled;
+    }
 
     onContentChanged(_): void {/*HACK*/ }
 
