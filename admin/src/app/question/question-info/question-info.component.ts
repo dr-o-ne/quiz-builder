@@ -6,6 +6,7 @@ import { OptionItem } from 'src/app/_models/UI/optionItem';
 import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.dataProvider';
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
+import { OptionItemsService } from 'src/app/_models/UI/optionItemService';
 
 @Component({
     selector: 'app-question-info',
@@ -24,17 +25,14 @@ export class QuestionInfoComponent {
 
     isEditMode = () => this.question.id;
 
-    options: OptionItem[] = [
-        new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
-        new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
-        new OptionItem('questionDisplayType', 'Display Type', '', false),
-    ];
+    options: OptionItem[];
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
         private questionDataProvider: QuestionDataProvider,
+        private optionItemService: OptionItemsService,
         public questionLangService: QuestionLangService) {
 
         this.emptyQuestionType = QuestionType.Empty;
@@ -64,6 +62,8 @@ export class QuestionInfoComponent {
             incorrectFeedback: [this.question.incorrectFeedback],
             isRequired: [this.question.isRequired]
         })
+
+        this.options = this.optionItemService.getQuestionTypeOptionItems(this.question.type);
     }
 
     getQuestionOptions = () => this.options.filter(x => x.enabled);
