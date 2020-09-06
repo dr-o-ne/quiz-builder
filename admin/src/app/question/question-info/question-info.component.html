@@ -15,57 +15,53 @@
 
             <form [formGroup]="questionForm">
 
-              <div class="mt-8">
-    
-                <mat-form-field fxFlex="60" appearance="outline">
+              <div class="mt-8" *ngIf="isOptionEnabled('name')">
+                <mat-form-field appearance="outline" fxFlex="100">
                   <mat-label>Name</mat-label>
                   <input matInput type="text" formControlName="name">
                 </mat-form-field>
-                
+              </div>
+
+              <div class="mt-8">
+                <app-rich-text-editor displayName="Text" textFormControlName="text"></app-rich-text-editor>
+              </div>
+
+              <div class="mt-8" *ngIf="isOptionEnabled('correctFeedback')">
+                <mat-form-field fxFlex="100" appearance="outline">
+                  <mat-label>Correct Feedback</mat-label>
+                  <textarea matInput formControlName="correctFeedback"></textarea>
+                </mat-form-field>
+              </div>
+              
+              <div *ngIf="isOptionEnabled('incorrectFeedback')">
+                <mat-form-field fxFlex="100" appearance="outline">
+                  <mat-label>Incorrect Feedback</mat-label>
+                  <textarea matInput formControlName="incorrectFeedback"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="mt-8" *ngIf="isOptionEnabled('questionDisplayType')">
+                <app-question-display-type [question]="question"></app-question-display-type>
+              </div>
+
+              <div *ngIf="question.type != emptyQuestionType" fxLayout>
+
+                <mat-form-field fxFlex="9.5" appearance="outline">
+                  <mat-label>Points</mat-label>
+                  <input matInput type="number" formControlName="points">
+                </mat-form-field>
+
                 <mat-checkbox
-                  *ngIf="question.type != emptyQuestionType" 
-                  fxFlexOffset="2" 
+                  fxFlexOffset="1.8" 
                   fxFlexAlign="center" 
                   formControlName="isRequired" 
                   color="primary" 
                   class="padding-bottom-fix" >
-
                   Is Required
-
                 </mat-checkbox>
 
-                <mat-form-field
-                  *ngIf="question.type != emptyQuestionType" 
-                  fxFlex="7" 
-                  fxFlexOffset="2" 
-                  appearance="outline">
-
-                  <mat-label>Points</mat-label>
-                  <input matInput type="number" formControlName="points">
-
-                </mat-form-field>
-  
               </div>
 
-              <app-rich-text-editor 
-                displayName="Text"
-                textFormControlName="text">
-              </app-rich-text-editor>
-
-              <div class="mt-8" *ngIf="isOptionEnabled('correctFeedback')">
-                <app-rich-text-editor displayName="Correct Feedback" textFormControlName="correctFeedback">
-                </app-rich-text-editor>
-              </div>
-              
-              <div class="mt-8" *ngIf="isOptionEnabled('incorrectFeedback')">
-                <app-rich-text-editor displayName="Incorrect Feedback" textFormControlName="incorrectFeedback">
-                </app-rich-text-editor>
-              </div>
-              
-              <div class="mt-8" *ngIf="isOptionEnabled('questionDisplayType')">
-                <app-question-display-type [question]="question"></app-question-display-type>
-              </div>
-  
             </form>
             
             <div class="mt-8">
