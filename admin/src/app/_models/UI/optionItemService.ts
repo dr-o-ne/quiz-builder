@@ -11,18 +11,18 @@ export class OptionItemsService {
     getQuestionTypeOptionItems(questionType: QuestionType) {
         switch (+questionType) {
             case QuestionType.TrueFalse: return [
-                new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
-                new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
+                new OptionItem('correctFeedback', 'Correct Feedback', 'wysiwyg', false),
+                new OptionItem('incorrectFeedback', 'Incorrect Feedback', 'wysiwyg', false),
                 new OptionItem('questionDisplayType', 'Display Type', '', false),
             ];
             case QuestionType.MultipleChoice: return [
-                new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
-                new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
+                new OptionItem('correctFeedback', 'Correct Feedback', 'wysiwyg', false),
+                new OptionItem('incorrectFeedback', 'Incorrect Feedback', 'wysiwyg', false),
                 new OptionItem('questionDisplayType', 'Display Type', '', false),
             ];
             case QuestionType.MultiSelect: return [
-                new OptionItem('correctFeedback', 'Correct feedback', 'wysiwyg', false),
-                new OptionItem('incorrectFeedback', 'Incorrect feedback', 'wysiwyg', false),
+                new OptionItem('correctFeedback', 'Correct Feedback', 'wysiwyg', false),
+                new OptionItem('incorrectFeedback', 'Incorrect Feedback', 'wysiwyg', false),
                 new OptionItem('questionDisplayType', 'Display Type', '', false),
             ];
             case QuestionType.LongAnswer: return [];
