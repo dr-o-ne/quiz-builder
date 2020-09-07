@@ -58,11 +58,6 @@ import { OptionsMenuComponent } from './common-components/options-menu/options-m
 import { TrueFalseChoiceInfoComponent } from './question/question-info/choice-info/true-false-choice-info/true-false-choice-info.component';
 import { EnumToArrayPipe } from './_common/pipes/enumToArray.pipe';
 import { RichTextEditorComponent } from './common-components/rich-text-editor/rich-text-editor.component';
-import { QuestionInfoSettingsHostDirective } from './question/question-info/question-info-settings/question-info-settings-host.directive';
-import { QuestionInfoSettingsDynamicComponent } from './question/question-info/question-info-settings/question-info-settings-dynamic.component';
-import { TrueFalseInfoSettingsComponent } from './question/question-info/question-info-settings/true-false-info-settings/true-false-info-settings.component';
-import { MultipleChoiceInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-choice-info-settings/multiple-choice-info-settings.component';
-import { MultipleSelectInfoSettingsComponent } from './question/question-info/question-info-settings/multiple-select-info-settings/multiple-select-info-settings.component';
 import { MultipleChoiceChoiceInfoComponent } from './question/question-info/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
 import { MultipleSelectChoiceInfoComponent } from './question/question-info/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
 import { QuestionDisplayTypeComponent } from './question/question-info/question-info-common-components/question-display-type/question-display-type.component';
@@ -94,18 +89,12 @@ import { OptionItemsService } from './_models/UI/optionItemService';
     GroupInfoComponent,
     QuestionInfoComponent,
 
-    QuestionInfoSettingsHostDirective,
-    QuestionInfoSettingsDynamicComponent,
-
     ChoiceHostDirective,
     ChoiceDynamicComponent,
 
     TrueFalseChoiceInfoComponent,
-    TrueFalseInfoSettingsComponent,
     MultipleChoiceChoiceInfoComponent,
-    MultipleChoiceInfoSettingsComponent,
     MultipleSelectChoiceInfoComponent,
-    MultipleSelectInfoSettingsComponent,
 
     QuestionDisplayTypeComponent,
   ],
@@ -165,11 +154,8 @@ import { OptionItemsService } from './_models/UI/optionItemService';
   ],
   entryComponents: [
     TrueFalseChoiceInfoComponent,
-    TrueFalseInfoSettingsComponent,
     MultipleChoiceChoiceInfoComponent,
-    MultipleChoiceInfoSettingsComponent,
     MultipleSelectChoiceInfoComponent,
-    MultipleSelectInfoSettingsComponent,
 
     QuizInfoSettingsTabComponent,
     QuizInfoQuestionsTabComponent,
