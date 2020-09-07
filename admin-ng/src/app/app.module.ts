@@ -32,6 +32,7 @@ import { HttpErrorInterceptor } from './quiz-builder/common/utils/interceptors/h
 import { EnumToArrayPipe } from './quiz-builder/common/utils/pipes/enumToArray.pipe';
 import { MaterialModule } from './quiz-builder/common/material.module';
 import { QuizListComponent } from './quiz-builder/_quiz/quiz-list/quiz-list.component';
+import { LoginModule } from './quiz-builder/_pages/auth/login/login.module';
 
 const appRoutes: Routes = [
     {
@@ -77,8 +78,11 @@ const appRoutes: Routes = [
         LayoutModule,
         SampleModule,
 
+        // Pages
+        LoginModule,
+
         //UI
-        MaterialModule,
+        MaterialModule,        
     ],
     providers: [
 

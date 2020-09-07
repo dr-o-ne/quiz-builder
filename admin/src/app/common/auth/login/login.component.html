@@ -34,7 +34,7 @@
         <a [routerLink]="['/forgot-password']" class="caption">Forgot Password?</a>
       </div>
 
-      <button (click)="send()" color="primary" mat-raised-button type="button">
+      <button appDebounceClick (debounceClick)="send()" [debounceTime]="2000" color="primary" mat-raised-button type="button">
         Sign in
       </button>
 
