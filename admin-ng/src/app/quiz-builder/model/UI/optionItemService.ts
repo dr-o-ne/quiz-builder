@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { QuestionType } from 'src/app/_models/question';
 import { OptionItem } from './optionItem';
+import { QuestionType } from '../question';
 
 @Injectable({
     providedIn: 'root'

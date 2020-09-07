@@ -4,7 +4,9 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr       : false,
+    apiUrl: 'https://localhost:5001/admin/',
+    clientUrl: 'http://localhost:4200/'
 };
 
 /*

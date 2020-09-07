@@ -1,5 +1,3 @@
-import { Choice } from './choice';
-
 export class Question {
   id: string;
   quizId: string;
