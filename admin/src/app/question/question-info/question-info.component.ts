@@ -7,6 +7,7 @@ import { QuestionDataProvider } from 'src/app/_service/dataProviders/question.da
 import { QuestionLangService } from 'src/app/_service/lang/question.lang.service';
 import { ChoiceDynamicComponent } from './choice-info/choice-dynamic.component';
 import { OptionItemsService } from 'src/app/_models/UI/optionItemService';
+import { QuestionGradingType } from 'src/app/_models/settings/answer.settings';
 
 @Component({
     selector: 'app-question-info',
@@ -22,6 +23,7 @@ export class QuestionInfoComponent {
     questionForm: FormGroup;
 
     emptyQuestionType: QuestionType;
+    gradingTypes = QuestionGradingType;
 
     isEditMode = () => this.question.id;
 
@@ -60,6 +62,7 @@ export class QuestionInfoComponent {
             points: [this.question.points],
             correctFeedback: [this.question.correctFeedback],
             incorrectFeedback: [this.question.incorrectFeedback],
+            gradingType: [this.question.settings.gradingType],
             isRequired: [this.question.isRequired]
         })
 

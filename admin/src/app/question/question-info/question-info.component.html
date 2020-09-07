@@ -62,6 +62,17 @@
 
               </div>
 
+              <div class="mt-8" *ngIf="isOptionEnabled('questionGradingType')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Grading Type</mat-label>
+                  <mat-select formControlName="gradingType">
+                    <mat-option *ngFor="let item of gradingTypes | enumToArray" [value]="item.index">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
             </form>
             
             <div class="mt-8">

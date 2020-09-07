@@ -27,6 +27,7 @@ export class OptionItemsService {
                 new OptionItem('correctFeedback', 'Correct Feedback', 'wysiwyg', false),
                 new OptionItem('incorrectFeedback', 'Incorrect Feedback', 'wysiwyg', false),
                 new OptionItem('questionDisplayType', 'Display Type', '', false),
+                new OptionItem('questionGradingType', 'Grading Type', '', false),
             ];
             case QuestionType.LongAnswer: return [
                 new OptionItem('name', 'Name', '', false)

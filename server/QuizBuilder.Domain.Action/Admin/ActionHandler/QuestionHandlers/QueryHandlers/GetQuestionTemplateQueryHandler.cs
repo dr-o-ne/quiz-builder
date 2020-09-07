@@ -45,13 +45,15 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 					trueFalseQuestion.FalseChoice = new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false};
 					return trueFalseQuestion;
 				case MultiChoice:
-					MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion();
+					var multipleChoiceQuestion = new MultipleChoiceQuestion();
 					multipleChoiceQuestion.Choices.Add( new BinaryChoice {Id = 0, Order = 0, Text = "True", IsCorrect = true} );
 					multipleChoiceQuestion.Choices.Add( new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false} );
 					return multipleChoiceQuestion;
 				case MultiSelect:
-					quizEntity = new MultipleSelectQuestion();
-					break;
+					var multipleSelectQuestion = new MultipleSelectQuestion();
+					multipleSelectQuestion.Choices.Add( new BinaryChoice {Id = 0, Order = 0, Text = "True", IsCorrect = true} );
+					multipleSelectQuestion.Choices.Add( new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false} );
+					return multipleSelectQuestion;
 				case Empty:
 					quizEntity = new EmptyQuestion();
 					break;
