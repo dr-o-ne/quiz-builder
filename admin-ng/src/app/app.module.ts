@@ -31,12 +31,13 @@ import { JwtInterceptor } from './quiz-builder/common/utils/interceptors/jwt.int
 import { HttpErrorInterceptor } from './quiz-builder/common/utils/interceptors/http-error.interceptor';
 import { EnumToArrayPipe } from './quiz-builder/common/utils/pipes/enumToArray.pipe';
 import { MaterialModule } from './quiz-builder/common/material.module';
+import { QuizListComponent } from './quiz-builder/_quiz/quiz-list/quiz-list.component';
 
 const appRoutes: Routes = [
     {
-        path: '**',
-        redirectTo: 'sample'
+        path: '**', component: QuizListComponent,
     }
+    
 ];
 
 @NgModule({
@@ -46,6 +47,9 @@ const appRoutes: Routes = [
         // Utils
         DebounceClickDirective,
         EnumToArrayPipe,
+
+        // UI
+        QuizListComponent,
     ],
     imports: [
         BrowserModule,
