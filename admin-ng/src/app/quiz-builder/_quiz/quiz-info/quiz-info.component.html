@@ -1,0 +1,68 @@
+<div id="quiz" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
+
+            <!-- APP TITLE -->
+
+            <button mat-raised-button fxFlex="none"
+                [disabled]="!quizForm.valid"
+                (click)="onSave()">
+                <span>ADD GROUP</span>
+            </button>
+
+            <div fxFlex></div>
+
+            <button mat-raised-button fxFlex="nogrow"
+                    [disabled]="!quizForm.valid"
+                    (click)="onSave()">
+                <span>SAVE</span>
+            </button>
+
+            <button mat-raised-button fxFlexOffset="2" [routerLink]="'/quizzes'">
+                <span>RETURN</span>
+            </button>
+            <!-- / APP TITLE -->
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card qb-container">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <mat-tab-group>
+
+                    <mat-tab label="Questions">
+
+                    </mat-tab>
+
+                    <mat-tab label="Settings">
+
+                    </mat-tab>
+
+                    <mat-tab label="Appearance">
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

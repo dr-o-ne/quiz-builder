@@ -40,10 +40,30 @@ import { NewQuestionResolver } from './quiz-builder/resolvers/new-question.resol
 
 const appRoutes: Routes = [
     {
-        path: '**',
+      path: '',
+      children: [
+        {
+          path: 'quizzes',
+          runGuardsAndResolvers: 'always',
+          canActivate: [AuthGuard],
+          children:
+            [
+              { path: '', component: QuizListComponent },
+              { path: 'new', component: QuizInfoComponent }
+            ]
+        },
+        {
+          path: 'quizzes/:id',
+          runGuardsAndResolvers: 'always',
+          canActivate: [AuthGuard],
+          children:
+            [
+              { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
+            ]
+        }
+      ]
     }
-    
-];
+  ];
 
 @NgModule({
     declarations: [

@@ -24,6 +24,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   exports: [
@@ -52,7 +53,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatSlideToggleModule,
         MatTooltipModule,
         MatExpansionModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatChipsModule
     ]
 })
 export class MaterialModule { }
