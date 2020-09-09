@@ -8,21 +8,21 @@ import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse
 import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.dataProvider';
 import * as moment from 'moment';
 import { fuseAnimations } from '@fuse/animations';
+import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.component';
 
 @Component({
     selector: 'app-quiz-info',
     templateUrl: './quiz-info.component.html',
     styleUrls: ['./quiz-info.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-
 export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
 
     //@ViewChild(QuizInfoQuestionsTabComponent) questionsControl: QuizInfoQuestionsTabComponent;
-    //@ViewChild(QuizInfoSettingsTabComponent) settingsControl: QuizInfoSettingsTabComponent;
+    @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
 
     quiz: Quiz;
     quizForm: FormGroup;
@@ -68,7 +68,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     onSave(): void {
         //this.questionsControl.saveFormData(this.quiz);
-        //this.settingsControl.saveFormData(this.quiz);
+        this.settingsControl.saveFormData(this.quiz);
 
         if (!this.isEditMode())
             this.createQuiz();

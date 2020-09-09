@@ -37,6 +37,7 @@ import { QuizInfoComponent } from './quiz-builder/_quiz/quiz-info/quiz-info.comp
 import { QuizResolver } from './quiz-builder/resolvers/quiz.resolver';
 import { QuestionResolver } from './quiz-builder/resolvers/question.resolver';
 import { NewQuestionResolver } from './quiz-builder/resolvers/new-question.resolver';
+import { QuizInfoSettingsComponent } from './quiz-builder/_quiz/quiz-info/settings/quiz-info-settings.component';
 
 const appRoutes: Routes = [
     {
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
 
         // UI
         QuizListComponent,
-        QuizInfoComponent
+        QuizInfoComponent,
+        QuizInfoSettingsComponent
     ],
     imports: [
         BrowserModule,

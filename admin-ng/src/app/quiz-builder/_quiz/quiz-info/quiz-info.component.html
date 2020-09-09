@@ -48,6 +48,13 @@
 
                     <mat-tab label="Settings">
 
+                        <div class="tab-content p-24" fusePerfectScrollbar>
+
+                            <app-quiz-info-settings [form]="quizForm.get('settings')" [isEditMode]="isEditMode()">
+                            </app-quiz-info-settings>
+                        
+                        </div>
+
                     </mat-tab>
 
                     <mat-tab label="Appearance">
