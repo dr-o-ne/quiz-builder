@@ -33,10 +33,14 @@ import { EnumToArrayPipe } from './quiz-builder/common/utils/pipes/enumToArray.p
 import { MaterialModule } from './quiz-builder/common/material.module';
 import { QuizListComponent } from './quiz-builder/_quiz/quiz-list/quiz-list.component';
 import { LoginModule } from './quiz-builder/_pages/auth/login/login.module';
+import { QuizInfoComponent } from './quiz-builder/_quiz/quiz-info/quiz-info.component';
+import { QuizResolver } from './quiz-builder/resolvers/quiz.resolver';
+import { QuestionResolver } from './quiz-builder/resolvers/question.resolver';
+import { NewQuestionResolver } from './quiz-builder/resolvers/new-question.resolver';
 
 const appRoutes: Routes = [
     {
-        path: '**', component: QuizListComponent,
+        path: '**',
     }
     
 ];
@@ -51,6 +55,7 @@ const appRoutes: Routes = [
 
         // UI
         QuizListComponent,
+        QuizInfoComponent
     ],
     imports: [
         BrowserModule,
@@ -100,6 +105,11 @@ const appRoutes: Routes = [
         AuthGuard,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+
+        //Resolvers
+        QuizResolver,
+        QuestionResolver,
+        NewQuestionResolver,
     ],
     bootstrap: [
         AppComponent
