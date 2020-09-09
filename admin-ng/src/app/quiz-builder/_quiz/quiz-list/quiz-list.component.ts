@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -6,11 +6,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AttemptService } from 'app/quiz-builder/services/attempt.service';
 import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.dataProvider';
 import { Quiz } from 'app/quiz-builder/model/quiz';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-  selector: 'app-quiz-list',
+  selector: 'quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.css']
+  styleUrls: ['./quiz-list.component.scss'],
+  animations   : fuseAnimations,
+  encapsulation: ViewEncapsulation.None
 })
 export class QuizListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'isEnabled', 'statistic', 'preview', 'copyLink', 'menu'];

@@ -81,6 +81,7 @@ $typography: mat-typography-config(
 @import "src/app/layout/components/chat-panel/chat-panel.theme";
 @import "src/app/layout/components/toolbar/toolbar.theme";
 @import "src/app/quiz-builder/_pages/auth/login/login.theme";
+@import "src/app/quiz-builder/_quiz/quiz-list/quiz-list.theme";
 
 // Define a mixin for easier access
 @mixin components-theme($theme) {
@@ -90,6 +91,7 @@ $typography: mat-typography-config(
     @include toolbar-theme($theme);
 
     // Pages
+    @include quiz-list-theme($theme);
     @include login-theme($theme);
 }
 

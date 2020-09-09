@@ -1,5 +1,137 @@
-<div class="page-layout blank p-24" fusePerfectScrollbar>
+<div id="quiz-list" class="page-layout carded fullwidth inner-scroll">
 
-    <h2>Blank Page</h2>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent quiz-list-container"
+             fxLayout="column" fxLayoutAlign="center center"
+             fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/apps/e-commerce/products/new'"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>ADD QUIZ</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a quiz">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card quiz-list-container">
+
+            <mat-table class="quiz-list-table"
+                       #table [dataSource]="dataSource"
+                       matSort
+                       [@animateStagger]="{value:'50'}"
+                       fusePerfectScrollbar>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element" (click)="onEditClick(element)">
+                        <p class="text-truncate">{{element.name}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isEnabled">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-slide-toggle color="accent" [checked]="element.isEnabled"
+                        (change)="onChangeQuizState($event.checked, element)">
+                      </mat-slide-toggle>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="statistic">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="accent" matTooltip="Statistic">
+                            <mat-icon>equalizer</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="preview">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="accent" matTooltip="Preview" (click)="onPreviewClick(element)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="copyLink">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="accent" matTooltip="Copy live quiz URL to Clipboard" (click)="copyLink(element)">
+                            <mat-icon>link</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="menu">
+                    <mat-header-cell *matHeaderCellDef>
+                        <button mat-icon-button [matMenuTriggerFor]="bulkMenu" matTooltip="Bulk edit" color="accent">
+                            <mat-icon>apps</mat-icon>
+                        </button>
+                        <mat-menu #bulkMenu="matMenu">
+                            <button mat-menu-item (click)="clickMultiSelection()">
+                                <mat-icon>done_all</mat-icon>
+                                <span>Bulk Select</span>
+                            </button>
+                            <button mat-menu-item (click)="bulkEnable()" [disabled]="!isAnySelected()">
+                                <mat-icon>cloud_upload</mat-icon>
+                                <span>Bulk Enable</span>
+                            </button>
+                            <button mat-menu-item (click)="bulkDisable()" [disabled]="!isAnySelected()">
+                                <mat-icon>cloud_off</mat-icon>
+                                <span>Bulk Disable</span>
+                            </button>
+                            <button mat-menu-item (click)="bulkDelete()" [disabled]="!isAnySelected()">
+                                <mat-icon>delete</mat-icon>
+                                <span>Bulk Delete</span>
+                            </button>
+                        </mat-menu>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" color="accent">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="deleteQuiz(element)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete Quiz</span>
+                            </button>
+                        </mat-menu>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let row; columns: displayedColumns;"
+                         class="quiz-list-row"
+                         matRipple>
+                </mat-row>
+
+            </mat-table>
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
 </div>
