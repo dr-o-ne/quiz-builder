@@ -14,6 +14,8 @@ import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from
 
 import { fuseConfig } from 'app/fuse-config';
 
+import { QuillModule } from 'ngx-quill';
+
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
@@ -38,6 +40,7 @@ import { QuizResolver } from './quiz-builder/resolvers/quiz.resolver';
 import { QuestionResolver } from './quiz-builder/resolvers/question.resolver';
 import { NewQuestionResolver } from './quiz-builder/resolvers/new-question.resolver';
 import { QuizInfoSettingsComponent } from './quiz-builder/_quiz/quiz-info/settings/quiz-info-settings.component';
+import { RichTextEditorComponent } from './quiz-builder/common/ui/rich-text-editor.component';
 
 const appRoutes: Routes = [
     {
@@ -70,6 +73,9 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
 
+        // 3th party
+        RichTextEditorComponent,
+
         // Utils
         DebounceClickDirective,
         EnumToArrayPipe,
@@ -86,6 +92,8 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
 
         TranslateModule.forRoot(),
+
+        QuillModule.forRoot(),
 
         // Material moment date module
         MatMomentDateModule,
@@ -108,7 +116,7 @@ const appRoutes: Routes = [
         // Pages
         LoginModule,
 
-        //UI
+        // UI
         MaterialModule,        
     ],
     providers: [
@@ -128,7 +136,7 @@ const appRoutes: Routes = [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
 
-        //Resolvers
+        // Resolvers
         QuizResolver,
         QuestionResolver,
         NewQuestionResolver,

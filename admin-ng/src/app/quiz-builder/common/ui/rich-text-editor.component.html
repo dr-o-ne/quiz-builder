@@ -1,0 +1,15 @@
+<div class="editor">
+
+    <span class="mat-caption" >{{displayName}}</span>
+
+
+    <quill-editor 
+        @fadeInUp 
+        [formControlName]="textFormControlName" 
+        [styles]="{height: '200px'}"
+        (onContentChanged)="onContentChanged($event);">
+    </quill-editor>
+    
+    <!--theme="bubble"-->
+
+</div> 

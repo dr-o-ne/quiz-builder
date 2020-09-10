@@ -7,4 +7,9 @@
             required>
     </mat-form-field>
 
+    <app-rich-text-editor *ngIf="isEditMode"
+        displayName="Introduction"
+        textFormControlName="introduction">
+    </app-rich-text-editor>
+
 </form>

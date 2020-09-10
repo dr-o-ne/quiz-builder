@@ -80,6 +80,11 @@ $typography: mat-typography-config(
 // Import app and page component themes here to enable theming for them
 @import "src/app/layout/components/chat-panel/chat-panel.theme";
 @import "src/app/layout/components/toolbar/toolbar.theme";
+
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
 @import "src/app/quiz-builder/_pages/auth/login/login.theme";
 @import "src/app/quiz-builder/_quiz/quiz-list/quiz-list.theme";
 
