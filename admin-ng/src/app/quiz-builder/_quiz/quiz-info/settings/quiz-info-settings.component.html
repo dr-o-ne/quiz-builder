@@ -12,4 +12,10 @@
         textFormControlName="introduction">
     </app-rich-text-editor>
 
+    <div class="mat-form-field-wrapper" *ngIf="isEditMode">
+        <mat-checkbox formControlName="isPrevButtonEnabled">
+            <span class="mat-body-1">Enable Previous Page Navigation</span>
+        </mat-checkbox>
+    </div>
+
 </form>

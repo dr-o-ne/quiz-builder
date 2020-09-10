@@ -1,10 +1,8 @@
-<div class="editor">
+<div class="editor mat-form-field-wrapper">
 
-    <span class="mat-caption" >{{displayName}}</span>
-
+    <span class="mat-body-1">{{displayName}}</span>
 
     <quill-editor 
-        @fadeInUp 
         [formControlName]="textFormControlName" 
         [styles]="{height: '200px'}"
         (onContentChanged)="onContentChanged($event);">
