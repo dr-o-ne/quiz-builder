@@ -50,6 +50,8 @@ import { QuizInfoSettingsComponent } from './quiz-builder/_quiz/quiz-info/settin
 import { RichTextEditorComponent } from './quiz-builder/common/ui/rich-text-editor.component';
 import { RegisterModule } from './quiz-builder/_pages/auth/register/register.module';
 import { ForgotPasswordModule } from './quiz-builder/_pages/auth/forgot-password/forgot-password.module';
+import { ResetPasswordModule } from './quiz-builder/_pages/auth/reset-password/reset-password.module';
+import { MailConfirmModule } from './quiz-builder/_pages/auth/mail-confirm/mail-confirm.module';
 
 const appRoutes: Routes = [
     {
@@ -128,10 +130,12 @@ const appRoutes: Routes = [
         LayoutModule,
         SampleModule,
 
-        // Pages
+        // Pages Auth
         LoginModule,
         RegisterModule,
         ForgotPasswordModule,
+        ResetPasswordModule,
+        MailConfirmModule,
 
         // UI
         MaterialModule,        
