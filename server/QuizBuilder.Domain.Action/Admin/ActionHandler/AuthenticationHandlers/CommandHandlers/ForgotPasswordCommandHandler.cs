@@ -28,7 +28,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.AuthenticationHandlers.C
 			}
 
 			string code = await _userManager.GeneratePasswordResetTokenAsync( user );
-			string link = HtmlEncoder.Default.Encode( $"http://localhost:5200/new-password/{code}" ); //TODO:
+			string link = HtmlEncoder.Default.Encode( $"http://localhost:5200/auth/reset-password/{code}" ); //TODO:
 
 			bool result = await _emailService.SendEmail( //TODO:
 				command.Email,

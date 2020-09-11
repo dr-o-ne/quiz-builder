@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'app/quiz-builder/services/auth/auth.service';
 
 @Component({
     selector     : 'reset-password',
@@ -22,7 +24,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
+        private authService: AuthService
     )
     {
         // Configure the layout
@@ -57,7 +62,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         this.resetPasswordForm = this._formBuilder.group({
-            name           : ['', Validators.required],
             email          : ['', [Validators.required, Validators.email]],
             password       : ['', Validators.required],
             passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
@@ -81,6 +85,19 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
+
+    reset() {
+        if (this.resetPasswordForm.invalid) {
+          return;
+        }
+    
+        const email = this.resetPasswordForm.value.email as string;
+        const password = this.resetPasswordForm.value.password as string;
+        const code = this.activatedRoute.snapshot.params['code'];
+    
+        this.authService.newPassword(code, email, password).subscribe(
+          () => { this.router.navigate(['/']); } );
+      }
 }
 
 /**

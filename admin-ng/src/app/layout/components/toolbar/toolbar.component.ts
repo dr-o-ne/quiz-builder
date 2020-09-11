@@ -120,7 +120,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
         this.currentUser = this.authService.currentUserValue;
         if(!this.currentUser) {
             this.currentUser = new User(); 
-            this.router.navigate['auth/login']
+            this.router.navigate['/auth/login']
         }
     }
 
