@@ -89,7 +89,6 @@ $typography: mat-typography-config(
 @import "src/app/quiz-builder/_pages/auth/register/register.theme";
 @import "src/app/quiz-builder/_pages/auth/forgot-password/forgot-password.theme";
 @import "src/app/quiz-builder/_pages/auth/reset-password/reset-password.theme";
-@import "src/app/quiz-builder/_pages/auth/mail-confirm/mail-confirm.theme";
 @import "src/app/quiz-builder/_quiz/quiz-list/quiz-list.theme";
 
 // Define a mixin for easier access
@@ -105,7 +104,6 @@ $typography: mat-typography-config(
     @include register-theme($theme);
     @include forgot-password-theme($theme);
     @include reset-password-theme($theme);
-    @include mail-confirm-theme($theme);
 }
 
 // -----------------------------------------------------------------------------------------------------
