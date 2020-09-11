@@ -48,6 +48,7 @@ import { QuestionResolver } from './quiz-builder/resolvers/question.resolver';
 import { NewQuestionResolver } from './quiz-builder/resolvers/new-question.resolver';
 import { QuizInfoSettingsComponent } from './quiz-builder/_quiz/quiz-info/settings/quiz-info-settings.component';
 import { RichTextEditorComponent } from './quiz-builder/common/ui/rich-text-editor.component';
+import { RegisterModule } from './quiz-builder/_pages/auth/register/register.module';
 
 const appRoutes: Routes = [
     {
@@ -84,7 +85,7 @@ const appRoutes: Routes = [
         RichTextEditorComponent,
 
         // Utils
-        DebounceClickDirective,
+        //DebounceClickDirective,
         EnumToArrayPipe,
 
         // UI
@@ -128,6 +129,7 @@ const appRoutes: Routes = [
 
         // Pages
         LoginModule,
+        RegisterModule,
 
         // UI
         MaterialModule,        
@@ -153,6 +155,8 @@ const appRoutes: Routes = [
         QuizResolver,
         QuestionResolver,
         NewQuestionResolver,
+
+
     ],
     bootstrap: [
         AppComponent
