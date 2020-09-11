@@ -8,6 +8,9 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
+import { AuthService } from 'app/quiz-builder/services/auth/auth.service';
+import { User } from 'app/quiz-builder/model/user';
+import { Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
     selector     : 'toolbar',
@@ -29,6 +32,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
     // Private
     private _unsubscribeAll: Subject<any>;
 
+    currentUser: User;
+
     /**
      * Constructor
      *
@@ -39,7 +44,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
-        private _translateService: TranslateService
+        private _translateService: TranslateService,
+        private router: Router,
+        private authService: AuthService
     )
     {
         // Set the defaults
@@ -110,6 +117,11 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
+        this.currentUser = this.authService.currentUserValue;
+        if(!this.currentUser) {
+            this.currentUser = new User(); 
+            this.router.navigate['auth/login']
+        }
     }
 
     /**
@@ -159,5 +171,10 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Use the selected language for translations
         this._translateService.use(lang.id);
+    }
+
+    logout() {
+        this.authService.logout();
+        this.router.navigate(['/auth/login']);
     }
 }
