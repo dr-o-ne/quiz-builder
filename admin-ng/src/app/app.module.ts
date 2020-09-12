@@ -51,6 +51,8 @@ import { RichTextEditorComponent } from './quiz-builder/common/ui/rich-text-edit
 import { RegisterModule } from './quiz-builder/_pages/auth/register/register.module';
 import { ForgotPasswordModule } from './quiz-builder/_pages/auth/forgot-password/forgot-password.module';
 import { ResetPasswordModule } from './quiz-builder/_pages/auth/reset-password/reset-password.module';
+import { GroupInfoComponent } from './quiz-builder/_quiz/quiz-info/structure/group-info/group-info.component';
+import { QuizInfoStructureTabComponent } from './quiz-builder/_quiz/quiz-info/structure/quiz-info-structure-tab.component';
 
 const appRoutes: Routes = [
     {
@@ -93,7 +95,9 @@ const appRoutes: Routes = [
         // UI
         QuizListComponent,
         QuizInfoComponent,
-        QuizInfoSettingsComponent
+        QuizInfoSettingsComponent,
+        GroupInfoComponent,
+        QuizInfoStructureTabComponent
     ],
     imports: [
         BrowserModule,

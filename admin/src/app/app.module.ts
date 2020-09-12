@@ -158,8 +158,7 @@ import { OptionItemsService } from './_models/UI/optionItemService';
     MultipleSelectChoiceInfoComponent,
 
     QuizInfoSettingsTabComponent,
-    QuizInfoQuestionsTabComponent,
-    GroupInfoComponent
+    QuizInfoQuestionsTabComponent
   ],
   providers: [
 
