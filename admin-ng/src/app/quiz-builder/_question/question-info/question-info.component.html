@@ -41,10 +41,15 @@
   
                   <mat-tab-group>
   
-                      <mat-tab label="{{questionLangService.getQuestionTypeLangTerm(question.type)}}">
+                      <mat-tab>
   
                           <div class="tab-content p-24" fusePerfectScrollbar>
 
+                            <form [formGroup]="questionForm">
+
+                                <app-rich-text-editor displayName="Text" textFormControlName="text"></app-rich-text-editor>
+
+                            </form>
   
                           </div>
   
