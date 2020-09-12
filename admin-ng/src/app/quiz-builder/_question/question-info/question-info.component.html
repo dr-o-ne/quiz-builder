@@ -9,20 +9,27 @@
 
           <!-- HEADER -->
           <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
+
+            <button mat-raised-button fxFlex="initial">
+                <span>OPTIONS</span>
+            </button>
   
-              <!-- APP TITLE -->
+            <!-- APP TITLE -->
+            <div fxFlex fxFlexOffset="40">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    {{questionLangService.getQuestionTypeLangTerm(question.type)}}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
   
-              <div fxFlex></div>
-  
-              <button mat-raised-button fxFlex="nogrow">
-                  <span>SAVE</span>
-              </button>
-  
-              <button mat-raised-button fxFlexOffset="2" [routerLink]="'/quizzes'">
-                  <span>RETURN</span>
-              </button>
-              <!-- / APP TITLE -->
-  
+            <button mat-raised-button fxFlex="nogrow">
+                <span>SAVE</span>
+            </button>
+
+            <button mat-raised-button fxFlexOffset="2" [routerLink]="'/quizzes'">
+                <span>RETURN</span>
+            </button>
+
           </div>
           <!-- / HEADER -->
   
@@ -37,6 +44,7 @@
                       <mat-tab label="{{questionLangService.getQuestionTypeLangTerm(question.type)}}">
   
                           <div class="tab-content p-24" fusePerfectScrollbar>
+
   
                           </div>
   
