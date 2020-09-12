@@ -1,0 +1,115 @@
+
+
+    <app-options-menu
+      *ngIf="question.type != emptyQuestionType" 
+      [options]="options">
+    </app-options-menu>
+
+    <mat-tab-group>
+
+      <mat-tab label="{{questionLangService.getQuestionTypeLangTerm(question.type)}}">
+
+          <div class="container qb-card mt-4">
+
+            <form [formGroup]="questionForm">
+
+              <div class="mt-8" *ngIf="isOptionEnabled('name')">
+                <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" formControlName="name">
+                </mat-form-field>
+              </div>
+
+              <div class="mt-8">
+                <app-rich-text-editor displayName="Text" textFormControlName="text"></app-rich-text-editor>
+              </div>
+
+              <div class="mt-8" *ngIf="isOptionEnabled('correctFeedback')">
+                <mat-form-field fxFlex="100" appearance="outline">
+                  <mat-label>Correct Feedback</mat-label>
+                  <textarea matInput formControlName="correctFeedback"></textarea>
+                </mat-form-field>
+              </div>
+              
+              <div *ngIf="isOptionEnabled('incorrectFeedback')">
+                <mat-form-field fxFlex="100" appearance="outline">
+                  <mat-label>Incorrect Feedback</mat-label>
+                  <textarea matInput formControlName="incorrectFeedback"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="mt-8" *ngIf="isOptionEnabled('questionDisplayType')">
+                <app-question-display-type [question]="question"></app-question-display-type>
+              </div>
+
+              <div class="mt-8" *ngIf="question.type != emptyQuestionType" fxLayout>
+
+                <mat-form-field fxFlex="9.5" appearance="outline">
+                  <mat-label>Points</mat-label>
+                  <input matInput type="number" formControlName="points">
+                </mat-form-field>
+
+                <mat-checkbox
+                  fxFlexOffset="1.8" 
+                  fxFlexAlign="center" 
+                  formControlName="isRequired" 
+                  color="primary" 
+                  class="padding-bottom-fix" >
+                  Is Required
+                </mat-checkbox>
+
+              </div>
+
+              <div class="mt-8" *ngIf="isOptionEnabled('questionGradingType')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Grading Type</mat-label>
+                  <mat-select formControlName="gradingType">
+                    <mat-option *ngFor="let item of gradingTypes | enumToArray" [value]="item.index">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </form>
+            
+            <div class="mt-8">
+              <app-choice-dynamic [question]="question"></app-choice-dynamic>
+            </div>
+
+          </div>
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+
+    <div class="footer-stick row"
+      fxLayout
+      fxLayoutAlign="center"
+      fxLayout.xs="column"
+      fxLayoutWrap="wrap"
+      fxLayoutGap="1%">
+
+      <button mat-raised-button 
+        color="accent" 
+        type="submit"
+        (click)="onSave()"
+        [disabled]="!isEnabled()">
+        
+        Save
+
+      </button>
+
+      <button mat-raised-button 
+        color="accent" 
+        (click)="onReturn()">
+
+        Return
+
+      </button>
+    </div>
+
+
+
+ 

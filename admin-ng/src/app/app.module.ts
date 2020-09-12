@@ -58,6 +58,8 @@ import { ChoiceDynamicComponent } from './quiz-builder/_question/choice-info/cho
 import { TrueFalseChoiceInfoComponent } from './quiz-builder/_question/choice-info/true-false-choice-info/true-false-choice-info.component';
 import { MultipleChoiceChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
 import { MultipleSelectChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
+import { QuestionDisplayTypeComponent } from './quiz-builder/_question/question-info/display-type/question-display-type.component';
+import { QuestionInfoComponent } from './quiz-builder/_question/question-info/question-info.component';
 
 const appRoutes: Routes = [
     {
@@ -109,6 +111,9 @@ const appRoutes: Routes = [
         TrueFalseChoiceInfoComponent,
         MultipleChoiceChoiceInfoComponent,
         MultipleSelectChoiceInfoComponent,
+
+        QuestionInfoComponent,
+        QuestionDisplayTypeComponent
     ],
     imports: [
         BrowserModule,
