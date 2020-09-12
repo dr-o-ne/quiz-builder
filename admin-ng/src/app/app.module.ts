@@ -53,6 +53,11 @@ import { ForgotPasswordModule } from './quiz-builder/_pages/auth/forgot-password
 import { ResetPasswordModule } from './quiz-builder/_pages/auth/reset-password/reset-password.module';
 import { GroupInfoComponent } from './quiz-builder/_quiz/quiz-info/structure/group-info/group-info.component';
 import { QuizInfoStructureTabComponent } from './quiz-builder/_quiz/quiz-info/structure/quiz-info-structure-tab.component';
+import { ChoiceHostDirective } from './quiz-builder/_question/choice-info/choice-host.directive';
+import { ChoiceDynamicComponent } from './quiz-builder/_question/choice-info/choice-dynamic.component';
+import { TrueFalseChoiceInfoComponent } from './quiz-builder/_question/choice-info/true-false-choice-info/true-false-choice-info.component';
+import { MultipleChoiceChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
+import { MultipleSelectChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
 
 const appRoutes: Routes = [
     {
@@ -97,7 +102,13 @@ const appRoutes: Routes = [
         QuizInfoComponent,
         QuizInfoSettingsComponent,
         GroupInfoComponent,
-        QuizInfoStructureTabComponent
+        QuizInfoStructureTabComponent,
+        ChoiceHostDirective,
+        ChoiceDynamicComponent,
+
+        TrueFalseChoiceInfoComponent,
+        MultipleChoiceChoiceInfoComponent,
+        MultipleSelectChoiceInfoComponent,
     ],
     imports: [
         BrowserModule,
@@ -141,6 +152,11 @@ const appRoutes: Routes = [
 
         // UI
         MaterialModule,        
+    ],
+    entryComponents: [
+      TrueFalseChoiceInfoComponent,
+      MultipleChoiceChoiceInfoComponent,
+      MultipleSelectChoiceInfoComponent
     ],
     providers: [
 
