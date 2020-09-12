@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'app/quiz-builder/model/UI/optionItem';
@@ -8,11 +8,14 @@ import { ChoiceDynamicComponent } from '../choice-info/choice-dynamic.component'
 import { QuestionLangService } from 'app/quiz-builder/services/lang/question.lang.service';
 import { QuestionDataProvider } from 'app/quiz-builder/services/dataProviders/question.dataProvider';
 import { QuestionType, Question } from 'app/quiz-builder/model/question';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
     selector: 'app-question-info',
     templateUrl: './question-info.component.html',
-    styleUrls: ['./question-info.component.css']
+    styleUrls: ['./question-info.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class QuestionInfoComponent {
 

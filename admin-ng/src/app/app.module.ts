@@ -47,7 +47,7 @@ import { QuizResolver } from './quiz-builder/resolvers/quiz.resolver';
 import { QuestionResolver } from './quiz-builder/resolvers/question.resolver';
 import { NewQuestionResolver } from './quiz-builder/resolvers/new-question.resolver';
 import { QuizInfoSettingsComponent } from './quiz-builder/_quiz/quiz-info/settings/quiz-info-settings.component';
-import { RichTextEditorComponent } from './quiz-builder/common/ui/rich-text-editor.component';
+import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-text-editor.component';
 import { RegisterModule } from './quiz-builder/_pages/auth/register/register.module';
 import { ForgotPasswordModule } from './quiz-builder/_pages/auth/forgot-password/forgot-password.module';
 import { ResetPasswordModule } from './quiz-builder/_pages/auth/reset-password/reset-password.module';
