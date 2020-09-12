@@ -10,9 +10,15 @@
           <!-- HEADER -->
           <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
 
-            <button mat-raised-button fxFlex="initial">
+            <button mat-raised-button [matMenuTriggerFor]="menu" *ngIf="options.length > 0">
                 <span>OPTIONS</span>
             </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
+                    <mat-icon *ngIf="option.enabled">done</mat-icon>
+                    <span>{{option.displayName}}</span>
+                </button>
+            </mat-menu>
   
             <!-- APP TITLE -->
             <div fxFlex fxFlexOffset="40">
@@ -47,7 +53,22 @@
 
                             <form [formGroup]="questionForm">
 
-                                <app-rich-text-editor displayName="Text" textFormControlName="text"></app-rich-text-editor>
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" *ngIf="isOptionEnabled('name')">
+                                    <mat-label>Question Name</mat-label>
+                                    <input matInput formControlName="name">
+                                </mat-form-field>
+
+                                <app-rich-text-editor displayName="Text:" textFormControlName="text">                                    
+                                </app-rich-text-editor>
+
+                                <app-rich-text-editor displayName="Correct Feedback:" textFormControlName="correctFeedback" *ngIf="isOptionEnabled('correctFeedback')">                                    
+                                </app-rich-text-editor>
+
+                                <app-rich-text-editor displayName="Incorrect Feedback:" textFormControlName="incorrectFeedback" *ngIf="isOptionEnabled('incorrectFeedback')">                                    
+                                </app-rich-text-editor>
+
+                                <app-question-display-type [question]="question" *ngIf="isOptionEnabled('questionDisplayType')">
+                                </app-question-display-type>
 
                             </form>
   

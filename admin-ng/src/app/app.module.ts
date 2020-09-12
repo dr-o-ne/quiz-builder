@@ -95,10 +95,9 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
 
-        // 3th party
+        // Utils
         RichTextEditorComponent,
 
-        // Utils
         //DebounceClickDirective,
         EnumToArrayPipe,
 

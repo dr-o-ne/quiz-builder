@@ -122,4 +122,9 @@ export class QuestionInfoComponent {
 
         return true;
     }
+
+    onOptionItemClick(event: MouseEvent, option: OptionItem): void {
+        option.enabled = !option.enabled;
+        event.stopPropagation();
+    }
 }
