@@ -91,6 +91,8 @@ $typography: mat-typography-config(
 @import "src/app/quiz-builder/_pages/auth/reset-password/reset-password.theme";
 @import "src/app/quiz-builder/_quiz/quiz-list/quiz-list.theme";
 
+@import "src/app/quiz-builder/_quiz/quiz-info/structure/academy.theme";
+
 // Define a mixin for easier access
 @mixin components-theme($theme) {
 
@@ -104,6 +106,10 @@ $typography: mat-typography-config(
     @include register-theme($theme);
     @include forgot-password-theme($theme);
     @include reset-password-theme($theme);
+
+    //
+    @include academy-theme($theme);
+
 }
 
 // -----------------------------------------------------------------------------------------------------

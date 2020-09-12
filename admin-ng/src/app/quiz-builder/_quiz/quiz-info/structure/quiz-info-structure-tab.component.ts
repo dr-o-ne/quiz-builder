@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { QuestionLangService } from 'app/quiz-builder/services/lang/question.lan
 import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { Quiz } from 'app/quiz-builder/model/quiz';
 import { Group } from 'app/quiz-builder/model/group';
+import { fuseAnimations } from '@fuse/animations';
 
 export class DataInfo implements GroupInfoViewModel {
     id: string;
@@ -23,7 +24,9 @@ export class DataInfo implements GroupInfoViewModel {
 @Component({
     selector: 'app-quiz-info-structure-tab',
     templateUrl: './quiz-info-structure-tab.component.html',
-    styleUrls: ['./quiz-info-structure-tab.component.scss']
+    styleUrls: ['./quiz-info-structure-tab.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class QuizInfoStructureTabComponent implements OnInit {
 
