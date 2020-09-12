@@ -1,5 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
 @Component({
   selector: 'app-rich-text-editor',
@@ -17,6 +18,8 @@ export class RichTextEditorComponent {
 
   @Input() textFormControlName: string;
   @Input() displayName: string;
+
+  public Editor = InlineEditor;
 
   onContentChanged(_): void { /*HACK*/ }
 
