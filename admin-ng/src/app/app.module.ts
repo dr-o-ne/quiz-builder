@@ -82,6 +82,8 @@ const appRoutes: Routes = [
           children:
             [
               { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
+              { path: 'questions/new', component: QuestionInfoComponent, resolve: { questionResolver: NewQuestionResolver } },
+              { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuestionResolver } }
             ]
         }
       ]
