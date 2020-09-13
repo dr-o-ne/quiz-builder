@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Common.Extensions;
@@ -7,7 +8,7 @@ using static QuizBuilder.Domain.Model.Default.Enums;
 
 namespace QuizBuilder.Api.Admin.Api.Internal {
 
-	//[Authorize]
+	[Authorize]
 	[ApiController]
 	[Route( "admin/[controller]" )]
 	public sealed class QuestionsController : ControllerBase {

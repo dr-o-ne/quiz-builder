@@ -74,7 +74,7 @@ export class QuizInfoStructureTabComponent implements OnInit {
 
     addGroupForm(group: Group): void {
 
-        var dataInfo = new DataInfo();
+        const dataInfo = new DataInfo();
         dataInfo.id = group.id;
         dataInfo.name = group.name;
         dataInfo.isEnabled = group.isEnabled;
@@ -204,7 +204,7 @@ export class QuizInfoStructureTabComponent implements OnInit {
     }
 
     saveFormData(quiz: Quiz): void {
-        for (let groupInfo of this.groupInfoControls) {
+        for (const groupInfo of this.groupInfoControls) {
 
             const group = quiz.groups.find(x => x.id == groupInfo.viewModel.id);
             const isDirty = groupInfo.saveFormData(group);
