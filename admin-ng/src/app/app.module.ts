@@ -87,8 +87,10 @@ const appRoutes: Routes = [
               { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuestionResolver } }
             ]
         }
-      ]
-    }
+      ],
+      
+    },
+    { path: '**', redirectTo: 'errors/404' }
   ];
 
 @NgModule({
