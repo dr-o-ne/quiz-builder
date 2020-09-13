@@ -97,8 +97,6 @@ export class QuestionInfoComponent {
 
     onSave(): void {
 
-        console.log('save');
-
         if (!this.questionForm.valid) {
             return;
         }

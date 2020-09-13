@@ -1,21 +1,3 @@
-import { SettingsBase } from '../question';
-
-export class BaseChoiceSettings extends SettingsBase {
-  choicesDisplayType = ChoicesDisplayType.Vertical;
-  choicesEnumerationType = ChoicesEnumerationType.one_two_three;
-  randomize = false;
-}
-
-export class SettingsTrueFalse extends BaseChoiceSettings {
-}
-
-export class SettingsMultipleSelectQuestion extends BaseChoiceSettings {
-  gradingType = QuestionGradingType.AllOrNothing;
-}
-
-export class SettingsMultipleChoiceQuestion extends BaseChoiceSettings {
-}
-
 export class DefaultEnumChoice {
   one_two_three = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   i_ii_iii = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'];

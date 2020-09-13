@@ -1,17 +1,10 @@
 import { Group } from './group';
 
-export enum PageSettings {
-    PagePerGroup = 1,
-    PagePerQuiz = 2,
-    PagePerQuestion = 3,
-    Custom = 4
-}
-
 export class Quiz {
     id: string;
     name: string;
     isEnabled: boolean;
-    groups: Group[];
+    groups: Group[] = [];
 
     introduction: string;
 
@@ -24,8 +17,11 @@ export class Quiz {
     isScheduleEnabled: boolean;
     startDate: number;
     endDate: number;
+}
 
-    constructor() {
-        this.groups = new Array<Group>();
-    }
+export enum PageSettings {
+    PagePerGroup = 1,
+    PagePerQuiz = 2,
+    PagePerQuestion = 3,
+    Custom = 4
 }

@@ -23,8 +23,6 @@ export class AuthService {
 
     signUp(name: string, email: string, password: string): Observable<User> {
 
-        console.log('asdfasdf');
-
         return this.dataProvider.signUp(name, email, password).pipe(
             map( response => {       
                 const user = response.payload;

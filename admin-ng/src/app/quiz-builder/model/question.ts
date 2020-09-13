@@ -32,9 +32,6 @@ export class Question {
 
 }
 
-export class SettingsBase {
-}
-
 export enum QuestionType {
   TrueFalse = 2,
   MultipleChoice = 3,
