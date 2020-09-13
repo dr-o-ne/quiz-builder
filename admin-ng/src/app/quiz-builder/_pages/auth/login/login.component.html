@@ -46,7 +46,15 @@
                     </a>
                 </div>
 
-                <button (click)="onClick()" mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" [disabled]="form.invalid">
+                <button mat-raised-button 
+                    appDebounceClick
+                    (debounceClick)="onClick()"
+                    [debounceTime]="1000"
+                    color="accent" 
+                    class="submit-button" 
+                    aria-label="LOG IN" 
+                    [disabled]="form.invalid">
+                    
                     LOGIN
                 </button>
 

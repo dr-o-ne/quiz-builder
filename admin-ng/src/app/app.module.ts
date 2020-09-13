@@ -33,7 +33,6 @@ import { QuizDataProvider } from './quiz-builder/services/dataProviders/quiz.dat
 import { QuestionLangService } from './quiz-builder/services/lang/question.lang.service';
 import { QuizLangService } from './quiz-builder/services/lang/quiz.lang.service';
 import { AttemptService } from './quiz-builder/services/attempt.service';
-import { DebounceClickDirective } from './quiz-builder/common/utils/directives/debounceClick.directive';
 import { AuthGuard } from './quiz-builder/common/utils/guards/auth.guard';
 import { JwtInterceptor } from './quiz-builder/common/utils/interceptors/jwt.interceptor';
 import { HttpErrorInterceptor } from './quiz-builder/common/utils/interceptors/http-error.interceptor';
@@ -59,6 +58,7 @@ import { MultipleChoiceChoiceInfoComponent } from './quiz-builder/_question/choi
 import { MultipleSelectChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
 import { QuestionDisplayTypeComponent } from './quiz-builder/_question/question-info/display-type/question-display-type.component';
 import { QuestionInfoComponent } from './quiz-builder/_question/question-info/question-info.component';
+import { CommonUtilsModule } from './quiz-builder/common/common-utils.module';
 
 const appRoutes: Routes = [
     {
@@ -153,9 +153,12 @@ const appRoutes: Routes = [
         RegisterModule,
         ForgotPasswordModule,
         ResetPasswordModule,
+        CommonUtilsModule,
 
         // UI
-        MaterialModule,        
+        MaterialModule,
+        
+        CommonUtilsModule
     ],
     entryComponents: [
       TrueFalseChoiceInfoComponent,
@@ -183,8 +186,6 @@ const appRoutes: Routes = [
         QuizResolver,
         QuestionResolver,
         NewQuestionResolver,
-
-
     ],
     bootstrap: [
         AppComponent

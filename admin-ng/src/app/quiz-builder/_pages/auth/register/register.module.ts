@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { RegisterComponent } from './register.component';
-import { DebounceClickDirective } from 'app/quiz-builder/common/utils/directives/debounceClick.directive';
+import { CommonUtilsModule } from 'app/quiz-builder/common/common-utils.module';
 
 const routes = [
     {
@@ -31,7 +31,9 @@ const routes = [
         MatIconModule,
         MatInputModule,
 
-        FuseSharedModule
+        FuseSharedModule,
+
+        CommonUtilsModule
     ]
 })
 export class RegisterModule

@@ -63,7 +63,9 @@
                 </div>
                 
                 <button mat-raised-button
-                    (click)="onClick()"
+                    appDebounceClick
+                    (debounceClick)="onClick()"
+                    [debounceTime]="1000"
                     color="accent" 
                     class="submit-button" 
                     aria-label="CREATE AN ACCOUNT" 

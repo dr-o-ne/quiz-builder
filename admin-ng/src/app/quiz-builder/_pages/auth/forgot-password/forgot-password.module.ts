@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { ForgotPasswordComponent } from './forgot-password.component';
+import { CommonUtilsModule } from 'app/quiz-builder/common/common-utils.module';
 
 
 const routes = [
@@ -28,7 +29,9 @@ const routes = [
         MatIconModule,
         MatInputModule,
 
-        FuseSharedModule
+        FuseSharedModule,
+
+        CommonUtilsModule
     ]
 })
 export class ForgotPasswordModule
