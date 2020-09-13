@@ -61,13 +61,13 @@ export class ForgotPasswordComponent implements OnInit
         });
     }
 
-    send() {
+    onClick(): void {
 
         if (this.forgotPasswordForm.invalid) {
-          return;
+            return;
         }
-    
+
         const email = this.forgotPasswordForm.value.email as string;
-        this.authService.forgotPassword( email ).subscribe();
-      }
+        this.authService.forgotPassword(email).subscribe();
+    }
 }

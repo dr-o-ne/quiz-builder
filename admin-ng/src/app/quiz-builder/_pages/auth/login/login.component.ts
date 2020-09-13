@@ -53,16 +53,16 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    login() {
+    onClick(): void {
 
         if (this.form.invalid) {
-          return;
+            return;
         }
-    
+
         const email = this.form.value.email as string;
         const password = this.form.value.password as string;
-    
-        this.authService.login( email, password ).subscribe(
-          () => { this.router.navigate([this.returnUrl]); } );
-      }
+
+        this.authService.login(email, password).subscribe(
+            () => { this.router.navigate([this.returnUrl]); });
+    }
 }

@@ -86,18 +86,18 @@ export class ResetPasswordComponent implements OnInit, OnDestroy
         this._unsubscribeAll.complete();
     }
 
-    reset() {
+    onClick(): void {
         if (this.resetPasswordForm.invalid) {
-          return;
+            return;
         }
-    
+
         const email = this.resetPasswordForm.value.email as string;
         const password = this.resetPasswordForm.value.password as string;
         const code = this.activatedRoute.snapshot.params['code'];
-    
+
         this.authService.newPassword(code, email, password).subscribe(
-          () => { this.router.navigate(['/']); } );
-      }
+            () => { this.router.navigate(['/']); });
+    }
 }
 
 /**

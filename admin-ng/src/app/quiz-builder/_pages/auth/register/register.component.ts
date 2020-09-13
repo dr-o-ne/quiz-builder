@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit, OnDestroy
     }
 
     
-    send() {
+    onClick(): void {
 
         if (this.registerForm.invalid) {
             return;
