@@ -25,7 +25,6 @@ import { NgxMatMomentModule } from '@angular-material-components/moment-adapter'
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
 import { AuthService } from './quiz-builder/services/auth/auth.service';
 import { AuthDataProvider } from './quiz-builder/services/dataProviders/auth.dataProvider';
 import { GroupDataProvider } from './quiz-builder/services/dataProviders/group.dataProvider';
@@ -148,7 +147,6 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule,
 
         // Pages Auth
         LoginModule,
