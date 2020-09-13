@@ -28,7 +28,7 @@
             </div>
             <!-- / APP TITLE -->
   
-            <button mat-raised-button fxFlex="nogrow">
+            <button mat-raised-button fxFlex="nogrow" (click)="onSave()" [disabled]="!questionForm.valid">
                 <span>SAVE</span>
             </button>
 
@@ -85,9 +85,9 @@
                                     </mat-checkbox>
                     
                                 </div>
-
+<!--
                                 <app-choice-dynamic [question]="question"></app-choice-dynamic>
-
+-->
                             </form>
   
                           </div>

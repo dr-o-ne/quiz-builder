@@ -2,10 +2,8 @@
 
   <div *ngFor="let choice of question.choices" fxLayout>
 
-      <mat-form-field fxFlex="50%" appearance="outline">
-        <mat-label>Choice Text</mat-label>
-        <textarea matInput [(ngModel)]="choice.text"></textarea>
-      </mat-form-field>
+      <app-rich-text-editor fxFlex="50%" displayName="Choice Text" textFormControlName="choice.text">                                    
+      </app-rich-text-editor>
 
       <mat-radio-button 
         color="primary"

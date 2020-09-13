@@ -5,8 +5,7 @@ import { Question } from 'app/quiz-builder/model/question';
 @Directive()
 export abstract class ChoiceBaseDirective {
 
-    constructor(
-        protected fb: FormBuilder){
+    constructor(protected fb: FormBuilder) {
     }
 
     question!: Question;

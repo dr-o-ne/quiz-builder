@@ -1,6 +1,5 @@
-
 <mat-form-field appearance="outline" floatLabel="always" fxFlex>
     <mat-label>{{displayName}}</mat-label>
     <textarea matInput #messageInput placeholder="Enter message" required style="display: none;"></textarea>
-    <ckeditor [editor]="Editor"></ckeditor>
+    <ckeditor [editor]="Editor" [formControlName]="textFormControlName"></ckeditor>
 </mat-form-field>

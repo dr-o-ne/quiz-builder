@@ -96,6 +96,9 @@ export class QuestionInfoComponent {
     onReturn = () => this.navigateToParent();
 
     onSave(): void {
+
+        console.log('save');
+
         if (!this.questionForm.valid) {
             return;
         }
