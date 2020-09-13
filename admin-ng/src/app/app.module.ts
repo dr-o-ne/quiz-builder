@@ -14,7 +14,6 @@ import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from
 
 import { fuseConfig } from 'app/fuse-config';
 
-import { QuillModule } from 'ngx-quill';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import {
@@ -126,7 +125,6 @@ const appRoutes: Routes = [
         TranslateModule.forRoot(),
 
         CKEditorModule,
-        QuillModule.forRoot(),
 
         // Material moment date module
         MatMomentDateModule,
