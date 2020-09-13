@@ -1,16 +1,6 @@
-<div class="editor mat-form-field-wrapper">
 
-    <span class="mat-body-1">{{displayName}}</span>
-
-    <!--
-    <quill-editor 
-        [formControlName]="textFormControlName" 
-        [styles]="{height: '200px'}"
-        (onContentChanged)="onContentChanged($event);">
-    </quill-editor>
-    -->
-    <!--theme="bubble"-->
-
-    <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
-
-</div> 
+<mat-form-field appearance="outline" floatLabel="always" fxFlex>
+    <mat-label>{{displayName}}</mat-label>
+    <textarea matInput #messageInput placeholder="Enter message" required style="display: none;"></textarea>
+    <ckeditor [editor]="Editor"></ckeditor>
+</mat-form-field>
