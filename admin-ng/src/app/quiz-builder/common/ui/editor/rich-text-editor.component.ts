@@ -21,6 +21,4 @@ export class RichTextEditorComponent {
 
   public Editor = InlineEditor;
 
-  onContentChanged(_): void { /*HACK*/ }
-
 }
