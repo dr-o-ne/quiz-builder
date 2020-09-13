@@ -11,7 +11,7 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "npm"
-    directory: "/admin"
+    directory: "/admin-ng"
     schedule:
       interval: "daily"
 
