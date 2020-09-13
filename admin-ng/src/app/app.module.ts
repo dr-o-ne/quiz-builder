@@ -59,6 +59,8 @@ import { MultipleSelectChoiceInfoComponent } from './quiz-builder/_question/choi
 import { QuestionDisplayTypeComponent } from './quiz-builder/_question/question-info/display-type/question-display-type.component';
 import { QuestionInfoComponent } from './quiz-builder/_question/question-info/question-info.component';
 import { CommonUtilsModule } from './quiz-builder/common/common-utils.module';
+import { Error500Module } from './quiz-builder/_pages/error/500/error-500.module';
+import { Error404Module } from './quiz-builder/_pages/error/404/error-404.module';
 
 const appRoutes: Routes = [
     {
@@ -138,6 +140,8 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
+        Error404Module,
+        Error500Module,
 
         // 3th party
         NgxMatDatetimePickerModule,
