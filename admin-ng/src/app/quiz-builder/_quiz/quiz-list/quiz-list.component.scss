@@ -82,6 +82,10 @@ quiz-list {
             align-items: center;
         }
 
+        .mat-column-select {
+            flex: 0 1 80px;
+        }
+
         .mat-column-isEnabled {
             flex: 0 1 80px;
         }
@@ -100,24 +104,6 @@ quiz-list {
 
         .mat-column-menu {
             flex: 0 1 80px;
-        }
-
-        .quantity-indicator {
-            display: inline-block;
-            vertical-align: middle;
-            width: 8px;
-            height: 8px;
-            border-radius: 4px;
-            margin-right: 8px;
-
-            & + span {
-                display: inline-block;
-                vertical-align: middle;
-            }
-        }
-
-        .active-icon {
-            border-radius: 50%;
         }
     }
 }

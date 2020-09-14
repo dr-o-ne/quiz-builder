@@ -41,6 +41,23 @@
                        [@animateStagger]="{value:'50'}"
                        fusePerfectScrollbar>
 
+                <ng-container matColumnDef="select" *ngIf="isMultiSelectMode">
+                    <mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox
+                            (change)="checkAllToggle($event.checked)" 
+                            [indeterminate]="isAnySelected() && !isAllSelected()"
+                            [checked]="isAllSelected()">
+                        </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-checkbox 
+                            (click)="$event.stopPropagation()" 
+                            (change)="checkItemToggle(element)"
+                            [checked]="isItemSelected(element)">
+                        </mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
                     <mat-cell *matCellDef="let element" (click)="onEditClick(element)">

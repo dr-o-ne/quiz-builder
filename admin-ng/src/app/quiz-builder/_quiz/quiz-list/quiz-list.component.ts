@@ -12,7 +12,7 @@ import { fuseAnimations } from '@fuse/animations';
   selector: 'quiz-list',
   templateUrl: './quiz-list.component.html',
   styleUrls: ['./quiz-list.component.scss'],
-  animations   : fuseAnimations,
+  animations: fuseAnimations,
   encapsulation: ViewEncapsulation.None
 })
 export class QuizListComponent implements OnInit {
