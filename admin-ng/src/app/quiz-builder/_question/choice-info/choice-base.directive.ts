@@ -11,4 +11,6 @@ export abstract class ChoiceBaseDirective {
     question!: Question;
 
     abstract isValid(): boolean;
+
+    abstract save(): void;
 }

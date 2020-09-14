@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'app/quiz-builder/model/UI/optionItem';
@@ -17,7 +17,7 @@ import { fuseAnimations } from '@fuse/animations';
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class QuestionInfoComponent {
+export class QuestionInfoComponent implements OnInit {
 
     @ViewChild(ChoiceDynamicComponent)
     private choicesForm!: ChoiceDynamicComponent;
@@ -97,9 +97,17 @@ export class QuestionInfoComponent {
 
     onSave(): void {
 
+        console.log('save');
+
         if (!this.questionForm.valid) {
             return;
         }
+        //if (!this.choicesForm.isValid) {
+        //    return;
+        //}
+
+
+        this.choicesForm.save();
 
         this.question = Object.assign(this.question, this.questionForm.value);
         this.question.settings = JSON.stringify(this.question.settings);

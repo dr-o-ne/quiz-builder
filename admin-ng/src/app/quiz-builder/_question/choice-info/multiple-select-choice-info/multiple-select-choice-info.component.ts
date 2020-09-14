@@ -9,6 +9,10 @@ import { Choice } from 'app/quiz-builder/model/choice';
 })
 
 export class MultipleSelectChoiceInfoComponent extends ChoiceBaseDirective {
+  
+  save(): void {
+    throw new Error("Method not implemented.");
+  }
 
   isValid(): boolean {
     const choices = this.question.choices;

@@ -6,7 +6,12 @@ import { ChoiceBaseDirective } from './choice-base.directive';
     template: ``,
 })
 export class ChoiceEmptyComponent extends ChoiceBaseDirective {
+
     isValid(): boolean {
         return true;
     }
+
+    save(): void {
+    }
+    
 }

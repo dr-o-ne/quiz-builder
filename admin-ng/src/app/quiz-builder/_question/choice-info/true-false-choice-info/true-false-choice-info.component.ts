@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChoiceBaseDirective } from '../choice-base.directive';
 import { MatRadioChange } from '@angular/material/radio';
 import { Choice } from 'app/quiz-builder/model/choice';
+import { FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-true-false-choice-info',
@@ -9,23 +10,54 @@ import { Choice } from 'app/quiz-builder/model/choice';
   styleUrls: ['./true-false-choice-info.component.css']
 })
 
-export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective {
+export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements OnInit {
+
+  choiceForms = new FormArray([]);
+
+  ngOnInit(): void {
+    this.question.choices.forEach(x => {
+      this.createFormItem(x);
+    });
+  }
 
   isValid(): boolean {
-
-    const choices = this.question.choices;
-
-    if (choices.length !== 2) return false;
-    if (choices[0].text === '') return false;
-    if (choices[1].text === '') return false;
-    if (choices[0].isCorrect === choices[1].isCorrect) return false;
-
-    return true;
-
+    return this.choiceForms.valid;
   }
-  
+
+  save(): void {
+
+    // update data
+    this.choiceForms.controls.forEach(
+      (choiceForm: FormGroup) => {
+        const choiceIdForm = choiceForm.get('id').value;
+        const choice = this.question.choices.find(x => x.id == choiceIdForm) as Choice;
+
+        choice.isCorrect = choiceForm.get('isCorrect').value;
+        choice.text = choiceForm.get('text').value;
+      }
+    );
+  }
+
   onChoiceChange(event: MatRadioChange): void {
-    this.question.choices.forEach((elem: Choice) => elem.isCorrect = elem.id === event.value);
+
+    // update form data
+    this.choiceForms.controls.forEach(
+      (x: FormGroup) => {
+        const isSelected = x.get('id').value == event.value
+        x.patchValue({ isCorrect: isSelected });
+      }
+    );
+  }
+
+  private createFormItem(choice: Choice): void {
+
+    const choiceGroup = this.fb.group({
+      id: [choice.id, Validators.required],
+      text: [choice.text, Validators.required],
+      isCorrect: [choice.isCorrect, Validators.required],
+    });
+
+    this.choiceForms.push(choiceGroup);
   }
 
 }

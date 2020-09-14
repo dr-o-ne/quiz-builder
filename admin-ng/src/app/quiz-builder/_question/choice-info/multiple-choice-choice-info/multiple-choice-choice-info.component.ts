@@ -11,6 +11,10 @@ import { Choice } from 'app/quiz-builder/model/choice';
 })
 
 export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective implements AfterViewChecked {
+  
+  save(): void {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(
     protected fb: FormBuilder,

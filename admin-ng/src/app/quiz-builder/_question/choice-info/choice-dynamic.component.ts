@@ -48,5 +48,12 @@ export class ChoiceDynamicComponent implements OnInit {
 
     return this.choiceComponentRef.instance.isValid();
   }
+
+  save(): void {
+    
+    if (!this.choiceComponentRef) return;
+
+    return this.choiceComponentRef.instance.save();
+  }
   
 }

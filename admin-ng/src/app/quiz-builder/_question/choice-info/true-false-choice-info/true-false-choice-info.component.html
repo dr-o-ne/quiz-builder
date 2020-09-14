@@ -1,14 +1,16 @@
 <mat-radio-group>
 
-  <div *ngFor="let choice of question.choices" fxLayout>
+  <div *ngFor="let choiceForm of choiceForms.controls" fxLayout>
 
-      <app-rich-text-editor fxFlex="50%" displayName="Choice Text" textFormControlName="choice.text">                                    
+    <ng-container [formGroup]="choiceForm">
+
+      <app-rich-text-editor fxFlex="50%" displayName="Choice Text" textFormControlName="text">                                    
       </app-rich-text-editor>
 
       <mat-radio-button 
         color="primary"
-        [value]="choice.id" 
-        [checked]="choice.isCorrect" 
+        [value]="choiceForm.get('id').value" 
+        [checked]="choiceForm.get('isCorrect').value" 
         fxFlexOffset="2" 
         fxFlexAlign="center" 
         class="padding-bottom-fix"
@@ -16,7 +18,8 @@
         Correct
       </mat-radio-button>
 
+    </ng-container>
+
   </div>
 
 </mat-radio-group>
-
