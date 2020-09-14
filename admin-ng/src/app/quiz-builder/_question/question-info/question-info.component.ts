@@ -97,8 +97,6 @@ export class QuestionInfoComponent implements OnInit {
 
     onSave(): void {
 
-        console.log('save');
-
         if (!this.questionForm.valid) {
             return;
         }
