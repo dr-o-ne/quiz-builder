@@ -1,11 +1,5 @@
 #question {
 
-    .qb-container{
-        width: 75%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     .content {
 
         .mat-tab-group,
@@ -30,6 +24,12 @@
         }
     }
 
+}
+
+.qb-container{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .padding-bottom-fix {
