@@ -66,10 +66,10 @@
                 </ng-container>
 
                 <ng-container matColumnDef="isEnabled">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="pl-12">Status</mat-header-cell>
                     <mat-cell *matCellDef="let element">
                         <mat-slide-toggle color="accent" [checked]="element.isEnabled"
-                        (change)="onChangeQuizState($event.checked, element)">
+                        (change)="onChangeQuizState($event.checked, element)" class="pl-12">
                       </mat-slide-toggle>
                     </mat-cell>
                 </ng-container>
