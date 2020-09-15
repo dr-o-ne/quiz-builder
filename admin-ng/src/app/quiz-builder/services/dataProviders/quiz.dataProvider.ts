@@ -15,8 +15,8 @@ export class QuizDataProvider {
     constructor(private http: HttpClient) {
     }
 
-    getAllQuizzes(): Observable<Quiz[]> {
-        return this.http.get<Quiz[]>(this.apiUrl + 'quizzes');
+    getAllQuizzes(): Observable<ApiResponse<Quiz[]>> {
+        return this.http.get<ApiResponse<Quiz[]>>(this.apiUrl + 'quizzes');
     }
 
     deleteQuiz(id: string): Observable<object> {

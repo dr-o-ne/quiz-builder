@@ -7,6 +7,7 @@ import { AttemptService } from 'app/quiz-builder/services/attempt.service';
 import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.dataProvider';
 import { Quiz } from 'app/quiz-builder/model/quiz';
 import { fuseAnimations } from '@fuse/animations';
+import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse';
 
 @Component({
   selector: 'quiz-list',
@@ -37,8 +38,9 @@ export class QuizListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.quizDataProvider.getAllQuizzes()
-      .subscribe((response: any) => { this.initDataSource(response.quizzes); });
+    this.quizDataProvider.getAllQuizzes().subscribe(
+      (response: ApiResponse<Quiz[]>) => { this.initDataSource(response.payload); }
+    );
   }
 
   initDataSource(quizzes: Quiz[]): void {

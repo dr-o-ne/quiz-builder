@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -28,8 +29,8 @@ namespace QuizBuilder.Test.Integration.TestHelpers {
 		public Task<(HttpStatusCode statusCode, CommandResult<QuizViewModel> data)> QuizGet( string uid ) =>
 			_httpClient.GetValueAsync<CommandResult<QuizViewModel>>( "admin/quizzes/" + uid );
 
-		public Task<(HttpStatusCode statusCode, QuizzesQueryResult data)> QuizGetAll() =>
-			_httpClient.GetValueAsync<QuizzesQueryResult>( "admin/quizzes/" );
+		public Task<(HttpStatusCode statusCode, CommandResult<ImmutableList<QuizViewModel>> data)> QuizGetAll() =>
+			_httpClient.GetValueAsync<CommandResult<ImmutableList<QuizViewModel>>>( "admin/quizzes/" );
 
 		public Task<(HttpStatusCode statusCode, CommandResult<QuizViewModel> data)> QuizCreate( object content ) =>
 			_httpClient.PostValueAsync<CommandResult<QuizViewModel>>( "admin/quizzes/", ToCommand<CreateQuizCommand>( content ) );

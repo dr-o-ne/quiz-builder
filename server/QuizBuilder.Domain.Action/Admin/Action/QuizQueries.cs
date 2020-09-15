@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Immutable;
+using System.ComponentModel.DataAnnotations;
 using QuizBuilder.Common.CQRS.Actions;
 using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Admin.ActionResult;
@@ -6,7 +7,7 @@ using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {
 
-	public sealed class GetAllQuizzesQuery : IQuery<QuizzesQueryResult>, IIdentityAction {
+	public sealed class GetAllQuizzesQuery : IQuery<CommandResult<ImmutableList<QuizViewModel>>>, IIdentityAction {
 
 		public long OrgId { get; set; }
 
