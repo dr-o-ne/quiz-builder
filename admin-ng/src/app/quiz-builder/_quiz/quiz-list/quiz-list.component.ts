@@ -35,19 +35,7 @@ export class QuizListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData(): void {
-    this.quizDataProvider.getAllQuizzes().subscribe(
-      (response: ApiResponse<Quiz[]>) => { this.initDataSource(response.payload); }
-    );
-  }
-
-  initDataSource(quizzes: Quiz[]): void {
-    this.dataSource = new MatTableDataSource<Quiz>(quizzes);
-    this.dataSource.sort = this.sort;
-    this.selection = new SelectionModel<Quiz>(true, []);
+    this.refreshData();
   }
 
   isEmptyFilter(): boolean {
@@ -76,7 +64,7 @@ export class QuizListComponent implements OnInit {
   }
 
   isAnySelected(): boolean {
-    return this.selection?.hasValue();
+    return this.selection.hasValue();
   }
 
   isItemSelected(item: Quiz): boolean {
@@ -95,14 +83,14 @@ export class QuizListComponent implements OnInit {
 
   deleteQuiz(quiz: Quiz): void {
     this.quizDataProvider.deleteQuiz(quiz.id).subscribe(
-      () => { this.loadData(); }
+      () => { this.refreshData(); }
     );
   }
 
   bulkDelete(): void {
     const ids = this.selection.selected.map(x => x.id);
     this.quizDataProvider.deleteQuizzes(ids).subscribe(
-      () => { this.loadData(); }
+      () => { this.refreshData(); }
     );
   }
 
@@ -119,7 +107,7 @@ export class QuizListComponent implements OnInit {
     this.selection.selected.forEach(x => this.onChangeQuizState(false, x));
   }
 
-  onEditClick(item: Quiz): void {
+  edit(item: Quiz): void {
     this.router.navigate(
       [item.id],
       {
@@ -129,7 +117,7 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  onPreviewClick(item: Quiz): void {
+  preview(item: Quiz): void {
     this.attemptService.tryAttempt(item.id);
   }
 
@@ -145,6 +133,18 @@ export class QuizListComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+  
+  private refreshData(): void {
+    this.quizDataProvider.getAllQuizzes().subscribe(
+      (response: ApiResponse<Quiz[]>) => { this.initDataSource(response.payload); }
+    );
+  }
+
+  private initDataSource(quizzes: Quiz[]): void {
+    this.dataSource = new MatTableDataSource<Quiz>(quizzes);
+    this.dataSource.sort = this.sort;
+    this.selection = new SelectionModel<Quiz>(true, []);
   }
 
 }
