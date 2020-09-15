@@ -70,6 +70,10 @@ quiz-list {
             min-height: 64px;
         }
 
+        .mat-row:hover {
+            background-color: red;
+        }
+
         .quiz-list-row {
             position: relative;
             cursor: pointer;

@@ -23,5 +23,9 @@
                 }
             }
         }
+
+        .mat-row:hover {
+            background-color: map-get($background, hover);
+        }
     }
 }
