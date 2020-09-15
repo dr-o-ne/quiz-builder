@@ -24,7 +24,10 @@
             <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for a quiz">
+                    <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterData" placeholder="Search for a quiz">
+                    <button mat-button *ngIf="!isEmptyFilter()" matSuffix mat-icon-button (click)="cleanFilter()">
+                        <mat-icon>close</mat-icon>
+                    </button>
                 </div>
             </div>
             <!-- / SEARCH -->

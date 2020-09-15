@@ -17,11 +17,12 @@ import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse
   encapsulation: ViewEncapsulation.None
 })
 export class QuizListComponent implements OnInit {
+
+  dataSource: MatTableDataSource<Quiz>;
+  selection: SelectionModel<Quiz>;
   displayedColumns: string[] = ['name', 'isEnabled', 'statistic', 'preview', 'copyLink', 'menu'];
   filterData: string;
   isMultiSelectMode = false;
-  dataSource: MatTableDataSource<Quiz>;
-  selection: SelectionModel<Quiz>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -93,14 +94,16 @@ export class QuizListComponent implements OnInit {
   }
 
   deleteQuiz(quiz: Quiz): void {
-    this.quizDataProvider.deleteQuiz(quiz.id)
-      .subscribe(() => { this.loadData(); });
+    this.quizDataProvider.deleteQuiz(quiz.id).subscribe(
+      () => { this.loadData(); }
+    );
   }
 
   bulkDelete(): void {
     const ids = this.selection.selected.map(x => x.id);
-    this.quizDataProvider.deleteQuizzes(ids)
-      .subscribe(() => { this.loadData(); });
+    this.quizDataProvider.deleteQuizzes(ids).subscribe(
+      () => { this.loadData(); }
+    );
   }
 
   onChangeQuizState(isEnabled: boolean, quiz: Quiz): void {
