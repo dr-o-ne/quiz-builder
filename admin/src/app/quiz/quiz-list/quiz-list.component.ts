@@ -35,7 +35,7 @@ export class QuizListComponent implements OnInit {
 
   loadData(): void {
     this.quizDataProvider.getAllQuizzes()
-      .subscribe((response: any) => { this.initDataSource(response.quizzes); });
+      .subscribe((response: any) => { this.initDataSource(response.payload); });
   }
 
   initDataSource(quizzes: Quiz[]): void {
