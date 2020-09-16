@@ -42,7 +42,7 @@
 
                 <mat-tab-group (selectedTabChange)="checkAddGroupButton()">
 
-                    <mat-tab label="Questions">
+                    <mat-tab label="Questions" [disabled]="!isEditMode()">
 
                         <div class="tab-content p-24" fusePerfectScrollbar>
 
@@ -64,7 +64,7 @@
 
                     </mat-tab>
 
-                    <mat-tab label="Appearance">
+                    <mat-tab label="Appearance" [disabled]="!isEditMode()">
 
                     </mat-tab>
 
