@@ -89,8 +89,8 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         this.quizDataProvider.updateQuiz(this.quiz).subscribe();
     }
 
-    addGroup(): void{
-        console.log(2);
+    addGroup(): void {
+        this.structureControl.addGroup();
     }
 
     checkAddGroupButton(): void {
