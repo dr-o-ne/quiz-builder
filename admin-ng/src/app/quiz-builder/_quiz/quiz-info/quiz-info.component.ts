@@ -9,6 +9,7 @@ import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.d
 import * as moment from 'moment';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.component';
+import { QuizInfoStructureTabComponent } from './structure/quiz-info-structure-tab.component';
 
 @Component({
     selector: 'app-quiz-info',
@@ -20,12 +21,13 @@ import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.compone
 export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
-
-    //@ViewChild(QuizInfoQuestionsTabComponent) questionsControl: QuizInfoQuestionsTabComponent;
+    @ViewChild(QuizInfoStructureTabComponent) structureControl: QuizInfoStructureTabComponent;
     @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
 
     quiz: Quiz;
     quizForm: FormGroup;
+
+    isAddGroupButtonVisible: boolean = true;
 
     constructor(
         private route: ActivatedRoute,
@@ -67,7 +69,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     onReturn = () => this.location.back();
 
     onSave(): void {
-        //this.questionsControl.saveFormData(this.quiz);
+        this.structureControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
 
         if (!this.isEditMode())
@@ -85,6 +87,14 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     updateQuiz(): void {
         this.quizDataProvider.updateQuiz(this.quiz).subscribe();
+    }
+
+    addGroup(): void{
+        console.log(2);
+    }
+
+    checkAddGroupButton(): void {
+        this.isAddGroupButtonVisible = this.tabGroup.selectedIndex === 0;
     }
 
 }

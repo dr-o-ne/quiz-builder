@@ -64,7 +64,7 @@ export class QuizListComponent implements OnInit {
   }
 
   isAnySelected(): boolean {
-    return this.selection.hasValue();
+    return this.selection?.hasValue();
   }
 
   isItemSelected(item: Quiz): boolean {

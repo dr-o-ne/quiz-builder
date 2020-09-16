@@ -12,9 +12,9 @@
 
             <!-- APP TITLE -->
 
-            <button mat-raised-button fxFlex="none"
-                [disabled]="!quizForm.valid"
-                (click)="onSave()">
+            <button mat-raised-button *ngIf="isAddGroupButtonVisible && isEditMode()"
+                fxFlex="none"
+                (click)="addGroup()">
                 <span>ADD GROUP</span>
             </button>
 
@@ -40,7 +40,7 @@
             <!-- CONTENT -->
             <div class="content">
 
-                <mat-tab-group>
+                <mat-tab-group (selectedTabChange)="checkAddGroupButton()">
 
                     <mat-tab label="Questions">
 
