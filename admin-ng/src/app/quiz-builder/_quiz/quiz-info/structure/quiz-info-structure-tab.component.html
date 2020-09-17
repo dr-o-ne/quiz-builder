@@ -1,10 +1,16 @@
 <div id="quiz-info-structure">
 
-    <div class="structure" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+    <div class="structure" 
+        fxLayout="column" 
+        fxLayoutAlign="center" 
+        [@animateStagger]="{value:'50'}" 
+        cdkDropList 
+        [cdkDropListData]="dataInfos" 
+        (cdkDropListDropped)="dropGroup($event)">
 
-        <div class="groups" *ngFor="let dataInfo of dataInfos" [@animate]="{value:'*',params:{y:'100%'}}">
+        <div *ngFor="let dataInfo of dataInfos" class="groups" [@animate]="{value:'*',params:{y:'100%'}}" cdkDrag>
 
-            <div class="group" fxLayout="column" fxFlex="1 1 auto">
+            <div class="group" fxLayout="column" fxFlex="1 1 auto" >
 
                 <div class="header accent" fxLayout="row" fxLayoutAlign="center center"                             >
 
@@ -18,6 +24,13 @@
                                 {{questionLangService.getQuestionTypeLangTerm(questionType)}}
                             </button>
                         </mat-menu>
+
+                        <button mat-icon-button matTooltip="Reorder Groups">
+                            <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+                        </button>
+
+                        <div fxFlex></div>
+
                     </div>
 
                     <div class="length" fxLayout="row" fxLayoutAlign="center center">
