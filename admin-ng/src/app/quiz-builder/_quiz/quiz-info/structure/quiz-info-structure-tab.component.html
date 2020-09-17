@@ -14,7 +14,7 @@
 
                 <div class="header accent" fxLayout="row" fxLayoutAlign="center center"                             >
 
-                    <div class="category" fxFlex>
+                    <div fxFlex>
                         <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu">
                             <span>ADD QUESTION</span>
                         </button>
@@ -31,22 +31,35 @@
 
                         <div fxFlex></div>
 
+                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>       
+                        <mat-menu #deleteGroupMenu="matMenu">
+                            <button mat-menu-item (click)="deleteGroup(dataInfo.id)" fxFlex="nogrow">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete Group</span>
+                            </button>
+                        </mat-menu>
+
                     </div>
 
                 </div>
 
-                <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
-                    [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"
+                <mat-table id={{dataInfo.id}} 
+                    [dataSource]="dataInfo.dataSource" 
+                    cdkDropList
+                    [cdkDropListData]="dataInfo.dataSource.data" 
+                    [cdkDropListConnectedTo]="getConnectedList()"
                     (cdkDropListDropped)="dropQuestion($event)">
             
                     <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
-                    <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{getDisplayName(element)}}</mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
+                        <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{getDisplayName(element)}}</mat-cell>
                     </ng-container>
             
                     <ng-container matColumnDef="type" >
-                    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-                    <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                        <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
                     </ng-container>
             
                     <ng-container matColumnDef="delete">
