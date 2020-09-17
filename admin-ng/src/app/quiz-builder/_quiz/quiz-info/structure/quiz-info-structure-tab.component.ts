@@ -36,7 +36,7 @@ export class QuizInfoStructureTabComponent implements OnInit {
     @Input() quiz: Quiz;
 
     questionType = QuestionType;
-    displayedColumns: string[] = ['name', 'type', 'delete'];
+    displayedColumns: string[] = ['name', 'type', 'menu'];
     dataInfos: DataInfo[] = new Array<DataInfo>();
     questionTypeKeys: number[];
 

@@ -49,7 +49,7 @@
 
                 </div>
 
-                <mat-table id={{dataInfo.id}} 
+                <mat-table id={{dataInfo.id}} class="question-list-table"
                     [dataSource]="dataInfo.dataSource" 
                     cdkDropList
                     [cdkDropListData]="dataInfo.dataSource.data" 
@@ -66,23 +66,23 @@
                         <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
                     </ng-container>
             
-                    <ng-container matColumnDef="delete">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="deleteQuestion(dataInfo.id, element.id)" fxFlex="nogrow">
-                            <mat-icon>delete</mat-icon>
-                            <span>Delete Question</span>
-                        </button>
-                        </mat-menu>
-                    </td>
+                    <ng-container matColumnDef="menu">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="deleteQuestion(dataInfo.id, element.id)" fxFlex="nogrow">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete Question</span>
+                            </button>
+                            </mat-menu>
+                        </mat-cell>
                     </ng-container>
             
                     <mat-header-row *matHeaderRowDef="displayedColumns" style="visibility: hidden"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag class="hover:bg-hover cursor-pointer"></mat-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="question-list-row hover:bg-hover cursor-pointer" cdkDrag></mat-row>
                 </mat-table>
 
             </div>
