@@ -2,9 +2,9 @@
 
     <div fxLayout="column" fxLayoutAlign="center">
 
-        <div class="courses" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+        <div class="groups" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
 
-            <div class="course" *ngFor="let dataInfo of dataInfos" [ngClass]="category" [@animate]="{value:'*',params:{y:'100%'}}">
+            <div class="group" *ngFor="let dataInfo of dataInfos" [ngClass]="category" [@animate]="{value:'*',params:{y:'100%'}}">
 
                 <div class="course-content" fxLayout="column" fxFlex="1 1 auto">
 

@@ -2,17 +2,12 @@
 
 #quiz-info-structure {
 
-    .courses {
+    .groups {
+        
         width: 100%;
         margin: 0 auto;
 
-        .no-courses {
-            font-size: 24px;
-            margin: 24px 0;
-            text-align: center;
-        }
-
-        .course {
+        .group {
             padding: 16px;
 
             &:hover {
