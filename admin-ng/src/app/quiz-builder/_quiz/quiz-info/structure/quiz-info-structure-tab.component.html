@@ -33,23 +33,40 @@
 
                     </div>
 
-                    <div class="length" fxLayout="row" fxLayoutAlign="center center">
-                        <mat-icon class="length-icon s-20">access_time</mat-icon>
-                        <div class="min">length min</div>
-                    </div>
-
                 </div>
 
-                <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
-                    <div class="h1">title</div>
-                    <div class="updated">updated</div>
-                </div>
-
-                <div class="footer" fxLayout="row" fxLayoutAlign="center center">
-                    <button mat-button color="accent">
-                        START
-                    </button>
-                </div>
+                <mat-table id={{dataInfo.id}} [dataSource]="dataInfo.dataSource" cdkDropList
+                    [cdkDropListData]="dataInfo.dataSource.data" [cdkDropListConnectedTo]="getConnectedList()"
+                    (cdkDropListDropped)="dropQuestion($event)">
+            
+                    <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
+                    <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{getDisplayName(element)}}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="type" >
+                    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                    <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{questionLangService.getQuestionTypeLangTerm(element.type)}}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="deleteQuestion(dataInfo.id, element.id)" fxFlex="nogrow">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete Question</span>
+                        </button>
+                        </mat-menu>
+                    </td>
+                    </ng-container>
+            
+                    <mat-header-row *matHeaderRowDef="displayedColumns" style="visibility: hidden"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag class="hover:bg-hover cursor-pointer"></mat-row>
+                </mat-table>
 
             </div>
 
