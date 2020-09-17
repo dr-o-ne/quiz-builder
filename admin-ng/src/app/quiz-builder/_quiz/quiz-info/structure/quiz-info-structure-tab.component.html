@@ -12,10 +12,10 @@
 
             <div class="group" fxLayout="column" fxFlex="1 1 auto" >
 
-                <div class="header accent" fxLayout="row" fxLayoutAlign="center center"                             >
+                <div class="header" fxLayout="row" fxLayoutAlign="center center"                             >
 
                     <div fxFlex>
-                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu">
+                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" class="accent">
                             <span>ADD QUESTION</span>
                         </button>
                         <mat-menu #addQuestionMenu="matMenu">
@@ -25,13 +25,17 @@
                             </button>
                         </mat-menu>
 
-                        <button mat-icon-button matTooltip="Reorder Groups">
+                        <button mat-icon-button matTooltip="Reorder Groups" color="accent">
                             <mat-icon cdkDragHandle>drag_indicator</mat-icon>
                         </button>
 
                         <div fxFlex></div>
 
-                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu">
+                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" color="accent">
+                            <mat-icon>settings</mat-icon>
+                        </button> 
+
+                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" color="accent">
                             <mat-icon>more_vert</mat-icon>
                         </button>       
                         <mat-menu #deleteGroupMenu="matMenu">
