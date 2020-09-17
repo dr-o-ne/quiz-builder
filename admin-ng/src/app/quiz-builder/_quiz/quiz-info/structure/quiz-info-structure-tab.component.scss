@@ -2,23 +2,23 @@
 
 #quiz-info-structure {
 
-    .groups {
+    .structure {
         
         width: 100%;
         margin: 0 auto;
 
-        .group {
+        .groups {
             padding: 16px;
 
             &:hover {
 
-                .course-content {
+                .group {
                     border: none;
                     @include mat-elevation(12);
                 }
             }
 
-            .course-content {
+            .group {
                 min-height: 240px;
                 border-radius: 4px;
                 overflow: hidden;

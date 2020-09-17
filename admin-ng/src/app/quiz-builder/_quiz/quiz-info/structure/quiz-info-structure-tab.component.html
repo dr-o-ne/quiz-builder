@@ -1,45 +1,41 @@
 <div id="quiz-info-structure">
 
-    <div fxLayout="column" fxLayoutAlign="center">
+    <div class="structure" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
 
-        <div class="groups" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+        <div class="groups" *ngFor="let dataInfo of dataInfos" [@animate]="{value:'*',params:{y:'100%'}}">
 
-            <div class="group" *ngFor="let dataInfo of dataInfos" [ngClass]="category" [@animate]="{value:'*',params:{y:'100%'}}">
+            <div class="group" fxLayout="column" fxFlex="1 1 auto">
 
-                <div class="course-content" fxLayout="column" fxFlex="1 1 auto">
+                <div class="header accent" fxLayout="row" fxLayoutAlign="center center"                             >
 
-                    <div class="header accent" fxLayout="row" fxLayoutAlign="center center"                             >
-
-                        <div class="category" fxFlex>
-                            <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu">
-                                <span>ADD QUESTION</span>
-                                </button>
-                                <mat-menu #addQuestionMenu="matMenu">
-                                <button mat-menu-item *ngFor="let questionType of questionTypeKeys; let i = index"
-                                    (click)="addQuestion(dataInfo.id, questionType)">
-                                    {{questionLangService.getQuestionTypeLangTerm(questionType)}}
-                                </button>
-                                </mat-menu>
-                        </div>
-
-                        <div class="length" fxLayout="row" fxLayoutAlign="center center">
-                            <mat-icon class="length-icon s-20">access_time</mat-icon>
-                            <div class="min">length min</div>
-                        </div>
-
-                    </div>
-
-                    <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
-                        <div class="h1">title</div>
-                        <div class="updated">updated</div>
-                    </div>
-
-                    <div class="footer" fxLayout="row" fxLayoutAlign="center center">
-                        <button mat-button color="accent">
-                            START
+                    <div class="category" fxFlex>
+                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu">
+                            <span>ADD QUESTION</span>
                         </button>
+                        <mat-menu #addQuestionMenu="matMenu">
+                            <button mat-menu-item *ngFor="let questionType of questionTypeKeys; let i = index"
+                                (click)="addQuestion(dataInfo.id, questionType)">
+                                {{questionLangService.getQuestionTypeLangTerm(questionType)}}
+                            </button>
+                        </mat-menu>
                     </div>
 
+                    <div class="length" fxLayout="row" fxLayoutAlign="center center">
+                        <mat-icon class="length-icon s-20">access_time</mat-icon>
+                        <div class="min">length min</div>
+                    </div>
+
+                </div>
+
+                <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
+                    <div class="h1">title</div>
+                    <div class="updated">updated</div>
+                </div>
+
+                <div class="footer" fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-button color="accent">
+                        START
+                    </button>
                 </div>
 
             </div>
