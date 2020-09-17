@@ -89,7 +89,7 @@ $typography: mat-typography-config(
 @import "src/app/quiz-builder/_pages/error/500/error-500.theme";
 @import "src/app/quiz-builder/_quiz/quiz-list/quiz-list.theme";
 
-@import "src/app/quiz-builder/_quiz/quiz-info/structure/academy.theme";
+@import "src/app/quiz-builder/_quiz/quiz-info/structure/quiz-info-structure.theme";
 
 // Define a mixin for easier access
 @mixin components-theme($theme) {
@@ -99,7 +99,6 @@ $typography: mat-typography-config(
     @include toolbar-theme($theme);
 
     // Pages
-    @include quiz-list-theme($theme);
     @include login-theme($theme);
     @include register-theme($theme);
     @include forgot-password-theme($theme);
@@ -107,8 +106,8 @@ $typography: mat-typography-config(
     @include error-404-theme($theme);
     @include error-500-theme($theme);
 
-    //
-    @include academy-theme($theme);
+    @include quiz-list-theme($theme);
+    @include quiz-info-structure($theme);
 
 }
 
@@ -126,7 +125,7 @@ $theme: mat-light-theme($default-primary-palette, $default-accent-palette, $defa
 
 // Add ".theme-default" class to the body to activate this theme.
 // Class name must start with "theme-" !!!
-body.theme-default {
+body.theme-default { 
 
     // Create an Angular Material theme from the $theme map
     @include angular-material-theme($theme);

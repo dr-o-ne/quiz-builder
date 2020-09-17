@@ -1,0 +1,10 @@
+@mixin quiz-info-structure($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    .mat-row:hover {
+        background-color: map-get($background, hover);
+    }
+
+}
