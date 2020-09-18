@@ -12,10 +12,10 @@
 
             <div class="group" fxLayout="column" fxFlex="1 1 auto" >
 
-                <div class="header accent" fxLayout="row" fxLayoutAlign="center center"                             >
+                <div class="header" fxLayout="row" fxLayoutAlign="center center">
 
                     <div fxFlex>
-                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" >
+                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" color="accent">
                             <span>ADD QUESTION</span>
                         </button>
                         <mat-menu #addQuestionMenu="matMenu">
@@ -25,17 +25,17 @@
                             </button>
                         </mat-menu>
 
-                        <button mat-icon-button matTooltip="Reorder Groups" color="primary">
+                        <button mat-icon-button matTooltip="Reorder Groups" color="accent">
                             <mat-icon cdkDragHandle>drag_indicator</mat-icon>
                         </button>
 
                         <div fxFlex></div>
 
-                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" color="primary">
+                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" color="accent" class="group-settings">
                             <mat-icon>settings</mat-icon>
                         </button> 
 
-                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" color="primary">
+                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" color="accent" class="group-menu">
                             <mat-icon>more_vert</mat-icon>
                         </button>       
                         <mat-menu #deleteGroupMenu="matMenu">
@@ -69,8 +69,8 @@
                     <ng-container matColumnDef="menu">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <button mat-icon-button [matMenuTriggerFor]="menu">
-                            <mat-icon>more_vert</mat-icon>
+                            <button mat-icon-button [matMenuTriggerFor]="menu" color="accent">
+                                <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="deleteQuestion(dataInfo.id, element.id)" fxFlex="nogrow">

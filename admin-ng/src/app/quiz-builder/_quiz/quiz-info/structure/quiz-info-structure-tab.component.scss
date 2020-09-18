@@ -10,14 +10,6 @@
         .groups {
             padding: 24px 16px;
 
-            &:hover {
-
-                .group {
-                    border: none;
-                    @include mat-elevation(12);
-                }
-            }
-
             .group {
                 min-height: 100px;
                 border-radius: 4px;
@@ -26,10 +18,19 @@
                 @include mat-elevation(1);
 
                 .header {
+                    background-color: rgb(245, 245, 245);
                     padding: 16px 24px;
                     height: 64px !important;
                     min-height: 64px !important;
                     max-height: 64px !important;
+
+                    .group-menu {
+                        flex: 0 1 70px;
+                    }
+
+                    .group-settings{
+                        flex: 0 1 80px;
+                    }
                 }
 
             }
@@ -40,7 +41,7 @@
         flex: 1 1 auto;
         border-bottom: 1px solid rgba(0, 0, 0, .12);
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch;      
     
         .mat-header-row {
             min-height: 16px;

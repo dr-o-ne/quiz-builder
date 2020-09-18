@@ -106,7 +106,7 @@
 
                 <ng-container matColumnDef="menu">
                     <mat-header-cell *matHeaderCellDef>
-                        <button mat-icon-button [matMenuTriggerFor]="bulkMenu" matTooltip="Bulk edit">
+                        <button mat-icon-button [matMenuTriggerFor]="bulkMenu" matTooltip="Bulk edit" color="accent">
                             <mat-icon>apps</mat-icon>
                         </button>
                         <mat-menu #bulkMenu="matMenu">
@@ -129,7 +129,7 @@
                         </mat-menu>
                     </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" color="accent">
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
