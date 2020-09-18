@@ -12,13 +12,18 @@
 
             <!-- APP TITLE -->
 
-            <button mat-raised-button *ngIf="isAddGroupButtonVisible && isEditMode()"
-                fxFlex="none"
+            <button mat-raised-button [style.visibility]="isAddGroupButtonVisible && isEditMode() ? 'visible': 'hidden'"
                 (click)="addGroup()">
                 <span>ADD GROUP</span>
             </button>
 
-            <div fxFlex></div>
+            <!-- APP TITLE -->
+            <div fxFlex fxLayoutAlign="center center" >
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    {{quizForm.get('settings.name').value}}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
 
             <button mat-raised-button fxFlex="nogrow"
                     [disabled]="!quizForm.valid"
