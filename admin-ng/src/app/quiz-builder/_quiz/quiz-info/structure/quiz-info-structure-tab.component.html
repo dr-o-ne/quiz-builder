@@ -3,12 +3,11 @@
     <div class="structure" 
         fxLayout="column" 
         fxLayoutAlign="center" 
-        [@animateStagger]="{value:'50'}" 
         cdkDropList 
         [cdkDropListData]="dataInfos" 
         (cdkDropListDropped)="dropGroup($event)">
 
-        <div *ngFor="let dataInfo of dataInfos" class="groups" [@animate]="{value:'*',params:{y:'100%'}}" cdkDrag>
+        <div *ngFor="let dataInfo of dataInfos" class="groups" cdkDrag>
 
             <div class="group" fxLayout="column" fxFlex="1 1 auto" >
 
@@ -55,6 +54,16 @@
                     </div>
 
                 </div>
+
+                <mat-expansion-panel 
+                    hideToggle 
+                    [disabled]="true"
+                    #mep="matExpansionPanel">
+            
+                    <app-group-info [viewModel]="dataInfo">
+                    </app-group-info>
+            
+                </mat-expansion-panel>
 
                 <mat-table id={{dataInfo.id}} class="question-list-table"
                     [dataSource]="dataInfo.dataSource" 
