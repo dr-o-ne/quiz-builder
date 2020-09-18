@@ -24,13 +24,19 @@
                     min-height: 64px !important;
                     max-height: 64px !important;
 
-                    .group-menu {
-                        flex: 0 1 70px;
+                    .group-dd {
+                        flex: 0 1 80px;
                     }
 
                     .group-settings{
                         flex: 0 1 80px;
                     }
+
+                    .group-menu {
+                        flex: 0 1 70px;
+                    }
+
+
                 }
 
             }
