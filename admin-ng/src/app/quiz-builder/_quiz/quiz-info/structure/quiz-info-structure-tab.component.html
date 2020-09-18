@@ -24,7 +24,7 @@
                             </button>
                         </mat-menu>
 
-                        <button mat-icon-button matTooltip="Reorder Groups" color="accent" class="group-dd">
+                        <button mat-icon-button matTooltip="Reorder Groups" class="group-dd">
                             <mat-icon cdkDragHandle>drag_indicator</mat-icon>
                         </button>
 
@@ -37,11 +37,11 @@
                             class="group-status">
                         </mat-slide-toggle>
 
-                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" color="accent" class="group-settings">
+                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" class="group-settings">
                             <mat-icon>settings</mat-icon>
                         </button> 
 
-                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" color="accent" class="group-menu">
+                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" class="group-menu">
                             <mat-icon>more_vert</mat-icon>
                         </button>       
                         <mat-menu #deleteGroupMenu="matMenu">

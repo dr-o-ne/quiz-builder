@@ -1,6 +1,6 @@
 <form [formGroup]="form">
 
-    <div fxFlex fxLayoutAlign="center center">
+    <div fxFlex fxLayoutAlign="none center">
 
         <mat-form-field appearance="outline" fxFlex="40%">
           <mat-label>Group Name</mat-label>
@@ -8,14 +8,12 @@
         </mat-form-field>
     
         <mat-checkbox fxFlexOffset="5" formControlName="selectAllQuestions">
-          Select All Questions
+            <span class="mat-body-1">Select All Questions</span>
         </mat-checkbox>
 
-        <div fxFlexOffset="2" *ngIf="!form.get('selectAllQuestions').value">
+        <div fxFlexOffset="2" *ngIf="!form.get('selectAllQuestions').value" fxLayoutAlign="none center">
 
-          <div>
-                Select
-          </div>
+          <span class="mat-body-1">Select</span>
 
           <mat-form-field appearance="outline" fxFlexOffset="2" fxFlex="20%">
             <mat-label>N</mat-label>
@@ -23,13 +21,13 @@
           </mat-form-field>
 
           <div fxFlex fxFlexOffset="2">
-                Questions
+            <span class="mat-body-1">Questions</span>
           </div>
 
         </div>
 
         <mat-checkbox fxFlexOffset="3" formControlName="randomizeQuestions" *ngIf="form.get('selectAllQuestions').value"> 
-          Randomize Questions
+            <span class="mat-body-1">Randomize Questions</span>
         </mat-checkbox>
 
     </div>
