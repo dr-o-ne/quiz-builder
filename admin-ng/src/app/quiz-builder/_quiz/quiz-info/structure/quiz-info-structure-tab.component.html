@@ -14,7 +14,7 @@
 
                 <div class="header" fxLayout="row" fxLayoutAlign="center center">
 
-                    <div fxFlex>
+                    <div fxFlex fxLayoutAlign="center center">
                         <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" color="accent">
                             <span>ADD QUESTION</span>
                         </button>
@@ -30,6 +30,13 @@
                         </button>
 
                         <div fxFlex></div>
+
+                        <mat-slide-toggle 
+                            [checked]="dataInfo.isEnabled" 
+                            (change)="onChangeGroupState($event.checked, dataInfo)" 
+                            matTooltip="Disable \ Enable Group"
+                            class="group-status">
+                        </mat-slide-toggle>
 
                         <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" color="accent" class="group-settings">
                             <mat-icon>settings</mat-icon>
