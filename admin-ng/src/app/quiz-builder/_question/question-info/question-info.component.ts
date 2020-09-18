@@ -79,8 +79,6 @@ export class QuestionInfoComponent implements OnInit {
         return option && option.enabled;
     }
 
-    onContentChanged(_): void {/*HACK*/ }
-
     navigateToParent(): void {
         this.router.navigate(
             ['../../'],

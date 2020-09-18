@@ -2,3 +2,11 @@
     border: none !important;
     box-shadow: none !important;
 }	
+
+.ck.ck-editor__editable_inline>:first-child{
+    margin-top: 4px;
+}
+
+.ck.ck-editor__editable_inline>:last-child {
+    margin-bottom: 4px;
+}
