@@ -25,17 +25,17 @@
                             </button>
                         </mat-menu>
 
-                        <button mat-icon-button matTooltip="Reorder Groups">
+                        <button mat-icon-button matTooltip="Reorder Groups" color="primary">
                             <mat-icon cdkDragHandle>drag_indicator</mat-icon>
                         </button>
 
                         <div fxFlex></div>
 
-                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings">
+                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" color="primary">
                             <mat-icon>settings</mat-icon>
                         </button> 
 
-                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu">
+                        <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" color="primary">
                             <mat-icon>more_vert</mat-icon>
                         </button>       
                         <mat-menu #deleteGroupMenu="matMenu">

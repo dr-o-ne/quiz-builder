@@ -8,7 +8,7 @@
         margin: 0 auto;
 
         .groups {
-            padding: 16px;
+            padding: 24px 16px;
 
             &:hover {
 
@@ -30,26 +30,7 @@
                     height: 64px !important;
                     min-height: 64px !important;
                     max-height: 64px !important;
-
-                    .category {
-                        text-transform: capitalize;
-                        text-align: left;
-                        font-weight: 600;
-                    }
-
-                    .length {
-
-                        .length-icon {
-                            margin-right: 8px;
-                        }
-
-                        .min {
-                            font-size: 16px;
-                        }
-                    }
                 }
-
-
 
             }
         }
@@ -62,7 +43,7 @@
         -webkit-overflow-scrolling: touch;
     
         .mat-header-row {
-            min-height: 64px;
+            min-height: 16px;
         }
     
         .question-list-row {
