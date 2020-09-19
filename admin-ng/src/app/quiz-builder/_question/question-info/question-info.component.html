@@ -54,7 +54,7 @@
                             <input matInput formControlName="name">
                         </mat-form-field>
 
-                        <app-rich-text-editor displayName="Question Text" textFormControlName="text">                                    
+                        <app-rich-text-editor displayName="Question Text" textFormControlName="text" [height]="200">                                    
                         </app-rich-text-editor>
 
                         <app-rich-text-editor displayName="Correct Feedback" textFormControlName="correctFeedback" *ngIf="isOptionEnabled('correctFeedback')">                                    

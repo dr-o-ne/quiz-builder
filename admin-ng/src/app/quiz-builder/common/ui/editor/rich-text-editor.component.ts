@@ -18,6 +18,7 @@ export class RichTextEditorComponent {
 
   @Input() textFormControlName: string;
   @Input() displayName: string;
+  @Input() height: number;
 
   public Editor = InlineEditor;
 

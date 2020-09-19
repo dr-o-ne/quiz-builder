@@ -10,3 +10,15 @@
 .ck.ck-editor__editable_inline>:last-child {
     margin-bottom: 4px;
 }
+
+.rte-height-100 .ck-editor__editable_inline {
+    min-height: 100px !important;
+}
+
+.rte-height-200 .ck-editor__editable_inline {
+    min-height: 200px !important;
+}
+
+.rte-height-300 .ck-editor__editable_inline {
+    min-height: 300px !important;
+}
