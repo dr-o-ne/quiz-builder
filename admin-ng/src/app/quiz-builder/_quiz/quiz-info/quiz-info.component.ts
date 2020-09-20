@@ -38,14 +38,6 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         private location: Location,
         private quizDataProvider: QuizDataProvider
     ) {
-        if (this.route.snapshot.data.quizResolver)
-            this.quiz = this.route.snapshot.data.quizResolver;
-        else
-            this.quiz = new Quiz();
-    }
-
-    ngOnInit(): void {
-
         this.fuseConfigService.config = {
             layout: {
                 navbar: {
@@ -53,6 +45,14 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                 },
             }
         };
+
+        if (this.route.snapshot.data.quizResolver)
+            this.quiz = this.route.snapshot.data.quizResolver;
+        else
+            this.quiz = new Quiz();
+    }
+
+    ngOnInit(): void {
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
