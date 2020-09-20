@@ -45,14 +45,6 @@ export class QuestionInfoComponent implements OnInit {
         public questionLangService: QuestionLangService) {
 
         this.emptyQuestionType = QuestionType.Empty;
-
-        this.fuseConfigService.config = {
-            layout: {
-                navbar: {
-                    hidden: false
-                },
-            }
-        };
     }
 
     ngOnInit(): void {

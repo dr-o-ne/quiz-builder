@@ -42,14 +42,6 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         private location: Location,
         private quizDataProvider: QuizDataProvider
     ) {
-        this.fuseConfigService.config = {
-            layout: {
-                navbar: {
-                    hidden: false
-                },
-            }
-        };
-
         if (this.route.snapshot.data.quizResolver)
             this.quiz = this.route.snapshot.data.quizResolver;
         else

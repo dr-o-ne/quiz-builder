@@ -19,7 +19,7 @@ export const fuseConfig: FuseConfig = {
             primaryBackground  : 'fuse-navy-700',
             secondaryBackground: 'fuse-navy-900',
             folded             : false,
-            hidden             : true,
+            hidden             : false,
             position           : 'left',
             variant            : 'vertical-style-2'
         },
@@ -30,7 +30,7 @@ export const fuseConfig: FuseConfig = {
             position             : 'above'
         },
         footer   : {
-            customBackgroundColor: true,
+            customBackgroundColor: false,
             background           : 'fuse-navy-900',
             hidden               : false,
             position             : 'below-fixed'
