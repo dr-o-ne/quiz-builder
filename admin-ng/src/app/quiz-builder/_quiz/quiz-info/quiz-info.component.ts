@@ -116,7 +116,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
         const createNavItem = {
             id: NavigationService.QUIZ_NAV_ROOT,
-            title: 'Quiz',
+            title: 'CREATE QUIZ',
             type: 'group',
             children: [
                 {
