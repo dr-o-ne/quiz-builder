@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.component';
 import { QuizInfoStructureTabComponent } from './structure/quiz-info-structure-tab.component';
+import { FuseConfigService } from '@fuse/services/config.service';
 
 @Component({
     selector: 'app-quiz-info',
@@ -30,6 +31,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     isAddGroupButtonVisible: boolean = true;
 
     constructor(
+        private fuseConfigService: FuseConfigService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
         private router: Router,
@@ -43,6 +45,15 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+
+        this.fuseConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: false
+                },
+            }
+        };
+
         this.quizForm = this.fb.group({
             settings: this.fb.group({
                 name: [this.quiz.name, Validators.required],
