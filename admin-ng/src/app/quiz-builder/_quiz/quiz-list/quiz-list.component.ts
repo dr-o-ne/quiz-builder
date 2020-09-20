@@ -8,6 +8,7 @@ import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.d
 import { Quiz } from 'app/quiz-builder/model/quiz';
 import { fuseAnimations } from '@fuse/animations';
 import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse';
+import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 
 @Component({
   selector: 'quiz-list',
@@ -27,11 +28,13 @@ export class QuizListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
+    private navService: NavigationService,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private attemptService: AttemptService,
     private quizDataProvider: QuizDataProvider
   ) {
+    this.createMenu();
   }
 
   ngOnInit(): void {
@@ -145,6 +148,10 @@ export class QuizListComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Quiz>(quizzes);
     this.dataSource.sort = this.sort;
     this.selection = new SelectionModel<Quiz>(true, []);
+  }
+
+  createMenu(): void {
+    this.navService.clean();
   }
 
 }

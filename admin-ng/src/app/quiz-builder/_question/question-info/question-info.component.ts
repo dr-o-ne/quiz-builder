@@ -11,6 +11,7 @@ import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 
 @Component({
     selector: 'app-question-info',
@@ -37,6 +38,7 @@ export class QuestionInfoComponent implements OnInit {
     constructor(
         private fuseConfigService: FuseConfigService,
         private fuseNavigationService: FuseNavigationService,
+        private navService: NavigationService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
@@ -137,10 +139,10 @@ export class QuestionInfoComponent implements OnInit {
 
     createMenu(): void {
 
-        this.removeMenu();
+        this.navService.clean();
 
         const createNavItem = {
-            id: 'QuestionRoot',
+            id: NavigationService.QUESTION_NAV_ROOT,
             title: 'More Options',
             type: 'group',
             children: [
@@ -179,11 +181,7 @@ export class QuestionInfoComponent implements OnInit {
             ]
         };
 
-        this.fuseNavigationService.addNavigationItem(createNavItem, 'start');
+        this.fuseNavigationService.addNavigationItem(createNavItem, 'end');
     }
 
-    removeMenu(): void {
-        this.fuseNavigationService.removeNavigationItem('QuizRoot');
-        this.fuseNavigationService.removeNavigationItem('QuestionRoot');
-    }
 }

@@ -12,6 +12,7 @@ import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.compone
 import { QuizInfoStructureTabComponent } from './structure/quiz-info-structure-tab.component';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 
 @Component({
     selector: 'app-quiz-info',
@@ -36,6 +37,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
     constructor(
         private fuseConfigService: FuseConfigService,
         private fuseNavigationService: FuseNavigationService,
+        private navService: NavigationService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
         private router: Router,
@@ -110,11 +112,11 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     createMenu(): void {
 
-        this.removeMenu();
+        this.navService.clean();
 
         const createNavItem = {
-            id: 'QuizRoot',
-            title: '',
+            id: NavigationService.QUIZ_NAV_ROOT,
+            title: 'Quiz',
             type: 'group',
             children: [
                 {
@@ -147,12 +149,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
             ]
         };
 
-        this.fuseNavigationService.addNavigationItem(createNavItem, 'start');
-    }
-
-    removeMenu(): void {
-        this.fuseNavigationService.removeNavigationItem('QuizRoot');
-        this.fuseNavigationService.removeNavigationItem('QuestionRoot');
+        this.fuseNavigationService.addNavigationItem(createNavItem, 'end');
     }
 
 }
