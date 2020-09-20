@@ -11,6 +11,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.component';
 import { QuizInfoStructureTabComponent } from './structure/quiz-info-structure-tab.component';
 import { FuseConfigService } from '@fuse/services/config.service';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector: 'app-quiz-info',
@@ -30,8 +31,11 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     isAddGroupButtonVisible: boolean = true;
 
+    selectedIndex: number;
+
     constructor(
         private fuseConfigService: FuseConfigService,
+        private fuseNavigationService: FuseNavigationService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
         private router: Router,
@@ -50,9 +54,13 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
             this.quiz = this.route.snapshot.data.quizResolver;
         else
             this.quiz = new Quiz();
+
+        this.selectedIndex = 0;
     }
 
     ngOnInit(): void {
+
+        this.createMenu();
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
@@ -106,6 +114,52 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     checkAddGroupButton(): void {
         this.isAddGroupButtonVisible = this.tabGroup.selectedIndex === 0;
+    }
+
+    createMenu(): void {
+
+        this.removeMenu();
+
+        const createNavItem = {
+            id: 'QuizRoot',
+            title: '',
+            type: 'group',
+            children: [
+                {
+                    id: 'questions',
+                    title: 'Questions',
+                    type: 'item',
+                    icon: 'playlist_add',
+                    function: () => {
+                        this.selectedIndex = 0;
+                    }
+                },
+                {
+                    id: 'settings',
+                    title: 'Settings',
+                    type: 'item',
+                    icon: 'settings',
+                    function: () => {
+                        this.selectedIndex = 1;
+                    }
+                },
+                {
+                    id: 'appearance',
+                    title: 'Appearance',
+                    type: 'item',
+                    icon: 'color_lens',
+                    function: () => {
+                        this.selectedIndex = 2;
+                    }
+                },
+            ]
+        };
+
+        this.fuseNavigationService.addNavigationItem(createNavItem, 'start');
+    }
+
+    removeMenu(): void {
+        this.fuseNavigationService.removeNavigationItem('QuizRoot');
     }
 
 }
