@@ -9,6 +9,8 @@ import { QuestionLangService } from 'app/quiz-builder/services/lang/question.lan
 import { QuestionDataProvider } from 'app/quiz-builder/services/dataProviders/question.dataProvider';
 import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { fuseAnimations } from '@fuse/animations';
+import { FuseConfigService } from '@fuse/services/config.service';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector: 'app-question-info',
@@ -33,6 +35,8 @@ export class QuestionInfoComponent implements OnInit {
     options: OptionItem[];
 
     constructor(
+        private fuseConfigService: FuseConfigService,
+        private fuseNavigationService: FuseNavigationService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
@@ -41,6 +45,14 @@ export class QuestionInfoComponent implements OnInit {
         public questionLangService: QuestionLangService) {
 
         this.emptyQuestionType = QuestionType.Empty;
+
+        this.fuseConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: false
+                },
+            }
+        };
     }
 
     ngOnInit(): void {
@@ -70,6 +82,8 @@ export class QuestionInfoComponent implements OnInit {
         })
 
         this.options = this.optionItemService.getQuestionTypeOptionItems(this.question.type);
+
+        this.createMenu();
     }
 
     getQuestionOptions = () => this.options.filter(x => x.enabled);
@@ -98,10 +112,6 @@ export class QuestionInfoComponent implements OnInit {
         if (!this.questionForm.valid) {
             return;
         }
-        //if (!this.choicesForm.isValid) {
-        //    return;
-        //}
-
 
         this.choicesForm.save();
 
@@ -131,5 +141,57 @@ export class QuestionInfoComponent implements OnInit {
     onOptionItemClick(event: MouseEvent, option: OptionItem): void {
         option.enabled = !option.enabled;
         event.stopPropagation();
+    }
+
+    createMenu(): void {
+
+        this.removeMenu();
+
+        const createNavItem = {
+            id: 'QuestionRoot',
+            title: 'More Options',
+            type: 'group',
+            children: [
+                {
+                    id: 'name',
+                    title: 'Name',
+                    type: 'item',
+                    icon: 'blank',
+                    function: () => {
+                    }
+                },
+                {
+                    id: 'correctFeedback',
+                    title: 'Correct Feedback',
+                    type: 'item',
+                    icon: 'blank',
+                    function: () => {
+                    }
+                },
+                {
+                    id: 'incorrectFeedback',
+                    title: 'Incorrect Feedback',
+                    type: 'item',
+                    icon: 'blank',
+                    function: () => {
+                    }
+                },
+                {
+                    id: 'displayType',
+                    title: 'Display Type',
+                    type: 'item',
+                    icon: 'blank',
+                    function: () => {
+                    }
+                },
+            ]
+        };
+
+        this.fuseNavigationService.addNavigationItem(createNavItem, 'start');
+    }
+
+    removeMenu(): void {
+        this.fuseNavigationService.removeNavigationItem('QuizRoot');
+        this.fuseNavigationService.removeNavigationItem('QuestionRoot');
     }
 }

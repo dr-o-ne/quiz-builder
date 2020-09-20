@@ -160,6 +160,7 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     removeMenu(): void {
         this.fuseNavigationService.removeNavigationItem('QuizRoot');
+        this.fuseNavigationService.removeNavigationItem('QuestionRoot');
     }
 
 }
