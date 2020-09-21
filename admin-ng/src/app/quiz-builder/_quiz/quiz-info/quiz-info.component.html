@@ -10,19 +10,21 @@
         <!-- HEADER -->
         <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
 
-            <button mat-raised-button [routerLink]="'/quizzes'">
-                <span>RETURN</span>
+            <button mat-icon-button [routerLink]="'/quizzes'">
+                <mat-icon>arrow_back</mat-icon>
             </button>
 
             <!-- APP TITLE -->
-            <div fxFlex fxLayoutAlign="center center">
+            <div fxFlex fxLayoutAlign="center center" fxFlex="initial" fxFlexOffset="1">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     {{quizForm.get('settings.name').value}}
                 </span>
             </div>
             <!-- / APP TITLE -->
 
-            <button mat-raised-button
+            <div fxFlex></div>
+
+            <button mat-raised-button fxFlex="nogrow"
                     [disabled]="!quizForm.valid"
                     (click)="onSave()">
                 <span>SAVE</span>
