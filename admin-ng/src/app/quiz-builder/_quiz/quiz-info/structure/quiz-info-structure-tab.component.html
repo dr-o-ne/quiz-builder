@@ -1,5 +1,14 @@
 <div id="quiz-info-structure">
 
+    <div *ngIf="dataInfos.length === 0" fxLayout="column" fxLayoutAlign="center center" class="pt-256">
+        <mat-icon class="s-128 mb-16 select-message-icon hint-text">
+            add
+        </mat-icon>
+        <span class="select-message-text hint-text mat-h1">
+            <span>Quiz is empty</span>
+        </span>
+    </div>
+
     <div class="structure" 
         fxLayout="column" 
         fxLayoutAlign="center" 
