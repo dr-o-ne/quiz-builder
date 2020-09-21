@@ -125,6 +125,11 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                     type: 'item',
                     icon: 'playlist_add',
                     function: () => {
+
+                        this.fuseNavigationService.updateNavigationItem('questions', { classes: 'active accent' });
+                        this.fuseNavigationService.updateNavigationItem('settings', { classes: '' });
+                        this.fuseNavigationService.updateNavigationItem('appearance', { classes: '' });
+
                         this.selectedIndex = 0;
                     }
                 },
@@ -134,6 +139,11 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                     type: 'item',
                     icon: 'settings',
                     function: () => {
+
+                        this.fuseNavigationService.updateNavigationItem('questions', { classes: '' });
+                        this.fuseNavigationService.updateNavigationItem('settings', { classes: 'active accent' });
+                        this.fuseNavigationService.updateNavigationItem('appearance', { classes: '' });
+
                         this.selectedIndex = 1;
                     }
                 },
@@ -143,6 +153,11 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
                     type: 'item',
                     icon: 'color_lens',
                     function: () => {
+
+                        this.fuseNavigationService.updateNavigationItem('questions', { classes: '' });
+                        this.fuseNavigationService.updateNavigationItem('settings', { classes: '' });
+                        this.fuseNavigationService.updateNavigationItem('appearance', { classes: 'active accent' });
+                        
                         this.selectedIndex = 2;
                     }
                 },
