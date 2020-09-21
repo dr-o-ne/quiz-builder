@@ -9,7 +9,6 @@ import * as moment from 'moment';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.component';
 import { QuizInfoStructureTabComponent } from './structure/quiz-info-structure-tab.component';
-import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 
@@ -27,11 +26,9 @@ export class QuizInfoComponent implements OnInit {
 
     quiz: Quiz;
     quizForm: FormGroup;
-
     selectedIndex: number;
 
     constructor(
-        private fuseConfigService: FuseConfigService,
         private fuseNavigationService: FuseNavigationService,
         private navService: NavigationService,
         private route: ActivatedRoute,
@@ -50,7 +47,8 @@ export class QuizInfoComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.createMenu();
+        this.createMenuItems();
+        this.selectMenuItem(0);
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
@@ -97,7 +95,24 @@ export class QuizInfoComponent implements OnInit {
         this.structureControl.addGroup();
     }
 
-    createMenu(): void {
+    selectMenuItem(index: number) {
+
+        this.selectedIndex = index;
+
+        const tabs = [
+            { index: 0, id: "questions" },
+            { index: 1, id: "settings" },
+            { index: 2, id: "appearance" }
+        ];
+
+        tabs.forEach(x => {
+            const classes = x.index === index ? 'active accent' : '';
+            this.fuseNavigationService.updateNavigationItem(x.id, { classes: classes });
+        });
+
+    }
+
+    createMenuItems(): void {
 
         this.navService.clean();
 
@@ -112,12 +127,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'playlist_add',
                     function: () => {
-
-                        this.fuseNavigationService.updateNavigationItem('questions', { classes: 'active accent' });
-                        this.fuseNavigationService.updateNavigationItem('settings', { classes: '' });
-                        this.fuseNavigationService.updateNavigationItem('appearance', { classes: '' });
-
-                        this.selectedIndex = 0;
+                        this.selectMenuItem(0)
                     }
                 },
                 {
@@ -126,12 +136,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'settings',
                     function: () => {
-
-                        this.fuseNavigationService.updateNavigationItem('questions', { classes: '' });
-                        this.fuseNavigationService.updateNavigationItem('settings', { classes: 'active accent' });
-                        this.fuseNavigationService.updateNavigationItem('appearance', { classes: '' });
-
-                        this.selectedIndex = 1;
+                        this.selectMenuItem(1)
                     }
                 },
                 {
@@ -140,12 +145,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'color_lens',
                     function: () => {
-
-                        this.fuseNavigationService.updateNavigationItem('questions', { classes: '' });
-                        this.fuseNavigationService.updateNavigationItem('settings', { classes: '' });
-                        this.fuseNavigationService.updateNavigationItem('appearance', { classes: 'active accent' });
-                        
-                        this.selectedIndex = 2;
+                        this.selectMenuItem(2)
                     }
                 },
             ]
