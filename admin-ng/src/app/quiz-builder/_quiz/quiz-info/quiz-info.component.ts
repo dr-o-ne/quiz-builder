@@ -1,7 +1,6 @@
-import { Component, ViewChild, AfterViewInit, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatTabGroup } from '@angular/material/tabs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Quiz } from 'app/quiz-builder/model/quiz';
 import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse';
@@ -21,16 +20,13 @@ import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/Navigation
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class QuizInfoComponent implements OnInit, AfterViewInit {
+export class QuizInfoComponent implements OnInit {
 
-    @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
     @ViewChild(QuizInfoStructureTabComponent) structureControl: QuizInfoStructureTabComponent;
     @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
 
     quiz: Quiz;
     quizForm: FormGroup;
-
-    isAddGroupButtonVisible: boolean = true;
 
     selectedIndex: number;
 
@@ -72,11 +68,6 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
         })
     }
 
-    ngAfterViewInit(): void {
-        if (!this.isEditMode())
-            this.tabGroup.selectedIndex = 1;
-    }
-
     isEditMode = () => this.quiz.id ? true : false;
 
     onReturn = () => this.location.back();
@@ -104,10 +95,6 @@ export class QuizInfoComponent implements OnInit, AfterViewInit {
 
     addGroup(): void {
         this.structureControl.addGroup();
-    }
-
-    checkAddGroupButton(): void {
-        this.isAddGroupButtonVisible = this.tabGroup.selectedIndex === 0;
     }
 
     createMenu(): void {

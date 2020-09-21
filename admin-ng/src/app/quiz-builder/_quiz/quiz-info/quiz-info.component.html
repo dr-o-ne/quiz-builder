@@ -11,13 +11,6 @@
         <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
 
             <!-- APP TITLE -->
-
-            <button mat-raised-button [style.visibility]="isAddGroupButtonVisible && isEditMode() ? 'visible': 'hidden'"
-                (click)="addGroup()">
-                <span>ADD GROUP</span>
-            </button>
-
-            <!-- APP TITLE -->
             <div fxFlex fxLayoutAlign="center center" >
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     {{quizForm.get('settings.name').value}}
@@ -38,6 +31,15 @@
 
         </div>
         <!-- / HEADER -->
+
+        <button mat-raised-button
+            [style.visibility]="selectedIndex === 0 && isEditMode() ? 'visible': 'hidden'"
+            (click)="addGroup()" 
+            class="addButton" 
+            color="accent">
+            <mat-icon>add</mat-icon>
+            <span>&nbsp;&nbsp;&nbsp;ADD GROUP&nbsp;&nbsp;</span>
+        </button>
 
         <!-- CONTENT CARD -->
         <div class="content-card qb-container">
