@@ -4,6 +4,12 @@ quiz-list {
 
     #quiz-list {
 
+        .addButton{
+            position: absolute;
+            left: 64px;
+            top: 236px;
+        }
+
         .top-bg {
 
             @include media-breakpoint('lt-md') {
@@ -106,3 +112,4 @@ quiz-list {
         }
     }
 }
+
