@@ -24,7 +24,8 @@
 
                     <div fxFlex fxLayoutAlign="center center">
                         <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" color="accent">
-                            <span>ADD QUESTION</span>
+                            <mat-icon>add</mat-icon>
+                            <span>&nbsp;&nbsp;&nbsp;ADD QUESTION&nbsp;&nbsp;</span>
                         </button>
                         <mat-menu #addQuestionMenu="matMenu">
                             <button mat-menu-item *ngFor="let questionType of questionTypeKeys; let i = index"
