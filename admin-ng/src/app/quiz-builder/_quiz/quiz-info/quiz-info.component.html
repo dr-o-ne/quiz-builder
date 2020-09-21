@@ -48,21 +48,21 @@
             <!-- CONTENT -->
             <div class="content">
 
-                <div class="p-24" fusePerfectScrollbar *ngIf="selectedIndex === 0">
+                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 0 ? 'block': 'none'">
 
                     <app-quiz-info-structure-tab [quiz]="quiz">
                     </app-quiz-info-structure-tab>
                     
                 </div>
 
-                <div class="p-24" fusePerfectScrollbar *ngIf="selectedIndex === 1">
+                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 1 ? 'block': 'none'">
 
                     <app-quiz-info-settings [form]="quizForm.get('settings')" [isEditMode]="isEditMode()">
                     </app-quiz-info-settings>
                     
                 </div>
 
-                <div class="p-24" fusePerfectScrollbar *ngIf="selectedIndex === 2">
+                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 2 ? 'block': 'none'">
 
                     KURA!
                     
