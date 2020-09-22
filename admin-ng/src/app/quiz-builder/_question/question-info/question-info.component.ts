@@ -9,7 +9,6 @@ import { QuestionLangService } from 'app/quiz-builder/services/lang/question.lan
 import { QuestionDataProvider } from 'app/quiz-builder/services/dataProviders/question.dataProvider';
 import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 
@@ -36,7 +35,6 @@ export class QuestionInfoComponent implements OnInit {
     options: OptionItem[];
 
     constructor(
-        private fuseConfigService: FuseConfigService,
         private fuseNavigationService: FuseNavigationService,
         private navService: NavigationService,
         private router: Router,

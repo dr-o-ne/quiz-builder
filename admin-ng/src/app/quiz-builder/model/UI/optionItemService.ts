@@ -5,7 +5,6 @@ import { QuestionType } from '../question';
 @Injectable({
     providedIn: 'root'
 })
-
 export class OptionItemsService {
 
     getQuestionTypeOptionItems(questionType: QuestionType) {
