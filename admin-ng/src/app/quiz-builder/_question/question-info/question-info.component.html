@@ -49,7 +49,11 @@
 
                     <form [formGroup]="questionForm">
 
-                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" *ngIf="isOptionEnabled('name')">
+                        <mat-form-field *ngIf="isOptionEnabled(optionItemsService.OPTION_NAME)"
+                            appearance="outline" 
+                            floatLabel="always" 
+                            class="w-100-p" >
+
                             <mat-label>Question Name</mat-label>
                             <input matInput formControlName="name">
                         </mat-form-field>
@@ -57,13 +61,18 @@
                         <app-rich-text-editor displayName="Question Text" textFormControlName="text" [height]="200">                                    
                         </app-rich-text-editor>
 
-                        <app-rich-text-editor displayName="Correct Feedback" textFormControlName="correctFeedback" *ngIf="isOptionEnabled('correctFeedback')">                                    
+                        <app-rich-text-editor *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK)"
+                            displayName="Correct Feedback" 
+                            textFormControlName="correctFeedback">                                    
                         </app-rich-text-editor>
 
-                        <app-rich-text-editor displayName="Incorrect Feedback" textFormControlName="incorrectFeedback" *ngIf="isOptionEnabled('incorrectFeedback')">                                    
+                        <app-rich-text-editor *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK)"
+                            displayName="Incorrect Feedback" 
+                            textFormControlName="incorrectFeedback">                                    
                         </app-rich-text-editor>
 
-                        <app-question-display-type [question]="question" *ngIf="isOptionEnabled('questionDisplayType')">
+                        <app-question-display-type *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_DISPLAY_TYPE)"
+                            [question]="question">
                         </app-question-display-type>
 
                         <div fxLayout *ngIf="question.type != emptyQuestionType" >

@@ -24,6 +24,8 @@ export class QuestionInfoComponent implements OnInit {
     @ViewChild(ChoiceDynamicComponent)
     private choicesForm!: ChoiceDynamicComponent;
 
+    optionItemsService = OptionItemsService;
+
     question: Question;
     questionForm: FormGroup;
 
