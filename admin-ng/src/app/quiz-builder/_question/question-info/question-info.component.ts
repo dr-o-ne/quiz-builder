@@ -11,6 +11,7 @@ import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
+import { empty } from 'rxjs';
 
 @Component({
     selector: 'app-question-info',
@@ -137,6 +138,13 @@ export class QuestionInfoComponent implements OnInit {
         event.stopPropagation();
     }
 
+    checkOption(menuItemId: string, optionId: string){
+        const option = this.options.find(x => x.name === optionId);
+        option.enabled = !option.enabled;
+        const icon = option.enabled ? 'done' : 'empty';
+        this.fuseNavigationService.updateNavigationItem(menuItemId, { icon: icon });
+    }
+
     createMenu(): void {
 
         this.navService.clean();
@@ -152,6 +160,7 @@ export class QuestionInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'blank',
                     function: () => {
+                        this.checkOption('name', OptionItemsService.OPTION_NAME);
                     }
                 },
                 {
@@ -160,6 +169,7 @@ export class QuestionInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'blank',
                     function: () => {
+                        this.checkOption('correctFeedback', OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK);
                     }
                 },
                 {
@@ -168,6 +178,7 @@ export class QuestionInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'blank',
                     function: () => {
+                        this.checkOption('incorrectFeedback', OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK);
                     }
                 },
                 {
@@ -176,6 +187,7 @@ export class QuestionInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'blank',
                     function: () => {
+                        this.checkOption('displayType', OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE);
                     }
                 },
             ]

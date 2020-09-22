@@ -9,16 +9,6 @@
 
           <!-- HEADER -->
           <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
-
-            <button mat-raised-button [matMenuTriggerFor]="menu" *ngIf="options.length > 0">
-                <span>OPTIONS</span>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item *ngFor="let option of options" (click)="onOptionItemClick($event, option)">
-                    <mat-icon *ngIf="option.enabled">done</mat-icon>
-                    <span>{{option.displayName}}</span>
-                </button>
-            </mat-menu>
   
             <!-- APP TITLE -->
             <div fxFlex fxFlexOffset="40">
