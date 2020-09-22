@@ -31,15 +31,29 @@
           </div>
           <!-- / HEADER -->
   
+
           <!-- CONTENT CARD -->
-          <div class="content-card qb-container">
-  
+          <div class="content-card qb-container"> 
+
               <!-- CONTENT -->
-              <div class="content">
-  
-                <div class="tab-content p-24" fusePerfectScrollbar>
+              <div class="content" fxLayout="row">
+
+                <div id="leftPanel" class="p-24" fusePerfectScrollbar fxFlex="60%">
 
                     <form [formGroup]="questionForm">
+
+                        <app-rich-text-editor displayName="Question Text" textFormControlName="text" [height]="200">                                    
+                        </app-rich-text-editor>
+
+                        <app-choice-dynamic [question]="question"></app-choice-dynamic>
+
+                    </form>
+
+                </div>
+
+                <div id="rightPanel" class="p-24" fusePerfectScrollbar fxFlex="40%">
+
+                    <form [formGroup]="questionForm" fxFlex fxLayout="column">
 
                         <mat-form-field *ngIf="isOptionEnabled(optionItemsService.OPTION_NAME)"
                             appearance="outline" 
@@ -50,8 +64,15 @@
                             <input matInput formControlName="name">
                         </mat-form-field>
 
-                        <app-rich-text-editor displayName="Question Text" textFormControlName="text" [height]="200">                                    
-                        </app-rich-text-editor>
+                        <mat-form-field fxFlex="9.5" appearance="outline" *ngIf="question.type != emptyQuestionType">
+                            <mat-label>Points</mat-label>
+                            <input matInput type="number" formControlName="points">
+                        </mat-form-field>
+        
+                        <mat-checkbox class="padding-bottom-fix" *ngIf="question.type != emptyQuestionType"
+                            formControlName="isRequired">
+                            Is Required
+                        </mat-checkbox>
 
                         <app-rich-text-editor *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK)"
                             displayName="Correct Feedback" 
@@ -67,31 +88,19 @@
                             [question]="question">
                         </app-question-display-type>
 
-                        <div fxLayout *ngIf="question.type != emptyQuestionType" >
-
-                            <mat-form-field fxFlex="9.5" appearance="outline">
-                                <mat-label>Points</mat-label>
-                                <input matInput type="number" formControlName="points">
-                            </mat-form-field>
-            
-                            <mat-checkbox class="padding-bottom-fix"
-                                fxFlexOffset="2" 
-                                fxFlexAlign="center" 
-                                formControlName="isRequired">
-                                Is Required
-                            </mat-checkbox>
-            
-                        </div>
-                        <app-choice-dynamic [question]="question"></app-choice-dynamic>
                     </form>
 
                 </div>
-  
+
+
               </div>
               <!-- / CONTENT -->
+
   
           </div>
           <!-- / CONTENT CARD -->
+
+
   
       </div>
       <!-- / CENTER -->

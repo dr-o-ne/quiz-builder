@@ -1,6 +1,4 @@
-<div fxLayout>
-
-    <mat-form-field appearance="outline" fxFlex="18">
+    <mat-form-field appearance="outline">
       <mat-label>Display Type</mat-label>
       <mat-select [(ngModel)]="question.settings.choicesDisplayType">
         <mat-option *ngFor="let item of choicesDisplayTypes | enumToArray" [value]="item.index">
@@ -9,7 +7,7 @@
       </mat-select>
     </mat-form-field>
   
-    <mat-form-field appearance="outline" fxFlexOffset="2" fxFlex="18" *ngIf="question.settings.choicesDisplayType != choicesDisplayTypes.Dropdown">
+    <mat-form-field appearance="outline" *ngIf="question.settings.choicesDisplayType != choicesDisplayTypes.Dropdown">
       <mat-label>Enumeration Type</mat-label>
       <mat-select [(ngModel)]="question.settings.choicesEnumerationType">
         <mat-option *ngFor="let item of choicesEnumerationTypes | enumToArray" [value]="item.index">
@@ -17,5 +15,3 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-</div>
