@@ -9,21 +9,23 @@
 
           <!-- HEADER -->
           <div class="header accent qb-container" fxLayout="row" fxLayoutAlign="none center">
+
+            <button mat-icon-button [routerLink]="'/quizzes'">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
   
             <!-- APP TITLE -->
-            <div fxFlex fxFlexOffset="40">
+            <div fxFlex fxLayoutAlign="center center" fxFlex="initial" fxFlexOffset="1">
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     {{questionLangService.getQuestionTypeLangTerm(question.type)}}
                 </span>
             </div>
             <!-- / APP TITLE -->
+
+            <div fxFlex></div>
   
             <button mat-raised-button fxFlex="nogrow" (click)="onSave()" [disabled]="!questionForm.valid">
                 <span>SAVE</span>
-            </button>
-
-            <button mat-raised-button fxFlexOffset="2" [routerLink]="'/quizzes'">
-                <span>RETURN</span>
             </button>
 
           </div>
