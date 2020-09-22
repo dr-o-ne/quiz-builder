@@ -52,6 +52,13 @@
                        [@animateStagger]="{value:'50'}"
                        fusePerfectScrollbar>
 
+                <ng-container matColumnDef="empty" *ngIf="!isMultiSelectMode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>                        
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                    </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="select" *ngIf="isMultiSelectMode">
                     <mat-header-cell *matHeaderCellDef>
                         <mat-checkbox
