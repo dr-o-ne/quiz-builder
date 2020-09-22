@@ -151,7 +151,7 @@ export class QuestionInfoComponent implements OnInit {
 
         const createNavItem = {
             id: NavigationService.QUESTION_NAV_ROOT,
-            title: 'More Options',
+            title: 'Show More Options',
             type: 'group',
             children: [
                 {
