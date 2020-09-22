@@ -21,7 +21,7 @@ export class QuizListComponent implements OnInit {
 
   dataSource: MatTableDataSource<Quiz>;
   selection: SelectionModel<Quiz>;
-  displayedColumns: string[] = ['name', 'isEnabled', 'statistic', 'preview', 'copyLink', 'menu'];
+  displayedColumns: string[] = ['empty', 'name', 'isEnabled', 'statistic', 'preview', 'copyLink', 'menu'];
   filterData: string;
   isMultiSelectMode = false;
 
@@ -55,9 +55,9 @@ export class QuizListComponent implements OnInit {
   }
 
   clickMultiSelection(): void {
-    this.isMultiSelectMode
-      ? this.displayedColumns.shift()
-      : this.displayedColumns.unshift('select');
+
+    this.displayedColumns.shift()
+    this.displayedColumns.unshift(this.isMultiSelectMode ? 'empty' : 'select');
 
     this.isMultiSelectMode = !this.isMultiSelectMode;
   }
@@ -137,7 +137,7 @@ export class QuizListComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(selBox);
   }
-  
+
   private refreshData(): void {
     this.quizDataProvider.getAllQuizzes().subscribe(
       (response: ApiResponse<Quiz[]>) => { this.initDataSource(response.payload); }

@@ -87,8 +87,12 @@ quiz-list {
             align-items: center;
         }
 
+        .mat-column-empty {
+            flex: 0 1 60px;
+        }
+
         .mat-column-select {
-            flex: 0 1 80px;
+            flex: 0 1 60px;
         }
 
         .mat-column-isEnabled {
