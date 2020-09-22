@@ -1,31 +1,12 @@
+@import "src/@fuse/scss/fuse";
+
 #question {
 
     .content {
 
         #leftPanel {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            padding: 0;
-            border-right: 1px solid;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .mat-tab-group,
-        .mat-tab-body-wrapper,
-        .tab-content{
-            flex: 1 1 auto;
-            max-width: 100%;
-        }
-
-        .mat-tab-body-content {
-            display: flex;
-        }
-
-        .mat-tab-label {
-            height: 64px;
+            border-right-width: 1px;
+            border-right-style: solid;
         }
 
         // Temporary prefix alignment fix

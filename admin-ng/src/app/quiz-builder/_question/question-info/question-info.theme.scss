@@ -1,0 +1,14 @@
+@mixin question-info-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    app-question-info {
+
+        #leftPanel{
+            border-right-color: map-get($foreground, divider);
+        }
+
+    }
+
+}

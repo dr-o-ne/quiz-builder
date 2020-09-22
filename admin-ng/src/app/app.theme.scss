@@ -88,8 +88,9 @@ $typography: mat-typography-config(
 @import "src/app/quiz-builder/_pages/error/404/error-404.theme";
 @import "src/app/quiz-builder/_pages/error/500/error-500.theme";
 @import "src/app/quiz-builder/_quiz/quiz-list/quiz-list.theme";
-
 @import "src/app/quiz-builder/_quiz/quiz-info/structure/quiz-info-structure.theme";
+
+@import "src/app/quiz-builder/_question/question-info/question-info.theme";
 
 // Define a mixin for easier access
 @mixin components-theme($theme) {
@@ -109,6 +110,7 @@ $typography: mat-typography-config(
     @include quiz-list-theme($theme);
     @include quiz-info-structure($theme);
 
+    @include question-info-theme($theme);
 }
 
 // -----------------------------------------------------------------------------------------------------
