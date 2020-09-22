@@ -37,18 +37,21 @@ export class QuizInfoComponent implements OnInit {
         private location: Location,
         private quizDataProvider: QuizDataProvider
     ) {
-        if (this.route.snapshot.data.quizResolver)
+        if (this.route.snapshot.data.quizResolver) 
             this.quiz = this.route.snapshot.data.quizResolver;
-        else
+        else 
             this.quiz = new Quiz();
 
-        this.selectedIndex = 0;
     }
 
     ngOnInit(): void {
 
         this.createMenuItems();
-        this.selectMenuItem(0);
+
+        if (this.isEditMode())
+            this.selectTab(0);
+        else
+            this.selectTab(1);
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
@@ -74,10 +77,11 @@ export class QuizInfoComponent implements OnInit {
         this.structureControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
 
-        if (!this.isEditMode())
-            this.createQuiz();
-        else
+        if (this.isEditMode())
             this.updateQuiz();
+        else
+            this.createQuiz();
+
     }
 
     createQuiz(): void {
@@ -95,7 +99,7 @@ export class QuizInfoComponent implements OnInit {
         this.structureControl.addGroup();
     }
 
-    selectMenuItem(index: number) {
+    selectTab(index: number) {
 
         this.selectedIndex = index;
 
@@ -127,7 +131,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'playlist_add',
                     function: () => {
-                        this.selectMenuItem(0)
+                        this.selectTab(0)
                     }
                 },
                 {
@@ -136,7 +140,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'settings',
                     function: () => {
-                        this.selectMenuItem(1)
+                        this.selectTab(1)
                     }
                 },
                 {
@@ -145,7 +149,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'color_lens',
                     function: () => {
-                        this.selectMenuItem(2)
+                        this.selectTab(2)
                     }
                 },
             ]
