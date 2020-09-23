@@ -1,6 +1,6 @@
 <mat-radio-group>
 
-  <div *ngFor="let choiceForm of choiceForms.controls" fxLayout>
+  <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
 
     <ng-container [formGroup]="choiceForm">
 

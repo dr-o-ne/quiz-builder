@@ -6,6 +6,7 @@ import { MultipleChoiceChoiceInfoComponent } from './multiple-choice-choice-info
 import { MultipleSelectChoiceInfoComponent } from './multiple-select-choice-info/multiple-select-choice-info.component';
 import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { TrueFalseChoiceInfoComponent } from './true-false-choice-info/true-false-choice-info.component';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-choice-dynamic',
@@ -14,7 +15,8 @@ import { TrueFalseChoiceInfoComponent } from './true-false-choice-info/true-fals
 
 export class ChoiceDynamicComponent implements OnInit {
 
-  @Input() question: Question;  
+  @Input() question: Question;
+  @Input() questionForm: FormGroup;  
   @ViewChild(ChoiceHostDirective, {static: true}) choiceHost: ChoiceHostDirective;
 
   choiceComponentRef: ComponentRef<ChoiceBaseDirective>;
@@ -40,13 +42,7 @@ export class ChoiceDynamicComponent implements OnInit {
     this.choiceComponentRef = this.choiceHost.viewContainerRef.createComponent(componentFactory);
 
     this.choiceComponentRef.instance.question = this.question;
-  }
-
-  isValid(): boolean {
-
-    if(!this.choiceComponentRef) return true;
-
-    return this.choiceComponentRef.instance.isValid();
+    this.choiceComponentRef.instance.questionForm = this.questionForm;
   }
 
   save(): void {

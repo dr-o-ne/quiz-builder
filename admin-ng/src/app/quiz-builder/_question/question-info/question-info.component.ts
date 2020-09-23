@@ -114,15 +114,6 @@ export class QuestionInfoComponent implements OnInit {
         }
     }
 
-    isEnabled(): boolean {
-
-        if (!this.questionForm.valid) return false;
-        if (!this.choicesForm) return true;
-        if (!this.choicesForm.isValid()) return false;
-
-        return true;
-    }
-
     onOptionItemClick(event: MouseEvent, option: OptionItem): void {
         option.enabled = !option.enabled;
         event.stopPropagation();

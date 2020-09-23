@@ -27,14 +27,6 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     this.cdRef.detectChanges();
   }
 
-  isValid(): boolean {
-    const choices = this.question.choices;
-
-    if (choices.length < 2) return false;
-
-    return true;
-  }
-
   onChoiceChange(event: MatRadioChange): void {
     this.question.choices.forEach((elem: Choice) => elem.isCorrect = elem.id === event.value);
   }

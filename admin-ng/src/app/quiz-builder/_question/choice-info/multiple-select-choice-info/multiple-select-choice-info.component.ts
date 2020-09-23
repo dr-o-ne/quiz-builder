@@ -14,14 +14,6 @@ export class MultipleSelectChoiceInfoComponent extends ChoiceBaseDirective {
     throw new Error("Method not implemented.");
   }
 
-  isValid(): boolean {
-    const choices = this.question.choices;
-
-    if (choices.length < 2) return false;
-
-    return true;
-  }
-
   onAddChoice(): void {
     const id = this.getNextChoiceId();
     const choice = new Choice(id, "", false);

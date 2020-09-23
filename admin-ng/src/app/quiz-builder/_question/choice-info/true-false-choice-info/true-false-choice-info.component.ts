@@ -12,20 +12,13 @@ import { FormGroup, Validators, FormArray } from '@angular/forms';
 
 export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements OnInit {
 
-  choiceForms = new FormArray([]);
-
   ngOnInit(): void {
     this.createForm();
   }
 
-  isValid(): boolean {
-    return this.choiceForms.valid;
-  }
-
   save(): void {
-
     // update data
-    this.choiceForms.controls.forEach(
+    this.choiceForm().controls.forEach(
       (choiceForm: FormGroup) => {
         const choiceIdForm = choiceForm.get('id').value;
         const choice = this.question.choices.find(x => x.id == choiceIdForm) as Choice;
@@ -36,9 +29,8 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
   }
 
   onChange(event: MatRadioChange): void {
-
     // update form data
-    this.choiceForms.controls.forEach(
+    this.choiceForm().controls.forEach(
       (x: FormGroup) => {
         const isSelected = x.get('id').value === event.value
         x.patchValue({ isCorrect: isSelected });
@@ -46,7 +38,13 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
     );
   }
 
+  choiceForm(): FormArray {
+    return this.questionForm.get("choices") as FormArray;
+  }
+
   private createForm(): void {
+
+    const choicesForm = new FormArray([]);
 
     let createChoiceForm = (choice: Choice) => {
       return this.fb.group({
@@ -58,8 +56,10 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
 
     this.question.choices.forEach((x: Choice) => {
       const choiceForm = createChoiceForm(x);
-      this.choiceForms.push(choiceForm);
+      choicesForm.push(choiceForm);
     });
+
+    this.questionForm.addControl("choices", choicesForm);
   }
 
 }
