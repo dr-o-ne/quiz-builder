@@ -56,7 +56,6 @@ import { ChoiceDynamicComponent } from './quiz-builder/_question/choice-info/cho
 import { TrueFalseChoiceInfoComponent } from './quiz-builder/_question/choice-info/true-false-choice-info/true-false-choice-info.component';
 import { MultipleChoiceChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-choice-choice-info/multiple-choice-choice-info.component';
 import { MultipleSelectChoiceInfoComponent } from './quiz-builder/_question/choice-info/multiple-select-choice-info/multiple-select-choice-info.component';
-import { QuestionDisplayTypeComponent } from './quiz-builder/_question/question-info/display-type/question-display-type.component';
 import { QuestionInfoComponent } from './quiz-builder/_question/question-info/question-info.component';
 import { CommonUtilsModule } from './quiz-builder/common/common-utils.module';
 import { Error500Module } from './quiz-builder/_pages/error/500/error-500.module';
