@@ -22,13 +22,13 @@ export class DataInfo implements GroupInfoViewModel {
 }
 
 @Component({
-    selector: 'app-quiz-info-structure-tab',
-    templateUrl: './quiz-info-structure-tab.component.html',
-    styleUrls: ['./quiz-info-structure-tab.component.scss'],
+    selector: 'app-quiz-info-structure',
+    templateUrl: './quiz-info-structure.component.html',
+    styleUrls: ['./quiz-info-structure.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class QuizInfoStructureTabComponent implements OnInit {
+export class QuizInfoStructureComponent implements OnInit {
 
     @ViewChildren(MatTable) tables!: QueryList<MatTable<Question>>;
     @ViewChildren(GroupInfoComponent) groupInfoControls!: QueryList<GroupInfoComponent>;

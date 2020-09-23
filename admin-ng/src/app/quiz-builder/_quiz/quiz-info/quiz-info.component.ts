@@ -8,7 +8,7 @@ import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.d
 import * as moment from 'moment';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.component';
-import { QuizInfoStructureTabComponent } from './structure/quiz-info-structure-tab.component';
+import { QuizInfoStructureComponent } from './structure/quiz-info-structure.component';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 
@@ -21,7 +21,7 @@ import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/Navigation
 })
 export class QuizInfoComponent implements OnInit {
 
-    @ViewChild(QuizInfoStructureTabComponent) structureControl: QuizInfoStructureTabComponent;
+    @ViewChild(QuizInfoStructureComponent) structureControl: QuizInfoStructureComponent;
     @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
 
     quiz: Quiz;

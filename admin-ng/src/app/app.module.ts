@@ -50,7 +50,7 @@ import { RegisterModule } from './quiz-builder/_pages/auth/register/register.mod
 import { ForgotPasswordModule } from './quiz-builder/_pages/auth/forgot-password/forgot-password.module';
 import { ResetPasswordModule } from './quiz-builder/_pages/auth/reset-password/reset-password.module';
 import { GroupInfoComponent } from './quiz-builder/_quiz/quiz-info/structure/group-info/group-info.component';
-import { QuizInfoStructureTabComponent } from './quiz-builder/_quiz/quiz-info/structure/quiz-info-structure-tab.component';
+import { QuizInfoStructureComponent } from './quiz-builder/_quiz/quiz-info/structure/quiz-info-structure.component';
 import { ChoiceHostDirective } from './quiz-builder/_question/choice-info/choice-host.directive';
 import { ChoiceDynamicComponent } from './quiz-builder/_question/choice-info/choice-dynamic.component';
 import { TrueFalseChoiceInfoComponent } from './quiz-builder/_question/choice-info/true-false-choice-info/true-false-choice-info.component';
@@ -107,7 +107,7 @@ const appRoutes: Routes = [
         QuizInfoComponent,
         QuizInfoSettingsComponent,
         GroupInfoComponent,
-        QuizInfoStructureTabComponent,
+        QuizInfoStructureComponent,
         ChoiceHostDirective,
         ChoiceDynamicComponent,
 
