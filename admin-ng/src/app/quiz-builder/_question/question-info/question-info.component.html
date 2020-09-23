@@ -55,24 +55,19 @@
 
                     <form [formGroup]="questionForm" fxFlex fxLayout="column">
 
-                        <mat-form-field *ngIf="isOptionEnabled(optionItemsService.OPTION_NAME)"
-                            appearance="outline" 
-                            floatLabel="always" 
-                            class="w-100-p" >
-
+                        <mat-form-field appearance="outline" floatLabel="always" *ngIf="isOptionEnabled(optionItemsService.OPTION_NAME)">
                             <mat-label>Question Name</mat-label>
                             <input matInput formControlName="name">
                         </mat-form-field>
 
-                        <mat-form-field fxFlex="9.5" appearance="outline" *ngIf="question.type != emptyQuestionType">
+                        <mat-checkbox class="padding-bottom-fix" formControlName="isRequired" *ngIf="question.type != emptyQuestionType">
+                            Is Required
+                        </mat-checkbox>
+
+                        <mat-form-field appearance="outline" *ngIf="question.type != emptyQuestionType">
                             <mat-label>Points</mat-label>
                             <input matInput type="number" formControlName="points">
                         </mat-form-field>
-        
-                        <mat-checkbox class="padding-bottom-fix" *ngIf="question.type != emptyQuestionType"
-                            formControlName="isRequired">
-                            Is Required
-                        </mat-checkbox>
 
                         <app-rich-text-editor *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK)"
                             displayName="Correct Feedback" 
