@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { OptionItem } from 'app/quiz-builder/model/UI/optionItem';
 import { ChoicesDisplayType, ChoicesEnumerationType, QuestionGradingType } from 'app/quiz-builder/model/settings/answer.settings';
 import { OptionItemsService } from 'app/quiz-builder/model/UI/optionItemService';
@@ -42,7 +42,6 @@ export class QuestionInfoComponent implements OnInit {
     constructor(
         private fuseNavigationService: FuseNavigationService,
         private navService: NavigationService,
-        private router: Router,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
         private questionDataProvider: QuestionDataProvider,
