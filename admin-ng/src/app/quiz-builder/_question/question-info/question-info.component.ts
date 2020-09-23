@@ -155,64 +155,32 @@ export class QuestionInfoComponent implements OnInit {
         this.fuseNavigationService.updateNavigationItem(menuItemId, { icon: icon });
     }
 
+    optionItem2menuItem(option: OptionItem) {
+        return {
+            id: option.name,
+            title: option.displayName,
+            type: 'item',
+            icon: 'blank',
+            function: () => {
+                this.checkOption(option.name, option.name);
+            }
+        }
+    }
+
     createMenu(): void {
 
         this.navService.clean();
+        const menuItems = this.options.map(x => this.optionItem2menuItem(x));
 
-        const createNavItem = {
-            id: NavigationService.QUESTION_NAV_ROOT,
-            title: 'Show More Options',
-            type: 'group',
-            children: [
-                {
-                    id: 'name',
-                    title: 'Short Description',
-                    type: 'item',
-                    icon: 'blank',
-                    function: () => {
-                        this.checkOption('name', OptionItemsService.OPTION_NAME);
-                    }
-                },
-                {
-                    id: 'correctFeedback',
-                    title: 'Correct Feedback',
-                    type: 'item',
-                    icon: 'blank',
-                    function: () => {
-                        this.checkOption('correctFeedback', OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK);
-                    }
-                },
-                {
-                    id: 'incorrectFeedback',
-                    title: 'Incorrect Feedback',
-                    type: 'item',
-                    icon: 'blank',
-                    function: () => {
-                        this.checkOption('incorrectFeedback', OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK);
-                    }
-                },
-                {
-                    id: 'displayType',
-                    title: 'Display Type',
-                    type: 'item',
-                    icon: 'blank',
-                    function: () => {
-                        this.checkOption('displayType', OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE);
-                    }
-                },
-                {
-                    id: 'enumerationType',
-                    title: 'Enumeration Type',
-                    type: 'item',
-                    icon: 'blank',
-                    function: () => {
-                        this.checkOption('enumerationType', OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE);
-                    }
-                },
-            ]
-        };
-
-        this.fuseNavigationService.addNavigationItem(createNavItem, 'end');
+        if (menuItems.length > 0) {
+            const createNavItem = {
+                id: NavigationService.QUESTION_NAV_ROOT,
+                title: 'Show More Options',
+                type: 'group',
+                children: menuItems
+            };
+            this.fuseNavigationService.addNavigationItem(createNavItem, 'end');
+        }
     }
 
 }
