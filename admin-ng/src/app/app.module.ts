@@ -61,7 +61,6 @@ import { QuestionInfoComponent } from './quiz-builder/_question/question-info/qu
 import { CommonUtilsModule } from './quiz-builder/common/common-utils.module';
 import { Error500Module } from './quiz-builder/_pages/error/500/error-500.module';
 import { Error404Module } from './quiz-builder/_pages/error/404/error-404.module';
-import { ChoiceLangService } from './quiz-builder/services/lang/choice.lang.service';
 
 const appRoutes: Routes = [
     {
@@ -118,7 +117,6 @@ const appRoutes: Routes = [
         MultipleSelectChoiceInfoComponent,
 
         QuestionInfoComponent,
-        QuestionDisplayTypeComponent
     ],
     imports: [
         BrowserModule,
@@ -181,7 +179,6 @@ const appRoutes: Routes = [
         QuestionDataProvider,
         QuizDataProvider,
         QuestionLangService,
-        ChoiceLangService,
         QuizLangService,
         AttemptService,
 
