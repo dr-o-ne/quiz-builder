@@ -143,7 +143,7 @@ export class QuestionInfoComponent implements OnInit {
                 id: option.name,
                 title: option.displayName,
                 type: 'item',
-                icon: 'blank',
+                icon: option.enabled ? 'done' : 'empty',
                 function: () => {
                     checkOption(option.name, option.name);
                 }

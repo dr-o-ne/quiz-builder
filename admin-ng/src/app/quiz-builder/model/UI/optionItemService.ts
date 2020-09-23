@@ -18,21 +18,21 @@ export class OptionItemsService {
     getQuestionTypeOptionItems(questionType: QuestionType) {
         switch (+questionType) {
             case QuestionType.TrueFalse: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false),
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
             ];
             case QuestionType.MultipleChoice: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false),
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
             ];
             case QuestionType.MultiSelect: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false),
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
@@ -40,9 +40,11 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
             ];
             case QuestionType.LongAnswer: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false)
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true)
             ];
-            case QuestionType.Empty: return [];
+            case QuestionType.Empty: return [
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
+            ];
         }
     }
 
