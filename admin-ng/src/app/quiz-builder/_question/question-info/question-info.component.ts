@@ -166,7 +166,7 @@ export class QuestionInfoComponent implements OnInit {
             children: [
                 {
                     id: 'name',
-                    title: 'Name',
+                    title: 'Short Description',
                     type: 'item',
                     icon: 'blank',
                     function: () => {
@@ -198,6 +198,15 @@ export class QuestionInfoComponent implements OnInit {
                     icon: 'blank',
                     function: () => {
                         this.checkOption('displayType', OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE);
+                    }
+                },
+                {
+                    id: 'enumerationType',
+                    title: 'Enumeration Type',
+                    type: 'item',
+                    icon: 'blank',
+                    function: () => {
+                        this.checkOption('enumerationType', OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE);
                     }
                 },
             ]

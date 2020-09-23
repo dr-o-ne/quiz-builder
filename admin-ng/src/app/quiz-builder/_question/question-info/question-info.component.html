@@ -56,7 +56,7 @@
                     <form [formGroup]="questionForm" fxFlex fxLayout="column">
 
                         <mat-form-field appearance="outline" floatLabel="always" *ngIf="isOptionEnabled(optionItemsService.OPTION_NAME)">
-                            <mat-label>Question Name</mat-label>
+                            <mat-label>Short Description</mat-label>
                             <input matInput formControlName="name">
                         </mat-form-field>
 
@@ -79,7 +79,7 @@
                             textFormControlName="incorrectFeedback">                                    
                         </app-rich-text-editor>
 
-                        <div fxLayout="column" class="padding-bottom-fix">
+                        <div fxLayout="column" class="padding-bottom-fix" *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_ENUMERATION_TYPE)">
                             <span class="mat-body-1">Enumeration Type:</span>
                             <div>
                                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesEnumerationType">

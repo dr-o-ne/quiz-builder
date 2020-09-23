@@ -12,30 +12,35 @@ export class OptionItemsService {
     public static OPTION_QUESTION_INCORRECT_FEEDBACK = 'questionIncorrectFeedback';
     public static OPTION_QUESTION_DISPLAY_TYPE = 'questionDisplayType';
     public static OPTION_QUESTION_GRADING_TYPE = 'questionGradingType';
+    public static OPTION_QUESTION_ENUMERATION_TYPE = 'questionEnumerationType';
+
 
     getQuestionTypeOptionItems(questionType: QuestionType) {
         switch (+questionType) {
             case QuestionType.TrueFalse: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Name', false),
-                new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
-                new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
-                new OptionItem('questionDisplayType', 'Display Type', false),
-            ];
-            case QuestionType.MultipleChoice: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Name', false),
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
+            ];
+            case QuestionType.MultipleChoice: return [
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
             ];
             case QuestionType.MultiSelect: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Name', false),
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_GRADING_TYPE, 'Grading Type', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
             ];
             case QuestionType.LongAnswer: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Name', false)
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', false)
             ];
             case QuestionType.Empty: return [];
         }
