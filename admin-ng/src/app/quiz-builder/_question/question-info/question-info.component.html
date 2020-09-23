@@ -61,7 +61,7 @@
                         </mat-form-field>
 
                         <mat-checkbox class="padding-bottom-fix" formControlName="isRequired" *ngIf="question.type != emptyQuestionType">
-                            Is Required
+                            <span class="mat-body-1">Is Required</span>
                         </mat-checkbox>
 
                         <mat-form-field appearance="outline" *ngIf="question.type != emptyQuestionType">
@@ -82,6 +82,15 @@
                         <app-question-display-type *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_DISPLAY_TYPE)"
                             [question]="question">
                         </app-question-display-type>
+
+                        <p>
+                            <span class="mat-body-1">Enumeration Type:</span>
+                            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesDisplayType">
+                                <mat-button-toggle *ngFor="let item of choicesEnumerationTypes | enumToArray" [value]="item.index">
+                                    {{item.name}}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </p>
 
                     </form>
 

@@ -2,7 +2,7 @@ import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'app/quiz-builder/model/UI/optionItem';
-import { QuestionGradingType } from 'app/quiz-builder/model/settings/answer.settings';
+import { ChoicesDisplayType, ChoicesEnumerationType, QuestionGradingType } from 'app/quiz-builder/model/settings/answer.settings';
 import { OptionItemsService } from 'app/quiz-builder/model/UI/optionItemService';
 import { ChoiceDynamicComponent } from '../choice-info/choice-dynamic.component';
 import { QuestionLangService } from 'app/quiz-builder/services/lang/question.lang.service';
@@ -32,6 +32,8 @@ export class QuestionInfoComponent implements OnInit {
 
     emptyQuestionType: QuestionType;
     gradingTypes = QuestionGradingType;
+    choicesDisplayTypes = ChoicesDisplayType;
+    choicesEnumerationTypes = ChoicesEnumerationType;
 
     isEditMode = () => this.question.id;
 
@@ -73,6 +75,7 @@ export class QuestionInfoComponent implements OnInit {
             correctFeedback: [this.question.correctFeedback],
             incorrectFeedback: [this.question.incorrectFeedback],
             gradingType: [this.question.settings.gradingType],
+            choicesDisplayType: [this.question.settings.choicesDisplayType],
             isRequired: [this.question.isRequired]
         })
 
@@ -111,6 +114,8 @@ export class QuestionInfoComponent implements OnInit {
         this.choicesForm.save();
 
         this.question = Object.assign(this.question, this.questionForm.value);
+        this.question.settings.choicesDisplayType = this.questionForm.get('choicesDisplayType').value;
+
         this.question.settings = JSON.stringify(this.question.settings);
         this.question.choices = JSON.stringify(this.question.choices);
 
