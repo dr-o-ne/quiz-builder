@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ChoicesEnumerationType } from 'app/quiz-builder/model/settings/answer.settings';
+import { ChoicesDisplayType, ChoicesEnumerationType } from 'app/quiz-builder/model/settings/answer.settings';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChoiceLangService {
 
-    getChoiceTypeLangTerm(input: ChoicesEnumerationType) {
+    getChoiceEnumerationTypeLangTerm(input: ChoicesEnumerationType) {
 
         switch (+input) {
             case ChoicesEnumerationType.NoEnumeration: return "Empty";
@@ -17,6 +17,15 @@ export class ChoiceLangService {
             case ChoicesEnumerationType.one_two_three: return "1 2 3";
         }
 
+    }
+
+    getChoiceDisplayTypeLangTerm(input: ChoicesDisplayType) {
+
+        switch (+input) {
+            case ChoicesDisplayType.Vertical: return "Vertical";
+            case ChoicesDisplayType.Horizontal: return "Horizontal";
+            case ChoicesDisplayType.Dropdown: return "Dropdown";
+        }
 
     }
 

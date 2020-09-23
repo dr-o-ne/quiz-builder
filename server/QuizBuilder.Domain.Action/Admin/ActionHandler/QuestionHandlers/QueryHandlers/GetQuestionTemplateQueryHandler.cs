@@ -43,6 +43,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuestionHandlers.QueryHa
 					var trueFalseQuestion = new TrueFalseQuestion();
 					trueFalseQuestion.TrueChoice = new BinaryChoice {Id = 0, Order = 0, Text = "True", IsCorrect = true};
 					trueFalseQuestion.FalseChoice = new BinaryChoice {Id = 1, Order = 1, Text = "False", IsCorrect = false};
+					trueFalseQuestion.ChoicesDisplayType = ChoicesDisplayType.Vertical;
+					trueFalseQuestion.ChoicesEnumerationType = ChoicesEnumerationType.NoEnumeration;
 					return trueFalseQuestion;
 				case MultiChoice:
 					var multipleChoiceQuestion = new MultipleChoiceQuestion();
