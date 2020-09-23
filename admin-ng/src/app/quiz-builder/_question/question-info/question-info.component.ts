@@ -33,8 +33,8 @@ export class QuestionInfoComponent implements OnInit {
 
     emptyQuestionType: QuestionType;
     gradingTypes = QuestionGradingType;
-    choicesDisplayTypes = ChoicesDisplayType;
-    choicesEnumerationTypes = ChoicesEnumerationType;
+    choicesDisplayType = ChoicesDisplayType;
+    choicesEnumerationType = ChoicesEnumerationType;
 
     isEditMode = () => this.question.id;
 
@@ -79,7 +79,7 @@ export class QuestionInfoComponent implements OnInit {
             incorrectFeedback: [this.question.incorrectFeedback],
             gradingType: [this.question.settings.gradingType],
             choicesDisplayType: [this.question.settings.choicesDisplayType],
-            choicesEnumerationTypes: [this.question.settings.choicesEnumerationTypes],
+            choicesEnumerationType: [this.question.settings.choicesEnumerationType],
             isRequired: [this.question.isRequired]
         })
 

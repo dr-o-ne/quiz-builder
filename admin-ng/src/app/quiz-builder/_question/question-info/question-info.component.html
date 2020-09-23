@@ -82,8 +82,8 @@
                         <div fxLayout="column" class="padding-bottom-fix">
                             <span class="mat-body-1">Enumeration Type:</span>
                             <div>
-                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesEnumerationTypes">
-                                    <mat-button-toggle *ngFor="let item of choicesEnumerationTypes | enumToArray" [value]="item.index">
+                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesEnumerationType">
+                                    <mat-button-toggle *ngFor="let item of choicesEnumerationType | enumToArray" [value]="item.index">
                                         {{choiceLangService.getChoiceEnumerationTypeLangTerm(item.index)}}
                                     </mat-button-toggle>
                                 </mat-button-toggle-group>
@@ -93,8 +93,8 @@
                         <div fxLayout="column" class="padding-bottom-fix" *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_DISPLAY_TYPE)">
                             <span class="mat-body-1">Display Type:</span>
                             <div>
-                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesDisplayTypes">
-                                    <mat-button-toggle *ngFor="let item of choicesDisplayTypes | enumToArray" [value]="item.index">
+                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesDisplayType">
+                                    <mat-button-toggle *ngFor="let item of choicesDisplayType | enumToArray" [value]="item.index">
                                         {{choiceLangService.getChoiceDisplayTypeLangTerm(item.index)}}
                                     </mat-button-toggle>
                                 </mat-button-toggle-group>
