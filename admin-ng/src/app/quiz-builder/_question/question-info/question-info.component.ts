@@ -131,11 +131,14 @@ export class QuestionInfoComponent implements OnInit {
 
     createMenu(): void {
 
+        let getIcon = (option: OptionItem) => {
+            return option.enabled ? 'done' : 'empty';
+        }
+
         let checkOption = (menuItemId: string, optionId: string) => {
             const option = this.options.find(x => x.name === optionId);
             option.enabled = !option.enabled;
-            const icon = option.enabled ? 'done' : 'empty';
-            this.fuseNavigationService.updateNavigationItem(menuItemId, { icon: icon });
+            this.fuseNavigationService.updateNavigationItem(menuItemId, { icon: getIcon(option) });
         }
 
         let optionItem2menuItem = (option: OptionItem) => {
@@ -143,7 +146,7 @@ export class QuestionInfoComponent implements OnInit {
                 id: option.name,
                 title: option.displayName,
                 type: 'item',
-                icon: option.enabled ? 'done' : 'empty',
+                icon: getIcon(option),
                 function: () => {
                     checkOption(option.name, option.name);
                 }
