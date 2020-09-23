@@ -4,7 +4,6 @@ import { PageSettings } from 'app/quiz-builder/model/quiz';
 @Injectable({
     providedIn: 'root'
 })
-
 export class QuizLangService {
 
     getPageSettingsLangTerm(input: PageSettings) { //TODO: review langterms

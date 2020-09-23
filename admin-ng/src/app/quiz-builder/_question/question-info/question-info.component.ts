@@ -12,6 +12,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 import { empty } from 'rxjs';
+import { ChoiceLangService } from 'app/quiz-builder/services/lang/choice.lang.service';
 
 @Component({
     selector: 'app-question-info',
@@ -26,7 +27,7 @@ export class QuestionInfoComponent implements OnInit {
     private choicesForm!: ChoiceDynamicComponent;
 
     optionItemsService = OptionItemsService;
-
+    
     question: Question;
     questionForm: FormGroup;
 
@@ -47,7 +48,8 @@ export class QuestionInfoComponent implements OnInit {
         private fb: FormBuilder,
         private questionDataProvider: QuestionDataProvider,
         private optionItemService: OptionItemsService,
-        public questionLangService: QuestionLangService) {
+        public questionLangService: QuestionLangService,
+        public choiceLangService: ChoiceLangService) {
 
         this.emptyQuestionType = QuestionType.Empty;
     }

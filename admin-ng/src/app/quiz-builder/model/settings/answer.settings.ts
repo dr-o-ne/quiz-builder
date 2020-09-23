@@ -13,12 +13,12 @@ export enum ChoicesDisplayType {
 }
 
 export enum ChoicesEnumerationType {
+  NoEnumeration = 6,
   one_two_three = 1,
   i_ii_iii = 2,
   I_II_III = 3,
   a_b_c = 4,
   A_B_C = 5,
-  NoEnumeration = 6
 }
 
 export enum QuestionGradingType {
