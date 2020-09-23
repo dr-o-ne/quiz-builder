@@ -11,7 +11,6 @@ import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
-import { empty } from 'rxjs';
 import { ChoiceLangService } from 'app/quiz-builder/services/lang/choice.lang.service';
 
 @Component({
@@ -88,26 +87,10 @@ export class QuestionInfoComponent implements OnInit {
         this.createMenu();
     }
 
-    getQuestionOptions = () => this.options.filter(x => x.enabled);
-
     isOptionEnabled(name: string): boolean {
         const option = this.options.find(x => x.name === name);
         return option && option.enabled;
     }
-
-    navigateToParent(): void {
-        this.router.navigate(
-            ['../../'],
-            {
-                relativeTo: this.activatedRoute,
-                state: {
-                    groupId: this.question.groupId
-                }
-            }
-        );
-    }
-
-    onReturn = () => this.navigateToParent();
 
     onSave(): void {
 
@@ -119,18 +102,16 @@ export class QuestionInfoComponent implements OnInit {
 
         this.question = Object.assign(this.question, this.questionForm.value);
         this.question.settings.choicesDisplayType = this.questionForm.get('choicesDisplayType').value;
-        this.question.settings.choicesEnumerationTypes = this.questionForm.get('choicesEnumerationTypes').value;
+        this.question.settings.choicesEnumerationType = this.questionForm.get('choicesEnumerationType').value;
 
         this.question.settings = JSON.stringify(this.question.settings);
         this.question.choices = JSON.stringify(this.question.choices);
 
         if (this.isEditMode()) {
-            this.questionDataProvider.updateQuestion(this.question).subscribe(
-                () => { this.navigateToParent(); });
+            this.questionDataProvider.updateQuestion(this.question).subscribe();
         }
         else {
-            this.questionDataProvider.createQuestion(this.question).subscribe(
-                () => { this.navigateToParent(); });
+            this.questionDataProvider.createQuestion(this.question).subscribe();
         }
     }
 
@@ -148,29 +129,29 @@ export class QuestionInfoComponent implements OnInit {
         event.stopPropagation();
     }
 
-    checkOption(menuItemId: string, optionId: string){
-        const option = this.options.find(x => x.name === optionId);
-        option.enabled = !option.enabled;
-        const icon = option.enabled ? 'done' : 'empty';
-        this.fuseNavigationService.updateNavigationItem(menuItemId, { icon: icon });
-    }
-
-    optionItem2menuItem(option: OptionItem) {
-        return {
-            id: option.name,
-            title: option.displayName,
-            type: 'item',
-            icon: 'blank',
-            function: () => {
-                this.checkOption(option.name, option.name);
-            }
-        }
-    }
-
     createMenu(): void {
 
+        let checkOption = (menuItemId: string, optionId: string) => {
+            const option = this.options.find(x => x.name === optionId);
+            option.enabled = !option.enabled;
+            const icon = option.enabled ? 'done' : 'empty';
+            this.fuseNavigationService.updateNavigationItem(menuItemId, { icon: icon });
+        }
+
+        let optionItem2menuItem = (option: OptionItem) => {
+            return {
+                id: option.name,
+                title: option.displayName,
+                type: 'item',
+                icon: 'blank',
+                function: () => {
+                    checkOption(option.name, option.name);
+                }
+            }
+        }
+
         this.navService.clean();
-        const menuItems = this.options.map(x => this.optionItem2menuItem(x));
+        const menuItems = this.options.map(x => optionItem2menuItem(x));
 
         if (menuItems.length > 0) {
             const createNavItem = {
