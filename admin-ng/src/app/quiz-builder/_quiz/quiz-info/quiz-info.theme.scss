@@ -1,4 +1,4 @@
-@mixin quiz-info-structure($theme) {
+@mixin quiz-info-theme($theme) {
 
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
