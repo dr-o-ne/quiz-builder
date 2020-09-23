@@ -15,9 +15,7 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
   choiceForms = new FormArray([]);
 
   ngOnInit(): void {
-    this.question.choices.forEach(x => {
-      this.createFormItem(x);
-    });
+    this.createForm();
   }
 
   isValid(): boolean {
@@ -32,32 +30,36 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
         const choiceIdForm = choiceForm.get('id').value;
         const choice = this.question.choices.find(x => x.id == choiceIdForm) as Choice;
 
-        choice.isCorrect = choiceForm.get('isCorrect').value;
-        choice.text = choiceForm.get('text').value;
+        Object.assign(choice, choiceForm.value);
       }
     );
   }
 
-  onChoiceChange(event: MatRadioChange): void {
+  onChange(event: MatRadioChange): void {
 
     // update form data
     this.choiceForms.controls.forEach(
       (x: FormGroup) => {
-        const isSelected = x.get('id').value == event.value
+        const isSelected = x.get('id').value === event.value
         x.patchValue({ isCorrect: isSelected });
       }
     );
   }
 
-  private createFormItem(choice: Choice): void {
+  private createForm(): void {
 
-    const choiceGroup = this.fb.group({
-      id: [choice.id, Validators.required],
-      text: [choice.text, Validators.required],
-      isCorrect: [choice.isCorrect, Validators.required],
+    let createChoiceForm = (choice: Choice) => {
+      return this.fb.group({
+        id: [choice.id, Validators.required],
+        text: [choice.text, Validators.required],
+        isCorrect: [choice.isCorrect, Validators.required],
+      });
+    }
+
+    this.question.choices.forEach((x: Choice) => {
+      const choiceForm = createChoiceForm(x);
+      this.choiceForms.push(choiceForm);
     });
-
-    this.choiceForms.push(choiceGroup);
   }
 
 }
