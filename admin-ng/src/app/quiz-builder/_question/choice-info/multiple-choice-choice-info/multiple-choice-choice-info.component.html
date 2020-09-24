@@ -1,25 +1,23 @@
-<div fxLayout>
+<div fxLayout="row">
+    <button mat-raised-button color="accent" (click)="onAddChoice()">
+        <mat-icon>add</mat-icon>
+        <span>&nbsp;&nbsp;&nbsp;ADD CHOICE&nbsp;&nbsp;</span>
+    </button>
 
-  <button 
-    mat-raised-button 
-    color="primary" 
-    (click)="onAddChoice()" 
-    class="mb-4">
-
-    Add Choice
-  </button>
-
-  <mat-checkbox 
-    fxFlexOffset="2"
-    fxFlexAlign="center"
-    color="primary" 
-    class="padding-bottom-fix"
-    [(ngModel)]="question.settings.randomize">
-    
-    Randomize Choices
-  </mat-checkbox>
+    <mat-checkbox 
+        fxFlexOffset="2"
+        fxFlexAlign="center"
+        color="primary" 
+        class="padding-bottom-fix"
+        [(ngModel)]="question.settings.randomize">
+        
+        Randomize Choices
+    </mat-checkbox>
 
 </div>
+
+
+
 
 <mat-radio-group>
 
