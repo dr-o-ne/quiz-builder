@@ -5,7 +5,7 @@
         <span>&nbsp;&nbsp;&nbsp;ADD CHOICE&nbsp;&nbsp;</span>
     </button>
 
-    <mat-checkbox color="accent" fxFlexOffset="4"
+    <mat-checkbox color="accent" fxFlexOffset="4" class="mt-4"
         [(ngModel)]="question.settings.randomize">
         
         Randomize Choices
@@ -25,12 +25,11 @@
           </app-rich-text-editor>
     
           <mat-radio-button 
-            color="primary"
+            color="accent"
             [value]="choiceForm.get('id').value" 
             [checked]="choiceForm.get('isCorrect').value" 
             fxFlexOffset="2" 
-            fxFlexAlign="center" 
-            class="padding-bottom-fix"
+            class="mt-24"
             (change)="onChangeChoice($event)">
             Correct
           </mat-radio-button>
@@ -39,8 +38,8 @@
             color="primary" 
             (click)="onDeleteChoice(choice)"
             fxFlexOffset="2"
-            fxFlexAlign="center">
-            <mat-icon class="padding-bottom-fix">delete</mat-icon>
+            class="mt-16">
+            <mat-icon>delete</mat-icon>
           </button>
     <!--
           <div fxLayout>
