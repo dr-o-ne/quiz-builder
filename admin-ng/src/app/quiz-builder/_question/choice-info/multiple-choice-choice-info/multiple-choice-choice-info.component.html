@@ -48,8 +48,11 @@
 
           </div>
 
-          <div>
-            <app-rich-text-editor fxFlex="76.5%" displayName="Choice Feedback" textFormControlName="feedback">                                    
+          <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
+            <app-rich-text-editor 
+              fxFlex="76.5%" 
+              displayName="Choice Feedback" 
+              textFormControlName="feedback">                                    
             </app-rich-text-editor>
           </div>
 

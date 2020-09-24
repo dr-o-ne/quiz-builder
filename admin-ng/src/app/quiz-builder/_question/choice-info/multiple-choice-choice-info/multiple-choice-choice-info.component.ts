@@ -24,6 +24,12 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     }
 
     ngOnInit(): void {
+
+        console.log(1);
+        console.log(this.options);
+        console.log(2);
+
+
         const choicesForm = this.choiceUtilsService.createBinaryChoicesForm(this.question.choices);
         this.questionForm.addControl("choices", choicesForm);
     }
@@ -31,7 +37,6 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     choiceForm(): FormArray {
         return this.questionForm.get("choices") as FormArray;
     }
-
 
     save(): void {
         // update model
@@ -75,6 +80,11 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     onDeleteChoice(id: number): void {
         const index = this.choiceForm().controls.findIndex(x => x.get('id').value === id);
         this.choiceForm().removeAt(index);
+    }
+
+    isOptionEnabled(name: string): boolean {
+        const option = this.options.find(x => x.name === name);
+        return option && option.enabled;
     }
 
     getNextChoiceId(): number {

@@ -10,6 +10,7 @@ export class OptionItemsService {
     public static OPTION_NAME = 'name';
     public static OPTION_QUESTION_CORRECT_FEEDBACK = 'questionCorrectFeedback';
     public static OPTION_QUESTION_INCORRECT_FEEDBACK = 'questionIncorrectFeedback';
+    public static OPTION_QUESTION_CHOICES_FEEDBACK = 'questionChoicesFeedback';
     public static OPTION_QUESTION_DISPLAY_TYPE = 'questionDisplayType';
     public static OPTION_QUESTION_GRADING_TYPE = 'questionGradingType';
     public static OPTION_QUESTION_ENUMERATION_TYPE = 'questionEnumerationType';
@@ -28,6 +29,7 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK, 'Choices Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
             ];
