@@ -1,3 +1,7 @@
 .padding-bottom-fix {
     padding-bottom: 1.34375em !important
 }
+
+.add-button-fix {
+    height: 36px;
+}

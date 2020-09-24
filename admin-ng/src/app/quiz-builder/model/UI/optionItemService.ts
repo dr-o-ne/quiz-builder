@@ -37,6 +37,7 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK, 'Correct Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK, 'Choices Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_GRADING_TYPE, 'Grading Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
