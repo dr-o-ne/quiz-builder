@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChoiceBaseDirective } from '../choice-base.directive';
 import { MatRadioChange } from '@angular/material/radio';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Choice } from 'app/quiz-builder/model/choice';
 import { ChoiceUtilsService } from '../choice-utls.service';
 
@@ -33,8 +33,14 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     throw new Error("Method not implemented.");
   }
 
-  onChoiceChange(event: MatRadioChange): void {
-    this.question.choices.forEach((elem: Choice) => elem.isCorrect = elem.id === event.value);
+  onChangeChoice(event: MatRadioChange): void {
+    // update form data
+    this.choiceForm().controls.forEach(
+      (x: FormGroup) => {
+        const isSelected = x.get('id').value === event.value
+        x.patchValue({ isCorrect: isSelected });
+      }
+    );
   }
 
   onAddChoice(): void {
@@ -55,26 +61,6 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
 
     const ids = this.question.choices.map(x => x.id);
     return Math.max(...ids) + 1;
-  }
-
-  private createForm(): void {
-
-    const choicesForm = new FormArray([]);
-
-    let createChoiceForm = (choice: Choice) => {
-      return this.fb.group({
-        id: [choice.id, Validators.required],
-        text: [choice.text, Validators.required],
-        isCorrect: [choice.isCorrect, Validators.required],
-      });
-    }
-
-    this.question.choices.forEach((x: Choice) => {
-      const choiceForm = createChoiceForm(x);
-      choicesForm.push(choiceForm);
-    });
-
-    this.questionForm.addControl("choices", choicesForm);
   }
 
 }

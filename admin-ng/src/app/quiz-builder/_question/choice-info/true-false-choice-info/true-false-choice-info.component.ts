@@ -37,7 +37,7 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
     );
   }
 
-  onChange(event: MatRadioChange): void {
+  onChangeChoice(event: MatRadioChange): void {
     // update form data
     this.choiceForm().controls.forEach(
       (x: FormGroup) => {
