@@ -78,7 +78,8 @@ export class QuestionInfoComponent implements OnInit {
             gradingType: [this.question.settings.gradingType],
             choicesDisplayType: [this.question.settings.choicesDisplayType],
             choicesEnumerationType: [this.question.settings.choicesEnumerationType],
-            isRequired: [this.question.isRequired]
+            isRequired: [this.question.isRequired],
+            randomize: [this.question.settings.randomize]
         })
 
         this.options = this.optionItemService.getQuestionTypeOptionItems(this.question.type);
@@ -102,6 +103,7 @@ export class QuestionInfoComponent implements OnInit {
 
         this.question.settings.choicesDisplayType = this.questionForm.get('choicesDisplayType').value;
         this.question.settings.choicesEnumerationType = this.questionForm.get('choicesEnumerationType').value;
+        this.question.settings.randomize = this.questionForm.get('randomize').value;
 
         this.question.settings = JSON.stringify(this.question.settings);
         this.question.choices = JSON.stringify(this.question.choices);
@@ -112,6 +114,16 @@ export class QuestionInfoComponent implements OnInit {
         else {
             this.questionDataProvider.createQuestion(this.question).subscribe();
         }
+
+        //HACK
+        this.question.settings = JSON.parse(this.question.settings);
+        //TODO:
+        if (!this.question.choices || this.question.choices.length === 0) {
+            this.question.choices = '{}';
+        }
+        this.question.choices = JSON.parse(this.question.choices);
+
+
     }
 
     onOptionItemClick(event: MouseEvent, option: OptionItem): void {

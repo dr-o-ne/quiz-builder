@@ -38,7 +38,12 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
 
         // remove
         const ids = this.choiceForm().controls.map(x => x.get('id').value);
+
+        console.log(this.question.choices);
+
         this.question.choices = this.question.choices.filter(x => ids.includes(x.id));
+
+        console.log(this.question.choices);
 
         this.choiceForm().controls.forEach(
             (choiceForm: FormGroup) => {

@@ -5,11 +5,13 @@
         <span>&nbsp;&nbsp;&nbsp;ADD CHOICE&nbsp;&nbsp;</span>
     </button>
 
-    <mat-checkbox color="accent" fxFlexOffset="4" class="mt-4"
-        [(ngModel)]="question.settings.randomize">
-        
+    <ng-container [formGroup]="questionForm">
+
+      <mat-checkbox color="accent" fxFlexOffset="4" class="mt-4" formControlName="randomize">
         Randomize Choices
-    </mat-checkbox>
+      </mat-checkbox>
+
+    </ng-container>
 
 </div>
 
