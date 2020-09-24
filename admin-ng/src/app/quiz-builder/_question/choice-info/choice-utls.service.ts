@@ -15,6 +15,7 @@ export class ChoiceUtilsService {
             id: [id, Validators.required],
             text: ['', Validators.required],
             isCorrect: [isCorrect, Validators.required],
+            feedback: ['']
         });
     }
 
@@ -23,6 +24,7 @@ export class ChoiceUtilsService {
             id: [choice.id, Validators.required],
             text: [choice.text, Validators.required],
             isCorrect: [choice.isCorrect, Validators.required],
+            feedback: [choice.feedback]
         });
     }
 
@@ -30,7 +32,8 @@ export class ChoiceUtilsService {
         return new Choice(
             choiceForm.get('id').value,
             choiceForm.get('text').value,
-            choiceForm.get('isCorrect').value);
+            choiceForm.get('isCorrect').value,
+            choiceForm.get('feedback').value);
     }
 
     createBinaryChoicesForm(choices: Choice[]) {

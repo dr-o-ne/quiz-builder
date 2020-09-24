@@ -19,40 +19,40 @@
 
     <mat-radio-group>
 
-      <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
+      <div *ngFor="let choiceForm of choiceForm().controls" fxLayout="column">
     
         <ng-container [formGroup]="choiceForm">
     
-          <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
-          </app-rich-text-editor>
-    
-          <mat-radio-button 
-            color="accent"
-            [value]="choiceForm.get('id').value" 
-            [checked]="choiceForm.get('isCorrect').value" 
-            fxFlexOffset="2" 
-            class="mt-24"
-            (change)="onChangeChoice($event)">
-            Correct
-          </mat-radio-button>
-            
-          <button mat-icon-button 
-            color="primary" 
-            (click)="onDeleteChoice(choice)"
-            fxFlexOffset="2"
-            class="mt-16">
-            <mat-icon>delete</mat-icon>
-          </button>
-    <!--
-          <div fxLayout>
-    
-            <mat-form-field fxFlex="60%" appearance="outline">
-              <mat-label>Choice Feedback</mat-label>
-              <textarea matInput [(ngModel)]="choice.feedback"></textarea>
-            </mat-form-field>
-      
+          <div>
+
+              <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
+              </app-rich-text-editor>
+        
+              <mat-radio-button 
+                color="accent"
+                [value]="choiceForm.get('id').value" 
+                [checked]="choiceForm.get('isCorrect').value" 
+                fxFlexOffset="2" 
+                class="mt-24"
+                (change)="onChangeChoice($event)">
+                Correct
+              </mat-radio-button>
+                
+              <button mat-icon-button 
+                color="primary" 
+                (click)="onDeleteChoice(choice)"
+                fxFlexOffset="2"
+                class="mt-16">
+                <mat-icon>delete</mat-icon>
+              </button>
+
           </div>
-    -->
+
+          <div>
+            <app-rich-text-editor fxFlex="76.5%" displayName="Choice Feedback" textFormControlName="feedback">                                    
+            </app-rich-text-editor>
+          </div>
+
         </ng-container>
     
       </div>
