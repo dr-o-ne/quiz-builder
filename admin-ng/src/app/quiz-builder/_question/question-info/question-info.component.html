@@ -105,6 +105,17 @@
                             </div>
                         </div>
 
+                        <div fxLayout="column" class="padding-bottom-fix" *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_GRADING_TYPE)">
+                            <span class="mat-body-1">Grading Type:</span>
+                            <div>
+                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="choicesDisplayType">
+                                    <mat-button-toggle *ngFor="let item of gradingTypes | enumToArray" [value]="item.index">
+                                        {{choiceLangService.getChoiceGradingTypeLangTerm(item.index)}}
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                        </div>
+
                     </form>
 
                 </div>

@@ -31,9 +31,9 @@ export class QuestionInfoComponent implements OnInit {
     questionForm: FormGroup;
 
     emptyQuestionType: QuestionType;
-    gradingTypes = QuestionGradingType;
     choicesDisplayType = ChoicesDisplayType;
     choicesEnumerationType = ChoicesEnumerationType;
+    gradingTypes = QuestionGradingType;
 
     isEditMode = () => this.question.id;
 

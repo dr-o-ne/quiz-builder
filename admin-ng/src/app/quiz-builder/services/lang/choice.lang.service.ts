@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ChoicesDisplayType, ChoicesEnumerationType } from 'app/quiz-builder/model/settings/answer.settings';
+import { ChoicesDisplayType, ChoicesEnumerationType, QuestionGradingType } from 'app/quiz-builder/model/settings/answer.settings';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChoiceLangService {
 
-    getChoiceEnumerationTypeLangTerm(input: ChoicesEnumerationType) {
+    getChoiceEnumerationTypeLangTerm(input: ChoicesEnumerationType): string {
 
         switch (+input) {
             case ChoicesEnumerationType.NoEnumeration: return "Empty";
@@ -19,12 +19,22 @@ export class ChoiceLangService {
 
     }
 
-    getChoiceDisplayTypeLangTerm(input: ChoicesDisplayType) {
+    getChoiceDisplayTypeLangTerm(input: ChoicesDisplayType): string {
 
         switch (+input) {
             case ChoicesDisplayType.Vertical: return "Vertical";
             case ChoicesDisplayType.Horizontal: return "Horizontal";
             case ChoicesDisplayType.Dropdown: return "Dropdown";
+        }
+
+    }
+
+    getChoiceGradingTypeLangTerm(input: QuestionGradingType): string {
+
+        switch (+input) {
+            case QuestionGradingType.AllOrNothing: return "All or Nothing";
+            case QuestionGradingType.CorrectAnswers: return "Correct Only";
+            case QuestionGradingType.RightMinusWrong: return "Right minus Wrong";
         }
 
     }
