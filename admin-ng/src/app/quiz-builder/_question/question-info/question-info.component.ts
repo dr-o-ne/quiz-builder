@@ -98,10 +98,20 @@ export class QuestionInfoComponent implements OnInit {
         }
 
         this.choicesForm.save();
+ 
+        console.log('save 1');
+        console.log(this.question.choices);
 
-        this.question = Object.assign(this.question, this.questionForm.value);
+        Object.assign(this.question, this.questionForm.value);
+
+        console.log(this.questionForm);
+        console.log('save 2');
+        console.log(this.question.choices);
+
         this.question.settings.choicesDisplayType = this.questionForm.get('choicesDisplayType').value;
         this.question.settings.choicesEnumerationType = this.questionForm.get('choicesEnumerationType').value;
+
+
 
         this.question.settings = JSON.stringify(this.question.settings);
         this.question.choices = JSON.stringify(this.question.choices);

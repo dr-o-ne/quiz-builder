@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Choice } from 'app/quiz-builder/model/choice';
 
 @Injectable({
@@ -10,20 +10,27 @@ export class ChoiceUtilsService {
     constructor(protected fb: FormBuilder) {
     }
 
-    createBinaryEmptyChoiceForm() {
+    createBinaryEmptyChoiceForm(id: number, isCorrect: boolean): FormGroup {
         return this.fb.group({
-            id: ['', Validators.required],
+            id: [id, Validators.required],
             text: ['', Validators.required],
-            isCorrect: ['', Validators.required],
+            isCorrect: [isCorrect, Validators.required],
         });
     }
 
-    createBinaryChoiceForm(choice: Choice) {
+    createBinaryChoiceForm(choice: Choice): FormGroup {
         return this.fb.group({
             id: [choice.id, Validators.required],
             text: [choice.text, Validators.required],
             isCorrect: [choice.isCorrect, Validators.required],
         });
+    }
+
+    createBinaryChoice(choiceForm: FormGroup): Choice {
+        return new Choice(
+            choiceForm.get('id').value,
+            choiceForm.get('text').value,
+            choiceForm.get('isCorrect').value);
     }
 
     createBinaryChoicesForm(choices: Choice[]) {
