@@ -1,8 +1,9 @@
-import { Component, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChoiceBaseDirective } from '../choice-base.directive';
 import { MatRadioChange } from '@angular/material/radio';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Choice } from 'app/quiz-builder/model/choice';
+import { ChoiceUtilsService } from '../choice-utls.service';
 
 @Component({
   selector: 'app-multiple-choice-choice-info',
@@ -10,21 +11,26 @@ import { Choice } from 'app/quiz-builder/model/choice';
   styleUrls: ['./multiple-choice-choice-info.component.css']
 })
 
-export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective implements AfterViewChecked {
-  
-  save(): void {
-    throw new Error("Method not implemented.");
-  }
+export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective implements OnInit {
 
-  constructor(
+  constructor(    
     protected fb: FormBuilder,
-    private cdRef: ChangeDetectorRef
-  ) {
+    private choiceUtilsService: ChoiceUtilsService ) {
+
     super(fb);
   }
 
-  ngAfterViewChecked(): void {
-    this.cdRef.detectChanges();
+  ngOnInit(): void {
+    const choicesForm = this.choiceUtilsService.createBinaryChoicesForm(this.question.choices);
+    this.questionForm.addControl("choices", choicesForm);
+  }
+
+  choiceForm(): FormArray {
+    return this.questionForm.get("choices") as FormArray;
+  }
+  
+  save(): void {
+    throw new Error("Method not implemented.");
   }
 
   onChoiceChange(event: MatRadioChange): void {
@@ -49,6 +55,26 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
 
     const ids = this.question.choices.map(x => x.id);
     return Math.max(...ids) + 1;
+  }
+
+  private createForm(): void {
+
+    const choicesForm = new FormArray([]);
+
+    let createChoiceForm = (choice: Choice) => {
+      return this.fb.group({
+        id: [choice.id, Validators.required],
+        text: [choice.text, Validators.required],
+        isCorrect: [choice.isCorrect, Validators.required],
+      });
+    }
+
+    this.question.choices.forEach((x: Choice) => {
+      const choiceForm = createChoiceForm(x);
+      choicesForm.push(choiceForm);
+    });
+
+    this.questionForm.addControl("choices", choicesForm);
   }
 
 }

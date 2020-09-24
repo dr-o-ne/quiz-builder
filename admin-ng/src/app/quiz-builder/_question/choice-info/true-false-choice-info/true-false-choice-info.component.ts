@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChoiceBaseDirective } from '../choice-base.directive';
 import { MatRadioChange } from '@angular/material/radio';
 import { Choice } from 'app/quiz-builder/model/choice';
-import { FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { ChoiceUtilsService } from '../choice-utls.service';
 
 @Component({
   selector: 'app-true-false-choice-info',
@@ -12,8 +13,16 @@ import { FormGroup, Validators, FormArray } from '@angular/forms';
 
 export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements OnInit {
 
+  constructor(    
+    protected fb: FormBuilder,
+    private choiceUtilsService: ChoiceUtilsService ) {
+
+    super(fb);
+  }
+
   ngOnInit(): void {
-    this.createForm();
+    const choicesForm = this.choiceUtilsService.createBinaryChoicesForm(this.question.choices);
+    this.questionForm.addControl("choices", choicesForm);
   }
 
   save(): void {
@@ -40,26 +49,6 @@ export class TrueFalseChoiceInfoComponent extends ChoiceBaseDirective implements
 
   choiceForm(): FormArray {
     return this.questionForm.get("choices") as FormArray;
-  }
-
-  private createForm(): void {
-
-    const choicesForm = new FormArray([]);
-
-    let createChoiceForm = (choice: Choice) => {
-      return this.fb.group({
-        id: [choice.id, Validators.required],
-        text: [choice.text, Validators.required],
-        isCorrect: [choice.isCorrect, Validators.required],
-      });
-    }
-
-    this.question.choices.forEach((x: Choice) => {
-      const choiceForm = createChoiceForm(x);
-      choicesForm.push(choiceForm);
-    });
-
-    this.questionForm.addControl("choices", choicesForm);
   }
 
 }

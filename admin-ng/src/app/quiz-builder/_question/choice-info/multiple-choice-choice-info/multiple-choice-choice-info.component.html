@@ -23,26 +23,24 @@
 
 <mat-radio-group>
 
-  <div *ngFor="let choice of question.choices">
+  <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
 
-    <div fxLayout>
+    <ng-container [formGroup]="choiceForm">
 
-      <mat-form-field fxFlex="60%" appearance="outline">
-        <mat-label>Choice Text</mat-label>
-        <textarea matInput [(ngModel)]="choice.text"></textarea>
-      </mat-form-field>
-  
+      <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
+      </app-rich-text-editor>
+
       <mat-radio-button 
         color="primary"
-        [value]="choice.id" 
-        [checked]="choice.isCorrect" 
+        [value]="choiceForm.get('id').value" 
+        [checked]="choiceForm.get('isCorrect').value" 
         fxFlexOffset="2" 
         fxFlexAlign="center" 
         class="padding-bottom-fix"
-        (change)="onChoiceChange($event)">
+        (change)="onChange($event)">
         Correct
       </mat-radio-button>
-  
+        
       <button mat-icon-button 
         color="primary" 
         (click)="onDeleteChoice(choice)"
@@ -50,18 +48,18 @@
         fxFlexAlign="center">
         <mat-icon class="padding-bottom-fix">delete</mat-icon>
       </button>
+<!--
+      <div fxLayout>
 
-    </div>
-    
-    <div fxLayout>
+        <mat-form-field fxFlex="60%" appearance="outline">
+          <mat-label>Choice Feedback</mat-label>
+          <textarea matInput [(ngModel)]="choice.feedback"></textarea>
+        </mat-form-field>
+  
+      </div>
+-->
+    </ng-container>
 
-      <mat-form-field fxFlex="60%" appearance="outline">
-        <mat-label>Choice Feedback</mat-label>
-        <textarea matInput [(ngModel)]="choice.feedback"></textarea>
-      </mat-form-field>
-
-    </div>
-   
   </div>
 
 </mat-radio-group>
