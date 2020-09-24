@@ -48,4 +48,12 @@ export class ChoiceUtilsService {
         return choicesForm;
     }
 
+    getNextBinaryChoiceId(choiceForm: FormArray): number {
+        if (choiceForm.length === 0)
+            return 0;
+        const ids = choiceForm.controls.map(x => x.get('id').value);
+        return Math.max(...ids) + 1;
+    }
+
+
 }

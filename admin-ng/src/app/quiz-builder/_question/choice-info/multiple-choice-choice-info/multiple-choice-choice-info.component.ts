@@ -65,7 +65,7 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     }
 
     onAddChoice(): void {
-        const id = this.getNextChoiceId();
+        const id = this.choiceUtilsService.getNextBinaryChoiceId(this.choiceForm());
         const isCorrect = this.choiceForm().length === 0;
         const choiceForm = this.choiceUtilsService.createBinaryEmptyChoiceForm(id, isCorrect);
         this.choiceForm().push(choiceForm);
@@ -79,13 +79,6 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     isOptionEnabled(name: string): boolean {
         const option = this.options.find(x => x.name === name);
         return option && option.enabled;
-    }
-
-    getNextChoiceId(): number {
-        if (this.choiceForm().length === 0)
-            return 0;
-        const ids = this.choiceForm().controls.map(x => x.get('id').value);
-        return Math.max(...ids) + 1;
     }
 
 }
