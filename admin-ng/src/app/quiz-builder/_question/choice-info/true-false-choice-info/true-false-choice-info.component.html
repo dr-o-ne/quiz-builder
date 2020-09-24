@@ -1,25 +1,25 @@
 <mat-radio-group>
 
-  <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
+    <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
 
-    <ng-container [formGroup]="choiceForm">
+        <ng-container [formGroup]="choiceForm">
 
-      <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
-      </app-rich-text-editor>
+            <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
+            </app-rich-text-editor>
 
-      <mat-radio-button 
-        color="accent"
-        [value]="choiceForm.get('id').value" 
-        [checked]="choiceForm.get('isCorrect').value" 
-        fxFlexOffset="2" 
-        fxFlexAlign="center" 
-        class="padding-bottom-fix"
-        (change)="onChangeChoice($event)">
-        Correct
-      </mat-radio-button>
+            <mat-radio-button 
+                color="accent"
+                [value]="choiceForm.get('id').value" 
+                [checked]="choiceForm.get('isCorrect').value" 
+                fxFlexOffset="2" 
+                fxFlexAlign="center" 
+                class="padding-bottom-fix"
+                (change)="onChangeChoice($event)">
+                Correct
+            </mat-radio-button>
 
-    </ng-container>
+        </ng-container>
 
-  </div>
+    </div>
 
 </mat-radio-group>
