@@ -1,14 +1,11 @@
-<div fxLayout="row">
-    <button mat-raised-button color="accent" (click)="onAddChoice()">
+<div fxLayout="row" fxLayoutAlign="start center" class="mat-form-field-wrapper">
+
+    <button mat-raised-button color="accent" class="add-button-fix" (click)="onAddChoice()">
         <mat-icon>add</mat-icon>
         <span>&nbsp;&nbsp;&nbsp;ADD CHOICE&nbsp;&nbsp;</span>
     </button>
 
-    <mat-checkbox 
-        fxFlexOffset="2"
-        fxFlexAlign="center"
-        color="primary" 
-        class="padding-bottom-fix"
+    <mat-checkbox color="accent" fxFlexOffset="4"
         [(ngModel)]="question.settings.randomize">
         
         Randomize Choices
@@ -16,48 +13,51 @@
 
 </div>
 
+<div class="mt-8">
 
+    <mat-radio-group>
 
-
-<mat-radio-group>
-
-  <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
-
-    <ng-container [formGroup]="choiceForm">
-
-      <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
-      </app-rich-text-editor>
-
-      <mat-radio-button 
-        color="primary"
-        [value]="choiceForm.get('id').value" 
-        [checked]="choiceForm.get('isCorrect').value" 
-        fxFlexOffset="2" 
-        fxFlexAlign="center" 
-        class="padding-bottom-fix"
-        (change)="onChangeChoice($event)">
-        Correct
-      </mat-radio-button>
-        
-      <button mat-icon-button 
-        color="primary" 
-        (click)="onDeleteChoice(choice)"
-        fxFlexOffset="2"
-        fxFlexAlign="center">
-        <mat-icon class="padding-bottom-fix">delete</mat-icon>
-      </button>
-<!--
-      <div fxLayout>
-
-        <mat-form-field fxFlex="60%" appearance="outline">
-          <mat-label>Choice Feedback</mat-label>
-          <textarea matInput [(ngModel)]="choice.feedback"></textarea>
-        </mat-form-field>
-  
+      <div *ngFor="let choiceForm of choiceForm().controls" fxLayout>
+    
+        <ng-container [formGroup]="choiceForm">
+    
+          <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
+          </app-rich-text-editor>
+    
+          <mat-radio-button 
+            color="primary"
+            [value]="choiceForm.get('id').value" 
+            [checked]="choiceForm.get('isCorrect').value" 
+            fxFlexOffset="2" 
+            fxFlexAlign="center" 
+            class="padding-bottom-fix"
+            (change)="onChangeChoice($event)">
+            Correct
+          </mat-radio-button>
+            
+          <button mat-icon-button 
+            color="primary" 
+            (click)="onDeleteChoice(choice)"
+            fxFlexOffset="2"
+            fxFlexAlign="center">
+            <mat-icon class="padding-bottom-fix">delete</mat-icon>
+          </button>
+    <!--
+          <div fxLayout>
+    
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>Choice Feedback</mat-label>
+              <textarea matInput [(ngModel)]="choice.feedback"></textarea>
+            </mat-form-field>
+      
+          </div>
+    -->
+        </ng-container>
+    
       </div>
--->
-    </ng-container>
+    
+    </mat-radio-group>
 
-  </div>
+</div>
 
-</mat-radio-group>
+
