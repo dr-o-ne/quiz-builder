@@ -24,12 +24,6 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
     }
 
     ngOnInit(): void {
-
-        console.log(1);
-        console.log(this.options);
-        console.log(2);
-
-
         const choicesForm = this.choiceUtilsService.createBinaryChoicesForm(this.question.choices);
         this.questionForm.addControl("choices", choicesForm);
     }
