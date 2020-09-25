@@ -25,13 +25,23 @@
 
           <div>
 
-              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-28">drag_indicator</mat-icon>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-24">drag_indicator</mat-icon>
               <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === true">empty</mat-icon>
 
               <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
               </app-rich-text-editor>
         
-              <mat-checkbox 
+              <mat-form-field 
+                appearance="outline" 
+                floatLabel="always" 
+                fxFlex="12%" 
+                fxFlexOffset="2"
+                *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_POINTS)">
+                <mat-label>Points</mat-label>
+                <input matInput type="number" formControlName="points">
+              </mat-form-field>
+
+              <mat-checkbox *ngIf="!isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_POINTS)"
                 color="accent"
                 formControlName="isCorrect" 
                 fxFlexOffset="2" 
@@ -55,7 +65,7 @@
             <mat-icon>empty</mat-icon>
 
             <app-rich-text-editor 
-              fxFlex="74.5%" 
+              fxFlex="74.2%" 
               displayName="Choice Feedback" 
               textFormControlName="feedback">                                    
             </app-rich-text-editor>
