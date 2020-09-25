@@ -68,7 +68,7 @@
                             <span class="mat-body-1">Is Required</span>
                         </mat-checkbox>
 
-                        <mat-form-field appearance="outline" floatLabel="always" *ngIf="question.type != emptyQuestionType">
+                        <mat-form-field appearance="outline" floatLabel="always" *ngIf="question.type != emptyQuestionType && !isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_POINTS)">
                             <mat-label>Points</mat-label>
                             <input matInput type="number" formControlName="points">
                         </mat-form-field>

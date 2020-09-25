@@ -27,23 +27,28 @@
 
             <div>
 
-              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-28">drag_indicator</mat-icon>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-24">drag_indicator</mat-icon>
               <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === true">empty</mat-icon>
 
               <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
               </app-rich-text-editor>
 
-              <mat-form-field appearance="outline" floatLabel="always">
+              <mat-form-field 
+                appearance="outline" 
+                floatLabel="always" 
+                fxFlex="12%" 
+                fxFlexOffset="2"
+                *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_POINTS)">
                 <mat-label>Points</mat-label>
                 <input matInput type="number" formControlName="points">
               </mat-form-field>
         
-              <mat-radio-button 
+              <mat-radio-button fxFlex="12%" *ngIf="!isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_POINTS)"
                 color="accent"
                 [value]="choiceForm.get('id').value" 
                 [checked]="choiceForm.get('isCorrect').value" 
                 fxFlexOffset="2" 
-                class="mt-24"
+                class="mt-20"
                 (change)="onChangeChoice($event)">
                 Correct
               </mat-radio-button>
@@ -52,7 +57,7 @@
                 color="primary" 
                 (click)="onDeleteChoice(choice)"
                 fxFlexOffset="2"
-                class="mt-16">
+                class="mt-12">
                 <mat-icon>delete</mat-icon>
               </button>
 
