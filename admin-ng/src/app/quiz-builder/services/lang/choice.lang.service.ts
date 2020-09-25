@@ -34,7 +34,7 @@ export class ChoiceLangService {
         switch (+input) {
             case QuestionGradingType.AllOrNothing: return "All or Nothing";
             case QuestionGradingType.CorrectAnswers: return "Correct Only";
-            case QuestionGradingType.RightMinusWrong: return "Right minus Wrong";
+            case QuestionGradingType.RightMinusWrong: return "Right - Wrong";
         }
 
     }

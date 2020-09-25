@@ -15,15 +15,21 @@
 
 </div>
 
-<div class="mt-8">
+<div class="mt-8" cdkDropList (cdkDropListDropped)="drop($event)">
 
     <mat-radio-group>
 
-      <div *ngFor="let choiceForm of choiceForm().controls" fxLayout="column">
+      <div *ngFor="let choiceForm of choiceForm().controls" fxLayout="column" > 
     
-        <ng-container [formGroup]="choiceForm">
+        <ng-container [formGroup]="choiceForm" >
     
-          <div>
+          <div cdkDrag>
+
+            <div>
+
+              <button mat-icon-button matTooltip="Reorder Answers" class="mt-16">
+                <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+              </button>
 
               <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
               </app-rich-text-editor>
@@ -46,14 +52,16 @@
                 <mat-icon>delete</mat-icon>
               </button>
 
-          </div>
+            </div>
 
-          <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
-            <app-rich-text-editor 
-              fxFlex="76.5%" 
-              displayName="Choice Feedback" 
-              textFormControlName="feedback">                                    
-            </app-rich-text-editor>
+            <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
+              <app-rich-text-editor 
+                fxFlex="76.5%" 
+                displayName="Choice Feedback" 
+                textFormControlName="feedback">                                    
+              </app-rich-text-editor>
+            </div>
+
           </div>
 
         </ng-container>
