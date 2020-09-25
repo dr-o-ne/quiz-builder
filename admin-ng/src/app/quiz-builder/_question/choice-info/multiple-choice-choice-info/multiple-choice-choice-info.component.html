@@ -27,9 +27,8 @@
 
             <div>
 
-              <button mat-icon-button matTooltip="Reorder Answers" class="mt-16">
-                <mat-icon cdkDragHandle>drag_indicator</mat-icon>
-              </button>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-28">drag_indicator</mat-icon>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === true">empty</mat-icon>
 
               <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
               </app-rich-text-editor>
@@ -55,8 +54,10 @@
             </div>
 
             <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
+              <mat-icon>empty</mat-icon>
+
               <app-rich-text-editor 
-                fxFlex="76.5%" 
+                fxFlex="74%" 
                 displayName="Choice Feedback" 
                 textFormControlName="feedback">                                    
               </app-rich-text-editor>
