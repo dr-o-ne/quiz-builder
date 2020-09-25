@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="mat-form-field-wrapper">
+<div fxLayout="row" fxLayoutAlign="start center" class="mat-form-field-wrapper mt-20">
 
     <button mat-raised-button color="accent" class="add-button-fix" (click)="onAddChoice()">
         <mat-icon>add</mat-icon>
@@ -15,7 +15,7 @@
 
 </div>
 
-<div class="mt-8" cdkDropList (cdkDropListDropped)="reorder($event)">
+<div class="mt-12" cdkDropList (cdkDropListDropped)="reorder($event)">
 
     <mat-radio-group>
 
@@ -54,13 +54,15 @@
             </div>
 
             <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
+
               <mat-icon>empty</mat-icon>
 
               <app-rich-text-editor 
-                fxFlex="74%" 
+                fxFlex="73.9%" 
                 displayName="Choice Feedback" 
                 textFormControlName="feedback">                                    
               </app-rich-text-editor>
+
             </div>
 
           </div>

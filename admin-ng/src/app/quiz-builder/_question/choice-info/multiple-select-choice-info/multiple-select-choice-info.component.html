@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="mat-form-field-wrapper">
+<div fxLayout="row" fxLayoutAlign="start center" class="mat-form-field-wrapper mt-20">
 
   <button mat-raised-button color="accent" class="add-button-fix" (click)="onAddChoice()">
       <mat-icon>add</mat-icon>
@@ -15,44 +15,55 @@
 
 </div>
 
-<div class="mt-8">
+<div class="mt-12" cdkDropList (cdkDropListDropped)="reorder($event)">
 
     <div *ngFor="let choiceForm of choiceForm().controls" fxLayout="column">
   
       <ng-container [formGroup]="choiceForm">
-  
-        <div>
 
-            <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
+        <div cdkDrag>
+
+          <div>
+
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-28">drag_indicator</mat-icon>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === true">empty</mat-icon>
+
+              <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
+              </app-rich-text-editor>
+        
+              <mat-checkbox 
+                color="accent"
+                formControlName="isCorrect" 
+                fxFlexOffset="2" 
+                fxFlexAlign="center" 
+                class="padding-bottom-fix">
+                Correct
+              </mat-checkbox>
+                
+              <button mat-icon-button 
+                color="primary" 
+                (click)="onDeleteChoice(choice)"
+                fxFlexOffset="2"
+                class="mt-16">
+                <mat-icon>delete</mat-icon>
+              </button>
+
+          </div>
+
+          <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
+
+            <mat-icon>empty</mat-icon>
+
+            <app-rich-text-editor 
+              fxFlex="74.5%" 
+              displayName="Choice Feedback" 
+              textFormControlName="feedback">                                    
             </app-rich-text-editor>
-      
-            <mat-checkbox 
-              color="accent"
-              formControlName="isCorrect" 
-              fxFlexOffset="2" 
-              fxFlexAlign="center" 
-              class="padding-bottom-fix">
-              Correct
-            </mat-checkbox>
-              
-            <button mat-icon-button 
-              color="primary" 
-              (click)="onDeleteChoice(choice)"
-              fxFlexOffset="2"
-              class="mt-16">
-              <mat-icon>delete</mat-icon>
-            </button>
+
+          </div>
 
         </div>
-
-        <div *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK)">
-          <app-rich-text-editor 
-            fxFlex="76.5%" 
-            displayName="Choice Feedback" 
-            textFormControlName="feedback">                                    
-          </app-rich-text-editor>
-        </div>
-
+  
       </ng-container>
   
     </div>

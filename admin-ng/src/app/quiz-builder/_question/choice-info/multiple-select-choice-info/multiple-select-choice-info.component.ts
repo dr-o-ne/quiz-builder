@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ChoiceUtilsService } from '../choice-utls.service';
 import { Choice } from 'app/quiz-builder/model/choice';
 import { fuseAnimations } from '@fuse/animations';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-multiple-select-choice-info',
@@ -68,6 +69,10 @@ export class MultipleSelectChoiceInfoComponent extends ChoiceBaseDirective imple
     isOptionEnabled(name: string): boolean {
         const option = this.options.find(x => x.name === name);
         return option && option.enabled;
+    }
+
+    reorder(event: CdkDragDrop<string[]>): void {
+        this.choiceUtilsService.reorder(this.choiceForm(), event.previousIndex, event.currentIndex);
     }
 
 }
