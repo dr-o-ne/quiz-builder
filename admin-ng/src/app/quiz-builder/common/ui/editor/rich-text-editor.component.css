@@ -5,14 +5,15 @@
 
 .ck.ck-editor__editable_inline {
     border: none !important;
+    overflow: initial;
 }
 
 .ck.ck-editor__editable_inline>:first-child{
-    margin-top: 4px;
+    margin-top: 0px;
 }
 
 .ck.ck-editor__editable_inline>:last-child {
-    margin-bottom: 4px;
+    margin-bottom: 0px;
 }
 
 .rte-height-100 .ck-editor__editable_inline {
