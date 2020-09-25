@@ -3,7 +3,8 @@ export class Choice {
     public id: number,
     public text: string = '',
     public isCorrect: boolean = false,
-    public feedback: string = ''
+    public feedback: string = '',
+    public points: number = 0
   ) {
   }
 }

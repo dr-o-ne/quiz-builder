@@ -14,6 +14,7 @@ export class OptionItemsService {
     public static OPTION_QUESTION_DISPLAY_TYPE = 'questionDisplayType';
     public static OPTION_QUESTION_GRADING_TYPE = 'questionGradingType';
     public static OPTION_QUESTION_ENUMERATION_TYPE = 'questionEnumerationType';
+    public static OPTION_QUESTION_CHOICES_POINTS = 'questionChoicesPoints';
 
 
     getQuestionTypeOptionItems(questionType: QuestionType) {
@@ -32,6 +33,7 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CHOICES_FEEDBACK, 'Choices Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_CHOICES_POINTS, 'Choices Points', false),
             ];
             case QuestionType.MultiSelect: return [
                 new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
