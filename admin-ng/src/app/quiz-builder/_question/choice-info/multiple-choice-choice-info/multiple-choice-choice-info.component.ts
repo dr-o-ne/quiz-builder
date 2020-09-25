@@ -82,13 +82,8 @@ export class MultipleChoiceChoiceInfoComponent extends ChoiceBaseDirective imple
         return option && option.enabled;
     }
 
-    drop(event: CdkDragDrop<string[]>): void {
-        console.log(event);
-        moveItemInArray(this.choiceForm().controls, event.previousIndex, event.currentIndex);
-        moveItemInArray(this.choiceForm().value, event.previousIndex, event.currentIndex);
-
-        console.log(this.choiceForm().controls);
-        console.log(this.choiceForm().value);
+    reorder(event: CdkDragDrop<string[]>): void {
+        this.choiceUtilsService.reorder(this.choiceForm(), event.previousIndex, event.currentIndex);
     }
 
 }

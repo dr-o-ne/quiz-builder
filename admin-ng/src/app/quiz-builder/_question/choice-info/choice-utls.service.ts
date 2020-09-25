@@ -1,3 +1,4 @@
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Choice } from 'app/quiz-builder/model/choice';
@@ -48,11 +49,16 @@ export class ChoiceUtilsService {
         return choicesForm;
     }
 
-    getNextBinaryChoiceId(choiceForm: FormArray): number {
-        if (choiceForm.length === 0)
+    getNextBinaryChoiceId(form: FormArray): number {
+        if (form.length === 0)
             return 0;
-        const ids = choiceForm.controls.map(x => x.get('id').value);
+        const ids = form.controls.map(x => x.get('id').value);
         return Math.max(...ids) + 1;
+    }
+
+    reorder(form: FormArray, from: number, to: number): void {
+        moveItemInArray(form.controls, from, to);
+        moveItemInArray(form.value, from, to);
     }
 
 
