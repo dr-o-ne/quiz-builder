@@ -54,7 +54,7 @@ export class QuizInfoComponent implements OnInit {
         if (this.isEditMode())
             this.selectTab(0);
         else
-            this.selectTab(1);
+            this.selectTab(2);
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
@@ -67,6 +67,7 @@ export class QuizInfoComponent implements OnInit {
                 isScheduleEnabled: [this.quiz.isScheduleEnabled],
                 startDate: [moment(this.quiz.startDate).utc()],
                 endDate: [moment(this.quiz.endDate).utc()],
+                isIntroductionEnabled: [this.quiz.isIntroductionEnabled],
                 introduction: [this.quiz.introduction]
             },
             

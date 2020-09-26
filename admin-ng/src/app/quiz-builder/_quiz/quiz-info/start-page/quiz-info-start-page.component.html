@@ -14,7 +14,14 @@
 
     <div id="rightPanel" class="p-24" fusePerfectScrollbar fxFlex="36%">
 
-RIGTH
+        <form [formGroup]="form">
+
+            <mat-checkbox formControlName="isIntroductionEnabled">
+                <span class="mat-body-1">Show Start Page</span>
+            </mat-checkbox>
+
+        </form>
+
 
     </div>
 

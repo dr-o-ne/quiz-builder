@@ -31,7 +31,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				Name = command.Name,
 				IsPrevButtonEnabled = true,
 				PageSettings = PagePerGroup,
-				QuestionsPerPage = 5
+				QuestionsPerPage = 5,
+				IsIntroductionEnabled = true
 			};
 
 			QuizDto quizDto = _mapper.Map<QuizDto>( quiz );

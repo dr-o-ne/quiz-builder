@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { Quiz } from 'app/quiz-builder/model/quiz';
 
@@ -14,12 +14,10 @@ export class QuizInfoStartPageComponent {
 
     @Input() form!: FormGroup;
 
-    constructor(private fb: FormBuilder) {
-    }
-
     saveFormData(quiz: Quiz): void {
         const value = this.form.value;
         quiz.introduction = value.introduction as string;
+        quiz.isIntroductionEnabled = value.isIntroductionEnabled as boolean;
     }
 
 }

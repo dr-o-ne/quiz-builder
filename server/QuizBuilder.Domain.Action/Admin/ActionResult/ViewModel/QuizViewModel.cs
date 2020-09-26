@@ -10,6 +10,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 
 		public string Id { get; set; }
 		public string Name { get; set; }
+		public bool IsIntroductionEnabled { get; set; }
 		public string Introduction { get; set; }
 		public bool IsEnabled { get; set; }
 		public PageSettings PageSettings { get; set; }

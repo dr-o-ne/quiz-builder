@@ -32,6 +32,9 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
+		[JsonPropertyName( "isIntroductionEnabled" )]
+		public bool IsIntroductionEnabled { get; set; }
+
 		[JsonPropertyName( "introduction" )]
 		public string Introduction { get; set; }
 
