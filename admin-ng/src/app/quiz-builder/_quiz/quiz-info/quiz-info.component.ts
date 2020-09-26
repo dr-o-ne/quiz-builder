@@ -12,6 +12,7 @@ import { QuizInfoStructureComponent } from './structure/quiz-info-structure.comp
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 import { QuizInfoStartPageComponent } from './start-page/quiz-info-start-page.component';
+import { QuizInfoEppearancePageComponent } from './appearance/quiz-info-appearance.component';
 
 @Component({
     selector: 'app-quiz-info',
@@ -25,7 +26,7 @@ export class QuizInfoComponent implements OnInit {
     @ViewChild(QuizInfoStructureComponent) structureControl: QuizInfoStructureComponent;
     @ViewChild(QuizInfoStartPageComponent) startPageControl: QuizInfoStartPageComponent;
     @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
-
+    @ViewChild(QuizInfoEppearancePageComponent) appearanceControl: QuizInfoEppearancePageComponent;
 
     quiz: Quiz;
     quizForm: FormGroup;
@@ -68,9 +69,13 @@ export class QuizInfoComponent implements OnInit {
                 startDate: [moment(this.quiz.startDate).utc()],
                 endDate: [moment(this.quiz.endDate).utc()],
                 isIntroductionEnabled: [this.quiz.isIntroductionEnabled],
-                introduction: [this.quiz.introduction]
+                introduction: [this.quiz.introduction],
+                headerColor: [],
+                backgroundColor: [],
+                sidesColor: [],
+                footerColor: []
             },
-            
+
             )
         })
     }
@@ -83,6 +88,7 @@ export class QuizInfoComponent implements OnInit {
         this.structureControl.saveFormData(this.quiz);
         this.startPageControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
+        this.appearanceControl.saveFormData(this.quiz);
 
         if (this.isEditMode())
             this.updateQuiz();

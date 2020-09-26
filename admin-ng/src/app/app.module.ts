@@ -23,6 +23,12 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 
+import { 
+  MAT_COLOR_FORMATS, 
+  NgxMatColorPickerModule, 
+  NGX_MAT_COLOR_FORMATS } 
+from '@angular-material-components/color-picker'
+
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AuthService } from './quiz-builder/services/auth/auth.service';
@@ -133,6 +139,8 @@ const appRoutes: Routes = [
 
         // Material moment date module
         MatMomentDateModule,
+        // Color Picker
+        NgxMatColorPickerModule,
 
         // Material
         MatButtonModule,
@@ -174,6 +182,8 @@ const appRoutes: Routes = [
       MultipleSelectChoiceInfoComponent
     ],
     providers: [
+        // color picker
+        { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS },
 
         // Services
         AuthService,

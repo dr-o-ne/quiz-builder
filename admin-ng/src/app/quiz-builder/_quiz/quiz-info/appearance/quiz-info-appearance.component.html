@@ -1,0 +1,50 @@
+<div id="quiz-info-appearance">
+
+    <form [formGroup]="form" fxLayout="column">
+
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Header Color:</span>
+    
+            <mat-form-field>
+                <input matInput [ngxMatColorPicker]="headerColorPicker" formControlName="headerColor">
+                <ngx-mat-color-toggle matSuffix [for]="headerColorPicker"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #headerColorPicker [color]="color"></ngx-mat-color-picker>
+            </mat-form-field>
+        </div>
+    
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Background Color:</span>
+    
+            <mat-form-field>
+                <input matInput [ngxMatColorPicker]="backgroundColorPicker" formControlName="backgroundColor">
+                <ngx-mat-color-toggle matSuffix [for]="backgroundColorPicker"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #backgroundColorPicker [color]="color"></ngx-mat-color-picker>
+            </mat-form-field>
+        </div>
+    
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Sides Color:</span>
+    
+            <mat-form-field>
+                <input matInput [ngxMatColorPicker]="sidesColorPicker" formControlName="sidesColor">
+                <ngx-mat-color-toggle matSuffix [for]="sidesColorPicker"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #sidesColorPicker [color]="color"></ngx-mat-color-picker>
+            </mat-form-field>
+        </div>
+    
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Footer Color:</span>
+    
+            <mat-form-field>
+                <input matInput [ngxMatColorPicker]="footerColorPicker" formControlName="footerColor">
+                <ngx-mat-color-toggle matSuffix [for]="footerColorPicker"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #footerColorPicker [color]="color"></ngx-mat-color-picker>
+            </mat-form-field>
+        </div>
+    
+    </form>
+
+</div>
+
+
+
