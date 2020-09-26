@@ -27,8 +27,12 @@
 
             <div>
 
-              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-24">drag_indicator</mat-icon>
-              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === true">empty</mat-icon>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === false" class="mt-24" matTooltip="Reorder Choices">
+                drag_indicator
+              </mat-icon>
+              <mat-icon cdkDragHandle *ngIf="questionForm.get('randomize').value === true">
+                empty
+              </mat-icon>
 
               <app-rich-text-editor fxFlex="100%" displayName="Choice Text" textFormControlName="text">                                    
               </app-rich-text-editor>
