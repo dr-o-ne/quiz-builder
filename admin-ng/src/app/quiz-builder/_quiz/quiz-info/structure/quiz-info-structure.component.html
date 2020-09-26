@@ -23,7 +23,12 @@
                 <div class="header" fxLayout="row" fxLayoutAlign="center center">
 
                     <div fxFlex fxLayoutAlign="center center">
-                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" color="accent">
+
+                        <mat-icon cdkDragHandle matTooltip="Reorder Groups">
+                            drag_indicator
+                        </mat-icon>
+
+                        <button mat-raised-button [matMenuTriggerFor]="addQuestionMenu" color="accent" fxFlexOffset="1">
                             <mat-icon>add</mat-icon>
                             <span>&nbsp;&nbsp;&nbsp;ADD QUESTION&nbsp;&nbsp;</span>
                         </button>
@@ -33,10 +38,6 @@
                                 {{questionLangService.getQuestionTypeLangTerm(questionType)}}
                             </button>
                         </mat-menu>
-
-                        <button mat-icon-button matTooltip="Reorder Groups" class="group-dd">
-                            <mat-icon cdkDragHandle>drag_indicator</mat-icon>
-                        </button>
 
                         <div fxFlex></div>
 
@@ -84,7 +85,12 @@
             
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                        <mat-cell *matCellDef="let element" (click)="onEditClick(element)">{{getDisplayName(element)}}</mat-cell>
+                        <mat-cell *matCellDef="let element" (click)="onEditClick(element)">
+                            <mat-icon matTooltip="Reorder Questions">
+                                drag_indicator
+                            </mat-icon>    
+                            <span fxFlexOffset="2">{{getDisplayName(element)}}</span>
+                        </mat-cell>
                     </ng-container>
             
                     <ng-container matColumnDef="type" >
@@ -95,7 +101,7 @@
                     <ng-container matColumnDef="menu">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <button mat-icon-button [matMenuTriggerFor]="menu" color="accent">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
