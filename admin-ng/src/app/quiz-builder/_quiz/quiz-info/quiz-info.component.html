@@ -57,12 +57,19 @@
 
                 <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 1 ? 'block': 'none'">
 
+                    <app-quiz-info-start-page [form]="quizForm.get('settings')">
+                    </app-quiz-info-start-page>
+
+                </div>
+
+                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 2 ? 'block': 'none'">
+
                     <app-quiz-info-settings [form]="quizForm.get('settings')" [isEditMode]="isEditMode()">
                     </app-quiz-info-settings>
                     
                 </div>
 
-                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 2 ? 'block': 'none'">
+                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 3 ? 'block': 'none'">
 
                     KURA!
                     

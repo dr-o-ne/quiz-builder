@@ -35,7 +35,6 @@ export class QuizInfoSettingsComponent {
         quiz.isScheduleEnabled = value.isScheduleEnabled as boolean;
         quiz.startDate = (value.startDate as moment.Moment).utc().unix();
         quiz.endDate = (value.endDate as moment.Moment).utc().unix();
-        quiz.introduction = value.introduction as string;
     }
 
     isQuestionsPerPageVisisble(): boolean {

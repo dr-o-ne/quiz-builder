@@ -11,6 +11,7 @@ import { QuizInfoSettingsComponent } from './settings/quiz-info-settings.compone
 import { QuizInfoStructureComponent } from './structure/quiz-info-structure.component';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
+import { QuizInfoStartPageComponent } from './start-page/quiz-info-start-page.component';
 
 @Component({
     selector: 'app-quiz-info',
@@ -22,7 +23,9 @@ import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/Navigation
 export class QuizInfoComponent implements OnInit {
 
     @ViewChild(QuizInfoStructureComponent) structureControl: QuizInfoStructureComponent;
+    @ViewChild(QuizInfoStartPageComponent) startPageControl: QuizInfoStartPageComponent;
     @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
+
 
     quiz: Quiz;
     quizForm: FormGroup;
@@ -65,7 +68,9 @@ export class QuizInfoComponent implements OnInit {
                 startDate: [moment(this.quiz.startDate).utc()],
                 endDate: [moment(this.quiz.endDate).utc()],
                 introduction: [this.quiz.introduction]
-            })
+            },
+            
+            )
         })
     }
 
@@ -75,6 +80,7 @@ export class QuizInfoComponent implements OnInit {
 
     onSave(): void {
         this.structureControl.saveFormData(this.quiz);
+        this.startPageControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
 
         if (this.isEditMode())
@@ -105,8 +111,9 @@ export class QuizInfoComponent implements OnInit {
 
         const tabs = [
             { index: 0, id: "questions" },
-            { index: 1, id: "settings" },
-            { index: 2, id: "appearance" }
+            { index: 1, id: "startPage" },
+            { index: 2, id: "settings" },
+            { index: 3, id: "appearance" }
         ];
 
         tabs.forEach(x => {
@@ -135,12 +142,21 @@ export class QuizInfoComponent implements OnInit {
                     }
                 },
                 {
+                    id: 'startPage',
+                    title: 'Start Page',
+                    type: 'item',
+                    icon: 'exit_to_app',
+                    function: () => {
+                        this.selectTab(1)
+                    }
+                },
+                {
                     id: 'settings',
                     title: 'Settings',
                     type: 'item',
                     icon: 'settings',
                     function: () => {
-                        this.selectTab(1)
+                        this.selectTab(2)
                     }
                 },
                 {
@@ -149,7 +165,7 @@ export class QuizInfoComponent implements OnInit {
                     type: 'item',
                     icon: 'color_lens',
                     function: () => {
-                        this.selectTab(2)
+                        this.selectTab(3)
                     }
                 },
             ]
