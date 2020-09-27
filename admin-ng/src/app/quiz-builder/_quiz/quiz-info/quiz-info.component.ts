@@ -72,7 +72,7 @@ export class QuizInfoComponent implements OnInit {
                 introduction: [this.quiz.introduction],
                 headerColor: ['#fff100'],
                 backgroundColor: ['#fff200'],
-                sidesColor: ['#278ce2'],
+                sideColor: ['#278ce2'],
                 footerColor: ['#a51ad633']
             })
         })

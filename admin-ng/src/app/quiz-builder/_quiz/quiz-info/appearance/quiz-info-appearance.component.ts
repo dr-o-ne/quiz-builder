@@ -30,12 +30,12 @@ export class QuizInfoEppearancePageComponent {
         this.form.value.backgroundColor = value;
     }
 
-    get sidesColor(): string {
-        return this.form.value.sidesColor;
+    get sideColor(): string {
+        return this.form.value.sideColor;
     }
     
-    set sidesColor(value: string) { 
-        this.form.value.sidesColor = value;
+    set sideColor(value: string) { 
+        this.form.value.sideColor = value;
     }
 
     get footerColor(): string {
