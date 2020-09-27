@@ -62,6 +62,7 @@ import { Error500Module } from './quiz-builder/_pages/error/500/error-500.module
 import { Error404Module } from './quiz-builder/_pages/error/404/error-404.module';
 import { QuizInfoStartPageComponent } from './quiz-builder/_quiz/quiz-info/start-page/quiz-info-start-page.component';
 import { QuizInfoEppearancePageComponent } from './quiz-builder/_quiz/quiz-info/appearance/quiz-info-appearance.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 const appRoutes: Routes = [
     {
@@ -130,6 +131,8 @@ const appRoutes: Routes = [
         TranslateModule.forRoot(),
 
         CKEditorModule,
+
+        ColorPickerModule,
 
         // Material moment date module
         MatMomentDateModule,

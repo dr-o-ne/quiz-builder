@@ -41,9 +41,9 @@ export class QuizInfoComponent implements OnInit {
         private location: Location,
         private quizDataProvider: QuizDataProvider
     ) {
-        if (this.route.snapshot.data.quizResolver) 
+        if (this.route.snapshot.data.quizResolver)
             this.quiz = this.route.snapshot.data.quizResolver;
-        else 
+        else
             this.quiz = new Quiz();
 
     }
@@ -56,7 +56,6 @@ export class QuizInfoComponent implements OnInit {
             this.selectTab(0);
         else
             this.selectTab(2);
-
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
@@ -71,13 +70,11 @@ export class QuizInfoComponent implements OnInit {
                 endDate: [moment(this.quiz.endDate).utc()],
                 isIntroductionEnabled: [this.quiz.isIntroductionEnabled],
                 introduction: [this.quiz.introduction],
-                headerColor: [],
-                backgroundColor: [],
-                sidesColor: [],
-                footerColor: []
-            },
-
-            )
+                headerColor: ['#fff100'],
+                backgroundColor: ['#fff200'],
+                sidesColor: ['#278ce2'],
+                footerColor: ['#a51ad633']
+            })
         })
     }
 

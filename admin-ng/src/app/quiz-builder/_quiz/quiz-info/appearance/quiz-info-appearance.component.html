@@ -1,6 +1,29 @@
 <div id="quiz-info-appearance">
 
     <form [formGroup]="form" fxLayout="column">
+
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Header Color:</span>
+            <input [(colorPicker)]="headerColor" [style.background]="headerColor"/>
+        </div>
+
+
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Background Color:</span>
+            <input [(colorPicker)]="backgroundColor" [style.background]="backgroundColor"/>
+        </div>
+
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Sides Color:</span>
+            <input [(colorPicker)]="sidesColor" [style.background]="sidesColor"/>
+        </div>
+
+        
+        <div fxLayoutAlign="start center">
+            <span class="mat-body-1" fxFlex="15%">Footer Color:</span>
+            <input [(colorPicker)]="footerColor" [style.background]="footerColor"/>
+        </div>
+
         <!--
         <div fxLayoutAlign="start center">
             <span class="mat-body-1" fxFlex="15%">Header Color:</span>
