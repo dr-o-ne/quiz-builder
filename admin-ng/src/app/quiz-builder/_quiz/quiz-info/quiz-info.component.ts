@@ -57,6 +57,7 @@ export class QuizInfoComponent implements OnInit {
         else
             this.selectTab(2);
 
+
         this.quizForm = this.fb.group({
             settings: this.fb.group({
                 name: [this.quiz.name, Validators.required],
