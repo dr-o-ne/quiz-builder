@@ -20,5 +20,9 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public bool RandomizeQuestions { get; set; }
 		public bool IsScheduleEnabled { get; set; }
 		public ImmutableArray<GroupViewModel> Groups { get; set; }
+		public string HeaderColor { get; set; }
+		public string BackgroundColor { get; set; }
+		public string SideColor { get; set; }
+		public string FooterColor { get; set; }
 	}
 }

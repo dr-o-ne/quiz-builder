@@ -32,7 +32,11 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				IsPrevButtonEnabled = true,
 				PageSettings = PagePerGroup,
 				QuestionsPerPage = 5,
-				IsIntroductionEnabled = true
+				IsIntroductionEnabled = true,
+				HeaderColor = "#11D9E9",
+				BackgroundColor = "#11D9E9",
+				SideColor = "#11D9E9",
+				FooterColor = "#11D9E9"
 			};
 
 			QuizDto quizDto = _mapper.Map<QuizDto>( quiz );

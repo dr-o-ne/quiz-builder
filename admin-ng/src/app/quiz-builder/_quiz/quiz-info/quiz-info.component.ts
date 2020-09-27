@@ -70,10 +70,10 @@ export class QuizInfoComponent implements OnInit {
                 endDate: [moment(this.quiz.endDate).utc()],
                 isIntroductionEnabled: [this.quiz.isIntroductionEnabled],
                 introduction: [this.quiz.introduction],
-                headerColor: ['#fff100'],
-                backgroundColor: ['#fff200'],
-                sideColor: ['#278ce2'],
-                footerColor: ['#a51ad633']
+                headerColor: [this.quiz.headerColor],
+                backgroundColor: [this.quiz.backgroundColor],
+                sideColor: [this.quiz.sideColor],
+                footerColor: [this.quiz.footerColor]
             })
         })
     }

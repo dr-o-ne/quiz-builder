@@ -58,5 +58,15 @@ namespace QuizBuilder.Domain.Model.Default {
 			return true;
 		}
 
+		// Appearance
+
+		public string HeaderColor { get; set; }
+
+		public string BackgroundColor { get; set; }
+
+		public string SideColor { get; set; }
+
+		public string FooterColor { get; set; }
+
 	}
 }

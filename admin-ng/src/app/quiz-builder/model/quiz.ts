@@ -18,6 +18,11 @@ export class Quiz {
     isScheduleEnabled: boolean;
     startDate: number;
     endDate: number;
+
+    headerColor: string;
+    backgroundColor: string;
+    sideColor: string;
+    footerColor: string;
 }
 
 export enum PageSettings {

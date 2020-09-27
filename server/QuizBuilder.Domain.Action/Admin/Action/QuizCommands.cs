@@ -72,6 +72,19 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "endDate" )]
 		public long? EndDate { get; set; }
 
+		// Appearance
+
+		[JsonPropertyName( "headerColor" )]
+		public string HeaderColor { get; set; }
+
+		[JsonPropertyName( "backgroundColor" )]
+		public string BackgroundColor { get; set; }
+
+		[JsonPropertyName( "sideColor" )]
+		public string SideColor { get; set; }
+
+		[JsonPropertyName( "footerColor" )]
+		public string FooterColor { get; set; }
 	}
 
 	public sealed class DeleteQuizCommand : ICommand<CommandResult>, IIdentityAction {

@@ -49,10 +49,10 @@ export class QuizInfoEppearancePageComponent {
     saveFormData(quiz: Quiz): void {
         const value = this.form.value;
 
-        this.form.get('headerColor').value;
-
-        console.log(value.headerColor as string);
-
+        quiz.headerColor = value.headerColor as string;
+        quiz.backgroundColor = value.backgroundColor as string;
+        quiz.sideColor = value.sideColor as string;
+        quiz.footerColor = value.footerColor as string;
     }
 
 }
