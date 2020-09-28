@@ -33,10 +33,10 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				PageSettings = PagePerGroup,
 				QuestionsPerPage = 5,
 				IsIntroductionEnabled = true,
-				HeaderColor = "#11D9E9",
-				BackgroundColor = "#11D9E9",
-				SideColor = "#11D9E9",
-				FooterColor = "#11D9E9"
+				HeaderColor = "#1a202e",
+				BackgroundColor = "#fff",
+				SideColor = "#f5f5f8",
+				FooterColor = "#fff"
 			};
 
 			QuizDto quizDto = _mapper.Map<QuizDto>( quiz );

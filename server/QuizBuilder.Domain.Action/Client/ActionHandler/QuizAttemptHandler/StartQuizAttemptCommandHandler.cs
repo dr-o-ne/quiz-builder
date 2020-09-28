@@ -59,15 +59,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			if( quizDto == null )
 				return new StartQuizAttemptCommandResult { IsSuccess = false };
 
-			//TODO: load from DB
-			var appearance = new Appearance {
-				ShowQuizName = true,
-				HeaderColor = "#1a202e",
-				MainColor = "#f5f5f8",
-				CardColor = "#fff",
-				FooterColor = "#fff"
-			};
-
 			Quiz quiz = _mapper.Map<Quiz>( quizDto );
 
 			if( !quiz.IsValid() )
@@ -75,6 +66,15 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			if( !quiz.IsAvailable() )
 				return new StartQuizAttemptCommandResult {IsSuccess = false};
+
+			//TODO: load from DB
+			var appearance = new Appearance {
+				ShowQuizName = true,
+				HeaderColor = quiz.HeaderColor,
+				MainColor = quiz.SideColor,
+				CardColor = quiz.BackgroundColor,
+				FooterColor = quiz.FooterColor
+			};
 
 			ImmutableArray<QuestionDto> questionDtos = await _questionDataProvider.GetByQuiz( command.QuizUId );
 			ImmutableArray<GroupDto> groupDtos = await _groupDataProvider.GetByQuiz( command.QuizUId );
