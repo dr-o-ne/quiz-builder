@@ -1,15 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.Json.Serialization;
-using QuizBuilder.Common.CQRS.Actions.Default;
 
 namespace QuizBuilder.Domain.Action.Client.ActionResult {
-
-	public sealed class StartQuizAttemptCommandResult : CommandResult<QuizAttemptInfo> {
-	}
-
-	public sealed class EndQuizAttemptCommandResult : CommandResult<AttemptFeedback> {
-	}
 
 	public sealed class QuizAttemptInfo {
 

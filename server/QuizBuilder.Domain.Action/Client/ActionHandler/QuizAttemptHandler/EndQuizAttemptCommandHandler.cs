@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common;
 using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
@@ -15,7 +16,7 @@ using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
-	public sealed class EndQuizAttemptCommandHandler : ICommandHandler<EndQuizAttemptCommand, EndQuizAttemptCommandResult> {
+	public sealed class EndQuizAttemptCommandHandler : ICommandHandler<EndQuizAttemptCommand, CommandResult<AttemptFeedback>> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -33,7 +34,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			_questionDataProvider = questionDataProvider;
 		}
 
-		public async Task<EndQuizAttemptCommandResult> HandleAsync( EndQuizAttemptCommand command ) {
+		public async Task<CommandResult<AttemptFeedback>> HandleAsync( EndQuizAttemptCommand command ) {
 
 			List<Question> questions = await GetQuestions( command.AttemptUId );
 
@@ -42,7 +43,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			foreach( QuestionAttemptResult item in command.Answers ) {
 				Question question = questions.SingleOrDefault( x => x.UId == item.QuestionUId );
 				if( question == null ) {
-					return new EndQuizAttemptCommandResult { IsSuccess = false, Message = string.Empty };
+					return new CommandResult<AttemptFeedback> { IsSuccess = false, Message = string.Empty };
 				}
 				//TODO: check required;
 
@@ -95,7 +96,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			}
 
-			return new EndQuizAttemptCommandResult {
+			return new CommandResult<AttemptFeedback> {
 				IsSuccess = true,
 				Message = string.Empty,
 				Payload = new AttemptFeedback {Score = totalScore}

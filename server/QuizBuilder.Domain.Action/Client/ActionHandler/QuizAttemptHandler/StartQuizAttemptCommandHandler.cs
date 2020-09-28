@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using QuizBuilder.Common;
 using QuizBuilder.Common.CQRS.ActionHandlers;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Common.Services;
 using QuizBuilder.Data.DataProviders;
 using QuizBuilder.Data.Dto;
@@ -19,7 +20,7 @@ using QuizBuilder.Domain.Model.Default.Structure;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
-	public sealed class StartQuizAttemptCommandHandler : ICommandHandler<StartQuizAttemptCommand, StartQuizAttemptCommandResult> {
+	public sealed class StartQuizAttemptCommandHandler : ICommandHandler<StartQuizAttemptCommand, CommandResult<QuizAttemptInfo>> {
 
 		private readonly IMapper _mapper;
 		private readonly IUIdService _uIdService;
@@ -47,25 +48,25 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			_pageInfoDataFactory = pageInfoDataFactory;
 		}
 
-		public async Task<StartQuizAttemptCommandResult> HandleAsync( StartQuizAttemptCommand command ) {
+		public async Task<CommandResult<QuizAttemptInfo>> HandleAsync( StartQuizAttemptCommand command ) {
 
 			string quizUId = command.QuizUId;
 
 			if( string.IsNullOrWhiteSpace( quizUId ) )
-				return new StartQuizAttemptCommandResult { IsSuccess = false };
+				return new CommandResult<QuizAttemptInfo> { IsSuccess = false };
 
 			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, quizUId );
 
 			if( quizDto == null )
-				return new StartQuizAttemptCommandResult { IsSuccess = false };
+				return new CommandResult<QuizAttemptInfo> { IsSuccess = false };
 
 			Quiz quiz = _mapper.Map<Quiz>( quizDto );
 
 			if( !quiz.IsValid() )
-				return new StartQuizAttemptCommandResult {IsSuccess = false};
+				return new CommandResult<QuizAttemptInfo> {IsSuccess = false};
 
 			if( !quiz.IsAvailable() )
-				return new StartQuizAttemptCommandResult {IsSuccess = false};
+				return new CommandResult<QuizAttemptInfo> {IsSuccess = false};
 
 			//TODO: load from DB
 			var appearance = new Appearance {
@@ -84,7 +85,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			QuizAttempt quizAttempt = await CreateQuizAttempt( quizUId );
 
-			return new StartQuizAttemptCommandResult {
+			return new CommandResult<QuizAttemptInfo> {
 				IsSuccess = true,
 				Message = string.Empty,
 				Payload = MapPayload( quizAttempt.UId, quiz, groups, questions, appearance )

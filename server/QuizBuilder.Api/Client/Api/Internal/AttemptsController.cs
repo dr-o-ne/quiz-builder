@@ -17,7 +17,7 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] StartQuizAttemptCommand command ) {
-			StartQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
+			var result = await _dispatcher.SendAsync( command );
 			QuizAttemptInfo payload = result.Payload;
 
 			return result.IsSuccess
@@ -27,7 +27,7 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 
 		[HttpPut]
 		public async Task<ActionResult> Update( [FromBody] EndQuizAttemptCommand command ) {
-			EndQuizAttemptCommandResult result = await _dispatcher.SendAsync( command );
+			var result = await _dispatcher.SendAsync( command );
 			AttemptFeedback payload = result.Payload;
 
 			return result.IsSuccess

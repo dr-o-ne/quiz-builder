@@ -2,11 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using QuizBuilder.Common.CQRS.Actions;
+using QuizBuilder.Common.CQRS.Actions.Default;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Client.Action {
 
-	public sealed class StartQuizAttemptCommand : ICommand<StartQuizAttemptCommandResult> {
+	public sealed class StartQuizAttemptCommand : ICommand<CommandResult<QuizAttemptInfo>> {
 
 		[Required]
 		[JsonPropertyName( "QuizId" )]
@@ -14,7 +15,7 @@ namespace QuizBuilder.Domain.Action.Client.Action {
 
 	}
 
-	public sealed class EndQuizAttemptCommand : ICommand<EndQuizAttemptCommandResult> {
+	public sealed class EndQuizAttemptCommand : ICommand<CommandResult<AttemptFeedback>> {
 
 		[Required]
 		[JsonPropertyName( "id" )]
