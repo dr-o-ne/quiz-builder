@@ -1,3 +1,3 @@
-export class ApiResponse<T> {
-    payload!: T;
+export interface ApiResponse<T> {
+    payload: T;
 }
