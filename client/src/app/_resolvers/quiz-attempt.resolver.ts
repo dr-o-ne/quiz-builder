@@ -14,13 +14,8 @@ export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
     }
 
     resolve(route: ActivatedRouteSnapshot): Observable<QuizAttemptInfo> {
-
         const quizId = route.params['id'];
-
-        const res =  this.dataProviderService.startAttempt(quizId).pipe(map(x => x.payload));
-
-
-        return res;
+        return  this.dataProviderService.startAttempt(quizId).pipe(map(x => x.payload));
     }
 
     onError(): Observable<never> {
