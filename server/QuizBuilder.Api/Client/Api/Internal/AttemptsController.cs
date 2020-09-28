@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using QuizBuilder.Common.CQRS.Dispatchers;
 using QuizBuilder.Domain.Action.Client.Action;
-using QuizBuilder.Domain.Action.Client.ActionResult;
 using StartQuizAttemptCommand = QuizBuilder.Domain.Action.Client.Action.StartQuizAttemptCommand;
 
 namespace QuizBuilder.Api.Client.Api.Internal {
@@ -18,21 +17,19 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] StartQuizAttemptCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
-			QuizAttemptInfo payload = result.Payload;
 
 			return result.IsSuccess
-				? (ActionResult)Created( nameof( string.Empty ), payload )
+				? (ActionResult)Created( nameof( string.Empty ), result )
 				: UnprocessableEntity( string.Empty );
 		}
 
 		[HttpPut]
 		public async Task<ActionResult> Update( [FromBody] EndQuizAttemptCommand command ) {
 			var result = await _dispatcher.SendAsync( command );
-			AttemptFeedback payload = result.Payload;
 
 			return result.IsSuccess
-				? (ActionResult)Ok( payload )
-				: UnprocessableEntity( result );
+				? (ActionResult)Ok( result )
+				: UnprocessableEntity( string.Empty );
 		}
 
 	}

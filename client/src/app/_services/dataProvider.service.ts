@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { QuizAttemptInfo } from '../_models/attemptInfo';
 import { QuizAttemptResult } from '../_models/attemptResult';
 import { QuizAttemptFeedback } from '../_models/attemptFeedback';
+import { ApiResponse } from './apiResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class DataProviderService {
 
   constructor(private http: HttpClient) { }
 
-  startAttempt(quizId: string): Observable<QuizAttemptInfo> {
-    return this.http.post<QuizAttemptInfo>(this.apiUrl + 'attempts', { quizId });
+  startAttempt(quizId: string): Observable<ApiResponse<QuizAttemptInfo>> {
+    return this.http.post<ApiResponse<QuizAttemptInfo>>(this.apiUrl + 'attempts', { quizId });
   }
 
-  endAttempt(quizAttempt: QuizAttemptResult): Observable<QuizAttemptFeedback> {
-    return this.http.put<QuizAttemptFeedback>(this.apiUrl + 'attempts', quizAttempt);
+  endAttempt(quizAttempt: QuizAttemptResult): Observable<ApiResponse<QuizAttemptFeedback>> {
+    return this.http.put<ApiResponse<QuizAttemptFeedback>>(this.apiUrl + 'attempts', quizAttempt);
   }
 
 }

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EndPageModalDialog } from './end-page/end-page-modal.component';
 import { QuizNavPanelComponent } from './quiz-nav-panel/quiz-nav-panel.component';
 import { MatButton } from '@angular/material/button';
+import { ApiResponse } from '../_services/apiResponse';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -35,6 +36,11 @@ export class QuizAttemptComponent implements AfterViewInit {
     public dialog: MatDialog
   ) {
     this.attempt = this.route.snapshot.data.attempt;
+
+    console.log(123);
+
+    console.log(this.route.snapshot.data);
+
     this.answers = new Map<string, QuestionAttemptResult>();
     this.currentPageIndex = 0;
   }
@@ -64,7 +70,7 @@ export class QuizAttemptComponent implements AfterViewInit {
     const result = new QuizAttemptResult(this.attempt.id, [...this.answers.values()]);
 
     this.dataProviderService.endAttempt(result).subscribe(
-      (quizAttemptFeedback: QuizAttemptFeedback) => { this.openDialog(quizAttemptFeedback); }
+      (quizAttemptFeedback: ApiResponse<QuizAttemptFeedback>) => { this.openDialog(quizAttemptFeedback.payload); }
     );
   }
 

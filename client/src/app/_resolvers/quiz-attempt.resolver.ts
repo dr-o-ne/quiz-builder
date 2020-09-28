@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, NEVER } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { QuizAttemptInfo } from '../_models/attemptInfo';
 import { DataProviderService } from 'src/app/_services/dataProvider.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
@@ -13,15 +13,14 @@ export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
         private router: Router) {
     }
 
-    resolve(route: ActivatedRouteSnapshot): Observable<QuizAttemptInfo> | Observable<never> {
+    resolve(route: ActivatedRouteSnapshot): Observable<QuizAttemptInfo> {
 
         const quizId = route.params['id'];
 
-        return this.dataProviderService.startAttempt(quizId).pipe(
-            attempt => {
-                return attempt ? attempt : this.onError();
-            }, catchError(() => this.onError())
-        );
+        const res =  this.dataProviderService.startAttempt(quizId).pipe(map(x => x.payload));
+
+
+        return res;
     }
 
     onError(): Observable<never> {
