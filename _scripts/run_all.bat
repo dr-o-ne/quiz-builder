@@ -5,4 +5,4 @@ cd ../admin-ng
 start cmd.exe /k "ng serve --port 5200"
 
 cd ../client
-start cmd.exe /k "ng serve --port 5200"
+start cmd.exe /k "ng serve --port 6200"
