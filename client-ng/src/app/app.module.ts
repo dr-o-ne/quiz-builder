@@ -18,6 +18,8 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
+import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.component';
+
 const appRoutes: Routes = [
     {
         path      : '**',
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        QuizAttemptComponent
     ],
     imports     : [
         BrowserModule,
