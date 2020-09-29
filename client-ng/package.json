@@ -39,7 +39,7 @@
         "@swimlane/ngx-datatable": "17.1.0",
         "@swimlane/ngx-dnd": "8.1.2",
         "@types/prismjs": "1.16.1",
-        "angular-calendar": "0.28.16",
+        "angular-calendar": "0.28.20",
         "angular-in-memory-web-api": "0.11.0",
         "chart.js": "2.9.3",
         "classlist.js": "1.1.20150312",
