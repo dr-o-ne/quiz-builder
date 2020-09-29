@@ -22,6 +22,8 @@ import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
 
 import { MaterialModule } from './quiz-builder/common/material.module';
+import { QuestionHostDirective } from './quiz-builder/_quiz-attempt/questions/question-host.directive';
+
 
 const appRoutes: Routes = [
     { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
@@ -30,7 +32,9 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        QuizAttemptComponent
+        QuizAttemptComponent,
+
+        QuestionHostDirective,
     ],
     imports     : [
         BrowserModule,

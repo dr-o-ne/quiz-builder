@@ -14,8 +14,8 @@ export class QuizAttemptComponent {
 
     animationDirection: 'left' | 'right' | 'none';
 
-    attempt: QuizAttemptInfo;
-    currentPageIndex: number;
+    attempt!: QuizAttemptInfo;
+    currentPageIndex!: number;
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
