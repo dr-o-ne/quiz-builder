@@ -1,0 +1,13 @@
+e2e/**
+src/@fuse/**
+src/app/fuse-config/**
+src/app/layout/**
+src/app/main/**
+src/app/navigation/**
+karma.conf.js
+src/app/app.component.ts
+src/app/app.module.ts
+src/app/app.component.ts
+src/hmr.ts
+src/polyfills.ts
+src/test.ts
