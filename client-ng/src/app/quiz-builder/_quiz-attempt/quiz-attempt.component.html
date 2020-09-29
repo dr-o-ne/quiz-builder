@@ -13,19 +13,19 @@
 
         <!-- CONTENT -->
         <div id="course-content" class="content">
-<!--
-            <ng-container *ngFor="let step of course.steps; let i = index;">
+
+            <ng-container *ngFor="let step of this.attempt.pages; let i = index;">
 
                 <div class="course-step" fusePerfectScrollbar
-                     *ngIf="currentStep === i"
+                     *ngIf="currentPageIndex === i"
                      [@slideIn]="animationDirection">
 
-                    <div id="course-step-content" class="course-step-content" [innerHTML]="step.content"></div>
+                    <div id="course-step-content" class="course-step-content">TEST</div>
 
                 </div>
 
             </ng-container>
--->
+
         </div>
         <!-- / CONTENT -->
 

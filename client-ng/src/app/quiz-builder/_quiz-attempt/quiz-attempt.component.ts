@@ -29,7 +29,6 @@ export class QuizAttemptComponent {
         if (this.currentPageIndex === 0) {
             return;
         }
-        this.currentPageIndex--;
 
         // Set the animation direction
         this.animationDirection = 'right';
@@ -37,6 +36,8 @@ export class QuizAttemptComponent {
         // Run change detection so the change
         // in the animation direction registered
         this.changeDetectorRef.detectChanges();
+
+        this.currentPageIndex--;
     }
 
     gotoNextPage(): void {
@@ -44,14 +45,14 @@ export class QuizAttemptComponent {
             return;
         }
 
-        this.currentPageIndex++;
-
         // Set the animation direction
         this.animationDirection = 'left';
 
         // Run change detection so the change
         // in the animation direction registered
         this.changeDetectorRef.detectChanges();
+
+        this.currentPageIndex++;
     }
 
 }
