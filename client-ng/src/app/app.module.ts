@@ -21,6 +21,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.component';
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
 
+import { MaterialModule } from './quiz-builder/common/material.module';
 
 const appRoutes: Routes = [
     { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
@@ -55,7 +56,10 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+
+        // UI
+        MaterialModule,
     ],
     providers: [
         QuizAttemptResolver
