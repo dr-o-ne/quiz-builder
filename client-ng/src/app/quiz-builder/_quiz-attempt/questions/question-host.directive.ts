@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-    selector: '[question-host]',
+    selector: '[qb-question-host]',
 })
 
 export class QuestionHostDirective {

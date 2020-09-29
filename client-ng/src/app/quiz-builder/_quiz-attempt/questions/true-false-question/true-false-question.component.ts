@@ -7,7 +7,7 @@ import { TrueFalseQuestionAttemptResult } from '../../../model/attemptResult';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({
-    selector: 'app-true-false-question',
+    selector: 'qb-true-false-question',
     templateUrl: './true-false-question.component.html'
 })
 

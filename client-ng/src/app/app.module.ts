@@ -23,6 +23,7 @@ import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resol
 
 import { MaterialModule } from './quiz-builder/common/material.module';
 import { QuestionHostDirective } from './quiz-builder/_quiz-attempt/questions/question-host.directive';
+import { QuestionDynamicComponent } from './quiz-builder/_quiz-attempt/questions/question-dynamic.component';
 import { TrueFalseQuestionComponent } from './quiz-builder/_quiz-attempt/questions/true-false-question/true-false-question.component';
 
 const appRoutes: Routes = [
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
         QuizAttemptComponent,
 
         QuestionHostDirective,
+        QuestionDynamicComponent,
         TrueFalseQuestionComponent
     ],
     imports     : [
