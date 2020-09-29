@@ -15,12 +15,13 @@ export class QuizAttemptResolver implements Resolve<QuizAttemptInfo> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<QuizAttemptInfo> {
         const quizId = route.params['id'];
-        return  this.dataProviderService.startAttempt(quizId).pipe(map(x => x.payload));
+        return this.dataProviderService.startAttempt(quizId).pipe(map(x => x.payload));
     }
 
     onError(): Observable<never> {
         this.router.navigate(['/404']); // TODO: check and add page. Quiz not found | not visible | error
         return NEVER;
     }
+    
 
 }

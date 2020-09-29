@@ -19,12 +19,11 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
 import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.component';
+import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
+
 
 const appRoutes: Routes = [
-    {
-        path      : '**',
-        redirectTo: 'sample'
-    }
+    { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
 ];
 
 @NgModule({
@@ -57,6 +56,9 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         SampleModule
+    ],
+    providers: [
+        QuizAttemptResolver
     ],
     bootstrap   : [
         AppComponent

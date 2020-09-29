@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { QuizAttemptInfo } from '../_models/attemptInfo';
-import { QuizAttemptResult } from '../_models/attemptResult';
-import { QuizAttemptFeedback } from '../_models/attemptFeedback';
+import { QuizAttemptInfo } from '../../model/attemptInfo';
+import { QuizAttemptResult } from '../../model/attemptResult';
+import { QuizAttemptFeedback } from '../../model/attemptFeedback';
 import { ApiResponse } from './apiResponse';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
