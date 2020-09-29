@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizAttemptInfo } from '../model/attemptInfo';
@@ -12,14 +12,46 @@ import { QuizAttemptInfo } from '../model/attemptInfo';
 })
 export class QuizAttemptComponent {
 
-    attempt!: QuizAttemptInfo;
-    currentPageIndex!: number;
+    animationDirection: 'left' | 'right' | 'none';
+
+    attempt: QuizAttemptInfo;
+    currentPageIndex: number;
 
     constructor(
+        private changeDetectorRef: ChangeDetectorRef,
         private route: ActivatedRoute
     ) {
         this.attempt = this.route.snapshot.data.attempt;
         this.currentPageIndex = 0;
+    }
+
+    gotoPreviousPage(): void {
+        if (this.currentPageIndex === 0) {
+            return;
+        }
+        this.currentPageIndex--;
+
+        // Set the animation direction
+        this.animationDirection = 'right';
+
+        // Run change detection so the change
+        // in the animation direction registered
+        this.changeDetectorRef.detectChanges();
+    }
+
+    gotoNextPage(): void {
+        if (this.currentPageIndex === this.attempt.pages.length - 1) {
+            return;
+        }
+
+        this.currentPageIndex++;
+
+        // Set the animation direction
+        this.animationDirection = 'left';
+
+        // Run change detection so the change
+        // in the animation direction registered
+        this.changeDetectorRef.detectChanges();
     }
 
 }
