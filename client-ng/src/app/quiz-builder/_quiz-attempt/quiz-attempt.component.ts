@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { QuizAttemptInfo } from '../model/attemptInfo';
+import { QuestionAttemptInfo, QuizAttemptInfo } from '../model/attemptInfo';
+import { QuestionAttemptResult } from '../model/attemptResult';
 
 @Component({
     selector: 'qb-quiz-attempt',
@@ -35,7 +36,7 @@ export class QuizAttemptComponent {
 
         // Run change detection so the change
         // in the animation direction registered
-        this.changeDetectorRef.detectChanges();
+        //this.changeDetectorRef.detectChanges();
 
         this.currentPageIndex--;
     }
@@ -50,9 +51,22 @@ export class QuizAttemptComponent {
 
         // Run change detection so the change
         // in the animation direction registered
-        this.changeDetectorRef.detectChanges();
+        //this.changeDetectorRef.detectChanges();
 
         this.currentPageIndex++;
+    }
+
+    getQuestions(): QuestionAttemptInfo[] {
+
+        console.log(this.currentPageIndex);
+        const res = this.attempt.pages[this.currentPageIndex].questions;
+
+        console.log(res);
+
+        return res;
+    }
+
+    onAnswer(answer: QuestionAttemptResult): void {
     }
 
 }

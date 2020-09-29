@@ -10,7 +10,7 @@ import { TrueFalseQuestionComponent } from './true-false-question/true-false-que
 
 @Component({
   selector: 'qb-question-dynamic',
-  template: '<ng-template question-host></ng-template>'
+  template: '<ng-template qb-question-host></ng-template>'
 })
 
 export class QuestionDynamicComponent implements OnInit {
@@ -23,6 +23,9 @@ export class QuestionDynamicComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    console.log('test');
+
     this.loadComponent();
   }
 
