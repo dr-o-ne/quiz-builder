@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
+import { QuizAttemptInfo } from '../model/attemptInfo';
 
 @Component({
     selector: 'qb-quiz-attempt',
@@ -9,4 +11,15 @@ import { fuseAnimations } from '@fuse/animations';
     animations: fuseAnimations
 })
 export class QuizAttemptComponent {
+
+    attempt!: QuizAttemptInfo;
+    currentPageIndex!: number;
+
+    constructor(
+        private route: ActivatedRoute
+    ) {
+        this.attempt = this.route.snapshot.data.attempt;
+        this.currentPageIndex = 0;
+    }
+
 }
