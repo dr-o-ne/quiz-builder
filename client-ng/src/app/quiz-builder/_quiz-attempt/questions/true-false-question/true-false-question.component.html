@@ -1,4 +1,4 @@
-{{question.text}}
+<ckeditor [editor]="Editor" data="{{question.text}}" [disabled]="true"></ckeditor>
 
 <div *ngIf="question.choicesDisplayType === choicesDisplayType.Horizontal || 
             question.choicesDisplayType === choicesDisplayType.Vertical">

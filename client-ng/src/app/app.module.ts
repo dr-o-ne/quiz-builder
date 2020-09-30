@@ -26,6 +26,8 @@ import { QuestionHostDirective } from './quiz-builder/_quiz-attempt/questions/qu
 import { QuestionDynamicComponent } from './quiz-builder/_quiz-attempt/questions/question-dynamic.component';
 import { TrueFalseQuestionComponent } from './quiz-builder/_quiz-attempt/questions/true-false-question/true-false-question.component';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 const appRoutes: Routes = [
     { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
 ];
@@ -64,6 +66,8 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         SampleModule,
+
+        CKEditorModule,
 
         // UI
         MaterialModule,
