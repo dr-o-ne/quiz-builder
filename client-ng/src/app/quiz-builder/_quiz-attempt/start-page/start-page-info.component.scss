@@ -1,6 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
-#quiz-attempt {
+#start-page-info {
 
     .center {
         position: relative;
@@ -42,29 +42,10 @@
                     border-radius: 8px;
                     @include mat-elevation(1);
                 }
+
             }
         }
 
-        .page-navigation {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            bottom: 32px;
-            max-width: 944px;
-            padding: 0 24px;
-            width: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-
-            .previous {
-                margin-right: auto;
-            }
-
-            .next,
-            .done {
-                margin-left: auto;
-            }
-        }
     }
 }
+
