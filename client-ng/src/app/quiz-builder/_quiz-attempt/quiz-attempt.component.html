@@ -14,20 +14,21 @@
         <!-- CONTENT -->
         <div id="course-content" class="content">
 
-            <div *ngFor="let question of getQuestions(); let i = index">
+            <div class="course-step" fusePerfectScrollbar [@slideIn]="animationDirection">
 
-                <div class="course-step" fusePerfectScrollbar [@slideIn]="animationDirection">
+                <div id="course-step-content" class="course-step-content">
 
-                    <div id="course-step-content" class="course-step-content">
+                    <div *ngFor="let question of getQuestions(); let i = index">
 
                         <qb-question-dynamic [question]="question" (answer)="onAnswer($event)">
                         </qb-question-dynamic>
-
+        
                     </div>
 
                 </div>
 
             </div>
+
         </div>
         <!-- / CONTENT -->
 
