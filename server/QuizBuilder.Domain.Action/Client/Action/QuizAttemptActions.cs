@@ -7,7 +7,7 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Client.Action {
 
-	public sealed class GetQuizInfoAction : IQuery<CommandResult<QuizInfo>> {
+	public sealed class GetQuizInfoAction : IQuery<CommandResult<StartPageInfo>> {
 
 		[Required]
 		[JsonPropertyName( "quizId" )]

@@ -12,7 +12,7 @@ using QuizBuilder.Domain.Model.Default;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
-	public sealed class GetQuizInfoQueryHandler : IQueryHandler<GetQuizInfoAction, CommandResult<QuizInfo>> {
+	public sealed class GetQuizInfoQueryHandler : IQueryHandler<GetQuizInfoAction, CommandResult<StartPageInfo>> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -22,31 +22,33 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			_quizDataProvider = quizDataProvider;
 		}
 
-		public async Task<CommandResult<QuizInfo>> HandleAsync( GetQuizInfoAction action ) {
+		public async Task<CommandResult<StartPageInfo>> HandleAsync( GetQuizInfoAction action ) {
 			string quizUId = action.QuizUId;
 
 			if( string.IsNullOrWhiteSpace( quizUId ) ) {
-				return new CommandResult<QuizInfo> {IsSuccess = false};
+				return new CommandResult<StartPageInfo> {IsSuccess = false};
 			}
 
 			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, quizUId );
 
 			if( quizDto == null ) {
-				return new CommandResult<QuizInfo> {IsSuccess = false};
+				return new CommandResult<StartPageInfo> {IsSuccess = false};
 			}
 
 			Quiz quiz = _mapper.Map<Quiz>( quizDto );
 
 			if( !quiz.IsValid() ) {
-				return new CommandResult<QuizInfo> {IsSuccess = false};
+				return new CommandResult<StartPageInfo> {IsSuccess = false};
 			}
 
 			if( !quiz.IsAvailable() ) {
-				return new CommandResult<QuizInfo> {IsSuccess = false};
+				return new CommandResult<StartPageInfo> {IsSuccess = false};
 			}
 
 			//TODO: load from DB
-			QuizInfo payload = new QuizInfo();
+			StartPageInfo payload = new StartPageInfo();
+			payload.ShowStartPage = true;
+			payload.Name = quiz.Name;
 			payload.IntroductionText = quiz.Introduction;
 			payload.TotalAttempts = 10;
 			payload.PassingScore = 80;
@@ -55,7 +57,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			payload.TotalQuestions = 10;
 			payload.TotalPoints = 100;
 
-			return new CommandResult<QuizInfo> {
+			return new CommandResult<StartPageInfo> {
 				IsSuccess = true,
 				Message = string.Empty,
 				Payload = payload

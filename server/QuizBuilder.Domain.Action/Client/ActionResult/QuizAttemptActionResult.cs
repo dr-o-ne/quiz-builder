@@ -5,7 +5,13 @@ using System.Text.Json.Serialization;
 
 namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
-	public sealed class QuizInfo {
+	public sealed class StartPageInfo {
+
+		[JsonPropertyName( "showStartPage" )]
+		public bool ShowStartPage { get; set; }
+
+		[JsonPropertyName( "name" )]
+		public string Name { get; set; }
 
 		[JsonPropertyName( "introductionText" )]
 		public string IntroductionText { get; set; }

@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
+import { StartPageInfo } from 'app/quiz-builder/model/startPageInfo';
 
 @Component({
     selector: 'qb-start-page-info',
@@ -10,4 +12,12 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class StartPageInfoComponent {
     
+    startPageInfo!: StartPageInfo;
+
+    constructor(
+        private route: ActivatedRoute
+    ) {
+        this.startPageInfo = this.route.snapshot.data.startPageInfo;
+    }
+
 }
