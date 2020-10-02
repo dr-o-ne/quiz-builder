@@ -1,4 +1,4 @@
-<div id="quiz-attempt" class="page-layout simple left-sidebar inner-scroll">
+<div id="academy-course" class="page-layout simple left-sidebar inner-scroll">
 
     <!-- CENTER -->
     <div class="center">
@@ -12,27 +12,31 @@
         <!-- / HEADER -->
 
         <!-- CONTENT -->
-        <div class="content">
+        <div id="course-content" class="content">
 
-            <div class="group" fusePerfectScrollbar >
+            <ng-container>
 
-                <div class="group-content">
+                <div class="course-step" fusePerfectScrollbar>
 
-                    <div *ngFor="let question of getQuestions(); let i = index">
+                    <div id="course-step-content" class="course-step-content">
 
-                        <qb-question-dynamic [question]="question" (answer)="onAnswer($event)">
-                        </qb-question-dynamic>
-        
+                        <div *ngFor="let question of getQuestions(); let i = index">
+
+                            <qb-question-dynamic id="course-step-content" [question]="question" (answer)="onAnswer($event)">
+                            </qb-question-dynamic>
+            
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
+            </ng-container>
 
         </div>
         <!-- / CONTENT -->
 
-        <div class="page-navigation">
+        <div class="step-navigation">
 
             <button mat-fab class="previous mat-accent fuse-white-fg"
                     (click)="gotoPreviousPage()"

@@ -23,6 +23,7 @@ export class QuizAttemptComponent {
         this.currentPageIndex = 0;
     }
 
+    
     gotoPreviousPage(): void {
         if (this.currentPageIndex === 0) {
             return;
