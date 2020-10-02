@@ -1,27 +1,32 @@
 <qb-rich-text-editor data="{{question.text}}"></qb-rich-text-editor>
 
-<div *ngIf="question.choicesDisplayType === choicesDisplayType.Horizontal || 
-            question.choicesDisplayType === choicesDisplayType.Vertical">
+<div class="mt-12">
 
-  <mat-radio-group (change)="onChange($event)"
-    [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'item-group-horizontal':'item-group-vertical'">
+  <div *ngIf="question.choicesDisplayType === choicesDisplayType.Horizontal || 
+              question.choicesDisplayType === choicesDisplayType.Vertical">
 
-    <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id" class="item-box">
-      {{choice.text}}
-    </mat-radio-button>
+    <mat-radio-group (change)="onChange($event)"
+      [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'item-group-horizontal':'item-group-vertical'">
 
-  </mat-radio-group>
-
-</div>
-
-<div *ngIf="question.choicesDisplayType === choicesDisplayType.Dropdown">
-
-  <mat-form-field appearance="outline">
-    <mat-select (selectionChange)="onChange($event)">
-      <mat-option *ngFor="let choice of question.choices" [value]="choice.id">
+      <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id">
         {{choice.text}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      </mat-radio-button>
+
+    </mat-radio-group>
+
+  </div>
+
+  <div *ngIf="question.choicesDisplayType === choicesDisplayType.Dropdown">
+
+    <mat-form-field appearance="outline">
+      <mat-select (selectionChange)="onChange($event)">
+        <mat-option *ngFor="let choice of question.choices" [value]="choice.id">
+          {{choice.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
 
 </div>
+
