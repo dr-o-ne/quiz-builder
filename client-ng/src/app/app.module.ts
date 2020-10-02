@@ -20,7 +20,10 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
 import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.component';
+import { StartPageInfoComponent } from './quiz-builder/_quiz-attempt/start-page/start-page-info.component';
+
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
+import { StartPageInfoResolver } from './quiz-builder/resolvers/start-page-info.resolver';
 
 import { MaterialModule } from './quiz-builder/common/material.module';
 import { QuestionHostDirective } from './quiz-builder/_quiz-attempt/questions/question-host.directive';
@@ -31,7 +34,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-text-editor.component';
 
 const appRoutes: Routes = [
-    { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
+    { path: 'quizzes/:id', component: StartPageInfoComponent, resolve: { attempt: StartPageInfoResolver } }
+
+    //{ path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
 ];
 
 @NgModule({
@@ -42,6 +47,7 @@ const appRoutes: Routes = [
 
         AppComponent,
         QuizAttemptComponent,
+        StartPageInfoComponent,
 
         QuestionHostDirective,
         QuestionDynamicComponent,
@@ -79,7 +85,8 @@ const appRoutes: Routes = [
         MaterialModule,
     ],
     providers: [
-        QuizAttemptResolver
+        QuizAttemptResolver,
+        StartPageInfoResolver
     ],
     bootstrap   : [
         AppComponent

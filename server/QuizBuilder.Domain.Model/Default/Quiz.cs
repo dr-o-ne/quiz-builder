@@ -16,10 +16,6 @@ namespace QuizBuilder.Domain.Model.Default {
 		[JsonIgnore]
 		public bool IsEnabled { get; set; }
 
-		public bool IsIntroductionEnabled { get; set; }
-
-		public string Introduction { get; set; }
-
 		public bool IsPrevButtonEnabled { get; set; }
 
 		public PageSettings PageSettings { get; set; }
@@ -67,6 +63,34 @@ namespace QuizBuilder.Domain.Model.Default {
 		public string SideColor { get; set; }
 
 		public string FooterColor { get; set; }
+
+		// Start Page
+
+		public bool IsIntroductionEnabled { get; set; }
+
+		public string Introduction { get; set; }
+
+		public string StartButtonText { get; set; }
+
+		public bool IsTotalAttemptsEnabled { get; set; }
+
+		public int? TotalAttempts { get; set; }
+
+		public bool IsTimeLimitEnabled { get; set; }
+
+		public TimeSpan? TimeLimit { get; set; }
+
+		public bool IsTotalQuestionsEnabled { get; set; }
+
+		public int? TotalQuestions { get; set; }
+
+		public bool IsTotalPointsEnabled { get; set; }
+
+		public decimal? TotalPoints { get; set; }
+
+		public decimal? IsPassingScoreEnabled { get; set; }
+
+		public decimal? PassingScore { get; set; }
 
 	}
 }

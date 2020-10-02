@@ -14,6 +14,17 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 
 		public AttemptsController( IDispatcher dispatcher ) => _dispatcher = dispatcher;
 
+		[HttpGet( "{uid}" )]
+		public async Task<ActionResult> Get( [FromRoute] string uid ) {
+
+			var action = new GetQuizInfoAction {QuizUId = uid};
+			var result = await _dispatcher.QueryAsync( action );
+
+			return !result.IsSuccess
+				? (ActionResult)NoContent()
+				: Ok( result );
+		}
+
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] StartQuizAttemptCommand command ) {
 			var result = await _dispatcher.SendAsync( command );

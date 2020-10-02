@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using QuizBuilder.Common.CQRS.Actions;
 using QuizBuilder.Common.CQRS.Actions.Default;
-using QuizBuilder.Domain.Action.Admin.ActionResult;
 using QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel;
 
 namespace QuizBuilder.Domain.Action.Admin.Action {

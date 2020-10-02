@@ -7,6 +7,14 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Client.Action {
 
+	public sealed class GetQuizInfoAction : IQuery<CommandResult<QuizInfo>> {
+
+		[Required]
+		[JsonPropertyName( "quizId" )]
+		public string QuizUId { get; set; }
+
+	}
+
 	public sealed class StartQuizAttemptCommand : ICommand<CommandResult<QuizAttemptInfo>> {
 
 		[Required]
@@ -41,5 +49,6 @@ namespace QuizBuilder.Domain.Action.Client.Action {
 		public string Text { get; set; }
 
 	}
+
 
 }

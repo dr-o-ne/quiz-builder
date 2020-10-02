@@ -1,8 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 
 namespace QuizBuilder.Domain.Action.Client.ActionResult {
+
+	public sealed class QuizInfo {
+
+		[JsonPropertyName( "introductionText" )]
+		public string IntroductionText { get; set; }
+
+		[JsonPropertyName( "startButtonText" )]
+		public string StartButtonText { get; set; }
+
+		[JsonPropertyName( "totalAttempts" )]
+		public int? TotalAttempts { get; set; }
+
+		[JsonPropertyName( "timeLimit" )]
+		public TimeSpan? TimeLimit { get; set; }
+
+		[JsonPropertyName( "totalQuestions" )]
+		public int? TotalQuestions { get; set; }
+
+		[JsonPropertyName( "totalPoints" )]
+		public decimal? TotalPoints { get; set; }
+
+		[JsonPropertyName( "passingScore" )]
+		public decimal? PassingScore { get; set; }
+
+	}
 
 	public sealed class QuizAttemptInfo {
 
