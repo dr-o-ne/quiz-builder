@@ -14,6 +14,7 @@ import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from
 
 import { fuseConfig } from 'app/fuse-config';
 
+
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
@@ -27,6 +28,7 @@ import { QuestionDynamicComponent } from './quiz-builder/_quiz-attempt/questions
 import { TrueFalseQuestionComponent } from './quiz-builder/_quiz-attempt/questions/true-false-question/true-false-question.component';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-text-editor.component';
 
 const appRoutes: Routes = [
     { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
@@ -34,6 +36,10 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
+
+        // Utils
+        RichTextEditorComponent,
+
         AppComponent,
         QuizAttemptComponent,
 
