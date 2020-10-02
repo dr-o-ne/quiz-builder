@@ -1,4 +1,4 @@
-<div id="academy-course" class="page-layout simple left-sidebar inner-scroll">
+<div id="quiz-attempt" class="page-layout simple left-sidebar inner-scroll">
 
     <!-- CENTER -->
     <div class="center">
@@ -12,11 +12,11 @@
         <!-- / HEADER -->
 
         <!-- CONTENT -->
-        <div id="course-content" class="content">
+        <div class="content">
 
-            <div class="course-step" fusePerfectScrollbar [@slideIn]="animationDirection">
+            <div class="group" fusePerfectScrollbar >
 
-                <div id="course-step-content" class="course-step-content">
+                <div class="group-content">
 
                     <div *ngFor="let question of getQuestions(); let i = index">
 
@@ -32,7 +32,7 @@
         </div>
         <!-- / CONTENT -->
 
-        <div class="step-navigation">
+        <div class="page-navigation">
 
             <button mat-fab class="previous mat-accent fuse-white-fg"
                     (click)="gotoPreviousPage()"
