@@ -1,4 +1,4 @@
-<div id="start-page-info" class="page-layout simple left-sidebar inner-scroll">
+<div id="academy-course" class="page-layout simple left-sidebar inner-scroll">
 
     <!-- CENTER -->
     <div class="center">
@@ -6,17 +6,17 @@
         <!-- HEADER -->
         <div class="header accent p-24" fxLayout="row" fxLayoutAlign="center center">
             <div>
-                <h2>TEST</h2>
+                <h2>{{startPageInfo.name}}</h2>
             </div>
         </div>
         <!-- / HEADER -->
 
         <!-- CONTENT -->
-        <div class="content">
+        <div id="course-content" class="content">
 
-            <div class="group" fusePerfectScrollbar >
+            <div class="course-step" fusePerfectScrollbar>
 
-                <div class="group-content">
+                <div id="course-step-content" class="course-step-content">
 
                     <qb-rich-text-editor data="{{startPageInfo.introductionText}}"></qb-rich-text-editor>
 
@@ -24,35 +24,6 @@
 
             </div>
 
-            <!--
-            <div fxLayout="row" fxLayoutAlign="center center"> 
-
-                <div>
-                    <div class="group-content" fxFlex="100">
-
-                        <div class="fuse-card auto-width mb-32">
-    
-                            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-    
-                                <div class="pr-16">
-                                    <div class="h3 secondary-text">Conversion</div>
-                                    <div class="h1">
-                                        {{123123}}
-                                    </div>
-                                </div>
-        
-                            </div>
-    
-                        </div>
-    
-                    </div>
-
-                </div>
-
-                <div>Test2</div>
-
-            </div>
--->
         </div>
         <!-- / CONTENT -->
 
