@@ -16,10 +16,64 @@
 
             <div class="course-step" fusePerfectScrollbar>
 
-                <div id="course-step-content" class="course-step-content">
+                <div id="course-step-content" class="course-step-content" *ngIf="startPageInfo.introductionText">
 
                     <qb-rich-text-editor data="{{startPageInfo.introductionText}}"></qb-rich-text-editor>
 
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="center center" class="mt-40">
+
+                    <div class="card" class="m-20" *ngIf="startPageInfo.totalAttempts">
+                        <div class="card-preview">
+                            <div class="fuse-card">
+                                <div class="p-24" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="h2 secondary-text">ATTEMPTS</div>
+                                    <div class="h2 light-blue-fg font-size-52">{{startPageInfo.totalAttempts}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" class="m-20" *ngIf="startPageInfo.totalQuestions">
+                        <div class="card-preview">
+                            <div class="fuse-card">
+                                <div class="p-24" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="h2 secondary-text">QUESTIONS</div>
+                                    <div class="h2 light-blue-fg font-size-52">{{startPageInfo.totalQuestions}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" class="m-20" *ngIf="startPageInfo.passingScore">
+                        <div class="card-preview">
+                            <div class="fuse-card">
+                                <div class="p-24" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="h2 secondary-text">PASSING SCORE</div>
+                                    <div class="h2 light-blue-fg font-size-52">{{startPageInfo.passingScore}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" class="m-20" *ngIf="startPageInfo.timeLimit">
+                        <div class="card-preview">
+                            <div class="fuse-card">
+                                <div class="p-24" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="h2 secondary-text">TIME LIMIT</div>
+                                    <div class="h2 light-blue-fg font-size-52">01:20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div fxLayoutAlign="center center" class="mt-60">
+                    <button mat-raised-button color="accent" class="pt-8 pb-8 pl-20 pr-20">
+                        <h2>{{startPageInfo.startButtonText}}</h2>
+                    </button>
                 </div>
 
             </div>

@@ -52,10 +52,9 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			payload.IntroductionText = quiz.Introduction;
 			payload.TotalAttempts = 10;
 			payload.PassingScore = 80;
-			payload.StartButtonText = "Start Quiz";
+			payload.StartButtonText = "START QUIZ";
 			payload.TimeLimit = new TimeSpan( 0, 1, 30, 0 );
 			payload.TotalQuestions = 10;
-			payload.TotalPoints = 100;
 
 			return new CommandResult<StartPageInfo> {
 				IsSuccess = true,

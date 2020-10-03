@@ -7,7 +7,6 @@ export interface StartPageInfo {
     totalAttempts?: number;
     timeLimit?: number;
     totalQuestions?: number;
-    totalPoints?: number;
     passingScore?: number;
     
 }

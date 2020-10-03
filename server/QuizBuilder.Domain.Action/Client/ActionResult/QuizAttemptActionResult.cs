@@ -28,9 +28,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "totalQuestions" )]
 		public int? TotalQuestions { get; set; }
 
-		[JsonPropertyName( "totalPoints" )]
-		public decimal? TotalPoints { get; set; }
-
 		[JsonPropertyName( "passingScore" )]
 		public decimal? PassingScore { get; set; }
 
