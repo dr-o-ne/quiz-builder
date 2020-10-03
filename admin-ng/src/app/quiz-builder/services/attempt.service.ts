@@ -9,7 +9,7 @@ export class AttemptService {
   clientUrl = environment.clientUrl;
 
   getLink(quizId: string): string {
-    return this.clientUrl + 'quizzes/' + quizId;
+    return this.clientUrl + 'quizzes/' + quizId + '/start';
   }
 
   tryAttempt(quizId: string): void {

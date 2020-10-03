@@ -6,6 +6,9 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	public sealed class StartPageInfo {
 
+		[JsonPropertyName( "id" )]
+		public string UId { get; set; }
+
 		[JsonPropertyName( "isStartPageEnabled" )]
 		public bool IsStartPageEnabled { get; set; }
 

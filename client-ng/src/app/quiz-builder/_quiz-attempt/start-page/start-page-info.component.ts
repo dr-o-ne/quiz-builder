@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { StartPageInfo } from 'app/quiz-builder/model/startPageInfo';
 
@@ -11,13 +11,17 @@ import { StartPageInfo } from 'app/quiz-builder/model/startPageInfo';
     animations: fuseAnimations
 })
 export class StartPageInfoComponent {
-    
+
     startPageInfo!: StartPageInfo;
 
     constructor(
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
         this.startPageInfo = this.route.snapshot.data.startPageInfo;
+        if (!this.startPageInfo.isStartPageEnabled) {
+            this.router.navigate(['../'], { relativeTo: this.route });
+        }
     }
 
 }

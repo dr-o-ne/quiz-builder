@@ -75,6 +75,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		public async Task<StartPageInfo> Map( Quiz quiz ) {
 
 			var payload = new StartPageInfo();
+			payload.UId = quiz.UId;
 			payload.IsStartPageEnabled = quiz.IsStartPageEnabled;
 
 			if( !quiz.IsStartPageEnabled ) {

@@ -35,9 +35,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-text-editor.component';
 
 const appRoutes: Routes = [
-    { path: 'quizzes/:id', component: StartPageInfoComponent, resolve: { startPageInfo: StartPageInfoResolver } }
-
-    //{ path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
+    { path: 'quizzes/:id/start', component: StartPageInfoComponent, resolve: { startPageInfo: StartPageInfoResolver } },
+    { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
 ];
 
 @NgModule({
