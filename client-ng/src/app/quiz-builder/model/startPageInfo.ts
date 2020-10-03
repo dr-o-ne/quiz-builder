@@ -1,9 +1,8 @@
 export interface StartPageInfo {
 
+    isStartPageEnabled: boolean;
     name: string;
-    showStartPage: boolean;
-    introductionText: string;
-    startButtonText: string;
+    description: string;
     totalAttempts?: number;
     timeLimit?: number;
     totalQuestions?: number;

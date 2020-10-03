@@ -68,9 +68,7 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public bool IsStartPageEnabled { get; set; }
 
-		public string Introduction { get; set; }
-
-		public string StartButtonText { get; set; }
+		public string Description { get; set; }
 
 		public bool IsTotalAttemptsEnabled { get; set; }
 

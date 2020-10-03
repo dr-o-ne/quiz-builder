@@ -32,8 +32,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		[JsonPropertyName( "isStartPageEnabled" )]
 		public bool IsStartPageEnabled { get; set; }
 
-		[JsonPropertyName( "introduction" )]
-		public string Introduction { get; set; }
+		[JsonPropertyName( "description" )]
+		public string Description { get; set; }
 
 		[JsonPropertyName( "isTotalAttemptsEnabled" )]
 		public bool IsTotalAttemptsEnabled { get; set; }

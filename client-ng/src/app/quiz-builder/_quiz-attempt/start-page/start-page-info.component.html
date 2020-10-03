@@ -16,9 +16,9 @@
 
             <div class="course-step" fusePerfectScrollbar>
 
-                <div id="course-step-content" class="course-step-content" *ngIf="startPageInfo.introductionText">
+                <div id="course-step-content" class="course-step-content" *ngIf="startPageInfo.description">
 
-                    <qb-rich-text-editor data="{{startPageInfo.introductionText}}"></qb-rich-text-editor>
+                    <qb-rich-text-editor data="{{startPageInfo.description}}"></qb-rich-text-editor>
 
                 </div>
 
@@ -72,7 +72,7 @@
 
                 <div fxLayoutAlign="center center" class="mt-60">
                     <button mat-raised-button color="accent" class="pt-8 pb-8 pl-20 pr-20">
-                        <h2>{{startPageInfo.startButtonText}}</h2>
+                        <h2>START QUIZ</h2>
                     </button>
                 </div>
 

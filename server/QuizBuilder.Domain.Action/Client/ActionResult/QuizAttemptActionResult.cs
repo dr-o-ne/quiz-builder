@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 
@@ -7,23 +6,20 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	public sealed class StartPageInfo {
 
-		[JsonPropertyName( "showStartPage" )]
-		public bool ShowStartPage { get; set; }
+		[JsonPropertyName( "isStartPageEnabled" )]
+		public bool IsStartPageEnabled { get; set; }
 
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
-		[JsonPropertyName( "introductionText" )]
-		public string IntroductionText { get; set; }
-
-		[JsonPropertyName( "startButtonText" )]
-		public string StartButtonText { get; set; }
+		[JsonPropertyName( "description" )]
+		public string Description { get; set; }
 
 		[JsonPropertyName( "totalAttempts" )]
 		public int? TotalAttempts { get; set; }
 
 		[JsonPropertyName( "timeLimit" )]
-		public TimeSpan? TimeLimit { get; set; }
+		public int? TimeLimit { get; set; }
 
 		[JsonPropertyName( "totalQuestions" )]
 		public int? TotalQuestions { get; set; }

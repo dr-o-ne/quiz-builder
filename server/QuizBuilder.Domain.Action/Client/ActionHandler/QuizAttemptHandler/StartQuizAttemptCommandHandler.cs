@@ -25,26 +25,26 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		private readonly IMapper _mapper;
 		private readonly IUIdService _uIdService;
 		private readonly IQuizDataProvider _quizDataProvider;
+		private readonly IGroupDataProvider _groupDataProvider;
 		private readonly IQuestionDataProvider _questionDataProvider;
 		private readonly IQuizAttemptDataProvider _attemptDataProvider;
-		private readonly IGroupDataProvider _groupDataProvider;
 		private readonly IPageInfoDataFactory _pageInfoDataFactory;
 
 		public StartQuizAttemptCommandHandler(
 			IMapper mapper,
 			IUIdService uIdService,
 			IQuizDataProvider quizDataProvider,
+			IGroupDataProvider groupDataProvider,
 			IQuestionDataProvider questionDataProvider,
 			IQuizAttemptDataProvider attemptDataProvider,
-			IGroupDataProvider groupDataProvider,
-			IPageInfoDataFactory pageInfoDataFactory ) {
-
+			IPageInfoDataFactory pageInfoDataFactory
+		) {
 			_mapper = mapper;
 			_uIdService = uIdService;
 			_quizDataProvider = quizDataProvider;
+			_groupDataProvider = groupDataProvider;
 			_questionDataProvider = questionDataProvider;
 			_attemptDataProvider = attemptDataProvider;
-			_groupDataProvider = groupDataProvider;
 			_pageInfoDataFactory = pageInfoDataFactory;
 		}
 

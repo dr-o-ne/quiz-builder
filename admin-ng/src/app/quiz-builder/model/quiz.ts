@@ -6,7 +6,7 @@ export class Quiz {
     isEnabled: boolean;
     groups: Group[] = [];
 
-    introduction: string;
+    description: string;
 
     isPrevButtonEnabled: boolean;
     pageSettings: PageSettings;
