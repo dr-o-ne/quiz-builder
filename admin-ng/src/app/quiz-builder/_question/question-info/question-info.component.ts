@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OptionItem } from 'app/quiz-builder/model/UI/optionItem';
 import { ChoicesDisplayType, ChoicesEnumerationType, QuestionGradingType } from 'app/quiz-builder/model/settings/answer.settings';
 import { OptionItemsService } from 'app/quiz-builder/model/UI/optionItemService';
@@ -43,6 +43,7 @@ export class QuestionInfoComponent implements OnInit {
         private fuseNavigationService: FuseNavigationService,
         private navService: NavigationService,
         private activatedRoute: ActivatedRoute,
+        private router: Router,
         private fb: FormBuilder,
         private questionDataProvider: QuestionDataProvider,
         private optionItemService: OptionItemsService,
@@ -124,6 +125,10 @@ export class QuestionInfoComponent implements OnInit {
         this.question.choices = JSON.parse(this.question.choices);
 
 
+    }
+
+    return(): void {
+        this.router.navigate(['../../'], { relativeTo: this.activatedRoute });
     }
 
     onOptionItemClick(event: MouseEvent, option: OptionItem): void {
