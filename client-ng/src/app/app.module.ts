@@ -21,6 +21,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 
 import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.component';
 import { StartPageInfoComponent } from './quiz-builder/_quiz-attempt/start-page/start-page-info.component';
+import { TotalAttemptsPipe } from './quiz-builder/_quiz-attempt/start-page/totalAttempts.pipe';
 
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
 import { StartPageInfoResolver } from './quiz-builder/resolvers/start-page-info.resolver';
@@ -51,7 +52,9 @@ const appRoutes: Routes = [
 
         QuestionHostDirective,
         QuestionDynamicComponent,
-        TrueFalseQuestionComponent
+        TrueFalseQuestionComponent,
+
+        TotalAttemptsPipe
     ],
     imports     : [
         BrowserModule,
