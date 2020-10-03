@@ -12,12 +12,28 @@
 
     </div>
 
-    <div id="rightPanel" class="p-24" fusePerfectScrollbar fxFlex="36%">
+    <div id="rightPanel" class="p-24" fusePerfectScrollbar fxFlex="36%" >
 
-        <form [formGroup]="form">
+        <form [formGroup]="form" fxLayout="column">
 
-            <mat-checkbox formControlName="isIntroductionEnabled">
+            <mat-checkbox formControlName="isStartPageEnabled">
                 <span class="mat-body-1">Show Start Page</span>
+            </mat-checkbox>
+
+            <mat-checkbox formControlName="isTotalAttemptsEnabled" class="mt-20">
+                <span class="mat-body-1">Show Attempts Count</span>
+            </mat-checkbox>
+
+            <mat-checkbox formControlName="isTotalQuestionsEnabled">
+                <span class="mat-body-1">Show Questions Count</span>
+            </mat-checkbox>
+
+            <mat-checkbox formControlName="isPassingScoreEnabled">
+                <span class="mat-body-1">Show Passing Score</span>
+            </mat-checkbox>
+            
+            <mat-checkbox formControlName="isTimeLimitEnabled">
+                <span class="mat-body-1">Show Time Limit</span>
             </mat-checkbox>
 
         </form>

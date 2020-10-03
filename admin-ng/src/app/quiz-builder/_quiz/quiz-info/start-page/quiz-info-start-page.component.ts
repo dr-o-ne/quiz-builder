@@ -16,8 +16,15 @@ export class QuizInfoStartPageComponent {
 
     saveFormData(quiz: Quiz): void {
         const value = this.form.value;
+
+        console.log(value);
+
         quiz.introduction = value.introduction as string;
-        quiz.isIntroductionEnabled = value.isIntroductionEnabled as boolean;
+        quiz.isStartPageEnabled = value.isStartPageEnabled as boolean;
+        quiz.isTotalAttemptsEnabled = value.isTotalAttemptsEnabled as boolean;
+        quiz.isTimeLimitEnabled = value.isTimeLimitEnabled as boolean;
+        quiz.isTotalQuestionsEnabled = value.isTotalQuestionsEnabled as boolean;
+        quiz.isPassingScoreEnabled = value.isPassingScoreEnabled as boolean;
     }
 
 }

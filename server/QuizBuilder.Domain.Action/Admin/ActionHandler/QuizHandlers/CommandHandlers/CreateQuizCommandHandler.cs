@@ -32,7 +32,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				IsPrevButtonEnabled = true,
 				PageSettings = PagePerGroup,
 				QuestionsPerPage = 5,
-				IsIntroductionEnabled = true,
+				IsStartPageEnabled = true,
 				HeaderColor = "#1a202e",
 				BackgroundColor = "#fff",
 				SideColor = "#f5f5f8",

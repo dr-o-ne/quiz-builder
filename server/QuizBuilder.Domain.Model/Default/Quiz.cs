@@ -66,7 +66,7 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		// Start Page
 
-		public bool IsIntroductionEnabled { get; set; }
+		public bool IsStartPageEnabled { get; set; }
 
 		public string Introduction { get; set; }
 
@@ -84,11 +84,7 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public int? TotalQuestions { get; set; }
 
-		public bool IsTotalPointsEnabled { get; set; }
-
-		public decimal? TotalPoints { get; set; }
-
-		public decimal? IsPassingScoreEnabled { get; set; }
+		public bool IsPassingScoreEnabled { get; set; }
 
 		public decimal? PassingScore { get; set; }
 

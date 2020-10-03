@@ -6,7 +6,6 @@ export class Quiz {
     isEnabled: boolean;
     groups: Group[] = [];
 
-    isIntroductionEnabled: boolean;
     introduction: string;
 
     isPrevButtonEnabled: boolean;
@@ -23,6 +22,12 @@ export class Quiz {
     backgroundColor: string;
     sideColor: string;
     footerColor: string;
+
+    isStartPageEnabled: boolean;
+    isTotalAttemptsEnabled: boolean;
+    isTimeLimitEnabled: boolean;
+    isTotalQuestionsEnabled: boolean;
+    isPassingScoreEnabled: boolean;
 }
 
 export enum PageSettings {

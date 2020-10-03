@@ -32,12 +32,6 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "name" )]
 		public string Name { get; set; }
 
-		[JsonPropertyName( "isIntroductionEnabled" )]
-		public bool IsIntroductionEnabled { get; set; }
-
-		[JsonPropertyName( "introduction" )]
-		public string Introduction { get; set; }
-
 		[Required]
 		[JsonPropertyName( "isEnabled" )]
 		public bool IsEnabled { get; set; }
@@ -85,6 +79,26 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 		[JsonPropertyName( "footerColor" )]
 		public string FooterColor { get; set; }
+
+		// Start Page
+		
+		[JsonPropertyName( "isStartPageEnabled" )]
+		public bool IsStartPageEnabled { get; set; }
+
+		[JsonPropertyName( "introduction" )]
+		public string Introduction { get; set; }
+
+		[JsonPropertyName( "isTotalAttemptsEnabled" )]
+		public bool IsTotalAttemptsEnabled { get; set; }
+
+		[JsonPropertyName( "isTimeLimitEnabled" )]
+		public bool IsTimeLimitEnabled { get; set; }
+
+		[JsonPropertyName( "isTotalQuestionsEnabled" )]
+		public bool IsTotalQuestionsEnabled { get; set; }
+
+		[JsonPropertyName( "isPassingScoreEnabled" )]
+		public bool IsPassingScoreEnabled { get; set; }
 	}
 
 	public sealed class DeleteQuizCommand : ICommand<CommandResult>, IIdentityAction {

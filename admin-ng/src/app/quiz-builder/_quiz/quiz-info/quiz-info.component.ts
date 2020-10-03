@@ -68,12 +68,16 @@ export class QuizInfoComponent implements OnInit {
                 isScheduleEnabled: [this.quiz.isScheduleEnabled],
                 startDate: [moment(this.quiz.startDate).utc()],
                 endDate: [moment(this.quiz.endDate).utc()],
-                isIntroductionEnabled: [this.quiz.isIntroductionEnabled],
                 introduction: [this.quiz.introduction],
                 headerColor: [this.quiz.headerColor],
                 backgroundColor: [this.quiz.backgroundColor],
                 sideColor: [this.quiz.sideColor],
-                footerColor: [this.quiz.footerColor]
+                footerColor: [this.quiz.footerColor],
+                isStartPageEnabled: [this.quiz.isStartPageEnabled],
+                isTotalAttemptsEnabled: [this.quiz.isTotalAttemptsEnabled],
+                isTimeLimitEnabled: [this.quiz.isTimeLimitEnabled],
+                isTotalQuestionsEnabled: [this.quiz.isTotalQuestionsEnabled],
+                isPassingScoreEnabled: [this.quiz.isPassingScoreEnabled]
             })
         })
     }
