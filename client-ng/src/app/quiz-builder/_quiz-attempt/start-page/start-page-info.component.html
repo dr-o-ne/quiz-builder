@@ -12,17 +12,11 @@
         <!-- / HEADER -->
 
         <!-- CONTENT -->
-        <div id="course-content" class="content">
+        <div id="course-content" class="content" >
 
             <div class="course-step" fusePerfectScrollbar>
 
-                <div id="course-step-content" class="course-step-content" *ngIf="startPageInfo.description">
-
-                    <qb-rich-text-editor data="{{startPageInfo.description}}"></qb-rich-text-editor>
-
-                </div>
-
-                <div fxLayout="row" fxLayoutAlign="center center" class="mt-40">
+                <div fxLayout="row" fxLayoutAlign="center center">
 
                     <div class="card" class="m-20" *ngIf="startPageInfo.totalAttempts">
                         <div class="card-preview">
@@ -68,6 +62,16 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div class="card" class="m-40" fxLayoutAlign="center center">
+                    <div class="card-preview">
+                        <div class="fuse-card qb-card">
+                            <div class="p-24">
+                                <qb-rich-text-editor data="{{startPageInfo.description}}"></qb-rich-text-editor>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div fxLayoutAlign="center center" class="mt-60">

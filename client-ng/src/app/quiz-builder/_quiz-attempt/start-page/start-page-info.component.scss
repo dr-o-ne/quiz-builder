@@ -25,26 +25,13 @@
                 padding: 48px;
                 overflow: auto;
                 -webkit-overflow-scrolling: touch;
-
-                &.ng-animating {
-                    overflow: hidden;
-                }
-
-                @media (max-width: 720px) {
-                    padding: 0 0 120px 0;
-                }
-
-                .course-step-content {
-                    padding: 24px;
-                    max-width: 720px;
-                    margin: 0 auto;
-                    width: 100%;
-                    border-radius: 8px;
-                    @include mat-elevation(1);
-                }
             }
         }
 
+    }
+
+    .qb-card {
+        min-width: 680px;
     }
 }
 
