@@ -4,11 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TotalAttemptsPipe implements PipeTransform {
 
     transform(value: number): string {
-
-        if(value > 100000)
-            return "unlimited"
-
-        return value.toString();
+        return (value > 100000) ? "unlimited" : value.toString();
     }
 
 }
