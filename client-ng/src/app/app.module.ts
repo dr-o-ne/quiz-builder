@@ -14,7 +14,6 @@ import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from
 
 import { fuseConfig } from 'app/fuse-config';
 
-
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
@@ -27,6 +26,7 @@ import { ResultPageInfoComponent } from './quiz-builder/_quiz-attempt/result-pag
 
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
 import { StartPageInfoResolver } from './quiz-builder/resolvers/start-page-info.resolver';
+import { ResultPageInfoResolver } from './quiz-builder/resolvers/result-page-info.resolver';
 
 import { MaterialModule } from './quiz-builder/common/material.module';
 import { QuestionHostDirective } from './quiz-builder/_quiz-attempt/questions/question-host.directive';
@@ -38,7 +38,8 @@ import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-te
 
 const appRoutes: Routes = [
     { path: 'quizzes/:id/start', component: StartPageInfoComponent, resolve: { startPageInfo: StartPageInfoResolver } },
-    { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } }
+    { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } },
+    { path: 'quizzes/:id/result', component: ResultPageInfoComponent, resolve: { attempt: ResultPageInfoResolver } }
 ];
 
 @NgModule({
@@ -91,7 +92,8 @@ const appRoutes: Routes = [
     ],
     providers: [
         QuizAttemptResolver,
-        StartPageInfoResolver
+        StartPageInfoResolver,
+        ResultPageInfoResolver
     ],
     bootstrap   : [
         AppComponent
