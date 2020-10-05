@@ -1,4 +1,6 @@
 export interface QuizAttemptFeedback {
-    score: number;
+    score?: number;
     feedback: string;
+    isSuccess?: boolean;
+    duration?: number;
 }

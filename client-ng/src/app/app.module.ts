@@ -23,6 +23,8 @@ import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.
 import { StartPageInfoComponent } from './quiz-builder/_quiz-attempt/start-page/start-page-info.component';
 import { TotalAttemptsPipe } from './quiz-builder/_quiz-attempt/start-page/totalAttempts.pipe';
 
+import { ResultPageInfoComponent } from './quiz-builder/_quiz-attempt/result-page/result-page-info.component';
+
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
 import { StartPageInfoResolver } from './quiz-builder/resolvers/start-page-info.resolver';
 
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
         AppComponent,
         QuizAttemptComponent,
         StartPageInfoComponent,
+        ResultPageInfoComponent,
 
         QuestionHostDirective,
         QuestionDynamicComponent,

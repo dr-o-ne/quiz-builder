@@ -125,8 +125,17 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	public sealed class AttemptFeedback {
 
+		[JsonPropertyName( "duration" )]
+		public int? Duration { get; set; }
+
+		[JsonPropertyName( "isSuccess" )]
+		public bool? IsSuccess { get; set; }
+
 		[JsonPropertyName( "score" )]
-		public decimal Score { get; set; }
+		public decimal? Score { get; set; }
+
+		[JsonPropertyName( "Feedback" )]
+		public string Feedback { get; set; }
 
 	}
 
