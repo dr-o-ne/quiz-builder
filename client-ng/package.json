@@ -37,7 +37,7 @@
         "@ngrx/store-devtools": "8.6.0",
         "@ngx-translate/core": "13.0.0",
         "@swimlane/dragula": "3.8.0",
-        "@swimlane/ngx-charts": "14.0.0",
+        "@swimlane/ngx-charts": "16.0.0",
         "@swimlane/ngx-datatable": "17.1.0",
         "@swimlane/ngx-dnd": "8.2.0",
         "@types/prismjs": "1.16.1",
