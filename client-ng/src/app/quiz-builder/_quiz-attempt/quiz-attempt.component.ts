@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizAttemptFeedback } from '../model/attemptFeedback';
 import { QuestionAttemptInfo, QuizAttemptInfo } from '../model/attemptInfo';
@@ -22,6 +22,7 @@ export class QuizAttemptComponent {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private dataProviderService: DataProviderService,
     ) {
         this.attempt = this.route.snapshot.data.attempt;
@@ -29,7 +30,7 @@ export class QuizAttemptComponent {
         this.answers = new Map<string, QuestionAttemptResult>();
     }
 
-    
+
     gotoPreviousPage(): void {
         if (this.currentPageIndex === 0) {
             return;
@@ -52,11 +53,12 @@ export class QuizAttemptComponent {
     onAnswer(answer: QuestionAttemptResult): void {
     }
 
-    submit(): void{
+    submit(): void {
         const result = new QuizAttemptResult(this.attempt.id, [...this.answers.values()]);
         this.dataProviderService.endAttempt(result).subscribe(
-            
-            (quizAttemptFeedback: ApiResponse<QuizAttemptFeedback>) => {console.log(quizAttemptFeedback)}
+            (quizAttemptFeedback: ApiResponse<QuizAttemptFeedback>) => {
+                this.router.navigate(['results/' + this.attempt.id]);
+            }
         );
     }
 

@@ -25,6 +25,17 @@ namespace QuizBuilder.Api.Client.Api.Internal {
 				: Ok( result );
 		}
 
+		[HttpGet( "{uid}/result" )]
+		public async Task<ActionResult> GetResult( [FromRoute] string uid ) {
+
+			var action = new GetAttemptFeedbackInfoAction {AttemptUId = uid};
+			var result = await _dispatcher.QueryAsync( action );
+
+			return !result.IsSuccess
+				? (ActionResult)NoContent()
+				: Ok( result );
+		}
+
 		[HttpPost]
 		public async Task<ActionResult> Create( [FromBody] StartQuizAttemptCommand command ) {
 			var result = await _dispatcher.SendAsync( command );

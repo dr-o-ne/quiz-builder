@@ -39,7 +39,7 @@ import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-te
 const appRoutes: Routes = [
     { path: 'quizzes/:id/start', component: StartPageInfoComponent, resolve: { startPageInfo: StartPageInfoResolver } },
     { path: 'quizzes/:id', component: QuizAttemptComponent, resolve: { attempt: QuizAttemptResolver } },
-    { path: 'quizzes/:id/result', component: ResultPageInfoComponent, resolve: { attempt: ResultPageInfoResolver } }
+    { path: 'results/:id', component: ResultPageInfoComponent, resolve: { data: ResultPageInfoResolver } }
 ];
 
 @NgModule({

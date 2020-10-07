@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { QuizAttemptFeedback } from 'app/quiz-builder/model/attemptFeedback';
 
@@ -11,6 +12,14 @@ import { QuizAttemptFeedback } from 'app/quiz-builder/model/attemptFeedback';
 })
 export class ResultPageInfoComponent {
 
-    quizAttemptFeedback!: QuizAttemptFeedback;
+    data!: QuizAttemptFeedback;
+
+    constructor(
+        private route: ActivatedRoute
+    ) {
+        this.data = this.route.snapshot.data.data;
+
+        console.log(this.data);
+    }
 
 }

@@ -20,7 +20,6 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			AttemptDto attemptDto = await _attemptDataProvider.Get( action.AttemptUId );
 			 
-
 			return new CommandResult<AttemptFeedbackInfo> {
 				IsSuccess = true,
 				Message = string.Empty,

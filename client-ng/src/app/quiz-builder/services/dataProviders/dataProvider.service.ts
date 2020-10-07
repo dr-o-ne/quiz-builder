@@ -23,6 +23,10 @@ export class DataProviderService {
     return this.http.get<ApiResponse<StartPageInfo>>(this.apiUrl + 'attempts/' + quizId);
   }
 
+  getResultPageInfo(attemptId: string): Observable<ApiResponse<QuizAttemptFeedback>> {
+    return this.http.get<ApiResponse<QuizAttemptFeedback>>(this.apiUrl + 'attempts/' + attemptId + '/result');
+  }
+
   startAttempt(quizId: string): Observable<ApiResponse<QuizAttemptInfo>> {
     return this.http.post<ApiResponse<QuizAttemptInfo>>(this.apiUrl + 'attempts', { quizId });
   }

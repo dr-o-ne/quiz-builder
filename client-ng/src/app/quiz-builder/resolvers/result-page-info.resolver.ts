@@ -14,8 +14,8 @@ export class ResultPageInfoResolver implements Resolve<QuizAttemptFeedback> {
     }
 
     resolve(route: ActivatedRouteSnapshot): Observable<QuizAttemptFeedback> {
-        const quizId = route.params['id'];
-        return this.dataProviderService.endAttempt(quizId).pipe(map(x => x.payload));
+        const attemptId = route.params['id'];
+        return this.dataProviderService.getResultPageInfo(attemptId).pipe(map(x => x.payload));
     }
 
     onError(): Observable<never> {
