@@ -51,6 +51,7 @@ export class QuizAttemptComponent {
     }
 
     onAnswer(answer: QuestionAttemptResult): void {
+        this.answers.set(answer.questionId, answer);
     }
 
     submit(): void {
