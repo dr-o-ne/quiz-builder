@@ -18,8 +18,6 @@ export class ResultPageInfoComponent {
         private route: ActivatedRoute
     ) {
         this.data = this.route.snapshot.data.data;
-
-        console.log(this.data);
     }
 
 }

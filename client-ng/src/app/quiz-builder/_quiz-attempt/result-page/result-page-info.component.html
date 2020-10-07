@@ -16,7 +16,20 @@
 
             <div class="course-step" fusePerfectScrollbar>
 
-                TEST
+                <div fxLayout="row" fxLayoutAlign="center center">
+
+                    <div class="card" class="m-20" *ngIf="data.totalScore !== null">
+                        <div class="card-preview">
+                            <div class="fuse-card">
+                                <div class="p-24" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="h2 secondary-text">SCORE</div>
+                                    <div class="h2 light-blue-fg font-size-40">{{data.totalScore}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
 
