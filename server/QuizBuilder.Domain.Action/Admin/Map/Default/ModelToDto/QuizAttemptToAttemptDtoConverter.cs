@@ -14,7 +14,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ModelToDto {
 				StartDate = source.StartDate,
 				EndDate = source.EndDate,
 				Data = source.Data,
-				Result = source.Result
+				TotalScore = source.TotalScore
 			};
 	}
 }

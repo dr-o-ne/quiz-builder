@@ -100,7 +100,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			}
 
-			attemptDto.Result = totalScore;
+			attemptDto.TotalScore = totalScore;
 			attemptDto.EndDate = DateTime.UtcNow;
 
 			await _attemptDataProvider.Update( 0, "169", attemptDto );
@@ -108,7 +108,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			return new CommandResult<AttemptFeedbackInfo> {
 				IsSuccess = true,
 				Message = string.Empty,
-				Payload = new AttemptFeedbackInfo {Score = totalScore}
+				Payload = new AttemptFeedbackInfo {TotalScore = totalScore}
 			};
 
 		}

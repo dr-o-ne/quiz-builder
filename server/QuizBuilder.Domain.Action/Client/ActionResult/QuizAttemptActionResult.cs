@@ -131,8 +131,8 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 		[JsonPropertyName( "isSuccess" )]
 		public bool? IsSuccess { get; set; }
 
-		[JsonPropertyName( "score" )]
-		public decimal? Score { get; set; }
+		[JsonPropertyName( "totalScore" )]
+		public decimal? TotalScore { get; set; }
 
 		[JsonPropertyName( "Feedback" )]
 		public string Feedback { get; set; }

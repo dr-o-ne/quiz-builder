@@ -15,7 +15,7 @@ namespace QuizBuilder.Domain.Model.Default.Attempts {
 
 		public string Data { get; set; }
 
-		public decimal Result { get; set; }
+		public decimal TotalScore { get; set; }
 
 	}
 

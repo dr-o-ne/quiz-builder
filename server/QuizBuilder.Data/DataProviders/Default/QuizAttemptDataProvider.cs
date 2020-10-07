@@ -23,7 +23,7 @@ SELECT Id,
        StartDate,
        EndDate,
        [Data],
-       Result
+       TotalScore
 FROM dbo.Attempt (NOLOCK)
 WHERE UId = @UId";
 
@@ -63,7 +63,7 @@ VALUES (
 			const string sql = @"
 UPDATE dbo.Attempt
 SET EndDate = @EndDate,
-    Result = @Result,
+    TotalScore = @TotalScore,
 	ModifiedOn = @ModifiedOn
 WHERE UId = @UId";
 			
@@ -73,7 +73,7 @@ WHERE UId = @UId";
 				UserId = userId,
 				dto.UId,
 				dto.EndDate,
-				dto.Result,
+				dto.TotalScore,
 				ModifiedOn = DateTime.UtcNow
 			} );
 
