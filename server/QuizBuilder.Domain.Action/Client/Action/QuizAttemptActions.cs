@@ -7,7 +7,7 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Client.Action {
 
-	public sealed class GetAttemptInfoAction : IQuery<CommandResult<AttemptFeedbackInfo>> {
+	public sealed class GetAttemptFeedbackInfoAction : IQuery<CommandResult<AttemptFeedbackInfo>> {
 
 		[Required]
 		[JsonPropertyName( "id" )]

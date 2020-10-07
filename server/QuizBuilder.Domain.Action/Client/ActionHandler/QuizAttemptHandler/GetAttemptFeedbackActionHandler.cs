@@ -8,7 +8,7 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
-	public sealed class GetAttemptFeedbackActionHandler : IQueryHandler<GetAttemptInfoAction, CommandResult<AttemptFeedbackInfo>> {
+	public sealed class GetAttemptFeedbackActionHandler : IQueryHandler<GetAttemptFeedbackInfoAction, CommandResult<AttemptFeedbackInfo>> {
 
 		private readonly IQuizAttemptDataProvider _attemptDataProvider;
 
@@ -16,7 +16,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			_attemptDataProvider = attemptDataProvider;
 		}
 
-		public async Task<CommandResult<AttemptFeedbackInfo>> HandleAsync( GetAttemptInfoAction action ) {
+		public async Task<CommandResult<AttemptFeedbackInfo>> HandleAsync( GetAttemptFeedbackInfoAction action ) {
 
 			AttemptDto attemptDto = await _attemptDataProvider.Get( action.AttemptUId );
 			 
