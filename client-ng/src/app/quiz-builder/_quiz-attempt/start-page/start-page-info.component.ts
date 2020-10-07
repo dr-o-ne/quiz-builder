@@ -24,4 +24,13 @@ export class StartPageInfoComponent {
         }
     }
 
+    formatAttempts(): string {
+
+        const value = this.startPageInfo.totalAttempts;
+        if(!value)
+            return null;
+
+        return (value > 100000) ? "unlimited" : value.toString();
+    }
+
 }

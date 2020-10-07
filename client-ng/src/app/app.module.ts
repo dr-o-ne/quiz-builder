@@ -20,9 +20,9 @@ import { SampleModule } from 'app/main/sample/sample.module';
 
 import { QuizAttemptComponent } from './quiz-builder/_quiz-attempt/quiz-attempt.component';
 import { StartPageInfoComponent } from './quiz-builder/_quiz-attempt/start-page/start-page-info.component';
-import { TotalAttemptsPipe } from './quiz-builder/_quiz-attempt/start-page/totalAttempts.pipe';
 
 import { ResultPageInfoComponent } from './quiz-builder/_quiz-attempt/result-page/result-page-info.component';
+import { InfoCardComponent } from './quiz-builder/_quiz-attempt/info-card/info-card.component';
 
 import { QuizAttemptResolver } from './quiz-builder/resolvers/quiz-attempt.resolver';
 import { StartPageInfoResolver } from './quiz-builder/resolvers/start-page-info.resolver';
@@ -35,6 +35,7 @@ import { TrueFalseQuestionComponent } from './quiz-builder/_quiz-attempt/questio
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-text-editor.component';
+
 
 const appRoutes: Routes = [
     { path: 'quizzes/:id/start', component: StartPageInfoComponent, resolve: { startPageInfo: StartPageInfoResolver } },
@@ -52,12 +53,11 @@ const appRoutes: Routes = [
         QuizAttemptComponent,
         StartPageInfoComponent,
         ResultPageInfoComponent,
+        InfoCardComponent,
 
         QuestionHostDirective,
         QuestionDynamicComponent,
         TrueFalseQuestionComponent,
-
-        TotalAttemptsPipe
     ],
     imports     : [
         BrowserModule,
