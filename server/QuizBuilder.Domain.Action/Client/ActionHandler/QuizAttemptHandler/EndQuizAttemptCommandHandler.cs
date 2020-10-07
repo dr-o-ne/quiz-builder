@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,13 +11,14 @@ using QuizBuilder.Data.Dto;
 using QuizBuilder.Domain.Action.Client.Action;
 using QuizBuilder.Domain.Action.Client.ActionResult;
 using QuizBuilder.Domain.Model.Default.Answers;
+using QuizBuilder.Domain.Model.Default.Attempts;
 using QuizBuilder.Domain.Model.Default.Graders;
 using QuizBuilder.Domain.Model.Default.Questions;
 using static QuizBuilder.Domain.Model.Default.Enums.QuizItemType;
 
 namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
-	public sealed class EndQuizAttemptCommandHandler : ICommandHandler<EndQuizAttemptCommand, CommandResult<AttemptFeedback>> {
+	public sealed class EndQuizAttemptCommandHandler : ICommandHandler<EndQuizAttemptCommand, CommandResult<AttemptFeedbackInfo>> {
 
 		private readonly IMapper _mapper;
 		private readonly IQuizDataProvider _quizDataProvider;
@@ -34,16 +36,18 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 			_questionDataProvider = questionDataProvider;
 		}
 
-		public async Task<CommandResult<AttemptFeedback>> HandleAsync( EndQuizAttemptCommand command ) {
+		public async Task<CommandResult<AttemptFeedbackInfo>> HandleAsync( EndQuizAttemptCommand command ) {
 
-			List<Question> questions = await GetQuestions( command.AttemptUId );
+			AttemptDto attemptDto = await _attemptDataProvider.Get( command.AttemptUId );
+
+			List<Question> questions = await GetQuestions( attemptDto );
 
 			decimal totalScore = 0;
 
 			foreach( QuestionAttemptResult item in command.Answers ) {
 				Question question = questions.SingleOrDefault( x => x.UId == item.QuestionUId );
 				if( question == null ) {
-					return new CommandResult<AttemptFeedback> { IsSuccess = false, Message = string.Empty };
+					return new CommandResult<AttemptFeedbackInfo> { IsSuccess = false, Message = string.Empty };
 				}
 				//TODO: check required;
 
@@ -96,16 +100,20 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 
 			}
 
-			return new CommandResult<AttemptFeedback> {
+			attemptDto.Result = totalScore;
+			attemptDto.EndDate = DateTime.UtcNow;
+
+			await _attemptDataProvider.Update( 0, "169", attemptDto );
+
+			return new CommandResult<AttemptFeedbackInfo> {
 				IsSuccess = true,
 				Message = string.Empty,
-				Payload = new AttemptFeedback {Score = totalScore}
+				Payload = new AttemptFeedbackInfo {Score = totalScore}
 			};
 
 		}
 
-		private async Task<List<Question>> GetQuestions( string attemptUId ) {
-			AttemptDto attemptDto = await _attemptDataProvider.Get( attemptUId );
+		private async Task<List<Question>> GetQuestions( AttemptDto attemptDto ) {
 			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, attemptDto.QuizId );
 			List<QuestionDto> questionDtos = ( await _questionDataProvider.GetByQuiz( quizDto.UId ) )
 				.OrderBy( x => x.SortOrder )

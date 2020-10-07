@@ -49,7 +49,6 @@
             </button>
 
             <button mat-fab class="done green-600"
-                    routerLink="/apps/academy/courses"
                     [disabled]="currentPageIndex !== this.attempt.pages.length - 1"
                     [fxShow]="currentPageIndex === this.attempt.pages.length - 1"
                     (click)="submit()">

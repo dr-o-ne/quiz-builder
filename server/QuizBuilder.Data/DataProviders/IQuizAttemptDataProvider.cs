@@ -9,6 +9,8 @@ namespace QuizBuilder.Data.DataProviders {
 
 		public Task<long> Add( AttemptDto dto );
 
+		public Task Update( long orgId, string userId, AttemptDto dto );
+
 	}
 
 }

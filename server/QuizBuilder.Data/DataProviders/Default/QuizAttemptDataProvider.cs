@@ -58,6 +58,27 @@ VALUES (
 			} );
 		}
 
+		public async Task Update( long orgId, string userId, AttemptDto dto ) {
+
+			const string sql = @"
+UPDATE dbo.Attempt
+SET EndDate = @EndDate,
+    Result = @Result,
+	ModifiedOn = @ModifiedOn
+WHERE UId = @UId";
+			
+			using IDbConnection conn = GetConnection();
+			await conn.ExecuteAsync( sql, new {
+				OrgId = orgId,
+				UserId = userId,
+				dto.UId,
+				dto.EndDate,
+				dto.Result,
+				ModifiedOn = DateTime.UtcNow
+			} );
+
+		}
+
 		private IDbConnection GetConnection() {
 			IDbConnection conn = _dbConnectionFactory.GetConnection();
 			conn.Open();

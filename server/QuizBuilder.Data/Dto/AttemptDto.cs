@@ -18,7 +18,7 @@ namespace QuizBuilder.Data.Dto {
 
 		public string Data { get; set; }
 
-		public double? Result { get; set; } 
+		public decimal? Result { get; set; } 
 
 	}
 

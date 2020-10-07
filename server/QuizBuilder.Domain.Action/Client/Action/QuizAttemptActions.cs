@@ -7,6 +7,14 @@ using QuizBuilder.Domain.Action.Client.ActionResult;
 
 namespace QuizBuilder.Domain.Action.Client.Action {
 
+	public sealed class GetAttemptInfoAction : IQuery<CommandResult<AttemptFeedbackInfo>> {
+
+		[Required]
+		[JsonPropertyName( "id" )]
+		public string AttemptUId { get; set; }
+
+	}
+
 	public sealed class GetQuizInfoAction : IQuery<CommandResult<StartPageInfo>> {
 
 		[Required]
@@ -23,7 +31,7 @@ namespace QuizBuilder.Domain.Action.Client.Action {
 
 	}
 
-	public sealed class EndQuizAttemptCommand : ICommand<CommandResult<AttemptFeedback>> {
+	public sealed class EndQuizAttemptCommand : ICommand<CommandResult<AttemptFeedbackInfo>> {
 
 		[Required]
 		[JsonPropertyName( "id" )]

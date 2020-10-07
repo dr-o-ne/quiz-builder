@@ -54,7 +54,7 @@ export class QuizAttemptComponent {
 
     submit(): void{
         const result = new QuizAttemptResult(this.attempt.id, [...this.answers.values()]);
-        this.dataProviderService.endAttempt(result).subscribe((quizAttemptFeedback: ApiResponse<QuizAttemptFeedback>) => {});
+        this.dataProviderService.endAttempt(result).subscribe((quizAttemptFeedback: ApiResponse<QuizAttemptFeedback>) => {console.log(quizAttemptFeedback)});
     }
 
 }

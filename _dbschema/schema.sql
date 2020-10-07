@@ -132,7 +132,7 @@ CREATE TABLE dbo.Attempt(
 	StartDate	DATETIME2(7) NOT NULL, 
 	EndDate		DATETIME2(7) NULL, 
 	Data		NVARCHAR(MAX) NULL,
-	Result		DECIMAL(18, 0) NULL, 
+	Result		DECIMAL(18, 2) NULL, 
 	CreatedOn	DATETIME2(7) NOT NULL, 
 	ModifiedOn	DATETIME2(7) NOT NULL, 
 

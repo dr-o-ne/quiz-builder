@@ -123,7 +123,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionResult {
 
 	}
 
-	public sealed class AttemptFeedback {
+	public sealed class AttemptFeedbackInfo {
 
 		[JsonPropertyName( "duration" )]
 		public int? Duration { get; set; }
