@@ -9,7 +9,7 @@
       [ngClass]="(question.choicesDisplayType === choicesDisplayType.Horizontal)?'item-group-horizontal':'item-group-vertical'">
 
       <mat-radio-button *ngFor="let choice of question.choices" [value]="choice.id">
-        {{choice.text}}
+        <qb-rich-text-editor data="{{choice.text}}"></qb-rich-text-editor>
       </mat-radio-button>
 
     </mat-radio-group>
