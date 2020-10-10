@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, Output, EventEmitter } from '@angular/core';
 import { QuestionType } from '../../model/_enums';
-import { QuestionAttemptInfo, TrueFalseQuestionAttemptInfo } from '../../model/attemptInfo';
+import { MultipleChoiceQuestionAttemptInfo, QuestionAttemptInfo, TrueFalseQuestionAttemptInfo } from '../../model/attemptInfo';
 import { QuestionAttemptResult } from '../../model/attemptResult';
 import { QuestionHostDirective } from './question-host.directive';
 //import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
-//import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
+import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
 //import { LongAnswerQuestionComponent } from './long-answer-question/long-answer-question.component';
 
 @Component({
@@ -44,7 +44,6 @@ export class QuestionDynamicComponent implements OnInit {
         );
         return;
       }
-      /*
       case QuestionType.MultipleChoice: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleChoiceQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
@@ -55,6 +54,8 @@ export class QuestionDynamicComponent implements OnInit {
 
         return;
       }
+      /*
+
       case QuestionType.MultipleSelect: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleSelectQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
