@@ -63,6 +63,7 @@ import { Error404Module } from './quiz-builder/_pages/error/404/error-404.module
 import { QuizInfoStartPageComponent } from './quiz-builder/_quiz/quiz-info/start-page/quiz-info-start-page.component';
 import { QuizInfoEppearancePageComponent } from './quiz-builder/_quiz/quiz-info/appearance/quiz-info-appearance.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { QuizInfoResultPageComponent } from './quiz-builder/_quiz/quiz-info/result-page/quiz-info-result-page.component';
 
 const appRoutes: Routes = [
     {
@@ -111,6 +112,7 @@ const appRoutes: Routes = [
         GroupInfoComponent,
         QuizInfoStructureComponent,
         QuizInfoStartPageComponent,
+        QuizInfoResultPageComponent,
         QuizInfoSettingsComponent,
         QuizInfoEppearancePageComponent,
         ChoiceHostDirective,
