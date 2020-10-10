@@ -28,6 +28,14 @@ export class Quiz {
     isTimeLimitEnabled: boolean;
     isTotalQuestionsEnabled: boolean;
     isPassingScoreEnabled: boolean;
+
+    resultPassText: string;
+    resultFailText: string;
+    IsResultPageEnabled: boolean;
+    IsResultTotalScoreEnabled: boolean;
+    IsResultPassFailEnabled: boolean;
+    IsResultFeedbackEnabled: boolean;
+    IsResultDurationEnabled: boolean;
 }
 
 export enum PageSettings {

@@ -28,7 +28,6 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public string FooterColor { get; set; }
 
 		// Start Page
-
 		[JsonPropertyName( "isStartPageEnabled" )]
 		public bool IsStartPageEnabled { get; set; }
 
@@ -46,6 +45,28 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 
 		[JsonPropertyName( "isPassingScoreEnabled" )]
 		public bool IsPassingScoreEnabled { get; set; }
+
+		// Result Page
+		[JsonPropertyName( "resultPassText" )]
+		public string ResultPassText { get; set; }
+
+		[JsonPropertyName( "resultFailText" )]
+		public string ResultFailText { get; set; }
+
+		[JsonPropertyName( "IsResultPageEnabled" )]
+		public bool IsResultPageEnabled { get; set; }
+
+		[JsonPropertyName( "isResultTotalScoreEnabled" )]
+		public bool IsResultTotalScoreEnabled { get; set; }
+
+		[JsonPropertyName( "isResultPassFailEnabled" )]
+		public bool IsResultPassFailEnabled { get; set; }
+
+		[JsonPropertyName( "isResultFeedbackEnabled" )]
+		public bool IsResultFeedbackEnabled { get; set; }
+
+		[JsonPropertyName( "isResultDurationEnabled" )]
+		public bool IsResultDurationEnabled { get; set; }
 	}
 	
 }

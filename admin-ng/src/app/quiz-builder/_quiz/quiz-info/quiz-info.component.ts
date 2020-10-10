@@ -122,7 +122,8 @@ export class QuizInfoComponent implements OnInit {
             { index: 0, id: "questions" },
             { index: 1, id: "startPage" },
             { index: 2, id: "settings" },
-            { index: 3, id: "appearance" }
+            { index: 3, id: "resultPage" },
+            { index: 4, id: "appearance" }
         ];
 
         tabs.forEach(x => {
@@ -169,12 +170,21 @@ export class QuizInfoComponent implements OnInit {
                     }
                 },
                 {
+                    id: 'resultPage',
+                    title: 'Result Page',
+                    type: 'item',
+                    icon: 'forward',
+                    function: () => {
+                        this.selectTab(3)
+                    }
+                },
+                {
                     id: 'appearance',
                     title: 'Appearance',
                     type: 'item',
                     icon: 'color_lens',
                     function: () => {
-                        this.selectTab(3)
+                        this.selectTab(4)
                     }
                 },
             ]

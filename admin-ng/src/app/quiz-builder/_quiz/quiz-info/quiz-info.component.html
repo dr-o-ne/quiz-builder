@@ -71,6 +71,13 @@
 
                 <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 3 ? 'block': 'none'">
 
+                    <app-quiz-info-result-page [form]="quizForm.get('settings')" [isEditMode]="isEditMode()">
+                    </app-quiz-info-result-page>
+                    
+                </div>
+
+                <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 4 ? 'block': 'none'">
+
                     <app-quiz-info-appearance [form]="quizForm.get('settings')">
                     </app-quiz-info-appearance>
                     

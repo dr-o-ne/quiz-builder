@@ -86,5 +86,21 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public decimal? PassingScore { get; set; }
 
+		// Result Page
+
+		public string ResultPassText { get; set; }
+
+		public string ResultFailText { get; set; }
+
+		public bool IsResultPageEnabled { get; set; }
+
+		public bool IsResultTotalScoreEnabled { get; set; }
+
+		public bool IsResultPassFailEnabled { get; set; }
+
+		public bool IsResultFeedbackEnabled { get; set; }
+
+		public bool IsResultDurationEnabled { get; set; }
+
 	}
 }
