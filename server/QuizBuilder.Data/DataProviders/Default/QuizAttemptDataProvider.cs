@@ -17,15 +17,16 @@ namespace QuizBuilder.Data.DataProviders.Default {
 
 		public async Task<AttemptDto> Get( string uid ) {
 			const string sql = @"
-SELECT Id,
-       UId,
-       QuizId,
-       StartDate,
-       EndDate,
-       [Data],
-       TotalScore
-FROM dbo.Attempt (NOLOCK)
-WHERE UId = @UId";
+SELECT a.Id,
+       a.UId,
+       q.UId AS QuizUId,
+       a.StartDate,
+       a.EndDate,
+       a.[Data],
+       a.TotalScore
+FROM dbo.Attempt AS a (NOLOCK)
+INNER JOIN dbo.Quiz AS q (NOLOCK) ON a.QuizId = q.Id
+WHERE a.UId = @UId";
 
 			using IDbConnection conn = GetConnection();
 			return await conn.QuerySingleOrDefaultAsync<AttemptDto>( sql, new { UId = uid } );

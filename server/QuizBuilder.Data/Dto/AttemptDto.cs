@@ -8,8 +8,6 @@ namespace QuizBuilder.Data.Dto {
 
 		public string UId { get; set; }
 
-		public long QuizId { get; set; }
-
 		public string QuizUId { get; set; }
 
 		public DateTime StartDate { get; set; }

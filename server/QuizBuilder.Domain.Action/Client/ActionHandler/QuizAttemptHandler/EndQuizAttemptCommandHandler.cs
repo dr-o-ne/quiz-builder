@@ -113,7 +113,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 		}
 
 		private async Task<List<Question>> GetQuestions( AttemptDto attemptDto ) {
-			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, attemptDto.QuizId );
+			QuizDto quizDto = await _quizDataProvider.Get( Consts.SupportUser.OrgId, Consts.SupportUser.UserId, attemptDto.QuizUId );
 			List<QuestionDto> questionDtos = ( await _questionDataProvider.GetByQuiz( quizDto.UId ) )
 				.OrderBy( x => x.SortOrder )
 				.ToList();
