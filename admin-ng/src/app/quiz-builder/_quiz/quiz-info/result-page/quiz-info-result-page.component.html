@@ -5,6 +5,11 @@
 
         <form [formGroup]="form">
 
+            <app-rich-text-editor displayName="Pass Message" textFormControlName="resultPassText" [height]="200">                                    
+            </app-rich-text-editor>
+
+            <app-rich-text-editor displayName="Fail Message" textFormControlName="resultFailText" [height]="200">                                    
+            </app-rich-text-editor>
 
         </form>
 
@@ -15,7 +20,6 @@
         <form [formGroup]="form" fxLayout="column">
 
         </form>
-
 
     </div>
 

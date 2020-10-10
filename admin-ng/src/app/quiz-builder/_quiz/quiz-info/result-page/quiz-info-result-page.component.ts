@@ -17,10 +17,12 @@ export class QuizInfoResultPageComponent {
     saveFormData(quiz: Quiz): void {
         const value = this.form.value;
         
-        quiz.IsResultPageEnabled = value.IsResultPageEnabled as boolean;
+        quiz.resultPassText = value.resultPassText as string;
+        quiz.resultFailText = value.resultFailText as string;
+        /*quiz.IsResultPageEnabled = value.IsResultPageEnabled as boolean;
         quiz.IsResultTotalScoreEnabled = value.IsResultTotalScoreEnabled as boolean;
         quiz.IsResultPassFailEnabled = value.IsResultPassFailEnabled as boolean;
         quiz.IsResultFeedbackEnabled = value.IsResultFeedbackEnabled as boolean;
-        quiz.IsResultDurationEnabled = value.IsResultDurationEnabled as boolean;
+        quiz.IsResultDurationEnabled = value.IsResultDurationEnabled as boolean;*/
     }
 }

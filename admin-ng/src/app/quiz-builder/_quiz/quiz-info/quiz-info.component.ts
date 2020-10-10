@@ -13,6 +13,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
 import { QuizInfoStartPageComponent } from './start-page/quiz-info-start-page.component';
 import { QuizInfoEppearancePageComponent } from './appearance/quiz-info-appearance.component';
+import { QuizInfoResultPageComponent } from './result-page/quiz-info-result-page.component';
 
 @Component({
     selector: 'app-quiz-info',
@@ -26,6 +27,7 @@ export class QuizInfoComponent implements OnInit {
     @ViewChild(QuizInfoStructureComponent) structureControl: QuizInfoStructureComponent;
     @ViewChild(QuizInfoStartPageComponent) startPageControl: QuizInfoStartPageComponent;
     @ViewChild(QuizInfoSettingsComponent) settingsControl: QuizInfoSettingsComponent;
+    @ViewChild(QuizInfoResultPageComponent) resultPageControl: QuizInfoResultPageComponent;
     @ViewChild(QuizInfoEppearancePageComponent) appearanceControl: QuizInfoEppearancePageComponent;
 
     quiz: Quiz;
@@ -73,11 +75,20 @@ export class QuizInfoComponent implements OnInit {
                 backgroundColor: [this.quiz.backgroundColor],
                 sideColor: [this.quiz.sideColor],
                 footerColor: [this.quiz.footerColor],
+                
                 isStartPageEnabled: [this.quiz.isStartPageEnabled],
                 isTotalAttemptsEnabled: [this.quiz.isTotalAttemptsEnabled],
                 isTimeLimitEnabled: [this.quiz.isTimeLimitEnabled],
                 isTotalQuestionsEnabled: [this.quiz.isTotalQuestionsEnabled],
-                isPassingScoreEnabled: [this.quiz.isPassingScoreEnabled]
+                isPassingScoreEnabled: [this.quiz.isPassingScoreEnabled],
+
+                resultPassText: [this.quiz.resultPassText],
+                resultFailText: [this.quiz.resultFailText],
+                IsResultPageEnabled: [this.quiz.IsResultPageEnabled],
+                IsResultTotalScoreEnabled: [this.quiz.IsResultTotalScoreEnabled],
+                IsResultPassFailEnabled: [this.quiz.IsResultPassFailEnabled],
+                IsResultFeedbackEnabled: [this.quiz.IsResultFeedbackEnabled],
+                IsResultDurationEnabled: [this.quiz.IsResultDurationEnabled],
             })
         })
     }
@@ -90,6 +101,7 @@ export class QuizInfoComponent implements OnInit {
         this.structureControl.saveFormData(this.quiz);
         this.startPageControl.saveFormData(this.quiz);
         this.settingsControl.saveFormData(this.quiz);
+        this.resultPageControl.saveFormData(this.quiz);
         this.appearanceControl.saveFormData(this.quiz);
 
         if (this.isEditMode())
