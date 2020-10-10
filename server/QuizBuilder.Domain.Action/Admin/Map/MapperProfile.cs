@@ -104,7 +104,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map {
 		}
 
 		private void AddAttemptMapping() {
-			CreateMap<QuizAttempt, AttemptDto>().ConvertUsing<QuizAttemptToAttemptDtoConverter>();
+			CreateMap<QuizAttempt, AttemptDto>();
 		}
 	}
 }
