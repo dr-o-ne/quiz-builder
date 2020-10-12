@@ -23,6 +23,16 @@
 
                 </div>
 
+                <div class="card" class="m-40" fxLayoutAlign="center center" *ngIf="data.feedback">
+                    <div class="card-preview">
+                        <div class="fuse-card qb-card">
+                            <div class="p-24">
+                                <qb-rich-text-editor data="{{data.feedback}}"></qb-rich-text-editor>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

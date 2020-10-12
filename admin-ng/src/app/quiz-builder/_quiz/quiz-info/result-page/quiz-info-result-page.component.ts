@@ -22,7 +22,7 @@ export class QuizInfoResultPageComponent {
         quiz.isResultPageEnabled = value.isResultPageEnabled as boolean;
         quiz.isResultTotalScoreEnabled = value.isResultTotalScoreEnabled as boolean;
         quiz.isResultPassFailEnabled = value.isResultPassFailEnabled as boolean;
-        //quiz.isResultFeedbackEnabled = value.isResultFeedbackEnabled as boolean;
+        quiz.isResultFeedbackEnabled = value.isResultFeedbackEnabled as boolean;
         quiz.isResultDurationEnabled = value.isResultDurationEnabled as boolean;
     }
 }

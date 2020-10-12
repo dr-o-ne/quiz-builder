@@ -37,6 +37,12 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				payload.TotalScore = attemptDto.TotalScore;
 			if( quiz.IsResultDurationEnabled )
 				payload.Duration = 100;
+			if( quiz.IsResultFeedbackEnabled ) {
+				if( attemptDto.TotalScore > 0 ) //TODO: > quiz.PassGrade
+					payload.Feedback = quiz.ResultPassText;
+				else
+					payload.Feedback = quiz.ResultFailText;
+			}
 			 
 			return new CommandResult<AttemptFeedbackInfo> {
 				IsSuccess = true,
