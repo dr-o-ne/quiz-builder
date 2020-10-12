@@ -53,7 +53,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		[JsonPropertyName( "resultFailText" )]
 		public string ResultFailText { get; set; }
 
-		[JsonPropertyName( "IsResultPageEnabled" )]
+		[JsonPropertyName( "isResultPageEnabled" )]
 		public bool IsResultPageEnabled { get; set; }
 
 		[JsonPropertyName( "isResultTotalScoreEnabled" )]

@@ -31,11 +31,11 @@ export class Quiz {
 
     resultPassText: string;
     resultFailText: string;
-    IsResultPageEnabled: boolean;
-    IsResultTotalScoreEnabled: boolean;
-    IsResultPassFailEnabled: boolean;
-    IsResultFeedbackEnabled: boolean;
-    IsResultDurationEnabled: boolean;
+    isResultPageEnabled: boolean;
+    isResultTotalScoreEnabled: boolean;
+    isResultPassFailEnabled: boolean;
+    isResultFeedbackEnabled: boolean;
+    isResultDurationEnabled: boolean;
 }
 
 export enum PageSettings {

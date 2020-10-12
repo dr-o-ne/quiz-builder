@@ -19,12 +19,10 @@ export class QuizInfoResultPageComponent {
         
         quiz.resultPassText = value.resultPassText as string;
         quiz.resultFailText = value.resultFailText as string;
-        quiz.IsResultPageEnabled = value.isResultPageEnabled as boolean;
-
-
-        /*quiz.IsResultTotalScoreEnabled = value.IsResultTotalScoreEnabled as boolean;
-        quiz.IsResultPassFailEnabled = value.IsResultPassFailEnabled as boolean;
-        quiz.IsResultFeedbackEnabled = value.IsResultFeedbackEnabled as boolean;
-        quiz.IsResultDurationEnabled = value.IsResultDurationEnabled as boolean;*/
+        quiz.isResultPageEnabled = value.isResultPageEnabled as boolean;
+        quiz.isResultTotalScoreEnabled = value.isResultTotalScoreEnabled as boolean;
+        /*quiz.IsResultPassFailEnabled = value.isResultPassFailEnabled as boolean;
+        quiz.IsResultFeedbackEnabled = value.isResultFeedbackEnabled as boolean;
+        quiz.IsResultDurationEnabled = value.isResultDurationEnabled as boolean;*/
     }
 }
