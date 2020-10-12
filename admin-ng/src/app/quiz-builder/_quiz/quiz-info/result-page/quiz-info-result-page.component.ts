@@ -21,8 +21,8 @@ export class QuizInfoResultPageComponent {
         quiz.resultFailText = value.resultFailText as string;
         quiz.isResultPageEnabled = value.isResultPageEnabled as boolean;
         quiz.isResultTotalScoreEnabled = value.isResultTotalScoreEnabled as boolean;
-        /*quiz.IsResultPassFailEnabled = value.isResultPassFailEnabled as boolean;
-        quiz.IsResultFeedbackEnabled = value.isResultFeedbackEnabled as boolean;
-        quiz.IsResultDurationEnabled = value.isResultDurationEnabled as boolean;*/
+        quiz.isResultPassFailEnabled = value.isResultPassFailEnabled as boolean;
+        //quiz.isResultFeedbackEnabled = value.isResultFeedbackEnabled as boolean;
+        quiz.isResultDurationEnabled = value.isResultDurationEnabled as boolean;
     }
 }
