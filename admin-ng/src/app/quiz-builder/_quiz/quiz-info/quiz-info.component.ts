@@ -84,7 +84,7 @@ export class QuizInfoComponent implements OnInit {
 
                 resultPassText: [this.quiz.resultPassText],
                 resultFailText: [this.quiz.resultFailText],
-                IsResultPageEnabled: [this.quiz.IsResultPageEnabled],
+                isResultPageEnabled: [this.quiz.IsResultPageEnabled],
                 IsResultTotalScoreEnabled: [this.quiz.IsResultTotalScoreEnabled],
                 IsResultPassFailEnabled: [this.quiz.IsResultPassFailEnabled],
                 IsResultFeedbackEnabled: [this.quiz.IsResultFeedbackEnabled],

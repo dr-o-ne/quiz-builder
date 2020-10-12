@@ -19,8 +19,10 @@ export class QuizInfoResultPageComponent {
         
         quiz.resultPassText = value.resultPassText as string;
         quiz.resultFailText = value.resultFailText as string;
-        /*quiz.IsResultPageEnabled = value.IsResultPageEnabled as boolean;
-        quiz.IsResultTotalScoreEnabled = value.IsResultTotalScoreEnabled as boolean;
+        quiz.IsResultPageEnabled = value.isResultPageEnabled as boolean;
+
+
+        /*quiz.IsResultTotalScoreEnabled = value.IsResultTotalScoreEnabled as boolean;
         quiz.IsResultPassFailEnabled = value.IsResultPassFailEnabled as boolean;
         quiz.IsResultFeedbackEnabled = value.IsResultFeedbackEnabled as boolean;
         quiz.IsResultDurationEnabled = value.IsResultDurationEnabled as boolean;*/
