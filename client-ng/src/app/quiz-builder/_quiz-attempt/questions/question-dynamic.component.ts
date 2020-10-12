@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, Output, EventEmitter } from '@angular/core';
 import { QuestionType } from '../../model/_enums';
-import { MultipleChoiceQuestionAttemptInfo, QuestionAttemptInfo, TrueFalseQuestionAttemptInfo } from '../../model/attemptInfo';
+import { MultipleChoiceQuestionAttemptInfo, MultipleSelectQuestionAttemptInfo, QuestionAttemptInfo, TrueFalseQuestionAttemptInfo } from '../../model/attemptInfo';
 import { QuestionAttemptResult } from '../../model/attemptResult';
 import { QuestionHostDirective } from './question-host.directive';
-//import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 import { TrueFalseQuestionComponent } from './true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './multiple-choice-question/multiple-choice-question.component';
+import { MultipleSelectQuestionComponent } from './multiple-select-question/multiple-select-question.component';
 //import { LongAnswerQuestionComponent } from './long-answer-question/long-answer-question.component';
 
 @Component({
@@ -23,9 +23,6 @@ export class QuestionDynamicComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    console.log('test');
-
     this.loadComponent();
   }
 
@@ -54,8 +51,6 @@ export class QuestionDynamicComponent implements OnInit {
 
         return;
       }
-      /*
-
       case QuestionType.MultipleSelect: {
         const componentFactory = this.resolver.resolveComponentFactory(MultipleSelectQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
@@ -65,7 +60,7 @@ export class QuestionDynamicComponent implements OnInit {
         );
         return;
       }
-      case QuestionType.LongAnswer: {
+      /*case QuestionType.LongAnswer: {
         const componentFactory = this.resolver.resolveComponentFactory(LongAnswerQuestionComponent);
         const componentRef = viewContainerRef.createComponent(componentFactory);
         (<LongAnswerQuestionComponent>componentRef.instance).question = this.question as LongAnswerQuestionAttemptInfo;

@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MatRadioChange } from '@angular/material/radio';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSelectChange } from '@angular/material/select';
 import { QuestionComponent } from '../question.component';
 import { ChoicesDisplayType } from '../../../model/_enums';
 import { MultipleSelectQuestionAttemptInfo } from '../../../model/attemptInfo';
 import { MultipleSelectQuestionAttemptResult } from '../../../model/attemptResult';
-import { MatSelectChange } from '@angular/material/select';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
@@ -18,11 +18,29 @@ import { fuseAnimations } from '@fuse/animations';
 export class MultipleSelectQuestionComponent extends QuestionComponent<MultipleSelectQuestionAttemptInfo, MultipleSelectQuestionAttemptResult> {
 
     choicesDisplayType = ChoicesDisplayType;
+    choices: Set<string>;
 
-    onChange(event: MatRadioChange | MatSelectChange): void {
+    constructor() {
+        super();
+        this.choices = new Set<string>();
+    }
+
+    onChange(event: MatCheckboxChange | MatSelectChange): void {
+
+        if (event instanceof MatCheckboxChange) {
+            if (event.checked)
+                this.choices.add(event.source.value);
+            else
+                this.choices.delete(event.source.value);
+        }
+
+        if (event instanceof MatSelectChange) {
+            this.choices = new Set<string>(event.value);
+        }
+
         const value = new MultipleSelectQuestionAttemptResult(
             this.question.id,
-            event.value
+            [...this.choices].map(x => parseInt(x))
         );
 
         this.answer.emit(value);
