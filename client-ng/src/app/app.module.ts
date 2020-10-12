@@ -33,6 +33,7 @@ import { QuestionHostDirective } from './quiz-builder/_quiz-attempt/questions/qu
 import { QuestionDynamicComponent } from './quiz-builder/_quiz-attempt/questions/question-dynamic.component';
 import { TrueFalseQuestionComponent } from './quiz-builder/_quiz-attempt/questions/true-false-question/true-false-question.component';
 import { MultipleChoiceQuestionComponent } from './quiz-builder/_quiz-attempt/questions/multiple-choice-question/multiple-choice-question.component';
+import { MultipleSelectQuestionComponent } from './quiz-builder/_quiz-attempt/questions/multiple-select-question/multiple-select-question.component';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RichTextEditorComponent } from './quiz-builder/common/ui/editor/rich-text-editor.component';
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
         QuestionDynamicComponent,
         TrueFalseQuestionComponent,
         MultipleChoiceQuestionComponent,
+        MultipleSelectQuestionComponent
     ],
     imports     : [
         BrowserModule,
