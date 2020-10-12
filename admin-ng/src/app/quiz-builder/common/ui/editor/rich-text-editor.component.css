@@ -27,3 +27,7 @@
 .rte-height-300 .ck-editor__editable_inline {
     min-height: 300px !important;
 }
+
+.rte-height-400 .ck-editor__editable_inline {
+    min-height: 400px !important;
+}

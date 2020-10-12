@@ -92,6 +92,7 @@ export class QuizInfoComponent implements OnInit {
             })
         })
     }
+    
 
     isEditMode = () => this.quiz.id ? true : false;
 
