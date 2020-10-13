@@ -11,15 +11,14 @@ quiz-list {
         }
 
         .top-bg {
-
-            @include media-breakpoint('lt-md') {
-                height: 256px;
-            }
+            background: linear-gradient(90deg,#0e2a3b 0,#34306b) !important;
         }
 
         > .center {
 
             > .header {
+
+                background-color: transparent !important;
 
                 .search-wrapper {
                     width: 100%;
