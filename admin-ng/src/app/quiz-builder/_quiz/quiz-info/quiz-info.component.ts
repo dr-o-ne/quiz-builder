@@ -1,9 +1,7 @@
 import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Quiz } from 'app/quiz-builder/model/quiz';
-import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse';
 import { QuizDataProvider } from 'app/quiz-builder/services/dataProviders/quiz.dataProvider';
 import * as moment from 'moment';
 import { fuseAnimations } from '@fuse/animations';
@@ -44,25 +42,16 @@ export class QuizInfoComponent implements OnInit {
         private navService: NavigationService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
-        private router: Router,
-        private location: Location,
         private quizDataProvider: QuizDataProvider
     ) {
         if (this.route.snapshot.data.quizResolver)
             this.quiz = this.route.snapshot.data.quizResolver;
-        else
-            this.quiz = new Quiz();
-
     }
 
     ngOnInit(): void {
 
         this.createMenuItems();
-
-        if (this.isEditMode())
-            this.selectTab(0);
-        else
-            this.selectTab(2);
+        this.selectTab(0);
 
         this.quizForm = this.fb.group({
             settings: this.fb.group({
@@ -97,11 +86,6 @@ export class QuizInfoComponent implements OnInit {
             })
         })
     }
-    
-
-    isEditMode = () => this.quiz.id ? true : false;
-
-    onReturn = () => this.location.back();
 
     updateTitle():void {
         this.addDialogRef = this.matDialog.open(QuizDialogFormComponent,
@@ -131,18 +115,7 @@ export class QuizInfoComponent implements OnInit {
         this.resultPageControl.saveFormData(this.quiz);
         this.appearanceControl.saveFormData(this.quiz);
 
-        if (this.isEditMode())
-            this.updateQuiz();
-        else
-            this.createQuiz();
-
-    }
-
-    createQuiz(): void {
-        this.quizDataProvider.createQuiz(this.quiz)
-            .subscribe(
-                (response: ApiResponse<Quiz>) => { this.router.navigateByUrl('quizzes/' + response.payload.id); }
-            );
+        this.updateQuiz();
     }
 
     updateQuiz(): void {

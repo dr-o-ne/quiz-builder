@@ -37,7 +37,7 @@
         <!-- / HEADER -->
 
         <button mat-raised-button
-            [style.visibility]="selectedIndex === 0 && isEditMode() ? 'visible': 'hidden'"
+            [style.visibility]="selectedIndex === 0"
             (click)="addGroup()" 
             class="addButton" 
             color="accent">
@@ -67,7 +67,7 @@
 
                 <div class="p-24" fusePerfectScrollbar [style.display]="selectedIndex === 2 ? 'block': 'none'">
 
-                    <app-quiz-info-settings [form]="quizForm.get('settings')" isEditMode="isEditMode()">
+                    <app-quiz-info-settings [form]="quizForm.get('settings')" isEditMode="true">
                     </app-quiz-info-settings>
                     
                 </div>
