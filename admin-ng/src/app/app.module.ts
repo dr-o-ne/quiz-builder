@@ -64,6 +64,7 @@ import { QuizInfoStartPageComponent } from './quiz-builder/_quiz/quiz-info/start
 import { QuizInfoEppearancePageComponent } from './quiz-builder/_quiz/quiz-info/appearance/quiz-info-appearance.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { QuizInfoResultPageComponent } from './quiz-builder/_quiz/quiz-info/result-page/quiz-info-result-page.component';
+import { QuizDialogFormComponent } from './quiz-builder/_quiz/quiz-dialog-form/quiz-dialog-form.component';
 
 const appRoutes: Routes = [
     {
@@ -107,6 +108,7 @@ const appRoutes: Routes = [
         EnumToArrayPipe,
 
         // UI
+        QuizDialogFormComponent,
         QuizListComponent,
         QuizInfoComponent,
         GroupInfoComponent,
@@ -174,6 +176,7 @@ const appRoutes: Routes = [
         CommonUtilsModule
     ],
     entryComponents: [
+      QuizDialogFormComponent,
       TrueFalseChoiceInfoComponent,
       MultipleChoiceChoiceInfoComponent,
       MultipleSelectChoiceInfoComponent

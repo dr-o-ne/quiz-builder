@@ -28,7 +28,7 @@
                     <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterData" placeholder="Search for a Quiz">
                     <button mat-button *ngIf="!isEmptyFilter()" matSuffix mat-icon-button (click)="cleanFilter()">
                         <mat-icon>close</mat-icon>
-                    </button>m /ljkl
+                    </button>
                 </div>
             </div>
             <!-- / SEARCH -->
@@ -37,7 +37,7 @@
         <!-- / HEADER -->
 
         <!-- ADD BUTTON -->
-        <button mat-raised-button [routerLink]="'/quizzes/new'" class="addButton" color="accent">
+        <button mat-raised-button  (click)="add()" class="addButton" color="accent">
             <mat-icon>add</mat-icon>
             <span>&nbsp;&nbsp;&nbsp;ADD QUIZ&nbsp;&nbsp;</span>
         </button>

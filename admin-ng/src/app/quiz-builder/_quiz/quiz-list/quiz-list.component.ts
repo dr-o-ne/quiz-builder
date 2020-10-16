@@ -9,6 +9,9 @@ import { Quiz } from 'app/quiz-builder/model/quiz';
 import { fuseAnimations } from '@fuse/animations';
 import { ApiResponse } from 'app/quiz-builder/services/dataProviders/apiResponse';
 import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/NavigationService';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { QuizDialogFormComponent } from '../quiz-dialog-form/quiz-dialog-form.component';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'quiz-list',
@@ -24,11 +27,13 @@ export class QuizListComponent implements OnInit {
   displayedColumns: string[] = ['empty', 'name', 'isEnabled', 'statistic', 'preview', 'copyLink', 'menu'];
   filterData: string;
   isMultiSelectMode = false;
+  addDialogRef: MatDialogRef<QuizDialogFormComponent>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private navService: NavigationService,
+    private matDialog: MatDialog,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private attemptService: AttemptService,
@@ -108,6 +113,25 @@ export class QuizListComponent implements OnInit {
 
   bulkDisable(): void {
     this.selection.selected.forEach(x => this.onChangeQuizState(false, x));
+  }
+
+  add(): void {
+    this.addDialogRef = this.matDialog.open(QuizDialogFormComponent, { panelClass: 'quiz-dialog-form' });
+
+    this.addDialogRef.afterClosed()
+      .subscribe(response => {
+        if (!response)
+          return;
+
+        const form: FormGroup = response;
+
+        const quiz = new Quiz();
+        quiz.name = form.value.name;
+        this.quizDataProvider.createQuiz(quiz).subscribe(
+          (response: ApiResponse<Quiz>) => { this.router.navigateByUrl('quizzes/' + response.payload.id); }
+        );
+
+      });
   }
 
   edit(item: Quiz): void {
