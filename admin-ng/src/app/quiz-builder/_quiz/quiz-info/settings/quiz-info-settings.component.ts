@@ -14,7 +14,6 @@ import { fuseAnimations } from '@fuse/animations';
 export class QuizInfoSettingsComponent {
 
     @Input() form: FormGroup;
-    @Input() isEditMode: boolean;
 
     pageSettings = PageSettings;
     pageSettingsKeys: number[];
