@@ -12,13 +12,12 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class QuizDialogFormComponent {
 
-    action: string;
     name: string;
     form: FormGroup;
 
     constructor(
         public matDialogRef: MatDialogRef<QuizDialogFormComponent>,
-        @Inject(MAT_DIALOG_DATA) private _data: any,
+        @Inject(MAT_DIALOG_DATA) private data: any,
         private fb: FormBuilder
     ) {
         this.form = this.createForm();
@@ -26,7 +25,7 @@ export class QuizDialogFormComponent {
 
     createForm(): FormGroup {
         return this.fb.group({
-            name: [this.name, Validators.required]
+            name: [this.data.name, Validators.required]
         });
     }
 }

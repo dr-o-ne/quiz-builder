@@ -14,6 +14,8 @@ import { NavigationService } from 'app/quiz-builder/common/ui/nav-bar/Navigation
 import { QuizInfoStartPageComponent } from './start-page/quiz-info-start-page.component';
 import { QuizInfoEppearancePageComponent } from './appearance/quiz-info-appearance.component';
 import { QuizInfoResultPageComponent } from './result-page/quiz-info-result-page.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { QuizDialogFormComponent } from '../quiz-dialog-form/quiz-dialog-form.component';
 
 @Component({
     selector: 'app-quiz-info',
@@ -34,7 +36,10 @@ export class QuizInfoComponent implements OnInit {
     quizForm: FormGroup;
     selectedIndex: number;
 
+    addDialogRef: MatDialogRef<QuizDialogFormComponent>;
+
     constructor(
+        private matDialog: MatDialog,
         private fuseNavigationService: FuseNavigationService,
         private navService: NavigationService,
         private route: ActivatedRoute,
@@ -97,6 +102,27 @@ export class QuizInfoComponent implements OnInit {
     isEditMode = () => this.quiz.id ? true : false;
 
     onReturn = () => this.location.back();
+
+    updateTitle():void {
+        this.addDialogRef = this.matDialog.open(QuizDialogFormComponent,
+            {
+                panelClass: 'quiz-dialog-form',
+                data: {
+                    name: this.quizForm.get('settings.name').value
+                }
+            },
+        );
+
+        this.addDialogRef.afterClosed()
+            .subscribe(response => {
+                if (!response)
+                    return;
+
+                const form: FormGroup = response;
+                this.quizForm.patchValue({settings:{name: form.value.name}});
+                this.onSave();
+            });
+    }
 
     onSave(): void {
         this.structureControl.saveFormData(this.quiz);

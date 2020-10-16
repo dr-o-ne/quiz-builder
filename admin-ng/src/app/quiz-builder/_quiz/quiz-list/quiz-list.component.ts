@@ -116,7 +116,14 @@ export class QuizListComponent implements OnInit {
   }
 
   add(): void {
-    this.addDialogRef = this.matDialog.open(QuizDialogFormComponent, { panelClass: 'quiz-dialog-form' });
+    this.addDialogRef = this.matDialog.open(QuizDialogFormComponent,
+      {
+          panelClass: 'quiz-dialog-form',
+          data: {
+              name: "",
+          }
+      },
+  );
 
     this.addDialogRef.afterClosed()
       .subscribe(response => {

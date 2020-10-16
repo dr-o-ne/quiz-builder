@@ -19,6 +19,9 @@
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     {{quizForm.get('settings.name').value}}
                 </span>
+                <button mat-icon-button (click)="updateTitle()">
+                    <mat-icon class="s-20">edit_mode</mat-icon>
+                </button>
             </div>
             <!-- / APP TITLE -->
 
