@@ -1,12 +1,5 @@
 <form [formGroup]="form">
 
-    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-        <mat-label>Quiz Name</mat-label>
-        <input matInput
-            formControlName="name"
-            required>
-    </mat-form-field>
-
     <div *ngIf="isEditMode">
 
         <div fxLayout fxLayoutAlign="none center">
@@ -32,12 +25,12 @@
                 <span class="mat-body-1">Randomize Questions</span>
             </mat-checkbox>
     
-            <div fxFlex></div>
-    
-            <mat-checkbox formControlName="isPrevButtonEnabled" fxFlex="nogrow" class="mat-form-field-wrapper">
+        </div>
+
+        <div class="mat-form-field-wrapper">
+            <mat-checkbox formControlName="isPrevButtonEnabled">
                 <span class="mat-body-1">Enable Previous Page Navigation</span>
             </mat-checkbox>
-    
         </div>
     
         <div class="mat-form-field-wrapper">
