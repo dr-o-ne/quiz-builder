@@ -12,6 +12,7 @@ import { Group } from 'app/quiz-builder/model/group';
 import { fuseAnimations } from '@fuse/animations';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GroupDialogFormComponent } from '../../group-dialog-form/group-dialog-form.component';
+import { FormGroup } from '@angular/forms';
 
 export class DataInfo implements GroupInfoViewModel {
     id: string;
@@ -185,6 +186,32 @@ export class QuizInfoStructureComponent implements OnInit {
                 }
             },
         );
+
+
+        this.groupEditDialogRef.afterClosed()
+            .subscribe(response => {
+                if (!response)
+                    return;
+
+                const form: FormGroup = response;
+
+                console.log(form);
+
+                const group = this.quiz.groups.find(x => x.id == dataInfo.id);
+
+                group.name = form.value.name as string;
+                group.selectAllQuestions = form.value.selectAllQuestions as boolean;
+                group.countOfQuestionsToSelect = form.value.countOfQuestionsToSelect as number;
+                group.randomizeQuestions = form.value.randomizeQuestions as boolean;
+
+                dataInfo.name = group.name;
+                dataInfo.selectAllQuestions = group.selectAllQuestions;
+                dataInfo.countOfQuestionsToSelect = group.countOfQuestionsToSelect;
+                dataInfo.randomizeQuestions = group.randomizeQuestions;
+
+                console.log(group);
+                this.groupDataProvider.updateGroup(group).subscribe();
+            });
     }
 
     onEditClick(question: Question): void {
@@ -231,7 +258,7 @@ export class QuizInfoStructureComponent implements OnInit {
                 this.groupDataProvider.updateGroup(group).subscribe();
         }
     }
-    
+
     onChangeGroupState(isEnabled: boolean, dataInfo: DataInfo): void {
         const group = this.quiz.groups.find(x => x.id == dataInfo.id);
         dataInfo.isEnabled = isEnabled;

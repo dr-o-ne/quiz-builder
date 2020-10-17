@@ -22,14 +22,17 @@ export class GroupDialogFormComponent {
         private fb: FormBuilder
     ) {
         this.form = this.createForm();
+
+        console.log(this.form);
+
     }
 
     createForm(): FormGroup {
 
-        const dataInfo: DataInfo = this.data;
+        const dataInfo: DataInfo = this.data.dataInfo;
 
         return this.fb.group({
-            name: [dataInfo.name, Validators.required],
+            name: [dataInfo.name],
             selectAllQuestions: [dataInfo.selectAllQuestions],
             randomizeQuestions: [dataInfo.randomizeQuestions],
             countOfQuestionsToSelect: [dataInfo.countOfQuestionsToSelect]
