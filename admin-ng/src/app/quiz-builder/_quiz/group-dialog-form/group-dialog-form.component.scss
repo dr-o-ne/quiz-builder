@@ -7,7 +7,7 @@
     }
 
     @include media-breakpoint('gt-xs') {
-        width: 580px;
+        width: 480px;
     }
 
     .mat-dialog-container {
@@ -24,4 +24,8 @@
     .secondary-color-input {
         padding: 6px 8px;
     }
+}
+
+.padding-bottom-fix {
+    padding-bottom: 1.34375em !important
 }
