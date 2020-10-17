@@ -10,6 +10,8 @@ import { QuestionType, Question } from 'app/quiz-builder/model/question';
 import { Quiz } from 'app/quiz-builder/model/quiz';
 import { Group } from 'app/quiz-builder/model/group';
 import { fuseAnimations } from '@fuse/animations';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { GroupDialogFormComponent } from '../../group-dialog-form/group-dialog-form.component';
 
 export class DataInfo implements GroupInfoViewModel {
     id: string;
@@ -33,6 +35,8 @@ export class QuizInfoStructureComponent implements OnInit {
     @ViewChildren(MatTable) tables!: QueryList<MatTable<Question>>;
     @ViewChildren(GroupInfoComponent) groupInfoControls!: QueryList<GroupInfoComponent>;
 
+    groupEditDialogRef: MatDialogRef<GroupDialogFormComponent>;
+
     @Input() quiz: Quiz;
 
     questionType = QuestionType;
@@ -41,6 +45,7 @@ export class QuizInfoStructureComponent implements OnInit {
     questionTypeKeys: number[];
 
     constructor(
+        private matDialog: MatDialog,
         private router: Router,
         private activeRoute: ActivatedRoute,
         public questionLangService: QuestionLangService,
@@ -166,6 +171,19 @@ export class QuizInfoStructureComponent implements OnInit {
                     questionType: typeQuestion
                 }
             }
+        );
+    }
+
+    onGroupEditClick(dataInfo: DataInfo): void {
+        //this.mep.expanded = !this.mep.expanded
+
+        this.groupEditDialogRef = this.matDialog.open(GroupDialogFormComponent,
+            {
+                panelClass: 'group-dialog-form',
+                data: {
+                    dataInfo
+                }
+            },
         );
     }
 

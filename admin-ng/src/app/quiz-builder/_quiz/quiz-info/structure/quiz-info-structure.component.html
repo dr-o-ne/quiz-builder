@@ -48,8 +48,8 @@
                             class="group-status">
                         </mat-slide-toggle>
 
-                        <button mat-icon-button (click)="mep.expanded = !mep.expanded" matTooltip="Group Settings" class="group-settings">
-                            <mat-icon>settings</mat-icon>
+                        <button mat-icon-button (click)="onGroupEditClick(dataInfo)" matTooltip="Group Settings" class="group-settings">
+                            <mat-icon>edit_mode</mat-icon>
                         </button> 
 
                         <button mat-icon-button [matMenuTriggerFor]="deleteGroupMenu" class="group-menu">
