@@ -11,6 +11,7 @@ export class Question {
   settings?: any;
   choices: any;
   isRequired: boolean;
+  timeLimit?: number;
 
   get isValid(): boolean {
 

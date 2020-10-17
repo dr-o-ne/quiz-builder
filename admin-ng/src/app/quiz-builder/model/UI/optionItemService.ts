@@ -15,6 +15,7 @@ export class OptionItemsService {
     public static OPTION_QUESTION_GRADING_TYPE = 'questionGradingType';
     public static OPTION_QUESTION_ENUMERATION_TYPE = 'questionEnumerationType';
     public static OPTION_QUESTION_CHOICES_POINTS = 'questionChoicesPoints';
+    public static OPTION_QUESTION_TIME_LIMIT = 'questionTimeLimit';
 
 
     getQuestionTypeOptionItems(questionType: QuestionType) {
@@ -25,6 +26,8 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_QUESTION_INCORRECT_FEEDBACK, 'Incorrect Feedback', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_TIME_LIMIT, 'Time Limit', false),
+
             ];
             case QuestionType.MultipleChoice: return [
                 new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
@@ -34,6 +37,7 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_QUESTION_DISPLAY_TYPE, 'Display Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CHOICES_POINTS, 'Choices Points', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_TIME_LIMIT, 'Time Limit', false),
             ];
             case QuestionType.MultiSelect: return [
                 new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
@@ -44,9 +48,11 @@ export class OptionItemsService {
                 new OptionItem(OptionItemsService.OPTION_QUESTION_ENUMERATION_TYPE, 'Enumeration Type', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_CHOICES_POINTS, 'Choices Points', false),
                 new OptionItem(OptionItemsService.OPTION_QUESTION_GRADING_TYPE, 'Grading Type', false),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_TIME_LIMIT, 'Time Limit', false),
             ];
             case QuestionType.LongAnswer: return [
-                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true)
+                new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),
+                new OptionItem(OptionItemsService.OPTION_QUESTION_TIME_LIMIT, 'Time Limit', false),
             ];
             case QuestionType.Empty: return [
                 new OptionItem(OptionItemsService.OPTION_NAME, 'Short Description', true),

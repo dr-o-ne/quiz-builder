@@ -68,7 +68,6 @@ export class QuestionInfoComponent implements OnInit {
         }
         this.question.choices = JSON.parse(this.question.choices);
 
-
         this.questionForm = this.fb.group({
             name: [this.question.name],
             type: [this.question.type, Validators.required],
@@ -80,7 +79,8 @@ export class QuestionInfoComponent implements OnInit {
             choicesDisplayType: [this.question.settings.choicesDisplayType],
             choicesEnumerationType: [this.question.settings.choicesEnumerationType],
             isRequired: [this.question.isRequired],
-            randomize: [this.question.settings.randomize]
+            randomize: [this.question.settings.randomize],
+            timeLimit: [this.question.timeLimit]
         })
 
         this.options = this.optionItemService.getQuestionTypeOptionItems(this.question.type);
@@ -101,6 +101,9 @@ export class QuestionInfoComponent implements OnInit {
 
         this.choicesForm.save();
         Object.assign(this.question, this.questionForm.value);
+
+        console.log(this.questionForm.value);
+        console.log(this.question);
 
         this.question.settings.choicesDisplayType = this.questionForm.get('choicesDisplayType').value;
         this.question.settings.choicesEnumerationType = this.questionForm.get('choicesEnumerationType').value;
@@ -123,8 +126,6 @@ export class QuestionInfoComponent implements OnInit {
             this.question.choices = '{}';
         }
         this.question.choices = JSON.parse(this.question.choices);
-
-
     }
 
     return(): void {

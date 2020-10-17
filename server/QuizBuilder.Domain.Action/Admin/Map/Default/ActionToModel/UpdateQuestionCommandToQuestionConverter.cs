@@ -56,6 +56,7 @@ namespace QuizBuilder.Domain.Action.Admin.Map.Default.ActionToModel {
 			question.CorrectFeedback = source.CorrectFeedback;
 			question.IncorrectFeedback = source.IncorrectFeedback;
 			question.IsRequired = source.IsRequired;
+			question.TimeLimit = source.TimeLimit;
 
 			return question;
 		}

@@ -15,6 +15,7 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public string Settings { get; set; }
 		public string Choices { get; set; }
 		public bool IsRequired { get; set; }
+		public int? TimeLimit { get; set; }
 
 	}
 }

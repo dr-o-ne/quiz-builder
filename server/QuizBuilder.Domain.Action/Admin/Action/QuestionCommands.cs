@@ -40,6 +40,8 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 
 		public bool IsRequired { get; set; }
 
+		public int? TimeLimit { get; set; }
+
 	}
 
 	public sealed class UpdateQuestionCommand : ICommand<CommandResult>, IIdentityAction {
@@ -72,6 +74,8 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		public string Choices { get; set; }
 
 		public bool IsRequired { get; set; }
+
+		public int? TimeLimit { get; set; }
 
 	}
 

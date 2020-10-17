@@ -73,6 +73,11 @@
                             <input matInput type="number" formControlName="points">
                         </mat-form-field>
 
+                        <mat-form-field appearance="outline" floatLabel="always" *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_TIME_LIMIT)">
+                            <mat-label>Time Limit (sec)</mat-label>
+                            <input matInput type="number" formControlName="timeLimit">
+                        </mat-form-field>
+
                         <app-rich-text-editor *ngIf="isOptionEnabled(optionItemsService.OPTION_QUESTION_CORRECT_FEEDBACK)"
                             displayName="Correct Feedback" 
                             textFormControlName="correctFeedback">                                    

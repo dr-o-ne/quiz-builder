@@ -20,6 +20,8 @@ namespace QuizBuilder.Domain.Model.Default.Questions {
 
 		public bool IsRequired { get; set; }
 
+		public int? TimeLimit { get; set; }
+
 		public decimal GetPoints() => Points ?? 0;
 
 	}
