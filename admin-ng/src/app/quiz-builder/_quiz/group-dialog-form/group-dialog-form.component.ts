@@ -13,7 +13,6 @@ import { DataInfo } from '../quiz-info/structure/quiz-info-structure.component';
 })
 export class GroupDialogFormComponent {
 
-    name: string;
     form: FormGroup;
 
     constructor(

@@ -12,7 +12,6 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class QuizDialogFormComponent {
 
-    name: string;
     form: FormGroup;
 
     constructor(
