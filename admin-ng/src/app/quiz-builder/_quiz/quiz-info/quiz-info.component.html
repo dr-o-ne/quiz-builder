@@ -37,7 +37,7 @@
         <!-- / HEADER -->
 
         <button mat-raised-button
-            [style.visibility]="selectedIndex === 0"
+            *ngIf="selectedIndex === 0"
             (click)="addGroup()" 
             class="addButton" 
             color="accent">
