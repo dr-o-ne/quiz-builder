@@ -66,10 +66,12 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { QuizInfoResultPageComponent } from './quiz-builder/_quiz/quiz-info/result-page/quiz-info-result-page.component';
 import { QuizDialogFormComponent } from './quiz-builder/_quiz/quiz-dialog-form/quiz-dialog-form.component';
 import { GroupDialogFormComponent } from './quiz-builder/_quiz/group-dialog-form/group-dialog-form.component';
+import { LandingModule } from './quiz-builder/_pages/landing/landing.module';
+import { LandingComponent } from './quiz-builder/_pages/landing/landing.component';
 
 const appRoutes: Routes = [
     {
-      path: '',
+      path: '', component: LandingComponent,
       children: [
         {
           path: 'quizzes',
@@ -171,6 +173,9 @@ const appRoutes: Routes = [
         ForgotPasswordModule,
         ResetPasswordModule,
         CommonUtilsModule,
+
+        //Landing
+        LandingModule,
 
         // UI
         MaterialModule,
