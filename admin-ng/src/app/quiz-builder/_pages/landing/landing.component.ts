@@ -20,7 +20,7 @@ export class LandingComponent {
                     hidden: true
                 },
                 toolbar: {
-                    hidden: true
+                    hidden: false
                 },
                 footer: {
                     hidden: true
