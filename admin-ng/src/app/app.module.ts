@@ -17,9 +17,9 @@ import { fuseConfig } from 'app/fuse-config';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import {
-  NgxMatDatetimePickerModule, 
-  NgxMatNativeDateModule, 
-  NgxMatTimepickerModule 
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
 } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 
@@ -70,150 +70,145 @@ import { LandingModule } from './quiz-builder/_pages/landing/landing.module';
 import { LandingComponent } from './quiz-builder/_pages/landing/landing.component';
 
 const appRoutes: Routes = [
-    {
-      path: '', component: LandingComponent,
-      children: [
-        {
-          path: 'quizzes',
-          runGuardsAndResolvers: 'always',
-          canActivate: [AuthGuard],
-          children:
-            [
-              { path: '', component: QuizListComponent },
-              { path: 'new', component: QuizInfoComponent }
-            ]
-        },
-        {
-          path: 'quizzes/:id',
-          runGuardsAndResolvers: 'always',
-          canActivate: [AuthGuard],
-          children:
-            [
-              { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
-              { path: 'questions/new', component: QuestionInfoComponent, resolve: { questionResolver: NewQuestionResolver } },
-              { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuestionResolver } }
-            ]
-        }
-      ],
-      
-    },
-    { path: '**', redirectTo: 'errors/404' }
-  ];
+  { path: '', component: LandingComponent },
+  {
+    path: 'quizzes',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children:
+      [
+        { path: '', component: QuizListComponent },
+        { path: 'new', component: QuizInfoComponent }
+      ]
+  },
+  {
+    path: 'quizzes/:id',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children:
+      [
+        { path: '', component: QuizInfoComponent, resolve: { quizResolver: QuizResolver } },
+        { path: 'questions/new', component: QuestionInfoComponent, resolve: { questionResolver: NewQuestionResolver } },
+        { path: 'questions/:id', component: QuestionInfoComponent, resolve: { questionResolver: QuestionResolver } }
+      ]
+  },
+  { path: '**', redirectTo: 'errors/404' }
+];
 
 @NgModule({
-    declarations: [
-        AppComponent,
+  declarations: [
+    AppComponent,
 
-        // Utils
-        RichTextEditorComponent,
+    // Utils
+    RichTextEditorComponent,
 
-        //DebounceClickDirective,
-        EnumToArrayPipe,
+    //DebounceClickDirective,
+    EnumToArrayPipe,
 
-        // UI
-        GroupDialogFormComponent,
-        QuizDialogFormComponent,
-        QuizListComponent,
-        QuizInfoComponent,
-        GroupInfoComponent,
-        QuizInfoStructureComponent,
-        QuizInfoStartPageComponent,
-        QuizInfoResultPageComponent,
-        QuizInfoSettingsComponent,
-        QuizInfoEppearancePageComponent,
-        ChoiceHostDirective,
-        ChoiceDynamicComponent,
+    // UI
+    GroupDialogFormComponent,
+    QuizDialogFormComponent,
+    QuizListComponent,
+    QuizInfoComponent,
+    GroupInfoComponent,
+    QuizInfoStructureComponent,
+    QuizInfoStartPageComponent,
+    QuizInfoResultPageComponent,
+    QuizInfoSettingsComponent,
+    QuizInfoEppearancePageComponent,
+    ChoiceHostDirective,
+    ChoiceDynamicComponent,
 
-        TrueFalseChoiceInfoComponent,
-        MultipleChoiceChoiceInfoComponent,
-        MultipleSelectChoiceInfoComponent,
+    TrueFalseChoiceInfoComponent,
+    MultipleChoiceChoiceInfoComponent,
+    MultipleSelectChoiceInfoComponent,
 
-        QuestionInfoComponent,
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
+    QuestionInfoComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
 
-        TranslateModule.forRoot(),
+    TranslateModule.forRoot(),
 
-        CKEditorModule,
+    CKEditorModule,
 
-        ColorPickerModule,
+    ColorPickerModule,
 
-        // Material moment date module
-        MatMomentDateModule,
+    // Material moment date module
+    MatMomentDateModule,
 
-        // Material
-        MatButtonModule,
-        MatIconModule,
+    // Material
+    MatButtonModule,
+    MatIconModule,
 
-        // Fuse modules
-        FuseModule.forRoot(fuseConfig),
-        FuseProgressBarModule,
-        FuseSharedModule,
-        FuseSidebarModule,
-        FuseThemeOptionsModule,
-        Error404Module,
-        Error500Module,
+    // Fuse modules
+    FuseModule.forRoot(fuseConfig),
+    FuseProgressBarModule,
+    FuseSharedModule,
+    FuseSidebarModule,
+    FuseThemeOptionsModule,
+    Error404Module,
+    Error500Module,
 
-        // 3th party
-        NgxMatDatetimePickerModule,
-        NgxMatTimepickerModule,
-        NgxMatNativeDateModule,      
-        NgxMatMomentModule, 
+    // 3th party
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    NgxMatMomentModule,
 
-        // App modules
-        LayoutModule,
+    // App modules
+    LayoutModule,
 
-        // Pages Auth
-        LoginModule,
-        RegisterModule,
-        ForgotPasswordModule,
-        ResetPasswordModule,
-        CommonUtilsModule,
+    // Pages Auth
+    LoginModule,
+    RegisterModule,
+    ForgotPasswordModule,
+    ResetPasswordModule,
+    CommonUtilsModule,
 
-        //Landing
-        LandingModule,
+    //Landing
+    LandingModule,
 
-        // UI
-        MaterialModule,
-        
-        CommonUtilsModule
-    ],
-    entryComponents: [
-      GroupDialogFormComponent,
-      QuizDialogFormComponent,
-      TrueFalseChoiceInfoComponent,
-      MultipleChoiceChoiceInfoComponent,
-      MultipleSelectChoiceInfoComponent
-    ],
-    providers: [
+    // UI
+    MaterialModule,
 
-        // Services
-        AuthService,
-        AuthDataProvider,
-        GroupDataProvider,
-        QuestionDataProvider,
-        QuizDataProvider,
-        QuestionLangService,
-        QuizLangService,
-        AttemptService,
+    CommonUtilsModule
+  ],
+  entryComponents: [
+    GroupDialogFormComponent,
+    QuizDialogFormComponent,
+    TrueFalseChoiceInfoComponent,
+    MultipleChoiceChoiceInfoComponent,
+    MultipleSelectChoiceInfoComponent
+  ],
+  providers: [
 
-        // Utils
-        AuthGuard,
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    // Services
+    AuthService,
+    AuthDataProvider,
+    GroupDataProvider,
+    QuestionDataProvider,
+    QuizDataProvider,
+    QuestionLangService,
+    QuizLangService,
+    AttemptService,
 
-        // Resolvers
-        QuizResolver,
-        QuestionResolver,
-        NewQuestionResolver,
-    ],
-    bootstrap: [
-        AppComponent
-    ]
+    // Utils
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+
+    // Resolvers
+    QuizResolver,
+    QuestionResolver,
+    NewQuestionResolver,
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {
 }
