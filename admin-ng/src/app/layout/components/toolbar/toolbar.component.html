@@ -37,7 +37,7 @@
                 </div>
             </button>
 
-            <button mat-button fxHide fxShow.gt-xs class="user-button w-120">
+            <button mat-button fxHide fxShow.gt-xs class="user-button w-120" (click)="onClickPlans()">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <mat-icon class="secondary-text">attach_money</mat-icon>
                     <span>&nbsp;&nbsp;Plans&nbsp;&nbsp;&nbsp;</span>
@@ -50,7 +50,7 @@
 
         </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center" *ngIf="hasUser()">
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center" *ngIf="authService.isUserLoggedIn()">
 
             <button mat-button [matMenuTriggerFor]="userMenu"
                     class="user-button">

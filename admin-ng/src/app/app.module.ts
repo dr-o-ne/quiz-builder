@@ -68,9 +68,11 @@ import { QuizDialogFormComponent } from './quiz-builder/_quiz/quiz-dialog-form/q
 import { GroupDialogFormComponent } from './quiz-builder/_quiz/group-dialog-form/group-dialog-form.component';
 import { LandingModule } from './quiz-builder/_pages/landing/landing.module';
 import { LandingComponent } from './quiz-builder/_pages/landing/landing.component';
+import { PricingComponent } from './quiz-builder/_pages/pricing/pricing.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
+  { path: 'plans', component: PricingComponent },
   {
     path: 'quizzes',
     runGuardsAndResolvers: 'always',
@@ -124,6 +126,8 @@ const appRoutes: Routes = [
     MultipleSelectChoiceInfoComponent,
 
     QuestionInfoComponent,
+
+    PricingComponent
   ],
   imports: [
     BrowserModule,

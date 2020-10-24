@@ -21,6 +21,20 @@ export class AuthService {
         return this.currentUserSubject.value;
     }
 
+    isUserLoggedIn(): boolean {
+        const user = this.currentUserValue;
+
+        if (!user) {
+            return false;
+        }
+
+        if (!user.username) {
+            return false;
+        }
+
+        return true;
+    }
+
     signUp(name: string, email: string, password: string): Observable<User> {
 
         return this.dataProvider.signUp(name, email, password).pipe(

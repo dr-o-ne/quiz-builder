@@ -46,7 +46,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
         private router: Router,
-        private authService: AuthService
+        public authService: AuthService
     )
     {
         // Set the defaults
@@ -173,23 +173,12 @@ export class ToolbarComponent implements OnInit, OnDestroy
         this._translateService.use(lang.id);
     }
 
-    hasUser(): boolean {
-
-        const user = this.authService.currentUserValue;
-
-        if(!user){
-            return false;
-        }
-
-        if(!user.username){
-            return false;
-        }
-
-        return true;
-    }
-
     logout() {
         this.authService.logout();
         this.router.navigate(['/auth/login']);
+    }
+
+    onClickPlans() {
+        this.router.navigate(['/plans'])
     }
 }
