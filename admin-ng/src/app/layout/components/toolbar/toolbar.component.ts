@@ -173,6 +173,21 @@ export class ToolbarComponent implements OnInit, OnDestroy
         this._translateService.use(lang.id);
     }
 
+    hasUser(): boolean {
+
+        const user = this.authService.currentUserValue;
+
+        if(!user){
+            return false;
+        }
+
+        if(!user.username){
+            return false;
+        }
+
+        return true;
+    }
+
     logout() {
         this.authService.logout();
         this.router.navigate(['/auth/login']);

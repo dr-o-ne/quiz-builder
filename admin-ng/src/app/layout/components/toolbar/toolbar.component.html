@@ -50,7 +50,7 @@
 
         </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center" *ngIf="hasUser()">
 
             <button mat-button [matMenuTriggerFor]="userMenu"
                     class="user-button">
