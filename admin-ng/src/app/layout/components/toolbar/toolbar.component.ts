@@ -178,11 +178,29 @@ export class ToolbarComponent implements OnInit, OnDestroy
         this.router.navigate(['/auth/login']);
     }
 
+    onClickHome(): void {
+        this.router.navigate(['/home']);
+    }
+
+    onClickFeatures(): void {
+        this.router.navigate(['/features']);
+    }
+
+    onClickHelp(): void {
+        this.router.navigate(['/help']);
+    }
+
+    onClickContact(): void {
+        this.router.navigate(['/contact']);
+    }
+
     onClickPlans(): void {
-        this.router.navigate(['/plans'])
+        this.router.navigate(['/plans']);
     }
 
     onClickLogin(): void {
-        this.router.navigate(['/auth/login'])
+        this.router.navigate(['/auth/login']);
     }
+
+
 }
