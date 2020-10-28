@@ -103,6 +103,15 @@ namespace QuizBuilder.Api {
 			app.UseHttpsRedirection();
 
             app.UseRouting();
+
+			//TODO: review later
+            app.UseCors(
+	            builder => builder
+		            .AllowAnyOrigin()
+		            .AllowAnyHeader()
+		            .AllowAnyMethod()
+            );
+
             app.UseAuthentication();
             app.UseAuthorization();
 
