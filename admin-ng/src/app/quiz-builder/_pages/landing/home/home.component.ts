@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FuseConfigService } from '@fuse/services/config.service';
+import { AuthService } from 'app/quiz-builder/services/auth/auth.service';
 
 @Component({
     selector: 'app-home',
@@ -11,12 +12,13 @@ export class HomeComponent {
 
     constructor(
         private fuseConfigService: FuseConfigService,
+        private authService: AuthService
     ) {
         // Configure the layout
         this.fuseConfigService.config = {
             layout: {
                 navbar: {
-                    hidden: true
+                    hidden: !authService.isUserLoggedIn()
                 },
                 toolbar: {
                     hidden: false
