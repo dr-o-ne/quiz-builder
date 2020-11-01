@@ -10,8 +10,8 @@ export class QuizLangService {
         switch (+input) {
             case PageSettings.PagePerGroup: return "Page per Group";
             case PageSettings.PagePerQuiz: return "Page per Quiz";
-            case PageSettings.PagePerQuestion: return "Each Question on new Page";
-            case PageSettings.Custom: return "Questions per Page";
+            case PageSettings.PagePerQuestion: return "Page per Question";
+            case PageSettings.Custom: return "Page with N Questions";
         }
     }
 
