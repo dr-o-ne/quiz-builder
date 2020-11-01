@@ -12,14 +12,15 @@ export const navigation: FuseNavigation[] = [
                 type     : 'item',
                 icon     : 'assignment',
                 url      : '/quizzes'
-            },
+            }
+            /*,
             {
                 id       : 'users',
                 title    : 'Users',
                 type     : 'item',
                 icon     : 'account_box',
                 url      : '/users'
-            }
+            }*/
         ]
     }
 ];
