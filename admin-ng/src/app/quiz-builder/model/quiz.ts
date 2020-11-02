@@ -13,6 +13,8 @@ export class Quiz {
     questionsPerPage: number;
     randomizeGroups: boolean;
     randomizeQuestions: boolean;
+    isPassingScoreEnabled: boolean;
+    passingScore: number;
 
     isScheduleEnabled: boolean;
     startDate: number;

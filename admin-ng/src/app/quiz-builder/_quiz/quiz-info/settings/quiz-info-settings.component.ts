@@ -34,6 +34,8 @@ export class QuizInfoSettingsComponent {
         quiz.isScheduleEnabled = value.isScheduleEnabled as boolean;
         quiz.startDate = (value.startDate as moment.Moment).utc().unix();
         quiz.endDate = (value.endDate as moment.Moment).utc().unix();
+        quiz.isPassingScoreEnabled = value.isPassingScoreEnabled as boolean;
+        quiz.passingScore = value.passingScore as number;
     }
 
     isQuestionsPerPageVisisble(): boolean {
