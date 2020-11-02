@@ -82,7 +82,7 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public int? TotalQuestions { get; set; }
 
-		public bool IsPassingScoreEnabled { get; set; }
+		public bool IsPassingScoreWidgetEnabled { get; set; }
 
 		public decimal? PassingScore { get; set; }
 

@@ -74,7 +74,7 @@ export class QuizInfoComponent implements OnInit {
                 isTotalAttemptsEnabled: [this.quiz.isTotalAttemptsEnabled],
                 isTimeLimitEnabled: [this.quiz.isTimeLimitEnabled],
                 isTotalQuestionsEnabled: [this.quiz.isTotalQuestionsEnabled],
-                isPassingScoreEnabled: [this.quiz.isPassingScoreEnabled],
+                isPassingScoreWidgetEnabled: [this.quiz.isPassingScoreWidgetEnabled],
 
                 resultPassText: [this.quiz.resultPassText],
                 resultFailText: [this.quiz.resultFailText],

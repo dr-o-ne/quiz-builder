@@ -43,8 +43,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		[JsonPropertyName( "isTotalQuestionsEnabled" )]
 		public bool IsTotalQuestionsEnabled { get; set; }
 
-		[JsonPropertyName( "isPassingScoreEnabled" )]
-		public bool IsPassingScoreEnabled { get; set; }
+		[JsonPropertyName( "isPassingScoreWidgetEnabled" )]
+		public bool IsPassingScoreWidgetEnabled { get; set; }
 
 		// Result Page
 		[JsonPropertyName( "resultPassText" )]

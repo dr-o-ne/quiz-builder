@@ -77,16 +77,18 @@
                     <span class="mat-body-1">Set Availability Dates:</span>
                 </mat-checkbox>
             </div>
+
+            <div fxFlex></div>
         
             <div fxLayoutAlign="none center" class="pt-20">
-                <mat-form-field appearance="outline" fxFlexOffset="2">
+                <mat-form-field appearance="outline">
                     <mat-label>Start Date</mat-label>
                     <input matInput [ngxMatDatetimePicker]="startDate" placeholder="Choose a date" formControlName="startDate" >
                     <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                     <ngx-mat-datetime-picker #startDate></ngx-mat-datetime-picker>
                 </mat-form-field>
         
-                <mat-form-field appearance="outline" fxFlexOffset="2">
+                <mat-form-field appearance="outline" fxFlexOffset="1">
                     <mat-label>End Date</mat-label>
                     <input matInput [ngxMatDatetimePicker]="endDate" placeholder="Choose a date" formControlName="endDate">
                     <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
@@ -94,6 +96,21 @@
                 </mat-form-field>
             </div>
 
+        </div>
+
+        <hr>
+
+        <div fxLayoutAlign="none center" class="pb-24 pt-24" >
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25%">
+                <mat-icon class="m-0 mr-16 secondary-text">spellcheck</mat-icon>
+                <div class="h2 secondary-text">Grades</div>
+            </div>
+
+            <div fxLayout="column" fxFlex="75%" class="pt-20">
+
+            </div>
+    
         </div>
 
     </div>

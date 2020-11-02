@@ -100,7 +100,7 @@ namespace QuizBuilder.Domain.Action.Client.ActionHandler.QuizAttemptHandler {
 				payload.TotalQuestions = pages.SelectMany( x => x.Questions ).Count();
 			}
 
-			if( quiz.IsPassingScoreEnabled ) {
+			if( quiz.IsPassingScoreWidgetEnabled ) {
 				payload.PassingScore = 80; //TODO:
 			}
 

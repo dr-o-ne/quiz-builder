@@ -27,7 +27,7 @@ export class Quiz {
     isTotalAttemptsEnabled: boolean;
     isTimeLimitEnabled: boolean;
     isTotalQuestionsEnabled: boolean;
-    isPassingScoreEnabled: boolean;
+    isPassingScoreWidgetEnabled: boolean;
 
     resultPassText: string;
     resultFailText: string;
