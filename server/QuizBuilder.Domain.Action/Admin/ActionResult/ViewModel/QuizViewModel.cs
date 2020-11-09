@@ -27,6 +27,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public string SideColor { get; set; }
 		public string FooterColor { get; set; }
 
+		public decimal? PassingScore { get; set; }
+
 		// Start Page
 		[JsonPropertyName( "isStartPageEnabled" )]
 		public bool IsStartPageEnabled { get; set; }

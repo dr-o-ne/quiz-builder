@@ -5,8 +5,7 @@
 export const environment = {
     production: false,
     hmr       : false,    
-    apiUrl: 'https://quizbuilderapi.azurewebsites.net/admin/',
-    //apiUrl: 'https://localhost:5001/admin/',
+    apiUrl: 'https://localhost:5001/admin/',
     clientUrl: 'http://localhost:4200/'
 };
 

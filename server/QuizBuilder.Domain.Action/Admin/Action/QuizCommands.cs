@@ -80,6 +80,9 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "footerColor" )]
 		public string FooterColor { get; set; }
 
+		[JsonPropertyName( "passingScore" )]
+		public decimal? PassingScore { get; set; }
+
 		// Start Page
 		
 		[JsonPropertyName( "isStartPageEnabled" )]
