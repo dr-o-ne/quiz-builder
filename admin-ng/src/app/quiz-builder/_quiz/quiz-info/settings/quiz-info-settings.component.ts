@@ -35,6 +35,7 @@ export class QuizInfoSettingsComponent {
         quiz.startDate = (value.startDate as moment.Moment).utc().unix();
         quiz.endDate = (value.endDate as moment.Moment).utc().unix();
         quiz.passingScore = value.passingScore as number;
+        quiz.timeLimit = value.timeLimit as number;
     }
 
     isQuestionsPerPageVisisble(): boolean {

@@ -76,8 +76,6 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public bool IsTimeLimitEnabled { get; set; }
 
-		public TimeSpan? TimeLimit { get; set; }
-
 		public bool IsTotalQuestionsEnabled { get; set; }
 
 		public int? TotalQuestions { get; set; }
@@ -85,6 +83,8 @@ namespace QuizBuilder.Domain.Model.Default {
 		public bool IsPassingScoreWidgetEnabled { get; set; }
 
 		public decimal? PassingScore { get; set; }
+
+		public long? TimeLimit { get; set; }
 
 		// Result Page
 

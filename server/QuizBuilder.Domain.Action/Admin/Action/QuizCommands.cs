@@ -83,6 +83,9 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "passingScore" )]
 		public decimal? PassingScore { get; set; }
 
+		[JsonPropertyName( "timeLimit" )]
+		public long? TimeLimit { get; set; }
+
 		// Start Page
 		
 		[JsonPropertyName( "isStartPageEnabled" )]

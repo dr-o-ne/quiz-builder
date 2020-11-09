@@ -18,6 +18,7 @@ export class Quiz {
     isScheduleEnabled: boolean;
     startDate: number;
     endDate: number;
+    timeLimit: number;
 
     headerColor: string;
     backgroundColor: string;
