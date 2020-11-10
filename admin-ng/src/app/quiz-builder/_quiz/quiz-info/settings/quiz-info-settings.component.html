@@ -122,15 +122,21 @@
                 <div class="h2 secondary-text">Grades</div>
             </div>
 
-            <div fxLayoutAlign="none center" class="pt-20">
+            <div fxLayout="column" fxFlex="75%">
 
-                <mat-form-field appearance="outline" class="w-244" fxFlexOffset="1">
+                <mat-form-field appearance="outline" class="w-244">
                     <mat-label>Passing Score (%)</mat-label>
                     <input matInput type="number" formControlName="passingScore">
                 </mat-form-field>
 
+                <mat-form-field appearance="outline" class="w-244">
+                    <mat-label>Max Attempts</mat-label>
+                    <input matInput type="number" formControlName="attemptsCount">
+                </mat-form-field>
+
+
             </div>
-    
+
         </div>
 
     </div>

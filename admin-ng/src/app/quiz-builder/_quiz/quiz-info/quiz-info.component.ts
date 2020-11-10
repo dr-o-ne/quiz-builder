@@ -98,7 +98,8 @@ export class QuizInfoComponent implements OnInit {
                 isResultFeedbackEnabled: [this.quiz.isResultFeedbackEnabled],
                 isResultDurationEnabled: [this.quiz.isResultDurationEnabled],
                 passingScore: [this.quiz.passingScore],
-                timeLimit: [this.quiz.timeLimit]
+                timeLimit: [this.quiz.timeLimit],
+                attemptsCount: [this.quiz.attemptsCount]
             })
         })
     }

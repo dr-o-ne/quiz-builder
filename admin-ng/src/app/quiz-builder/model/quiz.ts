@@ -14,6 +14,7 @@ export class Quiz {
     randomizeGroups: boolean;
     randomizeQuestions: boolean;
     passingScore: number;
+    attemptsCount: number;
 
     isScheduleEnabled: boolean;
     startDate: number;

@@ -86,6 +86,8 @@ namespace QuizBuilder.Domain.Model.Default {
 
 		public long? TimeLimit { get; set; }
 
+		public long? AttemptsCount { get; set; }
+
 		// Result Page
 
 		public string ResultPassText { get; set; }

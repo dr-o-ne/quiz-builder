@@ -86,6 +86,9 @@ namespace QuizBuilder.Domain.Action.Admin.Action {
 		[JsonPropertyName( "timeLimit" )]
 		public long? TimeLimit { get; set; }
 
+		[JsonPropertyName( "attemptsCount" )]
+		public long? AttemptsCount { get; set; }
+
 		// Start Page
 		
 		[JsonPropertyName( "isStartPageEnabled" )]

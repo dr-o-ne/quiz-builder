@@ -28,8 +28,10 @@ namespace QuizBuilder.Domain.Action.Admin.ActionResult.ViewModel {
 		public string FooterColor { get; set; }
 
 		public decimal? PassingScore { get; set; }
-		public long? timeLimit { get; set; }
+		public long? TimeLimit { get; set; }
 
+		[JsonPropertyName( "attemptsCount" )]
+		public long? AttemptsCount { get; set; }
 
 		// Start Page
 		[JsonPropertyName( "isStartPageEnabled" )]
