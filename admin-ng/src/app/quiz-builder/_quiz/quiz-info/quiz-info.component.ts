@@ -53,7 +53,21 @@ export class QuizInfoComponent implements OnInit {
         this.createMenuItems();
         this.selectTab(0);
 
+        console.log(1);
+        console.log(this.quiz.startDate);
+
+        let startDateValue = null;
+        if(this.quiz.startDate) {
+            startDateValue = moment(this.quiz.startDate).utc()
+        }
+
+        let endDateValue = null;
+        if(this.quiz.endDate) {
+            endDateValue = moment(this.quiz.endDate).utc()
+        }
+
         this.quizForm = this.fb.group({
+
             settings: this.fb.group({
                 name: [this.quiz.name, Validators.required],
                 pageSettings: [this.quiz.pageSettings],
@@ -62,8 +76,8 @@ export class QuizInfoComponent implements OnInit {
                 randomizeGroups: [this.quiz.randomizeGroups],
                 randomizeQuestions: [this.quiz.randomizeQuestions],
                 isScheduleEnabled: [this.quiz.isScheduleEnabled],
-                startDate: [moment(this.quiz.startDate).utc()],
-                endDate: [moment(this.quiz.endDate).utc()],
+                startDate: [startDateValue],
+                endDate: [endDateValue],
                 description: [this.quiz.description],
                 headerColor: [this.quiz.headerColor],
                 backgroundColor: [this.quiz.backgroundColor],

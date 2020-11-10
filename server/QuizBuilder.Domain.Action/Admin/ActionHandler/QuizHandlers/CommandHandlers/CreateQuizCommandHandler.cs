@@ -37,6 +37,8 @@ namespace QuizBuilder.Domain.Action.Admin.ActionHandler.QuizHandlers.CommandHand
 				BackgroundColor = "#fff",
 				SideColor = "#f5f5f8",
 				FooterColor = "#fff",
+				StartDate = null,
+				EndDate = null
 			};
 
 			QuizDto quizDto = _mapper.Map<QuizDto>( quiz );
