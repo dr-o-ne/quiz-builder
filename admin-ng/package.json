@@ -33,7 +33,7 @@
         "@angular/router": "10.0.5",
         "@angularclass/hmr": "3.0.0",
         "@ckeditor/ckeditor5-angular": "2.0.1",
-        "@ckeditor/ckeditor5-build-inline": "23.0.0",
+        "@ckeditor/ckeditor5-build-inline": "27.1.0",
         "@ngrx/effects": "8.6.0",
         "@ngrx/router-store": "8.6.0",
         "@ngrx/store": "8.6.0",
