@@ -50,7 +50,7 @@
         "classlist.js": "1.1.20150312",
         "d3": "6.2.0",
         "date-fns": "2.16.1",
-        "lodash": "4.17.20",
+        "lodash": "4.17.21",
         "moment": "2.29.1",
         "ng2-charts": "2.4.2",
         "ngrx-store-freeze": "0.2.4",
