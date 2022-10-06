@@ -28,7 +28,7 @@ jobs:
       working-directory: ./server
     - name: .NET code metrics
       id: code-stats
-      uses: dr-o-ne/code-stats-action/tree/main/src
+      uses: dr-o-ne/code-stats-action@v2
       env:
         GREETINGS: 'Hello World!' # ${{ secrets.GITHUB_TOKEN }}
       with:
