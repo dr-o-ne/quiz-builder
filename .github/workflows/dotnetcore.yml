@@ -26,8 +26,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal --filter Category!=Integration
       working-directory: ./server
-
-- name: .NET code metrics
+    - name: .NET code metrics
       id: code-stats
       uses: dr-o-ne/code-stats-action@main
       env:
