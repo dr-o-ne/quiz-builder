@@ -10,6 +10,7 @@ namespace QuizBuilder.Test.Unit.Utils {
 		[InlineData( "test2", false, "<p>test2</p>" )]
 		public void NormalizeText_Test( string expectedString, bool expectedIsHtml, string input ) =>
 			Assert.Equal( ( expectedString, expectedIsHtml ), QuillEditorHelper.NormalizeText( input ) );
+
 	}
 
 }
